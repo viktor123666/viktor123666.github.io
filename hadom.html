@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HADOM — The Heartbeat of Reality | Scalelist Universe</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#14141f;--gold:#c9a84c;--pulse:#ff2244;--border:#1e1e2e;--text:#e0e0e0;--dim:#888}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
+a{color:var(--gold);text-decoration:none}
+canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 20px}
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.hero-back{position:absolute;top:20px;left:20px;color:var(--dim);font-size:.85rem}
+.hero-back:hover{color:var(--gold)}
+.hadom-title{font-size:clamp(3rem,10vw,6rem);font-weight:900;letter-spacing:0.5em;text-transform:uppercase;color:#fff;animation:pulse-text 1s ease-in-out infinite}
+@keyframes pulse-text{0%,100%{text-shadow:0 0 10px rgba(255,34,68,.3),0 0 40px rgba(255,34,68,.1)}50%{text-shadow:0 0 30px rgba(255,34,68,.8),0 0 80px rgba(255,34,68,.3)}}
+.subtitle{color:var(--pulse);font-size:1.1rem;letter-spacing:.15em;margin-top:8px;opacity:.8}
+.subtitle2{color:var(--dim);font-size:.9rem;margin-top:16px;max-width:500px;line-height:1.6}
+/* ECG Line */
+.ecg-wrap{width:100%;max-width:600px;height:80px;margin:40px auto 0;position:relative;overflow:hidden}
+canvas#ecg{width:100%;height:100%}
+/* Heart */
+.heart-section{padding:80px 0;text-align:center}
+.heart-circle{width:160px;height:160px;border-radius:50%;border:3px solid var(--pulse);margin:0 auto 30px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;font-weight:900;color:var(--pulse);animation:heartbeat .83s ease-in-out infinite;position:relative}
+.heart-circle::after{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(255,34,68,.2);animation:heartbeat .83s ease-in-out infinite .1s}
+@keyframes heartbeat{0%,100%{transform:scale(1);box-shadow:0 0 20px rgba(255,34,68,.2)}15%{transform:scale(1.08);box-shadow:0 0 40px rgba(255,34,68,.5)}30%{transform:scale(1);box-shadow:0 0 20px rgba(255,34,68,.2)}45%{transform:scale(1.04);box-shadow:0 0 30px rgba(255,34,68,.3)}60%{transform:scale(1)}}
+.bpm-control{margin:20px auto;max-width:400px}
+.bpm-label{font-size:.8rem;color:var(--dim);letter-spacing:.1em;margin-bottom:8px}
+.bpm-val{font-size:2rem;font-weight:900;color:var(--pulse)}
+input[type=range]{width:100%;accent-color:var(--pulse);margin:10px 0}
+.mode-text{font-size:.85rem;padding:8px 16px;border-radius:20px;display:inline-block;margin-top:10px;transition:all .5s}
+.mode-calm{background:rgba(0,255,136,.1);color:#00ff88;border:1px solid rgba(0,255,136,.3)}
+.mode-normal{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.3)}
+.mode-combat{background:rgba(255,34,68,.1);color:var(--pulse);border:1px solid rgba(255,34,68,.3)}
+/* Section */
+.section{padding:60px 0}
+.section-title{text-align:center;font-size:1.8rem;font-weight:700;letter-spacing:.08em;color:var(--gold);margin-bottom:40px}
+/* Character Power */
+.char-row{display:flex;flex-direction:column;gap:16px}
+.char-power{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 24px;display:flex;align-items:center;gap:20px;transition:all .3s}
+.char-power:hover{border-color:var(--glow);box-shadow:0 0 20px color-mix(in srgb,var(--glow) 15%,transparent)}
+.cp-name{font-weight:700;font-size:1rem;min-width:110px;color:var(--glow)}
+.cp-bar-wrap{flex:1;height:24px;background:rgba(255,255,255,.05);border-radius:12px;overflow:hidden;position:relative}
+.cp-bar{height:100%;border-radius:12px;transition:width 2s ease;width:0;position:relative}
+.cp-bar::after{content:'';position:absolute;top:0;right:0;bottom:0;width:40px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3));animation:bar-shine 2s ease-in-out infinite}
+@keyframes bar-shine{0%,100%{opacity:0}50%{opacity:1}}
+.cp-value{min-width:120px;text-align:right;font-weight:700;font-size:.9rem;color:var(--dim)}
+.cp-value.glitch{animation:val-glitch .15s infinite}
+@keyframes val-glitch{0%{opacity:1}50%{opacity:0}100%{opacity:1}}
+.cp-value.panic{color:var(--pulse);animation:val-glitch .08s infinite}
+/* Actions */
+.actions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:20px}
+.action-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;transition:all .3s}
+.action-item:hover{border-color:var(--gold)}
+.action-icon{font-size:1.5rem;margin-bottom:6px}
+.action-name{font-size:.75rem;color:var(--dim);letter-spacing:.05em}
+/* Mini Game */
+.game-section{padding:60px 0;text-align:center}
+.game-circle{width:200px;height:200px;border-radius:50%;border:3px solid var(--pulse);margin:20px auto;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;user-select:none;color:var(--pulse)}
+.game-circle:active{transform:scale(.95);background:rgba(255,34,68,.1)}
+.game-circle.beating{animation:heartbeat .83s ease-in-out infinite}
+.game-result{margin-top:20px;font-size:1.1rem;min-height:80px}
+.game-compare{display:flex;justify-content:center;gap:30px;margin-top:16px;flex-wrap:wrap}
+.game-compare div{text-align:center}
+.game-compare .val{font-size:1.8rem;font-weight:900}
+.game-compare .label{font-size:.7rem;color:var(--dim);letter-spacing:.05em}
+/* Lore */
+.lore-text{max-width:700px;margin:0 auto;line-height:1.8;color:var(--dim);font-size:1rem;text-align:center}
+.lore-text em{color:var(--pulse);font-style:normal}
+/* Footer */
+footer{border-top:1px solid var(--border);padding:40px 20px;text-align:center;font-size:.75rem;color:#444}
+/* Responsive */
+@media(max-width:600px){.char-power{flex-wrap:wrap}.cp-name{min-width:80px}.cp-value{min-width:80px;font-size:.75rem}.game-compare{gap:15px}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="wrap">
+<section class="hero">
+<a href="/hub" class="hero-back">&larr; Back to Hub</a>
+<h1 class="hadom-title">HADOM</h1>
+<p class="subtitle">Hjärtslag — The Heartbeat of Reality</p>
+<p class="subtitle2">How many actions can you execute within a single heartbeat? In the Scalelist Universe, this is the ultimate measure of power.</p>
+<div class="ecg-wrap"><canvas id="ecg"></canvas></div>
+</section>
+
+<section class="heart-section">
+<h2 class="section-title">Heartbeat Simulator</h2>
+<div class="heart-circle" id="heart"><span>&#9829;</span></div>
+<div class="bpm-control">
+<div class="bpm-label">HEART RATE</div>
+<div class="bpm-val"><span id="bpmNum">72</span> BPM</div>
+<input type="range" id="bpmSlider" min="40" max="200" value="72">
+<div id="modeText" class="mode-text mode-normal">BALANCED — Standard combat resolution</div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">Champion Power Levels</h2>
+<div class="char-row">
+<div class="char-power" style="--glow:#00ff88"><span class="cp-name" style="color:#00ff88">Vigolas</span><div class="cp-bar-wrap"><div class="cp-bar" data-w="100" style="background:linear-gradient(90deg,#00ff88,#00cc66)"></div></div><span class="cp-value" id="val-v">∞ - 1</span></div>
+<div class="char-power" style="--glow:#ff3366"><span class="cp-name" style="color:#ff3366">Rougeina</span><div class="cp-bar-wrap"><div class="cp-bar" data-w="72" style="background:linear-gradient(90deg,#ff3366,#cc1144)"></div></div><span class="cp-value">950,000</span></div>
+<div class="char-power" style="--glow:#9933ff"><span class="cp-name" style="color:#9933ff">Trollmage</span><div class="cp-bar-wrap"><div class="cp-bar" data-w="50" style="background:linear-gradient(90deg,#9933ff,#6611cc)"></div></div><span class="cp-value">666,666</span></div>
+<div class="char-power" style="--glow:#ffaa00"><span class="cp-name" style="color:#ffaa00">Kompis</span><div class="cp-bar-wrap"><div class="cp-bar" data-w="65" style="background:linear-gradient(90deg,#ffaa00,#cc8800)"></div></div><span class="cp-value glitch" id="val-k">CLASSIFIED</span></div>
+<div class="char-power" style="--glow:#00aaff"><span class="cp-name" style="color:#00aaff">Smurjan</span><div class="cp-bar-wrap"><div class="cp-bar" data-w="88" style="background:linear-gradient(90deg,#00aaff,#0077cc)"></div></div><span class="cp-value panic" id="val-s">SYSTEM PANIC</span></div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">Actions Per Heartbeat</h2>
+<p style="text-align:center;color:var(--dim);margin-bottom:20px;font-size:.85rem">Each heartbeat tick allows these quantum operations:</p>
+<div class="actions-grid">
+<div class="action-item"><div class="action-icon">⚡</div><div class="action-name">MOVE</div></div>
+<div class="action-item"><div class="action-icon">🎯</div><div class="action-name">SHOOT</div></div>
+<div class="action-item"><div class="action-icon">💫</div><div class="action-name">STUN</div></div>
+<div class="action-item"><div class="action-icon">🔄</div><div class="action-name">REST</div></div>
+<div class="action-item"><div class="action-icon">💪</div><div class="action-name">FULL STRENGTH</div></div>
+<div class="action-item"><div class="action-icon">🔮</div><div class="action-name">PARTICLES</div></div>
+<div class="action-item"><div class="action-icon">⚛️</div><div class="action-name">QUANTUM RENDER</div></div>
+</div>
+</section>
+
+<section class="game-section">
+<h2 class="section-title">Test Your HADOM</h2>
+<p style="color:var(--dim);margin-bottom:10px">Click as many times as you can during ONE heartbeat pulse</p>
+<div class="game-circle beating" id="gameCircle">CLICK TO START</div>
+<div class="game-result" id="gameResult"></div>
+</section>
+
+<section class="section">
+<h2 class="section-title">The Lore of HADOM</h2>
+<p class="lore-text">In the Scalelist Universe, power is not measured by strength or speed alone. It is measured by <em>HADOM</em> — how many actions a being can execute within a single heartbeat.<br><br>The heart is the clock of existence. <em>Hjärtslag</em>. Every beat is a tick of reality. A normal human manages one action per beat. The Scalelist champions execute thousands — millions — in that same instant.<br><br>But there is a paradox: <em>when your heart races with fear, you gain more ticks — but each tick loses resolution</em>. Precision fades. The calm warrior, with a slow steady heart, executes fewer ticks but with perfect quantum resolution.<br><br>This is why <em>Vigolas</em>, who has mastered his heart for 50,000 years, operates at ∞-1. Not through speed. Through absolute stillness.</p>
+</section>
+</div>
+<footer>&copy; 2024–2026 Scalelist Universe &bull; <a href="/hub">Return to Hub</a></footer>
+
+<script>
+(function(){
+/* Particles */
+var c=document.getElementById('bg'),x=c.getContext('2d'),W,H,pts=[];
+var cols=['#ff224433','#ff224411','#c9a84c11','#00ff8811','#00aaff11'];
+function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+addEventListener('resize',resize);resize();
+for(var i=0;i<60;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2+.5,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,c:cols[i%5],a:Math.random()*.4+.1});
+function drawBg(){x.clearRect(0,0,W,H);for(var i=0;i<pts.length;i++){var p=pts[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fillStyle=p.c;x.globalAlpha=p.a;x.fill()}x.globalAlpha=1;requestAnimationFrame(drawBg)}
+drawBg();
+
+/* ECG */
+var ec=document.getElementById('ecg'),ex=ec.getContext('2d');
+ec.width=600;ec.height=80;
+var ecgX=0,ecgData=[];
+function ecgTick(){
+  ex.clearRect(0,0,600,80);
+  var t=Date.now()/1000,bpm=parseInt(document.getElementById('bpmSlider').value);
+  var beatPhase=(t*bpm/60)%1;
+  var y=40;
+  if(beatPhase<.05)y=40-30*Math.sin(beatPhase/.05*Math.PI);
+  else if(beatPhase<.1)y=40+15*Math.sin((beatPhase-.05)/.05*Math.PI);
+  else if(beatPhase<.15)y=40-10*Math.sin((beatPhase-.1)/.05*Math.PI);
+  ecgData.push(y);if(ecgData.length>600)ecgData.shift();
+  ex.strokeStyle='#ff2244';ex.lineWidth=2;ex.shadowColor='#ff2244';ex.shadowBlur=8;
+  ex.beginPath();
+  for(var i=0;i<ecgData.length;i++){i===0?ex.moveTo(i,ecgData[i]):ex.lineTo(i,ecgData[i])}
+  ex.stroke();ex.shadowBlur=0;
+  requestAnimationFrame(ecgTick);
+}
+ecgTick();
+
+/* BPM Slider */
+var slider=document.getElementById('bpmSlider');
+var bpmNum=document.getElementById('bpmNum');
+var modeText=document.getElementById('modeText');
+var heart=document.getElementById('heart');
+slider.addEventListener('input',function(){
+  var v=parseInt(this.value);bpmNum.textContent=v;
+  var dur=60/v;heart.style.animationDuration=dur+'s';
+  if(v<60){modeText.className='mode-text mode-calm';modeText.textContent='PRECISION MODE — Perfect quantum resolution, fewer ticks';}
+  else if(v<100){modeText.className='mode-text mode-normal';modeText.textContent='BALANCED — Standard combat resolution';}
+  else if(v<140){modeText.className='mode-text mode-combat';modeText.textContent='COMBAT MODE — Maximum throughput, reduced precision';}
+  else{modeText.className='mode-text mode-combat';modeText.textContent='OVERDRIVE — Reality destabilizing, quantum errors increasing';}
+});
+
+/* Power Bars Animation */
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var bars=e.target.querySelectorAll('.cp-bar');bars.forEach(function(b){b.style.width=b.dataset.w+'%'});obs.unobserve(e.target)}})},{threshold:.3});
+document.querySelectorAll('.char-row').forEach(function(r){obs.observe(r)});
+
+/* Kompis glitch text */
+var kVals=['CLASSIFIED','C̷L̴A̸S̷S̴I̶F̸I̶E̸D̵','[REDACTED]','???','CLASSIFIED','ERR0R'];
+var kEl=document.getElementById('val-k');
+setInterval(function(){kEl.textContent=kVals[Math.floor(Math.random()*kVals.length)]},200);
+
+/* Smurjan panic */
+var sVals=['SYSTEM PANIC','ERR: OVERFLOW','NaN × ∞','VOID_ERR','!!!PANIC!!!','[UNDEFINED]'];
+var sEl=document.getElementById('val-s');
+setInterval(function(){sEl.textContent=sVals[Math.floor(Math.random()*sVals.length)]},100);
+
+/* Mini Game */
+var gc=document.getElementById('gameCircle'),gr=document.getElementById('gameResult');
+var gameState='idle',clickCount=0,gameTimer=null;
+gc.addEventListener('click',function(){
+  if(gameState==='idle'){
+    gameState='waiting';gc.textContent='GET READY...';gc.classList.remove('beating');
+    setTimeout(function(){
+      gameState='active';clickCount=0;gc.textContent='CLICK NOW!';gc.style.borderColor='#00ff88';gc.style.color='#00ff88';
+      gameTimer=setTimeout(function(){
+        gameState='done';gc.textContent='DONE!';gc.style.borderColor='var(--pulse)';gc.style.color='var(--pulse)';
+        var score=clickCount;
+        gr.innerHTML='<div style="font-size:2rem;font-weight:900;color:var(--gold)">Your HADOM: '+score+'</div><div class="game-compare"><div><div class="val" style="color:var(--dim)">1</div><div class="label">Normal Human</div></div><div><div class="val" style="color:var(--gold)">'+score+'</div><div class="label">YOU</div></div><div><div class="val" style="color:#00ff88">∞-1</div><div class="label">Vigolas</div></div></div>';
+        setTimeout(function(){gameState='idle';gc.textContent='CLICK TO RETRY';gc.classList.add('beating')},3000);
+      },830);
+    },1500);
+  } else if(gameState==='active'){
+    clickCount++;gc.textContent=clickCount+'';
+  }
+});
+})();
+</script>
+</body>
+</html>

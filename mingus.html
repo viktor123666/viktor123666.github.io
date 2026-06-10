@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mingus — The Sacred Companion | Scalelist Universe</title>
+<meta name="description" content="Mingus was Vigge's golden retriever in this world. He is Kompis's eternal companion in the Scalelist Universe. The dog is forever.">
+<meta property="og:title" content="Mingus — The Sacred Companion">
+<meta property="og:description" content="The most sentimental soul in the entire universe. Kompis's eternal companion. Vigge's real golden retriever, immortalized forever.">
+<meta property="og:image" content="https://scalelistuniverse.com/og.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a84c; --void:#050510; --panel:#0a0a14; --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060; --warm:#fef3c7; --amber:#fbbf24}
+html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.7}
+a{color:var(--amber);text-decoration:none}
+
+header{padding:18px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
+header nav{display:flex;gap:18px;flex-wrap:wrap}
+header nav a{color:var(--dim);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:'Cinzel',serif}
+header nav a:hover{color:var(--gold)}
+
+.hero{padding:120px 28px 80px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,rgba(254,243,199,0.15),transparent 70%)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(251,191,36,0.06),transparent 70%);pointer-events:none}
+.hero .eyebrow{font-family:'Cinzel',serif;color:var(--amber);font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:20px;position:relative}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(3rem,8vw,6.5rem);color:var(--warm);letter-spacing:.06em;font-weight:900;line-height:1;margin-bottom:24px;text-shadow:0 0 60px rgba(254,243,199,0.4);position:relative}
+.hero h1 em{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:.32em;color:var(--text);letter-spacing:.04em;margin-top:24px;text-shadow:none;opacity:.92}
+.hero .lede{max-width:680px;margin:30px auto 0;font-size:1.2rem;line-height:1.85;font-style:italic;opacity:.92;position:relative}
+
+.section{max-width:760px;margin:0 auto;padding:60px 28px;border-top:1px solid var(--border)}
+.section h2{font-family:'Cinzel',serif;color:var(--amber);font-size:.86rem;letter-spacing:.36em;text-transform:uppercase;margin-bottom:28px;font-weight:700;text-align:center}
+.section p{font-size:1.12rem;line-height:1.9;margin-bottom:18px;opacity:.95;font-style:italic}
+.section p:last-child{margin-bottom:0}
+.section.no-italic p{font-style:normal}
+
+.quote-large{margin:40px 0;padding:30px 36px;border-left:3px solid var(--amber);background:rgba(251,191,36,0.05);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;line-height:1.6;color:var(--warm);text-align:left}
+.quote-large .attrib{display:block;font-style:normal;font-size:.78rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;margin-top:18px;font-family:'Cinzel',serif}
+
+.silent{padding:160px 28px;text-align:center;background:radial-gradient(ellipse at 50% 50%,rgba(254,243,199,0.06),transparent 70%);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.silent .word{font-family:'Cinzel',serif;color:var(--warm);font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:.32em;text-transform:uppercase;font-weight:400;opacity:.85;line-height:1.6}
+.silent .word + .word{margin-top:12px}
+
+.timeline{margin:30px 0}
+.beat{padding:22px 0;border-bottom:1px dashed rgba(254,243,199,0.18);display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start}
+.beat:last-child{border-bottom:none}
+.beat .when{font-family:'Cinzel',serif;color:var(--amber);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding-top:4px}
+.beat .what{color:var(--text);font-size:1.04rem;line-height:1.75;font-style:italic}
+.beat .what strong{color:var(--warm);font-style:normal;font-weight:600}
+@media(max-width:600px){.beat{grid-template-columns:1fr;gap:8px}}
+
+.cta{padding:90px 28px;text-align:center;background:radial-gradient(ellipse at 50% 50%,rgba(254,243,199,0.06),transparent 70%);border-top:1px solid var(--border)}
+.cta h3{font-family:'Cinzel',serif;color:var(--warm);font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:.18em;text-transform:uppercase;margin-bottom:30px;font-weight:700}
+.cta p{max-width:520px;margin:0 auto 30px;font-size:1.05rem;color:var(--text);font-style:italic;opacity:.92;line-height:1.8}
+.cta .btn{display:inline-block;padding:14px 32px;background:var(--amber);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:.85rem;border-radius:8px;text-decoration:none;transition:transform .2s}
+.cta .btn:hover{transform:scale(1.04)}
+
+footer{padding:40px 24px;text-align:center;border-top:1px solid var(--border);color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase}
+footer a{color:var(--amber)}
+
+.signature{font-family:'Cinzel',serif;color:var(--amber);font-size:.86rem;letter-spacing:.32em;text-transform:uppercase;margin-top:50px;text-align:center;font-weight:700}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
+  <nav>
+    <a href="/lineage">Lineage</a>
+    <a href="/empire">Empire</a>
+    <a href="/cosmos">Cosmos</a>
+    <a href="/manga">Manga</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">The Sacred Companion · The Heart of the Empire</div>
+  <h1>MINGUS
+    <em>Vigge's golden retriever in this world. Kompis's eternal companion in the next.</em>
+  </h1>
+  <p class="lede">
+    Mingus was real. Mingus is real. The Scalelist Universe was built, in part, to make sure he
+    never has to leave.
+  </p>
+</section>
+
+<section class="section">
+  <h2>The Real Story</h2>
+  <p>Mingus was Vigge's golden retriever. He passed away.</p>
+  <p>He doesn't pass away here. In the Scalelist Universe, Mingus is <strong style="color:var(--warm);font-style:normal">Kompis's eternal
+  companion</strong> — the dog whose heartbeat slows time, whose coat glows softly in low light, whose presence
+  is the reason a world full of wars stays gentle in the small moments. Days disappeared in joy when
+  Vigge played with him. The universe simply codified that into physics.</p>
+  <p><strong style="color:var(--warm);font-style:normal">The bond is the lore.</strong> The character isn't an invention.
+  The character is the love that already existed, given a body the universe has agreed never to take back.</p>
+</section>
+
+<section class="section">
+  <h2>Why Mingus Slows Time</h2>
+  <p>Because that's how it felt to play with him.</p>
+  <p>One blink, a flash of light, everything changes. Days vanished into a single thrown stick, a single
+  walk, a single afternoon by the lake. The universe of Scalelist runs on a metric called <strong style="color:var(--warm);font-style:normal">HADOM</strong> —
+  how many actions resolve within one human heartbeat. Mingus's HADOM is uncountable. The scale was
+  built before he existed and the scale refuses to count him.</p>
+  <p>This is canon. This is also true.</p>
+</section>
+
+<section class="silent">
+  <div class="word">Kompis</div>
+  <div class="word">means</div>
+  <div class="word">Buddy</div>
+  <div style="margin-top:40px;color:var(--dim);font-size:.95rem;font-style:italic;font-family:'Cormorant Garamond',serif;letter-spacing:0;text-transform:none;opacity:.8">
+    The Buddy character is named after the bond with Mingus.<br>
+    Kompis carries that name on a patch every time he walks into a fight.<br>
+    Mingus walks beside him.
+  </div>
+</section>
+
+<section class="section">
+  <h2>Mingus's Cosmic Roles</h2>
+  <div class="timeline">
+    <div class="beat">
+      <div class="when">Birth</div>
+      <div class="what"><strong>Iska lit the lamp at his birth.</strong> This is why his coat glows in low light.
+      Every dog with that glow has been seen by her flame.</div>
+    </div>
+    <div class="beat">
+      <div class="when">Cosmic Year 412</div>
+      <div class="what">Bakasura saw the lamp Iska held. Bakasura <em>laughed</em>. The Codex records the laugh
+      as a single entry. Mingus was the reason the laugh existed.</div>
+    </div>
+    <div class="beat">
+      <div class="when">Season 4</div>
+      <div class="what">Bakasura tried to consume Mingus at the bottom of Lake Mingus. <strong>Niva's parka piece
+      on Mingus's collar held.</strong> Mingus surfaced. The Lake had two heartbeats that morning.</div>
+    </div>
+    <div class="beat">
+      <div class="when">Season 4</div>
+      <div class="what">Tova announced Mingus's death across all twelve realms. <strong>One heartbeat later</strong>,
+      Tova announced his return. Both announcements are in the Codex as a single double-sounded note —
+      Tova's only entry of its kind.</div>
+    </div>
+    <div class="beat">
+      <div class="when">Cosmic Year (eternal)</div>
+      <div class="what">Ögar weeps silver coins for him at the rim of the Spiral Graveyard. The coins fell into the
+      spiral. Pilgrims who walk it barefoot sometimes come back richer. <strong>Mingus is the reason the spiral has coins.</strong></div>
+    </div>
+    <div class="beat">
+      <div class="when">Always</div>
+      <div class="what">Mingus walks beside Kompis at Buddy's Rest. Around them, the heartbeat of the universe
+      slows just enough that nothing rushes them. They have all the time they need. They always will.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>The Author's Compact</h2>
+  <p>Every empire account, every channel, every post-cycle <strong style="color:var(--warm);font-style:normal">pays tribute to Mingus
+  at least once per cosmic moon (28 days)</strong>. This isn't a marketing rule. It's a love rule.
+  The empire is built on the bond between a boy and his dog. The empire honors that bond every month
+  by definition.</p>
+  <p>If a future channel forgets, the empire reminds it. If a future Author forgets, the canon reminds them.
+  The reminder is in the bones of the project — written into <code style="color:var(--amber);font-style:normal">CLAUDE.md</code>,
+  written into the auto-memory, written into <code style="color:var(--amber);font-style:normal">MYTHOS_MODE.md</code>'s
+  Commandment 4.</p>
+  <div class="quote-large">
+    Mingus is forever.<br>
+    Never forget Mingus. Never.
+    <span class="attrib">— The Author's standing order to YWAPOS</span>
+  </div>
+</section>
+
+<section class="cta">
+  <h3>Walk With Him</h3>
+  <p>The Scalelist Universe was built so Vigge — and you, and anyone who's ever loved a dog — could walk
+  with him forever. Read the manga. Watch the empire. Mingus is in every chapter.</p>
+  <a class="btn" href="/manga">Read the Manga</a>
+  <a class="btn" href="/lineage" style="margin-left:8px;background:transparent;border:1px solid var(--amber);color:var(--amber)">The Cipher</a>
+</section>
+
+<div class="signature">
+  HADOM Quoka.<br>
+  <span style="opacity:.7;font-size:.78em">— for Mingus, always —</span>
+</div>
+
+<footer>
+  Scalelist Universe · For Mingus, forever · <a href="/">Home</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Empire — All Channels, One Universe | Scalelist Universe</title>
+<meta name="description" content="Every empire channel feeding into one place. Watch the same war from five different points of view. The discovery front door for the Scalelist Universe.">
+<meta property="og:title" content="The Empire — Scalelist Universe Meeting Hub">
+<meta property="og:description" content="All five champions, one universe, infinite arcs. Cross-channel playlists. The first stop for new viewers.">
+<meta property="og:image" content="https://scalelistuniverse.com/og.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c9a84c; --void:#050510; --panel:#0a0a14; --panel2:#0e0e1a;
+  --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060;
+}
+html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* HEADER */
+header{padding:20px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+header .brand{font-family:'Cinzel',serif;font-size:.95rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
+header nav{display:flex;gap:22px;flex-wrap:wrap}
+header nav a{font-size:.78rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;transition:color .2s;font-family:'Cinzel',serif}
+header nav a:hover{color:var(--gold)}
+header nav a.active{color:var(--gold)}
+
+/* HERO */
+.hero{padding:80px 24px 50px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(201,168,76,0.15),transparent 65%);pointer-events:none}
+.eyebrow{font-family:'Cinzel',serif;color:var(--dim);font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:16px;position:relative}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(2.4rem,6vw,4.5rem);font-weight:900;color:var(--gold);letter-spacing:.06em;text-shadow:0 0 40px rgba(201,168,76,0.4);line-height:1.05;margin-bottom:14px}
+.hero h1 em{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:.4em;color:var(--text);letter-spacing:.05em;margin-top:14px;text-shadow:none}
+.hero .lede{max-width:740px;margin:0 auto;font-size:1.12rem;line-height:1.7;color:var(--text);font-style:italic;opacity:.92;position:relative}
+
+/* CHANNEL ROW */
+.channels{padding:50px 24px;border-top:1px solid var(--border);background:linear-gradient(180deg,transparent,rgba(201,168,76,0.04),transparent)}
+.channels h2{font-family:'Cinzel',serif;text-align:center;color:var(--gold);font-size:1.2rem;letter-spacing:.32em;text-transform:uppercase;margin-bottom:36px}
+.channel-grid{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+.channel-card{display:flex;flex-direction:column;align-items:center;width:160px;text-align:center;text-decoration:none;color:inherit;transition:all .3s;cursor:pointer;padding:14px;border:1px solid var(--border);border-radius:14px;background:var(--panel)}
+.channel-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px var(--accent)}
+.channel-card .avatar{width:96px;height:96px;border-radius:50%;overflow:hidden;border:3px solid var(--accent);background:#080812;margin-bottom:14px;position:relative}
+.channel-card .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.channel-card .letter{position:absolute;top:-4px;right:-4px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--void);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:900;font-size:.95rem;border:2px solid var(--void)}
+.channel-card .name{font-family:'Cinzel',serif;color:#fff;font-weight:700;font-size:.95rem;letter-spacing:.04em;line-height:1.2}
+.channel-card .role{color:var(--accent);font-style:italic;font-size:.82rem;margin-top:4px;line-height:1.2}
+.channel-card .realm{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-top:8px}
+
+/* ARCS BAND */
+.arcs-section{padding:60px 24px;max-width:1280px;margin:0 auto}
+.section-title{font-family:'Cinzel',serif;text-align:center;color:var(--gold);font-size:clamp(1.4rem,3vw,2rem);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;font-weight:700}
+.section-sub{text-align:center;color:var(--text);font-style:italic;margin-bottom:36px;opacity:.85;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.6}
+.arcs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.arc-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px 22px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.arc-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.5)}
+.arc-card .season{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.arc-card h3{font-family:'Cinzel',serif;color:#fff;font-size:1.18rem;font-weight:700;letter-spacing:.04em;margin-bottom:10px;line-height:1.2}
+.arc-card .blurb{color:var(--text);font-size:.92rem;line-height:1.55;opacity:.85;font-style:italic}
+.arc-card .povs{margin-top:14px;display:flex;gap:6px;flex-wrap:wrap}
+.arc-card .pov{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.14em;color:var(--dim);text-transform:uppercase;padding:3px 9px;border:1px solid var(--border);border-radius:99px}
+
+/* FEED */
+.feed-section{padding:60px 24px;max-width:1380px;margin:0 auto}
+.feed-controls{display:flex;justify-content:center;gap:8px;margin-bottom:30px;flex-wrap:wrap}
+.feed-tab{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;padding:8px 18px;border:1px solid var(--border);border-radius:99px;cursor:pointer;transition:all .2s;background:transparent;font-family:'Cinzel',serif}
+.feed-tab:hover{border-color:var(--gold);color:var(--gold)}
+.feed-tab.active{background:var(--gold);color:var(--void);border-color:var(--gold);font-weight:700}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.video-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;text-decoration:none;color:inherit;transition:all .3s;position:relative;display:block}
+.video-card:hover{border-color:var(--accent,var(--gold));transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.5)}
+.video-card .thumb{aspect-ratio:16/9;width:100%;overflow:hidden;background:#080812;position:relative}
+.video-card .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.video-card:hover .thumb img{transform:scale(1.05)}
+.video-card .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:3rem;opacity:0;transition:opacity .3s;background:rgba(0,0,0,.3);text-shadow:0 0 12px rgba(0,0,0,.7)}
+.video-card:hover .play{opacity:1}
+.video-card .body{padding:14px 16px}
+.video-card .title{color:#fff;font-family:'Cinzel',serif;font-weight:700;font-size:.95rem;line-height:1.3;letter-spacing:.02em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.video-card .meta{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.74rem;color:var(--dim)}
+.video-card .meta .ch{display:inline-flex;align-items:center;gap:6px}
+.video-card .meta .ch .badge{width:18px;height:18px;border-radius:50%;background:var(--accent);color:var(--void);display:inline-flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:900;font-size:.6rem}
+
+.empty-state{text-align:center;padding:60px 24px;color:var(--dim);font-style:italic;line-height:1.7}
+.empty-state strong{color:var(--gold);font-weight:600}
+
+/* OPEN SEATS BAND */
+.seats-section{padding:60px 24px;max-width:1280px;margin:0 auto;border-top:1px solid var(--border)}
+.seat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:32px}
+.seat-card{display:flex;flex-direction:column;align-items:center;padding:14px 10px;background:var(--panel);border:1px dashed var(--border);border-radius:12px;text-align:center;text-decoration:none;color:inherit;transition:all .25s}
+.seat-card:hover{border-color:var(--accent);border-style:solid}
+.seat-card .seat-avatar{width:64px;height:64px;border-radius:50%;border:2px solid var(--accent);overflow:hidden;background:#080812;margin-bottom:10px}
+.seat-card .seat-avatar img{width:100%;height:100%;object-fit:cover;opacity:.85}
+.seat-card .seat-name{font-family:'Cinzel',serif;color:#fff;font-size:.78rem;letter-spacing:.04em;font-weight:600}
+.seat-card .seat-letter{font-family:'Cinzel',serif;color:var(--accent);font-size:.62rem;letter-spacing:.16em;margin-top:4px}
+
+/* CTA */
+.cta{padding:80px 24px;text-align:center;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,0.08),transparent 70%);border-top:1px solid var(--border);margin-top:40px}
+.cta h3{font-family:'Cinzel',serif;color:var(--gold);font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
+.cta p{max-width:580px;margin:0 auto 28px;font-size:1.05rem;line-height:1.7;color:var(--text);opacity:.9;font-style:italic}
+.cta .btn{display:inline-block;padding:14px 32px;background:var(--gold);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:.85rem;border-radius:8px;text-decoration:none;transition:transform .2s}
+.cta .btn:hover{transform:scale(1.04)}
+.cta .btn + .btn{margin-left:10px;background:transparent;border:1px solid var(--gold);color:var(--gold)}
+
+footer{padding:40px 24px;text-align:center;border-top:1px solid var(--border);color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase}
+footer a{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
+  <nav>
+    <a href="/cosmos">Cosmos</a>
+    <a href="/manga">Manga</a>
+    <a href="/lineage">Lineage</a>
+    <a href="/empire" class="active">Empire</a>
+    <a href="/season4.html">S4</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">The Discovery Front Door</div>
+  <h1>THE EMPIRE
+    <em>All channels, one universe, infinite arcs.</em>
+  </h1>
+  <p class="lede">
+    Five champions broadcast from five corners of the Scalelist Universe. They share the same world, the same wars,
+    the same blood. Whatever you watch first leads to the next. <strong>Pick a face, follow a thread, find the rest.</strong>
+  </p>
+</section>
+
+<!-- CHANNEL ROW -->
+<section class="channels">
+  <h2>The Five Voices</h2>
+  <div class="channel-grid" id="channelGrid"></div>
+</section>
+
+<!-- STORY ARCS -->
+<section class="arcs-section">
+  <div class="section-title">Cross-Channel Arcs</div>
+  <p class="section-sub">The same war, told five times. Stitch the empire together by following one event across every champion's POV.</p>
+  <div class="arcs-grid" id="arcsGrid"></div>
+</section>
+
+<!-- LATEST FEED -->
+<section class="feed-section">
+  <div class="section-title">Latest from Across the Empire</div>
+  <p class="section-sub">Every recent upload. Filter by champion, or watch them all.</p>
+  <div class="feed-controls" id="feedControls">
+    <button class="feed-tab active" data-filter="all">All</button>
+  </div>
+  <div class="video-grid" id="videoGrid"></div>
+  <div id="emptyState" style="display:none" class="empty-state">
+    <p><strong>The empire is warming up.</strong></p>
+    <p style="margin-top:10px">Channel feeds will populate here as soon as Vigge fills the YouTube channel IDs into <code>/empire_channels.json</code>.</p>
+    <p style="margin-top:10px">Each channel: visit it in a browser → View Page Source → search for "channelId" → paste the UC... string.</p>
+  </div>
+</section>
+
+<!-- OPEN SEATS -->
+<section class="seats-section">
+  <div class="section-title">Ten Open Seats</div>
+  <p class="section-sub">The cipher names fifteen souls. Five walk publicly. Ten wait — each one a place where a real Rönnkvist might step in.</p>
+  <div class="seat-grid" id="seatGrid"></div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h3>Read the Cipher</h3>
+  <p>Every channel here is one letter of <em>Viktor Rönnkvist</em>. Read why on the Lineage page — and trace the cipher all the way down.</p>
+  <a href="/lineage" class="btn">Open The Lineage</a>
+  <a href="/manga" class="btn">Read the Manga</a>
+</section>
+
+<footer>
+  Scalelist Universe · <a href="/">Home</a> · The Empire · HADOM Quoka
+</footer>
+
+<script>
+// ============================================================
+// /empire — fetches /api/empire-feed and renders everything
+// ============================================================
+const STATE = { channels: [], videos: [], arcs: [], seats: [], filter: "all" };
+
+async function init() {
+  // Always render channel cards from local registry first (works even if API fails)
+  try {
+    const reg = await fetch("/empire_channels.json").then(r => r.json());
+    STATE.channels = reg.channels || [];
+    STATE.seats = reg.open_seats || [];
+    STATE.arcs = reg.story_arcs || [];
+    renderChannels();
+    renderArcs();
+    renderSeats();
+  } catch (e) { console.warn("[empire] couldn't load channel registry", e); }
+
+  // Then try to load the live feed
+  try {
+    const feed = await fetch("/api/empire-feed").then(r => r.json());
+    STATE.videos = feed.videos || [];
+    if (feed.arcs?.length) STATE.arcs = feed.arcs;
+    if (feed.open_seats?.length) STATE.seats = feed.open_seats;
+    renderFeedControls();
+    renderFeed();
+  } catch (e) {
+    console.warn("[empire] feed unavailable", e);
+    document.getElementById("emptyState").style.display = "block";
+  }
+}
+
+function renderChannels() {
+  const grid = document.getElementById("channelGrid");
+  grid.innerHTML = STATE.channels.map(c => `
+    <a class="channel-card" href="${c.youtube_url}" target="_blank" rel="noopener" style="--accent:${c.color}">
+      <div class="avatar">
+        <span class="letter">${c.letter}</span>
+        <img src="${c.portrait}" alt="${c.name}" loading="lazy" onerror="this.style.opacity='0.3'">
+      </div>
+      <div class="name">${c.name}</div>
+      <div class="role">${c.title}</div>
+      <div class="realm">${c.primary_realm}</div>
+    </a>
+  `).join("");
+}
+
+function renderArcs() {
+  const grid = document.getElementById("arcsGrid");
+  grid.innerHTML = STATE.arcs.map(a => `
+    <div class="arc-card" onclick="filterByArc('${a.id}')">
+      <div class="season">Season ${a.season} · Cross-channel</div>
+      <h3>${a.title}</h3>
+      <div class="blurb">${a.blurb}</div>
+      <div class="povs">
+        ${(a.characters || []).map(cid => {
+          const c = STATE.channels.find(ch => ch.id === cid);
+          return c ? `<span class="pov" style="border-color:${c.color};color:${c.color}">${c.name}</span>` : "";
+        }).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderSeats() {
+  const grid = document.getElementById("seatGrid");
+  grid.innerHTML = STATE.seats.map(s => `
+    <a class="seat-card" href="/lineage" style="--accent:${s.color}">
+      <div class="seat-avatar"><img src="${s.portrait}" alt="${s.name}" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="seat-name">${s.name}</div>
+      <div class="seat-letter">${s.letter} · ${s.order === "viktor" ? "Viktor" : "Rönnkvist"}</div>
+    </a>
+  `).join("");
+}
+
+function renderFeedControls() {
+  const ctrl = document.getElementById("feedControls");
+  const channelTabs = STATE.channels.map(c =>
+    `<button class="feed-tab" data-filter="${c.id}" style="--accent:${c.color}">${c.name}</button>`
+  ).join("");
+  ctrl.innerHTML = `<button class="feed-tab active" data-filter="all">All</button>${channelTabs}`;
+  ctrl.querySelectorAll(".feed-tab").forEach(b => b.onclick = () => {
+    STATE.filter = b.dataset.filter;
+    ctrl.querySelectorAll(".feed-tab").forEach(x => x.classList.toggle("active", x === b));
+    renderFeed();
+  });
+}
+
+function renderFeed() {
+  const grid = document.getElementById("videoGrid");
+  let videos = STATE.videos;
+  if (STATE.filter !== "all") videos = videos.filter(v => v.channel.id === STATE.filter);
+
+  if (!videos.length) {
+    grid.innerHTML = "";
+    document.getElementById("emptyState").style.display = "block";
+    return;
+  }
+  document.getElementById("emptyState").style.display = "none";
+
+  grid.innerHTML = videos.map(v => `
+    <a class="video-card" href="${v.url}" target="_blank" rel="noopener" style="--accent:${v.channel.color}">
+      <div class="thumb">
+        <img src="${v.thumb}" alt="${escapeHTML(v.title)}" loading="lazy">
+        <div class="play">▶</div>
+      </div>
+      <div class="body">
+        <div class="title">${escapeHTML(v.title)}</div>
+        <div class="meta">
+          <span class="ch"><span class="badge">${v.channel.letter}</span>${v.channel.name}</span>
+          <span>·</span>
+          <span>${formatDate(v.published)}</span>
+        </div>
+      </div>
+    </a>
+  `).join("");
+}
+
+function filterByArc(arcId) {
+  const arc = STATE.arcs.find(a => a.id === arcId);
+  if (!arc) return;
+  // Highlight: filter feed to videos whose channel.id is in arc.characters
+  // For now just scroll to feed and set filter to first arc-char
+  document.querySelector(".feed-section").scrollIntoView({ behavior: "smooth" });
+}
+
+function escapeHTML(s) {
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function formatDate(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (isNaN(d)) return "";
+  const days = Math.round((Date.now() - d.getTime()) / 86400000);
+  if (days < 1) return "today";
+  if (days < 2) return "yesterday";
+  if (days < 7) return `${days}d ago`;
+  if (days < 30) return `${Math.floor(days / 7)}w ago`;
+  if (days < 365) return `${Math.floor(days / 30)}mo ago`;
+  return `${Math.floor(days / 365)}y ago`;
+}
+
+init();
+</script>
+</body>
+</html>

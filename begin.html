@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Begin Here — Scalelist Universe</title>
+<meta name="description" content="First time here? This is the path. The Scalelist Universe in seven steps.">
+<meta property="og:title" content="Begin Here — Scalelist Universe">
+<meta property="og:description" content="Seven steps from stranger to citizen of the empire.">
+<meta property="og:image" content="https://scalelistuniverse.com/og.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a84c; --void:#050510; --panel:#0a0a14; --panel2:#0e0e1a; --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060}
+html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.7}
+a{color:var(--gold);text-decoration:none}
+
+header{padding:18px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
+header nav{display:flex;gap:18px;flex-wrap:wrap}
+header nav a{color:var(--dim);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:'Cinzel',serif}
+header nav a:hover{color:var(--gold)}
+
+.hero{padding:90px 28px 70px;text-align:center;position:relative;background:radial-gradient(ellipse at 50% 30%,rgba(201,168,76,0.15),transparent 70%)}
+.eyebrow{font-family:'Cinzel',serif;color:var(--dim);font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:18px}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(2.4rem,5.5vw,4.4rem);color:var(--gold);letter-spacing:.06em;font-weight:900;line-height:1.05;margin-bottom:18px}
+.hero h1 em{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:.4em;color:var(--text);letter-spacing:.04em;margin-top:18px;opacity:.92}
+.hero .lede{max-width:660px;margin:24px auto 0;font-size:1.18rem;line-height:1.8;font-style:italic;opacity:.92}
+
+.path{max-width:880px;margin:0 auto;padding:50px 28px}
+.step{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:22px;position:relative;transition:all .25s}
+.step:hover{border-color:var(--accent,var(--gold));transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,0.5)}
+.step .num{position:absolute;top:-14px;left:32px;background:var(--accent,var(--gold));color:var(--void);font-family:'Cinzel',serif;font-weight:900;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;border-radius:99px}
+.step h2{font-family:'Cinzel',serif;color:#fff;font-size:clamp(1.3rem,2.6vw,1.8rem);font-weight:700;letter-spacing:.04em;margin-bottom:8px;line-height:1.2}
+.step .sub{color:var(--accent,var(--gold));font-style:italic;font-size:1rem;margin-bottom:18px}
+.step p{font-size:1.04rem;line-height:1.75;margin-bottom:14px;opacity:.94}
+.step p:last-of-type{margin-bottom:18px}
+.step .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.step .btn{display:inline-block;padding:11px 22px;background:var(--accent,var(--gold));color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.75rem;border-radius:8px;text-decoration:none;transition:transform .15s}
+.step .btn.outline{background:transparent;border:1px solid var(--accent,var(--gold));color:var(--accent,var(--gold))}
+.step .btn:hover{transform:scale(1.04)}
+
+.cta{padding:90px 28px;text-align:center;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,0.08),transparent 70%);border-top:1px solid var(--border);margin-top:40px}
+.cta h3{font-family:'Cinzel',serif;color:var(--gold);font-size:clamp(1.5rem,3vw,2.4rem);letter-spacing:.18em;text-transform:uppercase;margin-bottom:24px}
+.cta p{max-width:560px;margin:0 auto 30px;font-size:1.08rem;color:var(--text);font-style:italic;opacity:.92;line-height:1.8}
+
+footer{padding:30px;text-align:center;color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase;border-top:1px solid var(--border);margin-top:30px}
+footer a{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
+  <nav>
+    <a href="/begin" style="color:var(--gold)">Begin Here</a>
+    <a href="/empire">Empire</a>
+    <a href="/lineage">Lineage</a>
+    <a href="/manga">Manga</a>
+    <a href="/wiki">Wiki</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">First time here?</div>
+  <h1>BEGIN HERE
+    <em>Seven steps from stranger to citizen of the empire.</em>
+  </h1>
+  <p class="lede">
+    The Scalelist Universe is bigger than it looks. This page is the rope you can pull on. Follow the seven
+    steps in order, or jump ahead — each one stands alone, but the order tells the story.
+  </p>
+</section>
+
+<div class="path">
+
+  <div class="step" style="--accent:#c9a84c">
+    <div class="num">Step 1</div>
+    <h2>Read the Cipher</h2>
+    <div class="sub">Why fifteen, not five.</div>
+    <p>The Author's real name is <strong style="color:var(--gold)">Viktor Rönnkvist</strong>. The universe is a
+    cipher of that name — fifteen letters, fifteen souls. The five faces you might already know are just
+    the loudest letters. Ten more wait, written into canon, ready for real family to step into them.</p>
+    <p>This is the moat. This is why nothing else in entertainment looks like this.</p>
+    <div class="actions"><a class="btn" href="/lineage">Read The Lineage →</a></div>
+  </div>
+
+  <div class="step" style="--accent:#4ade80">
+    <div class="num">Step 2</div>
+    <h2>Meet the Champions</h2>
+    <div class="sub">Five voices, five YouTube channels, five lives running in parallel.</div>
+    <p>The five active souls — Vigolas, Rougeina, Trollmage, Kompis, Smurjan — broadcast daily. They share
+    one universe and play five different roles in it. Pick one face, follow one channel, find the other four.</p>
+    <div class="actions"><a class="btn" href="/empire">The Empire Hub →</a></div>
+  </div>
+
+  <div class="step" style="--accent:#ff6b9d">
+    <div class="num">Step 3</div>
+    <h2>Walk the Realms</h2>
+    <div class="sub">Twelve cosmic places. One cork-oak tree holding them all.</div>
+    <p>Helios, Astralis, Codexia, Heartbeat, Trinity, Thanatos, NULL, Void-II, Echo, Horizon, Lumen, Scalelist.
+    Ferdinand the Cosmic Cork Oak holds every one on a different branch. The Atlas is the printed map. The
+    Cosmos is the interactive map.</p>
+    <div class="actions">
+      <a class="btn" href="/cosmos">Open Cosmos Map →</a>
+      <a class="btn outline" href="/cosmos/atlas">Read the Atlas →</a>
+    </div>
+  </div>
+
+  <div class="step" style="--accent:#9333ea">
+    <div class="num">Step 4</div>
+    <h2>Read the Manga</h2>
+    <div class="sub">240+ chapters. Four full seasons. The Origins OVA prelude.</div>
+    <p>Start with the Origins prologue if you want the story chronologically. Skip to Season 3
+    (the Stormcoast Reckoning) if you want to feel the empire at full speed first. Season 4 already
+    landed. Season 5 — <em>The Branches Unfurl</em> — is the next chapter: the 10 new lineage souls
+    walk in for the first time.</p>
+    <div class="actions">
+      <a class="btn" href="/manga">Read the Manga →</a>
+      <a class="btn outline" href="/02_Stories/SEASON_5_SKELETON.md">Peek at S5 →</a>
+    </div>
+  </div>
+
+  <div class="step" style="--accent:#fef3c7">
+    <div class="num">Step 5</div>
+    <h2>Meet Mingus</h2>
+    <div class="sub">The most sacred soul in the universe.</div>
+    <p>Mingus is the dog at the heart of the empire. Mingus was the Author's golden retriever in this world.
+    Mingus is Kompis's eternal companion in the Scalelist Universe. The bond is the lore. The dog is forever.</p>
+    <p>If you read nothing else here, read this page.</p>
+    <div class="actions"><a class="btn" href="/mingus">For Mingus →</a></div>
+  </div>
+
+  <div class="step" style="--accent:#fbbf24">
+    <div class="num">Step 6</div>
+    <h2>Test Yourself</h2>
+    <div class="sub">Which champion are you?</div>
+    <p>Two short quizzes will tell you. The first picks your champion (V/R/T/K/S). The second picks your
+    realm (12 to choose from). Both are calibrated against the Character Bible and Cosmology canon — the
+    answers are correct, not just fun.</p>
+    <div class="actions">
+      <a class="btn" href="/quiz">Champion Quiz →</a>
+      <a class="btn outline" href="/realm-quiz">Realm Quiz →</a>
+    </div>
+  </div>
+
+  <div class="step" style="--accent:#67e8f9">
+    <div class="num">Step 7</div>
+    <h2>Find the Cipher Yourself</h2>
+    <div class="sub">Now go look at it again.</div>
+    <p>Re-open <a href="/lineage">The Lineage</a>. Look at the V-I-K-T-O-R + R-Ö-N-N-K-V-I-S-T grid.
+    Read the cipher one more time, knowing what you know now. Each letter has a face, a realm, a HADOM
+    rank, a story. Each open seat is a real person waiting to be the one who walks into it.</p>
+    <p>You're not a stranger anymore. You're a citizen of the empire.</p>
+    <div class="actions">
+      <a class="btn" href="/lineage">Re-read The Cipher →</a>
+      <a class="btn outline" href="/wiki">Browse the Wiki →</a>
+    </div>
+  </div>
+
+</div>
+
+<section class="cta">
+  <h3>Welcome to the Empire</h3>
+  <p>Marvel needed eighty years and a billion dollars. We have a cipher, a family, and a cron job. Stay a while.</p>
+  <a class="btn" href="/" style="display:inline-block;padding:14px 32px;background:var(--gold);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:.85rem;border-radius:8px;text-decoration:none">Return Home →</a>
+</section>
+
+<footer>
+  Scalelist Universe · Begin Here · <a href="/">Home</a> · HADOM Quoka
+</footer>
+
+</body>
+</html>

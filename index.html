@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="refresh" content="0;url=/hub.html"/>
+<script>window.location.replace('/hub.html')</script>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>Scalelist Universe — Dark Fantasy Manga</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&amp;family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a84c;--void:#050508;--panel:#10101e;--panelLight:#181830;--text:#e8e4d9;--textDim:#8a8677;--vigolas:#4ade80;--rougeina:#DC2626;--trollmage:#7C3AED;--kompis:#D97706;--smurjan:#0EA5E9}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--text);font-family:'Crimson Text',Georgia,serif;overflow-x:hidden;cursor:default;line-height:1.7}
+canvas#starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+canvas#aurora{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9998;pointer-events:none}
+.cursor-dot{position:fixed;width:6px;height:6px;border-radius:50%;background:var(--gold);z-index:9999;pointer-events:none;mix-blend-mode:screen;box-shadow:0 0 15px var(--gold),0 0 30px rgba(201,168,76,.4)}
+.planet{position:fixed;z-index:1;pointer-events:none;border-radius:50%;transition:transform .3s ease-out}
+.planet-ring{position:absolute;border:1.5px solid rgba(201,168,76,.25);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%) rotateX(65deg)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(5,5,8,.95) 0%,rgba(5,5,8,0) 100%);backdrop-filter:blur(8px)}
+nav .brand{font-family:'Cinzel',serif;font-weight:900;font-size:1.1rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase}
+nav .links{display:flex;gap:2rem}
+nav .links a{color:var(--textDim);font-family:'Space Mono',monospace;font-size:.75rem;text-decoration:none;letter-spacing:.15em;text-transform:uppercase;transition:color .3s}
+nav .links a:hover{color:var(--gold)}
+
+/* HERO */
+.hero{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem}
+.hero .sigil{font-size:4rem;color:var(--gold);margin-bottom:1rem;animation:pulse 3s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(201,168,76,.4))}
+@keyframes pulse{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+.hero .subtitle{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.5em;color:var(--textDim);text-transform:uppercase;margin-bottom:1rem}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(2.5rem,8vw,5.5rem);font-weight:900;color:var(--gold);letter-spacing:.08em;line-height:1.1;text-shadow:0 0 60px rgba(201,168,76,.3);margin-bottom:1.5rem}
+.hero .tagline{font-size:1.15rem;color:var(--textDim);max-width:600px;margin:0 auto 2.5rem;font-style:italic}
+.hero .btns{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}
+.btn{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 2.2rem;border:1px solid var(--gold);color:var(--gold);background:transparent;text-decoration:none;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.btn:hover{background:var(--gold);color:var(--void)}
+.btn.solid{background:var(--gold);color:var(--void)}
+.btn.solid:hover{background:transparent;color:var(--gold)}
+
+/* SECTIONS */
+section{position:relative;z-index:2;padding:6rem 2rem}
+.section-title{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--gold);text-align:center;margin-bottom:.5rem;letter-spacing:.1em}
+.section-sub{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--textDim);text-align:center;letter-spacing:.3em;text-transform:uppercase;margin-bottom:3rem}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.stagger{transition-delay:calc(var(--i,0) * .12s)}
+
+/* CHARACTER GRID */
+.char-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto}
+.char-card{background:var(--panel);border:1px solid rgba(201,168,76,.1);padding:2rem 1.5rem;text-align:center;cursor:pointer;transition:all .4s;position:relative;overflow:hidden}
+.char-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:0;transition:opacity .3s}
+.char-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.char-card:hover::before{opacity:1}
+.char-icon{font-size:2.5rem;margin-bottom:.8rem;filter:drop-shadow(0 0 10px var(--accent))}
+.char-name{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.3rem}
+.char-role{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--textDim);letter-spacing:.2em;text-transform:uppercase}
+.char-card .view-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-top:1rem;opacity:0;transition:opacity .3s}
+.char-card:hover .view-label{opacity:1}
+
+/* MODAL */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:200;background:rgba(5,5,8,.85);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--panel);border:1px solid rgba(201,168,76,.15);max-width:560px;width:90%;padding:3rem 2.5rem;position:relative;transform:translateY(30px) scale(.96);transition:transform .4s ease;max-height:90vh;overflow-y:auto}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:1rem;right:1.5rem;background:none;border:none;color:var(--textDim);font-size:1.5rem;cursor:pointer;transition:color .3s;font-family:'Cinzel',serif}
+.modal-close:hover{color:var(--gold)}
+.modal-accent{height:3px;margin-bottom:2rem;background:var(--accent)}
+.modal .m-icon{font-size:3rem;margin-bottom:.5rem;filter:drop-shadow(0 0 15px var(--accent))}
+.modal .m-name{font-family:'Cinzel',serif;font-size:2rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.2rem}
+.modal .m-role{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.25em;text-transform:uppercase;margin-bottom:1.5rem}
+.modal .m-field{margin-bottom:1.2rem}
+.modal .m-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--textDim);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.3rem}
+.modal .m-value{font-size:1rem;color:var(--text);line-height:1.6}
+.modal .m-season{margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(201,168,76,.1);font-family:'Space Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.15em}
+
+/* WATCH */
+.watch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto}
+.watch-card{background:var(--panel);border:1px solid rgba(201,168,76,.08);overflow:hidden;transition:all .4s;text-decoration:none;color:inherit}
+.watch-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.watch-thumb{position:relative;padding-top:56.25%;background:#0a0a12}
+.watch-thumb img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
+.watch-thumb .play-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;background:rgba(201,168,76,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--void);transition:transform .3s}
+.watch-card:hover .play-icon{transform:translate(-50%,-50%) scale(1.1)}
+.watch-info{padding:1.2rem 1.5rem}
+.watch-info h3{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);margin-bottom:.3rem}
+.watch-info p{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--textDim);letter-spacing:.15em;text-transform:uppercase}
+
+/* FOOTER */
+footer{position:relative;z-index:2;text-align:center;padding:3rem 2rem;border-top:1px solid rgba(201,168,76,.08)}
+footer p{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--textDim);letter-spacing:.2em}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:.8rem 1rem}
+  nav .brand{font-size:.85rem;letter-spacing:.1em}
+  nav .links{gap:1rem}
+  nav .links a{font-size:.65rem}
+  section{padding:4rem 1.2rem}
+  .hero{padding:5rem 1.2rem 3rem}
+  .modal{padding:2rem 1.5rem}
+  .char-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem}
+  .watch-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  nav .links{gap:.6rem}
+  .hero .btns{flex-direction:column;align-items:center}
+  .char-grid{grid-template-columns:1fr 1fr;gap:.8rem}
+  .char-card{padding:1.2rem 1rem}
+}
+</style>
+<meta content="Scalelist Universe — A dark fantasy manga series following five souls with infinite power. Read 119+ chapters free." name="description"/><meta content="scalelist universe, dark fantasy manga, five souls, vigolas, rougeina, trollmage, kompis, smurjan, free manga online, HADOM" name="keywords"/><link href="https://scalelist-universe.vercel.app/" rel="canonical"/><meta content="index, follow" name="robots"/><meta content="website" property="og:type"/><meta content="Scalelist Universe" property="og:site_name"/><meta content="https://scalelist-universe.vercel.app/" property="og:url"/><meta content="Scalelist Universe — Dark Fantasy Manga" property="og:title"/><meta content="Scalelist Universe — A dark fantasy manga series following five souls with infinite power. Read 119+ chapters free." property="og:description"/><meta content="https://scalelist-universe.vercel.app/og-image.jpg" property="og:image"/><meta content="en_US" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/><meta content="Scalelist Universe — Dark Fantasy Manga" name="twitter:title"/><meta content="Scalelist Universe — A dark fantasy manga series following five souls with infinite power. Read 119+ chapters free." name="twitter:description"/><meta content="https://scalelist-universe.vercel.app/og-image.jpg" name="twitter:image"/><meta content="@susmurjan" name="twitter:site"/><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Scalelist Universe",
+  "url": "https://scalelist-universe.vercel.app",
+  "description": "Scalelist Universe — A dark fantasy manga series following five souls with infinite power.",
+  "author": {
+    "@type": "Organization",
+    "name": "Scalelist Universe"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://scalelist-universe.vercel.app/manga.html?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}</script></head>
+<body>
+<canvas id="starfield"></canvas>
+<canvas id="aurora"></canvas>
+<nav>
+<div class="brand">Scalelist Universe</div>
+<div class="links">
+<a href="manga">Read Manga</a>
+<a href="#characters">Characters</a>
+<a href="#watch">Watch</a>
+</div>
+</nav>
+<section class="hero">
+<div class="sigil">⚔</div>
+<div class="subtitle">A Dark Fantasy Universe</div>
+<h1>SCALELIST<br/>UNIVERSE</h1>
+<p class="tagline">Five souls bound to a simulation they were never meant to escape. One list that decides who ascends—and who is erased.</p>
+<div class="btns">
+<a class="btn solid" href="manga">Read the Manga</a>
+<a class="btn" href="#characters">Meet the Characters</a>
+</div>
+</section>
+<section id="characters">
+<h2 class="section-title reveal">The Five</h2>
+<p class="section-sub reveal">Chosen by Sin — Bound by the Scalelist</p>
+<div class="char-grid">
+<div class="char-card reveal stagger" onclick="openModal(0)" style="--accent:var(--vigolas);--i:0">
+<div class="char-icon" style="color:var(--vigolas)">⚓</div>
+<div class="char-name">Vigolas</div>
+<div class="char-role">The Pirate Captain</div>
+<div class="view-label">View Profile →</div>
+</div>
+<div class="char-card reveal stagger" onclick="openModal(1)" style="--accent:var(--rougeina);--i:1">
+<div class="char-icon" style="color:var(--rougeina)">◆</div>
+<div class="char-name">Rougeina</div>
+<div class="char-role">The Shadow Walker</div>
+<div class="view-label">View Profile →</div>
+</div>
+<div class="char-card reveal stagger" onclick="openModal(2)" style="--accent:var(--trollmage);--i:2">
+<div class="char-icon" style="color:var(--trollmage)">☋</div>
+<div class="char-name">Trollmage</div>
+<div class="char-role">The Hybrid Scholar</div>
+<div class="view-label">View Profile →</div>
+</div>
+<div class="char-card reveal stagger" onclick="openModal(3)" style="--accent:var(--kompis);--i:3">
+<div class="char-icon" style="color:var(--kompis)">♦</div>
+<div class="char-name">Kompis</div>
+<div class="char-role">The Soul Collector</div>
+<div class="view-label">View Profile →</div>
+</div>
+<div class="char-card reveal stagger" onclick="openModal(4)" style="--accent:var(--smurjan);--i:4">
+<div class="char-icon" style="color:var(--smurjan)">☢</div>
+<div class="char-name">Smurjan</div>
+<div class="char-role">The Void Trinity</div>
+<div class="view-label">View Profile →</div>
+</div>
+</div>
+</section>
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+<div class="modal" id="modalContent">
+<button class="modal-close" onclick="closeModal()">×</button>
+<div class="modal-accent" id="modalAccent"></div>
+<div class="m-icon" id="mIcon"></div>
+<div class="m-name" id="mName"></div>
+<div class="m-role" id="mRole"></div>
+<div class="m-field"><div class="m-label">Sin</div><div class="m-value" id="mSin"></div></div>
+<div class="m-field"><div class="m-label">HADOM Codex</div><div class="m-value" id="mHadom"></div></div>
+<div class="m-field"><div class="m-label">Power</div><div class="m-value" id="mPower"></div></div>
+<div class="m-field"><div class="m-label">Weapon</div><div class="m-value" id="mWeapon"></div></div>
+<div class="m-season" id="mSeason"></div>
+</div>
+</div>
+<section id="watch">
+<h2 class="section-title reveal">Watch</h2>
+<p class="section-sub reveal">Animated Episodes on YouTube</p>
+<div class="watch-grid">
+<a class="watch-card reveal stagger" href="https://youtu.be/hFRYJd7JjZ0" rel="noopener" style="--i:0" target="_blank">
+<div class="watch-thumb"><img alt="Vigolas Episode" loading="lazy" src="https://img.youtube.com/vi/hFRYJd7JjZ0/hqdefault.jpg"/><div class="play-icon">▶</div></div>
+<div class="watch-info"><h3>The Virus and the Pirate</h3><p>Vigolas — S1 Ch.3</p></div>
+</a>
+<a class="watch-card reveal stagger" href="https://youtu.be/OTm_pMnwlno" rel="noopener" style="--i:1" target="_blank">
+<div class="watch-thumb"><img alt="Rougeina Episode" loading="lazy" src="https://img.youtube.com/vi/OTm_pMnwlno/hqdefault.jpg"/><div class="play-icon">▶</div></div>
+<div class="watch-info"><h3>Mirror Protocol</h3><p>Rougeina — S1 Ch.9</p></div>
+</a>
+<a class="watch-card reveal stagger" href="https://youtu.be/YtWk101TJOs" rel="noopener" style="--i:2" target="_blank">
+<div class="watch-thumb"><img alt="Trollmage Episode" loading="lazy" src="https://img.youtube.com/vi/YtWk101TJOs/hqdefault.jpg"/><div class="play-icon">▶</div></div>
+<div class="watch-info"><h3>The Architect's Blueprint</h3><p>Trollmage — S1 Ch.5</p></div>
+</a>
+<a class="watch-card reveal stagger" href="https://youtu.be/8OO_gHQ86kQ" rel="noopener" style="--i:3" target="_blank">
+<div class="watch-thumb"><img alt="Kompis Episode" loading="lazy" src="https://img.youtube.com/vi/8OO_gHQ86kQ/hqdefault.jpg"/><div class="play-icon">▶</div></div>
+<div class="watch-info"><h3>The Collector's Price</h3><p>Kompis — S1 Ch.6</p></div>
+</a>
+<a class="watch-card reveal stagger" href="https://youtu.be/6FeUJMfvFsc" rel="noopener" style="--i:4" target="_blank">
+<div class="watch-thumb"><img alt="Smurjan Episode" loading="lazy" src="https://img.youtube.com/vi/6FeUJMfvFsc/hqdefault.jpg"/><div class="play-icon">▶</div></div>
+<div class="watch-info"><h3>Seventeen Voices</h3><p>Smurjan — S1 Ch.19</p></div>
+</a>
+</div>
+</section>
+<footer>
+<p>© 2026 Scalelist Universe</p>
+</footer>
+<script>
+/* ── CHARACTER DATA ── */
+const chars=[
+{name:"Vigolas",icon:"\u2693",role:"The Pirate Captain",sin:"Greed",hadom:"Administrator Access",power:"Reality scripting via Black Soul + Ywapos golden pen",weapon:"Ywapos \u2014 golden pen that writes reality into existence",season:"Season 4 \u2014 Black Soul King (Ch. 181\u2013240)",color:"#4ade80"},
+{name:"Rougeina",icon:"\u25C6",role:"The Shadow Walker",sin:"Pride",hadom:"Instant Transaction",power:"Phase-shifts between Zankiel (Real) and Thanatos (Shadow) realms",weapon:"Umbra \u2014 Black Giant Panther with jewel-integrated armor",season:"Season 1 \u2014 Phantom Protocols (Ch. 1\u201360)",color:"#DC2626"},
+{name:"Trollmage",icon:"\u260B",role:"The Hybrid Scholar",sin:"Sloth",hadom:"Macrofication",power:"Troll Berserk + Elf Insight, mass spell multiplication",weapon:"Oversized rune staff with prismatic crystal",season:"Season 2 \u2014 Macro Wars (Ch. 61\u2013120)",color:"#7C3AED"},
+{name:"Kompis",icon:"\u2666",role:"The Soul Collector",sin:"Lust",hadom:"Subtick Billionaire",power:"Soul Sight \u2014 sees souls within guns, 1B actions per tick",weapon:"AK-47 Case Hardened, AWP Chrome Cannon, Desert Eagle Night",season:"Season 3 \u2014 Subtick Empire (Ch. 121\u2013180)",color:"#D97706"},
+{name:"Smurjan",icon:"\u2622",role:"The Void Trinity",sin:"Wrath + Envy + Gluttony",hadom:"Void Trinity",power:"Three-soul fusion: Smurjan + Bakasura + Kali",weapon:"Triple-fusion marks, combined void energy",season:"Season 5 \u2014 The Scalelist (Ch. 241\u2013300)",color:"#0EA5E9"}
+];
+
+/* ── MODAL ── */
+const overlay=document.getElementById('modalOverlay');
+function openModal(i){
+  const c=chars[i];
+  document.getElementById('modalAccent').style.background=c.color;
+  document.getElementById('mIcon').textContent=c.icon;
+  document.getElementById('mIcon').style.color=c.color;
+  document.getElementById('mName').textContent=c.name;
+  document.getElementById('mRole').textContent=c.role;
+  document.getElementById('mRole').style.color=c.color;
+  document.getElementById('mSin').textContent=c.sin;
+  document.getElementById('mHadom').textContent=c.hadom;
+  document.getElementById('mPower').textContent=c.power;
+  document.getElementById('mWeapon').textContent=c.weapon;
+  document.getElementById('mSeason').textContent=c.season;
+  document.getElementById('mSeason').style.color=c.color;
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(e){
+  if(e&&e.target!==overlay&&!e.target.classList.contains('modal-close'))return;
+  overlay.classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
+
+/* ── STARFIELD CANVAS ── */
+(function(){
+  const canvas=document.getElementById('starfield');
+  const ctx=canvas.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;initStars()}
+  function initStars(){
+    stars=[];
+    const count=Math.floor((W*H)/2500);
+    for(let i=0;i<count;i++){
+      stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,a:Math.random(),speed:Math.random()*.0015+.0005,phase:Math.random()*Math.PI*2});
+    }
+  }
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    for(const s of stars){
+      s.a=.3+.7*(.5+.5*Math.sin(t*s.speed+s.phase));
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(201,168,76,'+s.a+')';ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  resize();
+  requestAnimationFrame(draw);
+})();
+
+/* ── AURORA CURSOR TRAIL ── */
+(function(){
+  const ac=document.getElementById('aurora');
+  const aCtx=ac.getContext('2d');
+  function resizeA(){ac.width=window.innerWidth;ac.height=window.innerHeight}
+  resizeA(); window.addEventListener('resize',resizeA);
+
+  const dot=document.createElement('div');
+  dot.className='cursor-dot';
+  document.body.appendChild(dot);
+
+  const TRAIL=50, trail=[];
+  let amx=-100,amy=-100;
+
+  document.addEventListener('mousemove',function(e){
+    amx=e.clientX; amy=e.clientY;
+    dot.style.left=(amx-3)+'px'; dot.style.top=(amy-3)+'px';
+  });
+
+  function drawAurora(){
+    trail.push({x:amx,y:amy});
+    if(trail.length>TRAIL) trail.shift();
+    aCtx.clearRect(0,0,ac.width,ac.height);
+    if(trail.length<3){requestAnimationFrame(drawAurora);return}
+    for(let w=0;w<3;w++){
+      aCtx.beginPath();
+      const off=(w-1)*4;
+      aCtx.moveTo(trail[0].x+off,trail[0].y+off);
+      for(let i=1;i<trail.length-1;i++){
+        const cx=(trail[i].x+trail[i+1].x)/2+off;
+        const cy=(trail[i].y+trail[i+1].y)/2+off;
+        aCtx.quadraticCurveTo(trail[i].x+off,trail[i].y+off,cx,cy);
+      }
+      aCtx.strokeStyle=["rgba(201,168,76,0.08)","rgba(255,215,100,0.15)","rgba(160,130,60,0.08)"][w];
+      aCtx.lineWidth=[18,8,14][w];
+      aCtx.lineCap='round'; aCtx.lineJoin='round';
+      aCtx.stroke();
+    }
+    if(trail.length>2){
+      const l=trail[trail.length-1];
+      const g=aCtx.createRadialGradient(l.x,l.y,0,l.x,l.y,25);
+      g.addColorStop(0,'rgba(201,168,76,0.3)');
+      g.addColorStop(.5,'rgba(201,168,76,0.08)');
+      g.addColorStop(1,'rgba(201,168,76,0)');
+      aCtx.beginPath(); aCtx.arc(l.x,l.y,25,0,Math.PI*2);
+      aCtx.fillStyle=g; aCtx.fill();
+    }
+    requestAnimationFrame(drawAurora);
+  }
+  drawAurora();
+})();
+
+/* ── FLOATING PLANETS ── */
+(function(){
+  const planetDefs=[
+    {size:30,color:'#4ade80',x:12,y:20,ring:42,speed:.0003,amp:15},
+    {size:22,color:'#DC2626',x:85,y:30,ring:34,speed:.00025,amp:12},
+    {size:36,color:'#7C3AED',x:75,y:70,ring:50,speed:.0002,amp:18},
+    {size:18,color:'#D97706',x:8,y:75,ring:28,speed:.00035,amp:10},
+    {size:26,color:'#0EA5E9',x:50,y:85,ring:38,speed:.00028,amp:14},
+    {size:14,color:'#c9a84c',x:92,y:55,ring:22,speed:.0004,amp:8}
+  ];
+  const planets=[];
+  let mx=window.innerWidth/2,my=window.innerHeight/2;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});
+
+  planetDefs.forEach(function(d){
+    const el=document.createElement('div');
+    el.className='planet';
+    el.style.width=d.size+'px';el.style.height=d.size+'px';
+    el.style.background='radial-gradient(circle at 35% 35%,'+d.color+',rgba(0,0,0,.8))';
+    el.style.boxShadow='0 0 '+d.size/2+'px '+d.color+'44';
+    const ring=document.createElement('div');
+    ring.className='planet-ring';
+    ring.style.width=d.ring+'px';ring.style.height=d.ring+'px';
+    el.appendChild(ring);
+    document.body.appendChild(el);
+    planets.push({el:el,def:d,bx:d.x/100*window.innerWidth,by:d.y/100*window.innerHeight});
+  });
+
+  window.addEventListener('resize',function(){
+    planets.forEach(function(p){p.bx=p.def.x/100*window.innerWidth;p.by=p.def.y/100*window.innerHeight});
+  });
+
+  function animPlanets(t){
+    planets.forEach(function(p){
+      const d=p.def;
+      const ox=Math.sin(t*d.speed)*d.amp;
+      const oy=Math.cos(t*d.speed*.7)*d.amp*.6;
+      let fx=p.bx+ox,fy=p.by+oy;
+      const dx=mx-fx,dy=my-fy;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<180){
+        const push=(180-dist)/180*30;
+        fx-=dx/dist*push;
+        fy-=dy/dist*push;
+      }
+      p.el.style.left=fx-d.size/2+'px';
+      p.el.style.top=fy-d.size/2+'px';
+    });
+    requestAnimationFrame(animPlanets);
+  }
+  requestAnimationFrame(animPlanets);
+})();
+
+/* ── SCROLL REVEAL ── */
+(function(){
+  const obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
+    });
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+})();
+</script>
+<script src="/js/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Scalelist Atlas — Tribes, Continents, Fates</title>
+<meta name="description" content="The full Scalelist Universe atlas. 12 realms, 30+ continents, 80+ tribes, named peoples, and the prophetic fates of each world.">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;1,400;0,600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --gold:#c9a84c; --void:#050510; --panel:#0e0e1a; --border:rgba(201,168,76,0.3);
+    --text:#d4c9a8; --dim:#7a7060;
+  }
+  html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond','Segoe UI',serif;min-height:100vh;}
+  header{padding:20px 32px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:#0a0a14;position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);}
+  header h1{color:var(--gold);font-size:1.2rem;letter-spacing:0.1em;text-transform:uppercase;font-family:'Cinzel',serif;font-weight:700;}
+  header h1 span{color:#fff;}
+  header nav{margin-left:auto;display:flex;gap:18px;}
+  header nav a{color:var(--dim);text-decoration:none;font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;}
+  header nav a:hover{color:var(--gold);}
+  .hero{padding:60px 24px 36px;text-align:center;}
+  .hero h2{font-family:'Cinzel',serif;font-size:2.6rem;color:var(--gold);letter-spacing:0.06em;text-shadow:0 0 28px rgba(201,168,76,0.4);}
+  .hero p{color:var(--dim);margin-top:12px;font-size:1rem;line-height:1.6;max-width:640px;margin-left:auto;margin-right:auto;font-style:italic;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px 80px;}
+  .realm-card{background:linear-gradient(135deg,rgba(14,14,26,0.9),rgba(14,14,26,0.6));border:1px solid var(--border);border-radius:16px;padding:28px 32px;margin-bottom:28px;position:relative;overflow:hidden;}
+  .realm-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--accent,var(--gold));}
+  .realm-card h2{font-family:'Cinzel',serif;font-size:2.2rem;color:var(--accent,var(--gold));letter-spacing:0.06em;}
+  .realm-card .sub{font-size:0.95rem;color:var(--dim);font-style:italic;margin-top:4px;margin-bottom:20px;}
+  .realm-card .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px;}
+  @media(max-width:800px){.realm-card .grid{grid-template-columns:1fr;}}
+  .col h3{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--accent,var(--gold));letter-spacing:0.14em;text-transform:uppercase;margin-bottom:10px;border-bottom:1px solid rgba(201,168,76,0.15);padding-bottom:5px;}
+  .item{margin:10px 0;padding:10px 12px;background:rgba(10,10,20,0.4);border-left:2px solid var(--accent,var(--gold));border-radius:6px;}
+  .item .n{color:#fff;font-weight:600;font-size:0.95rem;}
+  .item .b{font-size:0.82rem;color:var(--dim);font-style:italic;margin-top:2px;}
+  .item .d{font-size:0.84rem;color:#d4c9a8;margin-top:6px;line-height:1.55;}
+  .fate{margin-top:22px;padding:14px 18px;background:rgba(60,14,14,0.45);border-left:3px solid #cc3333;border-radius:8px;}
+  .fate h3{font-family:'Cinzel',serif;color:#ff6677;letter-spacing:0.14em;text-transform:uppercase;font-size:0.82rem;margin-bottom:10px;}
+  .fate .line{font-size:0.62rem;letter-spacing:0.2em;color:#ff6677;text-transform:uppercase;margin-top:10px;font-weight:700;}
+  .fate .body{font-size:0.9rem;color:#f8dddd;line-height:1.6;margin-top:4px;}
+  .fate .prophecy{font-style:italic;color:#fff;font-size:1.02rem;line-height:1.5;padding:10px 14px;background:rgba(0,0,0,0.2);border-radius:6px;margin-top:6px;}
+  .realm-actions{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;}
+  .realm-actions a{padding:10px 18px;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;font-family:'Cinzel',serif;font-weight:700;border:1px solid var(--accent,var(--gold));color:var(--accent,var(--gold));text-decoration:none;border-radius:8px;background:rgba(201,168,76,0.08);transition:all 0.2s;}
+  .realm-actions a:hover{background:var(--accent,var(--gold));color:#1a1a0a;}
+  .characters-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:10px;margin-top:14px;}
+  .npc-card{background:rgba(10,10,20,0.6);border:1px solid rgba(201,168,76,0.2);border-radius:10px;overflow:hidden;cursor:pointer;transition:all 0.2s;text-decoration:none;color:inherit;display:block;}
+  .npc-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.4);border-color:var(--accent,var(--gold));}
+  .npc-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#0a0a14;}
+  .npc-card .nn{padding:6px 8px 4px;font-size:0.76rem;font-weight:600;color:#fff;line-height:1.2;}
+  .npc-card .nr{padding:0 8px 8px;font-size:0.6rem;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em;font-family:'Cinzel',serif;}
+  .loading{text-align:center;padding:80px;color:var(--dim);font-size:1rem;font-style:italic;}
+  .cultural-notes{margin-top:18px;padding-top:14px;border-top:1px solid rgba(201,168,76,0.15);font-size:0.88rem;color:#d4c9a8;font-style:italic;line-height:1.65;}
+  .scenery{position:relative;width:100%;aspect-ratio:16/8;border-radius:12px;overflow:hidden;margin-bottom:18px;background:#0a0a14;border:1px solid var(--border);}
+  .scenery img{width:100%;height:100%;object-fit:cover;display:block;}
+  .scenery::after{content:'';position:absolute;left:0;right:0;bottom:0;height:50%;background:linear-gradient(to top,rgba(5,5,16,0.85),transparent);}
+  .scenery .label{position:absolute;left:14px;bottom:12px;font-family:'Cinzel',serif;color:#fff;font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;text-shadow:0 1px 6px rgba(0,0,0,0.85);z-index:1;}
+  /* Major Antagonists hero section */
+  .villains-hero{max-width:1200px;margin:0 auto 30px;padding:32px 24px;background:linear-gradient(135deg,rgba(60,14,14,0.4),rgba(14,14,26,0.6));border:1px solid rgba(204,51,51,0.35);border-radius:16px;}
+  .villains-hero h2{font-family:'Cinzel',serif;color:#ff6677;font-size:1.8rem;letter-spacing:0.06em;margin-bottom:8px;}
+  .villains-hero .vh-sub{color:#d4c9a8;font-style:italic;font-size:0.94rem;margin-bottom:18px;}
+  .villains-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;}
+  .v-card{background:rgba(10,10,20,0.7);border:1px solid var(--accent,rgba(204,51,51,0.4));border-radius:10px;overflow:hidden;cursor:pointer;transition:all 0.2s;text-decoration:none;color:inherit;display:block;}
+  .v-card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(0,0,0,0.5);}
+  .v-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#0a0a14;}
+  .v-card .vc-name{padding:8px 10px 4px;font-weight:700;font-size:0.92rem;color:#fff;line-height:1.2;font-family:'Cinzel',serif;}
+  .v-card .vc-realm{padding:0 10px;font-size:0.66rem;color:var(--accent,#ff6677);text-transform:uppercase;letter-spacing:0.1em;font-family:'Cinzel',serif;}
+  .v-card .vc-role{padding:6px 10px 10px;font-size:0.74rem;color:var(--dim);line-height:1.4;}
+</style>
+</head>
+<body>
+<header>
+  <h1>SCALELIST <span>ATLAS</span></h1>
+  <nav>
+    <a href="/">Hub</a>
+    <a href="/cosmos">Cosmos</a>
+    <a href="/fanfic.html">Fan-Fiction</a>
+    <a href="/realm-quiz">Realm Quiz</a>
+  </nav>
+</header>
+<div class="hero">
+  <h2>The Atlas</h2>
+  <p>Twelve realms. Thirty-plus continents. Over eighty tribes. The full geography, peoples, and prophetic fates of every world hanging on Ferdinand's branches.</p>
+</div>
+<div class="wrap" id="app">
+  <div class="loading">Loading the atlas from all twelve realms...</div>
+</div>
+<script>
+const REALM_ORDER = ['scalelist','helios','astralis','codexia','heartbeat','trinity','thanatos','null','void2','echo','horizon','lumen'];
+let CATALOG = null;
+async function loadAll() {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+  // Fetch cosmos_data + character catalog + antagonists
+  const [cosmos, cat, antagonists] = await Promise.all([
+    fetch('/cosmos_data.json').then(r => r.json()),
+    fetch('/cosmos/character_catalog.json').then(r => r.json()).catch(() => ({characters:[]})),
+    fetch('/cosmos/antagonists.json').then(r => r.json()).catch(() => ({antagonists:[]})),
+  ]);
+  CATALOG = cat;
+
+  // Inject The Lineage section ABOVE everything else (newest canon)
+  const lineageChars = (CATALOG.characters || []).filter(c => c.is_lineage);
+  if (lineageChars.length) {
+    const l = document.createElement('div');
+    l.className = 'villains-hero';
+    l.style.cssText = 'background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(14,14,26,0.6));border-color:rgba(201,168,76,0.45);';
+    l.innerHTML = `
+      <h2 style="color:#fbbf24">⚜ The Viktor Rönnkvist Lineage</h2>
+      <div class="vh-sub">10 souls newly named — the cipher of the Author's true name. Each carries one letter of <em>Viktor Rönnkvist</em>. <a href="/lineage" style="color:#fbbf24">→ Read the canon</a></div>
+      <div class="villains-grid">
+        ${lineageChars.map(c => `
+          <a class="v-card" href="/lineage" style="--accent:${c.realm_color || '#fbbf24'};">
+            <img src="${c.portrait}" alt="${escapeAttr(c.name)}" loading="lazy" onerror="this.style.opacity='0.2';">
+            <div class="vc-name">${escapeHTML(c.name)}</div>
+            <div class="vc-realm">${escapeHTML(c.letter || '')}</div>
+            <div class="vc-role">${escapeHTML(c.role)}</div>
+          </a>
+        `).join('')}
+      </div>
+    `;
+    app.appendChild(l);
+  }
+
+  // Inject Major Antagonists section ABOVE the realm cards
+  if ((antagonists.antagonists || []).length){
+    const v = document.createElement('div');
+    v.className = 'villains-hero';
+    v.innerHTML = `
+      <h2>☠ Major Antagonists</h2>
+      <div class="vh-sub">${(antagonists.antagonists || []).length} recurring villains across Seasons 3-4. These appear in future seasons. Click any to read their fate.</div>
+      <div class="villains-grid">
+        ${antagonists.antagonists.map(a => `
+          <a class="v-card" href="#realm-${a.realm_id}" style="--accent:${a.color};">
+            <img src="${a.portrait}" alt="${escapeAttr(a.name)}" loading="lazy" onerror="this.style.opacity='0.2';">
+            <div class="vc-name">${escapeHTML(a.name)}</div>
+            <div class="vc-realm">${escapeHTML(a.realm_name)}</div>
+            <div class="vc-role">${escapeHTML(a.role)}</div>
+          </a>
+        `).join('')}
+      </div>
+    `;
+    app.appendChild(v);
+  }
+
+  const charByRealm = {};
+  for (const c of (CATALOG.characters || [])) {
+    if (!charByRealm[c.realm_id]) charByRealm[c.realm_id] = [];
+    charByRealm[c.realm_id].push(c);
+  }
+  const realmMeta = Object.fromEntries(cosmos.realms.map(r => [r.id, r]));
+  for (const id of REALM_ORDER) {
+    let lore = null;
+    try { lore = await fetch(`/cosmos/lore/${id}.json`).then(r => r.ok ? r.json() : null); } catch(e){}
+    if (!lore) continue;
+    const meta = realmMeta[id] || {name: id.toUpperCase(), color: '#c9a84c'};
+    const card = document.createElement('div');
+    card.className = 'realm-card';
+    card.id = `realm-${id}`;
+    card.style.setProperty('--accent', meta.color);
+    const contCount = (lore.continents || []).length;
+    const tribeCount = (lore.tribes || []).length;
+    const charCount = (lore.characters || []).length;
+    const charactersHere = charByRealm[id] || [];
+    card.innerHTML = `
+      <div class="scenery"><img src="/cosmos/scenery/${id}.jpg" alt="${escapeAttr(meta.name)} scenery" loading="lazy" onerror="this.parentElement.style.display='none';"><div class="label">${escapeHTML(meta.name)} — ${escapeHTML(meta.subtitle || '')}</div></div>
+      <h2>${meta.name}</h2>
+      <div class="sub">${meta.subtitle || ''} · ${contCount} continents · ${tribeCount} tribes · ${charCount} named characters</div>
+      <div class="grid">
+        <div class="col">
+          <h3>🗺 Continents</h3>
+          ${(lore.continents || []).map(c => `
+            <div class="item">
+              <div class="n">${c.name}</div>
+              <div class="b">${c.biome || ''}</div>
+              <div class="d">${c.blurb || ''}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="col">
+          <h3>👥 Tribes &amp; Peoples</h3>
+          ${(lore.tribes || []).map(t => `
+            <div class="item">
+              <div class="n">${t.name}</div>
+              <div class="b">on ${t.continent_id}</div>
+              <div class="d"><b>Look:</b> ${t.look || ''}</div>
+              <div class="d" style="margin-top:2px;"><b>Persona:</b> ${t.persona || ''}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ${lore.fate ? `
+        <div class="fate">
+          <h3>☠ How this realm ends</h3>
+          <div class="line">Threat</div>
+          <div class="body">${lore.fate.threat}</div>
+          <div class="line">Consequence</div>
+          <div class="body">${lore.fate.consequence}</div>
+          <div class="line">Prophecy</div>
+          <div class="prophecy">"${lore.fate.prophecy_line}"</div>
+          <div class="line">Destroyable by</div>
+          <div class="body">${lore.fate.destroyable_by}</div>
+        </div>
+      ` : ''}
+      ${charactersHere.length ? `
+        <h3 style="margin-top:22px;">🧍 Named Characters (${charactersHere.length}) · click to chat</h3>
+        <div class="characters-row">
+          ${charactersHere.map(c => `
+            <a class="npc-card" href="/cosmos/character-chat.html?char=${c.id}" style="border-color:${c.realm_color}55;">
+              <img src="${c.portrait}" alt="${escapeAttr(c.name)}" loading="lazy" onerror="this.style.opacity='0.2';">
+              <div class="nn">${escapeHTML(c.name)}</div>
+              <div class="nr">${escapeHTML(c.tribe_name || c.role || '')}</div>
+            </a>
+          `).join('')}
+        </div>
+      ` : ''}
+      ${lore.cultural_notes ? `<div class="cultural-notes">${lore.cultural_notes}</div>` : ''}
+      <div class="realm-actions">
+        <a href="/cosmos/realm.html?id=${id}">🗺 2D Map</a>
+        <a href="/cosmos/globe.html?id=${id}">🌐 3D Globe</a>
+        <a href="/cosmos/character-chat.html?realm=${id}">💬 Chat with all characters</a>
+        <a href="/cosmos#${id}">🌲 Back to Cosmos</a>
+      </div>
+    `;
+    app.appendChild(card);
+  }
+}
+function escapeHTML(s){return (s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
+function escapeAttr(s){return (s||"").replace(/[<>&"']/g, ' ');}
+loadAll();
+</script>
+</body>
+</html>

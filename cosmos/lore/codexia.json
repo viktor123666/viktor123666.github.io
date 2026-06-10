@@ -1,0 +1,147 @@
+{
+  "realm_id": "codexia",
+  "continents": [
+    {
+      "id": "spire_highlands",
+      "name": "The Spire Highlands",
+      "biome": "Seven colossal violet stone spires rising from misty moorlands.",
+      "position": {"x": 640, "y": 380, "w": 320, "h": 320},
+      "tribes": ["spire_readers", "codex_acolytes"],
+      "places": [
+        {"name": "Spire One — Gluttony's Page", "blurb": "The tallest spire. Trollmage reads the Sin Codex of Gluttony here. Bones of every animal the Codex has ever named form its base."},
+        {"name": "Spire Two — Lust's Page", "blurb": "A spire covered in climbing roses that grow only toward whoever is not looking."},
+        {"name": "Spire Three — Greed's Page", "blurb": "Its interior is gold-leafed. Every visitor leaves poorer by one small thing they did not miss."},
+        {"name": "Spire Four — Sloth's Page", "blurb": "A spire that moves one inch per century. Currently 40 feet west of its original foundations."},
+        {"name": "Spire Five — Wrath's Page", "blurb": "A spire of black obsidian. Its doors open only for those already furious. Trollmage visits once per decade."},
+        {"name": "Spire Six — Envy's Page", "blurb": "A mirror-surfaced spire. It shows you what you don't have, then offers to lend it."},
+        {"name": "Spire Seven — Pride's Page", "blurb": "The most dangerous. A spire that tells you you are right. Trollmage forbids non-wizards from entering."}
+      ],
+      "blurb": "The seven spires of Codexia — one per Sin Codex. Each spire is a library, a prison, and a patient teacher."
+    },
+    {
+      "id": "backwards_bayou",
+      "name": "The Backwards Bayou",
+      "biome": "Swampland where water flows uphill and trees grow roots skyward.",
+      "position": {"x": 220, "y": 460, "w": 340, "h": 320},
+      "tribes": ["reverse_scribes", "bayou_conjurers"],
+      "places": [
+        {"name": "The Ink-River", "blurb": "A river of writable ink that flows uphill. Texts written on it appear first as the last word, backwards."},
+        {"name": "The Drowned Manuscripts", "blurb": "Floating pages of text no one has yet written. Fishing them up means you will write them later."},
+        {"name": "The Uninverted Grove", "blurb": "A grove where trees grow upside-down. Their 'fruit' hangs from what would be their roots."},
+        {"name": "Trollmage's Dinghy", "blurb": "A small flat boat tied to a cypress. Trollmage rows it once a century to read the reverse-flowing river."}
+      ],
+      "blurb": "The marshland where magic works backwards. Every incantation cast here must be inverted before speaking. Dangerous for anyone who cannot think in reverse."
+    },
+    {
+      "id": "necromancer_reach",
+      "name": "The Necromancer Reach",
+      "biome": "Cold pine forest, fogged graveyards, black-ice rivers.",
+      "position": {"x": 1020, "y": 460, "w": 340, "h": 320},
+      "tribes": ["the_twin_raisers", "stone_readers"],
+      "places": [
+        {"name": "The Tuesday Graveyard", "blurb": "A graveyard where the dead are raised every Tuesday for a friendly afternoon. Restored to rest by sundown."},
+        {"name": "The Grammar Stones", "blurb": "Standing stones etched with necromantic grammar. The first rule carved: 'Be polite.'"},
+        {"name": "The Whisper Pine", "blurb": "A single enormous pine that whispers the names of every necromancer who has ever tried and failed to raise a dead god. Currently whispering 4,812 names."},
+        {"name": "The Unnamed Grave", "blurb": "A single grave with no headstone. The Twin Raisers will not raise it. When asked why, they say: 'Because.' "}
+      ],
+      "blurb": "The eastern continent. Necromancers, stonemasons, and students who find corpses more polite than the living."
+    },
+    {
+      "id": "dancehall_basin",
+      "name": "The Dancehall Basin",
+      "biome": "A basin of warm grasslands below the spires. One dancehall. That's it.",
+      "position": {"x": 640, "y": 760, "w": 320, "h": 200},
+      "tribes": ["dancehall_kin"],
+      "places": [
+        {"name": "Grandmother Iris's Dancehall", "blurb": "The only dancehall in Codexia. Rum older than the Spires. Drumming only when the Codices are closed."},
+        {"name": "The Drum That Plays Itself", "blurb": "A djembe suspended above the bar. Plays on its own when Trollmage enters."},
+        {"name": "The Back Garden", "blurb": "Where patrons rest. A small herb garden. Apprentice Nock tends it between spells."}
+      ],
+      "blurb": "The one warm and uncomplicated place in Codexia. Even Trollmage visits when the reading becomes too heavy."
+    }
+  ],
+  "tribes": [
+    {
+      "id": "spire_readers",
+      "name": "The Spire-Readers",
+      "continent_id": "spire_highlands",
+      "look": "Violet-robed. Hoods always up when reading. Ink-black fingertips. Calm.",
+      "customs": "Read backwards. Speak in half-rhythm. Trace a glyph in the air before entering any room. Never say 'the' without a tone change.",
+      "persona": "Patient. Warm once you earn it. Love a riddle. Will correct your grammar — forward or reverse.",
+      "notable_members": ["trollmage_warden", "apprentice_nock"]
+    },
+    {
+      "id": "codex_acolytes",
+      "name": "The Codex-Acolytes",
+      "continent_id": "spire_highlands",
+      "look": "Young, pale, tattooed with one sin-glyph per rank (max seven for a full master). Eyes slightly crossed from close reading.",
+      "customs": "Sleep with the Codex they are assigned. Never hum. Do not mix pages — even in conversation.",
+      "persona": "Earnest. Overworked. Just out of their twenties and carrying cosmic weight lightly.",
+      "notable_members": ["acolyte_fenn", "acolyte_paqe"]
+    },
+    {
+      "id": "reverse_scribes",
+      "name": "The Reverse-Scribes",
+      "continent_id": "backwards_bayou",
+      "look": "Lean. Ink-fingered. Tunic stained in reverse-drying ink. Writing-pads strapped to forearms.",
+      "customs": "Write from last word backward. Sign their name backwards. If interrupted, they complete the entire page silently before answering.",
+      "persona": "Focused to a fault. Prickly when distracted. Delightful after work hours, when the ink dries.",
+      "notable_members": ["the_voiceless_scribe", "bayou_ink_ros"]
+    },
+    {
+      "id": "bayou_conjurers",
+      "name": "The Bayou-Conjurers",
+      "continent_id": "backwards_bayou",
+      "look": "Stocky, sun-browned, wear garlands of cypress-bark. Cheek-tattoos in rune-clusters.",
+      "customs": "Invert every spell before casting. Never stand up to cast. Drink rum only AFTER a cast, never before.",
+      "persona": "Slow-talking. Sharp-eyed. Distrustful of anyone who talks about magic like it's a game.",
+      "notable_members": ["conjurer_tallis", "bayou_priest_odun"]
+    },
+    {
+      "id": "the_twin_raisers",
+      "name": "The Twin-Raisers",
+      "continent_id": "necromancer_reach",
+      "look": "Always a pair. Matching grey cloaks. One hums constantly; the other does not. The humming twin leads; the silent twin binds.",
+      "customs": "Work only as a pair. If a twin dies, the remaining twin adopts a successor within a year. Raise the dead only on Tuesdays and only for an afternoon.",
+      "persona": "Polite. Orderly. Surprisingly cheerful. They think of the dead as patient neighbors.",
+      "notable_members": ["tal_the_hummer", "tess_the_binder"]
+    },
+    {
+      "id": "stone_readers",
+      "name": "The Stone-Readers",
+      "continent_id": "necromancer_reach",
+      "look": "Calloused hands. Hoods of mossy wool. Carry a chisel at the belt. Knee-padded.",
+      "customs": "Read the Grammar Stones by touch first, then sight. Never write on stone — only read. Train for nine years to become a junior reader.",
+      "persona": "Slow. Deliberate. Feel the cold more than most. Nod rather than speak.",
+      "notable_members": ["stone_reader_ilk", "junior_reader_pev"]
+    },
+    {
+      "id": "dancehall_kin",
+      "name": "The Dancehall-Kin",
+      "continent_id": "dancehall_basin",
+      "look": "Warm-eyed. Aprons stained with rum and cornmeal. Fingers ring-laden. A single bell woven into each person's hair.",
+      "customs": "Drum before speaking to a stranger. Refuse no one's dance. Close the hall at midnight because 'the drum needs a rest.'",
+      "persona": "Generous. Musical. The heart of Codexia's social life, without trying to be.",
+      "notable_members": ["grandmother_iris", "dancehall_drummer_bo"]
+    }
+  ],
+  "characters": [
+    {"id": "trollmage_warden", "name": "Trollmage", "tribe_id": "spire_readers", "role": "Warden of Codexia, Keeper of the Seven Spires", "portrait_blurb": "See /characters/trollmage.png — tall, hooded, dark skin, silver dreadlocks, eyes that reflect the page in front of him. Patient as stone. Speaks slowly, rhythmically."},
+    {"id": "apprentice_nock", "name": "Apprentice Nock", "tribe_id": "spire_readers", "role": "Trollmage's trainee", "portrait_blurb": "Nineteen. Freckled. Violet robe two sizes too big. Has cast one spell — it worked. He has not recovered."},
+    {"id": "acolyte_fenn", "name": "Acolyte Fenn", "tribe_id": "codex_acolytes", "role": "Three-glyph acolyte assigned to Spire Three", "portrait_blurb": "Twenty-five. Gold-inked cheekbones. Left eye crossed from close work. Laughs rarely but fully when she does."},
+    {"id": "the_voiceless_scribe", "name": "The Voiceless Scribe", "tribe_id": "reverse_scribes", "role": "Writes Trollmage's decrees in invisible ink", "portrait_blurb": "Hooded. Ink-black fingers to the second knuckle. Has not spoken since apprenticeship — all communication is through reversed text."},
+    {"id": "conjurer_tallis", "name": "Conjurer Tallis", "tribe_id": "bayou_conjurers", "role": "Keeper of the Ink-River", "portrait_blurb": "Stocky, sun-browned, cypress garland. Walks with a slight squelch from bayou boots. Tells great jokes in reverse."},
+    {"id": "tal_the_hummer", "name": "Tal", "tribe_id": "the_twin_raisers", "role": "The humming twin", "portrait_blurb": "Grey-cloaked. Humming a tune older than the Reach. Left glove marked with a single rune."},
+    {"id": "tess_the_binder", "name": "Tess", "tribe_id": "the_twin_raisers", "role": "The silent twin", "portrait_blurb": "Identical to Tal except for the silence. Right glove marked with the binding rune. Has not spoken in 40 years."},
+    {"id": "stone_reader_ilk", "name": "Stone-Reader Ilk", "tribe_id": "stone_readers", "role": "Eldest Stone-Reader", "portrait_blurb": "Hands like tree bark. Knee-pads older than some necromancers. Hums back at the Whisper Pine."},
+    {"id": "grandmother_iris", "name": "Grandmother Iris", "tribe_id": "dancehall_kin", "role": "Runs the only dancehall in Codexia", "portrait_blurb": "Old, broad-shouldered, silver braid past her waist. Eye-patch over the left eye — she gave it to a necromancer as a fee."},
+    {"id": "dancehall_drummer_bo", "name": "Drummer Bo", "tribe_id": "dancehall_kin", "role": "Head drummer", "portrait_blurb": "Young, burly, smiles often. Inherited the bar's drum from an uncle who inherited it from the Whisper Pine."}
+  ],
+  "fate": {
+    "threat": "A Spire is read forward. If any Codex is read front-to-back (instead of back-to-front), the sin it contains spills into the reader's mind AND the surrounding realm. Trollmage has guarded against this for 800 years.",
+    "consequence": "Depends which Codex. Forward-reading Pride's Page would turn Codexia into a realm of perfect certainty — no one would doubt anything, which would end philosophy and therefore all casting. The other six pages would end the world at a lesser scale.",
+    "prophecy_line": "Read the last word first. Pride ends the page. Pride ends the realm.",
+    "destroyable_by": "Any reader who cannot resist reading forward. A famous inscription above Spire Seven's gate reads: 'Backwards. Or not at all.'"
+  },
+  "cultural_notes": "Codexia's culture is built on discipline of language. Spire-Readers and Reverse-Scribes alike think in inversions. The Dancehall-Kin are the release valve — the one tribe allowed to read forward. Their music is considered medicinal. Without the dancehall, the spires would break their readers within a decade. Trollmage protects both the Codex and the Dancehall with equal care."
+}

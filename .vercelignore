@@ -1,0 +1,41 @@
+# Temporary ignore — large recently-generated assets that bloat deploys.
+# Remove specific entries here when those assets need to go live.
+# This unblocks small content updates (lyrics, hub pages) when full upload times out.
+
+# Heavy generated manga PNGs (1200x11000px / 11-17MB each) — original scrolls.
+# Compressed JPGs in /manga/web/ are deployed instead; manga.html reader points there.
+manga/kompis_s*.png
+manga/rougeina_s*.png
+manga/smurjan_s*.png
+manga/trollmage_s*.png
+manga/vigolas_s*.png
+manga/chapter_*.png
+manga/enhanced/
+
+# Wan21 enhanced clips (290MB)
+clips_assets/enhanced/
+
+# Episode MP4s already on /su-vault-9x7k/origins (newer ones can be ignored too)
+episodes/bakasura/
+episodes/kali/
+
+# Local dev / cache
+.vercel/
+node_modules/
+*.log
+
+# ===== SECURITY — NEVER DEPLOY SECRETS (belt-and-suspenders) =====
+# .env lives ABOVE this deploy root so it's already out of scope, but block it
+# here too in case the tree layout ever changes. Same for any credential file.
+.env
+.env.*
+*.env
+*token*.json
+*secret*.json
+*credential*.json
+*.pem
+*.key
+*.p12
+*.bak
+tools/youtube_creds/
+**/youtube_creds/

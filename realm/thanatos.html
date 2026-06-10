@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>THANATOS — The Reclamation | Scalelist Universe</title>
+<meta name="description" content="THANATOS: The Reclamation. A realm on Ferdinand the Cosmic Cork Oak.">
+<meta property="og:title" content="THANATOS — The Reclamation">
+<meta property="og:description" content="The Reclamation. A realm on the cosmic cork oak Ferdinand.">
+<meta property="og:image" content="https://scalelistuniverse.com/cosmos/scenery/thanatos.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a84c; --void:#050510; --panel:#0a0a14; --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060; --accent:#c0c0c0}
+html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.7}
+a{color:inherit;text-decoration:none}
+
+header{padding:18px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
+header nav{display:flex;gap:18px;flex-wrap:wrap}
+header nav a{color:var(--dim);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:'Cinzel',serif}
+header nav a:hover{color:var(--gold)}
+
+.hero{position:relative;height:60vh;min-height:420px;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,transparent 50%,var(--void) 100%),radial-gradient(ellipse at 50% 100%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 70%);pointer-events:none}
+.hero .body{position:relative;z-index:2;padding:50px 32px;max-width:1100px;width:100%;margin:0 auto}
+.hero .eyebrow{font-family:'Cinzel',serif;color:var(--accent);font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(2.4rem,6vw,5rem);color:#fff;letter-spacing:.06em;font-weight:900;line-height:1;text-shadow:0 0 40px color-mix(in srgb,var(--accent) 40%,transparent)}
+.hero h1 em{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:.36em;color:var(--accent);letter-spacing:.04em;margin-top:12px;text-shadow:none;opacity:.95}
+
+.section{max-width:1100px;margin:0 auto;padding:50px 32px;border-top:1px solid var(--border)}
+.section h2{font-family:'Cinzel',serif;color:var(--accent);font-size:.86rem;letter-spacing:.32em;text-transform:uppercase;margin-bottom:24px;font-weight:700}
+.section .blurb{font-size:1.18rem;line-height:1.85;font-style:italic;opacity:.94;max-width:760px}
+
+.grid-2{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
+@media(min-width:780px){.grid-2{grid-template-columns:1fr 1fr}}
+.entry{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 22px;transition:all .25s}
+.entry:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+.entry h3{font-family:'Cinzel',serif;color:#fff;font-size:1.04rem;font-weight:700;letter-spacing:.04em;margin-bottom:6px;line-height:1.2}
+.entry .biome{color:var(--accent);font-style:italic;font-size:.84rem;margin-bottom:10px;letter-spacing:.04em}
+.entry p{font-size:.94rem;line-height:1.65;opacity:.92;margin-bottom:8px}
+.entry p:last-child{margin-bottom:0}
+
+.char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:14px}
+.char-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;transition:all .2s;display:block}
+.char-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.char-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#080812}
+.char-card .char-name{padding:10px 12px 4px;font-family:'Cinzel',serif;color:#fff;font-size:.88rem;font-weight:700;letter-spacing:.04em;line-height:1.2}
+.char-card .char-role{padding:0 12px 12px;color:var(--accent);font-style:italic;font-size:.78rem;line-height:1.3}
+
+.fate{margin-top:28px;background:linear-gradient(135deg,rgba(204,51,51,0.08),var(--panel));border:1px solid rgba(204,51,51,0.4);border-radius:12px;padding:20px 24px}
+.fate-label{font-family:'Cinzel',serif;color:#ff6677;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:8px;font-weight:700}
+.fate p{font-size:1rem;line-height:1.7;font-style:italic;color:var(--text)}
+
+.cta{padding:60px 32px;text-align:center;border-top:1px solid var(--border)}
+.cta a{display:inline-block;margin:6px;padding:12px 28px;background:var(--accent);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;border-radius:8px;text-decoration:none}
+.cta a.outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.cta a:hover{transform:scale(1.04);transition:transform .15s}
+
+footer{padding:30px;text-align:center;color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
+  <nav>
+    <a href="/cosmos">All Realms</a>
+    <a href="/cosmos/atlas">Atlas</a>
+    <a href="/lineage">Lineage</a>
+    <a href="/manga">Manga</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <img src="/cosmos/scenery/thanatos.jpg" alt="THANATOS scenery" onerror="this.style.display='none'">
+  <div class="body">
+    <div class="eyebrow">A realm on Ferdinand</div>
+    <h1>THANATOS<em>The Reclamation</em></h1>
+  </div>
+</section>
+
+<section class="section">
+  <h2>The Realm</h2>
+  <p class="blurb">THANATOS is one of the twelve realms of the Scalelist Universe.</p>
+  <div class="fate"><div class="fate-label">Realm Fate</div><p>{'threat': "The Central Pillar is read aloud to completion. The Pillar updates constantly; reading it aloud in its entirety would END the universe's capacity to produce new deaths — which would END the universe's capacity to produce new LIFE. Reincarnation would halt. Horizon would empty. New souls would never be born.", 'consequence': "Static universe. No death, no birth. Ferdinand's roots would stop drawing from Null (nothing new to draw). Cosmic cascade failure within seven cycles.", 'prophecy_line': 'The Pillar reads itself. You do not.', 'destroyable_by': "Any mortal fool enough to read aloud, or a God Slayer-class entity weaponizing Fenna's desk. Fenna has a standing order: if she dies, the Pillar is to be sealed in cork from Ferdinand himself."}</p></div>
+</section>
+
+<section class="section">
+  <h2>Continents · 4 regions</h2>
+  <div class="grid-2"><div class="entry">
+          <h3>The Outer Spiral</h3>
+          <div class="biome">Curved plains of pale stone, etched with names. Mist. Soft wind.</div>
+          <p>The outermost ring of the spiral graveyard. Where the ancient dead rest. The Name-Carvers work here.</p>
+        </div><div class="entry">
+          <h3>The Middle Ring</h3>
+          <div class="biome">Cypress and stone. Tall memorial pillars. Silver mist at ankle-height.</div>
+          <p>The middle continent. Where names are sung, rung, and written into final form. The realm's working heart.</p>
+        </div><div class="entry">
+          <h3>Fenna's Center</h3>
+          <div class="biome">A circular sanctum at the spiral's heart. Marble floor. Single pillar. Single desk.</div>
+          <p>The innermost center. Fenna's domain. Where the universe's deaths are read, acknowledged, and passed on.</p>
+        </div><div class="entry">
+          <h3>The Name-Snow Marshes</h3>
+          <div class="biome">Wetland plains where falling snow is actually drifting carved names.</div>
+          <p>The southern marshes where the realm's name-snow falls thickest. The Snow-Gatherers are the realm's archivists-on-foot.</p>
+        </div></div>
+</section>
+
+<section class="section">
+  <h2>Tribes &amp; Peoples · 8 groups</h2>
+  <div class="grid-2"><div class="entry">
+          <h3>The Name-Carvers</h3>
+          <div class="biome">on outer_spiral</div>
+          <p><b>Look:</b> Tall, thin, ink-stained sleeves. Calluses on both hands from chisel work. Wear a small silver letter on a chain — their own name, carved by a predecessor.</p>
+          <p><b>Persona:</b> Quiet. Precise. Respected. Their work is the realm's memory.</p>
+        </div><div class="entry">
+          <h3>The Silent-Grievers</h3>
+          <div class="biome">on outer_spiral</div>
+          <p><b>Look:</b> Grey or black. Veiled. Walk the Memorial Walk daily. Hands ink-black from rubbing the stone to feel the names.</p>
+          <p><b>Persona:</b> Meditative. Kind to visitors. Every Silent-Griever carries a grief they have chosen to represent the realm.</p>
+        </div><div class="entry">
+          <h3>The Bell-Ringers</h3>
+          <div class="biome">on middle_ring</div>
+          <p><b>Look:</b> Strong-armed, bronze-gloved. Dark uniforms. Hair cropped. One bell-medal per year of service.</p>
+          <p><b>Persona:</b> Earnest. Steadfast. Hate laziness. Take drinks after shift and sing old Thanatos hymns.</p>
+        </div><div class="entry">
+          <h3>The Grief-Poets</h3>
+          <div class="biome">on middle_ring</div>
+          <p><b>Look:</b> Shawl-wrapped. Quill at the ear. Ink-stained sleeves and cheeks. Soft-eyed.</p>
+          <p><b>Persona:</b> Gentle. Observant. Write the realm's uncatalogued tenderness.</p>
+        </div><div class="entry">
+          <h3>The Ledger-Keepers (Death branch)</h3>
+          <div class="biome">on fennas_center</div>
+          <p><b>Look:</b> Pale, linen-robed, carry a small book always. Eyes soft but unfocused (from proximity to the Central Pillar).</p>
+          <p><b>Persona:</b> Devoted. Quietly joyful. Grateful to serve a post that the universe depends on.</p>
+        </div><div class="entry">
+          <h3>Fenna (Herself)</h3>
+          <div class="biome">on fennas_center</div>
+          <p><b>Look:</b> Tall, pale, long black hair braided in a single thick plait. Black robe with silver trim. Hands ink-free — she reads, not writes.</p>
+          <p><b>Persona:</b> Kind in a way that is hard to notice. Will greet you in a language you have not yet learned but understand anyway. Has never been surprised.</p>
+        </div><div class="entry">
+          <h3>The Snow-Gatherers</h3>
+          <div class="biome">on the_name_snow_marshes</div>
+          <p><b>Look:</b> Insulated hooded cloaks. Snowshoes. Net-gloves for catching drifting names. Pink-cheeked from wind.</p>
+          <p><b>Persona:</b> Hardy. Cheerful. Tell tall tales around the Chapel fire. Respected by all other Thanatos tribes.</p>
+        </div><div class="entry">
+          <h3>The Thirteenth-Bell Watchers</h3>
+          <div class="biome">on the_name_snow_marshes</div>
+          <p><b>Look:</b> Grey-cloaked, seven-striped sleeves (one stripe per year of service). Silver ear-cuff. Solemn.</p>
+          <p><b>Persona:</b> Silent. Grave. Chosen by Fenna herself. It is the hardest post in the realm.</p>
+        </div></div>
+</section>
+
+<section class="section">
+  <h2>Named Characters Here · 11 souls</h2>
+  <div class="char-grid"><a class="char-card" href="/cosmos/atlas#realm-thanatos">
+          <img src="/characters/npcs/fenna_the_reader.png" alt="Fenna" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Fenna</div>
+          <div class="char-role">Reader of the Ledger, Gate-Keeper of Thanatos</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-thanatos">
+          <img src="/characters/npcs/master_carver_ost.png" alt="Master Carver Ost" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Master Carver Ost</div>
+          <div class="char-role">Eldest Name-Carver</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-thanatos">
+          <img src="/characters/npcs/elder_griever_ond.png" alt="Elder Griever Ond" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Elder Griever Ond</div>
+          <div class="char-role">Eldest of the Silent-Grievers</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-thanatos">
+          <img src="/characters/npcs/bell_master_oj.png" alt="Bell-Master Oj" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Bell-Master Oj</div>
+          <div class="char-role">Chief Bell-Ringer</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-thanatos">
+          <img src="/characters/npcs/poet_ama.png" alt="Poet Ama" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Poet Ama</div>
+          <div class="char-role">Head Grief-Poet</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-thanatos">
+          <img src="/characters/npcs/keeper_at_fennas_desk.png" alt="Keeper at Fenna's Desk" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Keeper at Fenna's Desk</div>
+          <div class="char-role">Fenna's primary assistant</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-thanatos">
+          <img src="/characters/npcs/gatherer_lom.png" alt="Gatherer Lom" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Gatherer Lom</div>
+          <div class="char-role">Senior Snow-Gatherer</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-thanatos">
+          <img src="/characters/npcs/current_watcher.png" alt="The Current Watcher" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">The Current Watcher</div>
+          <div class="char-role">Currently on shift at the Thirteenth Bell Tower</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-thanatos">
+          <img src="/characters/npcs/brother_vel.png" alt="Brother Vel" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Brother Vel</div>
+          <div class="char-role">Tends the meditation garden</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-thanatos">
+          <img src="/characters/npcs/thirteenth_bell_ringer_rumored.png" alt="The Thirteenth Bell Ringer (rumored)" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">The Thirteenth Bell Ringer (rumored)</div>
+          <div class="char-role">The one who will ring the Thirteenth Bell when it must be rung</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-thanatos">
+          <img src="/characters/lineage/ogar.png" alt="Ögar" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Ögar</div>
+          <div class="char-role">The Far-Eye Watcher</div>
+        </a></div>
+</section>
+
+<section class="cta">
+  <a href="/cosmos">All 12 Realms</a>
+  <a href="/cosmos/atlas" class="outline">Open Atlas</a>
+  <a href="/lineage" class="outline">The Lineage</a>
+</section>
+
+<footer>
+  Scalelist Universe · THANATOS · <a href="/" style="color:var(--accent)">Home</a>
+</footer>
+
+</body>
+</html>

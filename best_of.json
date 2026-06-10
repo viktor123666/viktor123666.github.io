@@ -1,0 +1,365 @@
+{
+  "generated_at": "2026-04-09 14:09:33",
+  "top": [
+    {
+      "rank": 1,
+      "char": "vigolas",
+      "name": "vigolas_W21_000_00_530767.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\vigolas\\vigolas_W21_000_00_530767.webp",
+      "score": 97.7,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 101.3,
+        "saturation": 26.6,
+        "variance": 5057.0,
+        "edge_density": 37.0
+      },
+      "size_kb": 8483.4
+    },
+    {
+      "rank": 2,
+      "char": "vigolas",
+      "name": "vigolas_W21_001_00_544365.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\vigolas\\vigolas_W21_001_00_544365.webp",
+      "score": 97.7,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 82.3,
+        "saturation": 25.4,
+        "variance": 1120.8,
+        "edge_density": 36.4
+      },
+      "size_kb": 8422.9
+    },
+    {
+      "rank": 3,
+      "char": "trollmage",
+      "name": "trollmage_W21_002_00_333325.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\trollmage\\trollmage_W21_002_00_333325.webp",
+      "score": 97.4,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 88.4,
+        "saturation": 22.3,
+        "variance": 842.1,
+        "edge_density": 53.1
+      },
+      "size_kb": 8160.6
+    },
+    {
+      "rank": 4,
+      "char": "vigolas",
+      "name": "vigolas_W21_004_00_508414.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\vigolas\\vigolas_W21_004_00_508414.webp",
+      "score": 96.1,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 95.7,
+        "saturation": 35.9,
+        "variance": 1811.3,
+        "edge_density": 29.2
+      },
+      "size_kb": 6676.5
+    },
+    {
+      "rank": 5,
+      "char": "vigolas",
+      "name": "vigolas_W21_003_00_454842.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\vigolas\\vigolas_W21_003_00_454842.webp",
+      "score": 95.6,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 83.4,
+        "saturation": 32.8,
+        "variance": 496.6,
+        "edge_density": 32.0
+      },
+      "size_kb": 6236.7
+    },
+    {
+      "rank": 6,
+      "char": "trollmage",
+      "name": "trollmage_W21_001_00_611821.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\trollmage\\trollmage_W21_001_00_611821.webp",
+      "score": 94.6,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 55.7,
+        "saturation": 21.7,
+        "variance": 1880.7,
+        "edge_density": 37.9
+      },
+      "size_kb": 10558.9
+    },
+    {
+      "rank": 7,
+      "char": "trollmage",
+      "name": "trollmage_W21_000_00_60731.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\trollmage\\trollmage_W21_000_00_60731.webp",
+      "score": 93.9,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 117,
+        "width": 960,
+        "height": 1440,
+        "brightness": 53.4,
+        "saturation": 20.1,
+        "variance": 2042.1,
+        "edge_density": 45.2
+      },
+      "size_kb": 9806.2
+    },
+    {
+      "rank": 8,
+      "char": "rougeina",
+      "name": "rougeina_W21_002_00_691619.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\rougeina\\rougeina_W21_002_00_691619.webp",
+      "score": 93.0,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 117,
+        "width": 960,
+        "height": 1440,
+        "brightness": 74.1,
+        "saturation": 17.5,
+        "variance": 5455.0,
+        "edge_density": 50.1
+      },
+      "size_kb": 8834.8
+    },
+    {
+      "rank": 9,
+      "char": "trollmage",
+      "name": "trollmage_W21_003_00_904743.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\trollmage\\trollmage_W21_003_00_904743.webp",
+      "score": 92.0,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 72.6,
+        "saturation": 31.9,
+        "variance": 987.0,
+        "edge_density": 25.2
+      },
+      "size_kb": 7737.0
+    },
+    {
+      "rank": 10,
+      "char": "rougeina",
+      "name": "rougeina_W21_003_00_467227.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\rougeina\\rougeina_W21_003_00_467227.webp",
+      "score": 92.0,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 79.8,
+        "saturation": 13.1,
+        "variance": 1304.2,
+        "edge_density": 57.8
+      },
+      "size_kb": 7728.8
+    },
+    {
+      "rank": 11,
+      "char": "rougeina",
+      "name": "rougeina_W21_000_00_164027.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\rougeina\\rougeina_W21_000_00_164027.webp",
+      "score": 91.1,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 42.3,
+        "saturation": 17.8,
+        "variance": 2164.2,
+        "edge_density": 29.1
+      },
+      "size_kb": 6728.7
+    },
+    {
+      "rank": 12,
+      "char": "smurjan",
+      "name": "smurjan_W21_003_00_179704.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\smurjan\\smurjan_W21_003_00_179704.webp",
+      "score": 89.5,
+      "grade": "GREAT",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 101.7,
+        "saturation": 7.6,
+        "variance": 2803.3,
+        "edge_density": 67.5
+      },
+      "size_kb": 10407.6
+    },
+    {
+      "rank": 13,
+      "char": "rougeina",
+      "name": "rougeina_W21_004_00_991768.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\rougeina\\rougeina_W21_004_00_991768.webp",
+      "score": 89.5,
+      "grade": "GREAT",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 65.4,
+        "saturation": 18.0,
+        "variance": 918.2,
+        "edge_density": 13.1
+      },
+      "size_kb": 4960.1
+    },
+    {
+      "rank": 14,
+      "char": "vigolas",
+      "name": "vigolas_W21_005_00_536912.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\vigolas\\vigolas_W21_005_00_536912.webp",
+      "score": 89.2,
+      "grade": "GREAT",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 111.2,
+        "saturation": 6.3,
+        "variance": 4411.8,
+        "edge_density": 48.5
+      },
+      "size_kb": 10101.1
+    },
+    {
+      "rank": 15,
+      "char": "kompis",
+      "name": "kompis_W21_002_00_378996.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\kompis\\kompis_W21_002_00_378996.webp",
+      "score": 88.8,
+      "grade": "GREAT",
+      "metrics": {
+        "frame_count": 116,
+        "width": 960,
+        "height": 1440,
+        "brightness": 83.2,
+        "saturation": 4.5,
+        "variance": 5507.1,
+        "edge_density": 55.4
+      },
+      "size_kb": 9640.5
+    },
+    {
+      "rank": 16,
+      "char": "kompis",
+      "name": "kompis_W21_000_00_807871.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\kompis\\kompis_W21_000_00_807871.webp",
+      "score": 88.5,
+      "grade": "GREAT",
+      "metrics": {
+        "frame_count": 116,
+        "width": 960,
+        "height": 1440,
+        "brightness": 110.5,
+        "saturation": 6.8,
+        "variance": 2578.9,
+        "edge_density": 45.9
+      },
+      "size_kb": 12637.2
+    },
+    {
+      "rank": 17,
+      "char": "smurjan",
+      "name": "smurjan_W21_004_00_359262.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\smurjan\\smurjan_W21_004_00_359262.webp",
+      "score": 88.0,
+      "grade": "GREAT",
+      "metrics": {
+        "frame_count": 117,
+        "width": 960,
+        "height": 1440,
+        "brightness": 147.3,
+        "saturation": 6.6,
+        "variance": 2962.2,
+        "edge_density": 49.0
+      },
+      "size_kb": 8837.3
+    },
+    {
+      "rank": 18,
+      "char": "smurjan",
+      "name": "smurjan_W21_000_00_460471.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\smurjan\\smurjan_W21_000_00_460471.webp",
+      "score": 86.6,
+      "grade": "GREAT",
+      "metrics": {
+        "frame_count": 115,
+        "width": 960,
+        "height": 1440,
+        "brightness": 144.4,
+        "saturation": 8.6,
+        "variance": 6496.1,
+        "edge_density": 86.5
+      },
+      "size_kb": 7305.0
+    },
+    {
+      "rank": 19,
+      "char": "kompis",
+      "name": "kompis_W21_003_00_408805.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\kompis\\kompis_W21_003_00_408805.webp",
+      "score": 86.4,
+      "grade": "GREAT",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 137.0,
+        "saturation": 7.4,
+        "variance": 3222.8,
+        "edge_density": 39.6
+      },
+      "size_kb": 7091.9
+    },
+    {
+      "rank": 20,
+      "char": "kompis",
+      "name": "kompis_W21_001_00_709785.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\kompis\\kompis_W21_001_00_709785.webp",
+      "score": 85.9,
+      "grade": "GREAT",
+      "metrics": {
+        "frame_count": 117,
+        "width": 960,
+        "height": 1440,
+        "brightness": 94.0,
+        "saturation": 2.7,
+        "variance": 3895.6,
+        "edge_density": 12.9
+      },
+      "size_kb": 6469.3
+    }
+  ]
+}

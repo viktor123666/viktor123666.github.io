@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-04-08 14:09:46",
+  "count": 1,
+  "candidates": [
+    {
+      "name": "vigolas_W21_002_00_292127.webp",
+      "char": "vigolas",
+      "img_idx": 2,
+      "scene_idx": 0,
+      "current_seed": 292127,
+      "current_score": 68.6,
+      "current_grade": "OK",
+      "alt_seeds": [
+        900971,
+        261686,
+        429470
+      ],
+      "reason": "score below 75 \u2014 possibly low motion or low variance"
+    }
+  ]
+}

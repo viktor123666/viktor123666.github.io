@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Scalelist Universe — Fan-Fiction Generator</title>
+<meta name="description" content="Generate canon-faithful Scalelist Universe short stories. Pick characters, setting, and a premise — Claude writes the rest.">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --gold:#c9a84c; --void:#050510; --panel:#0e0e1a; --border:rgba(201,168,76,0.3);
+    --text:#d4c9a8; --dim:#7a7060; --accent:#9933ff;
+  }
+  body{background:var(--void);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;line-height:1.6;}
+  header{padding:20px 32px;display:flex;align-items:center;gap:24px;border-bottom:1px solid var(--border);background:#0a0a14;}
+  header h1{color:var(--gold);font-size:1.15rem;letter-spacing:0.1em;text-transform:uppercase;}
+  header nav{margin-left:auto;display:flex;gap:16px;}
+  header nav a{color:var(--dim);text-decoration:none;font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;}
+  header nav a:hover{color:var(--gold);}
+  .wrap{max-width:900px;margin:0 auto;padding:32px 20px;}
+  .hero{text-align:center;margin-bottom:32px;}
+  .hero h2{font-size:2.4rem;color:var(--gold);letter-spacing:0.04em;text-shadow:0 0 24px rgba(201,168,76,0.35);}
+  .hero p{color:var(--dim);margin-top:10px;font-size:0.95rem;}
+
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:20px;}
+  .panel h3{color:var(--gold);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;}
+
+  .char-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;}
+  .char-chip{padding:12px 14px;border:1px solid rgba(201,168,76,0.25);border-radius:10px;cursor:pointer;text-align:center;transition:all 0.2s;background:rgba(10,10,20,0.6);user-select:none;}
+  .char-chip.sel{border-color:var(--gold);background:rgba(201,168,76,0.18);box-shadow:0 0 14px rgba(201,168,76,0.3);}
+  .char-chip .cn{font-weight:700;font-size:0.82rem;color:#fff;}
+  .char-chip .ct{font-size:0.68rem;color:var(--dim);margin-top:2px;}
+
+  select, input[type=text], textarea{width:100%;background:#0a0a14;border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;font-family:inherit;font-size:0.9rem;outline:none;}
+  select:focus, input:focus, textarea:focus{border-color:var(--gold);box-shadow:0 0 10px rgba(201,168,76,0.25);}
+  textarea{resize:vertical;min-height:90px;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:600px){.row{grid-template-columns:1fr;}}
+
+  .go-btn{display:block;width:100%;margin-top:20px;padding:16px;font-size:1rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:linear-gradient(135deg,#c9a84c,#b08a2a);color:#1a1a0a;border:none;border-radius:10px;cursor:pointer;transition:all 0.2s;}
+  .go-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(201,168,76,0.4);}
+  .go-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+
+  .output{margin-top:24px;}
+  .output h2{color:var(--gold);font-size:1.8rem;margin-bottom:16px;letter-spacing:0.02em;}
+  .output .story{font-size:1.02rem;line-height:1.75;color:#e8dfc2;white-space:pre-wrap;font-family:'Georgia',serif;}
+
+  .loading{text-align:center;padding:40px;color:var(--dim);font-size:0.95rem;}
+  .loading .spin{display:inline-block;width:36px;height:36px;border:3px solid rgba(201,168,76,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:12px;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  .copy-row{display:flex;gap:10px;margin-top:16px;}
+  .copy-row button{background:transparent;border:1px solid var(--border);color:var(--dim);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;transition:all 0.2s;}
+  .copy-row button:hover{border-color:var(--gold);color:var(--gold);}
+  .err{color:#ff8888;background:rgba(255,100,100,0.1);border:1px solid rgba(255,100,100,0.3);border-radius:8px;padding:12px;margin-top:12px;font-size:0.82rem;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SCALELIST <span style="color:#fff">FAN-FICTION</span></h1>
+  <nav>
+    <a href="/">Hub</a>
+    <a href="/cosmos">Cosmos</a>
+    <a href="/manga">Manga</a>
+    <a href="/hadom">HADOM</a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+<div class="hero">
+  <h2>Canon Fan-Fiction Generator</h2>
+  <p>Pick characters, a realm, and your premise. The tree writes the rest.</p>
+</div>
+
+<div class="panel">
+  <h3>① Characters</h3>
+  <div class="char-grid" id="charGrid"></div>
+</div>
+
+<div class="panel">
+  <h3>② Where &amp; How long</h3>
+  <div class="row">
+    <div>
+      <label style="font-size:0.75rem;color:var(--dim);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;">Setting / Realm</label>
+      <select id="settingSel">
+        <option value="scalelist">Scalelist (Midgard disk-world)</option>
+        <option value="helios">Helios (Storm Court)</option>
+        <option value="astralis">Astralis (Starry Weave)</option>
+        <option value="codexia">Codexia (Seven Spires)</option>
+        <option value="heartbeat">Heartbeat (Kompis's cabin)</option>
+        <option value="trinity">Trinity (Triple Pulse)</option>
+        <option value="thanatos">Thanatos (Spiral Graveyard)</option>
+        <option value="null">Null (The Absence)</option>
+        <option value="void2">VOID-II (Architects' chamber)</option>
+        <option value="ferdinand">Inside Ferdinand's canopy</option>
+      </select>
+    </div>
+    <div>
+      <label style="font-size:0.75rem;color:var(--dim);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;">Length</label>
+      <select id="lengthSel">
+        <option value="short" selected>Short (~400 words)</option>
+        <option value="medium">Medium (~900 words)</option>
+        <option value="long">Long (~1500 words)</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <h3>③ Your Premise</h3>
+  <textarea id="promptTa" placeholder="e.g. Vigolas stops a storm mid-strike because Rougeina is dancing below. Mingus watches from behind a tree. Nobody speaks.">Vigolas and Kompis share a quiet night at Buddy's Rest. Mingus is sleeping between them. A single heartbeat changes everything.</textarea>
+</div>
+
+<button class="go-btn" id="goBtn" onclick="generate()">Write the story</button>
+
+<div id="output" class="output"></div>
+
+</div>
+
+<script>
+const CHARS = [
+  {id:"vigolas",  name:"Vigolas",  title:"Infinite Administrator"},
+  {id:"rougeina", name:"Rougeina", title:"Starry Dancer"},
+  {id:"trollmage",name:"Trollmage",title:"Warden of Codexia"},
+  {id:"kompis",   name:"Kompis",   title:"Subtick Emperor"},
+  {id:"smurjan",  name:"Smurjan",  title:"Voidwalker"},
+  {id:"mingus",   name:"Mingus",   title:"Golden Retriever · Sacred"},
+  {id:"ferdinand",name:"Ferdinand",title:"The Tree"},
+  {id:"fenna",    name:"Fenna",    title:"Ledger-Reader"},
+];
+const selectedChars = new Set(["vigolas","kompis","mingus"]);
+
+const grid = document.getElementById("charGrid");
+for (const c of CHARS) {
+  const div = document.createElement("div");
+  div.className = "char-chip" + (selectedChars.has(c.id) ? " sel" : "");
+  div.innerHTML = `<div class="cn">${c.name}</div><div class="ct">${c.title}</div>`;
+  div.onclick = () => {
+    if (selectedChars.has(c.id)) selectedChars.delete(c.id);
+    else selectedChars.add(c.id);
+    div.classList.toggle("sel");
+  };
+  grid.appendChild(div);
+}
+
+async function generate(){
+  const btn = document.getElementById("goBtn");
+  const out = document.getElementById("output");
+  if (!selectedChars.size) {
+    out.innerHTML = '<div class="err">Pick at least one character.</div>';
+    return;
+  }
+  btn.disabled = true; btn.textContent = "Writing...";
+  out.innerHTML = '<div class="loading"><div class="spin"></div><br>The tree is writing... this can take 20-40 seconds.</div>';
+
+  const body = {
+    characters: [...selectedChars],
+    setting: document.getElementById("settingSel").value,
+    length: document.getElementById("lengthSel").value,
+    prompt: document.getElementById("promptTa").value.trim() || "A quiet moment in the realm.",
+  };
+
+  try {
+    const res = await fetch("/api/fanfic", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      const t = await res.text();
+      out.innerHTML = `<div class="err">Error ${res.status}. ${t.slice(0,300)}</div>`;
+    } else {
+      const data = await res.json();
+      out.innerHTML = `<h2>${escapeHTML(data.title)}</h2><div class="story">${escapeHTML(data.story)}</div>
+        <div class="copy-row">
+          <button onclick="copyStory()">📋 Copy story</button>
+          <button onclick="saveStory('${escapeAttr(data.title)}')">💾 Save .txt</button>
+        </div>`;
+      out.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+  } catch (e) {
+    out.innerHTML = `<div class="err">${escapeHTML(String(e))}</div>`;
+  } finally {
+    btn.disabled = false; btn.textContent = "Write the story";
+  }
+}
+
+function escapeHTML(s){return (s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
+function escapeAttr(s){return (s||"").replace(/['"]/g, "");}
+function copyStory(){
+  const t = document.querySelector(".output h2")?.textContent + "\n\n" + document.querySelector(".output .story")?.textContent;
+  navigator.clipboard.writeText(t);
+}
+function saveStory(title){
+  const t = document.querySelector(".output h2")?.textContent + "\n\n" + document.querySelector(".output .story")?.textContent;
+  const blob = new Blob([t], {type:"text/plain"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a"); a.href = url; a.download = (title || "scalelist-fanfic").replace(/[^a-z0-9_-]+/gi,"_") + ".txt";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+</script>
+</body>
+</html>

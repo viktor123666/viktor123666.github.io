@@ -1,0 +1,137 @@
+{
+  "_note": "Major recurring antagonists of the Scalelist Universe. Each one was given a real anime-style portrait via Pollinations.ai with detailed character DNA — designed to remain visually consistent across future seasons.",
+  "antagonists": [
+    {
+      "id": "vass",
+      "name": "Captain Vass",
+      "realm_id": "helios",
+      "realm_name": "HELIOS",
+      "first_seen": "Season 3 — The Stormcoast War",
+      "role": "Vigolas's old rival from the Sea-Ghost era. Walked back from a timeline that almost happened. Claims the Storm-Throne by right.",
+      "fate": "Defeated by Vigolas at Lightning's Mouth. Knelt. Now serves as Captain of the Storm-Guard.",
+      "color": "#3a6a3a",
+      "portrait": "/characters/villains/vass.png"
+    },
+    {
+      "id": "darkdancer",
+      "name": "The Dark Dancer",
+      "realm_id": "astralis",
+      "realm_name": "ASTRALIS",
+      "first_seen": "Season 3 — The Dark Dancer",
+      "role": "Inverted shadow-twin of Rougeina. Devours stars to consume joy-memories. Wears Rougeina's face for one heartbeat at a time.",
+      "fate": "Sealed inside the Choreographer's Tomb after Rougeina's eight-blade dance.",
+      "color": "#9a3a9a",
+      "portrait": "/characters/villains/darkdancer.png"
+    },
+    {
+      "id": "vex_villain",
+      "name": "Vex (Forward Reader)",
+      "realm_id": "codexia",
+      "realm_name": "CODEXIA",
+      "first_seen": "Season 3 — The Forward Reader",
+      "role": "12-year-old prodigy who read a Codex page forward and unleashed six sins.",
+      "fate": "Bound by Trollmage's Eighth Codex. Now his official apprentice.",
+      "color": "#7C3AED",
+      "portrait": "/characters/villains/vex_villain.png"
+    },
+    {
+      "id": "kasper",
+      "name": "Old Kasper",
+      "realm_id": "heartbeat",
+      "realm_name": "HEARTBEAT",
+      "first_seen": "Season 3 — The Subtick War",
+      "role": "Kompis's original subtick mentor. Founded the Cartel that hunted Kompis for Mingus's bond.",
+      "fate": "Defeated by Kompis + Mingus shared subtick. Imprisoned at Stormcoast under Vigolas's watch.",
+      "color": "#aa8800",
+      "portrait": "/characters/villains/kasper.png"
+    },
+    {
+      "id": "echo",
+      "name": "Echo (The Fourth Voice)",
+      "realm_id": "echo",
+      "realm_name": "ECHO",
+      "first_seen": "Season 3 + 4 — The Trinity War / Echo's Last Stand",
+      "role": "The fourth voice Smurjan's Triad refused 3000 years ago. Lobbied. Then attacked.",
+      "fate": "Absorbed permanently into Smurjan's body in S4. He now carries her as the internal Tetrad.",
+      "color": "#9e8eff",
+      "portrait": "/characters/villains/echo.png"
+    },
+    {
+      "id": "backward_self",
+      "name": "Backward-Self",
+      "realm_id": "helios",
+      "realm_name": "HELIOS",
+      "first_seen": "Season 4 — The Crack in the Seal",
+      "role": "K-XII's mirror-soul wearing Vigolas's face. Saboteur of the Architects' Seal.",
+      "fate": "Killed by Vigolas at Lightning's Mouth. K-XII's soul-thread sealed in the Eighth Codex.",
+      "color": "#3a8a4a",
+      "portrait": "/characters/villains/backward_self.png"
+    },
+    {
+      "id": "killer",
+      "name": "The Star Killer",
+      "realm_id": "astralis",
+      "realm_name": "ASTRALIS",
+      "first_seen": "Season 4 — The Star Killer",
+      "role": "Echo's left-hand shadow servant. Murdered eight Starfloor stars before being cornered.",
+      "fate": "Ended by Rougeina's forbidden 12,001 HADOM dance. Echo's left hand sealed beside Echo herself.",
+      "color": "#8a6aaa",
+      "portrait": "/characters/villains/killer.png"
+    },
+    {
+      "id": "possessed_hand",
+      "name": "The Possessed Hand",
+      "realm_id": "codexia",
+      "realm_name": "CODEXIA",
+      "first_seen": "Season 4 — Nock's Right Hand",
+      "role": "Apprentice Nock's severed right hand, possessed by Pride after one cosmic year of forward-reading.",
+      "fate": "Re-bonded to Nock via the Eighth Codex's Apprenticeship binding. Pride is now sealed.",
+      "color": "#6a3a8a",
+      "portrait": "/characters/villains/possessed_hand.png"
+    },
+    {
+      "id": "bakasura",
+      "name": "Bakasura (The Hunger)",
+      "realm_id": "null",
+      "realm_name": "NULL",
+      "first_seen": "Cosmic recurring — climax in Season 4",
+      "role": "Four-faced cosmic eater. The oldest hunger. Has consumed reality fragments since before gods existed.",
+      "fate": "Withdrew from the Lake when Mingus's true form spoke. Will return when hunger compels. STILL AT LARGE.",
+      "color": "#1a0a1a",
+      "portrait": "/characters/villains/bakasura.png"
+    },
+    {
+      "id": "k_xii_unwritten",
+      "name": "K-XII (The Unwritten)",
+      "realm_id": "void2",
+      "realm_name": "VOID-II",
+      "first_seen": "Cosmic — first mentioned in canon, central to S4",
+      "role": "The Twelfth Architect who broke the Ferdinand Oath and was unwritten from existence. Their fragments hunted Vigolas throughout S4.",
+      "fate": "Soul-thread bound inside the Eighth Codex inside the Architects' Seal. Triple-sealed.",
+      "color": "#c9a84c",
+      "portrait": "/characters/villains/k_xii_unwritten.png"
+    },
+    {
+      "id": "rogue_elder",
+      "name": "Elder Vasik",
+      "realm_id": "codexia",
+      "realm_name": "CODEXIA",
+      "first_seen": "Season 4 — Nock's Right Hand",
+      "role": "Last surviving rogue Codex Council member. Tried to drain the Whisper Pine for forbidden knowledge.",
+      "fate": "Captured. Trapped in unbreakable Necromancer-Reach stone. Reformed and works as a humble cypress-keeper.",
+      "color": "#5a3a8a",
+      "portrait": "/characters/villains/rogue_elder.png"
+    },
+    {
+      "id": "warden_corrupted",
+      "name": "Corrupted Warden",
+      "realm_id": "trinity",
+      "realm_name": "TRINITY",
+      "first_seen": "Season 4 — Echo's Last Stand",
+      "role": "Mirror-Warden possessed by Echo as her vessel. Half man, half Echo.",
+      "fate": "Echo extracted by Smurjan's soul-extraction spell. Warden survives. Walks unmasked now.",
+      "color": "#aab4dd",
+      "portrait": "/characters/villains/warden_corrupted.png"
+    }
+  ]
+}

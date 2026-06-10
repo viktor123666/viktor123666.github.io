@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Season 4: The Fates Unravel — Scalelist Universe</title>
+<meta name="description" content="Season 4 of the Scalelist Universe. 12 episodes. Each realm's destruction-fate is almost triggered. The five champions converge at Lumen. Ferdinand speaks for the first time.">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,400;0,600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --gold:#c9a84c; --void:#050510; --panel:#0e0e1a; --border:rgba(201,168,76,0.3);
+    --text:#d4c9a8; --dim:#7a7060; --red:#cc3333;
+  }
+  html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond','Segoe UI',serif;min-height:100vh;}
+  header{padding:18px 28px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:#0a0a14;position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);}
+  header h1{color:var(--gold);font-size:1.1rem;letter-spacing:0.1em;text-transform:uppercase;font-family:'Cinzel',serif;font-weight:700;}
+  header h1 span{color:#fff;}
+  header nav{margin-left:auto;display:flex;gap:16px;}
+  header nav a{color:var(--dim);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;}
+  header nav a:hover{color:var(--gold);}
+
+  .hero{padding:80px 24px 48px;text-align:center;background:radial-gradient(ellipse at center, rgba(201,168,76,0.1), transparent 70%);}
+  .hero h2{font-family:'Cinzel',serif;font-size:3.4rem;color:var(--gold);letter-spacing:0.06em;text-shadow:0 0 32px rgba(201,168,76,0.4);}
+  .hero h2 span{display:block;font-size:1.2rem;color:var(--dim);letter-spacing:0.3em;margin-top:14px;font-weight:500;}
+  .hero p{color:var(--text);margin-top:18px;font-size:1.05rem;line-height:1.7;max-width:720px;margin-left:auto;margin-right:auto;font-style:italic;}
+
+  .toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;max-width:1400px;margin:0 auto;padding:24px 24px 80px;}
+  .ep-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;transition:all 0.3s;text-decoration:none;color:inherit;display:block;position:relative;}
+  .ep-card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(0,0,0,0.5), 0 0 0 1px var(--accent,var(--gold));}
+  .ep-card .cover{width:100%;aspect-ratio:16/9;overflow:hidden;background:#0a0a14;}
+  .ep-card .cover img{width:100%;height:100%;object-fit:cover;display:block;}
+  .ep-card .body{padding:14px 18px 16px;}
+  .ep-card .num{font-family:'Cinzel',serif;color:var(--accent,var(--gold));font-size:0.72rem;letter-spacing:0.18em;font-weight:700;}
+  .ep-card .title{font-family:'Cinzel',serif;color:#fff;font-size:1.15rem;font-weight:700;margin-top:4px;letter-spacing:0.02em;}
+  .ep-card .fate{font-size:0.78rem;color:var(--dim);font-style:italic;margin-top:8px;line-height:1.5;}
+
+  /* Reader modal */
+  .reader{position:fixed;inset:0;background:rgba(5,5,16,0.98);z-index:100;display:none;flex-direction:column;overflow-y:auto;backdrop-filter:blur(8px);}
+  .reader.open{display:flex;}
+  .r-close{position:fixed;top:16px;right:16px;background:rgba(14,14,26,0.9);border:1px solid var(--border);color:var(--text);width:42px;height:42px;border-radius:50%;font-size:1.4rem;cursor:pointer;z-index:120;}
+  .r-close:hover{color:var(--gold);border-color:var(--gold);}
+  .r-cover{width:100%;max-height:60vh;overflow:hidden;}
+  .r-cover img{width:100%;height:auto;display:block;}
+  .r-body{max-width:820px;margin:0 auto;padding:40px 28px 80px;}
+  .r-num{font-family:'Cinzel',serif;color:var(--accent,var(--gold));font-size:0.85rem;letter-spacing:0.2em;font-weight:700;}
+  .r-title{font-family:'Cinzel',serif;color:#fff;font-size:2.6rem;margin-top:8px;line-height:1.1;letter-spacing:0.04em;}
+  .r-sub{color:var(--dim);font-style:italic;font-size:1rem;margin-top:8px;}
+  .r-fate{margin:24px 0;padding:16px 20px;background:rgba(60,14,14,0.4);border-left:3px solid var(--red);border-radius:8px;}
+  .r-fate .lab{font-family:'Cinzel',serif;color:#ff6677;letter-spacing:0.16em;text-transform:uppercase;font-size:0.74rem;font-weight:700;margin-bottom:6px;}
+  .r-fate .body{color:#f8dddd;font-size:0.98rem;line-height:1.6;}
+  .r-section{margin:30px 0;}
+  .r-section h3{font-family:'Cinzel',serif;color:var(--accent,var(--gold));font-size:0.96rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:14px;border-bottom:1px solid rgba(201,168,76,0.2);padding-bottom:8px;}
+  .r-syn{font-size:1.05rem;line-height:1.85;color:#e8dfc2;}
+  .r-scenes{display:grid;gap:10px;}
+  .r-scene{padding:10px 14px;background:rgba(10,10,20,0.5);border-left:2px solid var(--accent,var(--gold));border-radius:6px;}
+  .r-scene .loc{color:var(--accent,var(--gold));font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;font-family:'Cinzel',serif;font-weight:700;}
+  .r-scene .act{color:var(--text);font-size:0.95rem;margin-top:4px;line-height:1.5;}
+  .r-cliff{padding:18px 20px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:8px;margin-top:14px;font-size:1rem;line-height:1.65;color:#fff;font-style:italic;}
+  .r-panels{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
+  @media(max-width:700px){.r-panels{grid-template-columns:1fr;}}
+  .r-panel{padding:12px 14px;background:rgba(10,10,20,0.4);border:1px solid rgba(201,168,76,0.15);border-radius:8px;font-size:0.86rem;line-height:1.5;}
+  .r-panel .pn{font-family:'Cinzel',serif;color:var(--accent,var(--gold));font-size:0.72rem;letter-spacing:0.14em;font-weight:700;text-transform:uppercase;}
+  .r-panel .comp{color:#e8dfc2;margin-top:4px;}
+  .r-panel .em{color:var(--dim);font-size:0.78rem;font-style:italic;margin-top:6px;}
+  .r-panel .dialogue{margin-top:6px;padding:6px 10px;background:rgba(201,168,76,0.08);border-radius:4px;color:#fff;font-style:italic;font-size:0.84rem;}
+  .r-panel .caption{margin-top:6px;color:#bbb;font-size:0.78rem;font-style:italic;border-top:1px dashed rgba(201,168,76,0.15);padding-top:6px;}
+  .r-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;}
+  .r-actions a{padding:10px 18px;font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;border:1px solid var(--accent,var(--gold));color:var(--accent,var(--gold));text-decoration:none;border-radius:8px;background:rgba(201,168,76,0.08);transition:all 0.2s;}
+  .r-actions a:hover{background:var(--accent,var(--gold));color:#1a1a0a;}
+  .loading{text-align:center;padding:80px;color:var(--dim);font-style:italic;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SCALELIST <span>SEASON 4</span></h1>
+  <nav>
+    <a href="/">Hub</a>
+    <a href="/cosmos">Cosmos</a>
+    <a href="/cosmos/atlas.html">Atlas</a>
+    <a href="/cosmos/character-chat.html">Speak</a>
+    <a href="/manga">Manga</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h2>The Fates Unravel<span>SEASON 4 · 12 EPISODES</span></h2>
+  <p>One realm at a time, the destruction-fates we wrote into canon begin to <em>almost</em> manifest. The five champions converge at Lumen's Center. Ferdinand speaks for the first time. The universe holds — but it has been changed.</p>
+</div>
+
+<div class="toc" id="toc">
+  <div class="loading">Loading 12 episodes...</div>
+</div>
+
+<!-- Reader modal -->
+<div class="reader" id="reader">
+  <button class="r-close" onclick="closeReader()">✕</button>
+  <div class="r-cover" id="rCover"></div>
+  <div class="r-body" id="rBody"></div>
+</div>
+
+<script>
+let EPISODES = [];
+const REALM_COLORS = {
+  scalelist: '#c9a84c', helios: '#00ff88', astralis: '#ff3366',
+  codexia: '#9933ff', heartbeat: '#ffaa00', trinity: '#00aaff',
+  thanatos: '#c0c0c0', null: '#0a0a10', void2: '#ffffff',
+  echo: '#9e8eff', horizon: '#ffc880', lumen: '#fff2aa',
+};
+
+async function init() {
+  const ids = [
+    '01_scalelist','02_helios','03_astralis','04_codexia','05_heartbeat',
+    '06_trinity','07_thanatos','08_null','09_void2','10_echo','11_horizon','12_lumen'
+  ];
+  const results = await Promise.all(ids.map(id =>
+    fetch(`/season4/episodes/${id}.json`).then(r => r.ok ? r.json() : null).catch(() => null)
+  ));
+  EPISODES = results.filter(Boolean).sort((a, b) => a.number - b.number);
+  renderTOC();
+
+  // Auto-open episode if ?ep= param
+  const epParam = new URLSearchParams(location.search).get('ep');
+  if (epParam) {
+    const ep = EPISODES.find(e => String(e.number) === epParam || e.realm_id === epParam);
+    if (ep) openReader(ep);
+  }
+}
+
+function renderTOC() {
+  const toc = document.getElementById('toc');
+  toc.innerHTML = '';
+  for (const ep of EPISODES) {
+    const card = document.createElement('a');
+    card.className = 'ep-card';
+    card.href = '#';
+    card.style.setProperty('--accent', REALM_COLORS[ep.realm_id] || '#c9a84c');
+    card.innerHTML = `
+      <div class="cover"><img src="/season4/covers/episode_${String(ep.number).padStart(2, '0')}.png" alt="${escapeHTML(ep.title)}" loading="lazy"></div>
+      <div class="body">
+        <div class="num">EP ${String(ep.number).padStart(2, '0')} · ${(ep.realm_id || '').toUpperCase()}</div>
+        <div class="title">${escapeHTML(ep.title)}</div>
+        <div class="fate">${escapeHTML(ep.fate_triggered || '')}</div>
+      </div>
+    `;
+    card.addEventListener('click', e => { e.preventDefault(); openReader(ep); });
+    toc.appendChild(card);
+  }
+}
+
+function openReader(ep) {
+  document.getElementById('reader').classList.add('open');
+  document.querySelector('.reader').style.setProperty('--accent', REALM_COLORS[ep.realm_id] || '#c9a84c');
+  document.getElementById('rCover').innerHTML = `<img src="/season4/covers/episode_${String(ep.number).padStart(2, '0')}.png" alt="${escapeHTML(ep.title)}">`;
+  const scenesHTML = (ep.key_scenes || []).map(s =>
+    `<div class="r-scene"><div class="loc">${escapeHTML(s.location)}</div><div class="act">${escapeHTML(s.action)}</div></div>`
+  ).join('');
+  const panelsHTML = (ep.panel_storyboard || []).map(p => `
+    <div class="r-panel">
+      <div class="pn">PANEL ${p.panel} · ${escapeHTML(p.camera || '')}</div>
+      <div class="comp">${escapeHTML(p.composition || '')}</div>
+      <div class="em">Emotion: ${escapeHTML(p.emotion || '')}</div>
+      ${p.dialogue ? `<div class="dialogue">${escapeHTML(p.dialogue)}</div>` : ''}
+      ${p.caption ? `<div class="caption">${escapeHTML(p.caption)}</div>` : ''}
+    </div>
+  `).join('');
+  document.getElementById('rBody').innerHTML = `
+    <div class="r-num">EPISODE ${String(ep.number).padStart(2, '0')} OF 12 · ${(ep.realm_id || '').toUpperCase()}</div>
+    <h1 class="r-title">${escapeHTML(ep.title)}</h1>
+    <div class="r-sub">${escapeHTML(ep.subtitle || '')}</div>
+
+    <div class="r-fate">
+      <div class="lab">FATE TRIGGERED</div>
+      <div class="body">${escapeHTML(ep.fate_triggered || '')}</div>
+    </div>
+
+    <div class="r-section">
+      <h3>Synopsis</h3>
+      <div class="r-syn">${escapeHTML(ep.synopsis || '').replace(/\n/g, '<br><br>')}</div>
+    </div>
+
+    ${scenesHTML ? `<div class="r-section"><h3>Key Scenes (${(ep.key_scenes||[]).length})</h3><div class="r-scenes">${scenesHTML}</div></div>` : ''}
+
+    ${ep.cliffhanger ? `<div class="r-section"><h3>Cliffhanger</h3><div class="r-cliff">${escapeHTML(ep.cliffhanger)}</div></div>` : ''}
+
+    ${panelsHTML ? `<div class="r-section"><h3>Panel Storyboard (${(ep.panel_storyboard||[]).length})</h3><div class="r-panels">${panelsHTML}</div></div>` : ''}
+
+    ${ep.cosmic_price_paid ? `<div class="r-section"><h3>Cosmic Price Paid</h3><div class="r-cliff">${escapeHTML(ep.cosmic_price_paid)}</div></div>` : ''}
+
+    <div class="r-actions">
+      <a href="/cosmos/realm.html?id=${ep.realm_id}">🗺 ${(ep.realm_id || '').toUpperCase()} Map</a>
+      <a href="/cosmos/character-chat.html?realm=${ep.realm_id}">💬 Chat with characters</a>
+      <a href="#" onclick="closeReader();return false;">← Back to all episodes</a>
+    </div>
+  `;
+  document.getElementById('reader').scrollTop = 0;
+}
+
+function closeReader() {
+  document.getElementById('reader').classList.remove('open');
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeReader();
+});
+
+function escapeHTML(s) {
+  return (s || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+
+init();
+</script>
+</body>
+</html>

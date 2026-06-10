@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Which Realm Are You? — Scalelist Universe</title>
+<meta name="description" content="Take the Scalelist Universe realm quiz. Find out which of the nine realms on Ferdinand's branches you belong to.">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --gold:#c9a84c; --void:#050510; --panel:#0e0e1a; --border:rgba(201,168,76,0.3);
+    --text:#d4c9a8; --dim:#7a7060;
+  }
+  html,body{background:var(--void);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+
+  header{padding:16px 28px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:#0a0a14;}
+  header h1{color:var(--gold);font-size:1.1rem;letter-spacing:0.1em;text-transform:uppercase;}
+  header h1 span{color:#fff;}
+  header nav{margin-left:auto;display:flex;gap:16px;}
+  header nav a{color:var(--dim);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;}
+  header nav a:hover{color:var(--gold);}
+
+  .wrap{max-width:720px;margin:0 auto;padding:40px 20px;}
+
+  .intro{text-align:center;margin-bottom:40px;}
+  .intro h2{font-size:2.6rem;color:var(--gold);letter-spacing:0.04em;text-shadow:0 0 28px rgba(201,168,76,0.35);}
+  .intro p{color:var(--dim);margin-top:12px;font-size:1rem;line-height:1.6;}
+
+  .start-btn{display:block;margin:24px auto 0;padding:16px 40px;background:linear-gradient(135deg,#c9a84c,#b08a2a);color:#1a1a0a;border:none;border-radius:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-size:0.95rem;transition:all 0.2s;}
+  .start-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.45);}
+
+  .question-card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:32px 28px;margin-bottom:18px;animation:in 0.4s;}
+  @keyframes in{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  .q-progress{color:var(--gold);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:12px;}
+  .q-text{font-size:1.4rem;color:#fff;margin-bottom:22px;font-weight:600;line-height:1.4;}
+  .choices{display:flex;flex-direction:column;gap:10px;}
+  .choice{padding:14px 18px;background:rgba(10,10,20,0.6);border:1px solid rgba(201,168,76,0.2);border-radius:10px;cursor:pointer;font-size:0.95rem;line-height:1.5;transition:all 0.2s;color:var(--text);}
+  .choice:hover{background:rgba(201,168,76,0.12);border-color:var(--gold);color:#fff;transform:translateX(4px);}
+
+  .result{background:var(--panel);border:1px solid var(--accent,var(--gold));border-radius:18px;padding:36px 32px;animation:in 0.6s;text-align:center;box-shadow:0 0 40px rgba(201,168,76,0.25);}
+  .result .badge{display:inline-block;padding:8px 18px;border-radius:20px;background:rgba(201,168,76,0.15);color:var(--accent,var(--gold));letter-spacing:0.18em;text-transform:uppercase;font-size:0.72rem;font-weight:700;margin-bottom:20px;}
+  .result h2{font-size:3rem;color:var(--accent,var(--gold));letter-spacing:0.04em;margin-bottom:8px;text-shadow:0 0 24px currentColor;}
+  .result .sub{font-size:1.05rem;color:var(--dim);margin-bottom:22px;font-style:italic;}
+  .result .desc{font-size:1rem;line-height:1.75;color:#e8dfc2;margin-bottom:24px;text-align:left;}
+  .result .guardian-line{padding:14px 18px;background:rgba(201,168,76,0.08);border-left:3px solid var(--accent,var(--gold));border-radius:4px;text-align:left;color:var(--text);font-size:0.95rem;}
+  .result .actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:28px;}
+  @media(max-width:600px){.result .actions{grid-template-columns:1fr;}}
+  .result .actions a, .result .actions button{padding:12px 14px;background:rgba(201,168,76,0.1);border:1px solid var(--accent,var(--gold));border-radius:10px;color:var(--accent,var(--gold));text-decoration:none;text-align:center;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:inherit;}
+  .result .actions a:hover, .result .actions button:hover{background:rgba(201,168,76,0.22);transform:translateY(-1px);}
+
+  .share-card{margin-top:16px;padding:12px;background:rgba(10,10,20,0.5);border-radius:10px;font-size:0.78rem;color:var(--dim);text-align:center;}
+
+  .tally{position:fixed;bottom:14px;right:14px;background:rgba(10,10,20,0.85);padding:8px 14px;border-radius:10px;border:1px solid rgba(201,168,76,0.2);font-size:0.7rem;color:var(--dim);backdrop-filter:blur(8px);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SCALELIST <span>REALM QUIZ</span></h1>
+  <nav>
+    <a href="/">Hub</a>
+    <a href="/cosmos">Cosmos</a>
+    <a href="/fanfic.html">Fan-fiction</a>
+    <a href="/quiz">Character Quiz</a>
+  </nav>
+</header>
+
+<div class="wrap" id="app"></div>
+
+<script>
+// ============ DATA ============
+const QUESTIONS = [
+  {
+    q: "A storm arrives unannounced. You...",
+    choices: [
+      {text: "Sit still. Let it pass. It cannot move me.", tags: ["scalelist","heartbeat"]},
+      {text: "Walk directly INTO it — I'm curious what it wants.", tags: ["helios"]},
+      {text: "Dance through it, counting raindrops as beats.", tags: ["astralis"]},
+      {text: "Read the lightning's pattern. There's always a pattern.", tags: ["codexia"]},
+      {text: "Feel which part of me wants to fight it. Then the other two.", tags: ["trinity"]},
+      {text: "Record every name it passes over.", tags: ["thanatos"]},
+      {text: "Nothing. I am nothing. Nothing affects me.", tags: ["null"]},
+      {text: "I do not answer. I am already deliberating.", tags: ["void2"]},
+    ],
+  },
+  {
+    q: "You make a promise. Later, keeping it costs you everything. You...",
+    choices: [
+      {text: "Keep it anyway. The cost is the point.", tags: ["scalelist","heartbeat"]},
+      {text: "Keep it, but I make sure everyone sees.", tags: ["helios"]},
+      {text: "Keep it, joyfully — the joy is what matters.", tags: ["astralis"]},
+      {text: "Keep it. I already knew the cost. I wrote it down.", tags: ["codexia"]},
+      {text: "Two of my three voices say yes. That's enough.", tags: ["trinity"]},
+      {text: "Keep it. I've seen every ending. This one is right.", tags: ["thanatos"]},
+      {text: "A promise is something. I have nothing. So no.", tags: ["null"]},
+      {text: "The Architects' Seal holds. The Oath holds. We hold.", tags: ["void2"]},
+    ],
+  },
+  {
+    q: "Time works differently for you. How?",
+    choices: [
+      {text: "Normal-speed. One human heartbeat. I like it that way.", tags: ["scalelist"]},
+      {text: "Lightning fast. Backward if I'm angry.", tags: ["helios"]},
+      {text: "Flicker-time. I am in six places before you blink.", tags: ["astralis"]},
+      {text: "I read six books at once. That's just Tuesday.", tags: ["codexia"]},
+      {text: "Subtick. I live BETWEEN heartbeats, where nothing dies.", tags: ["heartbeat"]},
+      {text: "I pulse in threes. Always threes.", tags: ["trinity"]},
+      {text: "I count deaths, not heartbeats.", tags: ["thanatos"]},
+      {text: "Backward. Reversed. Actions undo themselves when observed.", tags: ["null","void2"]},
+    ],
+  },
+  {
+    q: "Your ideal companion is...",
+    choices: [
+      {text: "A loyal dog at my feet and a quiet lake.", tags: ["heartbeat"]},
+      {text: "No one. I sit alone on the throne because I can.", tags: ["helios"]},
+      {text: "Starlight and music — that's all the company I need.", tags: ["astralis"]},
+      {text: "A library. Books count as company if you listen.", tags: ["codexia"]},
+      {text: "A nameless meditator who never needs an answer.", tags: ["thanatos","scalelist"]},
+      {text: "Two other voices inside my head.", tags: ["trinity"]},
+      {text: "My own heartbeat, externally audible.", tags: ["null"]},
+      {text: "Eleven equals who know not to speak unless it matters.", tags: ["void2"]},
+    ],
+  },
+  {
+    q: "Someone wrongs you. Your response...",
+    choices: [
+      {text: "I refuse the fight I could win. I simply hold.", tags: ["scalelist","heartbeat"]},
+      {text: "They'll learn what the Storm Court does to debts.", tags: ["helios"]},
+      {text: "I dance past them. Their weight can't touch me.", tags: ["astralis"]},
+      {text: "I read their entire life backwards, find their mistake.", tags: ["codexia"]},
+      {text: "Kali wants blood. Bali says wait. Fused decides.", tags: ["trinity"]},
+      {text: "I write their name down. Time does the rest.", tags: ["thanatos"]},
+      {text: "They don't exist. Nothing does. Moot.", tags: ["null"]},
+      {text: "I convene the council. We vote. The vote binds.", tags: ["void2"]},
+    ],
+  },
+  {
+    q: "Choose a color:",
+    choices: [
+      {text: "Deep forest green + amber parchment", tags: ["scalelist"]},
+      {text: "Storm green — like lightning through moss", tags: ["helios"]},
+      {text: "Pink + starlight — the color of flickering joy", tags: ["astralis"]},
+      {text: "Violet + silver — tower smoke at dusk", tags: ["codexia"]},
+      {text: "Warm gold — late afternoon on a lake", tags: ["heartbeat"]},
+      {text: "Three rose-colors at once. All three.", tags: ["trinity"]},
+      {text: "Black-pearl and ghost-white", tags: ["thanatos"]},
+      {text: "The absence of color. The concept of color but unoccupied.", tags: ["null"]},
+      {text: "Cream parchment + single gold rune", tags: ["void2"]},
+    ],
+  },
+  {
+    q: "You're given one power. You pick...",
+    choices: [
+      {text: "To hold what cannot be lifted.", tags: ["scalelist","heartbeat"]},
+      {text: "To write my will into reality itself.", tags: ["helios"]},
+      {text: "To transmute moments of sadness into stars.", tags: ["astralis"]},
+      {text: "To know every spell ever spoken, backwards.", tags: ["codexia"]},
+      {text: "To stop time inside a single heartbeat.", tags: ["heartbeat"]},
+      {text: "To embody three minds at once.", tags: ["trinity"]},
+      {text: "To hear every death in the universe, simultaneously.", tags: ["thanatos"]},
+      {text: "To walk in the void and come back.", tags: ["null"]},
+      {text: "To unwrite an entire person from existence.", tags: ["void2"]},
+    ],
+  },
+  {
+    q: "A stranger asks: who are you?",
+    choices: [
+      {text: "I am a person who remembers the flowers.", tags: ["scalelist","heartbeat"]},
+      {text: "I am the weather before you could name it.", tags: ["helios"]},
+      {text: "I am the dance between two notes.", tags: ["astralis"]},
+      {text: "I am the paragraph you haven't read yet.", tags: ["codexia"]},
+      {text: "I am a subtick in someone's heartbeat. A buddy.", tags: ["heartbeat"]},
+      {text: "We are three. Never one. Never four.", tags: ["trinity"]},
+      {text: "I am the ledger of every name that has gone.", tags: ["thanatos"]},
+      {text: "I am the pause where the question gets unspoken.", tags: ["null"]},
+      {text: "I am seat K-something. The number is forbidden.", tags: ["void2"]},
+    ],
+  },
+];
+
+const REALMS = {
+  scalelist: {
+    name: "SCALELIST",
+    sub: "The Prime Material",
+    color: "#c9a84c",
+    desc: "You belong to Scalelist — the painted Midgard disk at the base of Ferdinand's trunk. You are the anchor. You live at human-speed, remember your friends' faces, and know which kind of bread to bring when someone is grieving. You are the one the other realms rely on to KEEP EXISTING. Without you, the rest is just theory.",
+    guardian: "Guardian: The Twelve Architects (K-V rotating). Guide: The 12 cities, all within walking distance of each other if you know the paths.",
+    character: null,
+  },
+  helios: {
+    name: "HELIOS",
+    sub: "The Infinite Court",
+    color: "#00ff88",
+    desc: "You belong to Helios — the storm court where lightning moves backwards and the shipwreck above the throne has been falling since before the first heartbeat. You are a leader by nature. You carry the cost of knowing things others don't. You keep your own counsel, and when you speak, it binds. The universe listens when you exhale.",
+    guardian: "Guardian: Vigolas, The Infinite Administrator. He does not smile often, but he will know you on sight.",
+    character: "vigolas",
+  },
+  astralis: {
+    name: "ASTRALIS",
+    sub: "The Starry Weave",
+    color: "#ff3366",
+    desc: "You belong to Astralis — the dance-floor galaxy where every star is a remembered moment of joy. You find beauty in EVERYTHING, and you refuse to be weighed down by the world's gravity. You move. You flicker. You celebrate. Your sadness does not last because you trade it for stars, and the universe is always hungry for more stars.",
+    guardian: "Guardian: Rougeina, The Starry Dancer. She will meet you in the middle of a dance you didn't know had started.",
+    character: "rougeina",
+  },
+  codexia: {
+    name: "CODEXIA",
+    sub: "The Seven Spires",
+    color: "#9933ff",
+    desc: "You belong to Codexia — the tower-city of wizards, necromancers, and exactly one dancehall. You see patterns before other people see the problem. You hold your knowledge lightly, speak rarely, and when you do, it is either riddle or revelation. You read things backwards on purpose — they make more sense that way.",
+    guardian: "Guardian: Trollmage, Warden of Codexia. He will nod once. That is an entire conversation.",
+    character: "trollmage",
+  },
+  heartbeat: {
+    name: "HEARTBEAT",
+    sub: "The Cabin Realm",
+    color: "#f8c471",
+    desc: "You belong to Heartbeat — the cabin realm at the edge of the lake, population 2 (you and the dog). You are the subtick emperor: you can stop time inside a single heartbeat, because love makes time irrelevant. You value your dog more than any throne, you answer your friends quickly, and you know that staying still with someone you love IS the entire point.",
+    guardian: "Guardian: Kompis, The Buddy. And Mingus — the golden retriever. Mingus is sacred. Always.",
+    character: "kompis",
+  },
+  trinity: {
+    name: "TRINITY",
+    sub: "The Triple Pulse",
+    color: "#ff88ff",
+    desc: "You belong to Trinity — the realm where Smurjan's three voices (Bali, Kali, Fused) share one body. You are not one person. You are a council of versions of yourself, and you know it. You are more honest than most people because you argue with yourself out loud. Decisions take three votes. Sometimes they take three lifetimes.",
+    guardian: "Guardian: Smurjan (Fused) — with Bali and Kali behind him, always listening.",
+    character: "smurjan",
+  },
+  thanatos: {
+    name: "THANATOS",
+    sub: "The Spiral Graveyard",
+    color: "#2a2a30",
+    desc: "You belong to Thanatos — the spiral graveyard where every death in the universe is heard by one person, silently. You are the listener. You hold the grief of others so they can keep walking. You do not flinch. You do not look away. You know the universe reuses names, and that's fine — the names remember themselves.",
+    guardian: "Guardian: Fenna, Reader of the Ledger. She will not greet you. She will already have greeted you, yesterday.",
+    character: null,
+  },
+  null: {
+    name: "NULL",
+    sub: "The Absence",
+    color: "#2a2a40",
+    desc: "You belong to Null — the void around the universe. You are the one who knows nothing is also something, and silence can be louder than every throne-room's declaration. Few come here and return with their memory intact. You did. That makes you rare. You carry the absence with you like a coat. It fits.",
+    guardian: "Guardian: No one claims rulership. Smurjan visits. Ferdinand's roots drink here. That is all.",
+    character: null,
+  },
+  void2: {
+    name: "VOID-II",
+    sub: "The Architects' Chamber",
+    color: "#c9a84c",
+    desc: "You belong to VOID-II — the deliberation chamber of the Twelve Architects. You are careful. You think before you speak. You know that one word, uttered in the right room, is worth ten thousand uttered anywhere else. You honor the Ferdinand Oath: to hold, to refuse the fight you can win, to remember the flowers. You are a keeper of the seal.",
+    guardian: "Guardian: K-V (the current elder — unnamed, always). Attendants: K-I through K-XI, and the silent chair of K-XII.",
+    character: null,
+  },
+};
+
+// ============ STATE ============
+let current = 0;
+const tally = {};
+
+function render() {
+  const app = document.getElementById("app");
+  if (current === -1) {
+    app.innerHTML = `
+      <div class="intro">
+        <h2>Which Realm Are You?</h2>
+        <p>Eight questions. One realm. Find out which branch of Ferdinand holds your soul.<br>Your guardian is already watching for you.</p>
+        <button class="start-btn" onclick="start()">Begin the walk</button>
+      </div>`;
+    return;
+  }
+  if (current < QUESTIONS.length) {
+    const q = QUESTIONS[current];
+    app.innerHTML = `
+      <div class="question-card">
+        <div class="q-progress">Question ${current + 1} of ${QUESTIONS.length}</div>
+        <div class="q-text">${q.q}</div>
+        <div class="choices">
+          ${q.choices.map((c,i) => `<div class="choice" onclick="answer(${i})">${c.text}</div>`).join("")}
+        </div>
+      </div>`;
+    return;
+  }
+  // Show result
+  const winner = Object.entries(tally).sort((a,b) => b[1] - a[1])[0][0];
+  const r = REALMS[winner];
+  app.innerHTML = `
+    <div class="result" style="--accent:${r.color};">
+      <span class="badge">You belong to</span>
+      <h2>${r.name}</h2>
+      <div class="sub">${r.sub}</div>
+      <div class="desc">${r.desc}</div>
+      <div class="guardian-line">${r.guardian}</div>
+      <div class="actions">
+        <a href="/cosmos/realm.html?id=${winner}">🗺 Explore realm map</a>
+        <a href="/cosmos/globe.html?id=${winner}">🌐 View 3D globe</a>
+        ${r.character ? `<a href="/su-vault-9x7k/chat.html?char=${r.character}">💬 Meet your guardian</a>` : `<a href="/cosmos">🌲 Back to cosmos</a>`}
+      </div>
+      <div class="share-card">Share your realm: ${r.name}, ${r.sub.toLowerCase()}. #ScalelistUniverse · scalelistuniverse.com/realm-quiz</div>
+      <button class="start-btn" style="margin-top:28px;background:transparent;color:${r.color};border:1px solid ${r.color};" onclick="restart()">Take the quiz again</button>
+    </div>`;
+}
+
+function start() { current = 0; render(); }
+function answer(i) {
+  const q = QUESTIONS[current];
+  for (const tag of q.choices[i].tags) {
+    tally[tag] = (tally[tag] || 0) + 1;
+  }
+  current++;
+  render();
+}
+function restart() {
+  for (const k in tally) delete tally[k];
+  current = -1;
+  render();
+}
+current = -1;
+render();
+</script>
+</body>
+</html>

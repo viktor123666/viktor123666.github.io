@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-04-08 14:09:47",
+  "current": 17,
+  "pace_sec": 2741.2103234678507,
+  "milestones": [
+    {
+      "target": 10,
+      "name": "First Wave",
+      "remaining": 0,
+      "done": true,
+      "eta_str": null
+    },
+    {
+      "target": 25,
+      "name": "Quarter Hundred",
+      "remaining": 8,
+      "done": false,
+      "eta_str": "6.1h (04-08 20:15)"
+    },
+    {
+      "target": 50,
+      "name": "Halfway",
+      "remaining": 33,
+      "done": false,
+      "eta_str": "1.0d (04-09 15:17)"
+    },
+    {
+      "target": 75,
+      "name": "Three Quarters",
+      "remaining": 58,
+      "done": false,
+      "eta_str": "1.8d (04-10 10:19)"
+    },
+    {
+      "target": 100,
+      "name": "Triple Digits",
+      "remaining": 83,
+      "done": false,
+      "eta_str": "2.6d (04-11 05:21)"
+    },
+    {
+      "target": 200,
+      "name": "Double Centurion",
+      "remaining": 183,
+      "done": false,
+      "eta_str": "5.8d (04-14 09:30)"
+    },
+    {
+      "target": 300,
+      "name": "Three Hundred Sparta",
+      "remaining": 283,
+      "done": false,
+      "eta_str": "9.0d (04-17 13:39)"
+    },
+    {
+      "target": 500,
+      "name": "Halfway to a Thousand",
+      "remaining": 483,
+      "done": false,
+      "eta_str": "15.3d (04-23 21:56)"
+    },
+    {
+      "target": 1000,
+      "name": "FOUR DIGIT EMPIRE",
+      "remaining": 983,
+      "done": false,
+      "eta_str": "31.2d (05-09 18:39)"
+    },
+    {
+      "target": 1620,
+      "name": "QUEUE COMPLETE",
+      "remaining": 1603,
+      "done": false,
+      "eta_str": "50.9d (05-29 10:45)"
+    }
+  ]
+}

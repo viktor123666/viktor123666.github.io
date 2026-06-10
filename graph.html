@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Relationship Graph — Scalelist Universe</title>
+<meta name="description" content="Every named soul, every cross-soul thread. The empire's relationships rendered as a D3 force-directed graph. Drag, zoom, click.">
+<meta property="og:image" content="https://scalelistuniverse.com/og.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400&display=swap" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a84c; --void:#050510; --panel:#0a0a14; --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060}
+html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;height:100vh;overflow:hidden}
+a{color:var(--gold);text-decoration:none}
+
+header{padding:14px 26px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:relative;z-index:10}
+header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
+header nav{display:flex;gap:18px;flex-wrap:wrap}
+header nav a{color:var(--dim);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:'Cinzel',serif}
+header nav a:hover{color:var(--gold)}
+
+#stage{position:fixed;top:51px;left:0;right:0;bottom:0;cursor:grab}
+#stage.grabbing{cursor:grabbing}
+#stage svg{width:100%;height:100%;display:block}
+
+.panel{position:fixed;top:65px;left:14px;background:rgba(10,10,20,0.92);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:10px;padding:14px 16px;max-width:280px;z-index:5}
+.panel h2{font-family:'Cinzel',serif;color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.panel p{font-size:.82rem;line-height:1.5;color:var(--text);opacity:.88}
+.panel .key{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.panel .key .k{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.14em;color:var(--dim);text-transform:uppercase;padding:3px 8px;border:1px solid var(--border);border-radius:99px}
+.panel .key .k::before{content:'•';color:var(--c);margin-right:4px;font-size:1rem;line-height:0}
+
+.detail{position:fixed;top:65px;right:14px;background:rgba(10,10,20,0.92);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:10px;padding:18px;max-width:300px;z-index:5;display:none}
+.detail.open{display:block}
+.detail h3{font-family:'Cinzel',serif;color:#fff;font-size:1.05rem;font-weight:700;letter-spacing:.04em;margin-bottom:4px}
+.detail .role{color:var(--accent,var(--gold));font-style:italic;font-size:.86rem;margin-bottom:10px}
+.detail .stat{font-family:'Space Mono',monospace;color:var(--dim);font-size:.74rem;margin-bottom:6px}
+.detail .links{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+.detail .links a{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;color:var(--gold);border:1px solid var(--gold);padding:4px 10px;border-radius:99px;text-decoration:none}
+
+.help{position:fixed;bottom:14px;left:14px;font-family:'Space Mono',monospace;color:var(--dim);font-size:.7rem;background:rgba(10,10,20,0.7);padding:6px 12px;border-radius:99px;border:1px solid var(--border);z-index:5}
+
+text{font-family:'Cinzel',serif;font-size:11px;fill:#fff;font-weight:700;letter-spacing:.08em;pointer-events:none;text-shadow:0 0 4px rgba(0,0,0,0.9)}
+.link{stroke-opacity:0.4;transition:stroke-opacity .3s}
+.link.dim{stroke-opacity:0.1}
+.node{cursor:pointer;transition:transform .2s,filter .2s}
+.node:hover{filter:drop-shadow(0 0 8px currentColor)}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
+  <nav>
+    <a href="/lineage">Lineage</a>
+    <a href="/wiki">Wiki</a>
+    <a href="/empire">Empire</a>
+    <a href="/cosmos">Cosmos</a>
+    <a href="/graph" style="color:var(--gold)">Graph</a>
+  </nav>
+</header>
+
+<div id="stage"><svg id="svg"></svg></div>
+
+<div class="panel">
+  <h2>Relationship Graph</h2>
+  <p>Every cipher soul. Every thread that binds them.</p>
+  <div class="key">
+    <span class="k" style="--c:#4ade80">Active Champion</span>
+    <span class="k" style="--c:#c9a84c">Open Seat</span>
+    <span class="k" style="--c:#ff6677">Antagonist</span>
+    <span class="k" style="--c:#fef3c7">Mingus</span>
+  </div>
+</div>
+
+<div class="detail" id="detail">
+  <h3 id="dName"></h3>
+  <div class="role" id="dRole"></div>
+  <div class="stat" id="dStats"></div>
+  <p style="font-size:.86rem;margin-top:8px;line-height:1.5;color:var(--text);opacity:.9" id="dBlurb"></p>
+  <div class="links" id="dLinks"></div>
+</div>
+
+<div class="help">drag • scroll to zoom • click a soul</div>
+
+<script>
+// ============================================================
+// Empire Relationship Graph — D3 force-directed
+// Built from canon-anchored data: 15 souls + Mingus + 12 villains
+// ============================================================
+const DATA = {
+  nodes: [
+    // Active 5 (champions)
+    {id:'vigolas',name:'Vigolas',role:'The Last Tide',type:'active',color:'#4ade80',realm:'Helios',hadom:'∞−1',bio:'/cosmos'},
+    {id:'rougeina',name:'Rougeina',role:'The Dancer',type:'active',color:'#ff6b9d',realm:'Astralis',hadom:'12,000',bio:'/cosmos'},
+    {id:'trollmage',name:'Trollmage',role:'The Reader',type:'active',color:'#9333ea',realm:'Codexia',hadom:'10⁵',bio:'/cosmos'},
+    {id:'kompis',name:'Kompis',role:'The Buddy',type:'active',color:'#fbbf24',realm:'Heartbeat',hadom:'10⁹',bio:'/cosmos'},
+    {id:'smurjan',name:'Smurjan',role:'The Third-Voice',type:'active',color:'#0ea5e9',realm:'Trinity',hadom:'∞ folded',bio:'/cosmos'},
+    {id:'mingus',name:'Mingus',role:'The Sacred Companion',type:'mingus',color:'#fef3c7',realm:'with Kompis',hadom:'unclassified',bio:'/cosmos'},
+    // Open 10 (lineage)
+    {id:'isa',name:'Isa',role:'The Stillborn Heartbeat',type:'open',color:'#67e8f9',realm:'Helios-Heartbeat',hadom:'1',bio:'/characters/isa'},
+    {id:'opha',name:'Opha',role:'The Conjunction',type:'open',color:'#ff6b9d',realm:'Astralis-Codexia',hadom:'24',bio:'/characters/opha'},
+    {id:'runa',name:'Runa',role:'The First Rune-Speaker',type:'open',color:'#fbbf24',realm:'Inside Ferdinand',hadom:'ageless',bio:'/characters/runa'},
+    {id:'ogar',name:'Ögar',role:'The Far-Eye Watcher',type:'open',color:'#9b9b9b',realm:'Thanatos',hadom:'8,000',bio:'/characters/ogar'},
+    {id:'niva',name:'Niva',role:'The Untraversed',type:'open',color:'#ffffff',realm:'NULL',hadom:'unmeasurable',bio:'/characters/niva'},
+    {id:'njord',name:'Njord',role:'The Tide-Reader',type:'open',color:'#3b82f6',realm:'Heartbeat-east',hadom:'1,200',bio:'/characters/njord'},
+    {id:'kvar',name:'Kvar',role:'The Last One',type:'open',color:'#71717a',realm:'anywhere',hadom:'1 (uncountable)',bio:'/characters/kvar'},
+    {id:'vidar',name:'Vidar',role:'The Silent Reckoner',type:'open',color:'#1f2937',realm:'Void-II',hadom:'0',bio:'/characters/vidar'},
+    {id:'iska',name:'Iska',role:'The Spark-Carrier',type:'open',color:'#fef3c7',realm:'Lumen',hadom:'7',bio:'/characters/iska'},
+    {id:'tova',name:'Tova',role:'The Thunder-Herald',type:'open',color:'#d97706',realm:'all 12',hadom:'12',bio:'/characters/tova'},
+    // Major antagonists
+    {id:'vass',name:'Captain Vass',role:'Reformed rival',type:'villain',color:'#3a6a3a',realm:'Helios',hadom:'high',bio:'/cosmos/atlas'},
+    {id:'darkdancer',name:'Dark Dancer',role:'Inverted twin',type:'villain',color:'#9a3a9a',realm:'Astralis',hadom:'high',bio:'/cosmos/atlas'},
+    {id:'kasper',name:'Old Kasper',role:'Subtick mentor',type:'villain',color:'#aa8800',realm:'Heartbeat',hadom:'high',bio:'/cosmos/atlas'},
+    {id:'echo',name:'Echo',role:'The Fourth Voice',type:'villain',color:'#9e8eff',realm:'Echo',hadom:'high',bio:'/cosmos/atlas'},
+    {id:'bakasura',name:'Bakasura',role:'The Hunger',type:'villain',color:'#1a0a1a',realm:'NULL',hadom:'cosmic',bio:'/cosmos/atlas'},
+    {id:'k_xii',name:'K-XII (Unwritten)',role:'Erased Architect',type:'villain',color:'#c9a84c',realm:'Void-II',hadom:'sealed',bio:'/cosmos/atlas'},
+  ],
+  links: [
+    // Champion ↔ Realm partnerships
+    {source:'vigolas',target:'kompis',type:'ally',label:'cousins-in-arms'},
+    {source:'vigolas',target:'mingus',type:'sacred',label:'protects'},
+    {source:'kompis',target:'mingus',type:'sacred',label:'eternal companion'},
+    {source:'rougeina',target:'trollmage',type:'ally',label:'page+star'},
+    {source:'smurjan',target:'vigolas',type:'ally',label:'storm+vote'},
+    {source:'smurjan',target:'trollmage',type:'ally',label:'codex+vote'},
+    // Lineage debut partnerships (S5)
+    {source:'isa',target:'vigolas',type:'lineage',label:'lake-edge stillness'},
+    {source:'isa',target:'kompis',type:'lineage',label:'unmet (the gap)'},
+    {source:'opha',target:'rougeina',type:'lineage',label:'bridged'},
+    {source:'opha',target:'trollmage',type:'lineage',label:'bridged'},
+    {source:'runa',target:'trollmage',type:'lineage',label:'great-grandmother'},
+    {source:'ogar',target:'mingus',type:'lineage',label:'wept silver coins'},
+    {source:'niva',target:'kompis',type:'lineage',label:'tea at the dock'},
+    {source:'niva',target:'bakasura',type:'enemy',label:'gave him parka pieces'},
+    {source:'niva',target:'mingus',type:'lineage',label:'parka piece on collar'},
+    {source:'njord',target:'kompis',type:'lineage',label:'distant cousins'},
+    {source:'njord',target:'vigolas',type:'lineage',label:'forecast the storm'},
+    {source:'kvar',target:'vigolas',type:'lineage',label:'always here'},
+    {source:'kvar',target:'vidar',type:'lineage',label:'decade-nod'},
+    {source:'vidar',target:'runa',type:'lineage',label:'pre-cipher kin'},
+    {source:'vidar',target:'k_xii',type:'enemy',label:'unwrote'},
+    {source:'iska',target:'mingus',type:'sacred',label:'lit the lamp at his birth'},
+    {source:'iska',target:'kompis',type:'lineage',label:'told him to hold him'},
+    {source:'iska',target:'bakasura',type:'enemy',label:'made him laugh once'},
+    {source:'tova',target:'smurjan',type:'lineage',label:'horn for the Tetrad'},
+    {source:'tova',target:'vigolas',type:'lineage',label:'horn at Stormhold'},
+    {source:'tova',target:'mingus',type:'sacred',label:'announced his return'},
+    // Antagonist threads
+    {source:'vass',target:'vigolas',type:'enemy',label:'reformed rival'},
+    {source:'darkdancer',target:'rougeina',type:'enemy',label:'inverted shadow'},
+    {source:'kasper',target:'kompis',type:'enemy',label:'old mentor turned hunter'},
+    {source:'echo',target:'smurjan',type:'enemy',label:'sealed inside'},
+    {source:'bakasura',target:'mingus',type:'enemy',label:'tried to consume'},
+    {source:'k_xii',target:'vigolas',type:'enemy',label:'soul-thread sealed'},
+  ],
+};
+
+const svg = d3.select('#svg');
+const W = window.innerWidth, H = window.innerHeight - 51;
+
+const root = svg.append('g');
+const linkLayer = root.append('g').attr('stroke-linecap', 'round');
+const nodeLayer = root.append('g');
+
+const zoom = d3.zoom().scaleExtent([0.4, 3]).on('zoom', (e) => root.attr('transform', e.transform));
+svg.call(zoom);
+
+const sim = d3.forceSimulation(DATA.nodes)
+  .force('link', d3.forceLink(DATA.links).id(d => d.id).distance(d => d.type === 'sacred' ? 70 : 110).strength(0.5))
+  .force('charge', d3.forceManyBody().strength(-380))
+  .force('center', d3.forceCenter(W/2, H/2))
+  .force('collide', d3.forceCollide(40))
+  .alpha(1).alphaDecay(0.018);
+
+const linkColor = (l) => l.type === 'enemy' ? '#ef4444' : l.type === 'sacred' ? '#fef3c7' : l.type === 'lineage' ? '#c9a84c' : '#67e8f9';
+
+const links = linkLayer.selectAll('line')
+  .data(DATA.links).enter().append('line')
+  .attr('class', 'link')
+  .attr('stroke', linkColor)
+  .attr('stroke-width', d => d.type === 'sacred' ? 2.5 : 1.4);
+
+const sizeFor = (d) => d.type === 'mingus' ? 22 : d.type === 'active' ? 18 : d.type === 'open' ? 14 : 12;
+
+const nodes = nodeLayer.selectAll('g.node')
+  .data(DATA.nodes).enter().append('g')
+  .attr('class', 'node')
+  .style('color', d => d.color)
+  .call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag',  (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end',   (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
+
+nodes.append('circle')
+  .attr('r', sizeFor)
+  .attr('fill', d => d.color)
+  .attr('stroke', '#050510')
+  .attr('stroke-width', 2);
+
+nodes.append('text')
+  .attr('text-anchor', 'middle')
+  .attr('dy', d => sizeFor(d) + 16)
+  .text(d => d.name);
+
+nodes.on('click', (e, d) => showDetail(d));
+
+sim.on('tick', () => {
+  links.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+  nodes.attr('transform', d => `translate(${d.x},${d.y})`);
+});
+
+function showDetail(d) {
+  const el = document.getElementById('detail');
+  el.style.setProperty('--accent', d.color);
+  el.classList.add('open');
+  document.getElementById('dName').textContent = d.name;
+  document.getElementById('dRole').textContent = d.role;
+  document.getElementById('dStats').innerHTML = `<b>Realm:</b> ${d.realm}<br><b>HADOM:</b> ${d.hadom}`;
+  // Find connections
+  const conns = DATA.links.filter(l => l.source.id === d.id || l.target.id === d.id || l.source === d.id || l.target === d.id);
+  const connNames = conns.map(l => {
+    const otherId = (l.source.id || l.source) === d.id ? (l.target.id || l.target) : (l.source.id || l.source);
+    const other = DATA.nodes.find(n => n.id === otherId);
+    return other ? `${other.name} <span style='opacity:.6'>· ${l.type}</span>` : '';
+  }).filter(Boolean).join(' · ');
+  document.getElementById('dBlurb').innerHTML = `<b style='color:var(--gold);font-family:Cinzel,serif;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase'>Connected to:</b><br>${connNames}`;
+  document.getElementById('dLinks').innerHTML = `<a href="${d.bio}">Open profile →</a>`;
+  // Highlight
+  links.classed('dim', l => !((l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id));
+}
+document.getElementById('stage').addEventListener('click', (e) => {
+  if (e.target.id === 'svg' || e.target.id === 'stage') {
+    document.getElementById('detail').classList.remove('open');
+    links.classed('dim', false);
+  }
+});
+</script>
+</body>
+</html>

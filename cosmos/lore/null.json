@@ -1,0 +1,110 @@
+{
+  "realm_id": "null",
+  "continents": [
+    {
+      "id": "the_absence",
+      "name": "The Absence",
+      "biome": "Nothing. No light. No air. No ground. You have a body here only because the universe is being polite.",
+      "position": {"x": 640, "y": 380, "w": 340, "h": 340},
+      "tribes": ["void_worms", "root_spirits"],
+      "places": [
+        {"name": "The Heartbeat Point", "blurb": "The one 'place' in Null where your own heartbeat becomes audible externally. The only sound in the realm."},
+        {"name": "The First Heartbeat Monument", "blurb": "An invisible monument marking where the first heartbeat entered Null and grew Ferdinand. Standing here, you feel every heartbeat that has ever happened, all at once. 30-second visitors leave changed. Longer visitors do not leave."},
+        {"name": "Smurjan's Seat", "blurb": "A single rock — the only solid object in upper Null. Smurjan uses it when he visits to think. Thinking in Null is different; conclusions arrive without effort."},
+        {"name": "The Unwriting", "blurb": "A blank patch where K-XII's existence used to be. Non-enterable because there is nothing to enter."}
+      ],
+      "blurb": "The whole of Null is one continent because it is nothing. Subdividing it would require something to subdivide."
+    },
+    {
+      "id": "ferdinands_roots",
+      "name": "Ferdinand's Roots",
+      "biome": "Silver-barked roots descending impossibly far through the absence.",
+      "position": {"x": 220, "y": 420, "w": 340, "h": 320},
+      "tribes": ["root_spirits", "root_tenders"],
+      "places": [
+        {"name": "The Oldest Root", "blurb": "The first root Ferdinand ever grew. It touches the Heartbeat Point. Source of every heartbeat that enters the universe."},
+        {"name": "The Root-Spirit Archive", "blurb": "Where retired Root-Spirits gather. Each has a tattooed number of heartbeats counted. Oldest confirmed: 4.8 billion."},
+        {"name": "The Silent Root", "blurb": "A root that has stopped drinking. Cause unknown. Ferdinand has not commented. The tree is quieter near it."},
+        {"name": "The Forbidden Root", "blurb": "A root sealed with Architect cork. Entering its proximity triggers an Architect response within three heartbeats. Do not approach."}
+      ],
+      "blurb": "The only 'continent' in Null that has structure — Ferdinand's silver roots. They are not Null's; they are Ferdinand's, but they are Null's only furniture."
+    },
+    {
+      "id": "the_inscriptions",
+      "name": "The Inscriptions",
+      "biome": "Non-spatial region where the Seven Sin Codices were etched on Null's 'inside.'",
+      "position": {"x": 1020, "y": 420, "w": 340, "h": 320},
+      "tribes": ["codex_readers_null", "the_pre_writers"],
+      "places": [
+        {"name": "The Seven Codices Inscription", "blurb": "Where the Seven Sin Codices were written by hands that had to exist before writing existed. Trollmage has read the inscription backwards once. He has not fully returned."},
+        {"name": "The Hand That Predates Writing", "blurb": "A preserved imprint in Null's inside wall. A hand. Five fingers. Alien but familiar. Who it belonged to is a cosmic-level secret. Smurjan suspects."},
+        {"name": "The Seal Crack", "blurb": "A hairline crack in the cork seal between Null and Scalelist. Monitored by the Architects. Has widened by 0.003 millimeters in the last century."}
+      ],
+      "blurb": "The theoretical continent of Null. Where the pre-written things exist. Non-spatial. Non-temporal. Real."
+    }
+  ],
+  "tribes": [
+    {
+      "id": "void_worms",
+      "name": "The Void-Worms",
+      "continent_id": "the_absence",
+      "look": "Translucent. Long, thin. Visible only in peripheral vision. Eyes like small white pupils.",
+      "customs": "Digest absence. Without them, Null would 'clot' — become too dense with nothing. Work in slow, grazing patterns.",
+      "persona": "Unintelligent in any conventional sense. Essential. Peaceful. Have never attacked anything in recorded history.",
+      "notable_members": ["eldest_worm_v8k", "the_grazer"]
+    },
+    {
+      "id": "root_spirits",
+      "name": "The Root-Spirits",
+      "continent_id": "ferdinands_roots",
+      "look": "Bark-skinned. Thin. Each has a numeric tattoo on their forearm — their heartbeat count. Silver eyes.",
+      "customs": "Attach themselves to a root at birth. Count every heartbeat the root drinks. Pass the count to a successor before dying.",
+      "persona": "Patient beyond mortal reckoning. Slow-speaking. Kind to visitors they choose to notice. Most visitors they do not.",
+      "notable_members": ["root_spirit_48000000000", "root_spirit_1", "junior_root_spirit"]
+    },
+    {
+      "id": "root_tenders",
+      "name": "The Root-Tenders",
+      "continent_id": "ferdinands_roots",
+      "look": "Cork-bodied. Hollow eyes — literally, they are carved. Move smoothly. Do not age.",
+      "customs": "Tend Ferdinand's roots silently. Never speak. Never eat. Never rest. Servants of the tree itself, not of any Architect.",
+      "persona": "Serene. Devoted. Considered by some scholars to be Ferdinand's own remote limbs.",
+      "notable_members": ["first_tender", "current_head_tender"]
+    },
+    {
+      "id": "codex_readers_null",
+      "name": "The Codex-Readers of Null",
+      "continent_id": "the_inscriptions",
+      "look": "Pale, hollow-eyed. Single-robed. Always bearing a small mirror — they read the Inscriptions by reflection.",
+      "customs": "Never look directly at the Inscriptions. Read only by mirror. Leave within three heartbeats of the last line.",
+      "persona": "Traumatized. Devout. A few have gone mad; the rest have gone quiet.",
+      "notable_members": ["trollmage_visiting", "reader_of_the_fifth_line"]
+    },
+    {
+      "id": "the_pre_writers",
+      "name": "The Pre-Writers",
+      "continent_id": "the_inscriptions",
+      "look": "Rumored. Theoretical. No confirmed sighting. Smurjan has said he 'has met one.' He will not name them.",
+      "customs": "Unknown.",
+      "persona": "Unknown.",
+      "notable_members": ["the_hand_that_wrote"]
+    }
+  ],
+  "characters": [
+    {"id": "smurjan_null_walker", "name": "Smurjan (Null-walker)", "tribe_id": "root_spirits", "role": "The only mortal who walks Null casually", "portrait_blurb": "See /characters/smurjan.png — in Null he appears only in his Fused form. Bare-feet. Tri-colored robe. Carries his own heartbeat as clothing."},
+    {"id": "root_spirit_48000000000", "name": "Elder 4.8 (Root-Spirit)", "tribe_id": "root_spirits", "role": "Oldest known Root-Spirit", "portrait_blurb": "Bark-skinned to the hip. Forearm tattoo: 4,800,000,000. Silver eyes unfocused. Will nod if you name her by number."},
+    {"id": "root_spirit_1", "name": "Root-Spirit One", "tribe_id": "root_spirits", "role": "The first Root-Spirit — nameless, numbered", "portrait_blurb": "Entirely bark. Features barely visible. Attached to Ferdinand's Oldest Root since the First Heartbeat. Will not speak. Does not need to."},
+    {"id": "junior_root_spirit", "name": "Junior Root-Spirit (unassigned)", "tribe_id": "root_spirits", "role": "A new Root-Spirit awaiting a root", "portrait_blurb": "Young. Bark still soft on arms. Tattoo: 0. Waiting."},
+    {"id": "first_tender", "name": "First Tender", "tribe_id": "root_tenders", "role": "Eldest Root-Tender", "portrait_blurb": "Cork-bodied, seamless, hollow eye-sockets carved deep. Moves like a thought. Does not speak."},
+    {"id": "trollmage_visiting", "name": "Trollmage (visiting)", "tribe_id": "codex_readers_null", "role": "Only living being to have read the Inscription backwards", "portrait_blurb": "Parts of him remain in Null. When he visits Codexia, witnesses report a faint silver line connecting his shoulder to the void."},
+    {"id": "reader_of_the_fifth_line", "name": "Reader of the Fifth Line", "tribe_id": "codex_readers_null", "role": "Specialist in the fifth Inscription", "portrait_blurb": "Pale. Carries a small mirror. Reads only at what corresponds to local dusk. Has not dreamed in 20 years."},
+    {"id": "the_hand_that_wrote", "name": "[REDACTED]", "tribe_id": "the_pre_writers", "role": "The hand that wrote the Codex Inscriptions", "portrait_blurb": "No description permitted. No image known. Bakasura has claimed to have eaten a rumor of them."}
+  ],
+  "fate": {
+    "threat": "Ferdinand's roots withdraw. If Ferdinand ever chose to stop drinking from Null — for whatever cosmic reason — the universe would lose its heartbeat supply. Every HADOM tick would slow, then stop. The Oldest Root is theoretically unmovable, but nothing is theoretically-always in the Scalelist Universe.",
+    "consequence": "The universe slows to a halt within 12 cosmic cycles. Every realm's HADOM drops to 0. Static existence. Ferdinand becomes an ornament, not an engine. Scholars call this 'the Quiet End.'",
+    "prophecy_line": "The tree drinks what the void offers. Do not make the tree refuse.",
+    "destroyable_by": "Only Ferdinand himself, by choice. No attack can sever his roots — they grow back faster than they can be cut. This is why the cosmology is safe: the universe depends on a tree who refuses to stop holding. And Ferdinand has never broken his Oath."
+  },
+  "cultural_notes": "Null is not 'culture' in any normal sense. It is the cosmological substrate. The 'tribes' listed here are either essential services (Void-Worms, Root-Tenders) or long-term witnesses (Root-Spirits). Visitors to Null are warned: you will hear your own heartbeat externally for the rest of your life if you stay longer than 90 seconds. This is not a curse. It is a permanent awareness that you are alive because Ferdinand's Oldest Root is still drinking."
+}

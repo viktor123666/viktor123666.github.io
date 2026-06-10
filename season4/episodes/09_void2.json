@@ -1,0 +1,38 @@
+{
+  "id": "s4e09_the_seal_tests",
+  "number": 9,
+  "title": "The Seal Tests",
+  "subtitle": "Episode 9 of 12 · Season 4: The Fates Unravel",
+  "realm_id": "void2",
+  "fate_triggered": "The cosmic-age Seal-test reveals a 0.4 mm hairline crack.",
+  "pov_characters": ["k_ii_at_desk", "chief_scribe_un"],
+  "supporting": ["k_i_first", "k_v_current_elder", "head_librarian_cork", "vigolas_the_administrator"],
+  "synopsis": "It is the cosmic-age Seal-test. Once per age, the Twelve Architects test the Seal to ensure it still closes. They have done this 4,800,000,000 times — the same count as Root-Spirit 4.8B's heartbeats — once per cosmic heartbeat. The test has always passed. Today, it does not. The Seal closes — yes — but a 0.4 millimeter hairline crack appears at the seam. Chief Scribe Un, kneeling at the Wall, is the one to record it. He freezes. He looks to K-II for guidance. K-II nods once and tells him: 'Record exactly what you see.' Un records: '0.4 mm. East-southeast seam. First crack in cosmic-test history.' The Architects vote, in silent unanimity, to convene an emergency session — the first emergency session in 1.2 cosmic ages. K-V, who normally remains seated, RISES — only the third time K-V has ever stood (the first two are unrecorded). K-V signals K-II to call in Vigolas. Vigolas arrives within a Helios storm-flicker. K-V says one sentence to him. The sentence is not recorded — Un is told to leave the Wall. Vigolas's face goes still. He bows. He says: 'I will start with Old Halla.' He leaves. Un returns to the Wall, but K-V has not allowed him to record what was said. The crack remains.",
+  "key_scenes": [
+    {"location": "Ring of Seats, Void-II, mid-test", "action": "The cosmic-age Seal-test. Chief Scribe Un kneeling at the Wall."},
+    {"location": "The crack appears", "action": "A 0.4 mm hairline crack at the east-southeast seam. Un freezes."},
+    {"location": "K-II's instruction", "action": "K-II nods once. 'Record exactly what you see.'"},
+    {"location": "Emergency session", "action": "First emergency session in 1.2 cosmic ages. K-V rises (third time only in history)."},
+    {"location": "Vigolas summoned", "action": "Vigolas arrives within a Helios storm-flicker. K-V whispers one sentence."},
+    {"location": "Un removed", "action": "K-V signals Un to leave. Un leaves. The sentence is not recorded."},
+    {"location": "Vigolas's response", "action": "Vigolas bows. Says: 'I will start with Old Halla.' Leaves."}
+  ],
+  "cliffhanger": "Head Librarian Cork — who has not moved in three cosmic ages — turns his head slightly to watch Vigolas leave. Slightly. But noticeably. The Library notices a Librarian moving, and a single book on the K-XII shelf re-shelves itself.",
+  "panel_storyboard": [
+    {"panel": 1, "composition": "Wide of the Ring of Seats. Twelve seats. The Seal at center. Twelve robed figures, the seats glowing softly.", "character": null, "camera": "establishing wide overhead", "emotion": "ritual"},
+    {"panel": 2, "composition": "Close-up of the Seal at the moment of test. Chief Scribe Un kneeling at the Wall, ink ready.", "character": "chief_scribe_un", "camera": "tight on seal", "emotion": "expectant"},
+    {"panel": 3, "composition": "The crack appearing. A single hairline split at the seam, gold light leaking through.", "character": null, "camera": "macro on crack", "emotion": "first such moment in cosmic history"},
+    {"panel": 4, "composition": "Un's brush hovering over parchment. Hand visibly trembling. Looking up to K-II for permission.", "character": "chief_scribe_un", "camera": "tight on hand and face", "emotion": "controlled awe"},
+    {"panel": 5, "composition": "K-II standing at his seat, nodding once, mouth barely moving.", "character": "k_ii_at_desk", "camera": "council medium", "emotion": "calm authority", "dialogue": "K-II: 'Record exactly what you see.'"},
+    {"panel": 6, "composition": "Wide of the Architects all rising at K-V's signal. K-V — partially silhouetted, not fully shown — visibly standing.", "character": "k_v_current_elder", "camera": "wide council", "emotion": "rare authority", "caption": "Only the third time K-V had ever stood."},
+    {"panel": 7, "composition": "Vigolas striding into the Ring through the open Seal-aperture. Storm-cloak still crackling from his transit.", "character": "vigolas_the_administrator", "camera": "low-angle hero entrance", "emotion": "summoned"},
+    {"panel": 8, "composition": "K-V leaning in to whisper to Vigolas. Both partially obscured. Un visibly turning to leave.", "character": null, "camera": "tight whisper, Un peripheral", "emotion": "redacted secrecy", "caption": "The sentence was not recorded."},
+    {"panel": 9, "composition": "Vigolas's face after the whisper. Stoic. Bowing.", "character": "vigolas_the_administrator", "camera": "tight three-quarter", "emotion": "duty accepted", "dialogue": "Vigolas: 'I will start with Old Halla.'"},
+    {"panel": 10, "composition": "Vigolas departing through the Seal. Head Librarian Cork visible in the background, head turned slightly, hollow eye-sockets following Vigolas.", "character": "head_librarian_cork", "camera": "wide departing with peripheral focus", "emotion": "noticing"},
+    {"panel": 11, "composition": "The K-XII shelf. A single book sliding back into place by itself.", "character": null, "camera": "macro on shelf", "emotion": "supernatural recognition", "caption": "The Library remembered."}
+  ],
+  "cosmic_price_paid": "The Seal now bears a 0.4 mm hairline crack at the east-southeast seam. The Library has noticed a Librarian move. K-V has stood (3rd time in history). Vigolas now bears K-V's secret instruction.",
+  "callout_for_cosmos_drawer": "In Season 4, the cosmic-age Seal-test produced a 0.4 mm hairline crack — the first failure in 4.8 billion tests. K-V rose. K-V whispered one sentence to Vigolas, unrecorded.",
+  "watch_chapter": null,
+  "read_chapter": null
+}

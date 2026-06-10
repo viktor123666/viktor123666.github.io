@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SEASON 3: SUBTICK EMPIRE — Scalelist Universe</title>
+<meta name="description" content="Kompis: The richest gunman alive. A fragment of cosmic Lust. Season 3 of Scalelist Universe begins."/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--amber:#f8c471;--gold:#e2a83e;--dark:#050508;--panel:#0a0a14;--dim:#7a7060;--text:#d4c9a8;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden;}
+a{color:var(--amber);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(248,196,113,0.08) 0%,transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to top,var(--dark),transparent);pointer-events:none;z-index:2;}
+
+#particles{position:absolute;inset:0;z-index:0;}
+.hero-content{position:relative;z-index:3;padding:2rem;}
+
+.season-tag{font-size:clamp(.8rem,2vw,1rem);letter-spacing:.5em;color:var(--dim);text-transform:uppercase;margin-bottom:1rem;animation:fadeDown 1s ease;}
+.season-num{font-size:clamp(5rem,15vw,12rem);font-weight:900;line-height:1;color:transparent;background:linear-gradient(180deg,#f8c471 0%,#e2a83e 40%,#c9872a 100%);-webkit-background-clip:text;background-clip:text;text-shadow:0 0 80px rgba(248,196,113,0.3);animation:fadeUp 1s ease;letter-spacing:.05em;}
+.subtitle{font-size:clamp(1.5rem,4vw,3rem);font-weight:700;letter-spacing:.3em;color:var(--amber);margin-top:.5rem;animation:fadeUp 1.2s ease;text-shadow:0 0 40px rgba(248,196,113,0.2);}
+.tagline{font-size:clamp(.9rem,2vw,1.2rem);color:var(--dim);margin-top:1.5rem;animation:fadeUp 1.4s ease;max-width:600px;}
+.chapters-badge{display:inline-block;margin-top:1.5rem;padding:.5rem 1.5rem;border:1px solid rgba(248,196,113,0.3);border-radius:99px;font-size:.8rem;color:var(--amber);letter-spacing:.15em;animation:fadeUp 1.6s ease;}
+
+.scroll-arrow{position:absolute;bottom:2rem;z-index:3;animation:bounce 2s infinite;cursor:pointer;color:var(--amber);font-size:1.5rem;}
+
+/* KOMPIS SECTION */
+.section{padding:5rem 2rem;max-width:1000px;margin:0 auto;}
+.section-title{font-size:clamp(1.5rem,4vw,2.5rem);color:var(--amber);font-weight:800;margin-bottom:.5rem;text-align:center;}
+.section-sub{color:var(--dim);text-align:center;margin-bottom:3rem;font-size:1rem;}
+
+.character-card{background:linear-gradient(135deg,#0a0a14,#1a1208);border:1px solid rgba(248,196,113,0.15);border-radius:16px;padding:3rem 2rem;text-align:center;margin-bottom:3rem;position:relative;overflow:hidden;}
+.character-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(248,196,113,0.03) 0%,transparent 50%);animation:rotateSlow 20s linear infinite;}
+.char-icon{font-size:4rem;margin-bottom:1rem;}
+.char-name{font-size:2rem;font-weight:900;color:var(--amber);letter-spacing:.1em;}
+.char-title{color:var(--dim);font-size:.9rem;letter-spacing:.2em;margin-top:.3rem;}
+.char-lore{color:var(--text);font-size:1rem;max-width:600px;margin:1.5rem auto 0;line-height:1.7;opacity:.85;}
+
+/* POWERS */
+.powers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;margin-top:2rem;}
+.power-card{background:var(--panel);border:1px solid rgba(248,196,113,0.1);border-radius:12px;padding:1.5rem;text-align:center;transition:all .3s;position:relative;overflow:hidden;}
+.power-card:hover{border-color:var(--amber);transform:translateY(-4px);box-shadow:0 8px 30px rgba(248,196,113,0.1);}
+.power-icon{font-size:2rem;margin-bottom:.8rem;}
+.power-name{color:var(--amber);font-weight:700;font-size:1rem;margin-bottom:.4rem;}
+.power-desc{color:var(--dim);font-size:.8rem;line-height:1.5;}
+
+/* ARCS */
+.arcs{margin-top:4rem;}
+.arc-timeline{position:relative;padding-left:2rem;}
+.arc-timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--amber),transparent);}
+.arc-item{position:relative;margin-bottom:2.5rem;padding-left:1.5rem;opacity:0;animation:slideIn .6s ease forwards;}
+.arc-item:nth-child(1){animation-delay:.2s;}
+.arc-item:nth-child(2){animation-delay:.4s;}
+.arc-item:nth-child(3){animation-delay:.6s;}
+.arc-item:nth-child(4){animation-delay:.8s;}
+.arc-item::before{content:'';position:absolute;left:-2rem;top:.5rem;width:12px;height:12px;border-radius:50%;background:var(--amber);box-shadow:0 0 12px rgba(248,196,113,0.5);transform:translateX(-5px);}
+.arc-num{font-size:.7rem;letter-spacing:.2em;color:var(--amber);text-transform:uppercase;margin-bottom:.3rem;}
+.arc-title{font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:.3rem;}
+.arc-desc{color:var(--dim);font-size:.9rem;line-height:1.6;}
+
+/* COUNTDOWN */
+.countdown-section{padding:4rem 2rem;text-align:center;}
+.countdown-label{font-size:.8rem;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;margin-bottom:1.5rem;}
+.countdown{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;}
+.cd-unit{background:var(--panel);border:1px solid rgba(248,196,113,0.15);border-radius:12px;padding:1.5rem 1rem;min-width:90px;}
+.cd-num{font-size:clamp(2rem,5vw,3rem);font-weight:900;color:var(--amber);font-variant-numeric:tabular-nums;}
+.cd-label{font-size:.65rem;letter-spacing:.15em;color:var(--dim);text-transform:uppercase;margin-top:.3rem;}
+
+/* NOTIFY */
+.notify-section{padding:3rem 2rem;text-align:center;max-width:500px;margin:0 auto;}
+.notify-form{display:flex;gap:.5rem;margin-top:1.5rem;}
+.notify-form input{flex:1;background:var(--panel);border:1px solid rgba(248,196,113,0.2);color:var(--text);padding:.8rem 1.2rem;border-radius:8px;font-size:1rem;outline:none;}
+.notify-form input:focus{border-color:var(--amber);}
+.notify-form button{background:linear-gradient(135deg,var(--amber),var(--gold));color:var(--dark);border:none;padding:.8rem 1.5rem;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;white-space:nowrap;transition:transform .2s;}
+.notify-form button:hover{transform:scale(1.05);}
+.notify-success{display:none;color:var(--amber);margin-top:1rem;font-size:.9rem;}
+
+/* CTA */
+.cta-section{padding:4rem 2rem;text-align:center;}
+.cta-grid{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;}
+.cta-btn{display:inline-block;padding:.8rem 2rem;border-radius:8px;font-weight:700;font-size:.9rem;letter-spacing:.05em;transition:all .3s;}
+.cta-primary{background:linear-gradient(135deg,var(--amber),var(--gold));color:var(--dark);}
+.cta-primary:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(248,196,113,0.3);text-decoration:none;}
+.cta-secondary{border:1px solid rgba(248,196,113,0.3);color:var(--amber);}
+.cta-secondary:hover{border-color:var(--amber);text-decoration:none;background:rgba(248,196,113,0.05);}
+
+/* SHARE */
+.share-section{padding:2rem;text-align:center;margin-bottom:3rem;}
+.share-btns{display:flex;justify-content:center;gap:.8rem;margin-top:1rem;flex-wrap:wrap;}
+.share-btn{padding:.5rem 1.2rem;border:1px solid rgba(248,196,113,0.2);border-radius:6px;color:var(--text);font-size:.8rem;cursor:pointer;background:var(--panel);transition:all .2s;}
+.share-btn:hover{border-color:var(--amber);color:var(--amber);}
+
+/* FOOTER */
+.footer{text-align:center;padding:2rem;color:var(--dim);font-size:.75rem;border-top:1px solid rgba(248,196,113,0.08);}
+
+/* ANIMATIONS */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-20px);}to{opacity:1;transform:translateX(0);}}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+@keyframes rotateSlow{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes pulse{0%,100%{opacity:.6;}50%{opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+@media(max-width:600px){
+  .notify-form{flex-direction:column;}
+  .countdown{gap:.8rem;}
+  .cd-unit{min-width:70px;padding:1rem .8rem;}
+  .powers-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <canvas id="particles"></canvas>
+  <div class="hero-content">
+    <div class="season-tag" style="color:#48ff8c;">&#10004; NOW LIVE &mdash; ALL CHAPTERS RELEASED</div>
+    <div class="season-num">SEASON 3</div>
+    <div class="subtitle">THE STORMCOAST RECKONING</div>
+    <div class="tagline">All 5 champions. 50 chapters. Stormcoast War, Dark Dancer, Forward Reader, Subtick War, Trinity War.</div>
+    <a href="/manga" class="chapters-badge" style="text-decoration:none;cursor:pointer;font-size:.9rem;padding:.7rem 1.8rem;background:linear-gradient(135deg,var(--amber),var(--gold));color:var(--dark);font-weight:800;letter-spacing:.2em;">READ NOW &rarr;</a>
+  </div>
+  <div class="scroll-arrow" onclick="document.getElementById('kompis').scrollIntoView({behavior:'smooth'})">&#9661;</div>
+</section>
+
+<!-- KOMPIS -->
+<section class="section" id="kompis">
+  <div class="character-card">
+    <div class="char-icon">&#9733;</div>
+    <div class="char-name">KOMPIS</div>
+    <div class="char-title">THE SUBTICK BILLIONAIRE</div>
+    <div class="char-lore">
+      Born from the cosmic force of <strong style="color:var(--amber);">Lust</strong> &mdash; not desire of the flesh, but the fundamental force that makes all beings want to connect. Kompis turned gambling addiction into an empire, mastering the art of the subtick: performing one billion actions in a single game tick. With the biggest weapon collection in existence and Protocol Zero in his arsenal, he doesn't just play the game &mdash; he <em>is</em> the game.
+    </div>
+  </div>
+
+  <div class="section-title">Abilities</div>
+  <div class="section-sub">The arsenal of the richest gunman</div>
+  <div class="powers-grid">
+    <div class="power-card">
+      <div class="power-icon">&#9889;</div>
+      <div class="power-name">Subtick Billionaire</div>
+      <div class="power-desc">1 billion actions per tick. While others take one step, Kompis takes a billion. Pure speed made manifest.</div>
+    </div>
+    <div class="power-card">
+      <div class="power-icon">&#10084;</div>
+      <div class="power-name">Soul Connector</div>
+      <div class="power-desc">Bonds with anyone he meets. The cosmic Lust lets him forge unbreakable connections that transcend reality.</div>
+    </div>
+    <div class="power-card">
+      <div class="power-icon">&#9940;</div>
+      <div class="power-name">Protocol Zero</div>
+      <div class="power-desc">Stops wars mid-battle. A single command that freezes all hostilities. The ultimate peacekeeping weapon.</div>
+    </div>
+    <div class="power-card">
+      <div class="power-icon">&#9876;</div>
+      <div class="power-name">Weapon Arsenal</div>
+      <div class="power-desc">The biggest weapon collection in existence. CS2-style firearms, each with unique properties and kill-verified histories.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCS -->
+<section class="section arcs" id="arcs">
+  <div class="section-title">The Four Arcs</div>
+  <div class="section-sub">From nothing to everything to nothing to everything again</div>
+  <div class="arc-timeline">
+    <div class="arc-item">
+      <div class="arc-num">Arc I &mdash; Chapters 121-135</div>
+      <div class="arc-title">From Gambler to Gunman</div>
+      <div class="arc-desc">Kompis hits rock bottom. Gambling addiction, debt, enemies. But in the ashes of his old life, he discovers the subtick &mdash; a hidden layer of reality where time splits into billions of micro-moments. His fingers remember what his mind forgot.</div>
+    </div>
+    <div class="arc-item">
+      <div class="arc-num">Arc II &mdash; Chapters 136-150</div>
+      <div class="arc-title">The Market &mdash; Building an Empire</div>
+      <div class="arc-desc">With subtick mastery comes wealth. Kompis builds a weapons trading empire that spans servers. Every rare skin, every contraband firearm flows through his hands. He becomes the richest player alive, but money is just the beginning.</div>
+    </div>
+    <div class="arc-item">
+      <div class="arc-num">Arc III &mdash; Chapters 151-165</div>
+      <div class="arc-title">The Crash &mdash; Dead Market Appears</div>
+      <div class="arc-desc">The Dead Market manifests &mdash; a shadow economy that devours value. Every weapon loses its worth overnight. Kompis's empire crumbles. His connections fray. The cosmic Lust that binds him to others becomes a chain dragging him into the void.</div>
+    </div>
+    <div class="arc-item">
+      <div class="arc-num">Arc IV &mdash; Chapters 166-180</div>
+      <div class="arc-title">Billion Actions &mdash; Mastering the Subtick</div>
+      <div class="arc-desc">With nothing left but his speed and his bonds, Kompis pushes past the limit. One billion actions per tick. He doesn't rebuild the market &mdash; he transcends it. Protocol Zero activates. Wars stop. The Subtick Empire isn't made of wealth. It's made of connections.</div>
+    </div>
+  </div>
+</section>
+
+<!-- READ CTA (formerly COUNTDOWN) -->
+<section class="countdown-section" id="countdown">
+  <div class="section-title">All Chapters Are Live</div>
+  <div class="countdown-label">Season 3 has been released &mdash; read on the manga page</div>
+  <div style="margin-top:1.5rem;">
+    <a href="/manga" style="display:inline-block;padding:1rem 2.5rem;background:linear-gradient(135deg,var(--amber),var(--gold));color:var(--dark);font-weight:800;letter-spacing:.2em;border-radius:8px;text-decoration:none;font-size:1.1rem;">READ SEASON 3 &rarr;</a>
+  </div>
+</section>
+
+<!-- WHAT'S NEXT -->
+<section class="notify-section" id="notify">
+  <div class="section-title" style="font-size:1.3rem;">What's Next</div>
+  <p style="color:var(--dim);font-size:.9rem;margin-top:.5rem;">Season 4: The Fates Unravel is also live. Each realm's destruction-fate almost manifests. Ferdinand speaks for the first time. The universe holds.</p>
+  <div style="margin-top:1.2rem;">
+    <a href="/season4.html" style="display:inline-block;padding:.8rem 1.8rem;background:transparent;border:1px solid var(--amber);color:var(--amber);font-weight:700;letter-spacing:.15em;border-radius:8px;text-decoration:none;font-size:.9rem;">READ SEASON 4 &rarr;</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-title" style="font-size:1.3rem;">Catch Up Before Season 3</div>
+  <p style="color:var(--dim);font-size:.9rem;margin-top:.5rem;">120 chapters of Scalelist Universe await.</p>
+  <div class="cta-grid">
+    <a href="/manga" class="cta-btn cta-primary">Read the Manga</a>
+    <a href="/" class="cta-btn cta-secondary">Season 1 &amp; 2</a>
+  </div>
+</section>
+
+<!-- SHARE -->
+<section class="share-section">
+  <div style="color:var(--dim);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;">Spread the Word</div>
+  <div class="share-btns">
+    <div class="share-btn" onclick="shareTo('twitter')">Twitter / X</div>
+    <div class="share-btn" onclick="shareTo('facebook')">Facebook</div>
+    <div class="share-btn" onclick="shareTo('reddit')">Reddit</div>
+    <div class="share-btn" onclick="shareTo('copy')">Copy Link</div>
+  </div>
+</section>
+
+<div class="footer">
+  &copy; 2026 Scalelist Universe &mdash; SUBTICK EMPIRE
+</div>
+
+<script>
+/* PARTICLE SYSTEM */
+(function(){
+  const c=document.getElementById('particles'),ctx=c.getContext('2d');
+  let w,h,particles=[];
+  function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+
+  class P{
+    constructor(){this.reset();}
+    reset(){
+      this.x=Math.random()*w;
+      this.y=Math.random()*h;
+      this.vx=(Math.random()-.5)*.3;
+      this.vy=-Math.random()*.5-.1;
+      this.r=Math.random()*2+.5;
+      this.a=Math.random()*.5+.1;
+      this.life=Math.random()*200+100;
+      this.age=0;
+    }
+    update(){
+      this.x+=this.vx;this.y+=this.vy;this.age++;
+      if(this.age>this.life||this.y<-10||this.x<-10||this.x>w+10)this.reset();
+    }
+    draw(){
+      let fade=1-this.age/this.life;
+      ctx.beginPath();
+      ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(248,196,113,${this.a*fade})`;
+      ctx.fill();
+      if(this.r>1.5){
+        ctx.beginPath();ctx.arc(this.x,this.y,this.r*3,0,Math.PI*2);
+        ctx.fillStyle=`rgba(248,196,113,${this.a*fade*0.1})`;ctx.fill();
+      }
+    }
+  }
+  for(let i=0;i<80;i++)particles.push(new P());
+  function loop(){
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p=>{p.update();p.draw();});
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* COUNTDOWN — 30 days from now */
+(function(){
+  const target=new Date(Date.now()+30*24*60*60*1000).getTime();
+  function tick(){
+    const now=Date.now(),diff=Math.max(0,target-now);
+    const d=Math.floor(diff/86400000);
+    const h=Math.floor((diff%86400000)/3600000);
+    const m=Math.floor((diff%3600000)/60000);
+    const s=Math.floor((diff%60000)/1000);
+    document.getElementById('cd-d').textContent=String(d).padStart(2,'0');
+    document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+  }
+  tick();setInterval(tick,1000);
+})();
+
+/* NOTIFY */
+function subscribe(){
+  const email=document.getElementById('emailInput').value.trim();
+  if(!email||!email.includes('@'))return;
+  let subs=JSON.parse(localStorage.getItem('su_s3_subs')||'[]');
+  if(!subs.includes(email)){subs.push(email);localStorage.setItem('su_s3_subs',JSON.stringify(subs));}
+  document.getElementById('notifyForm').style.display='none';
+  document.getElementById('notifySuccess').style.display='block';
+}
+
+/* SHARE */
+function shareTo(platform){
+  const url=encodeURIComponent(window.location.href);
+  const text=encodeURIComponent('Season 3 of Scalelist Universe is coming. SUBTICK EMPIRE. The richest gunman alive.');
+  const map={
+    twitter:`https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+    facebook:`https://www.facebook.com/sharer/sharer.php?u=${url}`,
+    reddit:`https://reddit.com/submit?url=${url}&title=${text}`,
+    copy:null
+  };
+  if(platform==='copy'){navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'));return;}
+  window.open(map[platform],'_blank','width=600,height=400');
+}
+
+/* INTERSECTION OBSERVER for arc animations */
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.style.animationPlayState='running';});
+},{threshold:0.2});
+document.querySelectorAll('.arc-item').forEach(el=>{el.style.animationPlayState='paused';obs.observe(el);});
+</script>
+<script src="/aurora-cursor.js"></script>
+</body>
+</html>

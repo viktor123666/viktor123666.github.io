@@ -1,0 +1,36 @@
+{
+  "id": "s4e06_the_triad_wavers",
+  "number": 6,
+  "title": "The Triad Wavers",
+  "subtitle": "Episode 6 of 12 · Season 4: The Fates Unravel",
+  "realm_id": "trinity",
+  "fate_triggered": "Echo's lobby gets a 2-1-no vote (still no, but the closest in 3000 years).",
+  "pov_characters": ["smurjan_fused", "bali_herself", "kali_herself"],
+  "supporting": ["lead_yearning_an", "morning_three_iku", "warden_of_first_mirror"],
+  "synopsis": "Echo has lobbied at the Silent Wall every night for 3000 years. Tonight is different. Lead Yearning An — Echo's chief lobby — presents an argument that has been written by Echo itself, in mirror-script. The argument: 'You three are already four. You have always been four. The Vote Mirror lies.' Bali, who has heard 1,094,250 of these arguments, is for the first time MOVED. She votes YES. Kali, predictably, votes NO. The vote is now 1-1. It comes to Smurjan (Fused). Smurjan deliberates. The Pulse Plaza's Morning Three holds the rhythm at the slowest tempo of the season — a literal cosmic suspense. Kali and Bali have a heated, unprecedented argument BEFORE Fused has spoken. The Triad has never argued before each other. It is happening. Smurjan finally votes — NO. The vote is 2-1-no. But the gap has narrowed for the first time in 3000 years. Bali apologizes to Kali in private. Kali accepts. Both apologize to Fused. Fused is silent for an hour. When he speaks, he says only: 'Echo's argument was technically correct. We do not vote with technical truth. We vote with the Oath.' Echo, hearing this, rejoices — because Echo now knows what to lobby on next.",
+  "key_scenes": [
+    {"location": "The Silent Wall, dusk", "action": "Lead Yearning An presents the new argument from Echo."},
+    {"location": "The Voting Stones, Fused Court", "action": "Bali votes YES for the first time in 3000 years."},
+    {"location": "The Voting Stones — Kali", "action": "Kali votes NO. The vote is 1-1."},
+    {"location": "The Voting Stones — Fused deliberation", "action": "Smurjan deliberates. The Pulse Plaza slows to its lowest tempo of the season."},
+    {"location": "Bali vs Kali argument", "action": "First-ever argument between Bali and Kali in the Triad's history. Heard by every Trinity citizen."},
+    {"location": "Fused's vote", "action": "Smurjan votes NO. 2-1-no. The gap is the narrowest in 3000 years."},
+    {"location": "Bali and Kali reconciliation, Fused's response", "action": "Apologies. Fused: 'We do not vote with technical truth. We vote with the Oath.'"}
+  ],
+  "cliffhanger": "Echo, in its Mirror Hall, writes a new argument that night. The Mirror-Tenders polish ALL mirrors twice — they have heard about Bali's vote and are afraid.",
+  "panel_storyboard": [
+    {"panel": 1, "composition": "Wide of the Silent Wall at dusk. Lead Yearning An standing before it, scroll in hand. Mirror-Wardens watching from a distance.", "character": "lead_yearning_an", "camera": "wide reverent", "emotion": "hope"},
+    {"panel": 2, "composition": "The argument as written: 'You three are already four. You have always been four. The Vote Mirror lies.' Glowing mirror-script floating in the air.", "character": null, "camera": "macro on text", "emotion": "danger"},
+    {"panel": 3, "composition": "Fused Court interior. Three Voting Stones glowing dimly. Bali, Kali, and Fused (Smurjan) in their seats.", "character": "smurjan_fused", "camera": "wide council", "emotion": "tension"},
+    {"panel": 4, "composition": "Bali's stone glowing GOLD (yes). Bali's face calm but with a single tear visible.", "character": "bali_herself", "camera": "tight on stone and face", "emotion": "compassion overruling habit", "caption": "She had heard 1,094,250 arguments. This was the first one that moved her."},
+    {"panel": 5, "composition": "Kali's stone glowing RED (no). Kali's face hard. Eyes burning.", "character": "kali_herself", "camera": "tight low-angle", "emotion": "righteous fury"},
+    {"panel": 6, "composition": "Bali and Kali standing, facing each other across the Voting Stones. Fused (Smurjan) frozen in the third seat. The Pulse Plaza visible in the background, dancers slowed.", "character": null, "camera": "wide council confrontation", "emotion": "unprecedented argument", "dialogue": "Bali: 'You will not save Echo by refusing to hear it.' Kali: 'I will not invite the Fourth into my own breath.'"},
+    {"panel": 7, "composition": "Smurjan (Fused) silent. All three voices visible faintly around him. The Triad Throne creaking softly under the weight.", "character": "smurjan_fused", "camera": "tight on Fused, three faint silhouettes flickering", "emotion": "oath bound"},
+    {"panel": 8, "composition": "Smurjan's stone glowing the white of the Fused vote. Kali's face softening into respect. Bali bowing.", "character": "smurjan_fused", "camera": "wide closure", "emotion": "binding decision", "dialogue": "Smurjan: 'No. The technical truth is correct. We vote the Oath.'"},
+    {"panel": 9, "composition": "Cut to Echo's Mirror Hall. Mirror-Tenders polishing in panicked precision. A new argument forming on the largest mirror.", "character": null, "camera": "wide hall", "emotion": "dread + hope", "caption": "Echo had learned the next move."}
+  ],
+  "cosmic_price_paid": "Bali has voted YES for the first time. The Triad now knows that Bali CAN vote yes. The next vote will not be at 2-1-no. It will be closer. The Pulse Plaza permanently lowered its tempo by 0.1.",
+  "callout_for_cosmos_drawer": "In Season 4, Echo's lobby received the first 2-1-no vote in 3000 years. Bali wavered. Smurjan held. Echo learned what to argue next.",
+  "watch_chapter": null,
+  "read_chapter": null
+}

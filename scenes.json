@@ -1,0 +1,135 @@
+{
+  "generated_at": "2026-04-08 03:30:48",
+  "total_scenes": 12,
+  "scenes": [
+    {
+      "index": 0,
+      "slug": "stands_confident",
+      "title": "Stands confident",
+      "description": "Character stands in hero pose, slow zoom in, confident breathing, dramatic lighting.",
+      "wan21_hint": "anime character standing confidently, hero pose, dramatic lighting, slow zoom in, cinematic, breathing, detailed face, 8k",
+      "suggested_bpm": 90,
+      "emotion": "heroic",
+      "duration_desc": "2s slow reveal"
+    },
+    {
+      "index": 1,
+      "slug": "walks_forward",
+      "title": "Walks forward",
+      "description": "Character walks toward the camera with purpose, cape or coat flowing, background slightly blurred.",
+      "wan21_hint": "anime character walking forward toward camera, purposeful stride, cape flowing, cinematic depth of field, motion blur",
+      "suggested_bpm": 110,
+      "emotion": "determined",
+      "duration_desc": "2s walking"
+    },
+    {
+      "index": 2,
+      "slug": "turns_slowly",
+      "title": "Turns slowly",
+      "description": "Character stands with back to camera then slowly turns to reveal face, dramatic hair movement.",
+      "wan21_hint": "anime character turning slowly from back to camera, dramatic reveal, hair flowing, cinematic close up, intense eyes",
+      "suggested_bpm": 80,
+      "emotion": "reveal",
+      "duration_desc": "2s slow turn"
+    },
+    {
+      "index": 3,
+      "slug": "petting_mingus",
+      "title": "Petting Mingus",
+      "description": "(Kompis only) Character tenderly pets Mingus the golden retriever, soft smile, golden hour sunset.",
+      "wan21_hint": "anime boy character petting golden retriever dog tenderly, soft smile, golden hour lighting, emotional close up, warm colors",
+      "suggested_bpm": 70,
+      "emotion": "tender",
+      "duration_desc": "2s warm moment",
+      "mingus_only": true
+    },
+    {
+      "index": 4,
+      "slug": "raises_arms",
+      "title": "Raises arms to sky",
+      "description": "Character raises arms to summon power, energy crackling around them, wind pushing outward.",
+      "wan21_hint": "anime character raising arms to sky, summoning power, energy crackling, wind effect, dramatic pose, cinematic",
+      "suggested_bpm": 120,
+      "emotion": "powerful",
+      "duration_desc": "2s power up"
+    },
+    {
+      "index": 5,
+      "slug": "looks_over_shoulder",
+      "title": "Looks over shoulder",
+      "description": "Character looks back over shoulder at the camera, mysterious glance, half-smile.",
+      "wan21_hint": "anime character looking over shoulder at camera, mysterious glance, half smile, cinematic close up, dramatic lighting",
+      "suggested_bpm": 85,
+      "emotion": "mysterious",
+      "duration_desc": "2s glance"
+    },
+    {
+      "index": 6,
+      "slug": "powers_up",
+      "title": "Powers up",
+      "description": "Character charges to full power, aura expanding, hair lifting, intense eyes glowing.",
+      "wan21_hint": "anime character powering up, aura expanding, hair lifting, intense glowing eyes, particle effects, cinematic anime",
+      "suggested_bpm": 140,
+      "emotion": "intense",
+      "duration_desc": "2s charge"
+    },
+    {
+      "index": 7,
+      "slug": "fighting_stance",
+      "title": "Fighting stance",
+      "description": "Character takes combat stance, weapons ready, wind blowing, ready to strike.",
+      "wan21_hint": "anime character in fighting stance, combat ready, weapon drawn, wind blowing, dramatic pose, cinematic action",
+      "suggested_bpm": 130,
+      "emotion": "ready",
+      "duration_desc": "2s stance"
+    },
+    {
+      "index": 8,
+      "slug": "runs_toward_camera",
+      "title": "Runs toward camera",
+      "description": "Character runs at full speed toward the camera, motion lines, intense expression.",
+      "wan21_hint": "anime character running fast toward camera, motion lines, intense expression, cinematic action, dynamic angle",
+      "suggested_bpm": 150,
+      "emotion": "urgent",
+      "duration_desc": "2s sprint"
+    },
+    {
+      "index": 9,
+      "slug": "jumps_into_air",
+      "title": "Jumps into air",
+      "description": "Character leaps into the air with cinematic slow motion, ready to strike from above.",
+      "wan21_hint": "anime character leaping into air, slow motion jump, cinematic angle, ready to strike, dramatic sky background",
+      "suggested_bpm": 135,
+      "emotion": "leap",
+      "duration_desc": "2s jump"
+    },
+    {
+      "index": 10,
+      "slug": "calm_meditation",
+      "title": "Calm meditation",
+      "description": "Character sits in meditation, eyes closed, subtle aura, peaceful breathing.",
+      "wan21_hint": "anime character sitting in meditation, eyes closed, subtle aura, peaceful expression, cinematic calm, soft lighting",
+      "suggested_bpm": 60,
+      "emotion": "calm",
+      "duration_desc": "2s meditation"
+    },
+    {
+      "index": 11,
+      "slug": "epic_finale",
+      "title": "Epic finale",
+      "description": "Character delivers final pose, lightning or starlight behind them, victory stance.",
+      "wan21_hint": "anime character epic final pose, lightning behind them, victory stance, cinematic wide angle, dramatic sky",
+      "suggested_bpm": 100,
+      "emotion": "triumphant",
+      "duration_desc": "2s finale"
+    }
+  ],
+  "char_negatives": {
+    "kompis": "no multiple dogs, no blurry retriever, keep Mingus golden retriever",
+    "vigolas": "no weapon confusion, keep katana visible, no extra arms",
+    "smurjan": "no face distortion, keep three-voice aesthetic, cosmic aura",
+    "trollmage": "no missing hat, keep dark robes, no extra hands",
+    "rougeina": "no missing jewelry, keep pink aesthetic, cosmic starlight"
+  },
+  "base_negative": "blurry, low quality, distorted face, extra limbs, bad anatomy, watermark, text, signature, jpeg artifacts"
+}

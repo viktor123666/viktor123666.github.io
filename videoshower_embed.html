@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Videoshower</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:transparent;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;overflow:hidden}
+.bar{display:flex;align-items:center;gap:8px;padding:4px 2px 8px}
+.bar .ttl{font-size:13px;font-weight:700;color:var(--c,#fff)}
+.bar a{font-size:12px;color:#888;text-decoration:none;margin-left:auto}
+.bar a:hover{color:#fff}
+.player{display:none;position:relative;width:100%;height:0;padding-top:56.25%;background:#000;border-radius:8px;overflow:hidden;margin-bottom:8px}
+.player.open{display:block}
+.player iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin;scrollbar-color:#333 transparent}
+.vt{flex:0 0 150px;cursor:pointer;border-radius:8px;overflow:hidden;background:#14141f;border:1px solid transparent;transition:border-color .15s}
+.vt:hover{border-color:var(--c,#fff)}
+.vt .th{position:relative;width:100%;height:0;padding-top:56.25%;background:#0e0e16}
+.vt img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block}
+.vt .d{position:absolute;bottom:4px;right:4px;background:rgba(0,0,0,.8);font-size:10px;font-weight:700;padding:0 4px;border-radius:3px}
+.vt .t{font-size:11px;line-height:1.3;padding:5px 7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;height:3.2em}
+</style>
+</head>
+<body>
+<div class="bar"><span class="ttl" id="ttl">Videoshower</span><a id="all" target="_top">All videos →</a></div>
+<div class="player" id="player"></div>
+<div class="strip" id="strip"></div>
+<script src="videoshower_data.js"></script>
+<script src="videoshower_mirror.js"></script>
+<script>
+(function(){
+const D=window.VIDEOSHOWER||{channels:{}},CH=D.channels,KEYS=Object.keys(CH);
+const has=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+const SHORT={};KEYS.forEach(k=>{const s=(CH[k].shortcut||k[0]).toLowerCase();if(!has(SHORT,s))SHORT[s]=k;});
+const P=new URLSearchParams(location.search);
+let raw=(P.get('char')||'').toLowerCase();
+const key=has(CH,raw)?raw:(has(SHORT,raw)?SHORT[raw]:KEYS[0]);
+const c=has(CH,key)?CH[key]:{name:'?',color:'#888',videos:[]};
+const n=Math.min(Math.max(parseInt(P.get('n')||'12',10)||12,1),40);
+const saver=(navigator.connection||{}).saveData;
+document.documentElement.style.setProperty('--c',c.color);
+document.getElementById('ttl').textContent=`${c.name} — latest videos`;
+document.getElementById('ttl').style.color=c.color;
+document.getElementById('all').href=`/videos.html?char=${key}`;
+const strip=document.getElementById('strip'),player=document.getElementById('player');
+// auto-resize when hosted in an iframe
+function pushH(){try{parent.postMessage({vsHeight:document.documentElement.scrollHeight},'*')}catch(e){}}
+addEventListener('load',()=>setTimeout(pushH,60));
+function fmtD(s){if(!s)return'';const m=Math.floor(s/60);return`${m}:${String(s%60).padStart(2,'0')}`;}
+(c.videos||[]).slice(0,n).forEach(v=>{
+  const d=document.createElement('div');d.className='vt';d.style.setProperty('--c',c.color);
+  d.innerHTML=`<div class="th"><img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/${v.id}/${saver?'default':'mqdefault'}.jpg" alt="">${v.d?`<span class="d">${fmtD(v.d)}</span>`:''}</div><div class="t"></div>`;
+  d.querySelector('.t').textContent=v.t;
+  d.onclick=()=>{const M=window.VS_MIRROR||{};const m=Object.prototype.hasOwnProperty.call(M,v.id)?M[v.id]:null;
+  player.innerHTML=m?`<video controls autoplay playsinline preload="metadata" style="position:absolute;top:0;left:0;width:100%;height:100%;background:#000" src="${m}"></video>`
+  :`<iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0" allow="autoplay;encrypted-media" allowfullscreen></iframe>`;
+  player.classList.add('open');requestAnimationFrame(()=>setTimeout(pushH,60));};
+  strip.appendChild(d);
+});
+})();
+</script>
+</body>
+</html>

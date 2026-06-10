@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-04-08 22:06:31",
+  "total_clips": 27,
+  "grade": "A+",
+  "comment": "Excellent diversity (88/100)",
+  "metrics": {
+    "brightness": {
+      "name": "brightness",
+      "n": 27,
+      "min": 37.2,
+      "max": 184.6,
+      "mean": 88.96,
+      "median": 83.2,
+      "std": 36.08
+    },
+    "saturation": {
+      "name": "saturation",
+      "n": 27,
+      "min": 1.5,
+      "max": 46.4,
+      "mean": 15.66,
+      "median": 13.1,
+      "std": 11.75
+    },
+    "variance": {
+      "name": "variance",
+      "n": 27,
+      "min": 21.3,
+      "max": 6496.1,
+      "mean": 2582.3,
+      "median": 2164.2,
+      "std": 1945.75
+    },
+    "edge_density": {
+      "name": "edge_density",
+      "n": 27,
+      "min": 12.9,
+      "max": 86.5,
+      "mean": 42.23,
+      "median": 39.6,
+      "std": 17.38
+    },
+    "score": {
+      "name": "score",
+      "n": 27,
+      "min": 68.6,
+      "max": 97.7,
+      "mean": 88.41,
+      "median": 89.2,
+      "std": 7.26
+    }
+  },
+  "char_gini": 0.044,
+  "scene_gini": 0.0,
+  "char_count": {
+    "kompis": 6,
+    "vigolas": 6,
+    "trollmage": 5,
+    "rougeina": 5,
+    "smurjan": 5
+  },
+  "scene_count": {
+    "0": 27
+  }
+}

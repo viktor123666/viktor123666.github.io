@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Read Manga — Scalelist Universe</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&amp;family=Crimson+Text:ital,wght@0,400;0,700;1,400&amp;family=Space+Mono&amp;display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a84c;--void:#050508;--panel:#0d0d14;--card:#12121c;--text:#e8e0d0;--dim:#7a7060}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--text);font-family:'Crimson Text',serif;min-height:100vh;overflow-x:hidden;cursor:none}
+canvas#stars{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+canvas#aurora{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9998;pointer-events:none}
+.cursor-dot{position:fixed;width:6px;height:6px;background:var(--gold);border-radius:50%;z-index:9999;pointer-events:none;mix-blend-mode:screen;box-shadow:0 0 15px var(--gold),0 0 30px rgba(201,168,76,.4)}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,5,8,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,.15)}
+nav .brand{font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem;color:var(--gold);letter-spacing:.15em;text-decoration:none}
+nav .links a{color:var(--dim);text-decoration:none;font-family:'Space Mono',monospace;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-left:2rem;transition:color .3s}
+nav .links a:hover,nav .links a.active{color:var(--gold)}
+/* HERO */
+.hero{padding:8rem 2rem 3rem;text-align:center;position:relative;z-index:1}
+.hero h1{font-family:'Cinzel',serif;font-size:3rem;color:var(--gold);letter-spacing:.08em;margin-bottom:.5rem}
+.hero p{color:var(--dim);font-size:1.1rem;letter-spacing:.08em}
+/* FILTERS */
+.filter-bar{position:sticky;top:60px;z-index:90;background:rgba(5,5,8,.92);backdrop-filter:blur(12px);padding:1rem 2rem;border-bottom:1px solid rgba(201,168,76,.1)}
+.filter-row{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.filter-row .search{flex:1;min-width:200px;background:var(--panel);border:1px solid rgba(201,168,76,.2);color:var(--text);padding:.55rem 1rem;border-radius:4px;font-family:'Space Mono',monospace;font-size:.8rem;outline:none}
+.filter-row .search:focus{border-color:var(--gold);box-shadow:0 0 8px rgba(201,168,76,.2)}
+.filter-row .search::placeholder{color:var(--dim)}
+.char-filters,.season-filters{display:flex;gap:.4rem;flex-wrap:wrap}
+.fbtn{background:transparent;border:1px solid rgba(201,168,76,.25);color:var(--dim);padding:.4rem .8rem;border-radius:3px;font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .25s}
+.fbtn:hover{border-color:var(--gold);color:var(--text)}
+.fbtn.active{background:var(--gold);color:var(--void);border-color:var(--gold);font-weight:700}
+/* CHAPTERS */
+.chapters{max-width:1100px;margin:2rem auto;padding:0 2rem;position:relative;z-index:1}
+.chapter-card{display:flex;align-items:center;background:var(--card);border:1px solid rgba(201,168,76,.08);border-left:3px solid var(--gold);border-radius:6px;padding:1.2rem 1.5rem;margin-bottom:.8rem;cursor:pointer;transition:all .35s ease;opacity:0;transform:translateY(20px)}
+.chapter-card.visible{opacity:1;transform:translateY(0)}
+.chapter-card:hover{background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.3);transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.4)}
+.chapter-card .num{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:700;min-width:70px;opacity:.7}
+.chapter-card .info{flex:1}
+.chapter-card .info h3{font-family:'Cinzel',serif;font-size:1.15rem;font-weight:700;margin-bottom:.25rem;letter-spacing:.03em}
+.chapter-card .info p{color:var(--dim);font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.04em}
+.chapter-card .badge{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.08em;padding:.3rem .7rem;border-radius:3px;border:1px solid;opacity:.8;white-space:nowrap}
+.no-results{text-align:center;padding:4rem 2rem;color:var(--dim);font-family:'Space Mono',monospace;font-size:.9rem;display:none;position:relative;z-index:1}
+/* READER OVERLAY */
+.reader-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:200;background:rgba(0,0,0,.97);display:none;flex-direction:column}
+.reader-overlay.open{display:flex}
+.reader-header{position:sticky;top:0;z-index:210;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(5,5,8,.97);border-bottom:1px solid rgba(201,168,76,.15);flex-shrink:0}
+.reader-header h2{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--gold)}
+.reader-close{background:none;border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:.4rem 1rem;border-radius:3px;cursor:pointer;font-family:'Space Mono',monospace;font-size:.8rem;transition:all .3s}
+.reader-close:hover{background:var(--gold);color:var(--void)}
+.reader-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0;background:#000}
+.reader-scroll img{display:block;width:100%;max-width:1200px;height:auto;margin:0 auto;image-rendering:high-quality;image-rendering:-webkit-optimize-contrast}
+.reader-audio{position:sticky;bottom:0;z-index:210;display:flex;align-items:center;gap:1rem;padding:1rem 2rem;background:rgba(5,5,8,.97);border-top:1px solid rgba(201,168,76,.15);flex-shrink:0}
+.reader-audio audio{flex:1;height:36px}
+.reader-audio span{color:var(--dim);font-family:'Space Mono',monospace;font-size:.7rem}
+/* COUNT */
+.count-bar{max-width:1100px;margin:0 auto 1rem;padding:0 2rem;position:relative;z-index:1}
+.count-bar span{color:var(--dim);font-family:'Space Mono',monospace;font-size:.75rem}
+/* FOOTER */
+footer{text-align:center;padding:3rem 2rem;color:var(--dim);font-family:'Space Mono',monospace;font-size:.7rem;position:relative;z-index:1;border-top:1px solid rgba(201,168,76,.08);margin-top:3rem}
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1{font-size:2rem}
+  .filter-row{flex-direction:column}
+  .chapter-card .num{font-size:1.2rem;min-width:50px}
+  .chapter-card{padding:.9rem 1rem}
+  nav .brand{font-size:.9rem}
+}
+</style>
+<meta content="Read Scalelist Universe manga online free — 219 chapters of dark fantasy action across Seasons 1-4. Follow Vigolas, Rougeina, Trollmage, Kompis and Smurjan." name="description"/><meta content="scalelist universe manga, read manga online free, dark fantasy manga chapters, vigolas manga, rougeina manga, trollmage manga" name="keywords"/><link href="https://scalelist-universe.vercel.app/manga.html" rel="canonical"/><meta content="index, follow" name="robots"/><meta content="website" property="og:type"/><meta content="Scalelist Universe" property="og:site_name"/><meta content="https://scalelist-universe.vercel.app/manga.html" property="og:url"/><meta content="Read Manga — Scalelist Universe" property="og:title"/><meta content="Read Scalelist Universe manga online free — 219 chapters of dark fantasy action across Seasons 1-4. Follow Vigolas, Rougeina, Trollmage, Kompis and Smurjan." property="og:description"/><meta content="https://scalelist-universe.vercel.app/og-image.jpg" property="og:image"/><meta content="en_US" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/><meta content="Read Manga — Scalelist Universe" name="twitter:title"/><meta content="Read Scalelist Universe manga online free — 219 chapters of dark fantasy action across Seasons 1-4. Follow Vigolas, Rougeina, Trollmage, Kompis and Smurjan." name="twitter:description"/><meta content="https://scalelist-universe.vercel.app/og-image.jpg" name="twitter:image"/><meta content="@susmurjan" name="twitter:site"/><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "ComicSeries",
+  "name": "Scalelist Universe",
+  "url": "https://scalelist-universe.vercel.app/manga.html",
+  "description": "A dark fantasy manga series following five souls — Vigolas, Rougeina, Trollmage, Kompis, and Smurjan — each wielding infinite power.",
+  "genre": [
+    "Dark Fantasy",
+    "Action",
+    "Manga"
+  ],
+  "numberOfEpisodes": 119,
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Scalelist Universe",
+    "url": "https://scalelist-universe.vercel.app"
+  },
+  "image": "https://scalelist-universe.vercel.app/og-image.jpg"
+}</script></head>
+<body>
+<canvas id="stars"></canvas>
+<canvas id="aurora"></canvas>
+<nav>
+<a class="brand" href="/">SCALELIST UNIVERSE</a>
+<div class="links">
+<a href="/">Home</a>
+<a class="active" href="/manga">Manga</a>
+</div>
+</nav>
+<section class="hero">
+<h1>Manga Chapters</h1>
+<p>Solo Leveling style vertical-scroll webtoon — 219 chapters · Seasons 1-4 complete</p>
+</section>
+<div class="filter-bar">
+<div class="filter-row">
+<input class="search" id="search" placeholder="Search chapters..." type="text"/>
+<div class="char-filters" id="charFilters"></div>
+<div class="season-filters" id="seasonFilters"></div>
+</div>
+</div>
+<div class="count-bar"><span id="countLabel"></span></div>
+<div class="chapters" id="chapterList"></div>
+<div class="no-results" id="noResults">No chapters match your filters.</div>
+<div class="reader-overlay" id="reader">
+<div class="reader-header">
+<h2 id="readerTitle">Chapter</h2>
+<button class="reader-close" onclick="closeReader()">✕ Close</button>
+</div>
+<div class="reader-scroll">
+<img alt="Manga chapter" id="readerImg" src=""/>
+</div>
+<div class="reader-audio">
+<span>🔊 Listen</span>
+<audio controls="" id="readerAudio"></audio>
+</div>
+</div>
+<footer>© 2026 Scalelist Universe. All rights reserved.</footer>
+<script>
+const CHAPTERS = [
+  {num:"01",title:"The Awakening",file:"chapter_01_the_awakening",meta:"All 7 characters introduced · 15 panels",char:"all",season:"prologue",badge:"PROLOGUE",color:"#c9a84c"},
+  {num:"02",title:"First Contact",file:"chapter_02_first_contact",meta:"Vigolas meets Kompis · Rougeina hunts · 13 panels",char:"all",season:"prologue",badge:"ARC 1",color:"#c9a84c"},
+  {num:"03",title:"The Virus & The Pirate",file:"chapter_03_the_virus_and_the_pirate",meta:"Trollmage confronts Vigolas · 12 panels",char:"all",season:"prologue",badge:"ARC 1",color:"#c9a84c"},
+  {num:"04",title:"Void Descent",file:"chapter_04_void_descent",meta:"The Void Trinity attacks · First battle · 12 panels",char:"all",season:"prologue",badge:"ARC 1",color:"#c9a84c"},
+  {num:"05",title:"The Architect's Blueprint",file:"chapter_05_the_architects_blueprint",meta:"HADOM Engine revealed · The Origin · 12 panels",char:"all",season:"prologue",badge:"ARC 1",color:"#c9a84c"},
+  {num:"06",title:"The Collector's Price",file:"chapter_06_the_collectors_price",meta:"Vigolas vs Collector Zahn · Solo battle",char:"vigolas",season:"prologue",badge:"VIGOLAS",color:"#4ade80"},
+  {num:"07",title:"Memory of the Unmade",file:"chapter_07_memory_of_the_unmade",meta:"Rougeina vs Meridia · Dark elf origin",char:"rougeina",season:"prologue",badge:"ROUGEINA",color:"#DC2626"},
+  {num:"08",title:"System Override",file:"chapter_08_system_override",meta:"Trollmage vs Syntax · Code battle",char:"trollmage",season:"prologue",badge:"TROLLMAGE",color:"#7C3AED"},
+  {num:"09",title:"Mirror Protocol",file:"chapter_09_mirror_protocol",meta:"Kompis vs Protocol-9 · Soul mirror",char:"kompis",season:"prologue",badge:"KOMPIS",color:"#D97706"},
+  {num:"10",title:"The Original Sin",file:"chapter_10_the_original_sin",meta:"Smurjan vs Vorthex · Void clash",char:"smurjan",season:"prologue",badge:"SMURJAN",color:"#0EA5E9"},
+  {num:"11",title:"Entropy vs Hunger",file:"chapter_11_entropy_vs_hunger",meta:"Kali vs Bakasura · Entropy unleashed",char:"all",season:"prologue",badge:"KALI",color:"#EC4899"},
+  {num:"12",title:"The Meal That Fights Back",file:"chapter_12_the_meal_that_fights_back",meta:"Bakasura vs Kali · Consumer consumed",char:"all",season:"prologue",badge:"BAKASURA",color:"#F97316"},
+  {num:"13",title:"Ghost Fleet",file:"chapter_13_ghost_fleet",meta:"Vigolas alone in Dead Drift",char:"vigolas",season:"prologue",badge:"ARC 3",color:"#4ade80"},
+  {num:"14",title:"The Glass Labyrinth",file:"chapter_14_the_glass_labyrinth",meta:"Rougeina infiltrates the labyrinth",char:"rougeina",season:"prologue",badge:"ARC 3",color:"#DC2626"},
+  {num:"15",title:"PARADOX INFINITE",file:"chapter_15_paradox_infinite",meta:"Trollmage decodes reality",char:"trollmage",season:"prologue",badge:"ARC 3",color:"#7C3AED"},
+  {num:"16",title:"The Empty Room",file:"chapter_16_the_empty_room",meta:"Kompis faces isolation",char:"kompis",season:"prologue",badge:"ARC 3",color:"#D97706"},
+  {num:"17",title:"Lightning in the Void",file:"chapter_17_lightning_in_the_void",meta:"Smurjan's Wrath trial",char:"smurjan",season:"prologue",badge:"ARC 3",color:"#0EA5E9"},
+  {num:"18",title:"Four-Point Compass",file:"chapter_18_four_point_compass",meta:"Kali maps entropy fields",char:"all",season:"prologue",badge:"ARC 3",color:"#c9a84c"},
+  {num:"19",title:"Seventeen Voices",file:"chapter_19_seventeen_voices",meta:"Bakasura's 17 consumed souls",char:"all",season:"prologue",badge:"ARC 3",color:"#c9a84c"},
+  {num:"S1E01",title:"The Last Tide",file:"vigolas_s1e01_the_last_tide",meta:"Vigolas · Season 1 Episode 1 · 6 panels",char:"vigolas",season:"s1",badge:"S1",color:"#4ade80"},
+  {num:"S1E02",title:"Salt in the Resurrection",file:"vigolas_s1e02_salt_in_the_resurrection",meta:"Vigolas · Season 1 Episode 2 · 6 panels",char:"vigolas",season:"s1",badge:"S1",color:"#4ade80"},
+  {num:"S1E03",title:"Fenna",file:"vigolas_s1e03_fenna",meta:"Vigolas · Season 1 Episode 3 · 6 panels",char:"vigolas",season:"s1",badge:"S1",color:"#4ade80"},
+  {num:"S1E04",title:"The Anchor Crew",file:"vigolas_s1e04_the_anchor_crew",meta:"Vigolas · Season 1 Episode 4 · 6 panels",char:"vigolas",season:"s1",badge:"S1",color:"#4ade80"},
+  {num:"S1E05",title:"The Dream Gate",file:"vigolas_s1e05_the_dream_gate",meta:"Vigolas · Season 1 Episode 5 · 6 panels",char:"vigolas",season:"s1",badge:"S1",color:"#4ade80"},
+  {num:"S1E06",title:"The Shard Room",file:"vigolas_s1e06_the_shard_room",meta:"Vigolas · Season 1 Episode 6 · 6 panels",char:"vigolas",season:"s1",badge:"S1",color:"#4ade80"},
+  {num:"S1E07",title:"Greed Sense",file:"vigolas_s1e07_greed_sense",meta:"Vigolas · Season 1 Episode 7 · 6 panels",char:"vigolas",season:"s1",badge:"S1",color:"#4ade80"},
+  {num:"S1E08",title:"The Extraction",file:"vigolas_s1e08_the_extraction",meta:"Vigolas · Season 1 Episode 8 · 6 panels",char:"vigolas",season:"s1",badge:"S1",color:"#4ade80"},
+  {num:"S1E09",title:"The Compass Activates",file:"vigolas_s1e09_the_compass_activates",meta:"Vigolas · Season 1 Episode 9 · 6 panels",char:"vigolas",season:"s1",badge:"S1",color:"#4ade80"},
+  {num:"S1E10",title:"The Oath of Greed",file:"vigolas_s1e10_the_oath_of_greed",meta:"Vigolas · Season 1 Episode 10 · 6 panels",char:"vigolas",season:"s1",badge:"S1",color:"#4ade80"},
+  {num:"S1E01",title:"Thin Places",file:"rougeina_s1e01_thin_places",meta:"Rougeina · Season 1 Episode 1 · 6 panels",char:"rougeina",season:"s1",badge:"S1",color:"#DC2626"},
+  {num:"S1E02",title:"The Other Side",file:"rougeina_s1e02_the_other_side",meta:"Rougeina · Season 1 Episode 2 · 6 panels",char:"rougeina",season:"s1",badge:"S1",color:"#DC2626"},
+  {num:"S1E03",title:"The Other Side",file:"rougeina_s1e03_the_other_side",meta:"Rougeina · Season 1 Episode 3 · 6 panels",char:"rougeina",season:"s1",badge:"S1",color:"#DC2626"},
+  {num:"S1E04",title:"Exile",file:"rougeina_s1e04_exile",meta:"Rougeina · Season 1 Episode 4 · 6 panels",char:"rougeina",season:"s1",badge:"S1",color:"#DC2626"},
+  {num:"S1E05",title:"The Black Panther",file:"rougeina_s1e05_the_black_panther",meta:"Rougeina · Season 1 Episode 5 · 6 panels",char:"rougeina",season:"s1",badge:"S1",color:"#DC2626"},
+  {num:"S1E06",title:"Umbra",file:"rougeina_s1e06_umbra",meta:"Rougeina · Season 1 Episode 6 · 6 panels",char:"rougeina",season:"s1",badge:"S1",color:"#DC2626"},
+  {num:"S1E07",title:"Ghost Tracks",file:"rougeina_s1e07_ghost_tracks",meta:"Rougeina · Season 1 Episode 7 · 6 panels",char:"rougeina",season:"s1",badge:"S1",color:"#DC2626"},
+  {num:"S1E08",title:"The Thin Spot Network",file:"rougeina_s1e08_the_thin_spot_network",meta:"Rougeina · Season 1 Episode 8 · 6 panels",char:"rougeina",season:"s1",badge:"S1",color:"#DC2626"},
+  {num:"S1E09",title:"Hunter's Moon",file:"rougeina_s1e09_hunters_moon",meta:"Rougeina · Season 1 Episode 9 · 6 panels",char:"rougeina",season:"s1",badge:"S1",color:"#DC2626"},
+  {num:"S1E10",title:"Phantom Protocol",file:"rougeina_s1e10_phantom_protocol",meta:"Rougeina · Season 1 Episode 10 · 6 panels",char:"rougeina",season:"s1",badge:"S1",color:"#DC2626"},
+  {num:"S1E01",title:"The Laziest Mage",file:"trollmage_s1e01_the_laziest_mage",meta:"Trollmage · Season 1 Episode 1 · 6 panels",char:"trollmage",season:"s1",badge:"S1",color:"#7C3AED"},
+  {num:"S1E02",title:"Macrofication",file:"trollmage_s1e02_macrofication",meta:"Trollmage · Season 1 Episode 2 · 6 panels",char:"trollmage",season:"s1",badge:"S1",color:"#7C3AED"},
+  {num:"S1E03",title:"The Iron Ring",file:"trollmage_s1e03_the_iron_ring",meta:"Trollmage · Season 1 Episode 3 · 6 panels",char:"trollmage",season:"s1",badge:"S1",color:"#7C3AED"},
+  {num:"S1E04",title:"Twenty Eight Years",file:"trollmage_s1e04_twenty_eight_years",meta:"Trollmage · Season 1 Episode 4 · 6 panels",char:"trollmage",season:"s1",badge:"S1",color:"#7C3AED"},
+  {num:"S1E05",title:"The Codex",file:"trollmage_s1e05_the_codex",meta:"Trollmage · Season 1 Episode 5 · 6 panels",char:"trollmage",season:"s1",badge:"S1",color:"#7C3AED"},
+  {num:"S1E06",title:"Fragment Awakening",file:"trollmage_s1e06_fragment_awakening",meta:"Trollmage · Season 1 Episode 6 · 6 panels",char:"trollmage",season:"s1",badge:"S1",color:"#7C3AED"},
+  {num:"S1E07",title:"Syntax Error",file:"trollmage_s1e07_syntax_error",meta:"Trollmage · Season 1 Episode 7 · 6 panels",char:"trollmage",season:"s1",badge:"S1",color:"#7C3AED"},
+  {num:"S1E08",title:"Debug Mode",file:"trollmage_s1e08_debug_mode",meta:"Trollmage · Season 1 Episode 8 · 6 panels",char:"trollmage",season:"s1",badge:"S1",color:"#7C3AED"},
+  {num:"S1E09",title:"The Paradox",file:"trollmage_s1e09_the_paradox",meta:"Trollmage · Season 1 Episode 9 · 6 panels",char:"trollmage",season:"s1",badge:"S1",color:"#7C3AED"},
+  {num:"S1E10",title:"Virus Mage",file:"trollmage_s1e10_virus_mage",meta:"Trollmage · Season 1 Episode 10 · 6 panels",char:"trollmage",season:"s1",badge:"S1",color:"#7C3AED"},
+  {num:"S1E01",title:"The Soul Market",file:"kompis_s1e01_the_soul_market",meta:"Kompis · Season 1 Episode 1 · 6 panels",char:"kompis",season:"s1",badge:"S1",color:"#D97706"},
+  {num:"S1E02",title:"Kill Count",file:"kompis_s1e02_kill_count",meta:"Kompis · Season 1 Episode 2 · 6 panels",char:"kompis",season:"s1",badge:"S1",color:"#D97706"},
+  {num:"S1E03",title:"The Collection",file:"kompis_s1e03_the_collection",meta:"Kompis · Season 1 Episode 3 · 6 panels",char:"kompis",season:"s1",badge:"S1",color:"#D97706"},
+  {num:"S1E04",title:"Case Hardened",file:"kompis_s1e04_case_hardened",meta:"Kompis · Season 1 Episode 4 · 6 panels",char:"kompis",season:"s1",badge:"S1",color:"#D97706"},
+  {num:"S1E05",title:"Dragon Tattoo",file:"kompis_s1e05_dragon_tattoo",meta:"Kompis · Season 1 Episode 5 · 6 panels",char:"kompis",season:"s1",badge:"S1",color:"#D97706"},
+  {num:"S1E06",title:"Blood Tiger",file:"kompis_s1e06_blood_tiger",meta:"Kompis · Season 1 Episode 6 · 6 panels",char:"kompis",season:"s1",badge:"S1",color:"#D97706"},
+  {num:"S1E07",title:"Chrome Cannon",file:"kompis_s1e07_chrome_cannon",meta:"Kompis · Season 1 Episode 7 · 6 panels",char:"kompis",season:"s1",badge:"S1",color:"#D97706"},
+  {num:"S1E08",title:"Night Market",file:"kompis_s1e08_night_market",meta:"Kompis · Season 1 Episode 8 · 6 panels",char:"kompis",season:"s1",badge:"S1",color:"#D97706"},
+  {num:"S1E09",title:"Syndicate Vault",file:"kompis_s1e09_syndicate_vault",meta:"Kompis · Season 1 Episode 9 · 6 panels",char:"kompis",season:"s1",badge:"S1",color:"#D97706"},
+  {num:"S1E10",title:"Subtick Billionaire",file:"kompis_s1e10_subtick_billionaire",meta:"Kompis · Season 1 Episode 10 · 6 panels",char:"kompis",season:"s1",badge:"S1",color:"#D97706"},
+  {num:"S1E01",title:"The Envy Sight",file:"smurjan_s1e01_the_envy_sight",meta:"Smurjan · Season 1 Episode 1 · 6 panels",char:"smurjan",season:"s1",badge:"S1",color:"#0EA5E9"},
+  {num:"S1E02",title:"Cascade",file:"smurjan_s1e02_cascade",meta:"Smurjan · Season 1 Episode 2 · 6 panels",char:"smurjan",season:"s1",badge:"S1",color:"#0EA5E9"},
+  {num:"S1E03",title:"The Star Fall",file:"smurjan_s1e03_the_star_fall",meta:"Smurjan · Season 1 Episode 3 · 6 panels",char:"smurjan",season:"s1",badge:"S1",color:"#0EA5E9"},
+  {num:"S1E04",title:"Seventeen",file:"smurjan_s1e04_seventeen",meta:"Smurjan · Season 1 Episode 4 · 6 panels",char:"smurjan",season:"s1",badge:"S1",color:"#0EA5E9"},
+  {num:"S1E05",title:"The Hunger Architecture",file:"smurjan_s1e05_the_hunger_architecture",meta:"Smurjan · Season 1 Episode 5 · 6 panels",char:"smurjan",season:"s1",badge:"S1",color:"#0EA5E9"},
+  {num:"S1E06",title:"The Voice",file:"smurjan_s1e06_the_voice",meta:"Smurjan · Season 1 Episode 6 · 6 panels",char:"smurjan",season:"s1",badge:"S1",color:"#0EA5E9"},
+  {num:"S1E07",title:"The Void Link",file:"smurjan_s1e07_the_void_link",meta:"Smurjan · Season 1 Episode 7 · 6 panels",char:"smurjan",season:"s1",badge:"S1",color:"#0EA5E9"},
+  {num:"S1E08",title:"The Trial Site",file:"smurjan_s1e08_the_trial_site",meta:"Smurjan · Season 1 Episode 8 · 6 panels",char:"smurjan",season:"s1",badge:"S1",color:"#0EA5E9"},
+  {num:"S1E09",title:"The Third Fragment",file:"smurjan_s1e09_the_third_fragment",meta:"Smurjan · Season 1 Episode 9 · 6 panels",char:"smurjan",season:"s1",badge:"S1",color:"#0EA5E9"},
+  {num:"S1E10",title:"The Void Trinity",file:"smurjan_s1e10_the_void_trinity",meta:"Smurjan · Season 1 Episode 10 · 6 panels",char:"smurjan",season:"s1",badge:"S1",color:"#0EA5E9"},
+  {num:"S2E01",title:"The Coast of Stolen Things",file:"vigolas_s2e01_the_coast_of_stolen_things",meta:"Vigolas · Season 2 Episode 1 · 6 panels",char:"vigolas",season:"s2",badge:"S2",color:"#4ade80"},
+  {num:"S2E02",title:"The Decoder's Price",file:"vigolas_s2e02_the_decoders_price",meta:"Vigolas · Season 2 Episode 2 · 6 panels",char:"vigolas",season:"s2",badge:"S2",color:"#4ade80"},
+  {num:"S2E03",title:"The Crew Responds",file:"vigolas_s2e03_the_crew_responds",meta:"Vigolas · Season 2 Episode 3 · 6 panels",char:"vigolas",season:"s2",badge:"S2",color:"#4ade80"},
+  {num:"S2E04",title:"The Intercept",file:"vigolas_s2e04_the_intercept",meta:"Vigolas · Season 2 Episode 4 · 6 panels",char:"vigolas",season:"s2",badge:"S2",color:"#4ade80"},
+  {num:"S2E05",title:"Wrath Surfaces",file:"vigolas_s2e05_wrath_surfaces",meta:"Vigolas · Season 2 Episode 5 · 6 panels",char:"vigolas",season:"s2",badge:"S2",color:"#4ade80"},
+  {num:"S2E06",title:"The Map Eater",file:"vigolas_s2e06_the_map_eater",meta:"Vigolas · Season 2 Episode 6 · 6 panels",char:"vigolas",season:"s2",badge:"S2",color:"#4ade80"},
+  {num:"S2E07",title:"The Shard Speaks",file:"vigolas_s2e07_the_shard_speaks",meta:"Vigolas · Season 2 Episode 7 · 6 panels",char:"vigolas",season:"s2",badge:"S2",color:"#4ade80"},
+  {num:"S2E08",title:"The Price of Greed",file:"vigolas_s2e08_the_price_of_greed",meta:"Vigolas · Season 2 Episode 8 · 6 panels",char:"vigolas",season:"s2",badge:"S2",color:"#4ade80"},
+  {num:"S2E09",title:"The Compass Points Home",file:"vigolas_s2e09_the_compass_points_home",meta:"Vigolas · Season 2 Episode 9 · 6 panels",char:"vigolas",season:"s2",badge:"S2",color:"#4ade80"},
+  {num:"S2E10",title:"The Weight of Every Theft",file:"vigolas_s2e10_the_weight_of_every_theft",meta:"Vigolas · Season 2 Episode 10 · 6 panels",char:"vigolas",season:"s2",badge:"S2",color:"#4ade80"},
+  {num:"S2E01",title:"The Thin Spot Network",file:"rougeina_s2e01_the_thin_spot_network",meta:"Rougeina · Season 2 Episode 1 · 6 panels",char:"rougeina",season:"s2",badge:"S2",color:"#DC2626"},
+  {num:"S2E02",title:"The Envoy Arrives",file:"rougeina_s2e02_the_envoy_arrives",meta:"Rougeina · Season 2 Episode 2 · 6 panels",char:"rougeina",season:"s2",badge:"S2",color:"#DC2626"},
+  {num:"S2E03",title:"The Other Side",file:"rougeina_s2e03_the_other_side",meta:"Rougeina · Season 2 Episode 3 · 6 panels",char:"rougeina",season:"s2",badge:"S2",color:"#DC2626"},
+  {num:"S2E04",title:"Pride Awakens",file:"rougeina_s2e04_pride_awakens",meta:"Rougeina · Season 2 Episode 4 · 6 panels",char:"rougeina",season:"s2",badge:"S2",color:"#DC2626"},
+  {num:"S2E05",title:"The Shadow Archive",file:"rougeina_s2e05_the_shadow_archive",meta:"Rougeina · Season 2 Episode 5 · 6 panels",char:"rougeina",season:"s2",badge:"S2",color:"#DC2626"},
+  {num:"S2E06",title:"The Sealed Door",file:"rougeina_s2e06_the_sealed_door",meta:"Rougeina · Season 2 Episode 6 · 6 panels",char:"rougeina",season:"s2",badge:"S2",color:"#DC2626"},
+  {num:"S2E07",title:"Hunted",file:"rougeina_s2e07_hunted",meta:"Rougeina · Season 2 Episode 7 · 6 panels",char:"rougeina",season:"s2",badge:"S2",color:"#DC2626"},
+  {num:"S2E08",title:"Two Fragments Meet",file:"rougeina_s2e08_two_fragments_meet",meta:"Rougeina · Season 2 Episode 8 · 6 panels",char:"rougeina",season:"s2",badge:"S2",color:"#DC2626"},
+  {num:"S2E09",title:"The Network Speaks",file:"rougeina_s2e09_the_network_speaks",meta:"Rougeina · Season 2 Episode 9 · 6 panels",char:"rougeina",season:"s2",badge:"S2",color:"#DC2626"},
+  {num:"S2E10",title:"The Phantom Ascends",file:"rougeina_s2e10_the_phantom_ascends",meta:"Rougeina · Season 2 Episode 10 · 6 panels",char:"rougeina",season:"s2",badge:"S2",color:"#DC2626"},
+  {num:"S2E01",title:"The Prismatic Awakening",file:"trollmage_s2e01_the_prismatic_awakening",meta:"Trollmage · Season 2 Episode 1 · 6 panels",char:"trollmage",season:"s2",badge:"S2",color:"#7C3AED"},
+  {num:"S2E02",title:"Troll Berserk",file:"trollmage_s2e02_troll_berserk",meta:"Trollmage · Season 2 Episode 2 · 6 panels",char:"trollmage",season:"s2",badge:"S2",color:"#7C3AED"},
+  {num:"S2E03",title:"The First Macro",file:"trollmage_s2e03_the_first_macro",meta:"Trollmage · Season 2 Episode 3 · 6 panels",char:"trollmage",season:"s2",badge:"S2",color:"#7C3AED"},
+  {num:"S2E04",title:"The Codex Keeper",file:"trollmage_s2e04_the_codex_keeper",meta:"Trollmage · Season 2 Episode 4 · 6 panels",char:"trollmage",season:"s2",badge:"S2",color:"#7C3AED"},
+  {num:"S2E05",title:"The Hybrid's Burden",file:"trollmage_s2e05_the_hybrids_burden",meta:"Trollmage · Season 2 Episode 5 · 6 panels",char:"trollmage",season:"s2",badge:"S2",color:"#7C3AED"},
+  {num:"S2E06",title:"Rougeina's Request",file:"trollmage_s2e06_rougeinas_request",meta:"Trollmage · Season 2 Episode 6 · 6 panels",char:"trollmage",season:"s2",badge:"S2",color:"#7C3AED"},
+  {num:"S2E07",title:"The Banned Library",file:"trollmage_s2e07_the_banned_library",meta:"Trollmage · Season 2 Episode 7 · 6 panels",char:"trollmage",season:"s2",badge:"S2",color:"#7C3AED"},
+  {num:"S2E08",title:"The Macro War",file:"trollmage_s2e08_the_macro_war",meta:"Trollmage · Season 2 Episode 8 · 6 panels",char:"trollmage",season:"s2",badge:"S2",color:"#7C3AED"},
+  {num:"S2E09",title:"The Scalelist Fragment",file:"trollmage_s2e09_the_scalelist_fragment",meta:"Trollmage · Season 2 Episode 9 · 6 panels",char:"trollmage",season:"s2",badge:"S2",color:"#7C3AED"},
+  {num:"S2E10",title:"Knowledge Unbound",file:"trollmage_s2e10_knowledge_unbound",meta:"Trollmage · Season 2 Episode 10 · 6 panels",char:"trollmage",season:"s2",badge:"S2",color:"#7C3AED"},
+  {num:"S2E01",title:"The Soul Auction",file:"kompis_s2e01_the_soul_auction",meta:"Kompis · Season 2 Episode 1 · 6 panels",char:"kompis",season:"s2",badge:"S2",color:"#D97706"},
+  {num:"S2E02",title:"Case Hardened",file:"kompis_s2e02_case_hardened",meta:"Kompis · Season 2 Episode 2 · 6 panels",char:"kompis",season:"s2",badge:"S2",color:"#D97706"},
+  {num:"S2E03",title:"Dragon Tattoo",file:"kompis_s2e03_dragon_tattoo",meta:"Kompis · Season 2 Episode 3 · 6 panels",char:"kompis",season:"s2",badge:"S2",color:"#D97706"},
+  {num:"S2E04",title:"The Subtick",file:"kompis_s2e04_the_subtick",meta:"Kompis · Season 2 Episode 4 · 6 panels",char:"kompis",season:"s2",badge:"S2",color:"#D97706"},
+  {num:"S2E05",title:"Blood Tiger",file:"kompis_s2e05_blood_tiger",meta:"Kompis · Season 2 Episode 5 · 6 panels",char:"kompis",season:"s2",badge:"S2",color:"#D97706"},
+  {num:"S2E06",title:"Night Market",file:"kompis_s2e06_night_market",meta:"Kompis · Season 2 Episode 6 · 6 panels",char:"kompis",season:"s2",badge:"S2",color:"#D97706"},
+  {num:"S2E07",title:"The God-Killer",file:"kompis_s2e07_the_god-killer",meta:"Kompis · Season 2 Episode 7 · 6 panels",char:"kompis",season:"s2",badge:"S2",color:"#D97706"},
+  {num:"S2E08",title:"A Billion Actions",file:"kompis_s2e08_a_billion_actions",meta:"Kompis · Season 2 Episode 8 · 6 panels",char:"kompis",season:"s2",badge:"S2",color:"#D97706"},
+  {num:"S2E09",title:"Soul Sight Truth",file:"kompis_s2e09_soul_sight_truth",meta:"Kompis · Season 2 Episode 9 · 6 panels",char:"kompis",season:"s2",badge:"S2",color:"#D97706"},
+  {num:"S2E10",title:"The Price of Everything",file:"kompis_s2e10_the_price_of_everything",meta:"Kompis · Season 2 Episode 10 · 6 panels",char:"kompis",season:"s2",badge:"S2",color:"#D97706"},
+  {num:"S2E01",title:"Three Voices",file:"smurjan_s2e01_three_voices",meta:"Smurjan · Season 2 Episode 1 · 6 panels",char:"smurjan",season:"s2",badge:"S2",color:"#0EA5E9"},
+  {num:"S2E02",title:"The Hunger",file:"smurjan_s2e02_the_hunger",meta:"Smurjan · Season 2 Episode 2 · 6 panels",char:"smurjan",season:"s2",badge:"S2",color:"#0EA5E9"},
+  {num:"S2E03",title:"Entropy's Edge",file:"smurjan_s2e03_entropys_edge",meta:"Smurjan · Season 2 Episode 3 · 6 panels",char:"smurjan",season:"s2",badge:"S2",color:"#0EA5E9"},
+  {num:"S2E04",title:"The Fusion Memory",file:"smurjan_s2e04_the_fusion_memory",meta:"Smurjan · Season 2 Episode 4 · 6 panels",char:"smurjan",season:"s2",badge:"S2",color:"#0EA5E9"},
+  {num:"S2E05",title:"Trinity Unleashed",file:"smurjan_s2e05_trinity_unleashed",meta:"Smurjan · Season 2 Episode 5 · 6 panels",char:"smurjan",season:"s2",badge:"S2",color:"#0EA5E9"},
+  {num:"S2E06",title:"The Consumed Council",file:"smurjan_s2e06_the_consumed_council",meta:"Smurjan · Season 2 Episode 6 · 6 panels",char:"smurjan",season:"s2",badge:"S2",color:"#0EA5E9"},
+  {num:"S2E07",title:"The Regeneration Cycle",file:"smurjan_s2e07_the_regeneration_cycle",meta:"Smurjan · Season 2 Episode 7 · 6 panels",char:"smurjan",season:"s2",badge:"S2",color:"#0EA5E9"},
+  {num:"S2E08",title:"The Void Between",file:"smurjan_s2e08_the_void_between",meta:"Smurjan · Season 2 Episode 8 · 6 panels",char:"smurjan",season:"s2",badge:"S2",color:"#0EA5E9"},
+  {num:"S2E09",title:"Seventeen Voices",file:"smurjan_s2e09_seventeen_voices",meta:"Smurjan · Season 2 Episode 9 · 6 panels",char:"smurjan",season:"s2",badge:"S2",color:"#0EA5E9"},
+  {num:"S2E10",title:"One Body, One Purpose",file:"smurjan_s2e10_one_body,_one_purpose",meta:"Smurjan · Season 2 Episode 10 · 6 panels",char:"smurjan",season:"s2",badge:"S2",color:"#0EA5E9"},
+
+  // ─── SEASON 3: THE WAR YEARS (5 character arcs, 50 chapters) ───
+  {num:"S3E01",title:"The Challenger Returns",file:"vigolas_s3e01_the_challenger_returns",meta:"Vigolas · S3 The Stormcoast War · E1 · 6 panels",char:"vigolas",season:"s3",badge:"S3",color:"#4ade80"},
+  {num:"S3E02",title:"Lightning Duel",file:"vigolas_s3e02_lightning_duel",meta:"Vigolas · S3 The Stormcoast War · E2 · 6 panels",char:"vigolas",season:"s3",badge:"S3",color:"#4ade80"},
+  {num:"S3E03",title:"The Drowned Fleet",file:"vigolas_s3e03_the_drowned_fleet",meta:"Vigolas · S3 The Stormcoast War · E3 · 6 panels",char:"vigolas",season:"s3",badge:"S3",color:"#4ade80"},
+  {num:"S3E04",title:"Naval Inferno",file:"vigolas_s3e04_naval_inferno",meta:"Vigolas · S3 The Stormcoast War · E4 · 6 panels",char:"vigolas",season:"s3",badge:"S3",color:"#4ade80"},
+  {num:"S3E05",title:"The Mastless Fall",file:"vigolas_s3e05_the_mastless_fall",meta:"Vigolas · S3 The Stormcoast War · E5 · 6 panels",char:"vigolas",season:"s3",badge:"S3",color:"#4ade80"},
+  {num:"S3E06",title:"The Quiet Corner",file:"vigolas_s3e06_the_quiet_corner",meta:"Vigolas · S3 The Stormcoast War · E6 · 6 panels",char:"vigolas",season:"s3",badge:"S3",color:"#4ade80"},
+  {num:"S3E07",title:"Race to the Forge",file:"vigolas_s3e07_race_to_the_forge",meta:"Vigolas · S3 The Stormcoast War · E7 · 6 panels",char:"vigolas",season:"s3",badge:"S3",color:"#4ade80"},
+  {num:"S3E08",title:"The Forge Falls",file:"vigolas_s3e08_the_forge_falls",meta:"Vigolas · S3 The Stormcoast War · E8 · 6 panels",char:"vigolas",season:"s3",badge:"S3",color:"#4ade80"},
+  {num:"S3E09",title:"Branon Returns",file:"vigolas_s3e09_branon_returns",meta:"Vigolas · S3 The Stormcoast War · E9 · 6 panels",char:"vigolas",season:"s3",badge:"S3",color:"#4ade80"},
+  {num:"S3E10",title:"The Crater Duel",file:"vigolas_s3e10_the_crater_duel",meta:"Vigolas · S3 The Stormcoast War · E10 · 6 panels",char:"vigolas",season:"s3",badge:"S3 FINALE",color:"#4ade80"},
+  {num:"S3E01",title:"The Black Star",file:"rougeina_s3e01_the_black_star",meta:"Rougeina · S3 The Dark Dancer · E1 · 6 panels",char:"rougeina",season:"s3",badge:"S3",color:"#DC2626"},
+  {num:"S3E02",title:"First Dance, First Cut",file:"rougeina_s3e02_first_dance_first_cut",meta:"Rougeina · S3 The Dark Dancer · E2 · 6 panels",char:"rougeina",season:"s3",badge:"S3",color:"#DC2626"},
+  {num:"S3E03",title:"The Choreographer's Tomb",file:"rougeina_s3e03_the_choreographers_tomb",meta:"Rougeina · S3 The Dark Dancer · E3 · 6 panels",char:"rougeina",season:"s3",badge:"S3",color:"#DC2626"},
+  {num:"S3E04",title:"Memory Hunt",file:"rougeina_s3e04_memory_hunt",meta:"Rougeina · S3 The Dark Dancer · E4 · 6 panels",char:"rougeina",season:"s3",badge:"S3",color:"#DC2626"},
+  {num:"S3E05",title:"The Bazaar Burns",file:"rougeina_s3e05_the_bazaar_burns",meta:"Rougeina · S3 The Dark Dancer · E5 · 6 panels",char:"rougeina",season:"s3",badge:"S3",color:"#DC2626"},
+  {num:"S3E06",title:"Lume Hidden",file:"rougeina_s3e06_lume_hidden",meta:"Rougeina · S3 The Dark Dancer · E6 · 6 panels",char:"rougeina",season:"s3",badge:"S3",color:"#DC2626"},
+  {num:"S3E07",title:"The Mirror Test",file:"rougeina_s3e07_the_mirror_test",meta:"Rougeina · S3 The Dark Dancer · E7 · 6 panels",char:"rougeina",season:"s3",badge:"S3",color:"#DC2626"},
+  {num:"S3E08",title:"The Stolen Memories Awaken",file:"rougeina_s3e08_the_stolen_memories_awaken",meta:"Rougeina · S3 The Dark Dancer · E8 · 6 panels",char:"rougeina",season:"s3",badge:"S3",color:"#DC2626"},
+  {num:"S3E09",title:"The Center Note",file:"rougeina_s3e09_the_center_note",meta:"Rougeina · S3 The Dark Dancer · E9 · 6 panels",char:"rougeina",season:"s3",badge:"S3",color:"#DC2626"},
+  {num:"S3E10",title:"Two Stars",file:"rougeina_s3e10_two_stars",meta:"Rougeina · S3 The Dark Dancer · E10 · 6 panels",char:"rougeina",season:"s3",badge:"S3 FINALE",color:"#DC2626"},
+  {num:"S3E01",title:"The Page Slipped Forward",file:"trollmage_s3e01_the_page_slipped_forward",meta:"Trollmage · S3 The Forward Reader · E1 · 6 panels",char:"trollmage",season:"s3",badge:"S3",color:"#7C3AED"},
+  {num:"S3E02",title:"Sloth Loose",file:"trollmage_s3e02_sloth_loose",meta:"Trollmage · S3 The Forward Reader · E2 · 6 panels",char:"trollmage",season:"s3",badge:"S3",color:"#7C3AED"},
+  {num:"S3E03",title:"Vex Runs",file:"trollmage_s3e03_vex_runs",meta:"Trollmage · S3 The Forward Reader · E3 · 6 panels",char:"trollmage",season:"s3",badge:"S3",color:"#7C3AED"},
+  {num:"S3E04",title:"Wrath Unbound",file:"trollmage_s3e04_wrath_unbound",meta:"Trollmage · S3 The Forward Reader · E4 · 6 panels",char:"trollmage",season:"s3",badge:"S3",color:"#7C3AED"},
+  {num:"S3E05",title:"The Codex Council",file:"trollmage_s3e05_the_codex_council",meta:"Trollmage · S3 The Forward Reader · E5 · 6 panels",char:"trollmage",season:"s3",badge:"S3",color:"#7C3AED"},
+  {num:"S3E06",title:"Greed and Envy",file:"trollmage_s3e06_greed_and_envy",meta:"Trollmage · S3 The Forward Reader · E6 · 6 panels",char:"trollmage",season:"s3",badge:"S3",color:"#7C3AED"},
+  {num:"S3E07",title:"Vex Cornered",file:"trollmage_s3e07_vex_cornered",meta:"Trollmage · S3 The Forward Reader · E7 · 6 panels",char:"trollmage",season:"s3",badge:"S3",color:"#7C3AED"},
+  {num:"S3E08",title:"Pride Arrives",file:"trollmage_s3e08_pride_arrives",meta:"Trollmage · S3 The Forward Reader · E8 · 6 panels",char:"trollmage",season:"s3",badge:"S3",color:"#7C3AED"},
+  {num:"S3E09",title:"Trollmage vs Pride",file:"trollmage_s3e09_trollmage_vs_pride",meta:"Trollmage · S3 The Forward Reader · E9 · 6 panels",char:"trollmage",season:"s3",badge:"S3",color:"#7C3AED"},
+  {num:"S3E10",title:"The Eighth Codex",file:"trollmage_s3e10_the_eighth_codex",meta:"Trollmage · S3 The Forward Reader · E10 · 6 panels",char:"trollmage",season:"s3",badge:"S3 FINALE",color:"#7C3AED"},
+  {num:"S3E01",title:"Smoke at the Lake",file:"kompis_s3e01_smoke_at_the_lake",meta:"Kompis · S3 The Subtick War · E1 · 6 panels",char:"kompis",season:"s3",badge:"S3",color:"#D97706"},
+  {num:"S3E02",title:"First Subtick Strike",file:"kompis_s3e02_first_subtick_strike",meta:"Kompis · S3 The Subtick War · E2 · 6 panels",char:"kompis",season:"s3",badge:"S3",color:"#D97706"},
+  {num:"S3E03",title:"The Lake Speaks",file:"kompis_s3e03_the_lake_speaks",meta:"Kompis · S3 The Subtick War · E3 · 6 panels",char:"kompis",season:"s3",badge:"S3",color:"#D97706"},
+  {num:"S3E04",title:"Wave Two",file:"kompis_s3e04_wave_two",meta:"Kompis · S3 The Subtick War · E4 · 6 panels",char:"kompis",season:"s3",badge:"S3",color:"#D97706"},
+  {num:"S3E05",title:"Vigolas Arrives",file:"kompis_s3e05_vigolas_arrives",meta:"Kompis · S3 The Subtick War · E5 · 6 panels",char:"kompis",season:"s3",badge:"S3",color:"#D97706"},
+  {num:"S3E06",title:"The Cave Assault",file:"kompis_s3e06_the_cave_assault",meta:"Kompis · S3 The Subtick War · E6 · 6 panels",char:"kompis",season:"s3",badge:"S3",color:"#D97706"},
+  {num:"S3E07",title:"Old Kasper",file:"kompis_s3e07_old_kasper",meta:"Kompis · S3 The Subtick War · E7 · 6 panels",char:"kompis",season:"s3",badge:"S3",color:"#D97706"},
+  {num:"S3E08",title:"Mingus Saves Vigolas",file:"kompis_s3e08_mingus_saves_vigolas",meta:"Kompis · S3 The Subtick War · E8 · 6 panels",char:"kompis",season:"s3",badge:"S3",color:"#D97706"},
+  {num:"S3E09",title:"Mingus Crosses",file:"kompis_s3e09_mingus_crosses",meta:"Kompis · S3 The Subtick War · E9 · 6 panels",char:"kompis",season:"s3",badge:"S3",color:"#D97706"},
+  {num:"S3E10",title:"The Empire of Two",file:"kompis_s3e10_the_empire_of_two",meta:"Kompis · S3 The Subtick War · E10 · 6 panels",char:"kompis",season:"s3",badge:"S3 FINALE",color:"#D97706"},
+  {num:"S3E01",title:"Echo's Whisper",file:"smurjan_s3e01_echos_whisper",meta:"Smurjan · S3 The Trinity War · E1 · 6 panels",char:"smurjan",season:"s3",badge:"S3",color:"#0EA5E9"},
+  {num:"S3E02",title:"The Defectors Return",file:"smurjan_s3e02_the_defectors_return",meta:"Smurjan · S3 The Trinity War · E2 · 6 panels",char:"smurjan",season:"s3",badge:"S3",color:"#0EA5E9"},
+  {num:"S3E03",title:"Bali Wounded",file:"smurjan_s3e03_bali_wounded",meta:"Smurjan · S3 The Trinity War · E3 · 6 panels",char:"smurjan",season:"s3",badge:"S3",color:"#0EA5E9"},
+  {num:"S3E04",title:"The Triad Argues",file:"smurjan_s3e04_the_triad_argues",meta:"Smurjan · S3 The Trinity War · E4 · 6 panels",char:"smurjan",season:"s3",badge:"S3",color:"#0EA5E9"},
+  {num:"S3E05",title:"Echo Manifests Half",file:"smurjan_s3e05_echo_manifests_half",meta:"Smurjan · S3 The Trinity War · E5 · 6 panels",char:"smurjan",season:"s3",badge:"S3",color:"#0EA5E9"},
+  {num:"S3E06",title:"The Pulse Plaza Burns",file:"smurjan_s3e06_the_pulse_plaza_burns",meta:"Smurjan · S3 The Trinity War · E6 · 6 panels",char:"smurjan",season:"s3",badge:"S3",color:"#0EA5E9"},
+  {num:"S3E07",title:"Smurjan vs Echo",file:"smurjan_s3e07_smurjan_vs_echo",meta:"Smurjan · S3 The Trinity War · E7 · 6 panels",char:"smurjan",season:"s3",badge:"S3",color:"#0EA5E9"},
+  {num:"S3E08",title:"The Rejected Turn",file:"smurjan_s3e08_the_rejected_turn",meta:"Smurjan · S3 The Trinity War · E8 · 6 panels",char:"smurjan",season:"s3",badge:"S3",color:"#0EA5E9"},
+  {num:"S3E09",title:"The Mirror Hall Strike",file:"smurjan_s3e09_the_mirror_hall_strike",meta:"Smurjan · S3 The Trinity War · E9 · 6 panels",char:"smurjan",season:"s3",badge:"S3",color:"#0EA5E9"},
+  {num:"S3E10",title:"The Triad Unified",file:"smurjan_s3e10_the_triad_unified",meta:"Smurjan · S3 The Trinity War · E10 · 6 panels",char:"smurjan",season:"s3",badge:"S3 FINALE",color:"#0EA5E9"},
+  // ─── SEASON 4: THE FATES UNRAVEL (5 character arcs, 50 chapters) ───
+  {num:"S4E01",title:"K-V's Whisper",file:"vigolas_s4e01_k_vs_whisper",meta:"Vigolas · S4 The Crack in the Seal · E1 · 6 panels",char:"vigolas",season:"s4",badge:"S4",color:"#4ade80"},
+  {num:"S4E02",title:"Old Halla's Palm",file:"vigolas_s4e02_old_hallas_palm",meta:"Vigolas · S4 The Crack in the Seal · E2 · 6 panels",char:"vigolas",season:"s4",badge:"S4",color:"#4ade80"},
+  {num:"S4E03",title:"The Stormcoast Imposter",file:"vigolas_s4e03_the_stormcoast_imposter",meta:"Vigolas · S4 The Crack in the Seal · E3 · 6 panels",char:"vigolas",season:"s4",badge:"S4",color:"#4ade80"},
+  {num:"S4E04",title:"Recovery in the Quiet Corner",file:"vigolas_s4e04_recovery_in_the_quiet_corner",meta:"Vigolas · S4 The Crack in the Seal · E4 · 6 panels",char:"vigolas",season:"s4",badge:"S4",color:"#4ade80"},
+  {num:"S4E05",title:"The Mended Beach Trap",file:"vigolas_s4e05_the_mended_beach_trap",meta:"Vigolas · S4 The Crack in the Seal · E5 · 6 panels",char:"vigolas",season:"s4",badge:"S4",color:"#4ade80"},
+  {num:"S4E06",title:"The Codexia Consult",file:"vigolas_s4e06_the_codexia_consult",meta:"Vigolas · S4 The Crack in the Seal · E6 · 6 panels",char:"vigolas",season:"s4",badge:"S4",color:"#4ade80"},
+  {num:"S4E07",title:"The Binding Ritual",file:"vigolas_s4e07_the_binding_ritual",meta:"Vigolas · S4 The Crack in the Seal · E7 · 6 panels",char:"vigolas",season:"s4",badge:"S4",color:"#4ade80"},
+  {num:"S4E08",title:"Lightning's Mouth Ambush",file:"vigolas_s4e08_lightnings_mouth_ambush",meta:"Vigolas · S4 The Crack in the Seal · E8 · 6 panels",char:"vigolas",season:"s4",badge:"S4",color:"#4ade80"},
+  {num:"S4E09",title:"The Twelfth's Gambit",file:"vigolas_s4e09_the_twelfths_gambit",meta:"Vigolas · S4 The Crack in the Seal · E9 · 6 panels",char:"vigolas",season:"s4",badge:"S4",color:"#4ade80"},
+  {num:"S4E10",title:"One Shot",file:"vigolas_s4e10_one_shot",meta:"Vigolas · S4 The Crack in the Seal · E10 · 6 panels",char:"vigolas",season:"s4",badge:"S4 FINALE",color:"#4ade80"},
+  {num:"S4E01",title:"The First Killing",file:"rougeina_s4e01_the_first_killing",meta:"Rougeina · S4 The Star Killer · E1 · 6 panels",char:"rougeina",season:"s4",badge:"S4",color:"#DC2626"},
+  {num:"S4E02",title:"The Pulse Archipelago War",file:"rougeina_s4e02_the_pulse_archipelago_war",meta:"Rougeina · S4 The Star Killer · E2 · 6 panels",char:"rougeina",season:"s4",badge:"S4",color:"#DC2626"},
+  {num:"S4E03",title:"The Afterglow Vigil",file:"rougeina_s4e03_the_afterglow_vigil",meta:"Rougeina · S4 The Star Killer · E3 · 6 panels",char:"rougeina",season:"s4",badge:"S4",color:"#DC2626"},
+  {num:"S4E04",title:"The Memory Archive",file:"rougeina_s4e04_the_memory_archive",meta:"Rougeina · S4 The Star Killer · E4 · 6 panels",char:"rougeina",season:"s4",badge:"S4",color:"#DC2626"},
+  {num:"S4E05",title:"Lume's Voice",file:"rougeina_s4e05_lumes_voice",meta:"Rougeina · S4 The Star Killer · E5 · 6 panels",char:"rougeina",season:"s4",badge:"S4",color:"#DC2626"},
+  {num:"S4E06",title:"The Center Note Defends",file:"rougeina_s4e06_the_center_note_defends",meta:"Rougeina · S4 The Star Killer · E6 · 6 panels",char:"rougeina",season:"s4",badge:"S4",color:"#DC2626"},
+  {num:"S4E07",title:"The Forbidden Dance",file:"rougeina_s4e07_the_forbidden_dance",meta:"Rougeina · S4 The Star Killer · E7 · 6 panels",char:"rougeina",season:"s4",badge:"S4",color:"#DC2626"},
+  {num:"S4E08",title:"The Killer Cornered",file:"rougeina_s4e08_the_killer_cornered",meta:"Rougeina · S4 The Star Killer · E8 · 6 panels",char:"rougeina",season:"s4",badge:"S4",color:"#DC2626"},
+  {num:"S4E09",title:"The Helios Tremor",file:"rougeina_s4e09_the_helios_tremor",meta:"Rougeina · S4 The Star Killer · E9 · 6 panels",char:"rougeina",season:"s4",badge:"S4",color:"#DC2626"},
+  {num:"S4E10",title:"The Two Stars Hold",file:"rougeina_s4e10_the_two_stars_hold",meta:"Rougeina · S4 The Star Killer · E10 · 6 panels",char:"rougeina",season:"s4",badge:"S4 FINALE",color:"#DC2626"},
+  {num:"S4E01",title:"Acolyte Fenn's Last Reading",file:"trollmage_s4e01_acolyte_fenns_last_reading",meta:"Trollmage · S4 Nock's Right Hand · E1 · 6 panels",char:"trollmage",season:"s4",badge:"S4",color:"#7C3AED"},
+  {num:"S4E02",title:"The Crime Scene",file:"trollmage_s4e02_the_crime_scene",meta:"Trollmage · S4 Nock's Right Hand · E2 · 6 panels",char:"trollmage",season:"s4",badge:"S4",color:"#7C3AED"},
+  {num:"S4E03",title:"Nock Locked Up",file:"trollmage_s4e03_nock_locked_up",meta:"Trollmage · S4 Nock's Right Hand · E3 · 6 panels",char:"trollmage",season:"s4",badge:"S4",color:"#7C3AED"},
+  {num:"S4E04",title:"The Hand Talks",file:"trollmage_s4e04_the_hand_talks",meta:"Trollmage · S4 Nock's Right Hand · E4 · 6 panels",char:"trollmage",season:"s4",badge:"S4",color:"#7C3AED"},
+  {num:"S4E05",title:"The Other Three Council Members",file:"trollmage_s4e05_the_other_three_council_members",meta:"Trollmage · S4 Nock's Right Hand · E5 · 6 panels",char:"trollmage",season:"s4",badge:"S4",color:"#7C3AED"},
+  {num:"S4E06",title:"Nock and the Hand Together",file:"trollmage_s4e06_nock_and_the_hand_together",meta:"Trollmage · S4 Nock's Right Hand · E6 · 6 panels",char:"trollmage",season:"s4",badge:"S4",color:"#7C3AED"},
+  {num:"S4E07",title:"The Binding at Pride's Page",file:"trollmage_s4e07_the_binding_at_prides_page",meta:"Trollmage · S4 Nock's Right Hand · E7 · 6 panels",char:"trollmage",season:"s4",badge:"S4",color:"#7C3AED"},
+  {num:"S4E08",title:"Hunting the Last Rogue",file:"trollmage_s4e08_hunting_the_last_rogue",meta:"Trollmage · S4 Nock's Right Hand · E8 · 6 panels",char:"trollmage",season:"s4",badge:"S4",color:"#7C3AED"},
+  {num:"S4E09",title:"The New Council",file:"trollmage_s4e09_the_new_council",meta:"Trollmage · S4 Nock's Right Hand · E9 · 6 panels",char:"trollmage",season:"s4",badge:"S4",color:"#7C3AED"},
+  {num:"S4E10",title:"The Dancehall Drinks",file:"trollmage_s4e10_the_dancehall_drinks",meta:"Trollmage · S4 Nock's Right Hand · E10 · 6 panels",char:"trollmage",season:"s4",badge:"S4 FINALE",color:"#7C3AED"},
+  {num:"S4E01",title:"The Subtick Slows",file:"kompis_s4e01_the_subtick_slows",meta:"Kompis · S4 Bakasura at the Lake · E1 · 6 panels",char:"kompis",season:"s4",badge:"S4",color:"#D97706"},
+  {num:"S4E02",title:"The Approach",file:"kompis_s4e02_the_approach",meta:"Kompis · S4 Bakasura at the Lake · E2 · 6 panels",char:"kompis",season:"s4",badge:"S4",color:"#D97706"},
+  {num:"S4E03",title:"First Contact",file:"kompis_s4e03_first_contact",meta:"Kompis · S4 Bakasura at the Lake · E3 · 6 panels",char:"kompis",season:"s4",badge:"S4",color:"#D97706"},
+  {num:"S4E04",title:"The Lemon Grove Stand",file:"kompis_s4e04_the_lemon_grove_stand",meta:"Kompis · S4 Bakasura at the Lake · E4 · 6 panels",char:"kompis",season:"s4",badge:"S4",color:"#D97706"},
+  {num:"S4E05",title:"Vigolas Arrives",file:"kompis_s4e05_vigolas_arrives",meta:"Kompis · S4 Bakasura at the Lake · E5 · 6 panels",char:"kompis",season:"s4",badge:"S4",color:"#D97706"},
+  {num:"S4E06",title:"The Cabin Falls",file:"kompis_s4e06_the_cabin_falls",meta:"Kompis · S4 Bakasura at the Lake · E6 · 6 panels",char:"kompis",season:"s4",badge:"S4",color:"#D97706"},
+  {num:"S4E07",title:"The Dock Stand",file:"kompis_s4e07_the_dock_stand",meta:"Kompis · S4 Bakasura at the Lake · E7 · 6 panels",char:"kompis",season:"s4",badge:"S4",color:"#D97706"},
+  {num:"S4E08",title:"Mingus Crosses Realms",file:"kompis_s4e08_mingus_crosses_realms",meta:"Kompis · S4 Bakasura at the Lake · E8 · 6 panels",char:"kompis",season:"s4",badge:"S4",color:"#D97706"},
+  {num:"S4E09",title:"Mingus's True Form",file:"kompis_s4e09_minguss_true_form",meta:"Kompis · S4 Bakasura at the Lake · E9 · 6 panels",char:"kompis",season:"s4",badge:"S4",color:"#D97706"},
+  {num:"S4E10",title:"HOME",file:"kompis_s4e10_home",meta:"Kompis · S4 Bakasura at the Lake · E10 · 6 panels",char:"kompis",season:"s4",badge:"S4 FINALE",color:"#D97706"},
+  {num:"S4E01",title:"The Cracked Tone",file:"smurjan_s4e01_the_cracked_tone",meta:"Smurjan · S4 Echo's Last Stand · E1 · 6 panels",char:"smurjan",season:"s4",badge:"S4",color:"#0EA5E9"},
+  {num:"S4E02",title:"The Rejected Defect Again",file:"smurjan_s4e02_the_rejected_defect_again",meta:"Smurjan · S4 Echo's Last Stand · E2 · 6 panels",char:"smurjan",season:"s4",badge:"S4",color:"#0EA5E9"},
+  {num:"S4E03",title:"Echo's New Body",file:"smurjan_s4e03_echos_new_body",meta:"Smurjan · S4 Echo's Last Stand · E3 · 6 panels",char:"smurjan",season:"s4",badge:"S4",color:"#0EA5E9"},
+  {num:"S4E04",title:"The Mirror Hall Strike",file:"smurjan_s4e04_the_mirror_hall_strike",meta:"Smurjan · S4 Echo's Last Stand · E4 · 6 panels",char:"smurjan",season:"s4",badge:"S4",color:"#0EA5E9"},
+  {num:"S4E05",title:"The Vote Mirror",file:"smurjan_s4e05_the_vote_mirror",meta:"Smurjan · S4 Echo's Last Stand · E5 · 6 panels",char:"smurjan",season:"s4",badge:"S4",color:"#0EA5E9"},
+  {num:"S4E06",title:"Echo Cornered",file:"smurjan_s4e06_echo_cornered",meta:"Smurjan · S4 Echo's Last Stand · E6 · 6 panels",char:"smurjan",season:"s4",badge:"S4",color:"#0EA5E9"},
+  {num:"S4E07",title:"The Warden Released",file:"smurjan_s4e07_the_warden_released",meta:"Smurjan · S4 Echo's Last Stand · E7 · 6 panels",char:"smurjan",season:"s4",badge:"S4",color:"#0EA5E9"},
+  {num:"S4E08",title:"The Dance of Three",file:"smurjan_s4e08_the_dance_of_three",meta:"Smurjan · S4 Echo's Last Stand · E8 · 6 panels",char:"smurjan",season:"s4",badge:"S4",color:"#0EA5E9"},
+  {num:"S4E09",title:"The Absorption",file:"smurjan_s4e09_the_absorption",meta:"Smurjan · S4 Echo's Last Stand · E9 · 6 panels",char:"smurjan",season:"s4",badge:"S4",color:"#0EA5E9"},
+  {num:"S4E10",title:"The True Trinity",file:"smurjan_s4e10_the_true_trinity",meta:"Smurjan · S4 Echo's Last Stand · E10 · 6 panels",char:"smurjan",season:"s4",badge:"S4 FINALE",color:"#0EA5E9"},
+];
+
+
+const CHAR_BTNS = [
+  {id:"all",label:"All",color:"#c9a84c"},
+  {id:"vigolas",label:"Vigolas",color:"#4ade80"},
+  {id:"rougeina",label:"Rougeina",color:"#DC2626"},
+  {id:"trollmage",label:"Trollmage",color:"#7C3AED"},
+  {id:"kompis",label:"Kompis",color:"#D97706"},
+  {id:"smurjan",label:"Smurjan",color:"#0EA5E9"},
+];
+const SEASON_BTNS = [
+  {id:"all",label:"All"},
+  {id:"prologue",label:"Prologue"},
+  {id:"s1",label:"Season 1"},
+  {id:"s2",label:"Season 2"},
+  {id:"s3",label:"Season 3"},
+  {id:"s4",label:"Season 4"},
+];
+
+let activeChar = "all", activeSeason = "all";
+
+// Build filter buttons
+const cf = document.getElementById("charFilters");
+CHAR_BTNS.forEach(b => {
+  const btn = document.createElement("button");
+  btn.className = "fbtn" + (b.id==="all"?" active":"");
+  btn.textContent = b.label;
+  btn.dataset.id = b.id;
+  if(b.id!=="all") btn.style.borderColor = b.color;
+  btn.onclick = () => {
+    activeChar = b.id;
+    cf.querySelectorAll(".fbtn").forEach(x=>x.classList.remove("active"));
+    btn.classList.add("active");
+    render();
+  };
+  cf.appendChild(btn);
+});
+
+const sf = document.getElementById("seasonFilters");
+SEASON_BTNS.forEach(b => {
+  const btn = document.createElement("button");
+  btn.className = "fbtn" + (b.id==="all"?" active":"");
+  btn.textContent = b.label;
+  btn.dataset.id = b.id;
+  btn.onclick = () => {
+    activeSeason = b.id;
+    sf.querySelectorAll(".fbtn").forEach(x=>x.classList.remove("active"));
+    btn.classList.add("active");
+    render();
+  };
+  sf.appendChild(btn);
+});
+
+document.getElementById("search").addEventListener("input", () => render());
+
+function render() {
+  const q = document.getElementById("search").value.toLowerCase();
+  const list = document.getElementById("chapterList");
+  list.innerHTML = "";
+  let filtered = CHAPTERS.filter(c => {
+    if(activeChar!=="all" && c.char!==activeChar) return false;
+    if(activeSeason!=="all" && c.season!==activeSeason) return false;
+    if(q && !c.title.toLowerCase().includes(q) && !c.meta.toLowerCase().includes(q) && !c.num.toLowerCase().includes(q) && !c.char.toLowerCase().includes(q)) return false;
+    return true;
+  });
+  document.getElementById("countLabel").textContent = filtered.length + " chapter" + (filtered.length!==1?"s":"");
+  document.getElementById("noResults").style.display = filtered.length===0?"block":"none";
+  filtered.forEach((c, i) => {
+    const card = document.createElement("div");
+    card.className = "chapter-card";
+    card.style.borderLeftColor = c.color;
+    card.style.transitionDelay = (i*30)+"ms";
+    card.innerHTML = `
+      <div class="num" style="color:${c.color}">${c.num}</div>
+      <div class="info">
+        <h3>${c.title}</h3>
+        <p>${c.meta}</p>
+      </div>
+      <div class="badge" style="color:${c.color};border-color:${c.color}">${c.badge}</div>
+    `;
+    card.onclick = () => openReader(c);
+    list.appendChild(card);
+    requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add("visible")));
+  });
+}
+
+function openReader(c) {
+  const reader = document.getElementById("reader");
+  const scroll = reader.querySelector(".reader-scroll");
+  reader.classList.add("open");
+  document.getElementById("readerTitle").textContent = c.num + " — " + c.title;
+  const img = document.getElementById("readerImg");
+  img.src = "";
+  // Panels are HD WebP at full 1200px source resolution (PNG originals are 11-17MB, deploy-ignored)
+  img.src = "/manga/web/" + c.file + ".webp";
+  img.onerror = () => {
+    img.onerror = () => { img.onerror = null; img.src = "/manga/" + c.file + ".png"; };
+    img.src = "/manga/web/" + c.file + ".jpg"; // fallback to old JPGs if WebP missing
+  };
+  // Season 3/4 don't have audio narration yet — hide the audio control
+  const audioEl = document.getElementById("readerAudio");
+  if (c.season === "s3" || c.season === "s4") {
+    audioEl.removeAttribute("src");
+    audioEl.style.display = "none";
+  } else {
+    const audioBase = c.season === "s2" ? "/audio/s2/" : "/audio/";
+    audioEl.src = audioBase + c.file + ".mp3";
+    audioEl.style.display = "";
+  }
+  scroll.scrollTop = 0;
+  document.body.style.overflow = "hidden";
+}
+
+function closeReader() {
+  document.getElementById("reader").classList.remove("open");
+  document.getElementById("readerAudio").pause();
+  document.body.style.overflow = "";
+}
+
+document.addEventListener("keydown", e => { if(e.key==="Escape") closeReader(); });
+
+// STARFIELD
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+let stars = [];
+function initStars() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  stars = [];
+  const count = Math.floor((canvas.width * canvas.height) / 3000);
+  for(let i=0;i<count;i++) stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5+.3,a:Math.random(),s:Math.random()*.005+.002});
+}
+function drawStars() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  stars.forEach(s => {
+    s.a += s.s;
+    const alpha = .3 + Math.sin(s.a) * .5;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(201,168,76,${Math.max(0,alpha)})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+initStars();
+drawStars();
+window.addEventListener("resize", initStars);
+
+// AURORA BOREALIS CURSOR TRAIL
+const auroraCanvas = document.getElementById("aurora");
+const aCtx = auroraCanvas.getContext("2d");
+function resizeAurora() { auroraCanvas.width = window.innerWidth; auroraCanvas.height = window.innerHeight; }
+resizeAurora();
+window.addEventListener("resize", resizeAurora);
+
+const cursor = document.createElement("div");
+cursor.className = "cursor-dot";
+document.body.appendChild(cursor);
+
+const TRAIL_LENGTH = 18;
+const MIN_DIST = 6; // minimum px between trail points to avoid clumping
+const trail = [];
+let mx = -100, my = -100;
+
+document.addEventListener("mousemove", e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = (mx - 3) + "px";
+  cursor.style.top = (my - 3) + "px";
+});
+
+// Smooth trail: interpolate points toward cursor each frame
+const smoothTrail = [];
+for (let i = 0; i < TRAIL_LENGTH; i++) smoothTrail.push({ x: -100, y: -100 });
+
+function drawAurora() {
+  // Ease each point toward the one ahead of it (first point follows cursor with 20px lag)
+  const lag = 0.35;
+  smoothTrail[0].x += (mx - smoothTrail[0].x) * lag;
+  smoothTrail[0].y += (my - smoothTrail[0].y) * lag;
+  for (let i = 1; i < TRAIL_LENGTH; i++) {
+    const ease = 0.3;
+    smoothTrail[i].x += (smoothTrail[i - 1].x - smoothTrail[i].x) * ease;
+    smoothTrail[i].y += (smoothTrail[i - 1].y - smoothTrail[i].y) * ease;
+  }
+
+  aCtx.clearRect(0, 0, auroraCanvas.width, auroraCanvas.height);
+
+  // Check if cursor is active (not offscreen)
+  if (mx < -50) { requestAnimationFrame(drawAurora); return; }
+
+  // Aurora colors: golden/amber -> teal (northern lights palette)
+  const auroraColors = [
+    { r: 201, g: 168, b: 76 },   // gold
+    { r: 218, g: 185, b: 80 },   // warm gold
+    { r: 180, g: 190, b: 70 },   // gold-green transition
+    { r: 120, g: 200, b: 140 },  // green
+    { r: 60, g: 190, b: 170 },   // teal-green
+    { r: 40, g: 180, b: 190 },   // teal
+    { r: 30, g: 160, b: 180 },   // deep teal
+  ];
+
+  function getAuroraColor(t) {
+    // t from 0 (head, gold) to 1 (tail, teal)
+    const idx = t * (auroraColors.length - 1);
+    const i = Math.floor(idx);
+    const f = idx - i;
+    const a = auroraColors[Math.min(i, auroraColors.length - 1)];
+    const b = auroraColors[Math.min(i + 1, auroraColors.length - 1)];
+    return {
+      r: Math.round(a.r + (b.r - a.r) * f),
+      g: Math.round(a.g + (b.g - a.g) * f),
+      b: Math.round(a.b + (b.b - a.b) * f)
+    };
+  }
+
+  // Draw multiple layered aurora strands with gradient color
+  const layers = [
+    { widthBase: 12, alphaBase: 0.18, offset: 0 },
+    { widthBase: 6, alphaBase: 0.35, offset: 0 },
+    { widthBase: 16, alphaBase: 0.06, offset: 3 },
+  ];
+
+  layers.forEach(layer => {
+    for (let seg = 0; seg < TRAIL_LENGTH - 2; seg++) {
+      const t = seg / (TRAIL_LENGTH - 1);
+      const fadeAlpha = Math.pow(1 - t, 1.5); // fade toward tail
+      const col = getAuroraColor(t);
+      const alpha = layer.alphaBase * fadeAlpha;
+      if (alpha < 0.005) continue;
+
+      const p0 = smoothTrail[seg];
+      const p1 = smoothTrail[seg + 1];
+      const p2 = smoothTrail[seg + 2];
+      const cpx = (p1.x + p2.x) / 2 + layer.offset;
+      const cpy = (p1.y + p2.y) / 2 + layer.offset;
+
+      aCtx.beginPath();
+      aCtx.moveTo(p0.x + layer.offset, p0.y + layer.offset);
+      aCtx.quadraticCurveTo(p1.x + layer.offset, p1.y + layer.offset, cpx, cpy);
+      aCtx.strokeStyle = `rgba(${col.r},${col.g},${col.b},${alpha})`;
+      aCtx.lineWidth = layer.widthBase * (1 - t * 0.6);
+      aCtx.lineCap = "round";
+      aCtx.lineJoin = "round";
+      aCtx.stroke();
+    }
+  });
+
+  // Glowing aurora head near cursor
+  const head = smoothTrail[0];
+  const grd = aCtx.createRadialGradient(head.x, head.y, 0, head.x, head.y, 22);
+  grd.addColorStop(0, "rgba(201,168,76,0.3)");
+  grd.addColorStop(0.4, "rgba(160,200,140,0.12)");
+  grd.addColorStop(1, "rgba(40,180,190,0)");
+  aCtx.beginPath();
+  aCtx.arc(head.x, head.y, 22, 0, Math.PI * 2);
+  aCtx.fillStyle = grd;
+  aCtx.fill();
+
+  requestAnimationFrame(drawAurora);
+}
+drawAurora();
+
+render();
+</script>
+<script src="/js/analytics.js"></script>
+</body>
+</html>

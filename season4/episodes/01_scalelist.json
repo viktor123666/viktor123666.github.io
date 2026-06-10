@@ -1,0 +1,33 @@
+{
+  "id": "s4e01_when_the_twelfth_returns",
+  "number": 1,
+  "title": "When the Twelfth Returns",
+  "subtitle": "Episode 1 of 12 · Season 4: The Fates Unravel",
+  "realm_id": "scalelist",
+  "fate_triggered": "The Twelfth City reappears on a map for three heartbeats.",
+  "pov_characters": ["vigolas_the_administrator", "old_halla"],
+  "supporting": ["keeper_maren", "ferrin_pencilwright"],
+  "synopsis": "A junior Ledger Librarian named Keeper Maren is filing the morning's geographies when she notices a thirteenth bullet point on a parchment that should only ever list twelve cities. She blinks. The bullet remains for two more heartbeats. On the third, it is gone. Maren has been trained for forty years not to mention what she has just seen — but she mentions it. To Old Halla, who is the last living human who remembers K-XII's face. Halla does not look surprised. She says only: 'Find the Administrator. Tell him the Twelfth said hello.' Vigolas receives the message at his Stormhold throne and stands for the first time in a year. He travels to the Ledger Heartland personally — the first Stormcoast leader to visit the central capital in 200 years. He reads the parchment. He sees nothing. But he can FEEL the shape of where the bullet point was. Vigolas writes a single line on a fresh sheet: 'I noticed.' He files it. The Twelfth, somewhere, files it back.",
+  "key_scenes": [
+    {"location": "The Architects' Ledger, Scalelist", "action": "Keeper Maren spots the 13th bullet point. Three heartbeats. It vanishes."},
+    {"location": "Old Halla's parlor, Ledger Heartland", "action": "Halla, blind in one eye, hears Maren's report. Says: 'Find the Administrator.'"},
+    {"location": "Stormhold throne room, Helios coast", "action": "Vigolas reads the message. Stands. The lightning above the tower pauses for one heartbeat in respect."},
+    {"location": "Ferdinand's Trunk-Shadow plain", "action": "Vigolas walks the cobbled Twelve-Cities Road to the Ledger. He arrives in twelve days. The 12th day is a Tuesday, as promised."},
+    {"location": "Ledger Heartland, the parchment", "action": "Vigolas reads. Senses the absence. Writes: 'I noticed.' Files it. The room exhales."}
+  ],
+  "cliffhanger": "Old Halla, alone in her parlor that night, looks at her right palm and finds a thirteenth crease that was not there yesterday. She closes her hand. She will not look again.",
+  "panel_storyboard": [
+    {"panel": 1, "composition": "Wide shot of the Ledger interior. Maren bent over the parchment, candle-lit. 12 bullet points visible, one fading.", "character": "keeper_maren", "camera": "high overhead", "emotion": "focused, then startled", "caption": "She had been trained for forty years not to mention what she had just seen."},
+    {"panel": 2, "composition": "Extreme close-up of Maren's eye reflecting the parchment. The 13th bullet point visible in the reflection.", "character": "keeper_maren", "camera": "macro", "emotion": "dread"},
+    {"panel": 3, "composition": "Old Halla's parlor. Halla in a wooden rocking chair, blind eye milky-white. Maren standing in the doorway, breathless.", "character": "old_halla", "camera": "interior wide", "emotion": "calm wisdom", "dialogue": "Halla: 'The Twelfth said hello, did it?'"},
+    {"panel": 4, "composition": "Stormhold throne room. Vigolas seated. A messenger sparrow arrives with a pale-gold scroll. Lightning visible through the window pauses mid-strike.", "character": "vigolas_the_administrator", "camera": "throne-level wide", "emotion": "recognition"},
+    {"panel": 5, "composition": "Vigolas standing for the first time. Wide shot showing the throne empty for the first time in canon.", "character": "vigolas_the_administrator", "camera": "low angle", "emotion": "weight"},
+    {"panel": 6, "composition": "Vigolas walking the Twelve-Cities Road, alone, cloak fluttering. Distant Stormhold behind, distant Ledger Heartland ahead. Twelve milestones visible.", "character": "vigolas_the_administrator", "camera": "long lens", "emotion": "deliberate"},
+    {"panel": 7, "composition": "Vigolas seated at the parchment table. Maren and Halla flanking. Vigolas's quill writing two words: 'I noticed.'", "character": "vigolas_the_administrator", "camera": "over shoulder", "emotion": "quiet acknowledgement", "dialogue": "Vigolas (whispered): 'I noticed.'"},
+    {"panel": 8, "composition": "Halla alone, candlelight, looking at her right palm. A thirteenth crease visible.", "character": "old_halla", "camera": "tight", "emotion": "private terror, controlled", "caption": "She closed her hand. She would not look again."}
+  ],
+  "cosmic_price_paid": "Old Halla now bears a thirteenth crease in her palm. K-V will visit her in Episode 11 to acknowledge it.",
+  "callout_for_cosmos_drawer": "In Season 4, the Twelfth City briefly returned to the map. Keeper Maren saw it. Vigolas filed it.",
+  "watch_chapter": null,
+  "read_chapter": null
+}

@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Realm Globe — Scalelist Cosmos</title>
+<meta name="description" content="Interactive 3D globe of a Scalelist Universe realm. Rotate, zoom, click cities. Atmosphere, clouds, day/night lighting.">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --accent:#c9a84c;
+    --panel:#0a0a14;
+    --panel-border:rgba(201,168,76,0.3);
+    --text:#d4c9a8;
+    --dim:#7a7060;
+  }
+  html,body{height:100%;overflow:hidden;background:#000;color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;user-select:none;-webkit-user-select:none;}
+
+  .nebula{position:fixed;inset:0;z-index:0;pointer-events:none;background:
+    radial-gradient(ellipse at 20% 20%, rgba(153,51,255,0.10) 0%, transparent 45%),
+    radial-gradient(ellipse at 80% 30%, rgba(255,51,102,0.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 80%, rgba(0,170,255,0.08) 0%, transparent 50%),
+    #030306;}
+
+  #gl{position:fixed;inset:0;z-index:1;cursor:grab;}
+  #gl.grabbing{cursor:grabbing;}
+
+  #labels{position:fixed;inset:0;z-index:5;pointer-events:none;}
+  .city-pin-label{position:absolute;transform:translate(-50%, -120%);text-align:center;white-space:nowrap;pointer-events:auto;cursor:pointer;transition:opacity 0.25s,transform 0.2s;}
+  .city-pin-label:hover{transform:translate(-50%, -130%);}
+  .city-pin-label .cn{font-size:11px;font-weight:700;color:#fff;letter-spacing:0.12em;text-shadow:0 0 8px rgba(0,0,0,0.9),0 0 4px currentColor;padding:4px 10px;background:rgba(10,10,20,0.6);border:1px solid currentColor;border-radius:4px;backdrop-filter:blur(6px);}
+  .city-pin-label.capital .cn{font-size:13px;letter-spacing:0.16em;}
+  .city-pin-label.sacred .cn{font-style:italic;}
+
+  /* Header */
+  header{position:fixed;top:0;left:0;right:0;z-index:30;padding:14px 24px;display:flex;align-items:center;gap:20px;background:linear-gradient(to bottom, rgba(5,5,8,0.92), rgba(5,5,8,0));}
+  header .back{color:var(--dim);font-size:0.82rem;letter-spacing:0.14em;text-decoration:none;text-transform:uppercase;transition:color 0.2s;}
+  header .back:hover{color:var(--accent);}
+  header h1{font-size:1.15rem;color:var(--accent);letter-spacing:0.08em;font-weight:700;text-transform:uppercase;margin-left:auto;text-shadow:0 0 14px currentColor;}
+  header h1 .sub{color:var(--dim);font-size:0.7rem;letter-spacing:0.2em;font-weight:400;margin-left:10px;}
+
+  /* View mode toggle */
+  .view-toggle{position:fixed;top:62px;left:50%;transform:translateX(-50%);z-index:19;background:rgba(10,10,20,0.85);backdrop-filter:blur(14px);border:1px solid var(--panel-border);border-radius:24px;padding:3px;display:flex;gap:2px;}
+  .view-toggle a{color:var(--dim);font-size:0.74rem;letter-spacing:0.14em;text-decoration:none;text-transform:uppercase;padding:8px 18px;border-radius:20px;transition:all 0.2s;}
+  .view-toggle a.active{background:var(--accent);color:#000;font-weight:700;box-shadow:0 0 12px rgba(201,168,76,0.5);}
+  .view-toggle a:hover:not(.active){color:var(--accent);}
+
+  /* Controls */
+  .ctrl-cluster{position:fixed;bottom:20px;right:24px;z-index:19;display:flex;flex-direction:column;gap:6px;}
+  .ctrl-cluster button{background:rgba(10,10,20,0.85);backdrop-filter:blur(14px);border:1px solid var(--panel-border);color:var(--accent);width:42px;height:42px;border-radius:10px;font-size:1.2rem;cursor:pointer;transition:all 0.2s;}
+  .ctrl-cluster button:hover{background:rgba(201,168,76,0.2);border-color:var(--accent);}
+
+  .help-pill{position:fixed;bottom:20px;left:24px;z-index:19;background:rgba(10,10,20,0.85);backdrop-filter:blur(14px);border:1px solid var(--panel-border);border-radius:20px;padding:8px 16px;font-size:0.74rem;color:var(--dim);}
+  .help-pill span{color:var(--accent);margin:0 4px;font-weight:700;}
+
+  /* Info panel */
+  .info-panel{position:fixed;top:62px;left:24px;z-index:19;background:rgba(10,10,20,0.88);backdrop-filter:blur(14px);border:1px solid var(--panel-border);border-radius:10px;padding:16px 18px;max-width:280px;font-size:0.82rem;}
+  .info-panel h2{font-size:0.95rem;color:var(--accent);letter-spacing:0.08em;margin-bottom:4px;}
+  .info-panel .rs{font-size:0.72rem;color:var(--dim);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:10px;}
+  .info-panel p{font-size:0.78rem;line-height:1.55;color:var(--text);font-style:italic;}
+
+  /* Layer toggles */
+  .layer-toggles{position:fixed;top:62px;right:24px;z-index:19;background:rgba(10,10,20,0.85);backdrop-filter:blur(14px);border:1px solid var(--panel-border);border-radius:10px;padding:12px 14px;font-size:0.76rem;}
+  .layer-toggles h3{font-size:0.66rem;color:var(--accent);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px;}
+  .layer-toggles label{display:flex;align-items:center;gap:8px;margin:4px 0;cursor:pointer;color:var(--dim);transition:color 0.2s;}
+  .layer-toggles label:hover{color:#fff;}
+  .layer-toggles input[type=checkbox]{accent-color:var(--accent);cursor:pointer;}
+
+  @media(max-width:800px){
+    .layer-toggles,.info-panel{display:none;}
+    .view-toggle{top:58px;}
+    #drawer{width:92vw !important;}
+  }
+
+  /* Drawer */
+  #drawer{position:fixed;top:0;right:0;width:420px;max-width:92vw;height:100vh;background:rgba(10,10,20,0.95);backdrop-filter:blur(16px);border-left:1px solid var(--panel-border);z-index:50;transform:translateX(100%);transition:transform 0.4s cubic-bezier(.25,.8,.25,1);overflow-y:auto;}
+  #drawer.open{transform:translateX(0);}
+  #drawer-header{padding:24px 28px 16px;border-bottom:1px solid var(--panel-border);}
+  #drawer-header .close{float:right;cursor:pointer;color:var(--dim);font-size:1.4rem;line-height:1;}
+  #drawer-header .close:hover{color:var(--accent);}
+  #drawer-header .sub{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--dim);margin-bottom:6px;}
+  #drawer-header h2{font-size:1.55rem;color:var(--accent);letter-spacing:0.04em;text-shadow:0 0 12px currentColor;}
+  #drawer-body{padding:22px 28px;}
+  #drawer-body p{font-size:0.88rem;line-height:1.6;color:var(--text);margin-bottom:12px;}
+  #drawer-body .note{font-size:0.85rem;line-height:1.6;color:#e8dfc2;border-left:2px solid var(--accent);padding-left:14px;font-style:italic;}
+
+  /* Splash */
+  .splash{position:fixed;inset:0;z-index:200;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity 0.6s ease;}
+  .splash.hidden{opacity:0;pointer-events:none;}
+  .splash h1{font-size:1.8rem;letter-spacing:0.3em;color:var(--accent);font-weight:700;}
+  .splash .sub{font-size:0.8rem;letter-spacing:0.3em;color:var(--dim);text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<div class="nebula"></div>
+<div id="gl"></div>
+<div id="labels"></div>
+
+<header>
+  <a href="/cosmos" class="back">← COSMOS</a>
+  <h1 id="realm-name">Loading…<span class="sub" id="realm-sub"></span></h1>
+</header>
+
+<div class="view-toggle">
+  <a href="#" id="to-map">🗺 2D MAP</a>
+  <a href="#" class="active">🌐 3D GLOBE</a>
+</div>
+
+<div class="info-panel" id="info-panel" style="display:none;">
+  <h2 id="ip-name">Realm</h2>
+  <div class="rs" id="ip-sub"></div>
+  <p id="ip-desc"></p>
+</div>
+
+<div class="layer-toggles">
+  <h3>Globe Layers</h3>
+  <label><input type="checkbox" id="lay-clouds" checked> Clouds</label>
+  <label><input type="checkbox" id="lay-atmo" checked> Atmosphere</label>
+  <label><input type="checkbox" id="lay-night" checked> Day / Night</label>
+  <label><input type="checkbox" id="lay-rotate" checked> Auto-rotate</label>
+  <label><input type="checkbox" id="lay-labels" checked> City labels</label>
+</div>
+
+<div class="ctrl-cluster">
+  <button id="zin">+</button>
+  <button id="zout">−</button>
+  <button id="zreset" style="font-size:0.9rem;">⌂</button>
+</div>
+
+<div class="help-pill"><span>DRAG</span> rotate · <span>SCROLL</span> zoom · <span>CLICK</span> city · <span>ESC</span> back</div>
+
+<div id="drawer">
+  <div id="drawer-header">
+    <span class="close" id="drawer-close">✕</span>
+    <div class="sub" id="d-sub">Location</div>
+    <h2 id="d-name">—</h2>
+  </div>
+  <div id="drawer-body"></div>
+</div>
+
+<div class="splash" id="splash">
+  <h1 id="splash-title">REALM</h1>
+  <div class="sub">RENDERING 3D GLOBE</div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const params = new URLSearchParams(location.search);
+const REALM_ID = params.get('id') || 'scalelist';
+const MAP_URL = `/cosmos/maps/${REALM_ID}.json`;
+document.getElementById('to-map').href = `/cosmos/realm.html?id=${REALM_ID}`;
+
+const GLOBE_RADIUS = 100;
+const MAP_W = 1600, MAP_H = 1000;
+
+/* =========================================================
+   SCENE
+   ========================================================= */
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 0.1, 5000);
+camera.position.set(0, 30, 280);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.setClearColor(0x000000, 0);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+document.getElementById('gl').appendChild(renderer.domElement);
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.15));
+const sun = new THREE.DirectionalLight(0xfff0d0, 1.8);
+sun.position.set(500, 200, 400);
+scene.add(sun);
+const fill = new THREE.PointLight(0x4080ff, 0.35, 2000);
+fill.position.set(-500, -200, -400);
+scene.add(fill);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.1;
+controls.minDistance = 130;
+controls.maxDistance = 800;
+controls.rotateSpeed = 0.55;
+controls.zoomSpeed = 0.85;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.4;
+
+/* =========================================================
+   STARFIELD BG
+   ========================================================= */
+function createStars(){
+  const n = innerWidth < 700 ? 1500 : 3000;
+  const geo = new THREE.BufferGeometry();
+  const p = new Float32Array(n*3), c = new Float32Array(n*3);
+  for(let i=0;i<n;i++){
+    const r = 2000 + Math.random()*1500;
+    const th = Math.random()*Math.PI*2;
+    const ph = Math.acos(2*Math.random()-1);
+    p[i*3]=r*Math.sin(ph)*Math.cos(th);
+    p[i*3+1]=r*Math.sin(ph)*Math.sin(th);
+    p[i*3+2]=r*Math.cos(ph);
+    const gold = Math.random() < 0.1;
+    c[i*3]=gold?1:0.82; c[i*3+1]=gold?0.88:0.7; c[i*3+2]=gold?0.6:0.4;
+  }
+  geo.setAttribute('position', new THREE.BufferAttribute(p,3));
+  geo.setAttribute('color', new THREE.BufferAttribute(c,3));
+  const m = new THREE.PointsMaterial({size:2.5,sizeAttenuation:true,vertexColors:true,transparent:true,opacity:0.9,blending:THREE.AdditiveBlending,depthWrite:false});
+  return new THREE.Points(geo,m);
+}
+scene.add(createStars());
+
+/* =========================================================
+   LOAD DATA AND BUILD GLOBE
+   ========================================================= */
+let DATA = null;
+let globeMesh = null, cloudMesh = null, atmoMesh = null;
+const cityPins = [], cityLabels = [];
+
+fetch(MAP_URL).then(r => { if(!r.ok) throw new Error('not found'); return r.json(); }).then(data => {
+  DATA = data;
+  applyTheme(data);
+  buildGlobe(data);
+  renderInfoPanel(data);
+  setTimeout(() => document.getElementById('splash').classList.add('hidden'), 400);
+  setTimeout(() => document.getElementById('splash').remove(), 1200);
+}).catch(e => {
+  console.error(e);
+  document.getElementById('splash').innerHTML = `
+    <h1 style="color:#ff6b6b;">${REALM_ID.toUpperCase()}</h1>
+    <div class="sub">Realm not yet charted</div>
+    <p style="margin-top:18px;color:#7a7060;max-width:420px;text-align:center;line-height:1.55;font-size:0.88rem;">
+      <a href="/cosmos" style="color:#c9a84c;">← Return to the Cosmos</a>
+    </p>`;
+});
+
+function applyTheme(data){
+  const r = document.documentElement;
+  r.style.setProperty('--accent', data.color || '#c9a84c');
+  document.getElementById('realm-name').innerHTML = `${data.name}<span class="sub">${data.subtitle||''}</span>`;
+  document.title = `${data.name} GLOBE — Scalelist Cosmos`;
+  document.getElementById('splash-title').textContent = data.name;
+  document.getElementById('to-map').style.color = data.color || '#c9a84c';
+}
+
+function renderInfoPanel(d){
+  document.getElementById('info-panel').style.display = 'block';
+  document.getElementById('ip-name').textContent = d.name;
+  document.getElementById('ip-sub').textContent = d.subtitle || '';
+  document.getElementById('ip-desc').textContent = d.description || '';
+
+  // Add "Life in this Realm" button
+  if(d.life){
+    const existing = document.getElementById('ip-life-btn');
+    if(existing) existing.remove();
+    const btn = document.createElement('button');
+    btn.id = 'ip-life-btn';
+    btn.textContent = `📖 Life in ${d.name} →`;
+    btn.style.marginTop = '14px';
+    btn.style.width = '100%';
+    btn.style.padding = '10px 14px';
+    btn.style.background = `linear-gradient(135deg, ${d.color}33, ${d.color}11)`;
+    btn.style.border = `1px solid ${d.color}`;
+    btn.style.borderRadius = '8px';
+    btn.style.color = d.color;
+    btn.style.fontSize = '0.8rem';
+    btn.style.fontWeight = '700';
+    btn.style.letterSpacing = '0.1em';
+    btn.style.textTransform = 'uppercase';
+    btn.style.cursor = 'pointer';
+    btn.style.transition = 'all 0.2s';
+    btn.onmouseover = () => { btn.style.background = `${d.color}44`; btn.style.boxShadow = `0 0 12px ${d.color}66`; };
+    btn.onmouseout = () => { btn.style.background = `linear-gradient(135deg, ${d.color}33, ${d.color}11)`; btn.style.boxShadow = 'none'; };
+    btn.onclick = () => openLifeDrawer(d);
+    document.getElementById('info-panel').appendChild(btn);
+  }
+}
+
+function openLifeDrawer(d){
+  const life = d.life;
+  if(!life) return;
+  dName.textContent = `Life in ${d.name}`;
+  dSub.textContent = d.subtitle || '';
+  dBody.innerHTML = '';
+  drawer.style.setProperty('--accent', d.color);
+
+  const section = (title, body) => {
+    const h = document.createElement('h3');
+    h.textContent = title;
+    h.style.fontSize = '0.76rem';
+    h.style.textTransform = 'uppercase';
+    h.style.letterSpacing = '0.16em';
+    h.style.color = 'var(--accent)';
+    h.style.margin = '18px 0 8px';
+    h.style.borderBottom = '1px solid rgba(201,168,76,0.15)';
+    h.style.paddingBottom = '5px';
+    dBody.appendChild(h);
+    if(typeof body === 'string'){
+      const p = document.createElement('p');
+      p.textContent = body;
+      p.style.fontSize = '0.88rem';
+      p.style.lineHeight = '1.6';
+      dBody.appendChild(p);
+    } else {
+      dBody.appendChild(body);
+    }
+  };
+
+  if(life.phenomenon){
+    const d2 = document.createElement('div');
+    d2.className = 'note';
+    d2.style.fontStyle = 'italic';
+    d2.style.fontSize = '0.92rem';
+    d2.textContent = life.phenomenon;
+    dBody.appendChild(d2);
+  }
+
+  if(life.inhabitants) section('Inhabitants', life.inhabitants);
+
+  if(life.fauna && life.fauna.length){
+    const list = document.createElement('div');
+    for(const f of life.fauna){
+      const el = document.createElement('div');
+      el.style.padding = '10px 0';
+      el.style.borderBottom = '1px solid rgba(201,168,76,0.08)';
+      el.innerHTML = `<div style="font-weight:700;color:#fff;font-size:0.9rem;">${f.name}</div><div style="font-size:0.82rem;color:var(--text);margin-top:4px;line-height:1.5;">${f.note}</div>`;
+      list.appendChild(el);
+    }
+    section('Fauna', list);
+  }
+
+  if(life.flora && life.flora.length){
+    const list = document.createElement('div');
+    for(const f of life.flora){
+      const el = document.createElement('div');
+      el.style.padding = '10px 0';
+      el.style.borderBottom = '1px solid rgba(201,168,76,0.08)';
+      el.innerHTML = `<div style="font-weight:700;color:#fff;font-size:0.9rem;">${f.name}</div><div style="font-size:0.82rem;color:var(--text);margin-top:4px;line-height:1.5;">${f.note}</div>`;
+      list.appendChild(el);
+    }
+    section('Flora', list);
+  }
+
+  if(life.architecture) section('Architecture', life.architecture);
+  if(life.culture) section('Culture', life.culture);
+  if(life.signature_item) section('Signature Item', life.signature_item);
+
+  if(life.sensory){
+    const list = document.createElement('div');
+    for(const [k, v] of Object.entries(life.sensory)){
+      const el = document.createElement('div');
+      el.style.padding = '8px 0';
+      el.innerHTML = `<div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--dim);margin-bottom:3px;">${k}</div><div style="font-size:0.86rem;line-height:1.55;color:var(--text);">${v}</div>`;
+      list.appendChild(el);
+    }
+    section('Sensory', list);
+  }
+
+  drawer.classList.add('open');
+}
+
+/* =========================================================
+   BUILD REALM TEXTURE on a CANVAS (equirectangular 2048x1024)
+   ========================================================= */
+// Per-realm parchment palettes (Thanatos-style: all light readable parchment with realm tint)
+const PARCHMENT = {
+  scalelist: { paper: '#ede0c1', ink: '#3a2814', accent: '#8b4513', wash: '#d4b88a' },  // cream
+  helios:    { paper: '#cfdacf', ink: '#0e1810', accent: '#2d5030', wash: '#aabbaa' },  // sage
+  astralis:  { paper: '#dccadc', ink: '#200a28', accent: '#7a3a7a', wash: '#bba6bb' },  // lavender
+  codexia:   { paper: '#d6c5d6', ink: '#240a28', accent: '#6a2a6a', wash: '#b5a3b5' },  // violet
+  heartbeat: { paper: '#efe2c4', ink: '#4a2a14', accent: '#8a5a28', wash: '#d8c196' },  // warm cream
+  trinity:   { paper: '#cdd3dc', ink: '#161628', accent: '#3a4a6a', wash: '#abb1bb' },  // blue-grey
+  thanatos:  { paper: '#c8c8d0', ink: '#2a2a30', accent: '#5a5a6a', wash: '#a8a8b4' },  // silver
+  null:      { paper: '#12121a', ink: '#c9a84c', accent: '#8a7030', wash: '#1e1e28' },  // black + gold
+  void2:     { paper: '#f4f4f6', ink: '#2a2a30', accent: '#9a2a2a', wash: '#e0e0e8' },  // white
+  echo:      { paper: '#d8cfee', ink: '#2a1d48', accent: '#6a4ea0', wash: '#bfb3db' },  // mirror violet
+  horizon:   { paper: '#f0dfba', ink: '#5a3a18', accent: '#b07830', wash: '#d8c090' },  // dawn gold
+  lumen:     { paper: '#fff5cf', ink: '#7a5a10', accent: '#c9a84c', wash: '#f4e8a8' },  // first-light
+};
+
+function buildRealmTexture(data){
+  const W = 2048, H = 1024;
+  const canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  const sx = W / MAP_W, sy = H / MAP_H;
+  const pal = PARCHMENT[data.id] || PARCHMENT.scalelist;
+
+  // 1. Parchment base
+  ctx.fillStyle = pal.paper;
+  ctx.fillRect(0, 0, W, H);
+
+  // Radial aged tint (edges slightly darker)
+  const rg = ctx.createRadialGradient(W/2, H/2, W*0.15, W/2, H/2, W*0.7);
+  rg.addColorStop(0, pal.paper);
+  rg.addColorStop(1, pal.wash);
+  ctx.fillStyle = rg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Paper noise texture
+  const imageData = ctx.getImageData(0, 0, W, H);
+  const d = imageData.data;
+  const inkRgb = hexRgb(pal.ink);
+  const seed0 = hashCode('grain' + data.id);
+  const grandom = mulberry32(seed0);
+  for(let i = 0; i < d.length; i += 4){
+    const n = (grandom() - 0.5) * 20;
+    d[i]   = Math.max(0, Math.min(255, d[i]   + n));
+    d[i+1] = Math.max(0, Math.min(255, d[i+1] + n));
+    d[i+2] = Math.max(0, Math.min(255, d[i+2] + n));
+  }
+  ctx.putImageData(imageData, 0, 0);
+
+  // 2. Sea hatching (wavy horizontal lines across the ocean areas)
+  if(data.type === 'continent' || !data.type || data.type === 'pastoral' || data.type === 'mist'){
+    ctx.strokeStyle = pal.ink;
+    ctx.globalAlpha = 0.14;
+    ctx.lineWidth = 0.8;
+    for(let y = 40; y < H - 40; y += 14){
+      ctx.beginPath();
+      for(let x = 0; x < W; x += 5){
+        const wave = Math.sin(x * 0.04 + y * 0.1) * 2.5;
+        if(x === 0) ctx.moveTo(x, y + wave);
+        else ctx.lineTo(x, y + wave);
+      }
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  // 3. Land polygon — ink outline + crosshatch fill
+  if(data.land_polygon){
+    ctx.save();
+    ctx.scale(sx, sy);
+    try {
+      const path = new Path2D(data.land_polygon);
+
+      // Drop-shadow
+      ctx.save();
+      ctx.translate(4/sx, 5/sy);
+      ctx.fillStyle = pal.wash;
+      ctx.globalAlpha = 0.7;
+      ctx.fill(path);
+      ctx.restore();
+
+      // Land fill (slightly lighter than paper)
+      ctx.fillStyle = pal.paper;
+      ctx.globalAlpha = 0.92;
+      ctx.fill(path);
+      ctx.globalAlpha = 1;
+
+      // Crosshatch pattern inside land (2 passes at 45° and -45°)
+      ctx.save();
+      ctx.clip(path);
+      ctx.strokeStyle = pal.accent;
+      ctx.globalAlpha = 0.22;
+      ctx.lineWidth = 0.5/Math.min(sx,sy);
+      for(let i = -MAP_W; i < MAP_W * 2; i += 8){
+        ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i + MAP_H, MAP_H); ctx.stroke();
+      }
+      ctx.globalAlpha = 0.12;
+      for(let i = -MAP_W; i < MAP_W * 2; i += 14){
+        ctx.beginPath(); ctx.moveTo(i, MAP_H); ctx.lineTo(i + MAP_H, 0); ctx.stroke();
+      }
+      ctx.restore();
+
+      // Ink outline (main)
+      ctx.strokeStyle = pal.ink;
+      ctx.lineWidth = 2.2/Math.min(sx,sy);
+      ctx.stroke(path);
+
+      // Inner dotted coastline (hand-drawn feel)
+      ctx.save();
+      ctx.translate(1/sx, 1/sy);
+      ctx.strokeStyle = pal.ink;
+      ctx.globalAlpha = 0.4;
+      ctx.lineWidth = 0.7/Math.min(sx,sy);
+      ctx.setLineDash([2/Math.min(sx,sy), 4/Math.min(sx,sy)]);
+      ctx.stroke(path);
+      ctx.setLineDash([]);
+      ctx.restore();
+
+    } catch(e){ console.warn('land path failed', e); }
+    ctx.restore();
+  }
+
+  // 4. Rivers — double-line (wash bank + ink line)
+  for(const rv of (data.rivers || [])){
+    ctx.save();
+    ctx.scale(sx, sy);
+    try {
+      const p = new Path2D(rv.path);
+      // Bank (wider, lighter)
+      ctx.strokeStyle = pal.wash;
+      ctx.lineWidth = ((rv.width || 3) * 1.6) / Math.min(sx,sy);
+      ctx.lineCap = 'round';
+      ctx.globalAlpha = 0.85;
+      ctx.stroke(p);
+      // Ink river line
+      ctx.strokeStyle = pal.ink;
+      ctx.lineWidth = ((rv.width || 3) * 0.5) / Math.min(sx,sy);
+      ctx.globalAlpha = 0.75;
+      ctx.stroke(p);
+      ctx.globalAlpha = 1;
+    } catch(e){}
+    ctx.restore();
+  }
+
+  // 5. Roads (dotted serpentine)
+  for(const rd of (data.roads || [])){
+    ctx.save();
+    ctx.scale(sx, sy);
+    try {
+      const p = new Path2D(rd.path);
+      ctx.strokeStyle = pal.accent;
+      ctx.lineWidth = 1.4 / Math.min(sx,sy);
+      ctx.setLineDash([3/Math.min(sx,sy), 5/Math.min(sx,sy)]);
+      ctx.globalAlpha = 0.6;
+      ctx.stroke(p);
+      ctx.globalAlpha = 1;
+      ctx.setLineDash([]);
+    } catch(e){}
+    ctx.restore();
+  }
+
+  // 6. Forests — clustered hand-drawn tree silhouettes
+  for(const f of (data.forests || [])){
+    const cx = f.center[0]*sx, cy = f.center[1]*sy, r = f.radius*Math.min(sx,sy);
+    const seed = hashCode(f.name + data.id);
+    const rand = mulberry32(seed);
+    const count = Math.max(18, Math.round(r*0.55));
+    const trees = [];
+    for(let i = 0; i < count; i++){
+      const ang = rand()*Math.PI*2;
+      const rr = Math.sqrt(rand()) * r * 0.95;
+      trees.push({ x: cx + Math.cos(ang)*rr, y: cy + Math.sin(ang)*rr*0.7, size: 9+rand()*6, kind: rand() < 0.6 ? 'pine' : 'oak' });
+    }
+    trees.sort((a, b) => a.y - b.y); // back-to-front
+    for(const t of trees){
+      drawTree(ctx, t.x, t.y, t.size, t.kind, pal.ink, pal.accent);
+    }
+    // Label
+    if(f.name){
+      ctx.fillStyle = pal.ink;
+      ctx.globalAlpha = 0.72;
+      ctx.font = `italic 600 16px Cinzel, Georgia, serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText(f.name.toUpperCase(), cx, cy - r - 6);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  // 7. Mountains — clusters of ink triangles with shading slope lines
+  for(const m of (data.mountain_ranges || [])){
+    for(const [mx, my] of m.points){
+      drawMountain(ctx, mx*sx, my*sy, (m.size || 30)*Math.min(sx,sy), pal.ink, pal.accent);
+    }
+    if(m.name && m.points.length){
+      const [lx, ly] = m.points[Math.floor(m.points.length/2)];
+      ctx.fillStyle = pal.ink;
+      ctx.globalAlpha = 0.72;
+      ctx.font = `italic 600 16px Cinzel, Georgia, serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText(m.name.toUpperCase(), lx*sx, ly*sy - 60);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  // 8. Cities — ornate markers + serif italic labels
+  for(const c of (data.cities || [])){
+    drawCity(ctx, c, pal.ink, pal.accent, pal.paper);
+  }
+
+  // 9. Sacred sites — 8-point star markers
+  for(const s of (data.sacred_sites || [])){
+    drawSacred(ctx, s, pal.ink, pal.accent, data.color || '#c9a84c', pal.paper);
+  }
+
+  return canvas;
+}
+
+function hexRgb(hex){
+  const h = hex.replace('#','');
+  return { r: parseInt(h.substr(0,2),16), g: parseInt(h.substr(2,2),16), b: parseInt(h.substr(4,2),16) };
+}
+
+function drawTree(ctx, x, y, size, kind, ink, accent){
+  ctx.save();
+  ctx.translate(x, y);
+  if(kind === 'pine'){
+    ctx.fillStyle = accent;
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 0.8;
+    const h = size * 1.4, w = size * 0.7;
+    ctx.beginPath();
+    ctx.moveTo(0, h * 0.5);
+    ctx.lineTo(-w * 0.5, h * 0.18);
+    ctx.lineTo(-w * 0.35, h * 0.18);
+    ctx.lineTo(-w * 0.55, -h * 0.1);
+    ctx.lineTo(-w * 0.4, -h * 0.1);
+    ctx.lineTo(-w * 0.5, -h * 0.36);
+    ctx.lineTo(-w * 0.35, -h * 0.36);
+    ctx.lineTo(-w * 0.45, -h * 0.6);
+    ctx.lineTo(0, -h);
+    ctx.lineTo(w * 0.45, -h * 0.6);
+    ctx.lineTo(w * 0.35, -h * 0.36);
+    ctx.lineTo(w * 0.5, -h * 0.36);
+    ctx.lineTo(w * 0.4, -h * 0.1);
+    ctx.lineTo(w * 0.55, -h * 0.1);
+    ctx.lineTo(w * 0.35, h * 0.18);
+    ctx.lineTo(w * 0.5, h * 0.18);
+    ctx.closePath();
+    ctx.globalAlpha = 0.88; ctx.fill();
+    ctx.globalAlpha = 1; ctx.stroke();
+    // Trunk
+    ctx.fillStyle = ink;
+    ctx.fillRect(-1, size * 0.3, 2, size * 0.25);
+  } else {
+    // Deciduous: round canopy with shading
+    ctx.fillStyle = accent;
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    ctx.arc(0, -size*0.55, size*0.58, 0, Math.PI*2);
+    ctx.globalAlpha = 0.85; ctx.fill();
+    ctx.globalAlpha = 1; ctx.stroke();
+    // Shading strokes
+    for(let i = 0; i < 4; i++){
+      const a = (i - 1.5) * 0.3;
+      ctx.strokeStyle = ink;
+      ctx.globalAlpha = 0.4;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(a)*size*0.3, -size*0.55 + Math.sin(a)*size*0.3);
+      ctx.lineTo(Math.cos(a)*size*0.5, -size*0.55 + Math.sin(a)*size*0.5);
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+    // Trunk
+    ctx.fillStyle = ink;
+    ctx.fillRect(-1.5, -size*0.1, 3, size*0.3);
+  }
+  ctx.restore();
+}
+
+function drawMountain(ctx, x, y, size, ink, accent){
+  ctx.save();
+  ctx.translate(x, y);
+  // Main peak
+  ctx.fillStyle = accent;
+  ctx.strokeStyle = ink;
+  ctx.lineWidth = 1.2;
+  ctx.globalAlpha = 0.9;
+  ctx.beginPath();
+  ctx.moveTo(-size, size*0.35);
+  ctx.lineTo(-size*0.3, -size*0.5);
+  ctx.lineTo(0, -size*0.95);
+  ctx.lineTo(size*0.3, -size*0.5);
+  ctx.lineTo(size, size*0.35);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  // Shading slope lines
+  ctx.strokeStyle = ink;
+  ctx.globalAlpha = 0.7;
+  ctx.lineWidth = 0.5;
+  for(let i = 0; i < 6; i++){
+    const px = -size*0.7 + i*size*0.25;
+    ctx.beginPath();
+    ctx.moveTo(px, size*0.2 - Math.abs(px)*0.4);
+    ctx.lineTo(px + size*0.08, size*0.32);
+    ctx.stroke();
+  }
+  // Secondary background peak
+  ctx.fillStyle = accent;
+  ctx.strokeStyle = ink;
+  ctx.lineWidth = 1;
+  ctx.globalAlpha = 0.8;
+  ctx.beginPath();
+  ctx.moveTo(size*0.4, size*0.35);
+  ctx.lineTo(size*0.7, -size*0.1);
+  ctx.lineTo(size*0.9, size*0.1);
+  ctx.lineTo(size*1.15, size*0.35);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
+
+function drawCity(ctx, c, ink, accent, paper){
+  const tier = c.tier || 'city';
+  const x = c.x * (2048 / MAP_W), y = c.y * (1024 / MAP_H);
+  ctx.save();
+  ctx.translate(x, y);
+  if(tier === 'capital'){
+    ctx.fillStyle = accent; ctx.strokeStyle = ink; ctx.lineWidth = 1.8;
+    ctx.beginPath(); ctx.arc(0, 0, 13, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = ink;
+    ctx.beginPath(); ctx.arc(0, 0, 7, 0, Math.PI*2); ctx.fill();
+    // Star
+    ctx.fillStyle = '#f5ebc8';
+    ctx.beginPath();
+    const pts = 'M 0 -6 L 2 -2 L 6 -1 L 2.8 2 L 4 6 L 0 4 L -4 6 L -2.8 2 L -6 -1 L -2 -2 Z';
+    const path = new Path2D(pts); ctx.fill(path);
+  } else if(tier === 'town'){
+    ctx.fillStyle = ink; ctx.strokeStyle = accent; ctx.lineWidth = 1.8;
+    ctx.beginPath(); ctx.arc(0, 0, 6, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+  } else {
+    ctx.fillStyle = accent; ctx.strokeStyle = ink; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(0, 0, 9, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = ink;
+    ctx.beginPath(); ctx.arc(0, 0, 2.5, 0, Math.PI*2); ctx.fill();
+  }
+  // Label
+  const fontSize = tier === 'capital' ? 18 : (tier === 'town' ? 13 : 15);
+  ctx.font = `600 ${fontSize}px Cinzel, Georgia, serif`;
+  ctx.textAlign = 'center';
+  // Halo
+  ctx.strokeStyle = paper; ctx.lineWidth = 4; ctx.globalAlpha = 0.85;
+  ctx.strokeText(c.name, 0, tier === 'capital' ? 36 : 26);
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = ink;
+  ctx.fillText(c.name, 0, tier === 'capital' ? 36 : 26);
+  ctx.restore();
+}
+
+function drawSacred(ctx, s, ink, accent, realmColor, paper){
+  const x = s.x * (2048 / MAP_W), y = s.y * (1024 / MAP_H);
+  ctx.save();
+  ctx.translate(x, y);
+  // 8-point star
+  ctx.fillStyle = realmColor; ctx.strokeStyle = ink; ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  const pts = [[0,-13],[2.4,-3.6],[10.8,-7.2],[4.2,0],[10.8,7.2],[2.4,3.6],[0,13],[-2.4,3.6],[-10.8,7.2],[-4.2,0],[-10.8,-7.2],[-2.4,-3.6]];
+  ctx.moveTo(pts[0][0], pts[0][1]);
+  for(let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+  ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  ctx.fillStyle = ink;
+  ctx.beginPath(); ctx.arc(0, 0, 2.5, 0, Math.PI*2); ctx.fill();
+  // Italic label with halo
+  ctx.font = `italic 500 13px Cormorant Garamond, Georgia, serif`;
+  ctx.textAlign = 'center';
+  ctx.strokeStyle = paper; ctx.lineWidth = 3.5; ctx.globalAlpha = 0.8;
+  ctx.strokeText(s.name, 0, 30);
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = ink;
+  ctx.fillText(s.name, 0, 30);
+  ctx.restore();
+}
+
+function buildCloudTexture(data){
+  const W = 1024, H = 512;
+  const canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = 'rgba(0,0,0,0)';
+  ctx.fillRect(0, 0, W, H);
+
+  const seed = hashCode('clouds'+data.id);
+  const rand = mulberry32(seed);
+  const cloudColor = data.cloud_color || 'rgba(255,255,255,0.45)';
+  // Scatter soft "clouds" via gaussian-ish splats
+  for(let i = 0; i < 140; i++){
+    const cx = rand() * W;
+    const cy = rand() * H * 0.9 + H*0.05;
+    const radius = 20 + rand() * 55;
+    const alpha = 0.12 + rand() * 0.3;
+    const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+    grad.addColorStop(0, cloudColor.replace(/rgba?\(([^)]+)\)/, (m, args) => {
+      const p = args.split(',').map(s => s.trim());
+      return `rgba(${p[0]},${p[1]},${p[2]},${alpha})`;
+    }));
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI*2);
+    ctx.fill();
+  }
+  return canvas;
+}
+
+function hashCode(s){let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h)+s.charCodeAt(i)|0;return h;}
+function mulberry32(a){return function(){let t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296;};}
+
+/* =========================================================
+   BUILD THE 3D GLOBE
+   ========================================================= */
+function buildGlobe(data){
+  // Main planet
+  const surfaceCanvas = buildRealmTexture(data);
+  const surfaceTex = new THREE.CanvasTexture(surfaceCanvas);
+  surfaceTex.colorSpace = THREE.SRGBColorSpace;
+  surfaceTex.anisotropy = 4;
+
+  const geom = new THREE.SphereGeometry(GLOBE_RADIUS, 128, 64);
+  const mat = new THREE.MeshStandardMaterial({
+    map: surfaceTex,
+    roughness: 0.95,
+    metalness: 0.05,
+    emissive: new THREE.Color(data.color || '#c9a84c'),
+    emissiveIntensity: 0.08,
+  });
+  globeMesh = new THREE.Mesh(geom, mat);
+  scene.add(globeMesh);
+
+  // Clouds layer (slightly larger, semi-transparent, rotates independently)
+  const cloudCanvas = buildCloudTexture(data);
+  const cloudTex = new THREE.CanvasTexture(cloudCanvas);
+  cloudTex.colorSpace = THREE.SRGBColorSpace;
+  const cloudGeom = new THREE.SphereGeometry(GLOBE_RADIUS * 1.02, 64, 32);
+  const cloudMat = new THREE.MeshStandardMaterial({
+    map: cloudTex,
+    transparent: true,
+    opacity: 0.75,
+    depthWrite: false,
+    roughness: 1,
+  });
+  cloudMesh = new THREE.Mesh(cloudGeom, cloudMat);
+  scene.add(cloudMesh);
+
+  // Atmosphere (fresnel rim-glow, back-side sphere)
+  const col = new THREE.Color(data.color || '#c9a84c');
+  const atmoGeom = new THREE.SphereGeometry(GLOBE_RADIUS * 1.1, 64, 32);
+  const atmoMat = new THREE.ShaderMaterial({
+    uniforms: { glowColor: { value: col }, power: { value: 2.8 } },
+    vertexShader: `varying vec3 vN; void main(){ vN = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+    fragmentShader: `uniform vec3 glowColor; uniform float power; varying vec3 vN; void main(){ float f = pow(1.0 - abs(vN.z), power); gl_FragColor = vec4(glowColor, f*0.85); }`,
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    side: THREE.BackSide,
+    depthWrite: false,
+  });
+  atmoMesh = new THREE.Mesh(atmoGeom, atmoMat);
+  scene.add(atmoMesh);
+
+  // CITY pins (3D cones on the surface) + HTML labels
+  for(const c of (data.cities || [])){
+    addMarker(c, data.city_color || data.color || '#c9a84c', 'city');
+  }
+  for(const s of (data.sacred_sites || [])){
+    addMarker(s, s.color || data.sacred_color || '#ffffff', 'sacred');
+  }
+
+  // PER-REALM PHENOMENON (Path B — life in the sky around the globe)
+  addRealmPhenomenon(data);
+
+  // PER-REALM IDENTITY FEATURES — what makes each planet unmistakable
+  addRealmIdentity(data);
+}
+
+/* =========================================================
+   REALM IDENTITY FEATURES
+   Each realm gets unique 3D geometry beyond the surface texture.
+   Purpose: "This is Null" / "This is Helios" recognizable at a glance.
+   ========================================================= */
+function addRealmIdentity(data){
+  const id = data.id;
+
+  if(id === 'helios'){
+    // Upside-down shipwreck floating above the equator
+    const wreck = new THREE.Group();
+    const hull = new THREE.Mesh(
+      new THREE.BoxGeometry(35, 8, 14),
+      new THREE.MeshStandardMaterial({ color: 0x5a3a1e, roughness: 0.9 })
+    );
+    wreck.add(hull);
+    const mast = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.8, 1.2, 28, 8),
+      new THREE.MeshStandardMaterial({ color: 0x3a2614, roughness: 0.9 })
+    );
+    mast.position.set(0, -18, 0);
+    wreck.add(mast);
+    const sail = new THREE.Mesh(
+      new THREE.PlaneGeometry(22, 18),
+      new THREE.MeshStandardMaterial({ color: 0x8a7858, roughness: 1, side: THREE.DoubleSide, transparent: true, opacity: 0.82 })
+    );
+    sail.position.set(0, -22, 0);
+    sail.rotation.x = Math.PI / 2;
+    wreck.add(sail);
+    wreck.position.set(0, GLOBE_RADIUS * 1.35, 0);
+    wreck.rotation.z = Math.PI; // UPSIDE DOWN
+    wreck.userData.spin = true;
+    scene.add(wreck);
+    identityGroup = wreck;
+
+    // Giant storm-eye on the surface (dark crater-like shader patch)
+    const eyeGeom = new THREE.CircleGeometry(GLOBE_RADIUS * 0.3, 32);
+    const eyeMat = new THREE.MeshBasicMaterial({
+      color: 0x0a1810, transparent: true, opacity: 0.55, depthWrite: false,
+    });
+    const eye = new THREE.Mesh(eyeGeom, eyeMat);
+    eye.position.set(0, 0, GLOBE_RADIUS * 1.01);
+    eye.lookAt(0, 0, GLOBE_RADIUS * 2);
+    if(globeMesh) globeMesh.add(eye);
+  }
+
+  else if(id === 'astralis'){
+    // Saturn-like equatorial ring made of glowing starlight
+    const ringGeom = new THREE.RingGeometry(GLOBE_RADIUS * 1.4, GLOBE_RADIUS * 2.2, 128, 1);
+    const ringCanvas = document.createElement('canvas');
+    ringCanvas.width = 512; ringCanvas.height = 64;
+    const rctx = ringCanvas.getContext('2d');
+    const gg = rctx.createLinearGradient(0, 0, 0, 64);
+    gg.addColorStop(0, 'rgba(255,120,180,0)');
+    gg.addColorStop(0.3, 'rgba(255,120,180,0.8)');
+    gg.addColorStop(0.5, 'rgba(255,240,220,1)');
+    gg.addColorStop(0.7, 'rgba(255,120,180,0.8)');
+    gg.addColorStop(1, 'rgba(255,120,180,0)');
+    rctx.fillStyle = gg;
+    rctx.fillRect(0, 0, 512, 64);
+    // Scatter bright specks (starlight)
+    rctx.fillStyle = 'rgba(255,255,255,1)';
+    for(let i = 0; i < 200; i++){
+      const x = Math.random() * 512;
+      const y = Math.random() * 64;
+      rctx.globalAlpha = Math.random();
+      rctx.fillRect(x, y, Math.random() * 2 + 0.5, Math.random() * 2 + 0.5);
+    }
+    rctx.globalAlpha = 1;
+    const ringTex = new THREE.CanvasTexture(ringCanvas);
+    const ringMat = new THREE.MeshBasicMaterial({
+      map: ringTex, transparent: true, opacity: 0.85,
+      blending: THREE.AdditiveBlending, side: THREE.DoubleSide, depthWrite: false,
+    });
+    const ring = new THREE.Mesh(ringGeom, ringMat);
+    ring.rotation.x = Math.PI / 2 - 0.2;
+    scene.add(ring);
+    identityGroup = ring;
+  }
+
+  else if(id === 'codexia'){
+    // Seven spires piercing up through the atmosphere
+    const group = new THREE.Group();
+    for(let i = 0; i < 7; i++){
+      const angle = (i / 7) * Math.PI * 2;
+      const spire = new THREE.Mesh(
+        new THREE.ConeGeometry(3, GLOBE_RADIUS * 0.5, 6),
+        new THREE.MeshStandardMaterial({
+          color: 0x1a0818, emissive: 0x9933ff, emissiveIntensity: 0.3,
+          roughness: 0.4, metalness: 0.6,
+        })
+      );
+      // Position at "north pole" arranged in a ring
+      const surfaceY = GLOBE_RADIUS * 0.75;
+      const ringR = GLOBE_RADIUS * 0.45;
+      spire.position.set(
+        ringR * Math.cos(angle),
+        surfaceY + GLOBE_RADIUS * 0.25,
+        ringR * Math.sin(angle)
+      );
+      spire.lookAt(0, 0, 0);
+      spire.rotateX(Math.PI / 2);
+      group.add(spire);
+    }
+    scene.add(group);
+    identityGroup = group;
+  }
+
+  else if(id === 'heartbeat'){
+    // Warm golden glow spot + smoke particles rising (the cabin visible from orbit)
+    const glowSpot = new THREE.Mesh(
+      new THREE.SphereGeometry(GLOBE_RADIUS * 0.08, 16, 16),
+      new THREE.MeshBasicMaterial({ color: 0xffcc66, transparent: true, opacity: 0.8 })
+    );
+    // Position over "Buddy's Rest" area
+    const u = 540 / MAP_W, v = 620 / MAP_H;
+    const pos = uvToSphere(u, v, GLOBE_RADIUS * 1.05);
+    glowSpot.position.copy(pos);
+    scene.add(glowSpot);
+
+    // Smoke particles rising from this spot
+    const smokeCount = 50;
+    const smokeGeo = new THREE.BufferGeometry();
+    const smokePos = new Float32Array(smokeCount * 3);
+    for(let i = 0; i < smokeCount; i++){
+      smokePos[i*3]   = pos.x + (Math.random() - 0.5) * 4;
+      smokePos[i*3+1] = pos.y + Math.random() * GLOBE_RADIUS * 0.4;
+      smokePos[i*3+2] = pos.z + (Math.random() - 0.5) * 4;
+    }
+    smokeGeo.setAttribute('position', new THREE.BufferAttribute(smokePos, 3));
+    const smokeMat = new THREE.PointsMaterial({
+      color: 0xddd0b0, size: 2.5, transparent: true, opacity: 0.35,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+    });
+    const smoke = new THREE.Points(smokeGeo, smokeMat);
+    scene.add(smoke);
+    identityGroup = smoke;
+  }
+
+  else if(id === 'trinity'){
+    // Three offset overlapping spheres (blue, purple, orange)
+    const colors = [0x80d0ff, 0xf080ff, 0xffa060];
+    const offsets = [
+      new THREE.Vector3(-12, 0, 0),
+      new THREE.Vector3(12, 0, 0),
+      new THREE.Vector3(0, 0, 12),
+    ];
+    for(let i = 0; i < 3; i++){
+      const g = new THREE.SphereGeometry(GLOBE_RADIUS * 1.04, 32, 32);
+      const m = new THREE.MeshBasicMaterial({
+        color: colors[i], transparent: true, opacity: 0.15,
+        blending: THREE.AdditiveBlending, depthWrite: false,
+      });
+      const mesh = new THREE.Mesh(g, m);
+      mesh.position.copy(offsets[i]);
+      scene.add(mesh);
+    }
+  }
+
+  else if(id === 'thanatos'){
+    // Spiral groove on surface + name-particles falling from above
+    // Spiral torus strip along surface
+    const spiralPts = [];
+    const turns = 5;
+    for(let i = 0; i < 500; i++){
+      const t = i / 500;
+      const phi = t * Math.PI * 2 * turns;
+      const theta = t * Math.PI; // top pole to bottom pole
+      const r = GLOBE_RADIUS * 1.005;
+      spiralPts.push(new THREE.Vector3(
+        r * Math.sin(theta) * Math.cos(phi),
+        r * Math.cos(theta),
+        r * Math.sin(theta) * Math.sin(phi)
+      ));
+    }
+    const curve = new THREE.CatmullRomCurve3(spiralPts);
+    const tubeGeom = new THREE.TubeGeometry(curve, 400, 0.8, 6, false);
+    const tubeMat = new THREE.MeshBasicMaterial({ color: 0x2a2a30, transparent: true, opacity: 0.75 });
+    const tube = new THREE.Mesh(tubeGeom, tubeMat);
+    scene.add(tube);
+    identityGroup = tube;
+  }
+
+  else if(id === 'null'){
+    // Replace the planet with a VOID — gravitational lens + central pulsing heartbeat light
+    // Hide the main globe mesh (Null isn't a planet, it's an absence)
+    if(globeMesh) globeMesh.visible = false;
+    if(cloudMesh) cloudMesh.visible = false;
+
+    // Event horizon sphere (pure black, no texture)
+    const horizonGeom = new THREE.SphereGeometry(GLOBE_RADIUS * 0.6, 48, 48);
+    const horizonMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const horizon = new THREE.Mesh(horizonGeom, horizonMat);
+    scene.add(horizon);
+
+    // Central heartbeat light (goldish)
+    const hbCore = new THREE.Mesh(
+      new THREE.SphereGeometry(GLOBE_RADIUS * 0.08, 32, 32),
+      new THREE.MeshBasicMaterial({ color: 0xc9a84c })
+    );
+    scene.add(hbCore);
+    const hbLight = new THREE.PointLight(0xc9a84c, 3, GLOBE_RADIUS * 6);
+    scene.add(hbLight);
+    // Animate heartbeat
+    const updater = phenomenonUpdater;
+    phenomenonUpdater = (t) => {
+      if(updater) updater(t);
+      const beat = Math.abs(Math.sin(t * 2.5)) ** 4 + Math.abs(Math.sin(t * 2.5 + 0.15)) ** 3 * 0.5;
+      hbCore.scale.setScalar(1 + beat * 0.4);
+      hbCore.material.opacity = 0.4 + beat * 0.6;
+      hbCore.material.transparent = true;
+      hbLight.intensity = 1.5 + beat * 3;
+    };
+
+    // Ferdinand's roots descending from above (visible silvery threads)
+    for(let i = 0; i < 12; i++){
+      const angle = (i / 12) * Math.PI * 2;
+      const rootGeom = new THREE.CylinderGeometry(0.4, 0.1, GLOBE_RADIUS * 2, 6);
+      const rootMat = new THREE.MeshStandardMaterial({
+        color: 0xd0d4dc, emissive: 0x8090a0, emissiveIntensity: 0.3, roughness: 0.4,
+      });
+      const root = new THREE.Mesh(rootGeom, rootMat);
+      const r = GLOBE_RADIUS * 0.8;
+      root.position.set(
+        r * Math.cos(angle),
+        GLOBE_RADIUS * 1.2,
+        r * Math.sin(angle)
+      );
+      root.rotation.z = (i % 2 === 0 ? 0.08 : -0.08);
+      scene.add(root);
+    }
+
+    // Accretion-disc-like glow ring
+    const discGeom = new THREE.RingGeometry(GLOBE_RADIUS * 0.65, GLOBE_RADIUS * 1.1, 128, 1);
+    const discMat = new THREE.MeshBasicMaterial({
+      color: 0xc9a84c, transparent: true, opacity: 0.3,
+      blending: THREE.AdditiveBlending, side: THREE.DoubleSide, depthWrite: false,
+    });
+    const disc = new THREE.Mesh(discGeom, discMat);
+    disc.rotation.x = Math.PI / 2 - 0.15;
+    scene.add(disc);
+  }
+
+  else if(id === 'void2'){
+    // 12 dark throne marks around a ring, central golden seal
+    const throneGroup = new THREE.Group();
+    for(let i = 0; i < 12; i++){
+      const angle = (i / 12) * Math.PI * 2;
+      const mark = new THREE.Mesh(
+        new THREE.SphereGeometry(2.5, 12, 12),
+        new THREE.MeshStandardMaterial({
+          color: i === 11 ? 0x9a2a2a : 0x2a2a30,
+          emissive: i === 11 ? 0x9a2a2a : 0x2a2a30,
+          emissiveIntensity: 0.4,
+        })
+      );
+      const r = GLOBE_RADIUS * 1.02;
+      mark.position.set(
+        r * Math.cos(angle),
+        0,
+        r * Math.sin(angle)
+      );
+      throneGroup.add(mark);
+    }
+    scene.add(throneGroup);
+    // Central golden seal (disc)
+    const sealGeom = new THREE.CylinderGeometry(GLOBE_RADIUS * 0.15, GLOBE_RADIUS * 0.15, 0.5, 32);
+    const sealMat = new THREE.MeshStandardMaterial({
+      color: 0xc9a84c, emissive: 0xc9a84c, emissiveIntensity: 0.6,
+      metalness: 0.7, roughness: 0.2,
+    });
+    const seal = new THREE.Mesh(sealGeom, sealMat);
+    seal.position.set(0, GLOBE_RADIUS * 1.01, 0);
+    scene.add(seal);
+    identityGroup = throneGroup;
+  }
+
+  else if(id === 'scalelist'){
+    // Golden Ledger Lines streaking across the sky (already in phenomenon_type ledger_lines)
+    // + a subtle warm glow aura
+    const glowGeom = new THREE.SphereGeometry(GLOBE_RADIUS * 1.04, 32, 32);
+    const glowMat = new THREE.MeshBasicMaterial({
+      color: 0xffdd90, transparent: true, opacity: 0.06,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+    });
+    const glow = new THREE.Mesh(glowGeom, glowMat);
+    scene.add(glow);
+  }
+}
+
+let identityGroup = null;
+
+/* =========================================================
+   REALM PHENOMENA — each realm gets its own particle effect
+   ========================================================= */
+let phenomenonUpdater = null;
+
+function addRealmPhenomenon(data){
+  const type = data.phenomenon_type;
+  const color = new THREE.Color(data.color || '#c9a84c');
+  if(!type) return;
+
+  if(type === 'reverse_lightning'){
+    // Helios — lightning bolts flashing around the globe
+    const group = new THREE.Group();
+    const boltMats = [];
+    for(let i = 0; i < 6; i++){
+      const pts = [];
+      const startPhi = Math.random() * Math.PI * 2;
+      let pos = new THREE.Vector3(
+        GLOBE_RADIUS * 1.8 * Math.cos(startPhi), GLOBE_RADIUS * (0.2 + Math.random() * 0.8),
+        GLOBE_RADIUS * 1.8 * Math.sin(startPhi)
+      );
+      pts.push(pos.clone());
+      for(let j = 0; j < 8; j++){
+        pos = pos.clone().add(new THREE.Vector3(
+          (Math.random() - 0.5) * 30,
+          -6 - Math.random() * 18,
+          (Math.random() - 0.5) * 30
+        ));
+        pts.push(pos.clone());
+      }
+      const geom = new THREE.BufferGeometry().setFromPoints(pts);
+      const mat = new THREE.LineBasicMaterial({ color: 0x80ffc0, transparent: true, opacity: 0, linewidth: 2 });
+      const line = new THREE.Line(geom, mat);
+      line.userData.flashAt = Math.random() * 8;
+      line.userData.period = 4 + Math.random() * 6;
+      group.add(line);
+      boltMats.push(line);
+    }
+    scene.add(group);
+    phenomenonUpdater = (t) => {
+      for(const line of boltMats){
+        const phase = ((t + line.userData.flashAt) % line.userData.period) / line.userData.period;
+        // Reverse lightning: quiet → BRIGHT flash → quick dim → silence
+        let op = 0;
+        if(phase < 0.02) op = 1.0;
+        else if(phase < 0.06) op = 1.0 - ((phase - 0.02) / 0.04) * 0.7;
+        else if(phase < 0.12) op = 0.3 - ((phase - 0.06) / 0.06) * 0.3;
+        line.material.opacity = op;
+      }
+    };
+  }
+
+  else if(type === 'fireflies'){
+    // Heartbeat — fireflies drifting around the globe
+    const count = 80;
+    const geom = new THREE.BufferGeometry();
+    const pos = new Float32Array(count * 3);
+    for(let i = 0; i < count; i++){
+      const r = GLOBE_RADIUS * (1.25 + Math.random() * 0.6);
+      const ph = Math.acos(2 * Math.random() - 1);
+      const th = Math.random() * Math.PI * 2;
+      pos[i*3]   = r * Math.sin(ph) * Math.cos(th);
+      pos[i*3+1] = r * Math.sin(ph) * Math.sin(th);
+      pos[i*3+2] = r * Math.cos(ph);
+    }
+    geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const glowCanvas = document.createElement('canvas');
+    glowCanvas.width = glowCanvas.height = 64;
+    const gctx = glowCanvas.getContext('2d');
+    const gg = gctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gg.addColorStop(0, 'rgba(255,220,140,1)');
+    gg.addColorStop(0.4, 'rgba(255,170,60,0.6)');
+    gg.addColorStop(1, 'rgba(0,0,0,0)');
+    gctx.fillStyle = gg;
+    gctx.fillRect(0, 0, 64, 64);
+    const mat = new THREE.PointsMaterial({
+      map: new THREE.CanvasTexture(glowCanvas), color: 0xffcc66,
+      size: 4, sizeAttenuation: true, transparent: true,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+    });
+    const points = new THREE.Points(geom, mat);
+    scene.add(points);
+    const phaseOffsets = new Float32Array(count);
+    for(let i = 0; i < count; i++) phaseOffsets[i] = Math.random() * Math.PI * 2;
+    phenomenonUpdater = (t) => {
+      const p = points.geometry.attributes.position.array;
+      for(let i = 0; i < count; i++){
+        const off = phaseOffsets[i];
+        p[i*3]   += Math.sin(t * 0.6 + off) * 0.04;
+        p[i*3+1] += Math.cos(t * 0.5 + off * 1.3) * 0.03;
+        p[i*3+2] += Math.sin(t * 0.7 + off * 0.7) * 0.04;
+      }
+      points.geometry.attributes.position.needsUpdate = true;
+      mat.opacity = 0.7 + Math.sin(t * 2) * 0.2;
+    };
+  }
+
+  else if(type === 'dancing_particles'){
+    // Astralis — bright points orbiting the globe in rhythmic pulse
+    const count = 200;
+    const geom = new THREE.BufferGeometry();
+    const pos = new Float32Array(count * 3);
+    const col = new Float32Array(count * 3);
+    const baseR = new Float32Array(count);
+    const phase = new Float32Array(count);
+    for(let i = 0; i < count; i++){
+      baseR[i] = GLOBE_RADIUS * (1.25 + Math.random() * 0.7);
+      phase[i] = Math.random() * Math.PI * 2;
+      const th = Math.random() * Math.PI * 2;
+      const ph = Math.acos(2 * Math.random() - 1);
+      pos[i*3]   = baseR[i] * Math.sin(ph) * Math.cos(th);
+      pos[i*3+1] = baseR[i] * Math.sin(ph) * Math.sin(th);
+      pos[i*3+2] = baseR[i] * Math.cos(ph);
+      col[i*3] = 1; col[i*3+1] = 0.3 + Math.random() * 0.5; col[i*3+2] = 0.5 + Math.random() * 0.3;
+    }
+    geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    geom.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    const mat = new THREE.PointsMaterial({
+      size: 3, vertexColors: true, transparent: true, opacity: 0.9,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+    });
+    const points = new THREE.Points(geom, mat);
+    scene.add(points);
+    phenomenonUpdater = (t) => {
+      const p = points.geometry.attributes.position.array;
+      // Beat at 128 BPM = 2.13 beats/sec = ~0.47s per beat
+      const beat = Math.sin(t * 13.4);
+      for(let i = 0; i < count; i++){
+        const r = baseR[i] + beat * 3;
+        const spinAngle = t * 0.2 + phase[i];
+        const currentTh = phase[i] + spinAngle;
+        const currentPh = Math.PI/2 + Math.sin(phase[i] * 2) * 0.8;
+        p[i*3]   = r * Math.sin(currentPh) * Math.cos(currentTh);
+        p[i*3+1] = r * Math.sin(currentPh) * Math.sin(currentTh);
+        p[i*3+2] = r * Math.cos(currentPh);
+      }
+      points.geometry.attributes.position.needsUpdate = true;
+    };
+  }
+
+  else if(type === 'ink_rain'){
+    // Codexia — dark purple drops falling from above
+    const count = 120;
+    const geom = new THREE.BufferGeometry();
+    const pos = new Float32Array(count * 3);
+    const startY = new Float32Array(count);
+    for(let i = 0; i < count; i++){
+      const th = Math.random() * Math.PI * 2;
+      const r = GLOBE_RADIUS * (1 + Math.random() * 0.8);
+      pos[i*3]   = r * Math.cos(th);
+      pos[i*3+1] = GLOBE_RADIUS * (1 + Math.random() * 1.2);
+      pos[i*3+2] = r * Math.sin(th);
+      startY[i] = pos[i*3+1];
+    }
+    geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const mat = new THREE.PointsMaterial({ color: 0xc77aff, size: 2.5, transparent: true, opacity: 0.85, depthWrite: false });
+    const points = new THREE.Points(geom, mat);
+    scene.add(points);
+    const fallSpeed = new Float32Array(count);
+    for(let i = 0; i < count; i++) fallSpeed[i] = 12 + Math.random() * 18;
+    phenomenonUpdater = (t) => {
+      const p = points.geometry.attributes.position.array;
+      for(let i = 0; i < count; i++){
+        p[i*3+1] -= fallSpeed[i] * 0.016;
+        if(p[i*3+1] < -GLOBE_RADIUS * 1.3){
+          const th = Math.random() * Math.PI * 2;
+          const r = GLOBE_RADIUS * (1 + Math.random() * 0.8);
+          p[i*3]   = r * Math.cos(th);
+          p[i*3+1] = GLOBE_RADIUS * (1 + Math.random() * 0.8);
+          p[i*3+2] = r * Math.sin(th);
+        }
+      }
+      points.geometry.attributes.position.needsUpdate = true;
+    };
+  }
+
+  else if(type === 'name_snow'){
+    // Thanatos — silver name flakes slowly falling
+    const count = 90;
+    const geom = new THREE.BufferGeometry();
+    const pos = new Float32Array(count * 3);
+    for(let i = 0; i < count; i++){
+      const th = Math.random() * Math.PI * 2;
+      const r = GLOBE_RADIUS * (1.1 + Math.random() * 0.7);
+      pos[i*3]   = r * Math.cos(th);
+      pos[i*3+1] = GLOBE_RADIUS * (0.5 + Math.random() * 1.5);
+      pos[i*3+2] = r * Math.sin(th);
+    }
+    geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const mat = new THREE.PointsMaterial({ color: 0xf0f0f8, size: 2.2, transparent: true, opacity: 0.8, depthWrite: false });
+    const points = new THREE.Points(geom, mat);
+    scene.add(points);
+    const fallSpeed = new Float32Array(count);
+    const drift = new Float32Array(count);
+    for(let i = 0; i < count; i++){
+      fallSpeed[i] = 2 + Math.random() * 4;
+      drift[i] = Math.random() * Math.PI * 2;
+    }
+    phenomenonUpdater = (t) => {
+      const p = points.geometry.attributes.position.array;
+      for(let i = 0; i < count; i++){
+        p[i*3+1] -= fallSpeed[i] * 0.016;
+        p[i*3]   += Math.sin(t * 0.4 + drift[i]) * 0.03;
+        p[i*3+2] += Math.cos(t * 0.3 + drift[i]) * 0.03;
+        if(p[i*3+1] < -GLOBE_RADIUS * 1.2){
+          const th = Math.random() * Math.PI * 2;
+          const r = GLOBE_RADIUS * (1.1 + Math.random() * 0.7);
+          p[i*3]   = r * Math.cos(th);
+          p[i*3+1] = GLOBE_RADIUS * 1.8;
+          p[i*3+2] = r * Math.sin(th);
+        }
+      }
+      points.geometry.attributes.position.needsUpdate = true;
+    };
+  }
+
+  else if(type === 'triple_pulse'){
+    // Trinity — 3 overlapping atmospheres pulsing at different rates
+    const colors = [0x80d0ff, 0xf080ff, 0xffa060];
+    const rates = [1.1, 1.4, 0.85];
+    const meshes = colors.map((c, i) => {
+      const geom = new THREE.SphereGeometry(GLOBE_RADIUS * (1.15 + i * 0.025), 48, 24);
+      const mat = new THREE.ShaderMaterial({
+        uniforms: { glowColor: { value: new THREE.Color(c) }, power: { value: 3 } },
+        vertexShader: `varying vec3 vN; void main(){ vN = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+        fragmentShader: `uniform vec3 glowColor; uniform float power; varying vec3 vN; void main(){ float f = pow(1.0 - abs(vN.z), power); gl_FragColor = vec4(glowColor, f * 0.35); }`,
+        transparent: true, blending: THREE.AdditiveBlending, side: THREE.BackSide, depthWrite: false,
+      });
+      const m = new THREE.Mesh(geom, mat);
+      scene.add(m);
+      return { mesh: m, rate: rates[i] };
+    });
+    phenomenonUpdater = (t) => {
+      for(const { mesh, rate } of meshes){
+        mesh.material.uniforms.power.value = 3 + Math.sin(t * rate) * 1.2;
+      }
+    };
+  }
+
+  else if(type === 'heartbeat_pulse'){
+    // Null — single central heartbeat light
+    const light = new THREE.PointLight(0x8a8aa0, 0, 600);
+    light.position.set(0, 0, 0);
+    scene.add(light);
+    const coreGeom = new THREE.SphereGeometry(6, 32, 32);
+    const coreMat = new THREE.MeshBasicMaterial({ color: 0xaaaacc, transparent: true, opacity: 0.7 });
+    const core = new THREE.Mesh(coreGeom, coreMat);
+    scene.add(core);
+    phenomenonUpdater = (t) => {
+      // Classic heartbeat pattern: thump-thump-..... thump-thump
+      const beat = Math.abs(Math.sin(t * 2.5)) ** 4 + Math.abs(Math.sin(t * 2.5 + 0.15)) ** 3 * 0.5;
+      light.intensity = beat * 2;
+      core.scale.setScalar(1 + beat * 0.3);
+      core.material.opacity = 0.4 + beat * 0.5;
+    };
+  }
+
+  else if(type === 'white_butterflies'){
+    // VOID-II — white butterfly sprites drifting erratically
+    const count = 30;
+    const butterflies = [];
+    for(let i = 0; i < count; i++){
+      const g = new THREE.PlaneGeometry(3, 2);
+      const m = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85, side: THREE.DoubleSide });
+      const b = new THREE.Mesh(g, m);
+      const r = GLOBE_RADIUS * (1.25 + Math.random() * 0.6);
+      const th = Math.random() * Math.PI * 2;
+      const ph = Math.acos(2 * Math.random() - 1);
+      b.position.set(r * Math.sin(ph) * Math.cos(th), r * Math.sin(ph) * Math.sin(th), r * Math.cos(ph));
+      b.userData.phase = Math.random() * Math.PI * 2;
+      b.userData.baseR = r;
+      scene.add(b);
+      butterflies.push(b);
+    }
+    phenomenonUpdater = (t) => {
+      for(const b of butterflies){
+        const ph = b.userData.phase;
+        b.position.x += Math.sin(t * 1.5 + ph) * 0.15;
+        b.position.y += Math.cos(t * 1.7 + ph * 1.3) * 0.12;
+        b.position.z += Math.sin(t * 1.3 + ph * 0.7) * 0.15;
+        b.rotation.y = t * 3 + ph;
+        b.rotation.z = Math.sin(t * 2 + ph) * 0.4;
+      }
+    };
+  }
+
+  else if(type === 'ledger_lines'){
+    // Scalelist — golden ledger lines streak across the sky periodically
+    const lines = [];
+    const lineCount = 5;
+    for(let i = 0; i < lineCount; i++){
+      const geom = new THREE.BufferGeometry();
+      const pts = [];
+      const baseR = GLOBE_RADIUS * 1.35;
+      const ph = Math.random() * Math.PI * 2;
+      const th0 = Math.random() * Math.PI;
+      for(let j = 0; j < 30; j++){
+        const dr = Math.sin(j / 30 * Math.PI) * 20;
+        pts.push(new THREE.Vector3(
+          (baseR + dr) * Math.sin(th0) * Math.cos(ph + j * 0.05),
+          (baseR + dr) * Math.cos(th0 + j * 0.03),
+          (baseR + dr) * Math.sin(th0) * Math.sin(ph + j * 0.05)
+        ));
+      }
+      geom.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pts.flatMap(p => [p.x, p.y, p.z])), 3));
+      const mat = new THREE.LineBasicMaterial({ color: 0xffdd80, transparent: true, opacity: 0 });
+      const line = new THREE.Line(geom, mat);
+      line.userData.period = 5 + Math.random() * 6;
+      line.userData.offset = Math.random() * line.userData.period;
+      scene.add(line);
+      lines.push(line);
+    }
+    phenomenonUpdater = (t) => {
+      for(const line of lines){
+        const phase = ((t + line.userData.offset) % line.userData.period) / line.userData.period;
+        // Streak: quickly bright, slowly fade
+        let op = 0;
+        if(phase < 0.1) op = phase * 10;
+        else if(phase < 0.5) op = 1 - ((phase - 0.1) / 0.4) * 0.8;
+        else op = 0.2 * (1 - (phase - 0.5) / 0.5);
+        line.material.opacity = op;
+      }
+    };
+  }
+}
+
+function uvToSphere(u, v, radius){
+  // u = 0..1 (longitude), v = 0..1 (latitude, 0=top, 1=bottom)
+  const phi = u * Math.PI * 2;
+  const theta = v * Math.PI;
+  const x = -radius * Math.sin(theta) * Math.cos(phi);
+  const y = radius * Math.cos(theta);
+  const z = radius * Math.sin(theta) * Math.sin(phi);
+  return new THREE.Vector3(x, y, z);
+}
+
+function addMarker(loc, color, kind){
+  // 2D map pixel (loc.x, loc.y) -> UV on the sphere
+  const u = loc.x / MAP_W;
+  const v = loc.y / MAP_H;
+  const surfacePos = uvToSphere(u, v, GLOBE_RADIUS);
+  const pinTop = uvToSphere(u, v, GLOBE_RADIUS * 1.06);
+
+  // Vertical pin (small cylinder from surface)
+  const pinGeom = new THREE.CylinderGeometry(0.4, 0.4, GLOBE_RADIUS * 0.06, 6);
+  const pinMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(color) });
+  const pin = new THREE.Mesh(pinGeom, pinMat);
+  pin.position.copy(surfacePos.clone().add(pinTop).multiplyScalar(0.5));
+  pin.lookAt(pinTop.clone().multiplyScalar(2));
+  pin.rotateX(Math.PI/2);
+  globeMesh.add(pin);
+
+  // Top sphere (clickable)
+  const topGeom = new THREE.SphereGeometry(loc.tier === 'capital' ? 2.3 : 1.8, 12, 12);
+  const topMat = new THREE.MeshStandardMaterial({
+    color: new THREE.Color(color),
+    emissive: new THREE.Color(color),
+    emissiveIntensity: 1.1,
+  });
+  const top = new THREE.Mesh(topGeom, topMat);
+  top.position.copy(pinTop);
+  top.userData = { loc, kind };
+  top.name = `marker-${loc.id || loc.name}`;
+  globeMesh.add(top);
+  cityPins.push(top);
+
+  // HTML label
+  const lbl = document.createElement('div');
+  lbl.className = `city-pin-label${loc.tier === 'capital' ? ' capital' : ''}${kind === 'sacred' ? ' sacred' : ''}`;
+  lbl.style.color = color;
+  lbl.innerHTML = `<span class="cn">${loc.name}</span>`;
+  lbl.addEventListener('click', e => { e.stopPropagation(); openMarker(loc, kind); });
+  document.getElementById('labels').appendChild(lbl);
+  cityLabels.push({ el: lbl, worldPos: pinTop.clone() });
+}
+
+/* =========================================================
+   DRAWER
+   ========================================================= */
+const drawer = document.getElementById('drawer');
+const dName = document.getElementById('d-name');
+const dSub = document.getElementById('d-sub');
+const dBody = document.getElementById('drawer-body');
+
+function openMarker(loc, kind){
+  dName.textContent = loc.name;
+  dSub.textContent = kind === 'sacred' ? 'Sacred Site' : (loc.tier === 'capital' ? 'Capital City' : (loc.tier === 'town' ? 'Town' : 'City'));
+  dBody.innerHTML = '';
+  if(loc.role){
+    const p = document.createElement('p');
+    p.style.textTransform = 'uppercase';
+    p.style.fontSize = '0.72rem';
+    p.style.letterSpacing = '0.18em';
+    p.style.color = 'var(--accent)';
+    p.textContent = loc.role;
+    dBody.appendChild(p);
+  }
+  if(loc.note){ const n = document.createElement('div'); n.className = 'note'; n.textContent = loc.note; dBody.appendChild(n); }
+  if(loc.lore){ const p = document.createElement('p'); p.textContent = loc.lore; dBody.appendChild(p); }
+  drawer.classList.add('open');
+}
+
+document.getElementById('drawer-close').addEventListener('click', () => drawer.classList.remove('open'));
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){
+    if(drawer.classList.contains('open')) drawer.classList.remove('open');
+    else location.href = '/cosmos';
+  }
+});
+
+/* =========================================================
+   CLICK / RAYCAST
+   ========================================================= */
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+let downXY = null, clickDrag = false;
+renderer.domElement.addEventListener('pointerdown', e => { downXY = [e.clientX, e.clientY]; clickDrag = false; });
+renderer.domElement.addEventListener('pointermove', e => {
+  if(downXY && (Math.abs(e.clientX - downXY[0]) > 4 || Math.abs(e.clientY - downXY[1]) > 4)) clickDrag = true;
+});
+renderer.domElement.addEventListener('pointerup', e => {
+  if(clickDrag){ downXY = null; return; }
+  pointer.x = (e.clientX / innerWidth) * 2 - 1;
+  pointer.y = -(e.clientY / innerHeight) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+  const hits = raycaster.intersectObjects(cityPins, false);
+  if(hits.length){
+    const o = hits[0].object;
+    openMarker(o.userData.loc, o.userData.kind);
+  }
+  downXY = null;
+});
+
+/* =========================================================
+   LABEL PROJECTION
+   ========================================================= */
+const tmp3 = new THREE.Vector3();
+const inv = new THREE.Matrix4();
+function syncLabels(){
+  if(!globeMesh) return;
+  const worldMat = globeMesh.matrixWorld;
+  for(const l of cityLabels){
+    tmp3.copy(l.worldPos).applyMatrix4(worldMat);
+    const distToCam = tmp3.distanceTo(camera.position);
+    tmp3.project(camera);
+    const sx = (tmp3.x * 0.5 + 0.5) * innerWidth;
+    const sy = (-tmp3.y * 0.5 + 0.5) * innerHeight;
+    // Dot test: is the marker on the near side of the sphere?
+    const markerWorld = l.worldPos.clone().applyMatrix4(worldMat);
+    const toCam = camera.position.clone().sub(markerWorld).normalize();
+    const normal = markerWorld.clone().sub(globeMesh.position).normalize();
+    const dot = toCam.dot(normal);
+    const behind = dot < 0.05 || tmp3.z > 1;
+    if(behind){
+      l.el.style.opacity = '0';
+      l.el.style.pointerEvents = 'none';
+    } else {
+      l.el.style.opacity = showLabels ? '1' : '0';
+      l.el.style.pointerEvents = showLabels ? 'auto' : 'none';
+    }
+    l.el.style.left = sx + 'px';
+    l.el.style.top = sy + 'px';
+  }
+}
+
+/* =========================================================
+   LAYER TOGGLES
+   ========================================================= */
+let showLabels = true;
+document.getElementById('lay-clouds').addEventListener('change', e => { if(cloudMesh) cloudMesh.visible = e.target.checked; });
+document.getElementById('lay-atmo').addEventListener('change', e => { if(atmoMesh) atmoMesh.visible = e.target.checked; });
+document.getElementById('lay-night').addEventListener('change', e => {
+  sun.intensity = e.target.checked ? 1.8 : 0.0;
+  scene.children.find(c => c.isAmbientLight).intensity = e.target.checked ? 0.15 : 0.8;
+});
+document.getElementById('lay-rotate').addEventListener('change', e => { controls.autoRotate = e.target.checked; });
+document.getElementById('lay-labels').addEventListener('change', e => { showLabels = e.target.checked; });
+
+/* =========================================================
+   ZOOM BUTTONS
+   ========================================================= */
+document.getElementById('zin').addEventListener('click', () => { camera.position.multiplyScalar(0.87); camera.position.clampLength(130, 800); });
+document.getElementById('zout').addEventListener('click', () => { camera.position.multiplyScalar(1.15); camera.position.clampLength(130, 800); });
+document.getElementById('zreset').addEventListener('click', () => { camera.position.set(0, 30, 280); controls.target.set(0,0,0); });
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+/* =========================================================
+   ANIMATION LOOP
+   ========================================================= */
+const clock = new THREE.Clock();
+function animate(){
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+  // Clouds rotate slightly faster than planet
+  if(cloudMesh) cloudMesh.rotation.y += 0.00055;
+  // Pulse atmosphere subtly
+  if(atmoMesh && atmoMesh.material.uniforms){
+    atmoMesh.material.uniforms.power.value = 2.8 + Math.sin(t * 0.8) * 0.25;
+  }
+  // Per-realm phenomenon particle systems
+  if(phenomenonUpdater) phenomenonUpdater(t);
+  controls.update();
+  syncLabels();
+  renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+</html>

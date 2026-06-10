@@ -1,0 +1,137 @@
+{
+  "id": "codexia",
+  "name": "CODEXIA",
+  "subtitle": "The Seven Spires",
+  "type": "spires",
+  "color": "#9933ff",
+  "bg_color": "#0a0218",
+  "ocean_color": "#0a0218",
+  "deep_ocean_color": "#030010",
+  "land_color": "#180530",
+  "land_highlight": "#32145a",
+  "land_shadow": "#08021a",
+  "city_color": "#c77aff",
+  "sacred_color": "#f0c0ff",
+  "description": "Trollmage's domain. Seven black-spire towers, one per sin-codex, arranged in a perfect ring. They hum in minor-key harmony. The central void between them is where the Sabbat Council meets.",
+  "ruler": "Trollmage — Keeper of the Seven Sin Codices",
+  "tick": "50,000 (spell-casting speed)",
+  "gate": "The Seven Gate (recite the codices backward)",
+  "phenomenon_type": "ink_rain",
+  "life": {
+    "phenomenon": "It sometimes rains ink. The ink writes sentences on walls as it falls. The sentences are always TRUE and always WARNINGS. Ink-rain is how the universe whispers to Codexia.",
+    "inhabitants": "Sin-Keepers (one per spire, seven total). Mages, necromancers, and the Sabbat Council. One permanently confused tourist nobody remembers inviting.",
+    "fauna": [
+      {"name": "Sin Raven", "note": "Each raven carries one feather of one sin. Collect all seven feathers for a wish. Currently 6 are in circulation; the Envy feather has not been seen in 200 years."},
+      {"name": "Codex Bat", "note": "Hangs from book pages to memorize them. A flock of 40 can recite an entire tome in harmony."},
+      {"name": "Shadow Snake", "note": "Only exists in peripheral vision. Look directly and it's gone. Many Codexians have one as a companion, though none can prove it."}
+    ],
+    "flora": [
+      {"name": "Patchouli Orchard", "note": "The trees smell of magic. Walk through barefoot and you remember a spell you've never cast."},
+      {"name": "Inkvine", "note": "Writes whatever it touches. Do not let them climb your walls unless you want your walls to have opinions."}
+    ],
+    "architecture": "Black marble spires with interior spiral libraries descending kilometers into the ground. The Dark Patois Dancehall has a neon sign visible from space. Every window faces inward toward the Sabbat Chamber.",
+    "culture": "Greet others by confessing a MINOR sin. 'I ate my roommate's bread this morning' is polite. 'I have no sin' is grounds for immediate ejection — nobody is sinless, so you are lying, which is itself a sin.",
+    "signature_item": "Sin-Ring — bind one sin temporarily. Wear the Greed ring and you cannot be stolen from. Wear the Envy ring and you do not want what others have (rare — bought only once per decade).",
+    "sensory": {
+      "sound": "Bell-hum of all 7 spires resonating in minor key. Occasional pages turning in distant libraries. Ink drops landing.",
+      "smell": "Old books, patchouli, faint sulfur, occasionally a whiff of Dark Patois dancehall smoke.",
+      "feel": "Paper-dry air. Fingers always slightly ink-stained even if you haven't written anything."
+    }
+  },
+  "backdrop": "<defs><radialGradient id='darkAura' cx='50%' cy='50%' r='50%'><stop offset='0%' stop-color='#4a1080' stop-opacity='0.25'/><stop offset='100%' stop-color='#0a0218' stop-opacity='0'/></radialGradient></defs><rect width='1600' height='1000' fill='url(#darkAura)'/><circle cx='800' cy='500' r='360' fill='none' stroke='#9933ff' stroke-width='1.5' opacity='0.25' stroke-dasharray='3 8'/><circle cx='800' cy='500' r='280' fill='none' stroke='#9933ff' stroke-width='1' opacity='0.18'/>",
+  "features": [
+    {
+      "svg": "<g><circle cx='800' cy='500' r='70' fill='#0a0030' stroke='#9933ff' stroke-width='2' opacity='0.7'/><circle cx='800' cy='500' r='70' fill='none' stroke='#c77aff' stroke-width='1' opacity='0.4' stroke-dasharray='2 6'><animateTransform attributeName='transform' type='rotate' from='0 800 500' to='360 800 500' dur='60s' repeatCount='indefinite'/></circle><text x='800' y='496' text-anchor='middle' fill='#c77aff' font-size='10' letter-spacing='3' opacity='0.8'>THE SABBAT</text><text x='800' y='512' text-anchor='middle' fill='#c77aff' font-size='9' letter-spacing='3' opacity='0.65'>COUNCIL CHAMBER</text></g>"
+    }
+  ],
+  "cities": [
+    {
+      "id": "spire_pride",
+      "name": "Spire of Pride",
+      "x": 800, "y": 140,
+      "tier": "capital",
+      "role": "Sin Codex I",
+      "note": "Tallest of the seven. Warning at base: 'Read slowly.'",
+      "lore": "Pride hums the highest note. Those who approach without humility hear ringing in their ears for 3 days. Those with true humility hear nothing — the spire respects them."
+    },
+    {
+      "id": "spire_greed",
+      "name": "Spire of Greed",
+      "x": 1121, "y": 280,
+      "tier": "city",
+      "role": "Sin Codex II",
+      "note": "The only spire with a lock. Key missing since 1971.",
+      "lore": "Around its base, fallen coins accumulate. No one picks them up — the coins refuse to be picked up. They belong to the spire now."
+    },
+    {
+      "id": "spire_wrath",
+      "name": "Spire of Wrath",
+      "x": 1160, "y": 620,
+      "tier": "city",
+      "role": "Sin Codex III",
+      "note": "Cracked down the middle. The crack does not widen or close.",
+      "lore": "The crack was caused by its own hum. Wrath is the only spire that cannot contain itself."
+    },
+    {
+      "id": "spire_envy",
+      "name": "Spire of Envy",
+      "x": 890, "y": 810,
+      "tier": "city",
+      "role": "Sin Codex IV",
+      "note": "Mirror-polished black. Constantly reflects the other six.",
+      "lore": "Walk around Envy and every other spire appears slightly taller than it is. That is Envy doing its work."
+    },
+    {
+      "id": "spire_lust",
+      "name": "Spire of Lust",
+      "x": 710, "y": 810,
+      "tier": "city",
+      "role": "Sin Codex V",
+      "note": "Wrapped in vines. The vines bloom at dusk.",
+      "lore": "Flowers open only after sunset. No one has planted them. They do not need soil — they root in the marble."
+    },
+    {
+      "id": "spire_gluttony",
+      "name": "Spire of Gluttony",
+      "x": 440, "y": 620,
+      "tier": "city",
+      "role": "Sin Codex VI",
+      "note": "Wider at the base than any other. Still growing wider.",
+      "lore": "Every 100 years, Gluttony's base expands by 3 meters. Architects have not yet decided if this is a problem."
+    },
+    {
+      "id": "spire_sloth",
+      "name": "Spire of Sloth",
+      "x": 479, "y": 280,
+      "tier": "city",
+      "role": "Sin Codex VII",
+      "note": "Leans at 4 degrees. Has for 600 years. Will not fall.",
+      "lore": "The laziest of the spires. Sloth does not bother to hum — but you still hear it. It's the sound of the other six, resonating through Sloth's stone."
+    },
+    {
+      "id": "dark_patois_dancehall",
+      "name": "Dark Patois Dancehall",
+      "x": 1350, "y": 460,
+      "tier": "town",
+      "role": "Trollmage's outpost at the edge",
+      "note": "The only place in Codexia where all seven sins are performed simultaneously, legally.",
+      "lore": "By ancient treaty, the dancehall operates outside the sin-tax. Every night. Open forever. Trollmage himself DJs on Thursdays."
+    }
+  ],
+  "sacred_sites": [
+    {
+      "name": "The Sabbat Chamber",
+      "x": 800, "y": 500,
+      "color": "#c77aff",
+      "note": "The void between the seven spires. Where Trollmage and six others convene.",
+      "lore": "The seventh chair is always empty. No one has ever sat in it. It belongs to whichever sin you came carrying."
+    },
+    {
+      "name": "The Seventh Step",
+      "x": 800, "y": 580,
+      "color": "#f0c0ff",
+      "note": "The final step before entering the Sabbat Chamber.",
+      "lore": "You must speak your truest sin aloud to cross it. If you lie, you are returned to Scalelist mid-step, confused."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-04-08 14:09:44",
+  "queue_state": "ALIVE",
+  "queue_msg": "WORKING elapsed=190s prompt=5a255083",
+  "total_clips": 17,
+  "hero": 8,
+  "great": 8,
+  "ok": 1,
+  "review": 0,
+  "fails": 0,
+  "staged": 17,
+  "achievements": "9/16",
+  "free_gb": 494.0,
+  "actions": [
+    {
+      "priority": "FYI",
+      "title": "8 HERO clips ready to publish",
+      "detail": "These scored 90+ \u2014 they're your premium content. Review at /best_of.html and post anywhere.",
+      "link": "/best_of.html"
+    },
+    {
+      "priority": "FYI",
+      "title": "1 OK clips below the 75 threshold",
+      "detail": "These are NOT auto-staged. Eyeball them at /clip_reviewer.html. Likely low-motion scenes (meditation, contemplation).",
+      "link": "/clip_reviewer.html"
+    },
+    {
+      "priority": "FYI",
+      "title": "17 clips staged in ready_to_publish",
+      "detail": "Each has clip.mp4 + thumbnail + youtube.json + social.json. Drag-drop into share_packages/{char}/{name}.zip for one-click upload.",
+      "link": null
+    },
+    {
+      "priority": "OPTIONAL",
+      "title": "9/16 achievements unlocked",
+      "detail": "7 more milestones to chase. Check /achievements.html to see what's left.",
+      "link": "/achievements.html"
+    },
+    {
+      "priority": "OPTIONAL",
+      "title": "Refresh all morning state in one command",
+      "detail": "Run morning_refresh.py to regenerate every report, image, and badge.",
+      "link": null
+    },
+    {
+      "priority": "OPTIONAL",
+      "title": "Push the dataset to HuggingFace",
+      "detail": "Run hf_dataset_readme_gen.py --push to update the README on HF with current stats.",
+      "link": null
+    }
+  ]
+}

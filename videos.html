@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="VIDEOSHOWER — every Scalelist Universe video ever made. Free. Ad-free browsing, no tracking. Built for any connection.">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<title>VIDEOSHOWER — Scalelist Universe</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#14141f;--border:#23233a}
+body{background:var(--bg);color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.header{padding:20px 24px 0;max-width:1400px;margin:0 auto}
+.header h1{font-size:30px;font-weight:900;letter-spacing:1px;background:linear-gradient(90deg,#00ff88,#00aaff,#9933ff,#ff3366,#ffaa00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:inline}
+.header .tag{color:#888;font-size:13px;margin-left:10px}
+.header .stats{color:#777;font-size:13px;margin-top:6px}
+.saver{float:right;margin-top:4px;font-size:12px;color:#aaa;border:1px solid var(--border);border-radius:20px;padding:6px 12px;cursor:pointer;background:transparent;transition:.2s}
+.saver.on{border-color:#00ff88;color:#00ff88}
+.sub-bar{display:flex;gap:10px;padding:14px 24px;max-width:1400px;margin:0 auto;overflow-x:auto;scrollbar-width:none}
+.sub-bar::-webkit-scrollbar{display:none}
+.sub-card{flex:0 0 auto;display:flex;align-items:center;gap:9px;background:var(--card);border-radius:12px;padding:8px 14px;border:1px solid var(--border);transition:.2s}
+.sub-card:hover{border-color:var(--c)}
+.sub-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#000;flex-shrink:0}
+.sub-info .name{font-weight:600;font-size:13px;white-space:nowrap}
+.sub-info .n{font-size:11px;color:#888}
+.filters{padding:8px 24px;max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.search{background:var(--card);border:1px solid #333;border-radius:8px;padding:8px 14px;color:#fff;font-size:14px;width:240px;outline:none}
+.search:focus{border-color:#00ff88}
+.tab{padding:6px 13px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #333;background:transparent;color:#aaa;transition:.15s}
+.tab:hover{border-color:#666;color:#fff}
+.tab.active{color:#fff;border-color:var(--c,#fff);background:color-mix(in srgb,var(--c,#fff) 22%,transparent)}
+.legend{font-size:11px;color:#555;margin-left:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;padding:16px 24px 60px;max-width:1400px;margin:0 auto}
+body.saver-mode .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.card{background:var(--card);border-radius:10px;overflow:hidden;cursor:pointer;border:1px solid transparent;transition:border-color .15s}
+.card:hover{border-color:var(--c)}
+.thumb{position:relative;width:100%;height:0;padding-top:56.25%;background:#0e0e16;overflow:hidden}
+.thumb img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block}
+.dur{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.8);color:#fff;font-size:11px;font-weight:700;padding:1px 5px;border-radius:4px}
+.kind{position:absolute;top:6px;left:6px;background:rgba(0,0,0,.7);color:var(--c);font-size:10px;font-weight:800;padding:1px 6px;border-radius:4px;text-transform:uppercase}
+.meta{padding:9px 11px}
+.meta .title{font-size:13px;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}
+.meta .ch{font-size:11.5px;margin-top:4px;color:var(--c);font-weight:600}
+.meta .vw{color:#666;font-weight:400}
+body.saver-mode .meta .title{font-size:12px;-webkit-line-clamp:1;min-height:auto}
+.more{grid-column:1/-1;height:10px}
+.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:#555}
+/* player */
+.ov{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:99;padding:16px}
+.ov.open{display:flex}
+.pwrap{width:min(960px,100%);}
+.pframe{position:relative;width:100%;height:0;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
+.pframe iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.pbar{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:13px;color:#aaa;gap:12px}
+.pbar .pt{font-weight:600;color:#fff;flex:1}
+.pbar a{color:#00aaff}
+.x{cursor:pointer;font-size:22px;color:#888;padding:0 6px}
+.x:hover{color:#fff}
+.foot{text-align:center;color:#444;font-size:12px;padding:30px 20px 50px}
+.foot b{color:#00ff88}
+</style>
+</head>
+<body>
+<div class="header">
+  <button class="saver" id="saverBtn" title="Low-data mode: tiny thumbnails, no effects. Auto-enables on slow connections.">📶 Data saver: <span id="saverState">off</span></button>
+  <h1>VIDEOSHOWER</h1><span class="tag">every Scalelist video ever · free · ad-free browsing · no tracking</span>
+  <div class="stats" id="stats">loading…</div>
+</div>
+
+<div class="sub-bar" id="subBar"></div>
+
+<div class="filters">
+  <input class="search" id="search" placeholder="Search all videos…">
+  <div class="tab-group" id="charTabs" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+  <div class="tab-group" id="typeTabs" style="display:flex;gap:6px"></div>
+  <span class="legend">keys: <span id="legendKeys"></span></span>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="ov" id="ov">
+  <div class="pwrap">
+    <div class="pframe" id="pframe"></div>
+    <div class="pbar"><span class="pt" id="pt"></span><a id="ytLink" target="_blank" rel="noopener">Watch on YouTube ↗</a><span class="x" id="closeBtn">✕</span></div>
+  </div>
+</div>
+
+<div class="foot">Scalelist Universe · <b>ツ</b> · hosted free, works anywhere — even on one bar of signal<br>
+<span style="font-size:11px">installable as an app (Add to Home Screen) · free mirror: <a href="https://viktor123666.github.io/videos.html" style="color:#00aaff">viktor123666.github.io</a></span></div>
+
+<script src="videoshower_data.js"></script>
+<script src="videoshower_mirror.js"></script>
+<script>
+if('serviceWorker' in navigator){try{navigator.serviceWorker.register('/sw.js')}catch(e){}}
+</script>
+<script>
+(function(){
+const D=window.VIDEOSHOWER||{channels:{},total:0,generated:''};
+const CH=D.channels, KEYS=Object.keys(CH);
+const SHORT={};KEYS.forEach(k=>{const s=(CH[k].shortcut||k[0]).toLowerCase();SHORT[s]=SHORT[s]||k;});
+document.getElementById('legendKeys').textContent=Object.keys(SHORT).join(' / ');
+
+// flatten
+const ALL=[];
+KEYS.forEach(k=>{(CH[k].videos||[]).forEach(v=>ALL.push({...v,c:k}));});
+
+// data saver: manual override > connection hint (localStorage may be blocked — best effort)
+function lsGet(){try{return localStorage.vsSaver}catch(e){return null}}
+function lsSet(v){try{localStorage.vsSaver=v}catch(e){}}
+const conn=navigator.connection||{};
+const _ls=lsGet();
+let saver=_ls==='1'||(_ls!=='0'&&(conn.saveData||/(^|[^4-9])[23]g/.test(conn.effectiveType||'')));
+function applySaver(){document.body.classList.toggle('saver-mode',saver);document.getElementById('saverBtn').classList.toggle('on',saver);document.getElementById('saverState').textContent=saver?'ON':'off';}
+document.getElementById('saverBtn').onclick=()=>{saver=!saver;lsSet(saver?'1':'0');applySaver();reset();};
+applySaver();
+
+// state
+const P=new URLSearchParams(location.search);
+let fChar=resolveChar(P.get('char'))||'all', fType='all', q='';
+function resolveChar(r){if(!r)return'';r=r.toLowerCase();if(CH[r])return r;return SHORT[r]||'';}
+
+// subscribe bar
+const sb=document.getElementById('subBar');
+KEYS.forEach(k=>{const c=CH[k];const a=document.createElement('a');a.className='sub-card';a.href=c.url;a.target='_blank';a.rel='noopener';a.style.setProperty('--c',c.color);
+a.innerHTML=`<div class="sub-avatar" style="background:${c.color}">${c.name[0]}</div><div class="sub-info"><div class="name">${c.name}</div><div class="n">${(c.videos||[]).length} videos</div></div>`;sb.appendChild(a);});
+
+// tabs
+const ct=document.getElementById('charTabs');
+function mkTab(parent,label,val,color,group){const b=document.createElement('button');b.className='tab';b.textContent=label;if(color)b.style.setProperty('--c',color);b.dataset.v=val;b.dataset.g=group;b.onclick=()=>{if(group==='c')fChar=val;else fType=val;syncTabs();reset();};parent.appendChild(b);return b;}
+mkTab(ct,'All',`all`,'#fff','c');
+KEYS.forEach(k=>mkTab(ct,CH[k].name,k,CH[k].color,'c'));
+const tt=document.getElementById('typeTabs');
+mkTab(tt,'Everything','all','#fff','t');mkTab(tt,'Shorts','short','#fb8c00','t');mkTab(tt,'Videos','video','#43a047','t');
+function syncTabs(){document.querySelectorAll('.tab').forEach(b=>{b.classList.toggle('active',(b.dataset.g==='c'?fChar:fType)===b.dataset.v);});
+const u=new URL(location);if(fChar==='all')u.searchParams.delete('char');else u.searchParams.set('char',fChar);history.replaceState(null,'',u);}
+syncTabs();
+
+// search
+let st;document.getElementById('search').addEventListener('input',e=>{clearTimeout(st);st=setTimeout(()=>{q=e.target.value.toLowerCase();reset();},200);});
+
+// keyboard shortcuts — v / r / k / s / t (Vigge's law)
+addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;if(e.target.tagName==='INPUT')return;if(e.key==='Escape')return closePlayer();const k=resolveChar(e.key);if(k){fChar=(fChar===k)?'all':k;syncTabs();reset();}});
+
+// render (batched, infinite scroll)
+const grid=document.getElementById('grid');
+const BATCH=24;let list=[],pos=0,sentinel;
+function fmtD(s){if(!s)return'';const m=Math.floor(s/60),sec=s%60;return m>=60?`${Math.floor(m/60)}:${String(m%60).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`;}
+function fmtV(n){if(n==null)return'';return n>=1e6?(n/1e6).toFixed(1)+'M views':n>=1e3?(n/1e3).toFixed(1)+'K views':n+' views';}
+function filterList(){return ALL.filter(v=>(fChar==='all'||v.c===fChar)&&(fType==='all'||v.k===fType||(fType==='video'&&v.k==='stream'))&&(!q||v.t.toLowerCase().includes(q)));}
+function reset(){list=filterList();pos=0;grid.innerHTML='';
+document.getElementById('stats').textContent=`${list.length.toLocaleString()} of ${ALL.length.toLocaleString()} videos · ${KEYS.length} channels · updated ${D.generated||'—'}`;
+if(!list.length){grid.innerHTML='<div class="empty">No videos match. The universe is bigger than this filter.</div>';return;}
+renderMore();}
+function renderMore(){const frag=document.createDocumentFragment();const end=Math.min(pos+BATCH,list.length);
+for(;pos<end;pos++){const v=list[pos],c=CH[v.c];const d=document.createElement('div');d.className='card';d.style.setProperty('--c',c.color);
+const tq=saver?'default':'mqdefault';
+d.innerHTML=`<div class="thumb"><img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/${v.id}/${tq}.jpg" alt="">${v.d?`<span class="dur">${fmtD(v.d)}</span>`:''}<span class="kind">${v.k==='short'?'SHORT':v.k==='stream'?'LIVE':'VIDEO'}</span></div>
+<div class="meta"><div class="title"></div><div class="ch">${c.name}${v.v!=null?` <span class="vw">· ${fmtV(v.v)}</span>`:''}</div></div>`;
+d.querySelector('.title').textContent=v.t;
+d.onclick=()=>openPlayer(v);
+frag.appendChild(d);}
+if(sentinel)sentinel.remove();
+grid.appendChild(frag);
+if(pos<list.length){if(io){sentinel=document.createElement('div');sentinel.className='more';grid.appendChild(sentinel);io.observe(sentinel);}else{sentinel=document.createElement('button');sentinel.textContent='Load more';sentinel.style.cssText='grid-column:1/-1;padding:12px;background:#14141f;border:1px solid #333;border-radius:8px;color:#fff;cursor:pointer;font-size:14px';sentinel.onclick=()=>renderMore();grid.appendChild(sentinel);}}}
+const io=typeof IntersectionObserver!=='undefined'?new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){io.unobserve(e.target);renderMore();}});},{rootMargin:'600px'}):null;
+
+// player — iframe only exists while open (zero weight otherwise).
+// If a video has a self-hosted ad-free mirror copy (VS_MIRROR), play THAT:
+// truly no ads, no YouTube, works even if YouTube is blocked.
+const MIRROR=window.VS_MIRROR||{};
+const ov=document.getElementById('ov'),pf=document.getElementById('pframe');
+function openPlayer(v){
+const m=Object.prototype.hasOwnProperty.call(MIRROR,v.id)?MIRROR[v.id]:null;
+if(m){pf.innerHTML=`<video controls autoplay playsinline preload="metadata" style="position:absolute;top:0;left:0;width:100%;height:100%;background:#000" src="${m}"></video>`;
+document.getElementById('pt').innerHTML=`<span style="background:#00ff8822;color:#00ff88;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle">AD-FREE MIRROR</span>`;
+document.getElementById('pt').append(v.t);}
+else{pf.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&modestbranding=1" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>`;
+document.getElementById('pt').textContent=v.t;}
+document.getElementById('ytLink').href=`https://www.youtube.com/watch?v=${v.id}`;
+ov.classList.add('open');}
+function closePlayer(){ov.classList.remove('open');pf.innerHTML='';}
+document.getElementById('closeBtn').onclick=closePlayer;
+ov.addEventListener('click',e=>{if(e.target===ov)closePlayer();});
+
+reset();
+})();
+</script>
+</body>
+</html>

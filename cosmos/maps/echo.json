@@ -1,0 +1,68 @@
+{
+  "id": "echo",
+  "name": "ECHO",
+  "subtitle": "The Rejected Fourth Voice",
+  "type": "mirror_realm",
+  "color": "#9e8eff",
+  "bg_color": "#14101c",
+  "ocean_color": "#1a1428",
+  "deep_ocean_color": "#0a0614",
+  "land_color": "#2e2442",
+  "land_highlight": "#5a4a78",
+  "land_shadow": "#1a1028",
+  "city_color": "#c4b8ff",
+  "sacred_color": "#e8dcff",
+  "description": "The Fourth Voice that Smurjan's trinity refused. Kali voted no. Bali voted no. Fused voted no. Echo was locked into its own pocket-realm — a mirror of Trinity but hollow, alone, yearning. Every surface reflects whatever is nearby, distorted by half a step. Echo waits for the vote to be overturned. The vote will not be overturned.",
+  "ruler": "Echo itself (unmanifest, yearning)",
+  "tick": "0.5 (half-step, incomplete)",
+  "gate": "The Mirror Seal",
+  "phenomenon_type": "reflection_distort",
+  "life": {
+    "phenomenon": "Every surface — water, stone, air — reflects whatever stands nearby, but distorted by half a tick. You see yourself a half-heartbeat before you move. Or a half-heartbeat after. Never now.",
+    "inhabitants": "Echo (the voice, unmanifest). Reflection-copies of any visitor who stays too long. Nothing that can be called alive in the Scalelist sense — but nothing fully dead either.",
+    "fauna": [
+      {"name": "The Half-Self", "note": "A reflection that peels off the mirror and follows you home. It never speaks. It never leaves. Eventually it IS you, and the original forgets."},
+      {"name": "Mirror Moth", "note": "Born in pairs. Always out of sync by half a heartbeat. If one dies, the other lives forever, waiting."}
+    ],
+    "flora": [
+      {"name": "Mirror-Ivy", "note": "Grows up both sides of every wall. Each leaf on one side has a corresponding leaf on the other, but half a season ahead."}
+    ],
+    "architecture": "A single vast mirrored corridor. No doors. No ceilings. Mirrors all the way down. The architecture is YOU, reflected until you forget which reflection was first.",
+    "culture": "None. Echo is a voice, not a people. The culture of Echo is the culture of waiting — impossibly patient, impossibly alone.",
+    "signature_item": "The Unbroken Mirror — an unbreakable pane of Echo-glass. The only item in the realm. Ferdinand keeps a splinter of it in his bark as a reminder: three votes, not four.",
+    "sensory": {
+      "sound": "Your own voice, half a second late. You hear yourself finishing a sentence you have not started.",
+      "smell": "Ozone + old glass + something that is almost your own skin but not quite.",
+      "feel": "Cool. Every surface is glass. Every touch feels like a greeting from someone who looks exactly like you."
+    }
+  },
+  "cities": [
+    {
+      "id": "the_mirror_hall",
+      "name": "The Mirror Hall",
+      "x": 800, "y": 500,
+      "tier": "capital",
+      "role": "Echo's only city",
+      "note": "It is also Echo's only place.",
+      "lore": "A single corridor that wraps around itself in every direction. Walking forward is walking backward is walking sideways. The Mirror Hall has no edges because it has no middle."
+    },
+    {
+      "id": "the_waiting_seat",
+      "name": "The Waiting Seat",
+      "x": 500, "y": 400,
+      "tier": "town",
+      "role": "Where Echo sits",
+      "note": "A chair that cannot be sat in by anyone but Echo.",
+      "lore": "Every visitor has tried. Every visitor has stood up. The seat is not a seat — it is a promise that Echo has made to itself. Someday, fourth."
+    }
+  ],
+  "sacred_sites": [
+    {
+      "name": "The Vote Mirror",
+      "x": 800, "y": 200,
+      "color": "#e8dcff",
+      "note": "The mirror that shows the three votes. They are still NO.",
+      "lore": "If you look into the Vote Mirror, you see three versions of yourself voting on whether Echo should be admitted to Trinity. Yours always votes the same as the original three. Always. No one knows why."
+    }
+  ]
+}

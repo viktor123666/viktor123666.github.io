@@ -1,0 +1,73 @@
+SCALELIST UNIVERSE — BGM GENERATION GUIDE
+==================================================
+
+Go to https://suno.com, log in, and generate each track.
+Toggle 'Instrumental' ON for all tracks.
+Save all files to: F:\scalelistuniverse\public\audio\bgm
+
+--- Track 1: vigolas_theme_full.mp3 ---
+Character: Vigolas
+Type: Character Theme (Full 2min)
+Style of Music: epic sea shanty, orchestral, dark pirate adventure, cinematic
+Prompt: Epic dark sea shanty with full orchestra. Deep cello and French horn over crashing wave percussion. A pirate king's theme — regal yet dangerous. Male choir hums a haunting melody. Accordion and fiddle weave through thunderous timpani. Dark fantasy adventure soundtrack.
+
+--- Track 2: vigolas_battle_full.mp3 ---
+Character: Vigolas
+Type: Battle Theme (Full 2min)
+Style of Music: intense orchestral battle, sea shanty metal, epic combat
+Prompt: Intense orchestral battle music with sea shanty metal energy. Rapid violin arpeggios over thundering war drums. Electric guitar riffs mixed with accordion fury. Cannon-blast percussion hits. A pirate king unleashing his blade dance — chaotic, powerful, unstoppable. Dark fantasy combat.
+
+--- Track 3: rougeina_theme_full.mp3 ---
+Character: Rougeina
+Type: Character Theme (Full 2min)
+Style of Music: dark ethereal, shadow-elf mystical, haunting female vocals, ambient
+Prompt: Dark ethereal ambient with haunting female vocals. Shadow-elf mystical soundscape — crystalline harp over deep sub-bass drones. Whispered melodies float through reverb-soaked strings. Moonlit forest atmosphere. Mysterious, seductive, dangerous beauty. Dark fantasy soundtrack.
+
+--- Track 4: rougeina_battle_full.mp3 ---
+Character: Rougeina
+Type: Battle Theme (Full 2min)
+Style of Music: dark electronic, ethereal combat, shadow magic, intense
+Prompt: Dark electronic combat music with ethereal shadow elements. Glitchy synth arpeggios over punishing bass drops. Haunting female vocal fragments cut through distorted strings. Shadow magic unleashed — arrows of darkness pierce the air. Intense, precise, lethal. Dark fantasy battle soundtrack.
+
+--- Track 5: trollmage_theme_full.mp3 ---
+Character: Trollmage
+Type: Character Theme (Full 2min)
+Style of Music: electronic glitch, orchestral magic, cerebral dubstep, scholarly
+Prompt: Cerebral electronic music with orchestral magic elements. Glitchy synthesizers process through arcane filters. Piano arpeggios morph into digital fractals. A scholar's laboratory of sound — intellectual yet powerful. Strings swell beneath calculated bass pulses. Dark fantasy tech-magic soundtrack.
+
+--- Track 6: trollmage_battle_full.mp3 ---
+Character: Trollmage
+Type: Battle Theme (Full 2min)
+Style of Music: heavy dubstep, glitch magic, orchestral chaos, intense
+Prompt: Heavy dubstep battle music with glitch magic elements. Massive wobble bass tears through orchestral chaos. Spell-casting synth leads fire rapid patterns over crushing drums. A troll-mage hybrid unleashing forbidden knowledge as sonic destruction. Cerebral fury meets raw power. Dark fantasy combat soundtrack.
+
+--- Track 7: kompis_theme_full.mp3 ---
+Character: Kompis
+Type: Character Theme (Full 2min)
+Style of Music: dark trap, Asian instruments, yakuza crime boss, menacing
+Prompt: Dark trap beat with traditional Asian instruments. Shamisen and koto melodies over 808 bass and hi-hat rolls. A yakuza crime boss theme — menacing, calculated, dripping with authority. Shakuhachi flute floats above heavy sub-bass. Soul-collecting darkness. Dark fantasy crime lord soundtrack.
+
+--- Track 8: kompis_battle_full.mp3 ---
+Character: Kompis
+Type: Battle Theme (Full 2min)
+Style of Music: aggressive trap, Asian battle music, soul-stealing combat
+Prompt: Aggressive trap battle music with Asian combat elements. Taiko drums thunder beneath rapid-fire hi-hats. Distorted shamisen shreds over crushing 808 patterns. A soul collector in combat — each hit steals life force. Shakuhachi screams through reverb. Yakuza warfare meets dark fantasy. Intense combat soundtrack.
+
+--- Track 9: smurjan_theme_full.mp3 ---
+Character: Smurjan
+Type: Character Theme (Full 2min)
+Style of Music: heavy bass, void energy, cosmic destruction, three-voice fusion
+Prompt: Cosmic void bass music with three-layered vocal textures. Deep sub-bass pulses from the edge of existence. Three distinct synth voices harmonize in alien intervals — Bali's aggression, Kali's wisdom, fused Smurjan's cosmic power. Void energy crackles through distorted space. Dark fantasy cosmic entity soundtrack.
+
+--- Track 10: smurjan_battle_full.mp3 ---
+Character: Smurjan
+Type: Battle Theme (Full 2min)
+Style of Music: extreme bass, void destruction, cosmic war, overwhelming
+Prompt: Extreme bass void destruction music. Reality-tearing sub-frequencies beneath three-voice cosmic war chants. Black hole percussion implodes and explodes in cycles. The void trinity unleashed — space itself screams. Overwhelming, apocalyptic, universe-ending power. Dark fantasy cosmic battle soundtrack.
+
+--- Track 11: main_theme_full.mp3 ---
+Character: Scalelist Universe
+Type: Main Title Theme (Full 2min)
+Style of Music: epic dark fantasy orchestra, main title, cinematic, grand
+Prompt: Epic dark fantasy orchestral main title theme. Grand cinematic opening — full orchestra builds from a lone cello melody into thunderous brass fanfare. War drums and choir crescendo into a heroic yet dark motif. Five distinct musical phrases interweave, representing five warriors bound by fate. The Scalelist Universe awakens. Cinematic main title soundtrack.
+

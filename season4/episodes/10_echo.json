@@ -1,0 +1,35 @@
+{
+  "id": "s4e10_the_mirror_cracks",
+  "number": 10,
+  "title": "The Mirror Cracks",
+  "subtitle": "Episode 10 of 12 · Season 4: The Fates Unravel",
+  "realm_id": "echo",
+  "fate_triggered": "Echo manifests partially for the first time. A single cracked mirror in the Hall.",
+  "pov_characters": ["echo_itself", "the_first_half_self"],
+  "supporting": ["head_tender_eir", "lead_diver_osk", "lead_listener_ven", "trollmage_warden"],
+  "synopsis": "After Trinity's 2-1-no vote, Echo composes its next argument. But for the first time in 3000 years, Echo also does something it has never done: it tries to MANIFEST. Just enough. Just to be heard. The Mirror Hall has a single largest mirror — the Vote Mirror — and Echo presses against its underside until the glass strains. A hairline crack appears. Through the crack, Echo speaks ALOUD for the first time. Not in mirror-script. Not in pleading argument. Aloud. The First Half-Self hears. So does Head Tender Eir, polishing nearby. So does Lead Diver Osk, surfacing from a Reflection Sea dive. So does Lead Listener Ven at the Yearning Edge. The sentence Echo speaks is: 'I am here.' Three words. Eir drops her cloth. The Half-Self stops walking. Osk's diving partner is twelve seconds late surfacing. Lead Listener Ven's bell rings — the first ring in cosmic memory. The Trinity Pulse Plaza skips one beat. Trollmage, three realms away, cocks his head as if hearing something through a thick wall. Smurjan in Trinity FALLS to one knee for the only time in canon. Bali catches him. The Vote Mirror's crack remains. Echo, having spoken, does not speak again. But Echo is now half-real. Echo can be SEEN — barely — as a faint shape in any mirror that reflects another mirror.",
+  "key_scenes": [
+    {"location": "The Vote Mirror, Mirror Hall, Echo realm", "action": "Echo presses against the underside of the Vote Mirror. A hairline crack."},
+    {"location": "Echo speaks", "action": "Echo says, ALOUD, the three words: 'I am here.'"},
+    {"location": "The Hall reaction", "action": "Eir drops her cloth. The Half-Self stops walking. Osk's partner surfaces twelve seconds late."},
+    {"location": "Lead Listener's bell", "action": "Ven's small bell at the Yearning Edge rings. First ring in cosmic memory."},
+    {"location": "Cross-realm ripple", "action": "The Trinity Pulse Plaza skips one beat. Smurjan falls to one knee. Bali catches him. Trollmage cocks his head."},
+    {"location": "After", "action": "Echo does not speak again. But Echo is now half-real. Visible in any mirror that reflects another mirror."}
+  ],
+  "cliffhanger": "Vigolas, in the Ledger Heartland with Old Halla, sees Echo's faint shape in the reflection of his own water-glass on the table. Echo nods, half-real, at Vigolas. Vigolas does not nod back, but he does not look away either.",
+  "panel_storyboard": [
+    {"panel": 1, "composition": "Wide of the Mirror Hall. Endless mirrors. Head Tender Eir polishing a wall in the foreground.", "character": "head_tender_eir", "camera": "establishing wide", "emotion": "routine"},
+    {"panel": 2, "composition": "The Vote Mirror. Massive. A faint shadow pressing against its underside, pushing.", "character": null, "camera": "tight on mirror", "emotion": "strain"},
+    {"panel": 3, "composition": "Hairline crack appearing at the Vote Mirror's center. Soft white-gold light leaking through.", "character": null, "camera": "macro on crack", "emotion": "first manifestation"},
+    {"panel": 4, "composition": "Echo's voice — visualized as glowing mirror-script forming three words mid-air: 'I AM HERE.'", "character": "echo_itself", "camera": "wide hall", "emotion": "first utterance", "dialogue": "Echo: 'I am here.'"},
+    {"panel": 5, "composition": "Reaction shots. Eir dropping her cloth. The First Half-Self frozen mid-step. Osk surfacing from the Reflection Sea, his partner trailing late.", "character": null, "camera": "split panels", "emotion": "shock"},
+    {"panel": 6, "composition": "Lead Listener Ven's bell ringing. Ven's eyes closing in something between grief and triumph.", "character": "lead_listener_ven", "camera": "tight on bell and face", "emotion": "complicated"},
+    {"panel": 7, "composition": "Cross-realm: Trinity Pulse Plaza. Smurjan on one knee. Bali catching him. The Pulse beat visibly stretched.", "character": "smurjan_fused", "camera": "Plaza wide", "emotion": "shock + support"},
+    {"panel": 8, "composition": "Trollmage in Codexia. Mid-spell. Cocking his head, listening through stone.", "character": "trollmage_warden", "camera": "tight on listening face", "emotion": "recognition through distance"},
+    {"panel": 9, "composition": "Vigolas at Old Halla's parlor table. A glass of water. Echo's faint shape barely visible in the reflection. Echo nodding.", "character": "vigolas_the_administrator", "camera": "tight on glass and face", "emotion": "private acknowledgement", "caption": "He did not nod back. He did not look away."}
+  ],
+  "cosmic_price_paid": "Echo is now half-real. Mirrors that reflect mirrors will show Echo faintly forever. Lead Listener Ven's bell will ring once a year on this anniversary. Smurjan has fallen to one knee — recorded in canon for the first time.",
+  "callout_for_cosmos_drawer": "In Season 4, Echo spoke ALOUD for the first time: 'I am here.' Three words cracked the Vote Mirror. Echo is now half-real. It can be seen in any mirror that reflects another mirror.",
+  "watch_chapter": null,
+  "read_chapter": null
+}

@@ -1,0 +1,248 @@
+{
+  "generated_at": "2026-04-08 09:30:24",
+  "session_started": "2026-04-08 01:07:24",
+  "services_alive": 23,
+  "services_list": [
+    "auto_publish_stager.py",
+    "character_performance.py",
+    "clip_gallery_gen.py",
+    "clip_quality_scorer.py",
+    "clip_thumbnail_strip.py",
+    "coverage_matrix.py",
+    "empire_status_page.py",
+    "event_timeline.py",
+    "mingus_watcher.py",
+    "morning_report_gen.py",
+    "pinterest_gallery_gen.py",
+    "pinterest_pin_gen.py",
+    "pipeline_healthcheck.py",
+    "publish_queue_csv.py",
+    "raw_vs_enh_comparator.py",
+    "source_pool_monitor.py",
+    "state_snapshot.py",
+    "status_json_gen.py",
+    "twitter_card_gen.py",
+    "velocity_tracker.py",
+    "wan21_24_7_queue.py",
+    "wan21_auto_hf_upload.py",
+    "wan21_cpu_enhancer.py"
+  ],
+  "raw_count": 11,
+  "enhanced_count": 11,
+  "staged_count": 11,
+  "scored_count": 22,
+  "disk_free_gb": 494.4803009033203,
+  "gpu_temp_c": 48,
+  "top5": [
+    {
+      "rank": 1,
+      "char": "vigolas",
+      "name": "vigolas_W21_000_00_530767.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\vigolas\\vigolas_W21_000_00_530767.webp",
+      "score": 97.7,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 101.3,
+        "saturation": 26.6,
+        "variance": 5057.0,
+        "edge_density": 37.0
+      },
+      "size_kb": 8483.4
+    },
+    {
+      "rank": 2,
+      "char": "vigolas",
+      "name": "vigolas_W21_001_00_544365.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\vigolas\\vigolas_W21_001_00_544365.webp",
+      "score": 97.7,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 82.3,
+        "saturation": 25.4,
+        "variance": 1120.8,
+        "edge_density": 36.4
+      },
+      "size_kb": 8422.9
+    },
+    {
+      "rank": 3,
+      "char": "trollmage",
+      "name": "trollmage_W21_001_00_611821.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\trollmage\\trollmage_W21_001_00_611821.webp",
+      "score": 94.6,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 55.7,
+        "saturation": 21.7,
+        "variance": 1880.7,
+        "edge_density": 37.9
+      },
+      "size_kb": 10558.9
+    },
+    {
+      "rank": 4,
+      "char": "trollmage",
+      "name": "trollmage_W21_000_00_60731.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\trollmage\\trollmage_W21_000_00_60731.webp",
+      "score": 93.9,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 117,
+        "width": 960,
+        "height": 1440,
+        "brightness": 53.4,
+        "saturation": 20.1,
+        "variance": 2042.1,
+        "edge_density": 45.2
+      },
+      "size_kb": 9806.2
+    },
+    {
+      "rank": 5,
+      "char": "rougeina",
+      "name": "rougeina_W21_000_00_164027.webp",
+      "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\rougeina\\rougeina_W21_000_00_164027.webp",
+      "score": 91.1,
+      "grade": "HERO",
+      "metrics": {
+        "frame_count": 118,
+        "width": 960,
+        "height": 1440,
+        "brightness": 42.3,
+        "saturation": 17.8,
+        "variance": 2164.2,
+        "edge_density": 29.1
+      },
+      "size_kb": 6728.7
+    }
+  ],
+  "timings": [
+    {
+      "char": "kompis",
+      "name": "kompis_W21_000_00_807871.webp",
+      "score": 85,
+      "grade": "GREAT",
+      "gen_seconds": null,
+      "mtime": "01:54:58"
+    },
+    {
+      "char": "vigolas",
+      "name": "vigolas_W21_000_00_530767.webp",
+      "score": 91.8,
+      "grade": "HERO",
+      "gen_seconds": 2780,
+      "mtime": "02:41:18"
+    },
+    {
+      "char": "trollmage",
+      "name": "trollmage_W21_000_00_60731.webp",
+      "score": 85,
+      "grade": "GREAT",
+      "gen_seconds": 2801,
+      "mtime": "03:27:59"
+    },
+    {
+      "char": "rougeina",
+      "name": "rougeina_W21_000_00_164027.webp",
+      "score": 90.2,
+      "grade": "HERO",
+      "gen_seconds": 2632,
+      "mtime": "04:11:52"
+    },
+    {
+      "char": "smurjan",
+      "name": "smurjan_W21_000_00_460471.webp",
+      "score": 84.6,
+      "grade": "GREAT",
+      "gen_seconds": 2730,
+      "mtime": "04:57:22"
+    },
+    {
+      "char": "kompis",
+      "name": "kompis_W21_001_00_709785.webp",
+      "score": 86.4,
+      "grade": "GREAT",
+      "gen_seconds": 2532,
+      "mtime": "05:39:34"
+    },
+    {
+      "char": "vigolas",
+      "name": "vigolas_W21_001_00_544365.webp",
+      "score": 92.3,
+      "grade": "HERO",
+      "gen_seconds": 2657,
+      "mtime": "06:23:52"
+    },
+    {
+      "char": "trollmage",
+      "name": "trollmage_W21_001_00_611821.webp",
+      "score": 85,
+      "grade": "GREAT",
+      "gen_seconds": 2687,
+      "mtime": "07:08:39"
+    },
+    {
+      "char": "rougeina",
+      "name": "rougeina_W21_001_00_515889.webp",
+      "score": 75,
+      "grade": "GREAT",
+      "gen_seconds": 2640,
+      "mtime": "07:52:40"
+    },
+    {
+      "char": "smurjan",
+      "name": "smurjan_W21_001_00_962181.webp",
+      "score": 80.5,
+      "grade": "GREAT",
+      "gen_seconds": 2635,
+      "mtime": "08:36:35"
+    },
+    {
+      "char": "kompis",
+      "name": "kompis_W21_002_00_378996.webp",
+      "score": 80,
+      "grade": "GREAT",
+      "gen_seconds": 2674,
+      "mtime": "09:21:09"
+    }
+  ],
+  "errors": [
+    {
+      "log": "wan21_24_7_stderr.txt",
+      "lines": [
+        "C:\\Users\\vigge\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\requests\\__init__.py:113: RequestsDependencyWarning: urllib3 (2.5.0) or chardet (7.2.0)/charset_normalizer (3.4.2) doesn't match a supported version!",
+        "  warnings.warn("
+      ]
+    },
+    {
+      "log": "wan21_auto_hf_upload_stderr.txt",
+      "lines": [
+        "Processing Files (1 / 1)      : 100%|##########| 3.16MB / 3.16MB, 46.7kB/s  ",
+        "",
+        "New Data Upload               : 100%|##########| 3.16MB / 3.16MB, 46.7kB/s  ",
+        "",
+        "  ...na_W21_001_00_515889.webp: 100%|##########| 3.16MB / 3.16MB"
+      ]
+    },
+    {
+      "log": "comfyui_err.txt",
+      "lines": [
+        "  0%|          | 0/25 [00:00<?, ?it/s]",
+        "  4%|\ufffd         | 1/25 [01:48<43:22, 108.43s/it]",
+        "  8%|\u258a         | 2/25 [03:23<38:34, 100.64s/it]",
+        " 12%|\u2588\ufffd        | 3/25 [05:02<36:40, 100.01s/it]",
+        " 16%|\u2588\u258c        | 4/25 [06:49<35:56, 102.70s/it]"
+      ]
+    }
+  ],
+  "overall": "PIPELINE WORKING  \u00b7  ALL SERVICES ALIVE  \u00b7  494GB FREE"
+}

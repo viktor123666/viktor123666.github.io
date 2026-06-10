@@ -1,0 +1,102 @@
+{
+  "id": "void2",
+  "name": "VOID-II",
+  "subtitle": "The Second Void",
+  "type": "void_white",
+  "color": "#f0f0f0",
+  "bg_color": "#f4f4f6",
+  "ocean_color": "#f4f4f6",
+  "deep_ocean_color": "#e0e0e4",
+  "land_color": "#ffffff",
+  "land_highlight": "#ffffff",
+  "land_shadow": "#d0d0d4",
+  "city_color": "#2a2a30",
+  "sacred_color": "#c9a84c",
+  "description": "The void of the void. Where the Twelve Architects originated before writing themselves into the HADOM Tree. No mortal has ever entered and returned with memory intact. Bakasura is rumored to visit sometimes. Shown here only by implication.",
+  "ruler": "The Twelve Architects (only)",
+  "tick": "negative (time runs backward)",
+  "gate": "The Architects' Seal (has never opened)",
+  "phenomenon_type": "white_butterflies",
+  "life": {
+    "phenomenon": "Actions UNDO themselves when observed. Reach for a book — it was already there. Turn away — it was never there. Time runs backward, but only when you're not looking.",
+    "inhabitants": "The Twelve Architects (11 alive, 1 unwritten). Ledger Librarians (cork-bodied constructs who file decisions). White Butterflies (each is a decision about to be made somewhere in the multiverse).",
+    "fauna": [
+      {"name": "White Butterfly", "note": "Each butterfly is a decision that will shortly be made, somewhere. The Architects watch them. When a butterfly lands, a choice has been finalized."},
+      {"name": "Ledger Librarian", "note": "Cork-bodied servitors. They file. They do not speak. They know where every decision has been recorded since the first."}
+    ],
+    "flora": [
+      {"name": "Nothing", "note": "Nothing grows in reverse-time. Seeds planted un-plant themselves."}
+    ],
+    "architecture": "12 stone seats in a perfect ring. One eternal library extending infinitely in all six cardinal directions. The Seal at center.",
+    "culture": "Deliberation. Stillness. Every word uttered here has weight equal to 10,000 realms. The Architects speak rarely and decisively.",
+    "signature_item": "Ferdinand's Seal Cork — the single physical object in VOID-II. Everything else is thought. The cork keeps VOID-II from leaking into Scalelist.",
+    "sensory": {
+      "sound": "Silence so complete you hear your own thoughts as if they were someone else's.",
+      "smell": "Pencil graphite + linen + the specific dust of pages that have never been read.",
+      "feel": "Lighter than air. Like you might drift upward at any moment. You do not."
+    }
+  },
+  "backdrop": "<rect width='1600' height='1000' fill='#f4f4f6'/><g opacity='0.08'><rect x='0' y='0' width='1600' height='1' fill='#2a2a30'/><rect x='0' y='999' width='1600' height='1' fill='#2a2a30'/><rect x='0' y='0' width='1' height='1000' fill='#2a2a30'/><rect x='1599' y='0' width='1' height='1000' fill='#2a2a30'/></g><g opacity='0.4'><text x='800' y='120' text-anchor='middle' fill='#8a8a90' font-size='10' letter-spacing='10'>NO MORTAL HAS SEEN THIS PLACE</text><text x='800' y='880' text-anchor='middle' fill='#8a8a90' font-size='10' letter-spacing='10'>WHAT YOU SEE IS IMPLICATION</text></g>",
+  "features": [
+    {
+      "svg": "<g transform='translate(800 500)'><circle r='260' fill='none' stroke='#c9a84c' stroke-width='1' opacity='0.5' stroke-dasharray='2 6'/><circle r='180' fill='none' stroke='#c9a84c' stroke-width='1.5' opacity='0.65' stroke-dasharray='4 4'/><circle r='100' fill='none' stroke='#c9a84c' stroke-width='2' opacity='0.8'/><circle r='40' fill='#f4f4f6' stroke='#c9a84c' stroke-width='2'/><polygon points='0,-20 17,10 -17,10' fill='#c9a84c'/><text y='55' text-anchor='middle' fill='#c9a84c' font-size='10' letter-spacing='3'>THE SEAL</text></g>"
+    },
+    {
+      "svg": "<g opacity='0.7'><circle cx='500' cy='350' r='5' fill='#2a2a30'/><text x='500' y='380' text-anchor='middle' fill='#2a2a30' font-size='11' letter-spacing='2'>K-I</text><circle cx='1100' cy='350' r='5' fill='#2a2a30'/><text x='1100' y='380' text-anchor='middle' fill='#2a2a30' font-size='11' letter-spacing='2'>K-II</text><circle cx='1260' cy='500' r='5' fill='#2a2a30'/><text x='1260' y='530' text-anchor='middle' fill='#2a2a30' font-size='11' letter-spacing='2'>K-III</text><circle cx='1100' cy='650' r='5' fill='#2a2a30'/><text x='1100' y='680' text-anchor='middle' fill='#2a2a30' font-size='11' letter-spacing='2'>K-IV</text><circle cx='500' cy='650' r='5' fill='#2a2a30'/><text x='500' y='680' text-anchor='middle' fill='#2a2a30' font-size='11' letter-spacing='2'>K-V</text><circle cx='340' cy='500' r='5' fill='#2a2a30'/><text x='340' y='530' text-anchor='middle' fill='#2a2a30' font-size='11' letter-spacing='2'>K-VI</text><circle cx='420' cy='270' r='5' fill='#2a2a30'/><text x='420' y='260' text-anchor='middle' fill='#2a2a30' font-size='11' letter-spacing='2'>K-VII</text><circle cx='800' cy='220' r='5' fill='#2a2a30'/><text x='800' y='210' text-anchor='middle' fill='#2a2a30' font-size='11' letter-spacing='2'>K-VIII</text><circle cx='1180' cy='270' r='5' fill='#2a2a30'/><text x='1180' y='260' text-anchor='middle' fill='#2a2a30' font-size='11' letter-spacing='2'>K-IX</text><circle cx='1180' cy='730' r='5' fill='#2a2a30'/><text x='1180' y='755' text-anchor='middle' fill='#2a2a30' font-size='11' letter-spacing='2'>K-X</text><circle cx='800' cy='780' r='5' fill='#2a2a30'/><text x='800' y='805' text-anchor='middle' fill='#2a2a30' font-size='11' letter-spacing='2'>K-XI</text><circle cx='420' cy='730' r='5' fill='none' stroke='#aa2a2a' stroke-width='1.2' stroke-dasharray='2 2'/><text x='420' y='755' text-anchor='middle' fill='#aa2a2a' font-size='10' letter-spacing='2'>K-XII (unwritten)</text></g>"
+    }
+  ],
+  "cities": [
+    {
+      "id": "seat_k1",
+      "name": "Seat of K-I (First Architect)",
+      "x": 500, "y": 350,
+      "tier": "capital",
+      "role": "The oldest position",
+      "note": "The Architect who became the council's memory.",
+      "lore": "K-I has sat here since Null learned it could think. Never moves. Never speaks without being asked. Remembers everything, including what hasn't happened yet."
+    },
+    {
+      "id": "seat_k2",
+      "name": "Seat of K-II (Reincarnation Keeper)",
+      "x": 1100, "y": 350,
+      "tier": "city",
+      "role": "The architect who built Helios Gate City",
+      "note": "Works with Fenna across realm boundaries.",
+      "lore": "When a new reincarnation must be approved, K-II writes the name on Ferdinand's trunk. Fenna reads it from Thanatos."
+    },
+    {
+      "id": "seat_k5",
+      "name": "Seat of K-V (Current Elder)",
+      "x": 500, "y": 650,
+      "tier": "capital",
+      "role": "The Architect currently in authority",
+      "note": "Every era, a K-V serves until retirement or violation of the Oath.",
+      "lore": "The current K-V has not been named. The current K-V has never been named. Naming K-V is forbidden — it destabilizes the seat."
+    },
+    {
+      "id": "unwritten_seat",
+      "name": "The Unwritten Seat (was K-XII)",
+      "x": 420, "y": 730,
+      "tier": "town",
+      "role": "The broken chair",
+      "note": "K-XII broke the Ferdinand Oath. K-V convened. K-XII was unwritten.",
+      "lore": "The chair remains because it cannot be removed — removing it would rewrite what was already unwritten. It sits as a warning."
+    }
+  ],
+  "sacred_sites": [
+    {
+      "name": "The Architects' Seal",
+      "x": 800, "y": 500,
+      "color": "#c9a84c",
+      "note": "Made of cork from Ferdinand's bark. The only thing keeping VOID-II closed to the outer universe.",
+      "lore": "The Seal has never opened. It is tested once per cosmic age to ensure it still closes. So far, it has. Ferdinand's cork regrows between tests."
+    },
+    {
+      "name": "Bakasura's Footprint",
+      "x": 800, "y": 890,
+      "color": "#2a2a30",
+      "note": "The only mark left by a non-Architect visitor. Rumored.",
+      "lore": "A single footprint in white dust. K-V refuses to confirm or deny. Bakasura, when asked, does not answer — but he smiles slightly, in three of his four faces."
+    }
+  ]
+}

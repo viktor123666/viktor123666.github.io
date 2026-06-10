@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TRINITY — The Void Three | Scalelist Universe</title>
+<meta name="description" content="TRINITY: The Void Three. A realm on Ferdinand the Cosmic Cork Oak.">
+<meta property="og:title" content="TRINITY — The Void Three">
+<meta property="og:description" content="The Void Three. A realm on the cosmic cork oak Ferdinand.">
+<meta property="og:image" content="https://scalelistuniverse.com/cosmos/scenery/trinity.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a84c; --void:#050510; --panel:#0a0a14; --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060; --accent:#00aaff}
+html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.7}
+a{color:inherit;text-decoration:none}
+
+header{padding:18px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
+header nav{display:flex;gap:18px;flex-wrap:wrap}
+header nav a{color:var(--dim);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:'Cinzel',serif}
+header nav a:hover{color:var(--gold)}
+
+.hero{position:relative;height:60vh;min-height:420px;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,transparent 50%,var(--void) 100%),radial-gradient(ellipse at 50% 100%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 70%);pointer-events:none}
+.hero .body{position:relative;z-index:2;padding:50px 32px;max-width:1100px;width:100%;margin:0 auto}
+.hero .eyebrow{font-family:'Cinzel',serif;color:var(--accent);font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(2.4rem,6vw,5rem);color:#fff;letter-spacing:.06em;font-weight:900;line-height:1;text-shadow:0 0 40px color-mix(in srgb,var(--accent) 40%,transparent)}
+.hero h1 em{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:.36em;color:var(--accent);letter-spacing:.04em;margin-top:12px;text-shadow:none;opacity:.95}
+
+.section{max-width:1100px;margin:0 auto;padding:50px 32px;border-top:1px solid var(--border)}
+.section h2{font-family:'Cinzel',serif;color:var(--accent);font-size:.86rem;letter-spacing:.32em;text-transform:uppercase;margin-bottom:24px;font-weight:700}
+.section .blurb{font-size:1.18rem;line-height:1.85;font-style:italic;opacity:.94;max-width:760px}
+
+.grid-2{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
+@media(min-width:780px){.grid-2{grid-template-columns:1fr 1fr}}
+.entry{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 22px;transition:all .25s}
+.entry:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+.entry h3{font-family:'Cinzel',serif;color:#fff;font-size:1.04rem;font-weight:700;letter-spacing:.04em;margin-bottom:6px;line-height:1.2}
+.entry .biome{color:var(--accent);font-style:italic;font-size:.84rem;margin-bottom:10px;letter-spacing:.04em}
+.entry p{font-size:.94rem;line-height:1.65;opacity:.92;margin-bottom:8px}
+.entry p:last-child{margin-bottom:0}
+
+.char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:14px}
+.char-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;transition:all .2s;display:block}
+.char-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.char-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#080812}
+.char-card .char-name{padding:10px 12px 4px;font-family:'Cinzel',serif;color:#fff;font-size:.88rem;font-weight:700;letter-spacing:.04em;line-height:1.2}
+.char-card .char-role{padding:0 12px 12px;color:var(--accent);font-style:italic;font-size:.78rem;line-height:1.3}
+
+.fate{margin-top:28px;background:linear-gradient(135deg,rgba(204,51,51,0.08),var(--panel));border:1px solid rgba(204,51,51,0.4);border-radius:12px;padding:20px 24px}
+.fate-label{font-family:'Cinzel',serif;color:#ff6677;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:8px;font-weight:700}
+.fate p{font-size:1rem;line-height:1.7;font-style:italic;color:var(--text)}
+
+.cta{padding:60px 32px;text-align:center;border-top:1px solid var(--border)}
+.cta a{display:inline-block;margin:6px;padding:12px 28px;background:var(--accent);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;border-radius:8px;text-decoration:none}
+.cta a.outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.cta a:hover{transform:scale(1.04);transition:transform .15s}
+
+footer{padding:30px;text-align:center;color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
+  <nav>
+    <a href="/cosmos">All Realms</a>
+    <a href="/cosmos/atlas">Atlas</a>
+    <a href="/lineage">Lineage</a>
+    <a href="/manga">Manga</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <img src="/cosmos/scenery/trinity.jpg" alt="TRINITY scenery" onerror="this.style.display='none'">
+  <div class="body">
+    <div class="eyebrow">A realm on Ferdinand</div>
+    <h1>TRINITY<em>The Void Three</em></h1>
+  </div>
+</section>
+
+<section class="section">
+  <h2>The Realm</h2>
+  <p class="blurb">TRINITY is one of the twelve realms of the Scalelist Universe.</p>
+  <div class="fate"><div class="fate-label">Realm Fate</div><p>{'threat': 'Smurjan admits the Fourth Voice. If Smurjan ever relents and welcomes Echo as the fourth, the Triad becomes the Tetrad. Balance becomes an unstable four-way. Bali, Kali, and Fused have unanimously refused this for 3000 years.', 'consequence': 'The Fused Court shatters. The Triad Throne cannot hold a fourth. The realm splits into four sub-realms, each ruled by a single voice. Civil cosmic war. Trinity as a realm ends — four new realms take its place. Ferdinand would need to grow three more branches and nobody knows if he would consent.', 'prophecy_line': 'When three become four, Trinity ends. Balance is a number; it does not negotiate.', 'destroyable_by': 'Echo itself — the ONLY entity that gains by this collapse. Echo has waited 3000 years and will wait more.'}</p></div>
+</section>
+
+<section class="section">
+  <h2>Continents · 4 regions</h2>
+  <div class="grid-2"><div class="entry">
+          <h3>Bali's Garden</h3>
+          <div class="biome">Terraced flower-gardens on a green-gold hillside. Always late morning.</div>
+          <p>The calm continent. Bali's domain. The only place in Trinity where Kali's fire cannot light.</p>
+        </div><div class="entry">
+          <h3>Kali's Burn</h3>
+          <div class="biome">Volcanic plateau. Black obsidian fields, perpetual dusk, red sky.</div>
+          <p>The fire continent. Kali's domain. The only place in Trinity where Bali's calm cannot settle.</p>
+        </div><div class="entry">
+          <h3>The Fused Court</h3>
+          <div class="biome">A circular plateau between the Garden and the Burn. Always dusk. Stone, silver, still water.</div>
+          <p>The balance continent. Where Smurjan's Fused voice holds the council. The realm's political and ritual heart.</p>
+        </div><div class="entry">
+          <h3>The Echo Marches</h3>
+          <div class="biome">Grey borderlands between Trinity and Echo realm. Mist. Silence. Mirrors embedded in stone.</div>
+          <p>The disputed edge. Where Echo's lobby for admission is carried out peacefully but endlessly. The Rejected live here as both buffer and witness.</p>
+        </div></div>
+</section>
+
+<section class="section">
+  <h2>Tribes &amp; Peoples · 8 groups</h2>
+  <div class="grid-2"><div class="entry">
+          <h3>The Bali-Gardeners</h3>
+          <div class="biome">on balis_garden</div>
+          <p><b>Look:</b> White or cream robes. Braided hair woven with pale-lotus petals. Bare feet. Hands always dirty from soil.</p>
+          <p><b>Persona:</b> Calm. Slow to offend. Enormous patience. Forgive so readily that the universe sometimes forgets to assign them guilt.</p>
+        </div><div class="entry">
+          <h3>The White Lotus Monks</h3>
+          <div class="biome">on balis_garden</div>
+          <p><b>Look:</b> Shaved heads. Simple robes. Calluses on their palms from the Lotus Pond's edge.</p>
+          <p><b>Persona:</b> Soft-spoken. Deeply focused. The universe's quietest disciplinarians.</p>
+        </div><div class="entry">
+          <h3>The Blade-Dancers</h3>
+          <div class="biome">on kalis_burn</div>
+          <p><b>Look:</b> Red-lacquered armor. Short hair, often scarred. Twelve-blade sashes. Eyes burnished with fire-coal.</p>
+          <p><b>Persona:</b> Fierce. Loyal. Rarely laugh but laugh from the chest when they do.</p>
+        </div><div class="entry">
+          <h3>The Obsidian Widows</h3>
+          <div class="biome">on kalis_burn</div>
+          <p><b>Look:</b> Veiled in black obsidian-thread. Hair cropped short. One silver piercing per loss.</p>
+          <p><b>Persona:</b> Grieving. Dignified. Strong. Their grief is not weakness — it is Kali's truest expression.</p>
+        </div><div class="entry">
+          <h3>The Three-Voiced Priests</h3>
+          <div class="biome">on fused_court</div>
+          <p><b>Look:</b> Robed in grey-silver with three braids — one black (Bali), one red (Kali), one white (Fused). Voice shifts between three tones mid-sentence.</p>
+          <p><b>Persona:</b> Balanced. Careful. Impossible to pin to one opinion — which is the point.</p>
+        </div><div class="entry">
+          <h3>The Pulse-Dancers</h3>
+          <div class="biome">on fused_court</div>
+          <p><b>Look:</b> Sleek. Muscled. Ankle-bells in trios. Wear form-fitting triple-colored garments (black/red/white).</p>
+          <p><b>Persona:</b> Disciplined. Warm. The realm's heart-keepers. Without them, the Trinity's balance collapses.</p>
+        </div><div class="entry">
+          <h3>The Rejected</h3>
+          <div class="biome">on echo_marches</div>
+          <p><b>Look:</b> Mixed origins — travelers from other realms who asked to join the Trinity and were politely refused. Carry one gift each from Smurjan as a parting mercy.</p>
+          <p><b>Persona:</b> Weary. Generous. Often the kindest tribe in the realm. Their rejection has taught them, not hardened them.</p>
+        </div><div class="entry">
+          <h3>The Mirror-Wardens</h3>
+          <div class="biome">on echo_marches</div>
+          <p><b>Look:</b> Half-masked silver. Robes stitched with tiny cracked mirror-fragments. One ear covered at all times — Echo whispers into open ears.</p>
+          <p><b>Persona:</b> Watchful. Stoic. Slightly paranoid — but justly so.</p>
+        </div></div>
+</section>
+
+<section class="section">
+  <h2>Named Characters Here · 13 souls</h2>
+  <div class="char-grid"><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/smurjan.png" alt="Smurjan (Fused)" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Smurjan (Fused)</div>
+          <div class="char-role">The Sovereign Voice when all three align</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/npcs/bali_herself.png" alt="Bali" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Bali</div>
+          <div class="char-role">The Calm Voice</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/npcs/kali_herself.png" alt="Kali" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Kali</div>
+          <div class="char-role">The Fire Voice</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/npcs/gardener_sen.png" alt="Gardener Sen" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Gardener Sen</div>
+          <div class="char-role">Bali's head apprentice</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/npcs/abbot_pel.png" alt="Abbot Pel" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Abbot Pel</div>
+          <div class="char-role">Abbot of the White Lotus monastery</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/npcs/blade_master_seven.png" alt="Blade-Master Seven" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Blade-Master Seven</div>
+          <div class="char-role">Kali's head instructor</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/npcs/widow_oria.png" alt="Widow Oria" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Widow Oria</div>
+          <div class="char-role">Eldest Obsidian Widow</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/npcs/high_priest_triad.png" alt="High Priest Triad" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">High Priest Triad</div>
+          <div class="char-role">Head of the Three-Voiced order</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/npcs/morning_three_veen.png" alt="Morning Three — Veen" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Morning Three — Veen</div>
+          <div class="char-role">Keeper of the Bali-beat</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/npcs/morning_three_sek.png" alt="Morning Three — Sek" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Morning Three — Sek</div>
+          <div class="char-role">Keeper of the Kali-beat</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/npcs/morning_three_iku.png" alt="Morning Three — Iku" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Morning Three — Iku</div>
+          <div class="char-role">Keeper of the Fused-beat</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/npcs/rejected_elder_am.png" alt="Elder Am" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Elder Am</div>
+          <div class="char-role">The Rejected's informal chief</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-trinity">
+          <img src="/characters/npcs/warden_of_first_mirror.png" alt="Warden of the First Mirror" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Warden of the First Mirror</div>
+          <div class="char-role">Senior Mirror-Warden</div>
+        </a></div>
+</section>
+
+<section class="cta">
+  <a href="/cosmos">All 12 Realms</a>
+  <a href="/cosmos/atlas" class="outline">Open Atlas</a>
+  <a href="/lineage" class="outline">The Lineage</a>
+</section>
+
+<footer>
+  Scalelist Universe · TRINITY · <a href="/" style="color:var(--accent)">Home</a>
+</footer>
+
+</body>
+</html>

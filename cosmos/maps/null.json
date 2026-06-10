@@ -1,0 +1,94 @@
+{
+  "id": "null",
+  "name": "NULL",
+  "subtitle": "The Absence",
+  "type": "void",
+  "color": "#2a2a40",
+  "bg_color": "#000000",
+  "ocean_color": "#000000",
+  "deep_ocean_color": "#000000",
+  "land_color": "#050508",
+  "land_highlight": "#0a0a10",
+  "land_shadow": "#000000",
+  "city_color": "#3a3a50",
+  "sacred_color": "#2a2a40",
+  "description": "What existed before the universe. What still exists around it. Pure absence. Ferdinand's roots drink here. The Seven Sin Codices were written on its inside by hands that had to exist before writing existed. Smurjan walks here casually; anyone else dies in seconds.",
+  "ruler": "no one (claiming rulership dissolves you)",
+  "tick": "0",
+  "gate": "The Root Crack (a fissure in Scalelist's ground)",
+  "phenomenon_type": "heartbeat_pulse",
+  "life": {
+    "phenomenon": "You hear your own heartbeat EXTERNALLY. There is nothing else to hear. The sound is Ferdinand drinking from the absence to feed the universe above.",
+    "inhabitants": "Smurjan (casually). Occasional lost souls (briefly). The Root-Spirits (bark creatures tethered to Ferdinand's roots). That's it.",
+    "fauna": [
+      {"name": "Root-Spirit", "note": "Attached to a root. Each has a number tattoo = how many heartbeats they have counted. Oldest known: 4.8 billion."},
+      {"name": "Void Worm", "note": "Digests absence. They are how absence stays fresh. Without them, Null would clot."}
+    ],
+    "flora": [
+      {"name": "Nothing", "note": "Or rather: everything-that-has-not-been-planted-yet. Potential, not actual."}
+    ],
+    "architecture": "None. Only Ferdinand's descending roots — silver-barked, kilometers long, impossibly thin.",
+    "culture": "There is no culture because there is no one. But if you manage to stay — and only Smurjan has — you become the custom.",
+    "signature_item": "A Single Cork Piece — the most valuable thing in Null. The only thing that still exists here. Traded for lifetimes.",
+    "sensory": {
+      "sound": "One heartbeat (yours). Nothing else. Forever.",
+      "smell": "Nothing. You realize you have never smelled 'nothing' before.",
+      "feel": "You still have a body. You are just certain the body is a kindness, not a fact."
+    }
+  },
+  "backdrop": "<rect width='1600' height='1000' fill='#000000'/><g opacity='0.15'><text x='800' y='100' text-anchor='middle' fill='#1a1a20' font-size='180' font-weight='100' letter-spacing='40'>. . .</text><text x='800' y='930' text-anchor='middle' fill='#1a1a20' font-size='180' font-weight='100' letter-spacing='40'>. . .</text></g><g opacity='0.5' stroke='#2a2a3a' stroke-width='1' fill='none'><path d='M 800 300 Q 820 400 780 500 Q 810 600 790 700'/><path d='M 800 300 Q 760 400 820 500 Q 770 600 810 700'/><path d='M 800 300 Q 830 380 760 470 Q 840 560 780 680'/></g><text x='800' y='500' text-anchor='middle' fill='#1a1a25' font-size='14' letter-spacing='8' opacity='0.6'>FERDINAND'S ROOTS</text>",
+  "cities": [
+    {
+      "id": "the_root_crack",
+      "name": "The Root Crack",
+      "x": 800, "y": 200,
+      "tier": "capital",
+      "role": "The entry point from Scalelist",
+      "note": "A fissure in the ground on Scalelist's northwest. Do not enter first.",
+      "lore": "A vertical crack in the soil. Standing over it, you feel the universe's absence breathing upward. Anyone who enters first is lost. Anyone who enters second arrives."
+    },
+    {
+      "id": "roots_of_ferdinand",
+      "name": "The Roots of Ferdinand",
+      "x": 800, "y": 500,
+      "tier": "capital",
+      "role": "Where the cork oak drinks from the void",
+      "note": "Ferdinand's roots extend into Null. You can see them if you do not look directly.",
+      "lore": "Ferdinand drinks absence. That is how he holds the universe without being burdened. The roots are silver-bark. Do not touch them unless you are Smurjan."
+    },
+    {
+      "id": "smurjans_seat",
+      "name": "Smurjan's Seat",
+      "x": 400, "y": 500,
+      "tier": "city",
+      "role": "Where Smurjan rests when visiting Null",
+      "note": "A single rock. The only solid thing in the upper Null.",
+      "lore": "Smurjan comes here to think. Thinking in Null is different. Time does not pass. Conclusions arrive without effort."
+    },
+    {
+      "id": "the_unwriting",
+      "name": "The Unwriting",
+      "x": 1200, "y": 500,
+      "tier": "city",
+      "role": "Where K-XII was dissolved",
+      "note": "A blank patch. The only way to tell it is a patch is that everything around it still exists.",
+      "lore": "K-XII broke the Ferdinand Oath. K-V convened. The Twelfth was unwritten. This is the empty space where their existence used to be. You cannot enter it — there is nothing to enter."
+    }
+  ],
+  "sacred_sites": [
+    {
+      "name": "The Seven Codices Inscription",
+      "x": 800, "y": 780,
+      "color": "#3a3a50",
+      "note": "Where the Seven Sin Codices were written on the inside of Null.",
+      "lore": "The inscription exists but cannot be read. The hand that wrote it predates writing. Only Trollmage has read it, and only backwards."
+    },
+    {
+      "name": "The First Heartbeat",
+      "x": 800, "y": 130,
+      "color": "#4a4a60",
+      "note": "The exact point where the first pulse entered Null and built Ferdinand.",
+      "lore": "Nothing marks it. The universe does. Stand here and you feel every heartbeat that has ever happened, all at once. Most visitors leave within 30 seconds."
+    }
+  ]
+}

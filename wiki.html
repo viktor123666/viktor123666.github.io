@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Wiki — Scalelist Universe Encyclopedia</title>
+<meta name="description" content="Every named character, every realm, every tribe, every event. The full canonical encyclopedia of the Scalelist Universe. Search, browse, cross-link.">
+<meta property="og:title" content="The Scalelist Universe Wiki">
+<meta property="og:description" content="125 characters · 12 realms · cross-linked encyclopedia.">
+<meta property="og:image" content="https://scalelistuniverse.com/og.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c9a84c; --void:#050510; --panel:#0a0a14; --panel2:#0e0e1a;
+  --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060;
+}
+html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.6}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+
+header{padding:18px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
+header nav{display:flex;gap:22px;flex-wrap:wrap}
+header nav a{font-size:.78rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;font-family:'Cinzel',serif;text-decoration:none}
+header nav a:hover{color:var(--gold)}
+header nav a.active{color:var(--gold)}
+
+.layout{display:grid;grid-template-columns:280px 1fr;max-width:1400px;margin:0 auto;min-height:calc(100vh - 64px)}
+@media(max-width:900px){ .layout{grid-template-columns:1fr} }
+
+aside{padding:28px 18px;border-right:1px solid var(--border);position:sticky;top:64px;align-self:start;height:calc(100vh - 64px);overflow-y:auto}
+@media(max-width:900px){ aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)} }
+aside h3{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin:18px 0 10px;font-weight:700}
+aside h3:first-child{margin-top:0}
+aside .search-input{width:100%;background:var(--panel);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:8px;font-family:'Space Mono',monospace;font-size:.85rem;margin-bottom:14px}
+aside .search-input:focus{outline:none;border-color:var(--gold)}
+aside ul{list-style:none}
+aside ul li a{display:block;padding:6px 10px;border-radius:6px;color:var(--text);font-size:.92rem;transition:all .15s;text-decoration:none}
+aside ul li a:hover{background:var(--panel);color:var(--gold)}
+
+main{padding:36px 40px}
+@media(max-width:900px){ main{padding:24px 22px} }
+main h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--gold);letter-spacing:.06em;margin-bottom:8px;font-weight:900}
+main .lede{color:var(--dim);font-style:italic;font-size:1.05rem;margin-bottom:36px;max-width:700px;line-height:1.7}
+
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:30px}
+.stat{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat .n{font-family:'Cinzel',serif;font-weight:900;color:var(--gold);font-size:1.8rem;line-height:1}
+.stat .l{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-top:6px}
+
+section{margin-bottom:40px;scroll-margin-top:80px}
+section h2{font-family:'Cinzel',serif;color:var(--gold);font-size:1.3rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid var(--border);font-weight:700}
+section h2 .count{color:var(--dim);font-size:.6em;font-weight:400;margin-left:10px;letter-spacing:.18em}
+.entry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.entry{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:all .25s;cursor:pointer;text-decoration:none;color:inherit;display:block}
+.entry:hover{border-color:var(--accent,var(--gold));transform:translateY(-2px);text-decoration:none}
+.entry .name{font-family:'Cinzel',serif;font-size:.95rem;color:#fff;font-weight:700;letter-spacing:.04em;line-height:1.2}
+.entry .role{font-size:.82rem;color:var(--accent,var(--gold));font-style:italic;margin-top:4px;line-height:1.3}
+.entry .tag{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.14em;color:var(--dim);text-transform:uppercase;margin-top:8px}
+
+footer{padding:30px 24px;text-align:center;border-top:1px solid var(--border);color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
+  <nav>
+    <a href="/cosmos">Cosmos</a>
+    <a href="/manga">Manga</a>
+    <a href="/lineage">Lineage</a>
+    <a href="/empire">Empire</a>
+    <a href="/wiki" class="active">Wiki</a>
+  </nav>
+</header>
+
+<div class="layout">
+  <aside>
+    <h3>Search</h3>
+    <input id="searchInput" class="search-input" placeholder="Type a name…" autocomplete="off">
+    <h3>Jump To</h3>
+    <ul>
+      <li><a href="#mains">Main Champions</a></li>
+      <li><a href="#lineage">The Lineage (10 new)</a></li>
+      <li><a href="#villains">Major Antagonists</a></li>
+      <li><a href="#realms">The Twelve Realms</a></li>
+      <li><a href="#tribes">Tribes &amp; Peoples</a></li>
+      <li><a href="#all">All NPCs</a></li>
+    </ul>
+    <h3>External</h3>
+    <ul>
+      <li><a href="/cosmos">→ Realm Map</a></li>
+      <li><a href="/cosmos/atlas">→ Realm Atlas</a></li>
+      <li><a href="/manga">→ Read the Manga</a></li>
+      <li><a href="/lineage">→ The Cipher</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <h1>The Wiki</h1>
+    <p class="lede">Every named character, every realm, every tribe. Cross-linked. Auto-built from canon. <strong style="color:var(--gold)">Type a name in the sidebar to filter live.</strong></p>
+
+    <div class="stat-row" id="statRow"></div>
+
+    <section id="mains">
+      <h2>Main Champions <span class="count" id="cMains"></span></h2>
+      <div class="entry-grid" id="grid-mains"></div>
+    </section>
+
+    <section id="lineage">
+      <h2>The Lineage — The 10 New <span class="count" id="cLineage"></span></h2>
+      <div class="entry-grid" id="grid-lineage"></div>
+    </section>
+
+    <section id="villains">
+      <h2>Major Antagonists <span class="count" id="cVillains"></span></h2>
+      <div class="entry-grid" id="grid-villains"></div>
+    </section>
+
+    <section id="realms">
+      <h2>The Twelve Realms <span class="count" id="cRealms"></span></h2>
+      <div class="entry-grid" id="grid-realms"></div>
+    </section>
+
+    <section id="tribes">
+      <h2>Tribes &amp; Peoples <span class="count" id="cTribes"></span></h2>
+      <div class="entry-grid" id="grid-tribes"></div>
+    </section>
+
+    <section id="all">
+      <h2>All Named Characters <span class="count" id="cAll"></span></h2>
+      <div class="entry-grid" id="grid-all"></div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  Scalelist Universe · Wiki · Auto-built from canon · <a href="/" style="color:var(--gold)">Home</a>
+</footer>
+
+<script>
+const STATE = { all: [], realms: [], antagonists: [] };
+const REALM_COLORS = {
+  scalelist: '#c9a84c', helios: '#4ade80', astralis: '#ff6b9d',
+  codexia: '#9333ea', heartbeat: '#fbbf24', trinity: '#0ea5e9',
+  thanatos: '#9b9b9b', null: '#ffffff', void2: '#fff2aa',
+  echo: '#9e8eff', horizon: '#ffc880', lumen: '#fef3c7',
+};
+
+async function init() {
+  const [cat, antagonists, cosmos] = await Promise.all([
+    fetch('/cosmos/character_catalog.json').then(r => r.json()).catch(() => ({characters:[]})),
+    fetch('/cosmos/antagonists.json').then(r => r.json()).catch(() => ({antagonists:[]})),
+    fetch('/cosmos_data.json').then(r => r.json()).catch(() => ({realms:[]})),
+  ]);
+  STATE.all = cat.characters || [];
+  STATE.antagonists = antagonists.antagonists || [];
+  STATE.realms = cosmos.realms || [];
+
+  renderStats();
+  renderMains();
+  renderLineage();
+  renderVillains();
+  renderRealms();
+  renderTribes();
+  renderAll();
+
+  document.getElementById('searchInput').addEventListener('input', applyFilter);
+}
+
+function renderStats() {
+  const row = document.getElementById('statRow');
+  const stats = [
+    {n: STATE.all.length, l: 'Characters'},
+    {n: STATE.realms.length || 12, l: 'Realms'},
+    {n: STATE.antagonists.length, l: 'Antagonists'},
+    {n: 15, l: 'Cipher Souls'},
+    {n: countTribes(), l: 'Tribes'},
+  ];
+  row.innerHTML = stats.map(s => `<div class="stat"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join('');
+}
+
+function countTribes() {
+  const set = new Set();
+  for (const c of STATE.all) if (c.tribe_id) set.add(c.tribe_id);
+  return set.size;
+}
+
+function makeCard(c, opts = {}) {
+  const realm = c.realm_id || 'scalelist';
+  const color = c.realm_color || REALM_COLORS[realm] || '#c9a84c';
+  const href = opts.href || (c.is_lineage && c.id ? `/characters/${c.id}` : `/cosmos/atlas#realm-${realm}`);
+  return `<a class="entry" href="${href}" style="--accent:${color}" data-name="${(c.name||'').toLowerCase()}">
+    <div class="name">${escapeHTML(c.name)}</div>
+    <div class="role">${escapeHTML(c.role || '')}</div>
+    <div class="tag">${escapeHTML((c.realm_name || c.realm_id || '').toString())}${c.letter ? ' · ' + c.letter : ''}</div>
+  </a>`;
+}
+
+function renderMains() {
+  const mains = STATE.all.filter(c => c.is_main);
+  document.getElementById('grid-mains').innerHTML = mains.map(c => makeCard(c)).join('');
+  document.getElementById('cMains').textContent = `${mains.length} entries`;
+}
+
+function renderLineage() {
+  const lin = STATE.all.filter(c => c.is_lineage);
+  document.getElementById('grid-lineage').innerHTML = lin.map(c => makeCard(c, {href: `/characters/${c.id}`})).join('');
+  document.getElementById('cLineage').textContent = `${lin.length} new souls`;
+}
+
+function renderVillains() {
+  document.getElementById('grid-villains').innerHTML = STATE.antagonists.map(v => `
+    <a class="entry" href="/cosmos/atlas#realm-${v.realm_id}" style="--accent:${v.color}" data-name="${(v.name||'').toLowerCase()}">
+      <div class="name">${escapeHTML(v.name)}</div>
+      <div class="role">${escapeHTML(v.role || '')}</div>
+      <div class="tag">${escapeHTML(v.realm_name || '')} · ${escapeHTML(v.first_seen || '')}</div>
+    </a>
+  `).join('');
+  document.getElementById('cVillains').textContent = `${STATE.antagonists.length} entries`;
+}
+
+function renderRealms() {
+  document.getElementById('grid-realms').innerHTML = STATE.realms.map(r => `
+    <a class="entry" href="/cosmos/atlas#realm-${r.id}" style="--accent:${r.color || '#c9a84c'}" data-name="${(r.name||'').toLowerCase()}">
+      <div class="name">${escapeHTML(r.name)}</div>
+      <div class="role">${escapeHTML(r.subtitle || '')}</div>
+      <div class="tag">${escapeHTML(r.id || '')}</div>
+    </a>
+  `).join('');
+  document.getElementById('cRealms').textContent = `${STATE.realms.length} entries`;
+}
+
+function renderTribes() {
+  const seen = {};
+  for (const c of STATE.all) {
+    if (!c.tribe_id || seen[c.tribe_id]) continue;
+    seen[c.tribe_id] = c;
+  }
+  const tribes = Object.values(seen);
+  document.getElementById('grid-tribes').innerHTML = tribes.map(c => `
+    <a class="entry" href="/cosmos/atlas#realm-${c.realm_id}" style="--accent:${c.realm_color || '#c9a84c'}" data-name="${(c.tribe_name||'').toLowerCase()}">
+      <div class="name">${escapeHTML(c.tribe_name)}</div>
+      <div class="role">${escapeHTML((c.tribe_persona || '').slice(0, 90))}…</div>
+      <div class="tag">${escapeHTML(c.realm_name || '')}</div>
+    </a>
+  `).join('');
+  document.getElementById('cTribes').textContent = `${tribes.length} entries`;
+}
+
+function renderAll() {
+  const sorted = [...STATE.all].sort((a, b) => a.name.localeCompare(b.name));
+  document.getElementById('grid-all').innerHTML = sorted.map(c => makeCard(c)).join('');
+  document.getElementById('cAll').textContent = `${sorted.length} entries`;
+}
+
+function applyFilter(e) {
+  const q = (e.target.value || '').toLowerCase().trim();
+  document.querySelectorAll('.entry').forEach(el => {
+    const name = el.dataset.name || '';
+    const txt = (el.textContent || '').toLowerCase();
+    el.style.display = (!q || name.includes(q) || txt.includes(q)) ? '' : 'none';
+  });
+}
+
+function escapeHTML(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+init();
+</script>
+</body>
+</html>

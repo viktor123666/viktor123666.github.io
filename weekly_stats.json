@@ -1,0 +1,122 @@
+{
+  "days": 7,
+  "window_start": "2026-04-01",
+  "window_end": "2026-04-08",
+  "raw_clips": 11,
+  "enhanced": 11,
+  "staged": 11,
+  "daily_counts": {
+    "2026-04-08": 11
+  },
+  "intervals": [
+    2780.101886510849,
+    2801.2008221149445,
+    2632.068247795105,
+    2730.2697143554688,
+    2532.6078629493713,
+    2657.302932739258,
+    2687.044451713562,
+    2640.790338039398,
+    2635.1048591136932,
+    2674.354598045349
+  ],
+  "char_breakdown": {
+    "kompis": {
+      "count": 3,
+      "avg_score": 87.7,
+      "best": 88.8
+    },
+    "vigolas": {
+      "count": 2,
+      "avg_score": 97.7,
+      "best": 97.7
+    },
+    "trollmage": {
+      "count": 2,
+      "avg_score": 94.2,
+      "best": 94.6
+    },
+    "rougeina": {
+      "count": 2,
+      "avg_score": 87.4,
+      "best": 91.1
+    },
+    "smurjan": {
+      "count": 2,
+      "avg_score": 84.0,
+      "best": 86.6
+    }
+  },
+  "quality": {
+    "hero": 5,
+    "great": 6,
+    "ok": 0,
+    "review": 0
+  },
+  "period_achievements": [
+    {
+      "id": "first_blood",
+      "name": "🩸 FIRST BLOOD",
+      "description": "Generated your very first Wan 2.1 clip",
+      "unlocked_at": "2026-04-08 03:34:35",
+      "at_clip": 3
+    },
+    {
+      "id": "first_hero",
+      "name": "⭐ HERO UNLOCKED",
+      "description": "First clip scoring 90 or higher",
+      "unlocked_at": "2026-04-08 03:34:35",
+      "at_clip": 3
+    },
+    {
+      "id": "full_roster",
+      "name": "🎭 FULL ROSTER",
+      "description": "At least 1 clip for each of the 5 characters",
+      "unlocked_at": "2026-04-08 05:01:31",
+      "at_clip": 5
+    },
+    {
+      "id": "all_grade_a",
+      "name": "🎖️ ALL A-GRADE",
+      "description": "Every character has at least one HERO or GREAT",
+      "unlocked_at": "2026-04-08 05:01:31",
+      "at_clip": 5
+    },
+    {
+      "id": "no_reviews",
+      "name": "✨ FLAWLESS",
+      "description": "Zero clips graded REVIEW",
+      "unlocked_at": "2026-04-08 05:01:31",
+      "at_clip": 5
+    },
+    {
+      "id": "total_hero",
+      "name": "👑 TOTAL HERO",
+      "description": "At least one HERO clip for each character",
+      "unlocked_at": "2026-04-08 05:01:31",
+      "at_clip": 5
+    },
+    {
+      "id": "five_heroes",
+      "name": "🏆 HERO TROPHY",
+      "description": "5 or more HERO-grade clips",
+      "unlocked_at": "2026-04-08 07:16:31",
+      "at_clip": 8
+    },
+    {
+      "id": "perfect_ten",
+      "name": "💎 PERFECT TEN",
+      "description": "10 consecutive clips with 0 failures",
+      "unlocked_at": "2026-04-08 08:41:31",
+      "at_clip": 10
+    },
+    {
+      "id": "hat_trick",
+      "name": "🎩 HAT TRICK",
+      "description": "3 clips of the same character generated",
+      "unlocked_at": "2026-04-08 09:26:31",
+      "at_clip": 11
+    }
+  ],
+  "avg_score": 90.0
+}

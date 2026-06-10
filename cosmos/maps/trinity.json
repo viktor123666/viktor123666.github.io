@@ -1,0 +1,118 @@
+{
+  "id": "trinity",
+  "name": "TRINITY",
+  "subtitle": "The Void Three",
+  "type": "triptych",
+  "color": "#00aaff",
+  "bg_color": "#020818",
+  "ocean_color": "#020818",
+  "deep_ocean_color": "#000310",
+  "land_color": "#0a1838",
+  "land_highlight": "#1a3068",
+  "land_shadow": "#04081a",
+  "city_color": "#60c8ff",
+  "sacred_color": "#c0e8ff",
+  "description": "Smurjan's domain. A realm containing itself three times, overlaid. Bali-reality (kind) + Kali-reality (wrathful) + Fused-reality (judgment). Entry must be attempted three times in rapid succession to meet Fused-Smurjan.",
+  "ruler": "Smurjan — Bali, Kali, and Fused",
+  "tick": "1,000,000 (void-processing)",
+  "gate": "The Three Doors (all three opened simultaneously)",
+  "phenomenon_type": "triple_pulse",
+  "life": {
+    "phenomenon": "Every building has THREE entrances. One to Bali's world, one to Kali's, one to the Fused-world. You pick which mood you're in. Walk through the wrong one and the building itself rejects you.",
+    "inhabitants": "Bali-Hermits (kind, always offering tea). Kali-Warriors (righteous, always armed). Fused-Judges (silent, always watching). All three populations are the SAME PEOPLE — they just live in different overlays.",
+    "fauna": [
+      {"name": "Three-Headed Hound", "note": "One head per reality. They argue. The middle head wins when hungry."},
+      {"name": "Judgment Moth", "note": "Lands on you ONLY if you have been lying recently. Their count on you is your sin-total."},
+      {"name": "Jade Snake", "note": "Speaks with three voices simultaneously. They recite the day's weather in all three realities. Useful for travelers."}
+    ],
+    "flora": [
+      {"name": "Triune Rose", "note": "One plant. Three different-colored blooms. Blue for Bali, orange for Kali, white for Fused. Cut one and the other two wilt."},
+      {"name": "Shadow Bamboo", "note": "Grows in all three realities at once. Cutting it in one reality leaves the cut visible only to you."}
+    ],
+    "architecture": "Every building has three doors. Walls painted in three stripes (blue/purple/orange). Rooftops split in thirds. Staircases spiral three times before reaching a new floor.",
+    "culture": "Decisions made by voting with yourself THREE TIMES — even if alone. 'Do I want coffee? One says yes, one says no, one says tea. Tea wins.' This is called the Trinity Vote.",
+    "signature_item": "Triune Coin — always lands on all three sides simultaneously. Flip it to break deadlocks. The coin cannot be fooled.",
+    "sensory": {
+      "sound": "Three layers of ambient — birdsong (Bali) + wind (Fused) + crackling fire (Kali) — blended. You can focus on any one layer.",
+      "smell": "Flowers + rain + burnt wood. All three. Always.",
+      "feel": "A constant slight déjà vu. The realm knows you better than you know yourself."
+    }
+  },
+  "backdrop": "<defs><radialGradient id='triColor' cx='50%' cy='50%' r='55%'><stop offset='0%' stop-color='#0080ff' stop-opacity='0.15'/><stop offset='100%' stop-color='#020818' stop-opacity='0'/></radialGradient></defs><rect width='1600' height='1000' fill='url(#triColor)'/><g opacity='0.35'><circle cx='520' cy='450' r='280' fill='#80d0ff' opacity='0.08'/><circle cx='800' cy='450' r='280' fill='#f080ff' opacity='0.08'/><circle cx='1080' cy='450' r='280' fill='#ffa060' opacity='0.08'/></g>",
+  "features": [
+    {
+      "svg": "<g transform='translate(520 450)' opacity='0.75'><rect x='-60' y='-100' width='120' height='200' rx='8' fill='#0a2040' stroke='#60c8ff' stroke-width='2'/><circle cx='30' cy='0' r='4' fill='#60c8ff'/><text y='130' text-anchor='middle' fill='#80d0ff' font-size='12' letter-spacing='3'>BALI DOOR</text><text y='146' text-anchor='middle' fill='#80d0ff' font-size='9' letter-spacing='2' opacity='0.6'>(kindness)</text></g>"
+    },
+    {
+      "svg": "<g transform='translate(800 450)' opacity='0.75'><rect x='-60' y='-100' width='120' height='200' rx='8' fill='#2a0a30' stroke='#f080ff' stroke-width='2'/><circle cx='30' cy='0' r='4' fill='#f080ff'/><text y='130' text-anchor='middle' fill='#ffa0ff' font-size='12' letter-spacing='3'>FUSED DOOR</text><text y='146' text-anchor='middle' fill='#ffa0ff' font-size='9' letter-spacing='2' opacity='0.6'>(judgment)</text></g>"
+    },
+    {
+      "svg": "<g transform='translate(1080 450)' opacity='0.75'><rect x='-60' y='-100' width='120' height='200' rx='8' fill='#301408' stroke='#ffa060' stroke-width='2'/><circle cx='30' cy='0' r='4' fill='#ffa060'/><text y='130' text-anchor='middle' fill='#ffc080' font-size='12' letter-spacing='3'>KALI DOOR</text><text y='146' text-anchor='middle' fill='#ffc080' font-size='9' letter-spacing='2' opacity='0.6'>(wrath)</text></g>"
+    }
+  ],
+  "cities": [
+    {
+      "id": "bali_hall",
+      "name": "The Hall of Kindness",
+      "x": 370, "y": 310,
+      "tier": "city",
+      "role": "Bali's city",
+      "note": "A hall of a thousand windows, each looking at a different person being kind to a stranger.",
+      "lore": "Bali-Smurjan walks here slowly. Every window is a blessing already given. The hall extends forever in all directions."
+    },
+    {
+      "id": "bali_garden",
+      "name": "The Garden of the Small Good",
+      "x": 370, "y": 620,
+      "tier": "town",
+      "role": "Bali's meditation garden",
+      "note": "Flowers bloom when someone helps an elderly stranger across a street.",
+      "lore": "On busy days the garden is bright. On tragic days it is also bright — more people help than you think."
+    },
+    {
+      "id": "kali_pyre",
+      "name": "The Pyre of Just Wrath",
+      "x": 1230, "y": 310,
+      "tier": "city",
+      "role": "Kali's city",
+      "note": "A city-shaped bonfire. The flames are justified.",
+      "lore": "Kali-Smurjan tends the fire. Every flame is a wrath that was deserved. The fire does not grow beyond its proper size."
+    },
+    {
+      "id": "kali_forge",
+      "name": "The Forge of Vengeance",
+      "x": 1230, "y": 620,
+      "tier": "town",
+      "role": "Kali's workshop",
+      "note": "Kali forges swords here. None are used; the forging is the point.",
+      "lore": "Each sword represents a wrong still uncorrected in some realm. Kali keeps them hanging. When a wrong is corrected somewhere, a sword turns to rust here and falls."
+    },
+    {
+      "id": "fused_seat",
+      "name": "The Seat of Judgment",
+      "x": 800, "y": 250,
+      "tier": "capital",
+      "role": "Fused-Smurjan's throne",
+      "note": "Only reachable by entering all three doors simultaneously.",
+      "lore": "Fused-Smurjan sits here with three voices. When you are judged, Bali argues for mercy, Kali argues for justice, Fused decides. The three agree more often than you'd think."
+    },
+    {
+      "id": "fused_library",
+      "name": "The Library of Decided Things",
+      "x": 800, "y": 720,
+      "tier": "city",
+      "role": "Where judgments are stored",
+      "note": "Every judgment ever made on any soul is written here, unalterable.",
+      "lore": "You may read your own file. No one else's. If you cannot find yours, it means you have not yet been judged. Keep living."
+    }
+  ],
+  "sacred_sites": [
+    {
+      "name": "The Three-Footed Bridge",
+      "x": 800, "y": 450,
+      "color": "#c0e8ff",
+      "note": "The only way between the three realities.",
+      "lore": "A bridge that exists in all three realities simultaneously. Walking it feels normal. Leaving it feels like being decided about."
+    }
+  ]
+}

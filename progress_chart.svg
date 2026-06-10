@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="500" viewBox="0 0 1100 500">
+<rect width="1100" height="500" fill="#0a0a14"/>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#0a0a14"/><stop offset="1" stop-color="#05050a"/>
+</linearGradient></defs>
+<rect width="1100" height="500" fill="url(#bg)"/>
+<text x="550" y="30" fill="#ffd166" font-family="Arial,sans-serif" font-size="20" font-weight="bold" text-anchor="middle">CLIPS GENERATED OVER TIME — Scalelist Universe</text>
+<line x1="60" y1="50.0" x2="1060" y2="50.0" stroke="#1a1a26" stroke-width="1"/>
+<text x="50" y="54.0" fill="#666" font-family="Consolas,monospace" font-size="11" text-anchor="end">13</text>
+<line x1="60" y1="128.0" x2="1060" y2="128.0" stroke="#1a1a26" stroke-width="1"/>
+<text x="50" y="132.0" fill="#666" font-family="Consolas,monospace" font-size="11" text-anchor="end">10</text>
+<line x1="60" y1="206.0" x2="1060" y2="206.0" stroke="#1a1a26" stroke-width="1"/>
+<text x="50" y="210.0" fill="#666" font-family="Consolas,monospace" font-size="11" text-anchor="end">8</text>
+<line x1="60" y1="284.0" x2="1060" y2="284.0" stroke="#1a1a26" stroke-width="1"/>
+<text x="50" y="288.0" fill="#666" font-family="Consolas,monospace" font-size="11" text-anchor="end">5</text>
+<line x1="60" y1="362.0" x2="1060" y2="362.0" stroke="#1a1a26" stroke-width="1"/>
+<text x="50" y="366.0" fill="#666" font-family="Consolas,monospace" font-size="11" text-anchor="end">3</text>
+<line x1="60" y1="440.0" x2="1060" y2="440.0" stroke="#1a1a26" stroke-width="1"/>
+<text x="50" y="444.0" fill="#666" font-family="Consolas,monospace" font-size="11" text-anchor="end">0</text>
+<line x1="60.0" y1="440" x2="60.0" y2="444" stroke="#444" stroke-width="1"/>
+<text x="60.0" y="458" fill="#666" font-family="Consolas,monospace" font-size="10" text-anchor="middle">01:54</text>
+<line x1="260.0" y1="440" x2="260.0" y2="444" stroke="#444" stroke-width="1"/>
+<text x="260.0" y="458" fill="#666" font-family="Consolas,monospace" font-size="10" text-anchor="middle">03:28</text>
+<line x1="460.0" y1="440" x2="460.0" y2="444" stroke="#444" stroke-width="1"/>
+<text x="460.0" y="458" fill="#666" font-family="Consolas,monospace" font-size="10" text-anchor="middle">05:01</text>
+<line x1="660.0" y1="440" x2="660.0" y2="444" stroke="#444" stroke-width="1"/>
+<text x="660.0" y="458" fill="#666" font-family="Consolas,monospace" font-size="10" text-anchor="middle">06:34</text>
+<line x1="860.0" y1="440" x2="860.0" y2="444" stroke="#444" stroke-width="1"/>
+<text x="860.0" y="458" fill="#666" font-family="Consolas,monospace" font-size="10" text-anchor="middle">08:07</text>
+<line x1="1060.0" y1="440" x2="1060.0" y2="444" stroke="#444" stroke-width="1"/>
+<text x="1060.0" y="458" fill="#666" font-family="Consolas,monospace" font-size="10" text-anchor="middle">09:40</text>
+<path d="M 60.0,410.0 L 159.5,380.0 L 259.8,350.0 L 354.0,320.0 L 451.7,290.0 L 542.3,260.0 L 637.4,230.0 L 733.6,200.0 L 828.1,170.0 L 922.4,140.0 L 1018.1,110.0" fill="none" stroke="#ffd166" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 60.0,410.0 L 542.3,380.0 L 1018.1,350.0" fill="none" stroke="#ffaa00" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" opacity="0.85"/>
+<circle cx="60.0" cy="410.0" r="3.5" fill="#ffaa00"/>
+<circle cx="542.3" cy="380.0" r="3.5" fill="#ffaa00"/>
+<circle cx="1018.1" cy="350.0" r="3.5" fill="#ffaa00"/>
+<path d="M 159.5,410.0 L 637.4,380.0" fill="none" stroke="#00ff88" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" opacity="0.85"/>
+<circle cx="159.5" cy="410.0" r="3.5" fill="#00ff88"/>
+<circle cx="637.4" cy="380.0" r="3.5" fill="#00ff88"/>
+<path d="M 259.8,410.0 L 733.6,380.0" fill="none" stroke="#9933ff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" opacity="0.85"/>
+<circle cx="259.8" cy="410.0" r="3.5" fill="#9933ff"/>
+<circle cx="733.6" cy="380.0" r="3.5" fill="#9933ff"/>
+<path d="M 354.0,410.0 L 828.1,380.0" fill="none" stroke="#ff3366" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" opacity="0.85"/>
+<circle cx="354.0" cy="410.0" r="3.5" fill="#ff3366"/>
+<circle cx="828.1" cy="380.0" r="3.5" fill="#ff3366"/>
+<path d="M 451.7,410.0 L 922.4,380.0" fill="none" stroke="#00aaff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" opacity="0.85"/>
+<circle cx="451.7" cy="410.0" r="3.5" fill="#00aaff"/>
+<circle cx="922.4" cy="380.0" r="3.5" fill="#00aaff"/>
+<rect x="890" y="54" width="190" height="136" fill="#0f0f18" stroke="#222" rx="4"/>
+<line x1="900" y1="70" x2="930" y2="70" stroke="#ffd166" stroke-width="3"/>
+<text x="938" y="74" fill="#ffd166" font-family="Arial,sans-serif" font-size="12" font-weight="bold">TOTAL (11)</text>
+<line x1="900" y1="90" x2="930" y2="90" stroke="#ffaa00" stroke-width="2.5"/>
+<text x="938" y="94" fill="#ffaa00" font-family="Arial,sans-serif" font-size="12">kompis (3)</text>
+<line x1="900" y1="110" x2="930" y2="110" stroke="#00ff88" stroke-width="2.5"/>
+<text x="938" y="114" fill="#00ff88" font-family="Arial,sans-serif" font-size="12">vigolas (2)</text>
+<line x1="900" y1="130" x2="930" y2="130" stroke="#9933ff" stroke-width="2.5"/>
+<text x="938" y="134" fill="#9933ff" font-family="Arial,sans-serif" font-size="12">trollmage (2)</text>
+<line x1="900" y1="150" x2="930" y2="150" stroke="#ff3366" stroke-width="2.5"/>
+<text x="938" y="154" fill="#ff3366" font-family="Arial,sans-serif" font-size="12">rougeina (2)</text>
+<line x1="900" y1="170" x2="930" y2="170" stroke="#00aaff" stroke-width="2.5"/>
+<text x="938" y="174" fill="#00aaff" font-family="Arial,sans-serif" font-size="12">smurjan (2)</text>
+<text x="550" y="490" fill="#444" font-family="Arial,sans-serif" font-size="10" text-anchor="middle">YWAPOS · Generated 2026-04-08 09:40:38</text>
+</svg>

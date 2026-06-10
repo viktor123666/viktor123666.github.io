@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-04-08 14:09:44",
+  "total_clips_ever": 17,
+  "first_clip_at": "2026-04-08 10:17:26",
+  "duration_hours": 12.2,
+  "total_size_mb": 185.2,
+  "best_clip_ever": "vigolas_W21_000_00_530767.webp",
+  "best_score_ever": 97.7,
+  "by_char": {
+    "kompis": {
+      "clips": 4,
+      "size": 47633924,
+      "best_score": 88.8
+    },
+    "rougeina": {
+      "clips": 3,
+      "size": 33873942,
+      "best_score": 93.0
+    },
+    "smurjan": {
+      "clips": 3,
+      "size": 27046286,
+      "best_score": 86.6
+    },
+    "trollmage": {
+      "clips": 3,
+      "size": 37944982,
+      "best_score": 97.4
+    },
+    "vigolas": {
+      "clips": 4,
+      "size": 47709768,
+      "best_score": 97.7
+    }
+  }
+}

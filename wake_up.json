@@ -1,0 +1,32 @@
+{
+  "greeting": "You're up late, Vigge.",
+  "paragraphs": [
+    "While you slept, the Wan 2.1 pipeline ran in quiet rhythm. 27 clips finished generation, each ~47 minutes of RTX 3060 Ti compute. 11 scored HERO (⭐ ⭐ ⭐ ⭐ ⭐) and 14 scored GREAT.",
+    "The best clip of the night is **vigolas** at **97.7/100** (HERO). Filename: `vigolas_W21_000_00_530767.webp`. Stage it first.",
+    "Everything is staged, scored, and waiting. Open the morning index, click through the top 5 in the reviewer, mark your favorites with `approved.flag`, then run `upload_ready_launcher.py --write-bat` to generate the batch upload script. Nothing has been uploaded — that's always your call.",
+    "9 achievements unlocked so far. Every new clip might unlock another. 25+ background services are alive. ComfyUI is patient. Mingus watches over the queue.",
+    "HADOM Quoka. Yet we are part of something."
+  ],
+  "done_count": 27,
+  "hero_count": 11,
+  "great_count": 14,
+  "unlocked": 9,
+  "top_clip": {
+    "sig": "1775608923.675073_8687046",
+    "path": "F:/scalelistuniverse/QA_REVIEW/wan21_queue_enhanced\\vigolas\\vigolas_W21_000_00_530767.webp",
+    "size_kb": 8483.4,
+    "metrics": {
+      "frame_count": 118,
+      "width": 960,
+      "height": 1440,
+      "brightness": 101.3,
+      "saturation": 26.6,
+      "variance": 5057.0,
+      "edge_density": 37.0
+    },
+    "score": 97.7,
+    "grade": "HERO",
+    "char": "vigolas",
+    "name": "vigolas_W21_000_00_530767.webp"
+  }
+}

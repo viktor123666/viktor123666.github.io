@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Speak to the Scalelist — Chat with any character</title>
+<meta name="description" content="Chat with any of the 115 named characters of the Scalelist Universe. Architects, tribes, gardeners, storm-sons, reflections, butterflies — all speak back.">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;1,400;0,600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --gold:#c9a84c; --void:#050510; --panel:#0e0e1a; --border:rgba(201,168,76,0.3);
+    --text:#d4c9a8; --dim:#7a7060;
+  }
+  html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond','Segoe UI',serif;min-height:100vh;}
+  body{display:flex;flex-direction:column;min-height:100vh;}
+
+  header{padding:18px 28px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:#0a0a14;position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);}
+  header h1{color:var(--gold);font-size:1.1rem;letter-spacing:0.1em;text-transform:uppercase;font-family:'Cinzel',serif;font-weight:700;}
+  header h1 span{color:#fff;}
+  header nav{margin-left:auto;display:flex;gap:16px;}
+  header nav a{color:var(--dim);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;}
+  header nav a:hover{color:var(--gold);}
+
+  .hero{padding:42px 24px 26px;text-align:center;}
+  .hero h2{font-family:'Cinzel',serif;font-size:2.2rem;color:var(--gold);letter-spacing:0.05em;}
+  .hero p{color:var(--dim);margin-top:10px;font-style:italic;}
+
+  .controls{display:flex;flex-wrap:wrap;gap:10px;padding:0 24px 20px;max-width:1400px;margin:0 auto;width:100%;align-items:center;justify-content:center;}
+  .controls input[type=text]{flex:1;min-width:240px;max-width:420px;padding:11px 14px;background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:8px;font-size:0.9rem;font-family:inherit;outline:none;}
+  .controls input[type=text]:focus{border-color:var(--gold);box-shadow:0 0 12px rgba(201,168,76,0.25);}
+  .controls select{padding:11px 14px;background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:8px;font-size:0.88rem;font-family:inherit;}
+
+  .grid{max-width:1400px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;width:100%;}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all 0.2s;position:relative;}
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,0.5), 0 0 0 1px var(--accent,var(--gold));}
+  .card .portrait-wrap{position:relative;width:100%;aspect-ratio:4/5;overflow:hidden;background:#0a0a14;}
+  .card .portrait-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+  .card .realm-pill{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.7);color:var(--accent,var(--gold));font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:10px;font-weight:700;font-family:'Cinzel',serif;}
+  .card .body{padding:10px 12px 12px;}
+  .card .body .n{font-weight:600;font-size:0.88rem;color:#fff;line-height:1.2;}
+  .card .body .r{font-size:0.68rem;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px;font-family:'Cinzel',serif;}
+  .count{text-align:center;color:var(--dim);font-size:0.85rem;font-style:italic;padding:0 0 14px;}
+
+  /* Chat overlay */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:100;display:none;align-items:stretch;justify-content:center;padding:0;}
+  .overlay.open{display:flex;}
+  .chat-modal{background:#0a0a14;width:100%;max-width:920px;margin:auto;border-radius:0;display:flex;flex-direction:column;max-height:100vh;height:100vh;}
+  @media(min-width:900px){.chat-modal{max-height:90vh;height:auto;border-radius:16px;border:1px solid var(--border);}}
+  .chat-header{display:flex;align-items:center;gap:16px;padding:16px 22px;border-bottom:1px solid var(--border);background:rgba(14,14,26,0.9);}
+  .chat-header .avatar{width:58px;height:58px;border-radius:50%;border:2px solid var(--accent,var(--gold));overflow:hidden;flex-shrink:0;background:#1a1a20;}
+  .chat-header .avatar img{width:100%;height:100%;object-fit:cover;}
+  .chat-header .info{flex:1;min-width:0;}
+  .chat-header .info .nm{font-family:'Cinzel',serif;color:#fff;font-size:1.15rem;font-weight:600;}
+  .chat-header .info .sb{font-size:0.76rem;color:var(--accent,var(--gold));letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;}
+  .chat-header .info .rl{font-size:0.72rem;color:var(--dim);margin-top:2px;font-style:italic;}
+  .chat-header .close{background:transparent;border:none;color:var(--dim);font-size:1.6rem;cursor:pointer;padding:6px 10px;line-height:1;}
+  .chat-header .close:hover{color:var(--gold);}
+
+  .api-banner{padding:6px 14px;font-size:11px;text-align:center;display:none;}
+  .api-banner.ok{background:#1a2a1a;color:#7acc7a;border-bottom:1px solid #2a4a2a;display:block;}
+  .api-banner.err{background:#2a1a1a;color:#cc7a7a;border-bottom:1px solid #4a2a2a;display:block;}
+
+  .chat-msgs{flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:12px;}
+  .msg{max-width:76%;padding:11px 16px;border-radius:14px;font-size:0.94rem;line-height:1.6;animation:msgIn 0.3s;}
+  @keyframes msgIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+  .msg.char{align-self:flex-start;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.18);color:#e8dfc2;border-bottom-left-radius:4px;}
+  .msg.user{align-self:flex-end;background:#1a1a2e;color:var(--text);border-bottom-right-radius:4px;}
+  .typing{align-self:flex-start;padding:11px 16px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.18);border-radius:14px;color:var(--dim);}
+  .typing span{animation:blink 1.4s infinite;display:inline-block;}
+  .typing span:nth-child(2){animation-delay:0.2s;}.typing span:nth-child(3){animation-delay:0.4s;}
+  @keyframes blink{0%,100%{opacity:0.25;}50%{opacity:1;}}
+
+  .chat-input{padding:16px 20px;border-top:1px solid var(--border);display:flex;gap:10px;background:rgba(14,14,26,0.9);}
+  .chat-input input{flex:1;background:#1a1a2e;border:1px solid var(--border);color:var(--text);padding:11px 16px;border-radius:10px;font-size:0.94rem;font-family:inherit;outline:none;}
+  .chat-input input:focus{border-color:var(--gold);}
+  .chat-input button{background:var(--accent,var(--gold));color:#1a1a0a;border:none;padding:11px 24px;border-radius:10px;font-weight:700;cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;font-size:0.78rem;font-family:'Cinzel',serif;}
+  .chat-input button:hover{filter:brightness(1.1);}
+
+  .empty{padding:60px 24px;text-align:center;color:var(--dim);font-style:italic;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SCALELIST <span>SPEAK</span></h1>
+  <nav>
+    <a href="/">Hub</a>
+    <a href="/cosmos">Cosmos</a>
+    <a href="/cosmos/atlas.html">Atlas</a>
+    <a href="/fanfic.html">Fan-fiction</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h2>Speak to the Scalelist</h2>
+  <p>115 named characters across 12 realms. Every one of them will answer.</p>
+</div>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Search name, role, tribe, or realm...">
+  <select id="realmFilter">
+    <option value="">All realms</option>
+  </select>
+</div>
+
+<div class="count" id="count">Loading...</div>
+<div class="grid" id="grid"></div>
+
+<!-- Chat overlay -->
+<div class="overlay" id="chatOverlay">
+  <div class="chat-modal">
+    <div class="chat-header">
+      <div class="avatar"><img id="chatAvatar" src="" alt=""></div>
+      <div class="info">
+        <div class="nm" id="chatName"></div>
+        <div class="sb" id="chatSub"></div>
+        <div class="rl" id="chatRealm"></div>
+      </div>
+      <button class="close" onclick="closeChat()">✕</button>
+    </div>
+    <div class="api-banner" id="apiBanner"></div>
+    <div class="chat-msgs" id="chatMsgs"></div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Speak..." onkeydown="if(event.key==='Enter') sendMsg()">
+      <button onclick="sendMsg()">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let CATALOG = null;
+let selected = null;
+let history = [];
+
+const REALM_LABELS = {
+  scalelist: "SCALELIST", helios: "HELIOS", astralis: "ASTRALIS",
+  codexia: "CODEXIA", heartbeat: "HEARTBEAT", trinity: "TRINITY",
+  thanatos: "THANATOS", null: "NULL", void2: "VOID-II",
+  echo: "ECHO", horizon: "HORIZON", lumen: "LUMEN",
+};
+
+async function init() {
+  const res = await fetch('/cosmos/character_catalog.json');
+  CATALOG = await res.json();
+  // Populate realm filter
+  const sel = document.getElementById('realmFilter');
+  const realmsPresent = [...new Set(CATALOG.characters.map(c => c.realm_id))];
+  for (const r of realmsPresent) {
+    const opt = document.createElement('option');
+    opt.value = r;
+    opt.textContent = REALM_LABELS[r] || r.toUpperCase();
+    sel.appendChild(opt);
+  }
+  // URL params
+  const params = new URLSearchParams(location.search);
+  const preRealm = params.get('realm');
+  const preChar = params.get('char');
+  if (preRealm && REALM_LABELS[preRealm]) sel.value = preRealm;
+  render();
+  document.getElementById('search').addEventListener('input', render);
+  sel.addEventListener('change', render);
+  // Auto-open chat if ?char= specified
+  if (preChar) {
+    const c = CATALOG.characters.find(x => x.id === preChar);
+    if (c) openChat(c);
+  }
+}
+
+function render() {
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const realmF = document.getElementById('realmFilter').value;
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  let shown = 0;
+  for (const c of CATALOG.characters) {
+    if (realmF && c.realm_id !== realmF) continue;
+    if (q) {
+      const hay = (c.name + ' ' + c.role + ' ' + c.tribe_name + ' ' + c.realm_name + ' ' + c.portrait_blurb).toLowerCase();
+      if (!hay.includes(q)) continue;
+    }
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.setProperty('--accent', c.realm_color);
+    card.innerHTML = `
+      <div class="portrait-wrap">
+        <img src="${c.portrait}" alt="${escapeHTML(c.name)}" loading="lazy" onerror="this.style.opacity='0.2';this.onerror=null;">
+        <div class="realm-pill" style="color:${c.realm_color};">${REALM_LABELS[c.realm_id] || c.realm_id}</div>
+      </div>
+      <div class="body">
+        <div class="n">${escapeHTML(c.name)}</div>
+        <div class="r">${escapeHTML(c.tribe_name || c.role || '')}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => openChat(c));
+    grid.appendChild(card);
+    shown++;
+  }
+  document.getElementById('count').textContent = `${shown} of ${CATALOG.characters.length} characters`;
+  if (shown === 0) {
+    grid.innerHTML = '<div class="empty">No one answers to that name.</div>';
+  }
+}
+
+function escapeHTML(s) {
+  return (s || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+
+function openChat(c) {
+  selected = c;
+  history = [];
+  document.getElementById('chatAvatar').src = c.portrait;
+  document.getElementById('chatName').textContent = c.name;
+  document.getElementById('chatSub').textContent = c.role || '';
+  document.getElementById('chatRealm').textContent = `${c.realm_name} · ${c.tribe_name || 'no tribe'}`;
+  document.getElementById('chatMsgs').innerHTML = '';
+  document.getElementById('apiBanner').className = 'api-banner';
+  document.getElementById('apiBanner').textContent = '';
+  document.querySelector('.chat-modal').style.setProperty('--accent', c.realm_color);
+  document.querySelector('.chat-header .avatar').style.borderColor = c.realm_color;
+  document.getElementById('chatOverlay').classList.add('open');
+  document.getElementById('chatInput').focus();
+  // Opening greeting — brief, in-voice, simulated (no API call yet)
+  const greet = opening_line(c);
+  history.push({ from: 'char', text: greet });
+  renderMsgs();
+}
+
+function opening_line(c) {
+  const name = c.name.split(' ')[0];
+  const options = [
+    `You found me. Speak.`,
+    `I am ${name}. What do you need?`,
+    `Yes? I am listening.`,
+    `Speak, and I will answer.`,
+    `You stand in ${c.realm_name}. Speak.`,
+  ];
+  return options[Math.floor(Math.random() * options.length)];
+}
+
+function closeChat() {
+  document.getElementById('chatOverlay').classList.remove('open');
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeChat();
+});
+
+function renderMsgs() {
+  const m = document.getElementById('chatMsgs');
+  m.innerHTML = history.map(msg =>
+    msg.from === 'char'
+      ? `<div class="msg char">${escapeHTML(msg.text)}</div>`
+      : `<div class="msg user">${escapeHTML(msg.text)}</div>`
+  ).join('');
+  m.scrollTop = m.scrollHeight;
+}
+
+async function sendMsg() {
+  if (!selected) return;
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  history.push({ from: 'user', text });
+  input.value = '';
+  renderMsgs();
+  // Typing indicator
+  const m = document.getElementById('chatMsgs');
+  const typing = document.createElement('div');
+  typing.className = 'typing';
+  typing.innerHTML = '<span>.</span><span>.</span><span>.</span>';
+  m.appendChild(typing);
+  m.scrollTop = m.scrollHeight;
+
+  // Build message history for API
+  const apiMessages = history.map(msg => ({
+    role: msg.from === 'user' ? 'user' : 'assistant',
+    content: msg.text,
+  })).slice(-20);
+  // Trim leading assistant greetings so first msg is user
+  while (apiMessages.length && apiMessages[0].role === 'assistant') apiMessages.shift();
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ character: selected.id, messages: apiMessages }),
+    });
+    typing.remove();
+    if (res.ok) {
+      const data = await res.json();
+      history.push({ from: 'char', text: data.reply || '...' });
+      setBanner('');
+    } else {
+      const data = await res.json().catch(() => ({}));
+      let fallback = fallback_line(selected);
+      history.push({ from: 'char', text: fallback });
+      if (data.fallback) {
+        setBanner('Server chat unavailable. Set ANTHROPIC_API_KEY in Vercel env. (Using fallback reply.)', 'err');
+      } else {
+        setBanner('Chat error. (Using fallback reply.)', 'err');
+      }
+    }
+  } catch (e) {
+    typing.remove();
+    history.push({ from: 'char', text: fallback_line(selected) });
+    setBanner('Network error. (Using fallback reply.)', 'err');
+  }
+  renderMsgs();
+}
+
+function setBanner(msg, kind) {
+  const b = document.getElementById('apiBanner');
+  b.className = 'api-banner' + (kind ? ' ' + kind : '');
+  b.textContent = msg;
+}
+
+function fallback_line(c) {
+  // Rough in-voice canned replies per realm
+  const realm = c.realm_id;
+  const pool = {
+    helios:   ["The storm carries more than your voice. I hear.", "Vigolas rules here. I serve. Speak again.", "Thunder answered your word, stranger."],
+    astralis: ["*flickers* What a question to ask mid-dance!", "I heard you. The stars did too.", "Joy first, answer second."],
+    codexia:  ["Read backward, I hear you clearer.", "A question is a page. Turn it.", "The Codex already named your worry."],
+    heartbeat:["Mmm. Come sit a bit.", "The Lake agrees with you. So do I.", "Mingus wagged once. That's a yes."],
+    trinity:  ["[BALI] Patience. [KALI] Or fire. [FUSED] Decide.", "The Three hear. Two agree. It is so.", "Vote with me — three answers ready."],
+    thanatos: ["Your name is on a page somewhere. Be kind to it.", "I have read your death. Do not fear the carving.", "The spiral welcomes you already."],
+    null:     ["*silence* Only your heartbeat.", "Ferdinand's root drinks. You endure.", "Nothing to say. This is the point."],
+    void2:    ["The Seal holds. The vote carries. Proceed.", "Eleven of twelve agree with you. One abstains.", "Write it down. We will consider."],
+    echo:     ["*half-step late* I heard. I hear. I heard again.", "Wait. I wait. You wait well too.", "The vote is NO. For now."],
+    horizon:  ["K-II will call you. Sit. There is a bench.", "The Dawn Door is open for your next. Breathe.", "A soul waits. So do you."],
+    lumen:    ["*silence — then light pulse* Yes.", "You stand near the Center. Leave soon or stay forever.", "The first heartbeat hears you."],
+    scalelist:["The Ledger has your question. I'll check.", "The city bells agree with you.", "Planted, noted, poured. We'll speak more."],
+  };
+  const arr = pool[realm] || ["I hear you. I will answer later."];
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+init();
+</script>
+</body>
+</html>

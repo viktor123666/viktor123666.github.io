@@ -1,0 +1,84 @@
+{
+  "id": "horizon",
+  "name": "HORIZON",
+  "subtitle": "The Soul's Waiting Room",
+  "type": "liminal_realm",
+  "color": "#ffc880",
+  "bg_color": "#3a2a1e",
+  "ocean_color": "#5a3a22",
+  "deep_ocean_color": "#2a1e12",
+  "land_color": "#c4a070",
+  "land_highlight": "#e8c890",
+  "land_shadow": "#6a4e2e",
+  "city_color": "#fff2d4",
+  "sacred_color": "#ffdca0",
+  "description": "The dawn-threshold between Thanatos and Helios Gate City. When Fenna releases a soul from the death-ledger, it arrives here first — a vast pink-gold platform at the edge of the next life. K-II walks the platform at a slow deliberate pace, reading names from Ferdinand's cork, matching souls to bodies, choosing Tuesday for some, choosing never-again for others.",
+  "ruler": "K-II (The Reincarnation Keeper)",
+  "tick": "variable (depends on the soul's readiness)",
+  "gate": "The Dawn Door (opens once per soul)",
+  "phenomenon_type": "dawn_perpetual",
+  "life": {
+    "phenomenon": "Dawn never completes here. The sun rises, rises, rises — and never clears the horizon. Souls wait on benches. K-II walks. Every soul hears the sound of the sun they will not see fully rise.",
+    "inhabitants": "Waiting souls (ranges from 12 to 4.8 million at any given moment). K-II. K-II's quill.",
+    "fauna": [
+      {"name": "Dawn Sparrow", "note": "A small gold-grey bird that never sings. It flies alongside each departing soul for exactly one heartbeat, then returns."},
+      {"name": "Horizon Fox", "note": "A fox the color of cream. It does not eat, does not sleep, does not run. It waits. No one knows what for. K-II greets it by name but will not say the name aloud."}
+    ],
+    "flora": [
+      {"name": "Dawn-Bloom", "note": "A flower that opens only when a soul is about to be released. Petals: gold-pink. Scent: your mother's kitchen, regardless of who your mother was."}
+    ],
+    "architecture": "A single vast stone platform stretching to the horizon. Benches every ten paces. One doorway at the far edge — the Dawn Door. No roof. No walls. Just the endless threshold.",
+    "culture": "Patience. Not fatalism — patience. Souls here do not complain. They sit. They watch the sun that will not rise. They are called when K-II calls them. They go.",
+    "signature_item": "K-II's Cork-Quill — carved from a single regrown splinter of Ferdinand's bark. K-II writes each soul's next name with it. The writing does not appear on the page until the soul agrees.",
+    "sensory": {
+      "sound": "A single held note — like a choir holding its breath. It does not resolve.",
+      "smell": "Sunrise. Every possible sunrise. All of them. At once.",
+      "feel": "Warm, but not hot. The light is on your face even when you turn away from it."
+    }
+  },
+  "cities": [
+    {
+      "id": "the_platform",
+      "name": "The Platform",
+      "x": 800, "y": 500,
+      "tier": "capital",
+      "role": "The one and only city",
+      "note": "A stone platform. Benches. K-II walking.",
+      "lore": "The Platform has 144,000 benches. They are always full. They are always empty. Both true."
+    },
+    {
+      "id": "k2s_desk",
+      "name": "K-II's Desk",
+      "x": 500, "y": 500,
+      "tier": "city",
+      "role": "Where reincarnation is written",
+      "note": "A simple wooden desk at the center of the platform. K-II stands. Never sits.",
+      "lore": "The desk has one drawer. Inside the drawer is the name of every soul that has ever been and ever will be. K-II knows which one is yours without opening the drawer."
+    },
+    {
+      "id": "the_dawn_door",
+      "name": "The Dawn Door",
+      "x": 1100, "y": 500,
+      "tier": "city",
+      "role": "Gate to Helios Gate City",
+      "note": "A doorway in the middle of the platform with nothing on the other side — until K-II names your destination.",
+      "lore": "When you are called, you walk to the Dawn Door. K-II says the name of your next life. You step through. On the other side, Mother Ila of Helios Gate City greets you."
+    }
+  ],
+  "sacred_sites": [
+    {
+      "name": "The Unwritten Names",
+      "x": 800, "y": 800,
+      "color": "#ffdca0",
+      "note": "A blank patch of platform where K-XII's roster would have been.",
+      "lore": "K-XII was supposed to process one-twelfth of all incoming souls. Since K-XII was unwritten, their roster is also unwritten. Their souls — which would have existed — do not. The platform has a permanent gap."
+    },
+    {
+      "name": "Fenna's Arriving Door",
+      "x": 800, "y": 200,
+      "color": "#fff2d4",
+      "note": "Where souls arrive from Thanatos.",
+      "lore": "Fenna does not come through this door. She simply releases a soul and it materializes here, disoriented for exactly three heartbeats. Then it walks to a bench and sits."
+    }
+  ]
+}
