@@ -14,45 +14,52 @@
 :root{--bg:#0a0a0f;--card:#14141f;--border:#23233a}
 body{background:var(--bg);color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh}
 a{color:inherit;text-decoration:none}
-.header{padding:20px 24px 0;max-width:1400px;margin:0 auto}
-.header h1{font-size:30px;font-weight:900;letter-spacing:1px;background:linear-gradient(90deg,#00ff88,#00aaff,#9933ff,#ff3366,#ffaa00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:inline}
-.header .tag{color:#888;font-size:13px;margin-left:10px}
-.header .stats{color:#777;font-size:13px;margin-top:6px}
+.header{padding:18px 24px 8px;max-width:1500px;margin:0 auto}
+.header h1{font-size:28px;font-weight:900;letter-spacing:1px;background:linear-gradient(90deg,#00ff88,#00aaff,#9933ff,#ff3366,#ffaa00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:inline}
+.header .tag{color:#888;font-size:12px;margin-left:10px}
+.header .stats{color:#777;font-size:13px;margin-top:4px}
 .saver{float:right;margin-top:4px;font-size:12px;color:#aaa;border:1px solid var(--border);border-radius:20px;padding:6px 12px;cursor:pointer;background:transparent;transition:.2s}
 .saver.on{border-color:#00ff88;color:#00ff88}
-.sub-bar{display:flex;gap:10px;padding:14px 24px;max-width:1400px;margin:0 auto;overflow-x:auto;scrollbar-width:none}
-.sub-bar::-webkit-scrollbar{display:none}
-.sub-card{flex:0 0 auto;display:flex;align-items:center;gap:9px;background:var(--card);border-radius:12px;padding:8px 14px;border:1px solid var(--border);transition:.2s}
-.sub-card:hover{border-color:var(--c)}
-.sub-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#000;flex-shrink:0}
-.sub-info .name{font-weight:600;font-size:13px;white-space:nowrap}
-.sub-info .n{font-size:11px;color:#888}
-.filters{padding:8px 24px;max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.search{background:var(--card);border:1px solid #333;border-radius:8px;padding:8px 14px;color:#fff;font-size:14px;width:240px;outline:none}
+/* layout: left sidebar + main */
+.layout{display:flex;gap:18px;max-width:1500px;margin:0 auto;padding:8px 24px 60px;align-items:flex-start}
+.side{flex:0 0 190px;position:sticky;top:10px;display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 20px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.side h4{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#667;margin-bottom:6px}
+.fgroup{display:flex;flex-direction:column;gap:4px}
+.search{background:var(--card);border:1px solid #333;border-radius:8px;padding:8px 12px;color:#fff;font-size:13px;width:100%;outline:none}
 .search:focus{border-color:#00ff88}
-.tab{padding:6px 13px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #333;background:transparent;color:#aaa;transition:.15s}
+.tab{padding:6px 11px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;border:1px solid #2a2a40;background:transparent;color:#aaa;transition:.15s;text-align:left;width:100%}
 .tab:hover{border-color:#666;color:#fff}
 .tab.active{color:#fff;border-color:var(--c,#fff);background:color-mix(in srgb,var(--c,#fff) 22%,transparent)}
-.legend{font-size:11px;color:#555;margin-left:auto}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;padding:16px 24px 60px;max-width:1400px;margin:0 auto}
-body.saver-mode .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.tab .cnt{float:right;color:#556;font-size:11px;font-weight:400}
+.legend{font-size:10.5px;color:#556;line-height:1.5}
+.main{flex:1;min-width:0}
+.sub-bar{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin-bottom:12px}
+.sub-bar::-webkit-scrollbar{display:none}
+.sub-card{flex:0 0 auto;display:flex;align-items:center;gap:8px;background:var(--card);border-radius:10px;padding:7px 12px;border:1px solid var(--border);transition:.2s}
+.sub-card:hover{border-color:var(--c)}
+.sub-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#000;flex-shrink:0}
+.sub-info .name{font-weight:600;font-size:12.5px;white-space:nowrap}
+.sub-info .n{font-size:10.5px;color:#888}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:14px}
+body.saver-mode .grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px}
 .card{background:var(--card);border-radius:10px;overflow:hidden;cursor:pointer;border:1px solid transparent;transition:border-color .15s}
 .card:hover{border-color:var(--c)}
 .thumb{position:relative;width:100%;height:0;padding-top:56.25%;background:#0e0e16;overflow:hidden}
 .thumb img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block}
 .dur{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.8);color:#fff;font-size:11px;font-weight:700;padding:1px 5px;border-radius:4px}
 .kind{position:absolute;top:6px;left:6px;background:rgba(0,0,0,.7);color:var(--c);font-size:10px;font-weight:800;padding:1px 6px;border-radius:4px;text-transform:uppercase}
-.meta{padding:9px 11px}
+.mbadge{position:absolute;top:6px;right:6px;background:rgba(0,255,136,.15);color:#00ff88;font-size:9px;font-weight:800;padding:1px 5px;border-radius:4px}
+.meta{padding:8px 10px}
 .meta .title{font-size:13px;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}
 .meta .ch{font-size:11.5px;margin-top:4px;color:var(--c);font-weight:600}
 .meta .vw{color:#666;font-weight:400}
 body.saver-mode .meta .title{font-size:12px;-webkit-line-clamp:1;min-height:auto}
 .more{grid-column:1/-1;height:10px}
 .empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:#555}
-/* player */
+/* player modal */
 .ov{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:99;padding:16px}
 .ov.open{display:flex}
-.pwrap{width:min(960px,100%);}
+.pwrap{width:min(960px,100%)}
 .pframe{position:relative;width:100%;height:0;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
 .pframe iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
 .pbar{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:13px;color:#aaa;gap:12px}
@@ -62,25 +69,41 @@ body.saver-mode .meta .title{font-size:12px;-webkit-line-clamp:1;min-height:auto
 .x:hover{color:#fff}
 .foot{text-align:center;color:#444;font-size:12px;padding:30px 20px 50px}
 .foot b{color:#00ff88}
+@media(max-width:840px){
+  .layout{flex-direction:column;padding:8px 14px 50px}
+  .side{position:static;flex-direction:row;flex-wrap:wrap;gap:10px;max-height:none;width:100%}
+  .fgroup{flex-direction:row;flex-wrap:wrap;width:auto}
+  .side h4{width:100%;margin-bottom:2px}
+  .tab{width:auto;text-align:center}
+  .tab .cnt{display:none}
+  .search{width:100%}
+}
 </style>
 </head>
 <body>
 <div class="header">
-  <button class="saver" id="saverBtn" title="Low-data mode: tiny thumbnails, no effects. Auto-enables on slow connections.">📶 Data saver: <span id="saverState">off</span></button>
+  <button class="saver" id="saverBtn" title="Low-data mode: tiny thumbnails, no hover previews. Auto-enables on slow connections.">📶 Data saver: <span id="saverState">off</span></button>
   <h1>VIDEOSHOWER</h1><span class="tag">every Scalelist video ever · free · ad-free browsing · no tracking</span>
   <div class="stats" id="stats">loading…</div>
 </div>
 
-<div class="sub-bar" id="subBar"></div>
+<div class="layout">
+  <aside class="side">
+    <input class="search" id="search" placeholder="Search…">
+    <div><h4>Character</h4><div class="fgroup" id="charTabs"></div></div>
+    <div><h4>Sort</h4><div class="fgroup" id="sortTabs"></div></div>
+    <div><h4>Views</h4><div class="fgroup" id="viewTabs"></div></div>
+    <div><h4>Type</h4><div class="fgroup" id="typeTabs"></div></div>
+    <div><h4>Length</h4><div class="fgroup" id="durTabs"></div></div>
+    <div><h4>Source</h4><div class="fgroup" id="mirrorTabs"></div></div>
+    <div class="legend">keys: <span id="legendKeys"></span><br>hover a card = live preview</div>
+  </aside>
 
-<div class="filters">
-  <input class="search" id="search" placeholder="Search all videos…">
-  <div class="tab-group" id="charTabs" style="display:flex;gap:6px;flex-wrap:wrap"></div>
-  <div class="tab-group" id="typeTabs" style="display:flex;gap:6px"></div>
-  <span class="legend">keys: <span id="legendKeys"></span></span>
+  <div class="main">
+    <div class="sub-bar" id="subBar"></div>
+    <div class="grid" id="grid"></div>
+  </div>
 </div>
-
-<div class="grid" id="grid"></div>
 
 <div class="ov" id="ov">
   <div class="pwrap">
@@ -101,14 +124,16 @@ if('serviceWorker' in navigator){try{navigator.serviceWorker.register('/sw.js')}
 (function(){
 const D=window.VIDEOSHOWER||{channels:{},total:0,generated:''};
 const CH=D.channels, KEYS=Object.keys(CH);
-const SHORT={};KEYS.forEach(k=>{const s=(CH[k].shortcut||k[0]).toLowerCase();SHORT[s]=SHORT[s]||k;});
+const MIRROR=window.VS_MIRROR||{};
+const has=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+const SHORT={};KEYS.forEach(k=>{const s=(CH[k].shortcut||k[0]).toLowerCase();if(!has(SHORT,s))SHORT[s]=k;});
 document.getElementById('legendKeys').textContent=Object.keys(SHORT).join(' / ');
 
 // flatten
 const ALL=[];
 KEYS.forEach(k=>{(CH[k].videos||[]).forEach(v=>ALL.push({...v,c:k}));});
 
-// data saver: manual override > connection hint (localStorage may be blocked — best effort)
+// data saver (localStorage may be blocked — best effort)
 function lsGet(){try{return localStorage.vsSaver}catch(e){return null}}
 function lsSet(v){try{localStorage.vsSaver=v}catch(e){}}
 const conn=navigator.connection||{};
@@ -120,61 +145,93 @@ applySaver();
 
 // state
 const P=new URLSearchParams(location.search);
-let fChar=resolveChar(P.get('char'))||'all', fType='all', q='';
-function resolveChar(r){if(!r)return'';r=r.toLowerCase();if(CH[r])return r;return SHORT[r]||'';}
+let fChar=resolveChar(P.get('char'))||'all', fType='all', fSort='new', fViews='all', fDur='all', fMirror='all', q='';
+function resolveChar(r){if(!r)return'';r=r.toLowerCase();if(has(CH,r))return r;return has(SHORT,r)?SHORT[r]:'';}
 
 // subscribe bar
 const sb=document.getElementById('subBar');
 KEYS.forEach(k=>{const c=CH[k];const a=document.createElement('a');a.className='sub-card';a.href=c.url;a.target='_blank';a.rel='noopener';a.style.setProperty('--c',c.color);
 a.innerHTML=`<div class="sub-avatar" style="background:${c.color}">${c.name[0]}</div><div class="sub-info"><div class="name">${c.name}</div><div class="n">${(c.videos||[]).length} videos</div></div>`;sb.appendChild(a);});
 
-// tabs
-const ct=document.getElementById('charTabs');
-function mkTab(parent,label,val,color,group){const b=document.createElement('button');b.className='tab';b.textContent=label;if(color)b.style.setProperty('--c',color);b.dataset.v=val;b.dataset.g=group;b.onclick=()=>{if(group==='c')fChar=val;else fType=val;syncTabs();reset();};parent.appendChild(b);return b;}
-mkTab(ct,'All',`all`,'#fff','c');
-KEYS.forEach(k=>mkTab(ct,CH[k].name,k,CH[k].color,'c'));
-const tt=document.getElementById('typeTabs');
-mkTab(tt,'Everything','all','#fff','t');mkTab(tt,'Shorts','short','#fb8c00','t');mkTab(tt,'Videos','video','#43a047','t');
-function syncTabs(){document.querySelectorAll('.tab').forEach(b=>{b.classList.toggle('active',(b.dataset.g==='c'?fChar:fType)===b.dataset.v);});
+// filter tabs
+const GROUPS={
+ c:[['all','All']].concat(KEYS.map(k=>[k,CH[k].name])),
+ s:[['new','Newest'],['top','Most viewed'],['flop','Least viewed'],['long','Longest'],['short','Shortest']],
+ v:[['all','All'],['hit','Hits 100+'],['mid','21–100'],['low','4–20'],['flop','Flops ≤3']],
+ t:[['all','Everything'],['short','Shorts'],['video','Videos']],
+ d:[['all','Any length'],['s1','Under 1 min'],['m10','1–10 min'],['l10','Over 10 min']],
+ m:[['all','All sources'],['mirror','Ad-free mirror']]
+};
+const HOLDERS={c:'charTabs',s:'sortTabs',v:'viewTabs',t:'typeTabs',d:'durTabs',m:'mirrorTabs'};
+function setF(g,val){if(g==='c')fChar=val;else if(g==='s')fSort=val;else if(g==='v')fViews=val;else if(g==='t')fType=val;else if(g==='d')fDur=val;else fMirror=val;syncTabs();reset();}
+function curF(g){return g==='c'?fChar:g==='s'?fSort:g==='v'?fViews:g==='t'?fType:g==='d'?fDur:fMirror;}
+Object.keys(GROUPS).forEach(g=>{const holder=document.getElementById(HOLDERS[g]);
+GROUPS[g].forEach(([val,label])=>{const b=document.createElement('button');b.className='tab';b.textContent=label;b.dataset.g=g;b.dataset.v=val;
+if(g==='c'&&val!=='all')b.style.setProperty('--c',CH[val].color);
+b.onclick=()=>setF(g,val);holder.appendChild(b);});});
+function syncTabs(){document.querySelectorAll('.tab').forEach(b=>{b.classList.toggle('active',curF(b.dataset.g)===b.dataset.v);});
 const u=new URL(location);if(fChar==='all')u.searchParams.delete('char');else u.searchParams.set('char',fChar);history.replaceState(null,'',u);}
 syncTabs();
 
 // search
 let st;document.getElementById('search').addEventListener('input',e=>{clearTimeout(st);st=setTimeout(()=>{q=e.target.value.toLowerCase();reset();},200);});
 
-// keyboard shortcuts — v / r / k / s / t (Vigge's law)
+// keyboard shortcuts — v/r/k/s/t/i (Vigge's law); modifiers pass through
 addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;if(e.target.tagName==='INPUT')return;if(e.key==='Escape')return closePlayer();const k=resolveChar(e.key);if(k){fChar=(fChar===k)?'all':k;syncTabs();reset();}});
 
-// render (batched, infinite scroll)
+// filtering + sorting
+function inViews(v){if(fViews==='all')return true;const x=v.v;if(x==null)return false;
+return fViews==='flop'?x<=3:fViews==='low'?(x>=4&&x<=20):fViews==='mid'?(x>=21&&x<=100):x>100;}
+function inDur(v){if(fDur==='all')return true;const d=v.d;if(d==null)return false;
+return fDur==='s1'?d<=60:fDur==='m10'?(d>60&&d<=600):d>600;}
+function filterList(){let l=ALL.filter(v=>(fChar==='all'||v.c===fChar)
+&&(fType==='all'||v.k===fType||(fType==='video'&&v.k==='stream'))
+&&inViews(v)&&inDur(v)
+&&(fMirror==='all'||has(MIRROR,v.id))
+&&(!q||v.t.toLowerCase().includes(q)));
+if(fSort==='top')l=l.slice().sort((a,b)=>(b.v??-1)-(a.v??-1));
+else if(fSort==='flop')l=l.slice().sort((a,b)=>(a.v??1e15)-(b.v??1e15));
+else if(fSort==='long')l=l.slice().sort((a,b)=>(b.d??-1)-(a.d??-1));
+else if(fSort==='short')l=l.slice().sort((a,b)=>(a.d??1e15)-(b.d??1e15));
+return l;}
+
+// render (batched, infinite scroll w/ fallback)
 const grid=document.getElementById('grid');
 const BATCH=24;let list=[],pos=0,sentinel;
-function fmtD(s){if(!s)return'';const m=Math.floor(s/60),sec=s%60;return m>=60?`${Math.floor(m/60)}:${String(m%60).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`;}
+function fmtD(s){if(s==null)return'';const m=Math.floor(s/60),sec=s%60;return m>=60?`${Math.floor(m/60)}:${String(m%60).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`;}
 function fmtV(n){if(n==null)return'';return n>=1e6?(n/1e6).toFixed(1)+'M views':n>=1e3?(n/1e3).toFixed(1)+'K views':n+' views';}
-function filterList(){return ALL.filter(v=>(fChar==='all'||v.c===fChar)&&(fType==='all'||v.k===fType||(fType==='video'&&v.k==='stream'))&&(!q||v.t.toLowerCase().includes(q)));}
+function thumbUrl(v){return`https://i.ytimg.com/vi/${v.id}/${saver?'default':'mqdefault'}.jpg`;}
 function reset(){list=filterList();pos=0;grid.innerHTML='';
 document.getElementById('stats').textContent=`${list.length.toLocaleString()} of ${ALL.length.toLocaleString()} videos · ${KEYS.length} channels · updated ${D.generated||'—'}`;
 if(!list.length){grid.innerHTML='<div class="empty">No videos match. The universe is bigger than this filter.</div>';return;}
 renderMore();}
+
+// hover flipbook preview — 3 real frames (mq1/mq2/mq3, ~10KB each), hover-only
+const canHover=matchMedia('(hover:hover)').matches;
+function attachPreview(d,v){
+if(!canHover)return;
+const img=d.querySelector('img');let t=null,i=0;
+d.addEventListener('mouseenter',()=>{if(saver)return;i=0;
+t=setInterval(()=>{i=(i%3)+1;img.src=`https://i.ytimg.com/vi/${v.id}/mq${i}.jpg`;},450);});
+d.addEventListener('mouseleave',()=>{if(t){clearInterval(t);t=null;}img.src=thumbUrl(v);});}
+
 function renderMore(){const frag=document.createDocumentFragment();const end=Math.min(pos+BATCH,list.length);
 for(;pos<end;pos++){const v=list[pos],c=CH[v.c];const d=document.createElement('div');d.className='card';d.style.setProperty('--c',c.color);
-const tq=saver?'default':'mqdefault';
-d.innerHTML=`<div class="thumb"><img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/${v.id}/${tq}.jpg" alt="">${v.d?`<span class="dur">${fmtD(v.d)}</span>`:''}<span class="kind">${v.k==='short'?'SHORT':v.k==='stream'?'LIVE':'VIDEO'}</span></div>
+d.innerHTML=`<div class="thumb"><img loading="lazy" decoding="async" src="${thumbUrl(v)}" alt="">${v.d!=null?`<span class="dur">${fmtD(v.d)}</span>`:''}<span class="kind">${v.k==='short'?'SHORT':v.k==='stream'?'LIVE':'VIDEO'}</span>${has(MIRROR,v.id)?'<span class="mbadge">AD-FREE</span>':''}</div>
 <div class="meta"><div class="title"></div><div class="ch">${c.name}${v.v!=null?` <span class="vw">· ${fmtV(v.v)}</span>`:''}</div></div>`;
 d.querySelector('.title').textContent=v.t;
 d.onclick=()=>openPlayer(v);
+attachPreview(d,v);
 frag.appendChild(d);}
 if(sentinel)sentinel.remove();
 grid.appendChild(frag);
 if(pos<list.length){if(io){sentinel=document.createElement('div');sentinel.className='more';grid.appendChild(sentinel);io.observe(sentinel);}else{sentinel=document.createElement('button');sentinel.textContent='Load more';sentinel.style.cssText='grid-column:1/-1;padding:12px;background:#14141f;border:1px solid #333;border-radius:8px;color:#fff;cursor:pointer;font-size:14px';sentinel.onclick=()=>renderMore();grid.appendChild(sentinel);}}}
 const io=typeof IntersectionObserver!=='undefined'?new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){io.unobserve(e.target);renderMore();}});},{rootMargin:'600px'}):null;
 
-// player — iframe only exists while open (zero weight otherwise).
-// If a video has a self-hosted ad-free mirror copy (VS_MIRROR), play THAT:
-// truly no ads, no YouTube, works even if YouTube is blocked.
-const MIRROR=window.VS_MIRROR||{};
+// player — mirror copies play as plain <video> (true ad-free); else nocookie embed
 const ov=document.getElementById('ov'),pf=document.getElementById('pframe');
 function openPlayer(v){
-const m=Object.prototype.hasOwnProperty.call(MIRROR,v.id)?MIRROR[v.id]:null;
+const m=has(MIRROR,v.id)?MIRROR[v.id]:null;
 if(m){pf.innerHTML=`<video controls autoplay playsinline preload="metadata" style="position:absolute;top:0;left:0;width:100%;height:100%;background:#000" src="${m}"></video>`;
 document.getElementById('pt').innerHTML=`<span style="background:#00ff8822;color:#00ff88;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;margin-right:8px;vertical-align:middle">AD-FREE MIRROR</span>`;
 document.getElementById('pt').append(v.t);}
