@@ -90,7 +90,9 @@ body.saver-mode .meta .title{font-size:12px;-webkit-line-clamp:1;min-height:auto
 <div class="layout">
   <aside class="side">
     <input class="search" id="search" placeholder="Search…">
+    <div class="fgroup" id="presets" style="flex-direction:row;flex-wrap:wrap;gap:4px"></div>
     <div><h4>Character</h4><div class="fgroup" id="charTabs"></div></div>
+    <div><h4>Category</h4><div class="fgroup" id="catTabs"></div></div>
     <div><h4>Sort</h4><div class="fgroup" id="sortTabs"></div></div>
     <div><h4>Views</h4><div class="fgroup" id="viewTabs"></div></div>
     <div><h4>Type</h4><div class="fgroup" id="typeTabs"></div></div>
@@ -129,9 +131,14 @@ const has=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 const SHORT={};KEYS.forEach(k=>{const s=(CH[k].shortcut||k[0]).toLowerCase();if(!has(SHORT,s))SHORT[s]=k;});
 document.getElementById('legendKeys').textContent=Object.keys(SHORT).join(' / ');
 
-// flatten
+// flatten + auto-categories from title source-prefix
 const ALL=[];
 KEYS.forEach(k=>{(CH[k].videos||[]).forEach(v=>ALL.push({...v,c:k}));});
+const CATCOUNT={};
+ALL.forEach(v=>{let s='other';const ix=v.t.indexOf(':');if(ix>0&&ix<=30)s=v.t.slice(0,ix).trim();v.cat=s;CATCOUNT[s]=(CATCOUNT[s]||0)+1;});
+const CATS=Object.entries(CATCOUNT).filter(([s,n])=>n>=8&&s!=='other').sort((a,b)=>b[1]-a[1]).slice(0,12).map(([s])=>s);
+const CATSET={};CATS.forEach(c=>CATSET[c]=1);
+ALL.forEach(v=>{if(!CATSET[v.cat])v.cat='other';});
 
 // data saver (localStorage may be blocked — best effort)
 function lsGet(){try{return localStorage.vsSaver}catch(e){return null}}
@@ -145,7 +152,7 @@ applySaver();
 
 // state
 const P=new URLSearchParams(location.search);
-let fChar=resolveChar(P.get('char'))||'all', fType='all', fSort='new', fViews='all', fDur='all', fMirror='all', q='';
+let fChar=resolveChar(P.get('char'))||'all', fType='all', fSort='new', fViews='all', fDur='all', fMirror='all', fCat='all', q='';
 function resolveChar(r){if(!r)return'';r=r.toLowerCase();if(has(CH,r))return r;return has(SHORT,r)?SHORT[r]:'';}
 
 // subscribe bar
@@ -156,19 +163,29 @@ a.innerHTML=`<div class="sub-avatar" style="background:${c.color}">${c.name[0]}<
 // filter tabs
 const GROUPS={
  c:[['all','All']].concat(KEYS.map(k=>[k,CH[k].name])),
- s:[['new','Newest'],['top','Most viewed'],['flop','Least viewed'],['long','Longest'],['short','Shortest']],
+ k:[['all','All']].concat(CATS.map(c=>[c,c])).concat([['other','Other']]),
+ s:[['new','Newest'],['top','Most viewed'],['flop','Least viewed'],['rand','Shuffle 🎲'],['long','Longest'],['short','Shortest']],
  v:[['all','All'],['hit','Hits 100+'],['mid','21–100'],['low','4–20'],['flop','Flops ≤3']],
  t:[['all','Everything'],['short','Shorts'],['video','Videos']],
  d:[['all','Any length'],['s1','Under 1 min'],['m10','1–10 min'],['l10','Over 10 min']],
  m:[['all','All sources'],['mirror','Ad-free mirror']]
 };
-const HOLDERS={c:'charTabs',s:'sortTabs',v:'viewTabs',t:'typeTabs',d:'durTabs',m:'mirrorTabs'};
-function setF(g,val){if(g==='c')fChar=val;else if(g==='s')fSort=val;else if(g==='v')fViews=val;else if(g==='t')fType=val;else if(g==='d')fDur=val;else fMirror=val;syncTabs();reset();}
-function curF(g){return g==='c'?fChar:g==='s'?fSort:g==='v'?fViews:g==='t'?fType:g==='d'?fDur:fMirror;}
+const HOLDERS={c:'charTabs',k:'catTabs',s:'sortTabs',v:'viewTabs',t:'typeTabs',d:'durTabs',m:'mirrorTabs'};
+function setF(g,val){if(g==='c')fChar=val;else if(g==='k')fCat=val;else if(g==='s')fSort=val;else if(g==='v')fViews=val;else if(g==='t')fType=val;else if(g==='d')fDur=val;else fMirror=val;syncTabs();reset();}
+function curF(g){return g==='c'?fChar:g==='k'?fCat:g==='s'?fSort:g==='v'?fViews:g==='t'?fType:g==='d'?fDur:fMirror;}
 Object.keys(GROUPS).forEach(g=>{const holder=document.getElementById(HOLDERS[g]);
 GROUPS[g].forEach(([val,label])=>{const b=document.createElement('button');b.className='tab';b.textContent=label;b.dataset.g=g;b.dataset.v=val;
 if(g==='c'&&val!=='all')b.style.setProperty('--c',CH[val].color);
+if(g==='k'&&val!=='all'&&CATCOUNT[val]){const s=document.createElement('span');s.className='cnt';s.textContent=CATCOUNT[val];b.appendChild(s);}
 b.onclick=()=>setF(g,val);holder.appendChild(b);});});
+// one-click tactical presets
+const PRESETS=[
+ ['🔥 Hits',()=>{fViews='hit';fSort='top';}],
+ ['💀 Switch list',()=>{fViews='flop';fSort='flop';}],
+ ['🎲 Surprise me',()=>{fSort='rand';}],
+ ['↺ Reset',()=>{fChar='all';fType='all';fSort='new';fViews='all';fDur='all';fMirror='all';fCat='all';q='';document.getElementById('search').value='';}]];
+const ph=document.getElementById('presets');
+PRESETS.forEach(([label,fn])=>{const b=document.createElement('button');b.className='tab';b.style.width='auto';b.textContent=label;b.onclick=()=>{fn();syncTabs();reset();};ph.appendChild(b);});
 function syncTabs(){document.querySelectorAll('.tab').forEach(b=>{b.classList.toggle('active',curF(b.dataset.g)===b.dataset.v);});
 const u=new URL(location);if(fChar==='all')u.searchParams.delete('char');else u.searchParams.set('char',fChar);history.replaceState(null,'',u);}
 syncTabs();
@@ -185,6 +202,7 @@ return fViews==='flop'?x<=3:fViews==='low'?(x>=4&&x<=20):fViews==='mid'?(x>=21&&
 function inDur(v){if(fDur==='all')return true;const d=v.d;if(d==null)return false;
 return fDur==='s1'?d<=60:fDur==='m10'?(d>60&&d<=600):d>600;}
 function filterList(){let l=ALL.filter(v=>(fChar==='all'||v.c===fChar)
+&&(fCat==='all'||v.cat===fCat)
 &&(fType==='all'||v.k===fType||(fType==='video'&&v.k==='stream'))
 &&inViews(v)&&inDur(v)
 &&(fMirror==='all'||has(MIRROR,v.id))
@@ -193,6 +211,7 @@ if(fSort==='top')l=l.slice().sort((a,b)=>(b.v??-1)-(a.v??-1));
 else if(fSort==='flop')l=l.slice().sort((a,b)=>(a.v??1e15)-(b.v??1e15));
 else if(fSort==='long')l=l.slice().sort((a,b)=>(b.d??-1)-(a.d??-1));
 else if(fSort==='short')l=l.slice().sort((a,b)=>(a.d??1e15)-(b.d??1e15));
+else if(fSort==='rand'){l=l.slice();for(let i=l.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[l[i],l[j]]=[l[j],l[i]];}}
 return l;}
 
 // render (batched, infinite scroll w/ fallback)
