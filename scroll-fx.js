@@ -23,6 +23,22 @@
 (function () {
   'use strict';
 
+  // ─── Low-end / reduced-motion bail-out ───────────────────────────────────
+  // The base hub already ships #particles + #tracer + scenery + Ferdinand for
+  // the aura. This "deluxe" layer (173 stars, O(n²) constellations, comets,
+  // lightning) is the heaviest. On weak phones or when the user asks for less
+  // motion, skip it entirely so the site stays smooth on the worst devices —
+  // exactly the audience the Scalelist Universe is built to reach for free.
+  var _reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var _weak = (navigator.deviceMemory && navigator.deviceMemory < 4)
+           || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
+           || (Math.min(window.innerWidth, window.innerHeight) < 600);
+  if (_reduced || _weak) return;
+
+  // Pause the whole layer when the tab is hidden (battery on weak phones).
+  var _hidden = false;
+  document.addEventListener('visibilitychange', function () { _hidden = document.hidden; });
+
   const CHAR_COLORS = ['#00ff88','#ff3366','#9933ff','#ffaa00','#00aaff'];
   const STAR_COLORS = ['#ffffff','#c9a84c','#00ff88','#00aaff','#ff3366','#9933ff','#ffaa00'];
   let chaosMode = false; // Konami unlock
@@ -324,6 +340,7 @@
   // ─── Main render loop ───────────────────────────────────────────────────
   let t0 = performance.now();
   function draw(t) {
+    if (_hidden) { requestAnimationFrame(draw); return; }
     const dt = Math.min(3, (t - t0) / 16.67);
     t0 = t;
     const sy = scrollY;

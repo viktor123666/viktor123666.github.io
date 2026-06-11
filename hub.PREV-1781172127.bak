@@ -114,27 +114,10 @@ footer .egg{color:#1a1a1a;font-size:0.62rem;margin-top:10px;transition:color 1s;
 footer .egg:hover{color:var(--gold)}
 
 @media(max-width:1000px){.char-row{grid-template-columns:repeat(3,1fr)}.portal-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){
-  .char-row{grid-template-columns:repeat(2,1fr)}.portal-grid{grid-template-columns:1fr}
-  .zone{padding:54px 0 30px}.hero-quick a{font-size:.66rem;padding:9px 15px}
-  /* compress char cards on phones */
-  .char-card{padding:16px 10px}.char-icon{width:48px;height:48px;font-size:1.3rem;margin-bottom:10px}.char-name{font-size:.9rem}
-  /* hide 2 lower-priority hero buttons so the row stays one or two lines */
-  .hero-quick a:nth-child(n+4){display:none}
-  /* Ferdinand smaller on phones: no horizontal scroll, no footer overlap */
-  #ferdinand{width:min(85vw,320px);height:38vh}
-  footer{padding-bottom:26vh}
-}
-@media(max-width:430px){.char-row{grid-template-columns:1fr}}
-/* touch devices have no hover — reveal arrows + socials so they're always usable */
-@supports (hover:none){
-  .char-socials{opacity:1}
-  .portal-arrow{opacity:1;transform:translateX(0)}
-}
+@media(max-width:600px){.char-row{grid-template-columns:repeat(2,1fr)}.portal-grid{grid-template-columns:1fr}.zone{padding:54px 0 30px}.hero-quick a{font-size:.66rem;padding:9px 15px}}
 @media(prefers-reduced-motion:reduce){
   .hero-title{animation:none}.scroll-hint{animation:none}#ferdinand{display:none}
   .char-card,.portal-card{transition:opacity .3s}
-  #scenery{transition:none}
 }
 </style>
 </head>
@@ -183,7 +166,7 @@ footer .egg:hover{color:var(--gold)}
       <div class="char-card" style="--glow:#00ff88" data-color="#00ff88">
         <div class="char-icon">V</div><div class="char-name">Vigolas</div><div class="char-title-text">The Last Tide</div>
         <div class="char-socials" aria-label="Vigolas">
-          <a href="/videos?char=vigolas" title="Videoshower — free, no ads">&#127909;</a>
+          <a href="/videos.html?char=vigolas" title="Videoshower — free, no ads">&#127909;</a>
           <a href="https://www.youtube.com/@Vigolas-Scalelist" target="_blank" rel="noopener" title="YouTube">YT</a>
           <a href="https://www.tiktok.com/@scalelistvigolas" target="_blank" rel="noopener" title="TikTok">TT</a>
           <a href="https://instagram.com/scalelistvigolas" target="_blank" rel="noopener" title="Instagram">IG</a>
@@ -193,7 +176,7 @@ footer .egg:hover{color:var(--gold)}
       <div class="char-card" style="--glow:#ff3366" data-color="#ff3366">
         <div class="char-icon">R</div><div class="char-name">Rougeina</div><div class="char-title-text">The Shadow Blade</div>
         <div class="char-socials" aria-label="Rougeina">
-          <a href="/videos?char=rougeina" title="Videoshower — free, no ads">&#127909;</a>
+          <a href="/videos.html?char=rougeina" title="Videoshower — free, no ads">&#127909;</a>
           <a href="https://www.youtube.com/@Rougeina-RaveLooks" target="_blank" rel="noopener" title="YouTube">YT</a>
           <a href="https://www.tiktok.com/@scalelistrougeina" target="_blank" rel="noopener" title="TikTok">TT</a>
           <a href="https://instagram.com/scalelistrougeina" target="_blank" rel="noopener" title="Instagram">IG</a>
@@ -202,7 +185,7 @@ footer .egg:hover{color:var(--gold)}
       <div class="char-card" style="--glow:#9933ff" data-color="#9933ff">
         <div class="char-icon">T</div><div class="char-name">Trollmage</div><div class="char-title-text">The Arcane Keeper</div>
         <div class="char-socials" aria-label="Trollmage">
-          <a href="/videos?char=trollmage" title="Videoshower — free, no ads">&#127909;</a>
+          <a href="/videos.html?char=trollmage" title="Videoshower — free, no ads">&#127909;</a>
           <a href="https://www.youtube.com/@trollmage7709" target="_blank" rel="noopener" title="YouTube">YT</a>
           <a href="https://www.tiktok.com/@scalelisttrollmage" target="_blank" rel="noopener" title="TikTok">TT</a>
           <a href="https://instagram.com/scalelisttrollmage" target="_blank" rel="noopener" title="Instagram">IG</a>
@@ -214,7 +197,7 @@ footer .egg:hover{color:var(--gold)}
           <span class="side side-t">T</span><span class="side-sep">&middot;</span><span class="side side-ct">CT</span><span class="paw">&#128054;</span>
         </div>
         <div class="char-socials" aria-label="Kompis">
-          <a href="/videos?char=kompis" title="Videoshower — free, no ads">&#127909;</a>
+          <a href="/videos.html?char=kompis" title="Videoshower — free, no ads">&#127909;</a>
           <a href="https://www.youtube.com/@Kompis-scale" target="_blank" rel="noopener" title="YouTube">YT</a>
           <a href="https://www.tiktok.com/@scalelistkompis" target="_blank" rel="noopener" title="TikTok">TT</a>
           <a href="https://instagram.com/scalelistkompis" target="_blank" rel="noopener" title="Instagram">IG</a>
@@ -223,7 +206,7 @@ footer .egg:hover{color:var(--gold)}
       <div class="char-card" style="--glow:#00aaff" data-color="#00aaff">
         <div class="char-icon">S</div><div class="char-name">Smurjan</div><div class="char-title-text">The Void Walker</div>
         <div class="char-socials" aria-label="Smurjan">
-          <a href="/videos?char=smurjan" title="Videoshower — free, no ads">&#127909;</a>
+          <a href="/videos.html?char=smurjan" title="Videoshower — free, no ads">&#127909;</a>
           <a href="https://www.youtube.com/@Smurjan" target="_blank" rel="noopener" title="YouTube">YT</a>
           <a href="https://www.tiktok.com/@scalelistsmurjan" target="_blank" rel="noopener" title="TikTok">TT</a>
           <a href="https://instagram.com/scalelistsmurjan" target="_blank" rel="noopener" title="Instagram">IG</a>
@@ -237,7 +220,7 @@ footer .egg:hover{color:var(--gold)}
           <span class="side-sep">&middot;</span><span style="font-family:'Cinzel',serif;font-size:.7em;color:#67e8f9;opacity:.85">VIKTOR-2</span>
         </div>
         <div class="char-socials" aria-label="Isa">
-          <a href="/videos?char=isa" title="Videoshower — free, no ads">&#127909;</a>
+          <a href="/videos.html?char=isa" title="Videoshower — free, no ads">&#127909;</a>
           <a href="/lineage" title="The Lineage">&#9876;</a>
           <a href="https://www.youtube.com/@scalelistisa" target="_blank" rel="noopener" title="YouTube (TBC)" data-disabled>YT</a>
         </div>
@@ -272,10 +255,10 @@ footer .egg:hover{color:var(--gold)}
     <div class="portal-grid">
       <a class="portal-card" href="/manga"><span class="portal-arrow">&rarr;</span><span class="portal-badge">240+ Chapters</span><h3>Manga Library</h3><p>The full saga from the Origins prologue through Season 4. Vertical-scroll, search, filter.</p></a>
       <a class="portal-card" href="/empire"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Discovery Hub</span><h3>The Empire — Channels</h3><p>All five champion channels in one place. Cross-channel arcs. Watch the same war from every POV.</p></a>
-      <a class="portal-card" href="/videos"><span class="portal-arrow">&rarr;</span><span class="portal-badge">No Ads · Low Data</span><h3>Videoshower</h3><p>Every video from every channel, organized by character. Feather-light, works on the worst connection on Earth.</p></a>
+      <a class="portal-card" href="/videos.html"><span class="portal-arrow">&rarr;</span><span class="portal-badge">No Ads · Low Data</span><h3>Videoshower</h3><p>Every video from every channel, organized by character. Feather-light, works on the worst connection on Earth.</p></a>
       <a class="portal-card" href="/manga"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Season 3</span><h3>The Stormcoast Reckoning</h3><p>50 chapters across all five champions. Stormcoast War, Dark Dancer, Forward Reader, Subtick War, Trinity War.</p></a>
-      <a class="portal-card" href="/season4"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Season 4</span><h3>The Fates Unravel</h3><p>Each realm's destruction-fate almost manifests. Ferdinand speaks for the first time. The universe holds.</p></a>
-      <a class="portal-card" href="/su-vault-9x7k/lyrics_library"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Audio</span><h3>Lyrics Library</h3><p>Character soundtracks and voice-clone reference tracks — one genre per fragment.</p></a>
+      <a class="portal-card" href="/season4.html"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Season 4</span><h3>The Fates Unravel</h3><p>Each realm's destruction-fate almost manifests. Ferdinand speaks for the first time. The universe holds.</p></a>
+      <a class="portal-card" href="/su-vault-9x7k/lyrics_library.html"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Audio</span><h3>Lyrics Library</h3><p>Character soundtracks and voice-clone reference tracks — one genre per fragment.</p></a>
     </div>
   </section>
 
@@ -288,11 +271,11 @@ footer .egg:hover{color:var(--gold)}
     </div>
     <div class="portal-grid">
       <a class="portal-card" href="/cosmos"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Interactive Map</span><h3>Cosmos Map</h3><p>The realms on Ferdinand's branches. Pan, zoom, search. The living atlas of everything.</p></a>
-      <a class="portal-card" href="/cosmos/atlas"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Deep Lore</span><h3>The Atlas</h3><p>30+ continents. 80+ tribes. Every named character. Every realm's prophetic fate.</p></a>
+      <a class="portal-card" href="/cosmos/atlas.html"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Deep Lore</span><h3>The Atlas</h3><p>30+ continents. 80+ tribes. Every named character. Every realm's prophetic fate.</p></a>
       <a class="portal-card" href="/wiki"><span class="portal-arrow">&rarr;</span><span class="portal-badge">125 Entries</span><h3>The Wiki</h3><p>Cross-linked encyclopedia. Every character, realm, tribe, antagonist. Live-search the empire.</p></a>
       <a class="portal-card" href="/graph"><span class="portal-arrow">&rarr;</span><span class="portal-badge">D3 Viz</span><h3>Relationship Graph</h3><p>Every cipher soul and every thread that binds them. Drag, zoom, click. Force-directed.</p></a>
       <a class="portal-card" href="/rankings"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Power Scale</span><h3>HADOM Rankings</h3><p>Every soul's heartbeat-tick, tiered. From Vidar's silent zero to Vigolas's ∞−1.</p></a>
-      <a class="portal-card" href="/hadom"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Heartbeat</span><h3>HADOM Visualizer</h3><p>The tick-rate of reality itself. Interactive power-system explorer.</p></a>
+      <a class="portal-card" href="/hadom.html"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Heartbeat</span><h3>HADOM Visualizer</h3><p>The tick-rate of reality itself. Interactive power-system explorer.</p></a>
     </div>
   </section>
 
@@ -304,11 +287,11 @@ footer .egg:hover{color:var(--gold)}
       <p class="zone-sub">Talk to the characters. Find your fragment. Write canon of your own. The universe talks back.</p>
     </div>
     <div class="portal-grid">
-      <a class="portal-card" href="/cosmos/character-chat"><span class="portal-arrow">&rarr;</span><span class="portal-badge">115 Characters</span><h3>Speak to the Scalelist</h3><p>Chat with any of the 115 named characters across all twelve realms.</p></a>
+      <a class="portal-card" href="/cosmos/character-chat.html"><span class="portal-arrow">&rarr;</span><span class="portal-badge">115 Characters</span><h3>Speak to the Scalelist</h3><p>Chat with any of the 115 named characters across all twelve realms.</p></a>
       <a class="portal-card" href="/quiz"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Viral Quiz</span><h3>Which Fragment Are You?</h3><p>Take the personality quiz and find which champion's soul you carry.</p></a>
       <a class="portal-card" href="/realm-quiz"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Soul Quiz</span><h3>Which Realm Are You?</h3><p>Find which of Ferdinand's twelve realms holds your soul.</p></a>
-      <a class="portal-card" href="/fanfic"><span class="portal-arrow">&rarr;</span><span class="portal-badge">AI Writing</span><h3>Fan-Fiction Generator</h3><p>Write canon short stories with Claude. Pick characters, pick a setting, watch it bloom.</p></a>
-      <a class="portal-card" href="/su-vault-9x7k/lore_explorer"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Deep Lore</span><h3>Lore Explorer</h3><p>HADOM, power rankings, villains, and the full timeline in one explorer.</p></a>
+      <a class="portal-card" href="/fanfic.html"><span class="portal-arrow">&rarr;</span><span class="portal-badge">AI Writing</span><h3>Fan-Fiction Generator</h3><p>Write canon short stories with Claude. Pick characters, pick a setting, watch it bloom.</p></a>
+      <a class="portal-card" href="/su-vault-9x7k/lore_explorer.html"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Deep Lore</span><h3>Lore Explorer</h3><p>HADOM, power rankings, villains, and the full timeline in one explorer.</p></a>
       <a class="portal-card" href="/pitch"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Press Kit</span><h3>One-Page Pitch</h3><p>The cipher, the moat, the numbers. For press, casting, and curious strangers.</p></a>
     </div>
   </section>
@@ -324,7 +307,7 @@ footer .egg:hover{color:var(--gold)}
       <a class="portal-card" href="/begin"><span class="portal-arrow">&rarr;</span><span class="portal-badge">First Time?</span><h3>Begin Here</h3><p>Seven steps from stranger to citizen of the empire. Start your journey here.</p></a>
       <a class="portal-card" href="https://huggingface.co/ScalelistUniverse" target="_blank" rel="noopener"><span class="portal-arrow">&rarr;</span><span class="portal-badge">5 Open LoRAs</span><h3>HuggingFace</h3><p>Five character LoRAs + a 180-clip dataset. Free, public, downloadable. Build with the empire's own faces.</p></a>
       <a class="portal-card" href="https://civitai.com/user/ScalelistUniverse" target="_blank" rel="noopener"><span class="portal-arrow">&rarr;</span><span class="portal-badge">AI Marketplace</span><h3>Civitai</h3><p>Five champion LoRAs on the biggest anime AI-art community.</p></a>
-      <a class="portal-card" href="/su-vault-9x7k/chat"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Vault</span><h3>Champion Chat</h3><p>Deep conversations with the main characters. Internal tooling behind the vault gate.</p></a>
+      <a class="portal-card" href="/su-vault-9x7k/chat.html"><span class="portal-arrow">&rarr;</span><span class="portal-badge">Vault</span><h3>Champion Chat</h3><p>Deep conversations with the main characters. Internal tooling behind the vault gate.</p></a>
     </div>
   </section>
 
@@ -344,14 +327,6 @@ footer .egg:hover{color:var(--gold)}
 
 <script>
 (function(){
-/* ── Performance guards: respect reduced-motion, pause when tab hidden, scale to device ── */
-var REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-var PAUSED=false;
-document.addEventListener('visibilitychange',function(){PAUSED=document.hidden;});
-var isMobile=window.innerWidth<768;
-var lowMem=(navigator.deviceMemory&&navigator.deviceMemory<4)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4);
-var PCOUNT=REDUCED?0:(isMobile||lowMem?24:80);  // far fewer particles on weak/mobile devices
-
 /* ── Particle Canvas (kept) ── */
 var pc=document.getElementById('particles'),px=pc.getContext('2d');
 var colors=['#00ff88','#ff3366','#9933ff','#ffaa00','#00aaff'];
@@ -359,9 +334,8 @@ var W,H,particles=[];
 function resize(){W=pc.width=window.innerWidth;H=pc.height=window.innerHeight}
 window.addEventListener('resize',resize);resize();
 function mkP(){return{x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+0.5,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,c:colors[Math.floor(Math.random()*5)],a:Math.random()*0.5+0.2}}
-for(var i=0;i<PCOUNT;i++)particles.push(mkP());
+for(var i=0;i<80;i++)particles.push(mkP());
 function drawParticles(){
-  if(PAUSED){requestAnimationFrame(drawParticles);return;}
   px.clearRect(0,0,W,H);
   for(var i=0;i<particles.length;i++){var p=particles[i];p.x+=p.vx;p.y+=p.vy;
     if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
@@ -386,7 +360,6 @@ document.addEventListener('mousemove',function(e){
   if(best>500)curColor='#c9a84c';
 });
 function drawTracer(){
-  if(PAUSED){requestAnimationFrame(drawTracer);return;}
   tx.clearRect(0,0,tc.width,tc.height);var now=Date.now();
   for(var i=0;i<trail.length;i++){var p=trail[i],age=(now-p.t)/400;var alpha=Math.max(0,1-age);
     if(alpha<=0)continue;var r=6*(i/trail.length);
