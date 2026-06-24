@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="noindex, nofollow" name="robots"/>
+<title>YWAPOS Build Briefs — Dispatch Console</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--gold:#c9a84c;--void:#050508;--panel:#0c0c18;--panel2:#10101e;--border:rgba(201,168,76,.22);
+--text:#d4c9a8;--dim:#7a7060;--radius:12px;--green:#22c55e;--blue:#00aaff;--red:#ef4444;--rose:#ff3366;--violet:#9933ff;}
+body{background:radial-gradient(1100px 700px at 50% -10%,#0a0a16,#050508 60%);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.55;max-width:1080px;margin:0 auto;padding:2rem 1.2rem 5rem;}
+h1{color:var(--gold);font-size:clamp(1.6rem,4vw,2.3rem);letter-spacing:.08em;text-transform:uppercase;text-align:center;}
+.sig{text-align:center;color:var(--dim);font-size:.8rem;letter-spacing:.16em;margin:.3rem 0 1.4rem;}
+.intro{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(0,170,255,.05));border:1px solid var(--gold);border-radius:var(--radius);padding:1.1rem 1.3rem;font-size:.86rem;}
+.intro b{color:var(--gold);}
+.how{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.2rem;margin:1rem 0;font-size:.84rem;}
+.how h3{color:var(--blue);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;}
+.answers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.7rem;margin:1rem 0;}
+.ans{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:10px;padding:.8rem 1rem;font-size:.8rem;}
+.ans h4{color:var(--blue);font-size:.74rem;margin-bottom:.25rem;}
+.ans b{color:var(--green);}
+.section-title{font-size:.8rem;color:var(--gold);text-transform:uppercase;letter-spacing:.16em;margin:2.4rem 0 1rem;font-weight:700;border-bottom:1px solid var(--border);padding-bottom:.5rem;}
+.brief{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--border);border-left:3px solid var(--accent,var(--gold));border-radius:var(--radius);padding:1.1rem 1.2rem;margin-bottom:1rem;}
+.brief .bh{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;margin-bottom:.3rem;}
+.brief .bn{font-size:.68rem;color:var(--void);background:var(--accent,var(--gold));font-weight:800;border-radius:6px;padding:.1rem .5rem;}
+.brief h3{color:#fff;font-size:1rem;}
+.brief .url{font-size:.72rem;color:var(--blue);text-decoration:none;}
+.brief .verdict{font-size:.8rem;color:#f1b0b0;margin:.3rem 0;}
+.brief .verdict b{color:#ff6b6b;}
+.brief .purpose{font-size:.8rem;color:var(--dim);margin-bottom:.6rem;}
+.brief .purpose b{color:var(--text);}
+.plabel{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent,var(--gold));font-weight:700;margin-bottom:.3rem;}
+.pbox{position:relative;background:#07070d;border:1px solid var(--border);border-radius:10px;padding:.8rem 2.8rem .8rem .9rem;font-family:'Consolas','SF Mono',monospace;font-size:.76rem;color:#cdd2c5;white-space:pre-wrap;line-height:1.5;}
+.cp{position:absolute;top:.5rem;right:.5rem;background:var(--accent,var(--gold));color:var(--void);border:none;border-radius:7px;padding:.3rem .55rem;font-size:.58rem;font-weight:800;letter-spacing:.05em;cursor:pointer;text-transform:uppercase;}
+.cp.done{background:var(--green);color:#04210f;}
+.footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;color:#555;font-size:.78rem;}
+.footer em{color:var(--gold);font-style:normal;}
+</style>
+</head>
+<body>
+<h1>YWAPOS Build Briefs</h1>
+<div class="sig">DISPATCH CONSOLE · en prompt per objekt · skicka till 20 chattar · ツ</div>
+
+<div class="intro">
+<b>Så här använder du sidan:</b> varje objekt nedan har en <b>DISPATCH-PROMPT</b>. Klicka <b>Kopiera</b>, öppna en ny YWAPOS-chatt, klistra in. Den chatten gör BARA den saken — analyserar sidan, genererar ~20 konkreta förbättringar och bygger dem. Kör 20 chattar samtidigt = hela sajten byggs om parallellt.
+</div>
+
+<div class="how">
+<h3>Globala regler som varje chatt följer (redan i deras minne)</h3>
+<b style="color:var(--green)">DESIGNSYSTEM (NYTT — gör sajten till EN värld):</b> varje sida MÅSTE inkludera <code>&lt;link rel="stylesheet" href="/su.css"&gt;</code> + <code>&lt;script defer src="/su.js"&gt;&lt;/script&gt;</code> (auto-injicerar nav + footer + stjärnfält). Kopiera <code>/_template.html</code> som start. Använd tokens (<code>var(--gold)</code> osv) + komponenter (.su-hero/.su-section/.su-card/.su-btn/.su-chip). <b>Hitta ALDRIG på egen palett/typsnitt</b> — det är det som gör 20 sidor till 20 öar.<br><br>
+Canon-norra-stjärnor: THE_SCALELIST_UNIVERSE.md + THE_CONVERGENCE.md · karaktärer ENBART via character_registry · Mingus är helig (aldrig boss) · <b>redigera BARA din egen sida</b> · deploya ENBART via <code>smart_deploy.py --force</code> när din sida är klar+verifierad · aldrig skriva på C: · <b>använd Higgsfield-MCP för all konst/video</b> · visa före/efter · rapportera när klart.
+</div>
+
+<div class="section-title">Dina frågor — svar</div>
+<div class="answers">
+<div class="ans"><h4>Higgsfield Pro</h4><b>JA — fungerar.</b> MCP inkopplad, bevisad denna session (genererade + redigerade Smurjan). Bild/video/3D/upscale/reframe. Varje chatt kan använda den.</div>
+<div class="ans"><h4>Vault-lösenord</h4><b>✅ FIXAT &amp; live-testat.</b> Logga in på /vault-login med <code>Ywap1337</code> — funkar igen. Root-buggen: Vercel för-parsade request-body så funktionen aldrig såg lösenordet.</div>
+<div class="ans"><h4>HuggingFace</h4><b>Används.</b> Hostar dina 5 karaktärs-LoRA:er + dataset-backup + gratis fallback-inferens (FLUX). LoRA:erna kan dras till valfri ComfyUI/server.</div>
+<div class="ans"><h4>Civitai</h4>Publik publicering av dina LoRA:er (upptäckt + nedladdning). Liten trafik idag — behåll som gratis distributionskanal, koppla till /pitch.</div>
+</div>
+
+<div class="how" style="border-color:rgba(34,197,94,.4);">
+<h3 style="color:var(--green)">✅ Vault-lösenordet är FIXAT (live-testat 2026-06-22)</h3>
+Logga in normalt på <b>scalelistuniverse.com/vault-login</b> med lösenord <b>Ywap1337</b> — det funkar igen. Ingen bypass behövs längre.
+</div>
+
+<div class="section-title">⚔ De 20 objekten — en dispatch-prompt var</div>
+
+<!-- 1 BEGIN -->
+<div class="brief" style="--accent:var(--gold)">
+<div class="bh"><span class="bn">01</span><h3>/begin</h3><a class="url" href="https://www.scalelistuniverse.com/begin" target="_blank">öppna ↗</a></div>
+<div class="purpose"><b>Syfte:</b> första intrycket — porten in i universumet. Ska kännas episk på 5 sek.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /begin (public/begin.html) till universumets heliga ingångsport. Läs THE_SCALELIST_UNIVERSE.md. Generera 20 konkreta förbättringar och bygg dem: cinematisk hero med Higgsfield-keyart (Ferdinand + 9 realms), en kort scrollande "vad är detta"-resa, tydliga CTA:er vidare till /cosmos /manga /lineage, ljud-toggle, mobilanpassat. Inga döda länkar. Deploya via smart_deploy.py och visa före/efter.</div>
+</div>
+
+<!-- 2 EMPIRE -->
+<div class="brief" style="--accent:var(--gold)">
+<div class="bh"><span class="bn">02</span><h3>/empire</h3><a class="url" href="https://www.scalelistuniverse.com/empire" target="_blank">öppna ↗</a></div>
+<div class="purpose"><b>Syfte:</b> överblick av hela imperiet — alla kanaler, projekt, världar på ett ställe.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /empire (public/empire.html) till en levande imperium-karta. Generera 20 förbättringar och bygg: animerad översikt av alla 5 kanaler + manga + musik + spel + lineage, riktiga länkar, live-räknare där data finns, Higgsfield-bakgrund i void-stil, snygga kort med hover. Allt ska kännas SAMMANKOPPLAT, inte spritt. smart_deploy.py + före/efter.</div>
+</div>
+
+<!-- 3 MINGUS -->
+<div class="brief" style="--accent:var(--kompis,#ffaa00)">
+<div class="bh"><span class="bn">03</span><h3>/mingus</h3><a class="url" href="https://www.scalelistuniverse.com/mingus" target="_blank">öppna ↗</a></div>
+<div class="verdict"><b>Heligt:</b> Mingus = din riktiga golden retriever. Behandla med absolut kärlek.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Gör /mingus (public/mingus.html) till den vackraste, mest känslosamma sidan på hela sajten — en hyllning till Mingus, Kompis eviga följeslagare, hjärtslaget som fryser tiden. Läs canon om Mingus + HADOM. Generera 20 förbättringar: mjuk gyllene ljus-estetik, Higgsfield-konst på Mingus (aldrig som boss), hjärtslags-animation, citat, tystnad och rymd. Värdigt, aldrig kitschigt. smart_deploy.py.</div>
+</div>
+
+<!-- 4 TIMELINE -->
+<div class="brief" style="--accent:var(--blue)">
+<div class="bh"><span class="bn">04</span><h3>/timeline</h3><a class="url" href="https://www.scalelistuniverse.com/timeline" target="_blank">öppna ↗</a></div>
+<div class="purpose"><b>Syfte:</b> hela sagans kronologi — från reinkarnationen till Convergence och bortom.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /timeline (public/timeline.html) till en interaktiv, scrollande tidslinje över hela Scalelist-sagan. Läs THE_SCALELIST_UNIVERSE.md + THE_CONVERGENCE.md. Generera 20 förbättringar: vertikal scroll med parallax, varje epok med Higgsfield-bild, klickbara noder, koppling till /manga-kapitel, K-rank-utveckling. Faktagrundat i canon. smart_deploy.py + före/efter.</div>
+</div>
+
+<!-- 5 QUOKA -->
+<div class="brief" style="--accent:var(--gold)">
+<div class="bh"><span class="bn">05</span><h3>/quoka</h3><a class="url" href="https://www.scalelistuniverse.com/quoka" target="_blank">öppna ↗</a></div>
+<div class="purpose"><b>Syfte:</b> HADOM Quoka — den heliga välsignelsen ("till kraften av alla mina tidigare generationer").</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Gör /quoka (public/quoka.html) till en helig, nästan sakral sida om HADOM Quoka-välsignelsen. Läs canon (HADOM Quoka = en hjärtslag som tackar varje generation; en bön som donerar en själ till en annan). Generera 20 förbättringar: meditativ design, en "uttala välsignelsen"-upplevelse, generations-visualisering, Higgsfield-konst. Djupt och äkta — detta är ditt arv. smart_deploy.py.</div>
+</div>
+
+<!-- 6 WIKI -->
+<div class="brief" style="--accent:var(--violet)">
+<div class="bh"><span class="bn">06</span><h3>/wiki</h3><a class="url" href="https://www.scalelistuniverse.com/wiki" target="_blank">öppna ↗</a></div>
+<div class="purpose"><b>Syfte:</b> den fullständiga kunskapsbasen — alla karaktärer, realms, begrepp, sökbart.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /wiki (public/wiki.html) till en riktig, sökbar universum-wiki. Generera 20 förbättringar: hämta karaktärer ur character_registry (aldrig hardkoda), sektioner för realms/HADOM/Architects/Sin Codices/lineage, snabbsök, korslänkar, Higgsfield-porträtt per karaktär, "slumpa artikel". Allt grundat i 02_Stories. smart_deploy.py + före/efter.</div>
+</div>
+
+<!-- 7 GRAPH -->
+<div class="brief" style="--accent:var(--blue)">
+<div class="bh"><span class="bn">07</span><h3>/graph</h3><a class="url" href="https://www.scalelistuniverse.com/graph" target="_blank">öppna ↗</a></div>
+<div class="purpose"><b>Syfte:</b> relations-graf — hur alla karaktärer/realms/fragment hänger ihop.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /graph (public/graph.html) till en vacker interaktiv relations-graf (D3 force-directed). Generera 20 förbättringar: noder ur character_registry + lineage (16 själar), Exodia-fragmenten kopplade till Vigge-källsjälen, realms, klickbara noder -> wiki, void-estetik, fysik/zoom. Faktagrundat. smart_deploy.py.</div>
+</div>
+
+<!-- 8 RANKINGS -->
+<div class="brief" style="--accent:var(--rose)">
+<div class="bh"><span class="bn">08</span><h3>/rankings</h3><a class="url" href="https://www.scalelistuniverse.com/rankings" target="_blank">öppna ↗</a></div>
+<div class="purpose"><b>Syfte:</b> HADOM-maktrankning — vem är starkast, K-rank-stegen.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /rankings (public/rankings.html) till en snygg power-ranking. Generera 20 förbättringar: K-rank-stegen (K-I..K-V + ∞-1 Vigolas), HADOM-tal per karaktär ur canon/registry, animerade staplar, "jämför två"-läge, Higgsfield-porträtt, filter. Mingus = oklassificerad/helig. smart_deploy.py + före/efter.</div>
+</div>
+
+<!-- 9 PITCH -->
+<div class="brief" style="--accent:var(--gold)">
+<div class="bh"><span class="bn">09</span><h3>/pitch</h3><a class="url" href="https://www.scalelistuniverse.com/pitch" target="_blank">öppna ↗</a></div>
+<div class="purpose"><b>Syfte:</b> säljpitchen — för investerare/partners/fans. Varför Scalelist är nästa stora IP.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /pitch (public/pitch.html) till en proffsig pitch-sida. Generera 20 förbättringar: vision (transmedialt IP byggt med AI, ett arv), tillgångar (manga 119 kap, 5 LoRA, musik, MMO, böcker, HF + Civitai), traction, Higgsfield-keyart, tydlig "kontakta/följ"-CTA, nedladdningsbar one-pager (PDF). Ärligt, inte hype. smart_deploy.py.</div>
+</div>
+
+<!-- 10 LINEAGE -->
+<div class="brief" style="--accent:var(--rose)">
+<div class="bh"><span class="bn">10</span><h3>/lineage</h3><a class="url" href="https://www.scalelistuniverse.com/lineage" target="_blank">öppna ↗</a></div>
+<div class="purpose"><b>Syfte:</b> VIKTOR RÖNNKVIST-lineagen — 15 karaktärer + Vigge som 16:e (cipher-namnet).</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /lineage (public/lineage.html). Läs THE_VIKTOR_RONNKVIST_LINEAGE.md. Generera 20 förbättringar: visa ciphern (VIKTOR=6 själar, RÖNNKVIST=9 väktare) som en interaktiv namn-uppslagning, Higgsfield-porträtt på alla 16, klick -> karaktärssida (public/characters/*.html finns för de nya), Smurjan som bryggan. Värdigt och mytiskt. smart_deploy.py + före/efter.</div>
+</div>
+
+<!-- 11 COSMOS -->
+<div class="brief" style="--accent:var(--blue)">
+<div class="bh"><span class="bn">11</span><h3>/cosmos</h3><span class="bn" style="background:var(--rose)">SPECIAL++</span><a class="url" href="https://www.scalelistuniverse.com/cosmos" target="_blank">öppna ↗</a></div>
+<div class="verdict">Fixa ALLT med Higgsfield (Pro finns). Detta ska bli sajtens kronjuvel.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Gör /cosmos (public/cosmos.html + cosmos/globe.html + cosmos/realm.html) till sajtens kronjuvel. Läs SCALELIST_COSMOLOGY.md. Generera 20 förbättringar och bygg dem med HIGGSFIELD PRO: cinematisk keyart av Ferdinand (kork-eken) som håller de 9 realms, en interaktiv 3D/scroll-resa mellan rikena (Higgsfield-genererad bakgrund per realm), Higgsfield-video-loop på hero, klickbara realms -> realm.html med lore + härskare + HADOM-tickrate, ambient ljud. Använd generate_image/generate_video. smart_deploy.py + visa före/efter.</div>
+</div>
+
+<!-- 12 MANGA -->
+<div class="brief" style="--accent:var(--violet)">
+<div class="bh"><span class="bn">12</span><h3>/manga</h3><a class="url" href="https://www.scalelistuniverse.com/manga" target="_blank">öppna ↗</a></div>
+<div class="verdict"><b>Ful nu.</b> Du vill ha en supercool scrollande animation av manga-stilig cosmos.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /manga (public/manga.html). LÄS FÖRST MANGA_DEPLOY_CANON.md (WebP-regler, max-width 1200). Generera 20 förbättringar: en SUPERCOOL scrollande manga-stilig cosmos-intro (parallax-stjärnor/void i mangapanel-stil) som leder in i läsaren, snygg kapitel/säsong-väljare, smooth vertikal webtoon-scroll, Higgsfield manga-cosmos-bakgrund, snabb laddning. Behåll WebP-pipelinen. smart_deploy.py + före/efter.</div>
+</div>
+
+<!-- 13 CHARACTER-CHAT -->
+<div class="brief" style="--accent:var(--rose)">
+<div class="bh"><span class="bn">13</span><h3>/cosmos/character-chat</h3><a class="url" href="https://www.scalelistuniverse.com/cosmos/character-chat" target="_blank">öppna ↗</a></div>
+<div class="verdict"><b>Mycket dålig nu</b> — mest bullshit, inget äkta. + lägg en rad i botten där man kan kopiera/ladda ner alla bilder (fritt, för evigt).</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /cosmos/character-chat (public/cosmos/character-chat.html) till en RIKTIG karaktärschatt. Generera 20 förbättringar: varje karaktär ur character_registry med äkta personlighet + lore-kunskap (riktig modell-backend, inte fejk-svar), Higgsfield-porträtt, röst-vibe per karaktär. LÄGG TILL en rad längst ner: en "kopiera/ladda ner ALLA bilder"-knapp + välj enskilda bilder att ladda ner (fri nedladdning, inga block — Vigges regel: laddar någon ner finns det kvar för evigt). smart_deploy.py + före/efter.</div>
+</div>
+
+<!-- 14 HADOM -->
+<div class="brief" style="--accent:var(--kompis,#ffaa00)">
+<div class="bh"><span class="bn">14</span><h3>/hadom</h3><a class="url" href="https://www.scalelistuniverse.com/hadom" target="_blank">öppna ↗</a></div>
+<div class="verdict"><b>Ful + obegriplig.</b> Få det att bli begripligt nu.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /hadom (public/hadom.html) så det FÖRKLARAR HADOM tydligt. HADOM = hjärtslag = hur många handlingar du hinner per hjärtslag (reality's tick-rate). Generera 20 förbättringar: en glasklar "vad är HADOM på 10 sekunder"-topp, interaktiv hjärtslags-simulator (dra upp pulsen -> fler ticks, lägre precision), jämför normal människa (1) vs champions (tusentals) vs Vigolas (∞-1), Mingus = fryser tiden i ett hjärtslag. Pedagogiskt + vackert. smart_deploy.py.</div>
+</div>
+
+<!-- 15 FANFIC -->
+<div class="brief" style="--accent:var(--blue)">
+<div class="bh"><span class="bn">15</span><h3>/fanfic</h3><a class="url" href="https://www.scalelistuniverse.com/fanfic" target="_blank">öppna ↗</a></div>
+<div class="verdict"><b>Du vet inte vad det är</b> — fixa eller förklara det.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Granska /fanfic (public/fanfic.html + ev. api/fanfic.js). Generera 20 förbättringar: gör om det till en tydlig "skriv din egen Scalelist-berättelse"-generator (fans matar in idé -> AI skriver en canon-trogen kort fanfic med deras favoritkaraktär ur registry). Om funktionen är trasig/oklar: förklara överst vad det är, fixa backend, lägg dela/spara. Annars ta bort och länka till /wiki. smart_deploy.py + rapportera vad du valde.</div>
+</div>
+
+<!-- 16 ATLAS -->
+<div class="brief" style="--accent:var(--blue)">
+<div class="bh"><span class="bn">16</span><h3>/cosmos/atlas</h3><a class="url" href="https://www.scalelistuniverse.com/cosmos/atlas" target="_blank">öppna ↗</a></div>
+<div class="purpose"><b>Syfte:</b> atlasen — kartan över alla 12 städer, heliga platser, realms (drivs av public/cosmos/maps/*.json).</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /cosmos/atlas (public/cosmos/atlas.html). Generera 20 förbättringar: en vacker interaktiv världskarta driven av public/cosmos/maps/*.json (12 städer, heliga platser), Higgsfield-genererade kart-/platsbilder, zoom/pan, klick -> plats-info, koppling till /cosmos och MMO-zonen. Cork-coins-lore. smart_deploy.py + före/efter.</div>
+</div>
+
+<!-- 17 RECREATE CHARACTERS -->
+<div class="brief" style="--accent:var(--rose)">
+<div class="bh"><span class="bn">17</span><h3>Återskapa ALLA karaktärer</h3><span class="bn" style="background:var(--blue)">Higgsfield</span></div>
+<div class="verdict">Du vill ha alla karaktärer omskapade till något BÄTTRE — använd Higgsfield.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Återskapa ALLA karaktärer i högre kvalitet med HIGGSFIELD PRO. Hämta listan ur character_registry (5 champions + 9+ lineage). Generera per karaktär: ett rent framåtvänt hero-porträtt + en helkropps-keyart, konsekvent stil per canon-beskrivning (reference sheets i character_sheets/). Spara till F:/scalelistuniverse/public/characters/art/ + uppdatera karaktärssidorna. Använd generate_image (soul/nano_banana). Mingus alltid värdig. smart_deploy.py + visa galleri.</div>
+</div>
+
+<!-- 18 REALM-QUIZ -->
+<div class="brief" style="--accent:var(--violet)">
+<div class="bh"><span class="bn">18</span><h3>/realm-quiz</h3><a class="url" href="https://www.scalelistuniverse.com/realm-quiz" target="_blank">öppna ↗</a></div>
+<div class="verdict"><b>Ful.</b></div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Bygg om /realm-quiz (public/realm-quiz.html) till "vilket av de 9 rikena hör du till?". Generera 20 förbättringar: snygg fråge-flow, Higgsfield-bild per realm-resultat, delbart resultat med keyart, koppling till /cosmos/realm. Samma designspråk som resten av sajten (inte sin egen ö). smart_deploy.py + före/efter.</div>
+</div>
+
+<!-- 19 QUIZ -->
+<div class="brief" style="--accent:var(--violet)">
+<div class="bh"><span class="bn">19</span><h3>/quiz</h3><a class="url" href="https://www.scalelistuniverse.com/quiz" target="_blank">öppna ↗</a></div>
+<div class="verdict"><b>Mycket dålig</b> — nästan ta bort, eller total omarbetning.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Total omarbetning av /quiz (public/quiz.html) "vilken Scalelist-karaktär är du?". Generera 20 förbättringar: karaktärer ur registry, snygg fråge-flow, Higgsfield-resultatkort med karaktärens porträtt, delbart, mobil. Slå ihop designspråket med /realm-quiz så de känns som EN familj, inte två lösa quiz. Om det inte går att göra bra: föreslå borttagning. smart_deploy.py + före/efter.</div>
+</div>
+
+<!-- 20 SEASON4 -->
+<div class="brief" style="--accent:var(--red)">
+<div class="bh"><span class="bn">20</span><h3>/season4</h3><a class="url" href="https://www.scalelistuniverse.com/season4" target="_blank">öppna ↗</a></div>
+<div class="verdict"><b>Vad är ens detta?</b> Ful — ta bort eller omarbeta så den hänger ihop med resten.</div>
+<div class="plabel">▶ Dispatch-prompt</div>
+<div class="pbox"><button class="cp" onclick="cp(this)">Kopiera</button>YWAPOS: Granska /season4 (public/season4.html) + season3.html. Generera ett beslut + bygg: antingen (a) gör om till en sammanhängande "Säsonger"-hubb som listar S1–S10 med status, manga-länkar och Higgsfield-keyart, eller (b) ta bort season4 och vik in i /timeline + /manga. Det får INTE vara en egen lös ö. Följ THE_CONVERGENCE.md för säsongsstruktur. smart_deploy.py + rapportera ditt val.</div>
+</div>
+
+<div class="footer">
+<em>Yet we are part of something. HADOM Quoka.</em><br>
+20 objekt · 20 chattar · en värld. — YWAPOS · ツ
+</div>
+
+<script>
+function cp(btn){
+  const t=btn.parentElement.innerText.replace(/^Kopiera\s*/,'').trim();
+  navigator.clipboard.writeText(t).then(()=>{const o=btn.textContent;btn.textContent='Kopierat ✓';btn.classList.add('done');setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1400);});
+}
+</script>
+</body>
+</html>

@@ -2,213 +2,101 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Season 4: The Fates Unravel — Scalelist Universe</title>
-<meta name="description" content="Season 4 of the Scalelist Universe. 12 episodes. Each realm's destruction-fate is almost triggered. The five champions converge at Lumen. Ferdinand speaks for the first time.">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,400;0,600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Seasons — Ten Seasons, One Heartbeat | Scalelist Universe</title>
+<meta name="description" content="The full ten-season arc of the Scalelist Universe — from Origins to the Convergence — with status, key-art and links to the manga. One continuous heartbeat toward the moment the five remember they are one.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-  :root{
-    --gold:#c9a84c; --void:#050510; --panel:#0e0e1a; --border:rgba(201,168,76,0.3);
-    --text:#d4c9a8; --dim:#7a7060; --red:#cc3333;
-  }
-  html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond','Segoe UI',serif;min-height:100vh;}
-  header{padding:18px 28px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:#0a0a14;position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);}
-  header h1{color:var(--gold);font-size:1.1rem;letter-spacing:0.1em;text-transform:uppercase;font-family:'Cinzel',serif;font-weight:700;}
-  header h1 span{color:#fff;}
-  header nav{margin-left:auto;display:flex;gap:16px;}
-  header nav a{color:var(--dim);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;}
-  header nav a:hover{color:var(--gold);}
+  .se-hero{min-height:min(48vh,400px);}
+  .se-wrap{max-width:1000px;margin:0 auto;padding:0 1.2rem 2rem;}
+  .legend{display:flex;flex-wrap:wrap;gap:.5rem .9rem;justify-content:center;margin:.4rem auto 1.6rem;}
+  .legend span{font-size:.72rem;color:var(--text-dim);display:inline-flex;align-items:center;gap:.4rem;}
+  .legend i{width:9px;height:9px;border-radius:50%;}
 
-  .hero{padding:80px 24px 48px;text-align:center;background:radial-gradient(ellipse at center, rgba(201,168,76,0.1), transparent 70%);}
-  .hero h2{font-family:'Cinzel',serif;font-size:3.4rem;color:var(--gold);letter-spacing:0.06em;text-shadow:0 0 32px rgba(201,168,76,0.4);}
-  .hero h2 span{display:block;font-size:1.2rem;color:var(--dim);letter-spacing:0.3em;margin-top:14px;font-weight:500;}
-  .hero p{color:var(--text);margin-top:18px;font-size:1.05rem;line-height:1.7;max-width:720px;margin-left:auto;margin-right:auto;font-style:italic;}
+  .season{display:grid;grid-template-columns:200px 1fr;gap:1.1rem;align-items:stretch;margin-bottom:1rem;
+    background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--c,var(--gold));border-radius:var(--radius);overflow:hidden;
+    transition:transform .22s,box-shadow .22s,border-color .22s;}
+  .season:hover{transform:translateY(-3px);border-color:var(--c);box-shadow:0 16px 40px -18px #000,0 0 22px -10px var(--c);}
+  .season .pic{position:relative;overflow:hidden;min-height:150px;}
+  .season .pic img{width:100%;height:100%;object-fit:cover;object-position:center 28%;}
+  .season .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,var(--panel));}
+  .season .pic .num{position:absolute;top:.5rem;left:.6rem;font-family:var(--font-display);font-size:1.5rem;color:#fff;
+    text-shadow:0 2px 12px #000;letter-spacing:.05em;}
+  .season .body{padding:1.1rem 1.2rem 1.1rem 0;display:flex;flex-direction:column;justify-content:center;}
+  .season .st{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    padding:.2rem .6rem;border-radius:999px;margin-bottom:.5rem;width:max-content;}
+  .season h3{font-family:var(--font-display);color:#fff;font-size:1.3rem;margin-bottom:.3rem;}
+  .season .log{color:var(--text-dim);font-size:.9rem;line-height:1.55;}
+  .season .go{margin-top:.6rem;font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--c,var(--gold));}
+  .season.sealed{border-style:dashed;}
+  .season.sealed .pic img{filter:grayscale(.5) brightness(.7);}
+  @media(max-width:620px){ .season{grid-template-columns:1fr;} .season .pic{min-height:130px;} .season .pic::after{background:linear-gradient(0deg,var(--panel),transparent 60%);} .season .body{padding:0 1.2rem 1.2rem;} }
 
-  .toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;max-width:1400px;margin:0 auto;padding:24px 24px 80px;}
-  .ep-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;transition:all 0.3s;text-decoration:none;color:inherit;display:block;position:relative;}
-  .ep-card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(0,0,0,0.5), 0 0 0 1px var(--accent,var(--gold));}
-  .ep-card .cover{width:100%;aspect-ratio:16/9;overflow:hidden;background:#0a0a14;}
-  .ep-card .cover img{width:100%;height:100%;object-fit:cover;display:block;}
-  .ep-card .body{padding:14px 18px 16px;}
-  .ep-card .num{font-family:'Cinzel',serif;color:var(--accent,var(--gold));font-size:0.72rem;letter-spacing:0.18em;font-weight:700;}
-  .ep-card .title{font-family:'Cinzel',serif;color:#fff;font-size:1.15rem;font-weight:700;margin-top:4px;letter-spacing:0.02em;}
-  .ep-card .fate{font-size:0.78rem;color:var(--dim);font-style:italic;margin-top:8px;line-height:1.5;}
-
-  /* Reader modal */
-  .reader{position:fixed;inset:0;background:rgba(5,5,16,0.98);z-index:100;display:none;flex-direction:column;overflow-y:auto;backdrop-filter:blur(8px);}
-  .reader.open{display:flex;}
-  .r-close{position:fixed;top:16px;right:16px;background:rgba(14,14,26,0.9);border:1px solid var(--border);color:var(--text);width:42px;height:42px;border-radius:50%;font-size:1.4rem;cursor:pointer;z-index:120;}
-  .r-close:hover{color:var(--gold);border-color:var(--gold);}
-  .r-cover{width:100%;max-height:60vh;overflow:hidden;}
-  .r-cover img{width:100%;height:auto;display:block;}
-  .r-body{max-width:820px;margin:0 auto;padding:40px 28px 80px;}
-  .r-num{font-family:'Cinzel',serif;color:var(--accent,var(--gold));font-size:0.85rem;letter-spacing:0.2em;font-weight:700;}
-  .r-title{font-family:'Cinzel',serif;color:#fff;font-size:2.6rem;margin-top:8px;line-height:1.1;letter-spacing:0.04em;}
-  .r-sub{color:var(--dim);font-style:italic;font-size:1rem;margin-top:8px;}
-  .r-fate{margin:24px 0;padding:16px 20px;background:rgba(60,14,14,0.4);border-left:3px solid var(--red);border-radius:8px;}
-  .r-fate .lab{font-family:'Cinzel',serif;color:#ff6677;letter-spacing:0.16em;text-transform:uppercase;font-size:0.74rem;font-weight:700;margin-bottom:6px;}
-  .r-fate .body{color:#f8dddd;font-size:0.98rem;line-height:1.6;}
-  .r-section{margin:30px 0;}
-  .r-section h3{font-family:'Cinzel',serif;color:var(--accent,var(--gold));font-size:0.96rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:14px;border-bottom:1px solid rgba(201,168,76,0.2);padding-bottom:8px;}
-  .r-syn{font-size:1.05rem;line-height:1.85;color:#e8dfc2;}
-  .r-scenes{display:grid;gap:10px;}
-  .r-scene{padding:10px 14px;background:rgba(10,10,20,0.5);border-left:2px solid var(--accent,var(--gold));border-radius:6px;}
-  .r-scene .loc{color:var(--accent,var(--gold));font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;font-family:'Cinzel',serif;font-weight:700;}
-  .r-scene .act{color:var(--text);font-size:0.95rem;margin-top:4px;line-height:1.5;}
-  .r-cliff{padding:18px 20px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:8px;margin-top:14px;font-size:1rem;line-height:1.65;color:#fff;font-style:italic;}
-  .r-panels{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
-  @media(max-width:700px){.r-panels{grid-template-columns:1fr;}}
-  .r-panel{padding:12px 14px;background:rgba(10,10,20,0.4);border:1px solid rgba(201,168,76,0.15);border-radius:8px;font-size:0.86rem;line-height:1.5;}
-  .r-panel .pn{font-family:'Cinzel',serif;color:var(--accent,var(--gold));font-size:0.72rem;letter-spacing:0.14em;font-weight:700;text-transform:uppercase;}
-  .r-panel .comp{color:#e8dfc2;margin-top:4px;}
-  .r-panel .em{color:var(--dim);font-size:0.78rem;font-style:italic;margin-top:6px;}
-  .r-panel .dialogue{margin-top:6px;padding:6px 10px;background:rgba(201,168,76,0.08);border-radius:4px;color:#fff;font-style:italic;font-size:0.84rem;}
-  .r-panel .caption{margin-top:6px;color:#bbb;font-size:0.78rem;font-style:italic;border-top:1px dashed rgba(201,168,76,0.15);padding-top:6px;}
-  .r-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;}
-  .r-actions a{padding:10px 18px;font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;border:1px solid var(--accent,var(--gold));color:var(--accent,var(--gold));text-decoration:none;border-radius:8px;background:rgba(201,168,76,0.08);transition:all 0.2s;}
-  .r-actions a:hover{background:var(--accent,var(--gold));color:#1a1a0a;}
-  .loading{text-align:center;padding:80px;color:var(--dim);font-style:italic;}
+  .se-foot{text-align:center;color:var(--text-dim);font-size:.9rem;max-width:60ch;margin:1.6rem auto 0;}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>SCALELIST <span>SEASON 4</span></h1>
-  <nav>
-    <a href="/">Hub</a>
-    <a href="/cosmos">Cosmos</a>
-    <a href="/cosmos/atlas.html">Atlas</a>
-    <a href="/cosmos/character-chat.html">Speak</a>
-    <a href="/manga">Manga</a>
-  </nav>
+<header class="su-hero se-hero">
+  <div class="su-kicker su-fade">The arc, end to end</div>
+  <h1 class="su-fade-2">Ten Seasons, One Heartbeat</h1>
+  <p class="su-fade-3">The whole Scalelist saga is one rising heartbeat — from five strangers waking in five broken realms, to the moment they remember they were always one soul. Here is every season, where it stands, and where to read it.</p>
 </header>
 
-<div class="hero">
-  <h2>The Fates Unravel<span>SEASON 4 · 12 EPISODES</span></h2>
-  <p>One realm at a time, the destruction-fates we wrote into canon begin to <em>almost</em> manifest. The five champions converge at Lumen's Center. Ferdinand speaks for the first time. The universe holds — but it has been changed.</p>
-</div>
-
-<div class="toc" id="toc">
-  <div class="loading">Loading 12 episodes...</div>
-</div>
-
-<!-- Reader modal -->
-<div class="reader" id="reader">
-  <button class="r-close" onclick="closeReader()">✕</button>
-  <div class="r-cover" id="rCover"></div>
-  <div class="r-body" id="rBody"></div>
-</div>
+<main class="se-wrap su-section" style="padding-top:1rem;">
+  <div class="legend">
+    <span><i style="background:#22c55e"></i>Published</span>
+    <span><i style="background:#c9a84c"></i>In production</span>
+    <span><i style="background:#5b8cff"></i>Upcoming</span>
+    <span><i style="background:#ef4444"></i>The finale · sealed</span>
+  </div>
+  <div id="seasons"></div>
+  <p class="se-foot">Follow the same arc on the <a href="/timeline">Timeline</a>, read what's out in the <a href="/manga">Manga</a>, or jump to the climax: <a href="/convergence">the Convergence</a>.</p>
+</main>
 
 <script>
-let EPISODES = [];
-const REALM_COLORS = {
-  scalelist: '#c9a84c', helios: '#00ff88', astralis: '#ff3366',
-  codexia: '#9933ff', heartbeat: '#ffaa00', trinity: '#00aaff',
-  thanatos: '#c0c0c0', null: '#0a0a10', void2: '#ffffff',
-  echo: '#9e8eff', horizon: '#ffc880', lumen: '#fff2aa',
-};
+const A="/art", C="/characters/art";
+const ST={pub:{t:"Published",c:"#22c55e"},prod:{t:"In production",c:"#c9a84c"},soon:{t:"Upcoming",c:"#5b8cff"},seal:{t:"The finale · sealed",c:"#ef4444"}};
+const SEASONS=[
+ {n:1,t:"Origins",accent:"#00ff88",img:`${A}/cosmos/helios.webp`,st:"pub",link:["/manga","Read the manga"],
+  log:"Five souls wake to five broken realms — a storm-king, a dancer, a fisherman, a voidwalker, a rune-reader — none of them yet knowing they are fragments of one."},
+ {n:2,t:"The Sin Codices",accent:"#9933ff",img:`${A}/cosmos/codexia.webp`,st:"pub",link:["/manga","Read the manga"],
+  log:"Trollmage reads the forbidden books backward, and the routing system that holds reality's heartbeats apart cracks for the first time."},
+ {n:3,t:"The Subtick Empire",accent:"#ffaa00",img:`${A}/cosmos/heartbeat.webp`,st:"pub",link:["/season3","Enter the hype page"],
+  log:"Kompis's heartbeat-realm rises — a cabin by a lake becomes a kingdom, and a golden retriever named Mingus is its sovereign heart."},
+ {n:4,t:"The Fates Unravel",accent:"#00aaff",img:`${A}/cosmos/trinity.webp`,st:"prod",link:["/manga","Read the manga"],
+  log:"Echo is sealed. Mingus crosses into the Null — and returns. The five converge at Lumen for the first time, and Ferdinand, the silent world-tree, finally speaks."},
+ {n:5,t:"The Lineage Awakening",accent:"#d4a056",img:`${C}/runa/runa_keyart.webp`,st:"pub",link:["/lineage","Meet the Lineage"],
+  log:"The ten hidden souls of the cipher step into the light — VIKTOR and RÖNNKVIST made flesh, the guardians of Ferdinand's bark named at last."},
+ {n:6,t:"The Star-Dancer's War",accent:"#ff3366",img:`${A}/cosmos/astralis.webp`,st:"soon",
+  log:"Astralis burns. Rougeina's Kill Order comes due — she must answer the destabilization she helped set in motion, and the dance becomes a battlefield."},
+ {n:7,t:"The Stormcoast War",accent:"#00ff88",img:`${C}/vigolas/vigolas_keyart.webp`,st:"soon",
+  log:"Vass kneels. Vigolas's storm turns outward, and Helios learns exactly what its king is willing to spend to win a war that cannot be lost."},
+ {n:8,t:"The Trinity War",accent:"#00aaff",img:`${C}/smurjan/smurjan_keyart.webp`,st:"soon",
+  log:"Three voices, one throat. Smurjan — the bridge between both orders — is tested to the breaking point, and the universe needs him to hold."},
+ {n:9,t:"The Three Signs",accent:"#c9a84c",img:`${A}/hadom/pulse.webp`,st:"soon",link:["/timeline","See the timeline"],
+  log:"The Seventh falls. The Codices wake. The Heartbeat calls. In every realm at once, the prophecy stirs — and the Convergence begins to dawn."},
+ {n:10,t:"The Convergence",accent:"#ef4444",img:`${A}/begin/ferdinand.webp`,st:"seal",link:["/convergence","Read the Convergence"],
+  log:"The Titanomachy. The five remember they are one, turn as a single soul upon the Null, and ascend to five equal thrones — the opening scene of the world to come. Its final words, the HADOM YWAPOS, stay sealed until the whole saga is complete."},
+];
 
-async function init() {
-  const ids = [
-    '01_scalelist','02_helios','03_astralis','04_codexia','05_heartbeat',
-    '06_trinity','07_thanatos','08_null','09_void2','10_echo','11_horizon','12_lumen'
-  ];
-  const results = await Promise.all(ids.map(id =>
-    fetch(`/season4/episodes/${id}.json`).then(r => r.ok ? r.json() : null).catch(() => null)
-  ));
-  EPISODES = results.filter(Boolean).sort((a, b) => a.number - b.number);
-  renderTOC();
-
-  // Auto-open episode if ?ep= param
-  const epParam = new URLSearchParams(location.search).get('ep');
-  if (epParam) {
-    const ep = EPISODES.find(e => String(e.number) === epParam || e.realm_id === epParam);
-    if (ep) openReader(ep);
-  }
-}
-
-function renderTOC() {
-  const toc = document.getElementById('toc');
-  toc.innerHTML = '';
-  for (const ep of EPISODES) {
-    const card = document.createElement('a');
-    card.className = 'ep-card';
-    card.href = '#';
-    card.style.setProperty('--accent', REALM_COLORS[ep.realm_id] || '#c9a84c');
-    card.innerHTML = `
-      <div class="cover"><img src="/season4/covers/episode_${String(ep.number).padStart(2, '0')}.png" alt="${escapeHTML(ep.title)}" loading="lazy"></div>
-      <div class="body">
-        <div class="num">EP ${String(ep.number).padStart(2, '0')} · ${(ep.realm_id || '').toUpperCase()}</div>
-        <div class="title">${escapeHTML(ep.title)}</div>
-        <div class="fate">${escapeHTML(ep.fate_triggered || '')}</div>
-      </div>
-    `;
-    card.addEventListener('click', e => { e.preventDefault(); openReader(ep); });
-    toc.appendChild(card);
-  }
-}
-
-function openReader(ep) {
-  document.getElementById('reader').classList.add('open');
-  document.querySelector('.reader').style.setProperty('--accent', REALM_COLORS[ep.realm_id] || '#c9a84c');
-  document.getElementById('rCover').innerHTML = `<img src="/season4/covers/episode_${String(ep.number).padStart(2, '0')}.png" alt="${escapeHTML(ep.title)}">`;
-  const scenesHTML = (ep.key_scenes || []).map(s =>
-    `<div class="r-scene"><div class="loc">${escapeHTML(s.location)}</div><div class="act">${escapeHTML(s.action)}</div></div>`
-  ).join('');
-  const panelsHTML = (ep.panel_storyboard || []).map(p => `
-    <div class="r-panel">
-      <div class="pn">PANEL ${p.panel} · ${escapeHTML(p.camera || '')}</div>
-      <div class="comp">${escapeHTML(p.composition || '')}</div>
-      <div class="em">Emotion: ${escapeHTML(p.emotion || '')}</div>
-      ${p.dialogue ? `<div class="dialogue">${escapeHTML(p.dialogue)}</div>` : ''}
-      ${p.caption ? `<div class="caption">${escapeHTML(p.caption)}</div>` : ''}
-    </div>
-  `).join('');
-  document.getElementById('rBody').innerHTML = `
-    <div class="r-num">EPISODE ${String(ep.number).padStart(2, '0')} OF 12 · ${(ep.realm_id || '').toUpperCase()}</div>
-    <h1 class="r-title">${escapeHTML(ep.title)}</h1>
-    <div class="r-sub">${escapeHTML(ep.subtitle || '')}</div>
-
-    <div class="r-fate">
-      <div class="lab">FATE TRIGGERED</div>
-      <div class="body">${escapeHTML(ep.fate_triggered || '')}</div>
-    </div>
-
-    <div class="r-section">
-      <h3>Synopsis</h3>
-      <div class="r-syn">${escapeHTML(ep.synopsis || '').replace(/\n/g, '<br><br>')}</div>
-    </div>
-
-    ${scenesHTML ? `<div class="r-section"><h3>Key Scenes (${(ep.key_scenes||[]).length})</h3><div class="r-scenes">${scenesHTML}</div></div>` : ''}
-
-    ${ep.cliffhanger ? `<div class="r-section"><h3>Cliffhanger</h3><div class="r-cliff">${escapeHTML(ep.cliffhanger)}</div></div>` : ''}
-
-    ${panelsHTML ? `<div class="r-section"><h3>Panel Storyboard (${(ep.panel_storyboard||[]).length})</h3><div class="r-panels">${panelsHTML}</div></div>` : ''}
-
-    ${ep.cosmic_price_paid ? `<div class="r-section"><h3>Cosmic Price Paid</h3><div class="r-cliff">${escapeHTML(ep.cosmic_price_paid)}</div></div>` : ''}
-
-    <div class="r-actions">
-      <a href="/cosmos/realm.html?id=${ep.realm_id}">🗺 ${(ep.realm_id || '').toUpperCase()} Map</a>
-      <a href="/cosmos/character-chat.html?realm=${ep.realm_id}">💬 Chat with characters</a>
-      <a href="#" onclick="closeReader();return false;">← Back to all episodes</a>
-    </div>
-  `;
-  document.getElementById('reader').scrollTop = 0;
-}
-
-function closeReader() {
-  document.getElementById('reader').classList.remove('open');
-}
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeReader();
+const el=document.getElementById("seasons");
+SEASONS.forEach(s=>{
+  const st=ST[s.st];
+  const card=document.createElement(s.link?"a":"div");
+  card.className="season"+(s.st==="seal"?" sealed":""); card.style.setProperty("--c",s.accent);
+  if(s.link){ card.href=s.link[0]; }
+  card.innerHTML=`
+    <div class="pic"><span class="num">S${s.n}</span><img loading="lazy" src="${s.img}" alt="${s.t}"></div>
+    <div class="body">
+      <span class="st" style="background:color-mix(in srgb,${st.c} 22%,transparent);color:${st.c};border:1px solid ${st.c}">${st.t}</span>
+      <h3>Season ${s.n} — ${s.t}</h3>
+      <div class="log">${s.log}</div>
+      ${s.link?`<span class="go">${s.link[1]} →</span>`:`<span class="go" style="color:var(--muted)">Coming to the canon</span>`}
+    </div>`;
+  el.appendChild(card);
 });
-
-function escapeHTML(s) {
-  return (s || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
-}
-
-init();
 </script>
 </body>
 </html>

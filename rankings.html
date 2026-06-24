@@ -2,170 +2,223 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>HADOM Rankings — Power Scale of the Scalelist Universe</title>
-<meta name="description" content="The HADOM tick-rate of every champion, guardian, antagonist. Ranked from heartbeat-1 to infinite-folded.">
-<meta property="og:title" content="HADOM Rankings — Scalelist Universe">
-<meta property="og:image" content="https://scalelistuniverse.com/og.png">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Mono&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The HADOM Ladder — Scalelist Universe Rankings</title>
+<meta name="description" content="Every champion and guardian ranked by HADOM — actions per heartbeat, the true power scale of the Scalelist Universe. From the held heartbeat to the infinite-folded.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--gold:#c9a84c; --void:#050510; --panel:#0a0a14; --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060}
-html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.6}
-a{color:var(--gold);text-decoration:none}
-header{padding:18px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
-header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
-header nav{display:flex;gap:18px;flex-wrap:wrap}
-header nav a{color:var(--dim);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:'Cinzel',serif}
-header nav a:hover{color:var(--gold)}
+  .rk-hero{min-height:min(56vh,460px);}
+  .rk-hero .pulse{position:absolute;width:min(60vw,440px);height:min(60vw,440px);border-radius:50%;
+    border:1px solid var(--border);opacity:.4;animation:rk-pulse 3.2s ease-out infinite;}
+  @keyframes rk-pulse{0%{transform:scale(.6);opacity:.5;}100%{transform:scale(1.25);opacity:0;}}
 
-.wrap{max-width:1100px;margin:0 auto;padding:50px 28px}
-h1{font-family:'Cinzel',serif;font-size:clamp(2rem,4vw,3.2rem);color:var(--gold);letter-spacing:.06em;font-weight:900;margin-bottom:10px;text-align:center}
-.lede{text-align:center;color:var(--text);font-style:italic;font-size:1.1rem;max-width:720px;margin:0 auto 50px;line-height:1.7;opacity:.92}
-.lede strong{color:var(--gold);font-weight:600;font-style:normal}
+  /* controls */
+  .rk-controls{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:center;margin:1.6rem 0 2.4rem;}
+  .rk-chip{cursor:pointer;font-family:var(--font-body);font-weight:700;font-size:.74rem;letter-spacing:.08em;
+    text-transform:uppercase;padding:.5rem 1.1rem;border-radius:999px;border:1px solid var(--border);
+    background:transparent;color:var(--text-dim);transition:all .2s;}
+  .rk-chip.on,.rk-chip:hover{color:var(--gold);border-color:var(--border-bright);background:rgba(201,168,76,.1);}
+  .rk-chip.cmp{color:var(--smurjan);border-color:color-mix(in srgb,var(--smurjan) 50%,transparent);}
+  .rk-chip.cmp.on{background:color-mix(in srgb,var(--smurjan) 16%,transparent);color:#bfe6ff;}
 
-.tier{margin-bottom:30px;background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-.tier-head{padding:16px 22px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 14%,var(--panel)),var(--panel));border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
-.tier-head .label{font-family:'Cinzel',serif;color:var(--accent,var(--gold));font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;font-weight:700}
-.tier-head .name{font-family:'Cinzel',serif;color:#fff;font-size:1.4rem;font-weight:700;letter-spacing:.05em}
-.tier-head .range{font-family:'Space Mono',monospace;color:var(--dim);font-size:.85rem}
-.tier-body{padding:18px 22px}
-.tier-body .desc{color:var(--text);font-size:.96rem;font-style:italic;margin-bottom:14px;opacity:.92;line-height:1.6}
-.entry-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
-.entry{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:rgba(255,255,255,0.02);text-decoration:none;color:inherit;transition:all .2s}
-.entry:hover{border-color:var(--accent,var(--gold));transform:translateY(-2px)}
-.entry .let{font-family:'Cinzel',serif;font-weight:900;color:var(--accent,var(--gold));font-size:1.1rem;width:30px;text-align:center;flex-shrink:0}
-.entry .name{font-family:'Cinzel',serif;color:#fff;font-weight:600;font-size:.9rem;letter-spacing:.04em;line-height:1.2}
-.entry .hadom{font-family:'Space Mono',monospace;color:var(--dim);font-size:.74rem;margin-top:2px}
+  /* tier */
+  .tier{margin-bottom:2.2rem;}
+  .tier-head{display:flex;align-items:baseline;gap:.8rem;margin-bottom:.9rem;flex-wrap:wrap;}
+  .tier-head .lab{font-family:var(--font-display);color:var(--gold);letter-spacing:.22em;text-transform:uppercase;font-size:.72rem;}
+  .tier-head .nm{font-family:var(--font-display);color:#fff;font-size:1.15rem;}
+  .tier-head .sub{color:var(--text-dim);font-size:.82rem;}
+  .tier-head::after{content:"";flex:1;height:1px;min-width:30px;background:linear-gradient(90deg,var(--border-bright),transparent);align-self:center;}
 
-footer{padding:30px;text-align:center;color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase;border-top:1px solid var(--border);margin-top:40px}
+  /* rank row */
+  .row{display:grid;grid-template-columns:64px 1fr auto;gap:1rem;align-items:center;
+    background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--c,var(--gold));
+    border-radius:var(--radius-sm);padding:.7rem .9rem;margin-bottom:.6rem;
+    transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer;position:relative;overflow:hidden;}
+  .row:hover{transform:translateX(4px);box-shadow:0 10px 30px -14px #000,0 0 22px -8px var(--c,var(--gold));}
+  .row.dim{opacity:.18;filter:grayscale(.6);}
+  .row.picked{outline:2px solid var(--smurjan);outline-offset:1px;}
+  .row .ava{width:64px;height:64px;border-radius:10px;object-fit:cover;object-position:center top;
+    border:1px solid var(--c,var(--border));background:var(--void-2);}
+  .row .ava.silh{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.5rem;}
+  .row .who .nm{font-family:var(--font-display);color:#fff;font-size:1.08rem;letter-spacing:.02em;}
+  .row .who .ro{color:var(--c,var(--gold));font-size:.78rem;font-weight:600;}
+  .row .who .nt{color:var(--text-dim);font-size:.76rem;margin-top:.15rem;}
+  .row .bar{height:7px;border-radius:6px;background:rgba(255,255,255,.06);margin-top:.5rem;overflow:hidden;max-width:340px;}
+  .row .bar i{display:block;height:100%;width:0;border-radius:6px;
+    background:linear-gradient(90deg,var(--c,var(--gold)),color-mix(in srgb,var(--c,var(--gold)) 40%,#fff));
+    transition:width 1.1s cubic-bezier(.2,.8,.2,1);}
+  .row .bar.ghost i{background:repeating-linear-gradient(90deg,var(--c,var(--gold)) 0 7px,transparent 7px 14px);opacity:.6;width:100%;}
+  .row .bar.inf i{background:linear-gradient(90deg,var(--c),#fff,var(--c));background-size:200% 100%;width:100%;animation:rk-flow 2.4s linear infinite;}
+  @keyframes rk-flow{to{background-position:200% 0;}}
+  .row .val{text-align:right;min-width:96px;}
+  .row .val .h{font-family:var(--font-display);font-size:1.35rem;color:#fff;line-height:1;}
+  .row .val .u{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);}
+
+  /* compare tray */
+  #cmp{position:fixed;left:0;right:0;bottom:0;z-index:1500;background:rgba(8,9,18,.94);backdrop-filter:blur(14px);
+    border-top:1px solid var(--border-bright);transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.8,.2,1);}
+  #cmp.open{transform:none;}
+  #cmp .inner{max-width:var(--maxw);margin:0 auto;padding:1rem 1.2rem 1.3rem;display:grid;
+    grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center;}
+  #cmp .slot{display:flex;align-items:center;gap:.8rem;}
+  #cmp .slot.right{flex-direction:row-reverse;text-align:right;}
+  #cmp .slot img{width:58px;height:58px;border-radius:10px;object-fit:cover;object-position:center top;border:1px solid var(--border);}
+  #cmp .slot .nm{font-family:var(--font-display);color:#fff;font-size:1rem;}
+  #cmp .slot .h{font-family:var(--font-display);color:var(--gold);font-size:1.3rem;}
+  #cmp .slot .empty{color:var(--muted);font-size:.82rem;font-style:italic;}
+  #cmp .verdict{text-align:center;min-width:160px;}
+  #cmp .verdict .vs{font-family:var(--font-display);color:var(--smurjan);letter-spacing:.2em;font-size:.8rem;}
+  #cmp .verdict .out{color:var(--text);font-size:.84rem;margin-top:.3rem;line-height:1.4;}
+  #cmp .x{position:absolute;top:.5rem;right:.8rem;color:var(--text-dim);background:none;border:none;cursor:pointer;font-size:1.1rem;}
+  @media(max-width:680px){#cmp .inner{grid-template-columns:1fr;gap:.5rem;} #cmp .slot.right{flex-direction:row;text-align:left;}}
 </style>
 </head>
 <body>
 
-<header>
-  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
-  <nav>
-    <a href="/wiki">Wiki</a>
-    <a href="/lineage">Lineage</a>
-    <a href="/empire">Empire</a>
-    <a href="/cosmos">Cosmos</a>
-    <a href="/rankings" style="color:var(--gold)">Rankings</a>
-  </nav>
+<header class="su-hero rk-hero">
+  <div class="pulse"></div>
+  <div class="su-kicker su-fade">Actions per heartbeat</div>
+  <h1 class="su-fade-2">The HADOM Ladder</h1>
+  <p class="su-fade-3">HADOM — <em>hjärtslag</em> — is the true power scale of this universe: how many moves, strikes and quantum renders a soul resolves inside a single human heartbeat. A normal human fires one. These are not normal.</p>
 </header>
 
-<div class="wrap">
-
-<h1>HADOM Rankings</h1>
-<p class="lede">
-  <strong>HADOM</strong> = <em>hjärtslag</em>, the Swedish word for heartbeat. The tick-rate of reality itself —
-  how many actions a being can resolve within one human heartbeat. A normal human is HADOM 1.
-  Scalelist champions reach into the millions. Vidar speaks once a century. Mingus is uncountable.
-</p>
-
-<!-- Tiers from highest to lowest -->
-<div class="tier" style="--accent:#fef3c7">
-  <div class="tier-head">
-    <div><div class="label">Tier ∞</div><div class="name">Cosmic Singletons — Above Counting</div></div>
-    <div class="range">HADOM &gt; ∞</div>
+<main class="su-wrap su-section">
+  <div class="rk-controls reveal">
+    <span class="rk-chip on" data-filter="all">All 16</span>
+    <span class="rk-chip" data-filter="champion">Champions</span>
+    <span class="rk-chip" data-filter="lineage">The Lineage</span>
+    <span class="rk-chip cmp" id="cmpToggle">⚖ Compare two</span>
   </div>
-  <div class="tier-body">
-    <div class="desc">Cannot be measured. The HADOM scale was built before they existed; the scale refuses to count them.</div>
-    <div class="entry-list">
-      <a class="entry" href="/02_Stories/CHARACTER_BIBLE_V2.md"><span class="let">∞</span><span><div class="name">Mingus</div><div class="hadom">unclassified · time freezes within a heartbeat</div></span></a>
-      <a class="entry" href="/lineage"><span class="let">S</span><span><div class="name">Smurjan (Tetrad)</div><div class="hadom">∞ folded · 4 voices in 1 body</div></span></a>
-      <a class="entry" href="/lineage"><span class="let">V</span><span><div class="name">Vigolas</div><div class="hadom">∞ − 1 · The Infinite Administrator</div></span></a>
-    </div>
+  <div id="ladder"></div>
+  <p class="su-dim" style="text-align:center;font-size:.8rem;margin-top:1.4rem;">
+    K-rank classifies the Architects (K-I → K-V, the Twelve). Above K-V the scale stops counting:
+    Vigolas burns at ∞−1, and Mingus is unclassified — sacred, beyond the ladder. The dog is forever.
+  </p>
+</main>
+
+<div id="cmp">
+  <button class="x" id="cmpClose">✕</button>
+  <div class="inner">
+    <div class="slot left"><span class="empty" id="s0">Pick a soul…</span></div>
+    <div class="verdict"><div class="vs">VS</div><div class="out" id="cmpOut">Tap two rows to compare their heartbeats.</div></div>
+    <div class="slot right"><span class="empty" id="s1">Pick a soul…</span></div>
   </div>
 </div>
 
-<div class="tier" style="--accent:#fbbf24">
-  <div class="tier-head">
-    <div><div class="label">Tier K-V — Architects</div><div class="name">The Twelve (now Ten + sealed)</div></div>
-    <div class="range">HADOM 0 — special</div>
-  </div>
-  <div class="tier-body">
-    <div class="desc">The Architects' Council. Their HADOM is recorded as 0 — they don't act in heartbeats; they act in centuries.</div>
-    <div class="entry-list">
-      <a class="entry" href="/characters/vidar"><span class="let">V</span><span><div class="name">Vidar (Rönnkvist V)</div><div class="hadom">HADOM 0 · 1 sentence per cosmic century</div></span></a>
-      <a class="entry" href="/cosmos/atlas#realm-void2"><span class="let">K-I</span><span><div class="name">K-I — The First</div><div class="hadom">first carved into the seal</div></span></a>
-      <a class="entry" href="/cosmos/atlas#realm-void2"><span class="let">K-V</span><span><div class="name">K-V — Current Elder</div><div class="hadom">leads the Council</div></span></a>
-      <a class="entry" href="/cosmos/atlas#realm-void2"><span class="let">K-XII</span><span><div class="name">K-XII (unwritten)</div><div class="hadom">erased by Vidar's century-sentence</div></span></a>
-    </div>
-  </div>
-</div>
+<script>
+const ROOT="/characters/art";
+// HADOM canon values. logv = log10 for finite bars; kind: inf | off | num
+const TIERS=[
+ {lab:"Beyond the scale",nm:"The Uncounted",sub:"the ladder stops here",rows:[
+   {k:"mingus",n:"Mingus",o:"baseline",r:"The Eternal Companion",c:"#e9b949",h:"∞",kind:"inf",nt:"Unclassified. Sacred. One heartbeat is forever."},
+   {k:"vigolas",n:"Vigolas",o:"champion",r:"The Infinite Administrator",c:"#00ff88",h:"∞−1",kind:"inf",nt:"Every action but one, inside every beat."},
+ ]},
+ {lab:"Millions per beat",nm:"The Titans",sub:"",rows:[
+   {k:"smurjan",n:"Smurjan",o:"champion",r:"The Void Three",c:"#00aaff",h:"1,000,000",kind:"num",logv:6,nt:"Three realities acting as one."},
+   {k:"trollmage",n:"Trollmage",o:"champion",r:"The Codex-Keeper",c:"#9933ff",h:"50,000",kind:"num",logv:4.7,nt:"Reads and rewrites faster than thought."},
+ ]},
+ {lab:"Ten-thousand burn",nm:"The High Tier",sub:"",rows:[
+   {k:"rougeina",n:"Rougeina",o:"champion",r:"The Star-Dancer",c:"#ff3366",h:"10,000",kind:"num",logv:4,nt:"Ten thousand steps between two stars."},
+   {k:"kompis",n:"Kompis",o:"champion",r:"The Heartbeat",c:"#ffaa00",h:"10,000",kind:"num",logv:4,nt:"Steady as the hearth he guards."},
+   {k:"ogar",n:"Ögar",o:"lineage",r:"The Far-Eye Watcher",c:"#a78bfa",h:"8,000",kind:"num",logv:3.9,nt:"Eight thousand blinks, each a different time."},
+ ]},
+ {lab:"The measured",nm:"The Counted",sub:"",rows:[
+   {k:"njord",n:"Njord",o:"lineage",r:"The Tide-Reader",c:"#38bdf8",h:"1,200",kind:"num",logv:3.08,nt:"Twelve hundred weathers per beat — he rarely bothers."},
+   {k:"opha",n:"Opha",o:"lineage",r:"The Conjunction",c:"#d946ef",h:"24",kind:"num",logv:1.38,nt:"Low, because her output is meaning — and meaning is slow."},
+   {k:"tova",n:"Tova",o:"lineage",r:"The Thunder-Herald",c:"#f59e0b",h:"12",kind:"num",logv:1.08,nt:"One heartbeat per realm."},
+   {k:"iska",n:"Iska",o:"lineage",r:"The Spark-Carrier",c:"#fbbf24",h:"7",kind:"num",logv:.85,nt:"Seven lights of Lumen, one per beat."},
+ ]},
+ {lab:"The floor — and its paradox",nm:"The Ones",sub:"where the scale lies",rows:[
+   {k:"isa",n:"Isa",o:"lineage",r:"The Stillborn Heartbeat",c:"#67e8f9",h:"1",kind:"num",logv:0,nt:"Her single beat contains the millions the others fire inside it."},
+   {k:"kvar",n:"Kvar",o:"lineage",r:"The Last One",c:"#c2675a",h:"1",kind:"num",logv:0,nt:"The 1 is a lie — his one heartbeat is infinite; the scale refuses to count it."},
+   {k:"_human",n:"A Human",o:"baseline",r:"The Baseline",c:"#6b6555",h:"1",kind:"num",logv:0,nt:"One action per heartbeat. You are here."},
+ ]},
+ {lab:"Off the scale",nm:"The Unmeasured",sub:"no heartbeat the ladder can read",rows:[
+   {k:"runa",n:"Runa",o:"lineage",r:"The First Rune-Speaker",c:"#d4a056",h:"ageless",kind:"off",nt:"Her heartbeat is one of Ferdinand's. When she breathes in, the tree breathes out."},
+   {k:"niva",n:"Niva",o:"lineage",r:"The Untraversed",c:"#e5e7eb",h:"—",kind:"off",nt:"The Null has no heartbeats; she does not register. She acts in absences."},
+   {k:"vidar",n:"Vidar",o:"lineage",r:"The Silent Reckoner",c:"#cdb878",h:"0",kind:"off",nt:"He has stopped counting. One sentence per century unwrites an Architect."},
+ ]},
+];
 
-<div class="tier" style="--accent:#9333ea">
-  <div class="tier-head">
-    <div><div class="label">Tier Million</div><div class="name">Realm-Class Champions</div></div>
-    <div class="range">HADOM 100,000 — 1,000,000+</div>
-  </div>
-  <div class="tier-body">
-    <div class="desc">Each one rules a realm or holds a unique cosmic role. Acts faster than human eyes track.</div>
-    <div class="entry-list">
-      <a class="entry" href="/lineage"><span class="let">K</span><span><div class="name">Kompis</div><div class="hadom">10⁹ subtick · billion actions per heartbeat</div></span></a>
-      <a class="entry" href="/lineage"><span class="let">T</span><span><div class="name">Trollmage</div><div class="hadom">10⁵ · backward Codex reader</div></span></a>
-      <a class="entry" href="/characters/runa"><span class="let">R</span><span><div class="name">Runa (Rönnkvist R)</div><div class="hadom">ageless · pre-Codex rune-speaker</div></span></a>
-    </div>
-  </div>
-</div>
+const ALL={};
+const lad=document.getElementById("ladder");
+TIERS.forEach(t=>{
+  const sec=document.createElement("section"); sec.className="tier";
+  sec.innerHTML=`<div class="tier-head"><span class="lab">${t.lab}</span><span class="nm">${t.nm}</span>${t.sub?`<span class="sub">${t.sub}</span>`:""}</div>`;
+  t.rows.forEach(r=>{
+    ALL[r.k]=r;
+    const ava = r.k==="_human"
+      ? `<div class="ava silh">☻</div>`
+      : `<img class="ava" loading="lazy" src="${ROOT}/${r.k}/${r.k}_hero.webp" alt="${r.n}">`;
+    const barClass = r.kind==="inf"?"bar inf":(r.kind==="off"?"bar ghost":"bar");
+    const row=document.createElement("div");
+    row.className="row"; row.dataset.k=r.k; row.dataset.order=r.o; row.style.setProperty("--c",r.c);
+    row.innerHTML=`${ava}
+      <div class="who"><div class="nm">${r.n}</div><div class="ro">${r.r}</div>
+        <div class="nt">${r.nt}</div>
+        <div class="${barClass}"><i data-w="${r.kind==="num"?Math.max(4,Math.round(r.logv/6*100)):100}"></i></div>
+      </div>
+      <div class="val"><div class="h">${r.h}</div><div class="u">HADOM</div></div>`;
+    row.addEventListener("click",()=>onPick(r.k,row));
+    sec.appendChild(row);
+  });
+  lad.appendChild(sec);
+});
 
-<div class="tier" style="--accent:#ff6b9d">
-  <div class="tier-head">
-    <div><div class="label">Tier Thousand</div><div class="name">Star-Class &amp; Realm-Lieutenants</div></div>
-    <div class="range">HADOM 1,000 — 100,000</div>
-  </div>
-  <div class="tier-body">
-    <div class="desc">Read the cosmos at a faster rhythm than humans can hear.</div>
-    <div class="entry-list">
-      <a class="entry" href="/lineage"><span class="let">R</span><span><div class="name">Rougeina</div><div class="hadom">12,000 · eight-blade dancer</div></span></a>
-      <a class="entry" href="/characters/ogar"><span class="let">Ö</span><span><div class="name">Ögar (Rönnkvist Ö)</div><div class="hadom">8,000 · 8K blinks per heartbeat</div></span></a>
-      <a class="entry" href="/characters/njord"><span class="let">N</span><span><div class="name">Njord (Rönnkvist N₂)</div><div class="hadom">1,200 · tide-reader</div></span></a>
-    </div>
-  </div>
-</div>
+// animate bars in on view
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){const i=e.target.querySelector(".bar i");if(i&&!i.style.width)i.style.width=i.dataset.w+"%";}}),{threshold:.4});
+document.querySelectorAll(".row").forEach(r=>io.observe(r));
 
-<div class="tier" style="--accent:#67e8f9">
-  <div class="tier-head">
-    <div><div class="label">Tier Hundred</div><div class="name">Fast Mortals &amp; Special Roles</div></div>
-    <div class="range">HADOM 10 — 1,000</div>
-  </div>
-  <div class="tier-body">
-    <div class="desc">Higher than any normal human. Often empowered by realm or ritual.</div>
-    <div class="entry-list">
-      <a class="entry" href="/characters/opha"><span class="let">O</span><span><div class="name">Opha (Viktor O)</div><div class="hadom">24 · the Conjunction</div></span></a>
-      <a class="entry" href="/characters/tova"><span class="let">T</span><span><div class="name">Tova (Rönnkvist T)</div><div class="hadom">12 · thunder-herald</div></span></a>
-      <a class="entry" href="/characters/iska"><span class="let">I</span><span><div class="name">Iska (Rönnkvist I)</div><div class="hadom">7 · spark-carrier</div></span></a>
-    </div>
-  </div>
-</div>
+// filter
+document.querySelectorAll('.rk-chip[data-filter]').forEach(ch=>ch.addEventListener('click',()=>{
+  document.querySelectorAll('.rk-chip[data-filter]').forEach(c=>c.classList.remove('on'));
+  ch.classList.add('on'); const f=ch.dataset.filter;
+  document.querySelectorAll('.row').forEach(r=>{
+    const show = f==="all" || r.dataset.order===f || (f!=="all"&&r.dataset.order==="baseline"&&false);
+    r.style.display = show?"":"none";
+  });
+  document.querySelectorAll('.tier').forEach(t=>{
+    const any=[...t.querySelectorAll('.row')].some(r=>r.style.display!=="none");
+    t.style.display=any?"":"none";
+  });
+}));
 
-<div class="tier" style="--accent:#71717a">
-  <div class="tier-head">
-    <div><div class="label">Tier 1</div><div class="name">Ordinary Humans (and the Unclassifiable)</div></div>
-    <div class="range">HADOM 1 — special</div>
-  </div>
-  <div class="tier-body">
-    <div class="desc">Most beings live here. A few souls have a HADOM of 1 by recorded number but operate outside the scale's logic.</div>
-    <div class="entry-list">
-      <a class="entry" href="/characters/isa"><span class="let">I</span><span><div class="name">Isa (Viktor I)</div><div class="hadom">1 · slows time around her</div></span></a>
-      <a class="entry" href="/characters/kvar"><span class="let">K</span><span><div class="name">Kvar (Rönnkvist K)</div><div class="hadom">1 (uncountable) · always survives</div></span></a>
-      <a class="entry" href="/characters/niva"><span class="let">N</span><span><div class="name">Niva (Rönnkvist N₁)</div><div class="hadom">unmeasurable · the Untraversed</div></span></a>
-      <a class="entry" href="/cosmos/atlas"><span class="let">·</span><span><div class="name">Most NPCs</div><div class="hadom">1 — heartbeat humans</div></span></a>
-    </div>
-  </div>
-</div>
-
-<p class="lede" style="margin-top:30px;font-size:1rem">
-  Want the full mechanics? Read <a href="/hadom">the interactive HADOM Visualizer</a> for the heartbeat simulation,
-  or <a href="/02_Stories/CHARACTER_BIBLE_V2.md">the Character Bible</a> for canon-anchored values.
-</p>
-
-</div>
-
-<footer>
-  Scalelist Universe · HADOM Rankings · <a href="/wiki">Back to the Wiki</a>
-</footer>
-
+// compare mode
+let cmpMode=false, picks=[];
+const tray=document.getElementById('cmp');
+document.getElementById('cmpToggle').addEventListener('click',function(){
+  cmpMode=!cmpMode; this.classList.toggle('on',cmpMode);
+  if(cmpMode){tray.classList.add('open');} else {closeCmp();}
+});
+document.getElementById('cmpClose').addEventListener('click',closeCmp);
+function closeCmp(){cmpMode=false;tray.classList.remove('open');document.getElementById('cmpToggle').classList.remove('on');
+  picks=[];document.querySelectorAll('.row.picked').forEach(r=>r.classList.remove('picked'));resetCmp();}
+function resetCmp(){slot(0,null);slot(1,null);document.getElementById('cmpOut').textContent="Tap two rows to compare their heartbeats.";}
+function onPick(k,row){
+  if(!cmpMode){ location.href="/gallery#"+(k.startsWith("_")?"":k); return; }
+  if(picks.includes(k)){picks=picks.filter(x=>x!==k);row.classList.remove('picked');}
+  else{ if(picks.length>=2){const old=picks.shift();document.querySelector(`.row[data-k="${old}"]`)?.classList.remove('picked');}
+        picks.push(k);row.classList.add('picked'); }
+  slot(0,picks[0]?ALL[picks[0]]:null); slot(1,picks[1]?ALL[picks[1]]:null); verdict();
+}
+function slot(i,r){
+  const el=document.getElementById('s'+i);
+  if(!r){el.outerHTML=`<span class="empty" id="s${i}">Pick a soul…</span>`;return;}
+  const img = r.k==="_human"?`<div style="width:58px;height:58px;border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);color:var(--muted);font-size:1.4rem">☻</div>`
+    :`<img src="${ROOT}/${r.k}/${r.k}_hero.webp" alt="${r.n}">`;
+  el.outerHTML=`<div class="slot ${i?'right':'left'}" id="s${i}">${img}<div><div class="nm">${r.n}</div><div class="h">${r.h}</div></div></div>`;
+}
+function verdict(){
+  const o=document.getElementById('cmpOut'); if(picks.length<2){o.textContent="Pick one more…";return;}
+  const a=ALL[picks[0]],b=ALL[picks[1]];
+  if(a.kind==="inf"||b.kind==="inf"){o.innerHTML=`<b>${(a.kind==="inf"?a:b).n}</b> sits beyond measure. No ratio exists.`;return;}
+  if(a.kind==="off"||b.kind==="off"){o.innerHTML=`One acts outside the heartbeat itself — the scale cannot weigh them.`;return;}
+  const av=Math.pow(10,a.logv),bv=Math.pow(10,b.logv);
+  if(av===bv){o.innerHTML=`Dead even — both at <b>${a.h}</b> HADOM.`;return;}
+  const hi=av>bv?a:b, lo=av>bv?b:a, x=Math.round(Math.max(av,bv)/Math.max(1,Math.min(av,bv)));
+  o.innerHTML=`<b style="color:${hi.c}">${hi.n}</b> fires <b>${x.toLocaleString()}×</b> more actions per heartbeat than ${lo.n}.`;
+}
+</script>
 </body>
 </html>

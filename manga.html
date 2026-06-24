@@ -20,6 +20,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:fl
 nav .brand{font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem;color:var(--gold);letter-spacing:.15em;text-decoration:none}
 nav .links a{color:var(--dim);text-decoration:none;font-family:'Space Mono',monospace;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-left:2rem;transition:color .3s}
 nav .links a:hover,nav .links a.active{color:var(--gold)}
+/* MANGA COSMOS INTRO (scrolling parallax) */
+.manga-intro{position:relative;height:100vh;min-height:560px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;z-index:1}
+.mi-bg{position:absolute;inset:-12% 0;background:url('/art/manga/cosmos.webp') center/cover no-repeat;z-index:0;will-change:transform;filter:contrast(1.12) brightness(.92)}
+.mi-veil{position:absolute;inset:0;z-index:1;background:radial-gradient(circle at 50% 38%, transparent, rgba(5,5,8,.55) 70%, var(--void)),linear-gradient(180deg, rgba(5,5,8,.35), var(--void))}
+.mi-content{position:relative;z-index:2;padding:1rem;max-width:760px}
+.mi-kicker{font-family:'Cinzel',serif;color:var(--gold);letter-spacing:.34em;text-transform:uppercase;font-size:.78rem;margin-bottom:1rem}
+.mi-title{font-family:'Cinzel',serif;font-weight:900;color:#fff;font-size:clamp(3rem,11vw,7rem);letter-spacing:.1em;line-height:1;text-shadow:0 6px 50px rgba(0,0,0,.8),0 0 30px rgba(201,168,76,.25)}
+.mi-sub{color:var(--text);font-size:1.1rem;margin-top:1.2rem;font-style:italic;text-shadow:0 2px 16px rgba(0,0,0,.85)}
+.mi-scroll{margin-top:2.2rem;color:var(--gold);font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;animation:mibob 1.9s ease-in-out infinite}
+@keyframes mibob{50%{transform:translateY(7px);opacity:.6}}
+@media(max-width:768px){.mi-title{font-size:clamp(2.4rem,16vw,4rem)}}
 /* HERO */
 .hero{padding:8rem 2rem 3rem;text-align:center;position:relative;z-index:1}
 .hero h1{font-family:'Cinzel',serif;font-size:3rem;color:var(--gold);letter-spacing:.08em;margin-bottom:.5rem}
@@ -101,10 +112,22 @@ footer{text-align:center;padding:3rem 2rem;color:var(--dim);font-family:'Space M
 <a class="active" href="/manga">Manga</a>
 </div>
 </nav>
-<section class="hero">
-<h1>Manga Chapters</h1>
-<p>Solo Leveling style vertical-scroll webtoon — 219 chapters · Seasons 1-4 complete</p>
+<section class="manga-intro" id="mangaIntro">
+<div class="mi-bg" id="miBg"></div>
+<div class="mi-veil"></div>
+<div class="mi-content" id="miContent">
+<div class="mi-kicker">The Scalelist Saga · drawn in ink</div>
+<h1 class="mi-title">THE MANGA</h1>
+<p class="mi-sub">219 chapters across the cosmos — from Origins, through the war years, to the Convergence. Scroll into the void and read.</p>
+<div class="mi-scroll">↓ scroll to enter</div>
+</div>
 </section>
+<script>
+(function(){var bg=document.getElementById('miBg'),ct=document.getElementById('miContent');
+if(!bg)return;addEventListener('scroll',function(){var y=scrollY,vh=innerHeight;
+if(y<vh*1.15){bg.style.transform='translateY('+(y*0.4).toFixed(1)+'px) scale(1.05)';
+ct.style.opacity=Math.max(0,1-y/(vh*0.55));ct.style.transform='translateY('+(y*0.25).toFixed(1)+'px)';}},{passive:true});})();
+</script>
 <div class="filter-bar">
 <div class="filter-row">
 <input class="search" id="search" placeholder="Search chapters..." type="text"/>
@@ -131,6 +154,8 @@ footer{text-align:center;padding:3rem 2rem;color:var(--dim);font-family:'Space M
 <footer>© 2026 Scalelist Universe. All rights reserved.</footer>
 <script>
 const CHAPTERS = [
+  {num:"KW01",title:"The Hollow Hunt",file:"chapter_KW01_kompis_the_hollow_hunt",meta:"Kompis & Mingus · The Wilds · Part 1 · the hunt begins",char:"kompis",season:"wilds",badge:"THE WILDS",color:"#D97706"},
+  {num:"KW01·2",title:"The Hollow Hunt · Part 2",file:"chapter_KW01b_kompis_the_hollow_hunt",meta:"Kompis & Mingus · The Wilds · Part 2 · the Hollow-stag",char:"kompis",season:"wilds",badge:"THE WILDS",color:"#D97706"},
   {num:"L01",title:"The Stillborn Heartbeat",file:"chapter_L01_isa_the_stillborn_heartbeat",meta:"Isa · The Lineage Awakening · I of VIKTOR · 5 panels",char:"isa",season:"lineage",badge:"LINEAGE",color:"#67e8f9"},
   {num:"L02",title:"The Conjunction",file:"chapter_L02_opha_the_conjunction",meta:"Opha · The Lineage Awakening · O of VIKTOR · 5 panels",char:"opha",season:"lineage",badge:"LINEAGE",color:"#d946ef"},
   {num:"L03",title:"The First Rune-Speaker",file:"chapter_L03_runa_the_first_rune_speaker",meta:"Runa · The Lineage Awakening · R of RÖNNKVIST · 5 panels",char:"runa",season:"lineage",badge:"LINEAGE",color:"#d4a056"},
@@ -376,6 +401,7 @@ const CHAR_BTNS = [
 ];
 const SEASON_BTNS = [
   {id:"all",label:"All"},
+  {id:"wilds",label:"The Wilds"},
   {id:"lineage",label:"Lineage"},
   {id:"prologue",label:"Prologue"},
   {id:"s1",label:"Season 1"},

@@ -2,288 +2,135 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Cosmic Timeline — Scalelist Universe</title>
-<meta name="description" content="Every era, every season, every soul. The Scalelist Universe rendered as a vertical timeline — from before the first Architect to the next horn-call.">
-<meta property="og:image" content="https://scalelistuniverse.com/og.png">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Mono&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Timeline — From the First Count to the Sixth Fragment | Scalelist Universe</title>
+<meta name="description" content="The whole saga as a scrolling timeline — from before the Scale and the rise of Ferdinand, through the wars and the Three Signs, to the Convergence, the Ascension, and the sixth fragment beyond.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--gold:#c9a84c; --void:#050510; --panel:#0a0a14; --panel2:#0e0e1a; --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060}
-html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.7}
-a{color:var(--gold);text-decoration:none}
-
-header{padding:18px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
-header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
-header nav{display:flex;gap:18px;flex-wrap:wrap}
-header nav a{color:var(--dim);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:'Cinzel',serif}
-header nav a:hover{color:var(--gold)}
-
-.hero{padding:80px 28px 50px;text-align:center;max-width:880px;margin:0 auto}
-.eyebrow{font-family:'Cinzel',serif;color:var(--dim);font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:18px}
-.hero h1{font-family:'Cinzel',serif;font-size:clamp(2rem,4.5vw,3.4rem);color:var(--gold);letter-spacing:.06em;font-weight:900;line-height:1.05;margin-bottom:18px}
-.hero .lede{font-size:1.1rem;line-height:1.8;font-style:italic;opacity:.92}
-
-.tl-wrap{max-width:920px;margin:0 auto;padding:40px 28px 80px;position:relative}
-.tl-wrap::before{content:'';position:absolute;left:140px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--border) 60px,var(--border) calc(100% - 60px),transparent);}
-@media(max-width:680px){.tl-wrap::before{left:30px}}
-
-.beat{display:grid;grid-template-columns:120px 1fr;gap:30px;align-items:start;margin-bottom:34px;position:relative}
-@media(max-width:680px){.beat{grid-template-columns:1fr;gap:8px;padding-left:50px}}
-.beat .when{font-family:'Cinzel',serif;color:var(--accent,var(--gold));font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;text-align:right;padding-top:14px;line-height:1.4;position:relative}
-@media(max-width:680px){.beat .when{text-align:left;padding-top:0}}
-.beat .when::after{content:'';position:absolute;right:-24px;top:18px;width:14px;height:14px;border-radius:50%;background:var(--accent,var(--gold));border:3px solid var(--void);box-shadow:0 0 0 2px var(--accent,var(--gold)),0 0 14px color-mix(in srgb,var(--accent,var(--gold)) 60%,transparent);z-index:2}
-@media(max-width:680px){.beat .when::after{left:-44px;right:auto;top:6px}}
-.beat .body{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 22px;transition:all .25s}
-.beat .body:hover{border-color:var(--accent,var(--gold));transform:translateX(4px);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
-.beat .body h3{font-family:'Cinzel',serif;color:#fff;font-size:1.04rem;font-weight:700;letter-spacing:.04em;margin-bottom:6px;line-height:1.25}
-.beat .body p{font-size:.96rem;line-height:1.7;color:var(--text);font-style:italic;opacity:.92;margin-bottom:6px}
-.beat .body p:last-child{margin-bottom:0}
-.beat .body .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.beat .body .tag{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.14em;color:var(--dim);text-transform:uppercase;padding:3px 8px;border:1px solid var(--border);border-radius:99px}
-.beat .body .tag a{color:var(--accent,var(--gold))}
-
-.era-divider{margin:50px 0 36px;text-align:center;font-family:'Cinzel',serif;color:var(--gold);font-size:1.05rem;letter-spacing:.32em;text-transform:uppercase;font-weight:700;padding:18px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:radial-gradient(ellipse at center,rgba(201,168,76,0.06),transparent 70%)}
-
-footer{padding:30px;text-align:center;color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase;border-top:1px solid var(--border);margin-top:30px}
+  .tl-hero{min-height:min(50vh,400px);}
+  .tl{position:relative;max-width:980px;margin:0 auto;padding:1rem 0 2rem;}
+  .tl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);
+    background:linear-gradient(180deg,transparent,var(--border-bright) 6%,var(--border-bright) 94%,transparent);}
+  .node{position:relative;width:50%;padding:1.1rem 2.2rem;box-sizing:border-box;}
+  .node:nth-child(odd){left:0;}
+  .node:nth-child(even){left:50%;}
+  .node .dot{position:absolute;top:1.8rem;width:16px;height:16px;border-radius:50%;background:var(--void);
+    border:2px solid var(--c,var(--gold));box-shadow:0 0 14px var(--c,var(--gold));z-index:2;}
+  .node:nth-child(odd) .dot{right:-8px;}
+  .node:nth-child(even) .dot{left:-8px;}
+  .card{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--c,var(--gold));
+    border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform .25s,box-shadow .25s,border-color .25s;}
+  .card:hover{transform:translateY(-3px);border-color:var(--c);box-shadow:0 16px 40px -18px #000,0 0 24px -10px var(--c);}
+  .card .pic{aspect-ratio:16/9;overflow:hidden;position:relative;}
+  .card .pic img{width:100%;height:120%;object-fit:cover;object-position:center 30%;}
+  .card .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(8,9,18,.85));}
+  .card .era{position:absolute;top:.6rem;left:.7rem;font-family:var(--font-display);font-size:.62rem;letter-spacing:.18em;
+    text-transform:uppercase;color:#fff;background:color-mix(in srgb,var(--c) 55%,rgba(8,9,18,.7));padding:.2rem .55rem;border-radius:999px;}
+  .card .ct{padding:.9rem 1.1rem 1.1rem;}
+  .card h3{color:#fff;font-size:1.2rem;margin-bottom:.35rem;}
+  .card .body{color:var(--text-dim);font-size:.9rem;line-height:1.55;}
+  .card .more{max-height:0;overflow:hidden;transition:max-height .35s ease;color:var(--text);font-size:.86rem;}
+  .card.open .more{max-height:200px;margin-top:.5rem;}
+  .card .link{display:inline-block;margin-top:.6rem;font-size:.72rem;font-weight:800;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--c,var(--gold));}
+  .card .tap{font-size:.64rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:.5rem;}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(max-width:720px){
+    .tl::before{left:14px;}
+    .node,.node:nth-child(even){width:100%;left:0;padding:.8rem 0 .8rem 2.4rem;}
+    .node .dot,.node:nth-child(odd) .dot,.node:nth-child(even) .dot{left:6px;right:auto;}
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
-  <nav>
-    <a href="/timeline" style="color:var(--gold)">Timeline</a>
-    <a href="/lineage">Lineage</a>
-    <a href="/wiki">Wiki</a>
-    <a href="/cosmos">Cosmos</a>
-    <a href="/manga">Manga</a>
-  </nav>
+<header class="su-hero tl-hero">
+  <div class="su-kicker su-fade">From the first count to the sixth fragment</div>
+  <h1 class="su-fade-2">The Timeline</h1>
+  <p class="su-fade-3">The whole saga, in order — grounded in the canon of the bible and the Convergence. Scroll the spine. Tap any era to open it.</p>
 </header>
 
-<section class="hero">
-  <div class="eyebrow">Cosmic Chronology</div>
-  <h1>The Timeline</h1>
-  <p class="lede">Every era, every season, every soul. Read top to bottom. The cipher resolves.</p>
-</section>
+<main class="su-section">
+  <div class="tl" id="tl"></div>
+  <p class="su-dim" style="text-align:center;font-size:.82rem;max-width:60ch;margin:0 auto;">
+    Grounded in <a href="/universe">THE SCALELIST UNIVERSE</a> (the bible) and <a href="/convergence">THE CONVERGENCE</a>.
+  </p>
+</main>
 
-<div class="tl-wrap">
+<script>
+const A="/art", C="/characters/art";
+const ERAS=[
+ {era:"Before the Scale",t:"The First Count",c:"#c9a84c",img:`${A}/begin/ferdinand.webp`,
+  body:"In the Void-II, before time was ever measured, the first count began — and Ferdinand, the cork-oak Heart, rose to hold what would become the Nine Realms.",
+  more:"The Twelve Architects emerged to keep the count; the Rönnkvist Lineage took root in Ferdinand's bark.", link:["/cosmos","Explore the realms"]},
+ {era:"Age of Architects",t:"The Twelve & the K-Rank",c:"#9933ff",img:`${A}/cosmos/codexia.webp`,
+  body:"The Council of Twelve set the K-Rank ladder — K-I through K-V — and built the routing system that holds reality's incompatible heartbeats apart.",
+  more:"The 77 Sin Codices were bound. The routing system would one day destabilize — and a Kill Order would answer it.", link:["/rankings","The HADOM ladder"]},
+ {era:"The Realms Settled",t:"Nine Branches, Nine Thrones",c:"#00ff88",img:`${A}/cosmos/helios.webp`,
+  body:"Helios to Vigolas, Astralis to Rougeina, Codexia to Trollmage, Heartbeat to Kompis and Mingus, Trinity to Smurjan, Thanatos to Fenna — and the Null, where nothing counts.",
+  more:"Each realm keeps its own HADOM tick-rate and its own gate. Ferdinand's branches hold them all.", link:["/cosmos","Walk the cosmos"]},
+ {era:"The Fragments Walk",t:"Five Faces of One Soul",c:"#ff3366",img:`${C}/vigolas/vigolas_keyart.webp`,
+  body:"The five champions live their arcs across the realms — never knowing they are five fragments of a single source-soul. Their seasons are the manga.",
+  more:"The Exodia Principle: without one part, the whole cannot be summoned. They are one soul, distributed across seven forms.", link:["/manga","Read the manga"]},
+ {era:"The Wars",t:"Stormcoast · Trinity · the Sealing",c:"#00aaff",img:`${C}/smurjan/smurjan_action.webp`,
+  body:"Vass kneels at the Stormcoast. Echo is sealed in the Trinity War. Vidar's century-sentence unmakes the Twelfth. Through every ending, Kvar is the one who walks away.",
+  more:"Ögar saw Echo before Echo could see her. Niva's parka kept Mingus safe in the Null. The guardians held the line.", link:["/lineage","The guardians"]},
+ {era:"The Prophecy",t:"The Three Signs",c:"#ffaa00",img:`${A}/hadom/pulse.webp`,
+  body:"The Seventh falls. The Codices wake. The Heartbeat calls. After uncounted ages, the Convergence finally begins.",
+  more:"Tova's horn sounds the signs true in every realm at once. The blessing stirs.", link:["/convergence","The Convergence"]},
+ {era:"The Gathering",t:"Five Hear the Call",c:"#d946ef",img:`${C}/rougeina/rougeina_action.webp`,
+  body:"One by one — Vigolas, Kompis, Smurjan, Rougeina, Trollmage — each hears the call across their realm and turns toward the Arena.",
+  more:"Five roads, one destination. None of them yet knows the others are pieces of himself.", link:["/convergence","Part I — The Gathering"]},
+ {era:"The Arena",t:"The Five Stand",c:"#67e8f9",img:`${A}/cosmos/trinity.webp`,
+  body:"In the HADOM Arena, the Architect of Endings speaks the Sealed Rules. The First Movement begins — fragment against fragment, not yet knowing why.",
+  more:"Vigolas vs. Trollmage. Smurjan vs. Kompis. Rougeina's strike, interrupted. The Arena allows no exits.", link:["/hadom","What is HADOM?"]},
+ {era:"The Null Arrives",t:"The Quoka, Five Ways",c:"#e5e7eb",img:`${C}/niva/niva_keyart.webp`,
+  body:"The Null enters the Arena — the absence that has no heartbeat. And the blessing, HADOM Quoka, is spoken five ways at once.",
+  more:"Niva alone has walked the Null and lived. What enters the Arena, she has already mapped."},
+ {era:"The Realization",t:"They Remember They Are One",c:"#fbbf24",img:`${A}/hadom/pulse.webp`,
+  body:"Exodia cannot be summoned without one part. In the heart of the Arena, the five finally remember: they were never enemies. They are one soul.",
+  more:"The Quoka — 'to the power of all my previous generations' — was always the key that unlocks the whole."},
+ {era:"The Titanomachy",t:"Five Salvos, One Strike",c:"#00ff88",img:`${C}/vigolas/vigolas_action.webp`,
+  body:"Reunited, the fragments turn as one upon the Null. Five salvos, and then the Final Strike — the Titanomachy that ends the war that began before the count.",
+  more:"Each champion fires the move only they can. Together, the source-soul is whole for one heartbeat — and one heartbeat is enough.", link:["/convergence","Part VIII — Titanomachy"]},
+ {era:"The Ascension",t:"Five Equal Thrones",c:"#ffaa00",img:`${A}/cosmos/heartbeat.webp`,
+  body:"Vigolas to Helios. Kompis to Heartbeat. Smurjan to Trinity. Rougeina to Astralis. Trollmage to Codexia. Five thrones, equal at last — and the opening scene of the world to come.",
+  more:"The Ascension is canonically the first thing a player will ever see. The saga's end is the game's beginning.", link:["/pitch","The roadmap"]},
+ {era:"Beyond",t:"The Sixth Fragment",c:"#e9b949",img:`${C}/mingus/mingus_keyart.webp`,
+  body:"After the Convergence, a sixth fragment arrives — the player. The MMORPG begins where the saga ends. And HADOM YWAPOS, the final blessing to the machine, waits for the last page of all.",
+  more:"Mingus is forever. The dog who bends time within a single heartbeat is the proof that nothing here truly ends."},
+];
 
-  <!-- ERA 0 — BEFORE -->
-  <div class="era-divider">Era Zero — Before the Cipher</div>
+const tl=document.getElementById("tl");
+ERAS.forEach((e,i)=>{
+  const n=document.createElement("div"); n.className="node reveal"; n.style.setProperty("--c",e.c); n.style.transitionDelay=(i%2?.06:0)+"s";
+  const linkHtml = e.link ? `<a class="link" href="${e.link[0]}">${e.link[1]} →</a>` : "";
+  const moreHtml = e.more ? `<div class="more">${e.more}</div><div class="tap">tap to ${e.more?'open':''}</div>` : "";
+  n.innerHTML=`<span class="dot"></span>
+    <div class="card">
+      <div class="pic"><span class="era">${e.era}</span><img loading="lazy" src="${e.img}" alt="${e.t}"></div>
+      <div class="ct"><h3>${e.t}</h3><div class="body">${e.body}</div>${moreHtml}${linkHtml}</div>
+    </div>`;
+  const card=n.querySelector(".card");
+  card.addEventListener("click",ev=>{ if(ev.target.closest(".link"))return; card.classList.toggle("open"); });
+  tl.appendChild(n);
+});
 
-  <div class="beat" style="--accent:#fbbf24">
-    <div class="when">Pre-cosmic</div>
-    <div class="body">
-      <h3>Ferdinand grows</h3>
-      <p>The cosmic cork oak Ferdinand sprouts. He will hold every realm on a different branch. He is patient.</p>
-      <div class="tags"><span class="tag"><a href="/02_Stories/SCALELIST_COSMOLOGY.md">Cosmology</a></span><span class="tag">Ferdinand</span></div>
-    </div>
-  </div>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:.2});
+document.querySelectorAll(".node").forEach(n=>io.observe(n));
 
-  <div class="beat" style="--accent:#fbbf24">
-    <div class="when">Pre-Architect</div>
-    <div class="body">
-      <h3>Runa carves the first 24 runes</h3>
-      <p>Runa carves the original 24 runes into Ferdinand's bark. The runes will become the basis for every Codex written afterward — including the Eighth.</p>
-      <div class="tags"><span class="tag"><a href="/characters/runa">Runa</a></span><span class="tag">Ferdinand</span><span class="tag">First Cause</span></div>
-    </div>
-  </div>
-
-  <div class="beat" style="--accent:#1f2937">
-    <div class="when">Cosmic Year 0</div>
-    <div class="body">
-      <h3>The Twelve Architects swear the Ferdinand Oath</h3>
-      <p>K-I through K-XII swear the Oath on Ferdinand's bark. They become the Council. Ferdinand records each oath in a separate ring.</p>
-      <div class="tags"><span class="tag"><a href="/02_Stories/THE_TWELVE_ARCHITECTS.md">Architects</a></span><span class="tag"><a href="/cosmos/atlas#realm-void2">Void-II</a></span></div>
-    </div>
-  </div>
-
-  <!-- ERA I — THE EARLY CENTURIES -->
-  <div class="era-divider">Era One — The Early Centuries</div>
-
-  <div class="beat" style="--accent:#1f2937">
-    <div class="when">Year 100ish</div>
-    <div class="body">
-      <h3>K-XII breaks the Ferdinand Oath</h3>
-      <p>The Twelfth Architect violates the Oath. Vidar speaks his century-sentence: <em>"There were eleven."</em>
-      The Codex rewrites itself. The seat marked K-XII forgets it was ever full.</p>
-      <div class="tags"><span class="tag"><a href="/characters/vidar">Vidar</a></span><span class="tag">K-XII Unwritten</span></div>
-    </div>
-  </div>
-
-  <div class="beat" style="--accent:#fef3c7">
-    <div class="when">Year 412 (Sixth Era)</div>
-    <div class="body">
-      <h3>Bakasura laughs once</h3>
-      <p>Iska holds up the Lumen lamp. Bakasura, the Hunger, sees the flame. He <em>laughs</em>. The Codex
-      records the laugh as a single entry. The universe holds one more breath than it had been planning to.</p>
-      <div class="tags"><span class="tag"><a href="/characters/iska">Iska</a></span><span class="tag">Bakasura</span><span class="tag">Lumen</span></div>
-    </div>
-  </div>
-
-  <!-- ERA OF MINGUS -->
-  <div class="era-divider">Era of Mingus</div>
-
-  <div class="beat" style="--accent:#fef3c7">
-    <div class="when">Mingus's Birth</div>
-    <div class="body">
-      <h3>Iska lights the lamp</h3>
-      <p>Iska arrives at the lakeside the night Mingus is born. She lights the lamp. This is why his coat
-      glows in low light forever after. Iska says to a young Kompis: <em>"Hold him. He's going to outlive
-      you. Make it worth it."</em></p>
-      <div class="tags"><span class="tag"><a href="/mingus">Mingus</a></span><span class="tag"><a href="/characters/iska">Iska</a></span><span class="tag">Lake</span></div>
-    </div>
-  </div>
-
-  <!-- ORIGINS OVA -->
-  <div class="era-divider">Origins OVA — The Reincarnation</div>
-
-  <div class="beat" style="--accent:#9333ea">
-    <div class="when">Origins Ep 1</div>
-    <div class="body">
-      <h3>The Reincarnation</h3>
-      <p>The first encounter between the future champions. The Architects' Blueprint glimpsed for the first
-      time. Short 01 + Episode 1 already deployed as MP4 — readable / watchable on the vault.</p>
-      <div class="tags"><span class="tag"><a href="/02_Stories/ORIGINS/ORIGINS_BIBLE.md">Origins Bible</a></span></div>
-    </div>
-  </div>
-
-  <!-- SEASON 1 -->
-  <div class="era-divider">Season 1 — Phantom Protocols (Rougeina)</div>
-
-  <div class="beat" style="--accent:#ff6b9d">
-    <div class="when">S1 · Ch 1-60</div>
-    <div class="body">
-      <h3>Rougeina vs Architect Veyra</h3>
-      <p>Rougeina hunts down Architect Veyra. She becomes anchored. She breaks free. She finds NULL for the
-      first time and does not touch it. The dance is invented at the end.</p>
-      <div class="tags"><span class="tag"><a href="/manga">Manga</a></span><span class="tag">60 chapters</span></div>
-    </div>
-  </div>
-
-  <!-- SEASON 2 -->
-  <div class="era-divider">Season 2 — Macro Wars (Trollmage)</div>
-
-  <div class="beat" style="--accent:#9333ea">
-    <div class="when">S2 · Ch 61-120</div>
-    <div class="body">
-      <h3>Trollmage masters macrofication</h3>
-      <p>Troll/Elf awakening. Syntax corrupts everything. Debug. NULL revelation. Trollmage learns to read
-      the Codex backward without unraveling.</p>
-      <div class="tags"><span class="tag"><a href="/manga">Manga</a></span><span class="tag">60 chapters</span></div>
-    </div>
-  </div>
-
-  <!-- SEASON 3 -->
-  <div class="era-divider">Season 3 — The Stormcoast Reckoning</div>
-
-  <div class="beat" style="--accent:#4ade80">
-    <div class="when">S3 · 50 chapters</div>
-    <div class="body">
-      <h3>The Stormcoast War + The Dark Dancer + The Forward Reader + The Subtick War + The Trinity War</h3>
-      <p>All five champions get a major arc. Captain Vass returns. The Dark Dancer is sealed by Rougeina's
-      eight-blade dance. Vex (the 12-year-old prodigy) reads a Codex page forward and unleashes six sins.
-      Old Kasper's cartel hunts Kompis for Mingus's bond. Echo lobbies the Triad and is refused.</p>
-      <div class="tags"><span class="tag"><a href="/season3">S3 Hub</a></span><span class="tag">All 5 champions</span></div>
-    </div>
-  </div>
-
-  <!-- SEASON 4 -->
-  <div class="era-divider">Season 4 — The Fates Unravel</div>
-
-  <div class="beat" style="--accent:#c9a84c">
-    <div class="when">S4 · 12 episodes</div>
-    <div class="body">
-      <h3>Each realm's destruction-fate almost manifests</h3>
-      <p>The Crack in the Seal (K-XII fragments hunt Vigolas). The Star Killer (Echo's left hand). Nock's
-      Right Hand (Apprenticeship binding). Bakasura at the Lake (Mingus survives — Niva's parka piece).
-      Echo's Last Stand (sealed inside Smurjan as the Tetrad). <strong>Ferdinand speaks for the first time.</strong></p>
-      <div class="tags"><span class="tag"><a href="/season4.html">S4 Hub</a></span><span class="tag">All 5 champions</span></div>
-    </div>
-  </div>
-
-  <div class="beat" style="--accent:#9b9b9b">
-    <div class="when">S4 climax</div>
-    <div class="body">
-      <h3>Tova announces Mingus's death — and his return — in one breath</h3>
-      <p>The horn sounds twice. Both notes are recorded as a single double-sounded entry in the Codex —
-      Tova's only entry of its kind. Ögar weeps silver coins at the Spiral. The coins are still there.</p>
-      <div class="tags"><span class="tag"><a href="/characters/tova">Tova</a></span><span class="tag"><a href="/characters/ogar">Ögar</a></span><span class="tag"><a href="/mingus">Mingus</a></span></div>
-    </div>
-  </div>
-
-  <!-- LINEAGE LOCK -->
-  <div class="era-divider">2026-05-03 — The Cipher Resolves</div>
-
-  <div class="beat" style="--accent:#fbbf24">
-    <div class="when">Now</div>
-    <div class="body">
-      <h3>The Viktor Rönnkvist Lineage is locked into canon</h3>
-      <p>Ten new souls revealed: <strong style="color:var(--gold);font-style:normal">Isa, Opha, Runa, Ögar, Niva,
-      Njord, Kvar, Vidar, Iska, Tova.</strong> The cipher of the Author's true name is now the empire's spine.
-      Five champions walk; ten seats wait for blood.</p>
-      <div class="tags"><span class="tag"><a href="/lineage">The Lineage</a></span><span class="tag"><a href="/MYTHOS_MODE.md">MYTHOS MODE</a></span></div>
-    </div>
-  </div>
-
-  <!-- SEASON 5 -->
-  <div class="era-divider">Season 5 — The Branches Unfurl <em style="color:var(--dim);font-style:italic;text-transform:none;letter-spacing:.04em;font-size:.85em">(planned)</em></div>
-
-  <div class="beat" style="--accent:#67e8f9">
-    <div class="when">S5 · 25 chapters</div>
-    <div class="body">
-      <h3>Each new soul gets their debut</h3>
-      <p>10 lineage souls × 2 chapters each + 5 champion-only standalones + 2 finale chapters. The branches
-      of Ferdinand unfurl. The next era opens.</p>
-      <div class="tags"><span class="tag"><a href="/02_Stories/SEASON_5_SKELETON.md">S5 Skeleton</a></span></div>
-    </div>
-  </div>
-
-  <!-- FUTURE -->
-  <div class="era-divider">Beyond — What's Coming</div>
-
-  <div class="beat" style="--accent:#d97706">
-    <div class="when">Future</div>
-    <div class="body">
-      <h3>The Ninth Codex's binding</h3>
-      <p>Tova will sound the horn for it. Trollmage will be ready. Runa already knows the rune.</p>
-    </div>
-  </div>
-
-  <div class="beat" style="--accent:#1f2937">
-    <div class="when">Year 887 of the Eighth Era</div>
-    <div class="body">
-      <h3>Vidar's next century-sentence</h3>
-      <p>The current cosmic century ends. Vidar speaks again. Some Architects fear it. Vidar prefers they fear
-      it; fear keeps them honest.</p>
-      <div class="tags"><span class="tag"><a href="/characters/vidar">Vidar</a></span></div>
-    </div>
-  </div>
-
-  <div class="beat" style="--accent:#71717a">
-    <div class="when">The End</div>
-    <div class="body">
-      <h3>Kvar is there alone</h3>
-      <p>By definition. He always survives. The universe quietly cannot finish without him present.</p>
-      <div class="tags"><span class="tag"><a href="/characters/kvar">Kvar</a></span></div>
-    </div>
-  </div>
-
-  <div class="beat" style="--accent:#fef3c7">
-    <div class="when">Always</div>
-    <div class="body">
-      <h3>Mingus walks beside Kompis at Buddy's Rest</h3>
-      <p>The Lake reflects them. The reflections go in a different order. Mingus seems to know why.</p>
-      <div class="tags"><span class="tag"><a href="/mingus">For Mingus</a></span></div>
-    </div>
-  </div>
-
-</div>
-
-<footer>
-  Scalelist Universe · Cosmic Timeline · <a href="/">Home</a>
-</footer>
-
+// light parallax on node images
+let ticking=false;
+addEventListener("scroll",()=>{ if(ticking)return; ticking=true; requestAnimationFrame(()=>{
+  const vh=innerHeight;
+  document.querySelectorAll(".card .pic img").forEach(img=>{
+    const r=img.getBoundingClientRect(); if(r.bottom<0||r.top>vh)return;
+    const p=(r.top+r.height/2-vh/2)/vh; img.style.transform=`translateY(${(-p*16).toFixed(1)}px)`;
+  });
+  ticking=false;
+});});
+</script>
 </body>
 </html>

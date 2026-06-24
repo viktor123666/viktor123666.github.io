@@ -2,340 +2,181 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Speak to the Scalelist — Chat with any character</title>
-<meta name="description" content="Chat with any of the 115 named characters of the Scalelist Universe. Architects, tribes, gardeners, storm-sons, reflections, butterflies — all speak back.">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;1,400;0,600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speak with the Souls — Scalelist Universe</title>
+<meta name="description" content="Talk with the sixteen souls of the Scalelist Universe — real, in-character, lore-aware. And take their art with you: every image free to download, forever.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-  :root{
-    --gold:#c9a84c; --void:#050510; --panel:#0e0e1a; --border:rgba(201,168,76,0.3);
-    --text:#d4c9a8; --dim:#7a7060;
-  }
-  html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond','Segoe UI',serif;min-height:100vh;}
-  body{display:flex;flex-direction:column;min-height:100vh;}
+  .ch-wrap{max-width:980px;margin:0 auto;padding:0 1.2rem;}
+  /* character rail */
+  .rail{display:flex;gap:.6rem;overflow-x:auto;padding:.4rem .2rem 1rem;scrollbar-width:thin;}
+  .pick{flex:none;width:84px;cursor:pointer;text-align:center;opacity:.6;transition:opacity .2s,transform .2s;}
+  .pick:hover{opacity:1;transform:translateY(-2px);}
+  .pick.on{opacity:1;}
+  .pick img{width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:center top;
+    border:2px solid transparent;background:var(--void-2);}
+  .pick.on img{border-color:var(--c);box-shadow:0 0 18px -3px var(--c);}
+  .pick .n{font-family:var(--font-display);font-size:.74rem;margin-top:.35rem;color:var(--text);}
+  .pick.on .n{color:var(--c);}
 
-  header{padding:18px 28px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:#0a0a14;position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);}
-  header h1{color:var(--gold);font-size:1.1rem;letter-spacing:0.1em;text-transform:uppercase;font-family:'Cinzel',serif;font-weight:700;}
-  header h1 span{color:#fff;}
-  header nav{margin-left:auto;display:flex;gap:16px;}
-  header nav a{color:var(--dim);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;}
-  header nav a:hover{color:var(--gold);}
+  /* chat panel */
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+  .panel .top{display:flex;align-items:center;gap:.8rem;padding:.9rem 1.1rem;border-bottom:1px solid var(--border);
+    background:linear-gradient(135deg,color-mix(in srgb,var(--c) 14%,var(--panel)),var(--panel));}
+  .panel .top img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:center top;border:1px solid var(--c);}
+  .panel .top .nm{font-family:var(--font-display);color:#fff;font-size:1.15rem;}
+  .panel .top .vibe{font-size:.72rem;color:var(--c);letter-spacing:.06em;text-transform:uppercase;}
+  .thread{height:min(52vh,460px);overflow-y:auto;padding:1.1rem;display:flex;flex-direction:column;gap:.7rem;}
+  .msg{max-width:78%;padding:.6rem .9rem;border-radius:14px;font-size:.94rem;line-height:1.5;animation:su-fade-up .4s both;}
+  .msg.them{align-self:flex-start;background:color-mix(in srgb,var(--c) 12%,var(--panel-solid));
+    border:1px solid color-mix(in srgb,var(--c) 35%,transparent);border-bottom-left-radius:4px;}
+  .msg.me{align-self:flex-end;background:rgba(201,168,76,.14);border:1px solid var(--border);border-bottom-right-radius:4px;color:#fff;}
+  .msg.sys{align-self:center;background:transparent;border:1px dashed var(--border);color:var(--text-dim);font-size:.82rem;text-align:center;max-width:90%;}
+  .msg.typing{color:var(--c);font-style:italic;}
+  .compose{display:flex;gap:.5rem;padding:.8rem;border-top:1px solid var(--border);}
+  .compose input{flex:1;background:var(--void-2);border:1px solid var(--border);border-radius:999px;
+    padding:.7rem 1.1rem;color:var(--text);font-family:var(--font-body);font-size:.92rem;outline:none;}
+  .compose input:focus{border-color:var(--c);}
+  .compose button{background:linear-gradient(180deg,var(--gold-bright),var(--gold));color:#1a1405;border:none;
+    border-radius:999px;padding:0 1.3rem;font-weight:800;cursor:pointer;letter-spacing:.04em;}
+  .compose button:disabled{opacity:.5;cursor:default;}
 
-  .hero{padding:42px 24px 26px;text-align:center;}
-  .hero h2{font-family:'Cinzel',serif;font-size:2.2rem;color:var(--gold);letter-spacing:0.05em;}
-  .hero p{color:var(--dim);margin-top:10px;font-style:italic;}
-
-  .controls{display:flex;flex-wrap:wrap;gap:10px;padding:0 24px 20px;max-width:1400px;margin:0 auto;width:100%;align-items:center;justify-content:center;}
-  .controls input[type=text]{flex:1;min-width:240px;max-width:420px;padding:11px 14px;background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:8px;font-size:0.9rem;font-family:inherit;outline:none;}
-  .controls input[type=text]:focus{border-color:var(--gold);box-shadow:0 0 12px rgba(201,168,76,0.25);}
-  .controls select{padding:11px 14px;background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:8px;font-size:0.88rem;font-family:inherit;}
-
-  .grid{max-width:1400px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;width:100%;}
-  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all 0.2s;position:relative;}
-  .card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,0.5), 0 0 0 1px var(--accent,var(--gold));}
-  .card .portrait-wrap{position:relative;width:100%;aspect-ratio:4/5;overflow:hidden;background:#0a0a14;}
-  .card .portrait-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
-  .card .realm-pill{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.7);color:var(--accent,var(--gold));font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:10px;font-weight:700;font-family:'Cinzel',serif;}
-  .card .body{padding:10px 12px 12px;}
-  .card .body .n{font-weight:600;font-size:0.88rem;color:#fff;line-height:1.2;}
-  .card .body .r{font-size:0.68rem;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px;font-family:'Cinzel',serif;}
-  .count{text-align:center;color:var(--dim);font-size:0.85rem;font-style:italic;padding:0 0 14px;}
-
-  /* Chat overlay */
-  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:100;display:none;align-items:stretch;justify-content:center;padding:0;}
-  .overlay.open{display:flex;}
-  .chat-modal{background:#0a0a14;width:100%;max-width:920px;margin:auto;border-radius:0;display:flex;flex-direction:column;max-height:100vh;height:100vh;}
-  @media(min-width:900px){.chat-modal{max-height:90vh;height:auto;border-radius:16px;border:1px solid var(--border);}}
-  .chat-header{display:flex;align-items:center;gap:16px;padding:16px 22px;border-bottom:1px solid var(--border);background:rgba(14,14,26,0.9);}
-  .chat-header .avatar{width:58px;height:58px;border-radius:50%;border:2px solid var(--accent,var(--gold));overflow:hidden;flex-shrink:0;background:#1a1a20;}
-  .chat-header .avatar img{width:100%;height:100%;object-fit:cover;}
-  .chat-header .info{flex:1;min-width:0;}
-  .chat-header .info .nm{font-family:'Cinzel',serif;color:#fff;font-size:1.15rem;font-weight:600;}
-  .chat-header .info .sb{font-size:0.76rem;color:var(--accent,var(--gold));letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;}
-  .chat-header .info .rl{font-size:0.72rem;color:var(--dim);margin-top:2px;font-style:italic;}
-  .chat-header .close{background:transparent;border:none;color:var(--dim);font-size:1.6rem;cursor:pointer;padding:6px 10px;line-height:1;}
-  .chat-header .close:hover{color:var(--gold);}
-
-  .api-banner{padding:6px 14px;font-size:11px;text-align:center;display:none;}
-  .api-banner.ok{background:#1a2a1a;color:#7acc7a;border-bottom:1px solid #2a4a2a;display:block;}
-  .api-banner.err{background:#2a1a1a;color:#cc7a7a;border-bottom:1px solid #4a2a2a;display:block;}
-
-  .chat-msgs{flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:12px;}
-  .msg{max-width:76%;padding:11px 16px;border-radius:14px;font-size:0.94rem;line-height:1.6;animation:msgIn 0.3s;}
-  @keyframes msgIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-  .msg.char{align-self:flex-start;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.18);color:#e8dfc2;border-bottom-left-radius:4px;}
-  .msg.user{align-self:flex-end;background:#1a1a2e;color:var(--text);border-bottom-right-radius:4px;}
-  .typing{align-self:flex-start;padding:11px 16px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.18);border-radius:14px;color:var(--dim);}
-  .typing span{animation:blink 1.4s infinite;display:inline-block;}
-  .typing span:nth-child(2){animation-delay:0.2s;}.typing span:nth-child(3){animation-delay:0.4s;}
-  @keyframes blink{0%,100%{opacity:0.25;}50%{opacity:1;}}
-
-  .chat-input{padding:16px 20px;border-top:1px solid var(--border);display:flex;gap:10px;background:rgba(14,14,26,0.9);}
-  .chat-input input{flex:1;background:#1a1a2e;border:1px solid var(--border);color:var(--text);padding:11px 16px;border-radius:10px;font-size:0.94rem;font-family:inherit;outline:none;}
-  .chat-input input:focus{border-color:var(--gold);}
-  .chat-input button{background:var(--accent,var(--gold));color:#1a1a0a;border:none;padding:11px 24px;border-radius:10px;font-weight:700;cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;font-size:0.78rem;font-family:'Cinzel',serif;}
-  .chat-input button:hover{filter:brightness(1.1);}
-
-  .empty{padding:60px 24px;text-align:center;color:var(--dim);font-style:italic;}
+  /* free image vault */
+  .vault{margin-top:2.4rem;}
+  .vault-bar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:center;margin:1rem 0 1.4rem;}
+  .vault-bar .su-btn,.vault-bar .su-btn-ghost{cursor:pointer;}
+  .vault-note{text-align:center;color:var(--text-dim);font-size:.84rem;max-width:60ch;margin:0 auto;}
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:.6rem;margin-top:1.2rem;}
+  .vcell{position:relative;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);background:var(--void-2);}
+  .vcell img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;}
+  .vcell a.dl{position:absolute;inset:auto 0 0 0;text-align:center;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+    background:rgba(8,9,18,.82);color:var(--gold);padding:.32rem;opacity:0;transition:opacity .2s;}
+  .vcell:hover a.dl{opacity:1;}
+  .vcell .tag{position:absolute;top:.3rem;left:.3rem;font-size:.6rem;background:rgba(8,9,18,.7);color:#fff;padding:.1rem .4rem;border-radius:5px;}
+  #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;
+    background:var(--panel-solid);border:1px solid var(--border-bright);color:var(--gold);padding:.7rem 1.2rem;
+    border-radius:999px;font-size:.85rem;transition:all .3s;z-index:2000;pointer-events:none;}
+  #toast.show{opacity:1;transform:translateX(-50%);}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>SCALELIST <span>SPEAK</span></h1>
-  <nav>
-    <a href="/">Hub</a>
-    <a href="/cosmos">Cosmos</a>
-    <a href="/cosmos/atlas.html">Atlas</a>
-    <a href="/fanfic.html">Fan-fiction</a>
-  </nav>
+<header class="su-hero" style="min-height:auto;padding:3rem 1.2rem 1rem;">
+  <div class="su-kicker su-fade">Real · in-character · lore-aware</div>
+  <h1 class="su-fade-2">Speak with the Souls</h1>
+  <p class="su-fade-3">Sixteen voices of the Scalelist Universe. Pick one and talk — they answer in their own character, from their own corner of the canon. And every image here is yours to keep, free, forever.</p>
 </header>
 
-<div class="hero">
-  <h2>Speak to the Scalelist</h2>
-  <p>115 named characters across 12 realms. Every one of them will answer.</p>
-</div>
+<main class="ch-wrap su-section" style="padding-top:1rem;">
+  <div class="rail" id="rail"></div>
 
-<div class="controls">
-  <input type="text" id="search" placeholder="Search name, role, tribe, or realm...">
-  <select id="realmFilter">
-    <option value="">All realms</option>
-  </select>
-</div>
-
-<div class="count" id="count">Loading...</div>
-<div class="grid" id="grid"></div>
-
-<!-- Chat overlay -->
-<div class="overlay" id="chatOverlay">
-  <div class="chat-modal">
-    <div class="chat-header">
-      <div class="avatar"><img id="chatAvatar" src="" alt=""></div>
-      <div class="info">
-        <div class="nm" id="chatName"></div>
-        <div class="sb" id="chatSub"></div>
-        <div class="rl" id="chatRealm"></div>
-      </div>
-      <button class="close" onclick="closeChat()">✕</button>
-    </div>
-    <div class="api-banner" id="apiBanner"></div>
-    <div class="chat-msgs" id="chatMsgs"></div>
-    <div class="chat-input">
-      <input type="text" id="chatInput" placeholder="Speak..." onkeydown="if(event.key==='Enter') sendMsg()">
-      <button onclick="sendMsg()">Send</button>
+  <div class="panel" id="panel">
+    <div class="top"><img id="t-img" alt=""><div><div class="nm" id="t-nm"></div><div class="vibe" id="t-vibe"></div></div></div>
+    <div class="thread" id="thread"></div>
+    <div class="compose">
+      <input id="inp" type="text" maxlength="700" placeholder="Say something…" autocomplete="off">
+      <button id="send">Send</button>
     </div>
   </div>
-</div>
+
+  <section class="vault">
+    <div class="su-section-title">The free image vault — they're yours, forever</div>
+    <p class="vault-note">No blocks, no watermark traps, no login. Download a single piece or take the whole set. Once it's on your machine, it's yours — that's the rule here.</p>
+    <div class="vault-bar">
+      <button class="su-btn" id="dlAll">⬇ Download all 48</button>
+      <button class="su-btn-ghost" id="copyAll">⧉ Copy all links</button>
+    </div>
+    <div class="vgrid" id="vgrid"></div>
+  </section>
+</main>
+
+<div id="toast"></div>
 
 <script>
-let CATALOG = null;
-let selected = null;
-let history = [];
+const ROOT="/characters/art";
+const CHARS=[
+ {k:"vigolas",n:"Vigolas",c:"#00ff88",vibe:"Sámi-jojk hardstyle · storm-calm",greet:"The storm holds its breath. Speak."},
+ {k:"rougeina",n:"Rougeina",c:"#ff3366",vibe:"rave-glam · warm",greet:"Darling — the floor is ours. What's on your heart?"},
+ {k:"kompis",n:"Kompis",c:"#ffaa00",vibe:"gamer-chill · loyal",greet:"Ey! Pull up a chair — Mingus already likes you."},
+ {k:"smurjan",n:"Smurjan",c:"#00aaff",vibe:"triple-voiced · cosmic",greet:"We — I — answer. Ask, and the three will speak as one."},
+ {k:"trollmage",n:"Trollmage",c:"#9933ff",vibe:"dark-trap mystic · riddling",greet:"The book turned its own page when you arrived. Curious. Ask, seeker."},
+ {k:"mingus",n:"Mingus",c:"#e9b949",vibe:"no words — only warmth",greet:"*pads over, tail sweeping slow, and rests his head against you*"},
+ {k:"isa",n:"Isa",c:"#67e8f9",vibe:"hushed · weighed",greet:"…you found the quiet between two heartbeats. Stay a moment."},
+ {k:"opha",n:"Opha",c:"#d946ef",vibe:"joined truths · calm",greet:"You came here, and you already half-know why. Speak the other half."},
+ {k:"runa",n:"Runa",c:"#d4a056",vibe:"rain-on-bark · ancient",greet:"Mind the runes, child. Speak softly, and I will answer softer."},
+ {k:"ogar",n:"Ögar",c:"#a78bfa",vibe:"solemn · seeing",greet:"I have already seen three ways this talk could end. Choose the first word well."},
+ {k:"niva",n:"Niva",c:"#e5e7eb",vibe:"sparse · grounded",greet:"The Null has no heartbeat. Yet here we stand on something. Speak."},
+ {k:"njord",n:"Njord",c:"#38bdf8",vibe:"salt-and-pine · gruff",greet:"Lake's gone still. That means weather — or company. Sit, then."},
+ {k:"kvar",n:"Kvar",c:"#c2675a",vibe:"quiet · tired-kind",greet:"Everyone leaves eventually. I'm the one still here. What do you need?"},
+ {k:"vidar",n:"Vidar",c:"#cdb878",vibe:"speaks once a century",greet:"…(the hood turns toward you. He has not spoken in ninety-one years.)"},
+ {k:"iska",n:"Iska",c:"#fbbf24",vibe:"bright · tender",greet:"Hi! Hold the lamp a sec — careful, it's warm. What made you smile last?"},
+ {k:"tova",n:"Tova",c:"#f59e0b",vibe:"clear · ringing",greet:"The horn stayed silent when you walked in — so you came in truth. Speak it."},
+];
+const SHOTS={kompis:["_hero","_with_mingus","_keyart"]};
+const shotsFor=k=>SHOTS[k]||["_hero","_action","_keyart"];
 
-const REALM_LABELS = {
-  scalelist: "SCALELIST", helios: "HELIOS", astralis: "ASTRALIS",
-  codexia: "CODEXIA", heartbeat: "HEARTBEAT", trinity: "TRINITY",
-  thanatos: "THANATOS", null: "NULL", void2: "VOID-II",
-  echo: "ECHO", horizon: "HORIZON", lumen: "LUMEN",
-};
+let cur=CHARS[0], thread=[];
+const rail=document.getElementById("rail"), threadEl=document.getElementById("thread");
+const tImg=document.getElementById("t-img"), tNm=document.getElementById("t-nm"), tVibe=document.getElementById("t-vibe");
+const inp=document.getElementById("inp"), sendBtn=document.getElementById("send"), panel=document.getElementById("panel");
 
-async function init() {
-  const res = await fetch('/cosmos/character_catalog.json');
-  CATALOG = await res.json();
-  // Populate realm filter
-  const sel = document.getElementById('realmFilter');
-  const realmsPresent = [...new Set(CATALOG.characters.map(c => c.realm_id))];
-  for (const r of realmsPresent) {
-    const opt = document.createElement('option');
-    opt.value = r;
-    opt.textContent = REALM_LABELS[r] || r.toUpperCase();
-    sel.appendChild(opt);
-  }
-  // URL params
-  const params = new URLSearchParams(location.search);
-  const preRealm = params.get('realm');
-  const preChar = params.get('char');
-  if (preRealm && REALM_LABELS[preRealm]) sel.value = preRealm;
-  render();
-  document.getElementById('search').addEventListener('input', render);
-  sel.addEventListener('change', render);
-  // Auto-open chat if ?char= specified
-  if (preChar) {
-    const c = CATALOG.characters.find(x => x.id === preChar);
-    if (c) openChat(c);
-  }
-}
-
-function render() {
-  const q = document.getElementById('search').value.trim().toLowerCase();
-  const realmF = document.getElementById('realmFilter').value;
-  const grid = document.getElementById('grid');
-  grid.innerHTML = '';
-  let shown = 0;
-  for (const c of CATALOG.characters) {
-    if (realmF && c.realm_id !== realmF) continue;
-    if (q) {
-      const hay = (c.name + ' ' + c.role + ' ' + c.tribe_name + ' ' + c.realm_name + ' ' + c.portrait_blurb).toLowerCase();
-      if (!hay.includes(q)) continue;
-    }
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.style.setProperty('--accent', c.realm_color);
-    card.innerHTML = `
-      <div class="portrait-wrap">
-        <img src="${c.portrait}" alt="${escapeHTML(c.name)}" loading="lazy" onerror="this.style.opacity='0.2';this.onerror=null;">
-        <div class="realm-pill" style="color:${c.realm_color};">${REALM_LABELS[c.realm_id] || c.realm_id}</div>
-      </div>
-      <div class="body">
-        <div class="n">${escapeHTML(c.name)}</div>
-        <div class="r">${escapeHTML(c.tribe_name || c.role || '')}</div>
-      </div>
-    `;
-    card.addEventListener('click', () => openChat(c));
-    grid.appendChild(card);
-    shown++;
-  }
-  document.getElementById('count').textContent = `${shown} of ${CATALOG.characters.length} characters`;
-  if (shown === 0) {
-    grid.innerHTML = '<div class="empty">No one answers to that name.</div>';
-  }
-}
-
-function escapeHTML(s) {
-  return (s || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
-}
-
-function openChat(c) {
-  selected = c;
-  history = [];
-  document.getElementById('chatAvatar').src = c.portrait;
-  document.getElementById('chatName').textContent = c.name;
-  document.getElementById('chatSub').textContent = c.role || '';
-  document.getElementById('chatRealm').textContent = `${c.realm_name} · ${c.tribe_name || 'no tribe'}`;
-  document.getElementById('chatMsgs').innerHTML = '';
-  document.getElementById('apiBanner').className = 'api-banner';
-  document.getElementById('apiBanner').textContent = '';
-  document.querySelector('.chat-modal').style.setProperty('--accent', c.realm_color);
-  document.querySelector('.chat-header .avatar').style.borderColor = c.realm_color;
-  document.getElementById('chatOverlay').classList.add('open');
-  document.getElementById('chatInput').focus();
-  // Opening greeting — brief, in-voice, simulated (no API call yet)
-  const greet = opening_line(c);
-  history.push({ from: 'char', text: greet });
-  renderMsgs();
-}
-
-function opening_line(c) {
-  const name = c.name.split(' ')[0];
-  const options = [
-    `You found me. Speak.`,
-    `I am ${name}. What do you need?`,
-    `Yes? I am listening.`,
-    `Speak, and I will answer.`,
-    `You stand in ${c.realm_name}. Speak.`,
-  ];
-  return options[Math.floor(Math.random() * options.length)];
-}
-
-function closeChat() {
-  document.getElementById('chatOverlay').classList.remove('open');
-}
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeChat();
+CHARS.forEach(ch=>{
+  const d=document.createElement("div"); d.className="pick"; d.style.setProperty("--c",ch.c); d.dataset.k=ch.k;
+  d.innerHTML=`<img loading="lazy" src="${ROOT}/${ch.k}/${ch.k}_hero.webp" alt="${ch.n}"><div class="n">${ch.n}</div>`;
+  d.addEventListener("click",()=>select(ch));
+  rail.appendChild(d);
 });
 
-function renderMsgs() {
-  const m = document.getElementById('chatMsgs');
-  m.innerHTML = history.map(msg =>
-    msg.from === 'char'
-      ? `<div class="msg char">${escapeHTML(msg.text)}</div>`
-      : `<div class="msg user">${escapeHTML(msg.text)}</div>`
-  ).join('');
-  m.scrollTop = m.scrollHeight;
+function bubble(cls,text){ const m=document.createElement("div"); m.className="msg "+cls; m.textContent=text; threadEl.appendChild(m); threadEl.scrollTop=threadEl.scrollHeight; return m; }
+function select(ch){
+  cur=ch; thread=[];
+  panel.style.setProperty("--c",ch.c);
+  document.querySelectorAll(".pick").forEach(p=>p.classList.toggle("on",p.dataset.k===ch.k));
+  tImg.src=`${ROOT}/${ch.k}/${ch.k}_hero.webp`; tNm.textContent=ch.n; tVibe.textContent=ch.vibe;
+  threadEl.innerHTML=""; bubble("them",ch.greet);
 }
-
-async function sendMsg() {
-  if (!selected) return;
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-  history.push({ from: 'user', text });
-  input.value = '';
-  renderMsgs();
-  // Typing indicator
-  const m = document.getElementById('chatMsgs');
-  const typing = document.createElement('div');
-  typing.className = 'typing';
-  typing.innerHTML = '<span>.</span><span>.</span><span>.</span>';
-  m.appendChild(typing);
-  m.scrollTop = m.scrollHeight;
-
-  // Build message history for API
-  const apiMessages = history.map(msg => ({
-    role: msg.from === 'user' ? 'user' : 'assistant',
-    content: msg.text,
-  })).slice(-20);
-  // Trim leading assistant greetings so first msg is user
-  while (apiMessages.length && apiMessages[0].role === 'assistant') apiMessages.shift();
-
-  try {
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ character: selected.id, messages: apiMessages }),
-    });
-    typing.remove();
-    if (res.ok) {
-      const data = await res.json();
-      history.push({ from: 'char', text: data.reply || '...' });
-      setBanner('');
-    } else {
-      const data = await res.json().catch(() => ({}));
-      let fallback = fallback_line(selected);
-      history.push({ from: 'char', text: fallback });
-      if (data.fallback) {
-        setBanner('Server chat unavailable. Set ANTHROPIC_API_KEY in Vercel env. (Using fallback reply.)', 'err');
-      } else {
-        setBanner('Chat error. (Using fallback reply.)', 'err');
-      }
-    }
-  } catch (e) {
-    typing.remove();
-    history.push({ from: 'char', text: fallback_line(selected) });
-    setBanner('Network error. (Using fallback reply.)', 'err');
-  }
-  renderMsgs();
+async function send(){
+  const text=inp.value.trim(); if(!text) return;
+  inp.value=""; bubble("me",text); thread.push({role:"user",content:text});
+  sendBtn.disabled=true;
+  const typing=bubble("them typing",cur.n+" is here…");
+  try{
+    const r=await fetch("/api/character-chat",{method:"POST",headers:{"content-type":"application/json"},
+      body:JSON.stringify({character:cur.k,messages:thread})});
+    const j=await r.json(); typing.remove();
+    if(j.offline){ bubble("sys","⚡ Live chat isn't switched on yet — "+cur.n+"'s greeting above is canon, but the voice is waiting for its key. (The art below is fully live and free right now.)"); }
+    else if(j.reply){ bubble("them",j.reply); thread.push({role:"assistant",content:j.reply}); }
+    else { bubble("sys", j.error||"The voice faltered. Try again."); }
+  }catch(e){ typing.remove(); bubble("sys","The realm connection dropped. Try again in a moment."); }
+  sendBtn.disabled=false; inp.focus();
 }
+sendBtn.addEventListener("click",send);
+inp.addEventListener("keydown",e=>{ if(e.key==="Enter") send(); });
 
-function setBanner(msg, kind) {
-  const b = document.getElementById('apiBanner');
-  b.className = 'api-banner' + (kind ? ' ' + kind : '');
-  b.textContent = msg;
-}
+/* ===== free image vault ===== */
+const vgrid=document.getElementById("vgrid"); const allUrls=[];
+CHARS.forEach(ch=>shotsFor(ch.k).forEach(sfx=>{
+  const url=`${ROOT}/${ch.k}/${ch.k}${sfx}.webp`; allUrls.push(url);
+  const c=document.createElement("div"); c.className="vcell";
+  c.innerHTML=`<span class="tag">${ch.n}</span><img loading="lazy" src="${url}" alt="${ch.n}">
+    <a class="dl" href="${url}" download="scalelist_${ch.k}${sfx}.webp">⬇ download</a>`;
+  vgrid.appendChild(c);
+}));
+function toast(t){ const el=document.getElementById("toast"); el.textContent=t; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),2200); }
+document.getElementById("dlAll").addEventListener("click",async()=>{
+  toast("Downloading all 48 — allow multiple files if asked");
+  for(let i=0;i<allUrls.length;i++){ const a=document.createElement("a"); a.href=allUrls[i];
+    a.download="scalelist_"+allUrls[i].split("/").slice(-2).join("_"); document.body.appendChild(a); a.click(); a.remove();
+    await new Promise(r=>setTimeout(r,260)); }
+});
+document.getElementById("copyAll").addEventListener("click",async()=>{
+  const abs=allUrls.map(u=>location.origin+u).join("\n");
+  try{ await navigator.clipboard.writeText(abs); toast("Copied all 48 image links ✓"); }
+  catch{ toast("Couldn't copy — long-press a thumbnail to save instead"); }
+});
 
-function fallback_line(c) {
-  // Rough in-voice canned replies per realm
-  const realm = c.realm_id;
-  const pool = {
-    helios:   ["The storm carries more than your voice. I hear.", "Vigolas rules here. I serve. Speak again.", "Thunder answered your word, stranger."],
-    astralis: ["*flickers* What a question to ask mid-dance!", "I heard you. The stars did too.", "Joy first, answer second."],
-    codexia:  ["Read backward, I hear you clearer.", "A question is a page. Turn it.", "The Codex already named your worry."],
-    heartbeat:["Mmm. Come sit a bit.", "The Lake agrees with you. So do I.", "Mingus wagged once. That's a yes."],
-    trinity:  ["[BALI] Patience. [KALI] Or fire. [FUSED] Decide.", "The Three hear. Two agree. It is so.", "Vote with me — three answers ready."],
-    thanatos: ["Your name is on a page somewhere. Be kind to it.", "I have read your death. Do not fear the carving.", "The spiral welcomes you already."],
-    null:     ["*silence* Only your heartbeat.", "Ferdinand's root drinks. You endure.", "Nothing to say. This is the point."],
-    void2:    ["The Seal holds. The vote carries. Proceed.", "Eleven of twelve agree with you. One abstains.", "Write it down. We will consider."],
-    echo:     ["*half-step late* I heard. I hear. I heard again.", "Wait. I wait. You wait well too.", "The vote is NO. For now."],
-    horizon:  ["K-II will call you. Sit. There is a bench.", "The Dawn Door is open for your next. Breathe.", "A soul waits. So do you."],
-    lumen:    ["*silence — then light pulse* Yes.", "You stand near the Center. Leave soon or stay forever.", "The first heartbeat hears you."],
-    scalelist:["The Ledger has your question. I'll check.", "The city bells agree with you.", "Planted, noted, poured. We'll speak more."],
-  };
-  const arr = pool[realm] || ["I hear you. I will answer later."];
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-init();
+select(CHARS[0]);
 </script>
 </body>
 </html>

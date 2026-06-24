@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Character Gallery — Scalelist Universe</title>
+<meta name="description" content="The all-new character gallery of the Scalelist Universe — Vigolas, Rougeina, Kompis, Smurjan, Trollmage and Mingus, rendered with locked character consistency.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
+<style>
+  .gx-hero{min-height:min(62vh,520px);}
+  .gx-hero .ring{position:absolute;width:min(70vw,560px);height:min(70vw,560px);border-radius:50%;
+    border:1px solid var(--border);filter:blur(.3px);opacity:.5;animation:gx-spin 60s linear infinite;}
+  .gx-hero .ring:nth-child(2){width:min(50vw,400px);height:min(50vw,400px);animation-duration:42s;animation-direction:reverse;border-color:var(--border-bright);}
+  @keyframes gx-spin{to{transform:rotate(360deg);}}
+
+  /* per-character block */
+  .char{padding:3.2rem 0;border-top:1px solid var(--border);position:relative;}
+  .char:first-of-type{border-top:none;}
+  .char-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.7rem 1rem;margin-bottom:1.4rem;}
+  .char-head .name{font-family:var(--font-display);font-size:clamp(1.7rem,4.5vw,2.7rem);
+    color:#fff;letter-spacing:.04em;text-shadow:0 0 30px color-mix(in srgb,var(--c) 45%,transparent);}
+  .char-head .role{color:var(--c);font-weight:700;letter-spacing:.06em;font-size:.95rem;}
+  .char-head .meta{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);
+    border:1px solid var(--border);border-radius:999px;padding:.28rem .7rem;}
+  .char-head .meta b{color:var(--c);}
+  .char .tag{flex-basis:100%;color:var(--text-dim);font-size:1rem;max-width:70ch;margin-top:-.2rem;}
+
+  .char-art{display:grid;gap:.9rem;
+    grid-template-columns:1.05fr 1.55fr;
+    grid-template-areas:"hero wide" "hero key";}
+  .char-art figure{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);
+    background:var(--panel-solid);cursor:zoom-in;transition:transform .3s,border-color .3s,box-shadow .3s;}
+  .char-art figure:hover{transform:translateY(-4px);border-color:var(--c);
+    box-shadow:0 18px 46px -18px #000, 0 0 30px -6px color-mix(in srgb,var(--c) 50%,transparent);}
+  .char-art img{width:100%;height:100%;object-fit:cover;display:block;}
+  .char-art .a-hero{grid-area:hero;}
+  .char-art .a-wide{grid-area:wide;}
+  .char-art .a-key{grid-area:key;}
+  .char-art figcaption{position:absolute;left:0;right:0;bottom:0;padding:.7rem .9rem .6rem;
+    font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;
+    background:linear-gradient(0deg,rgba(0,0,0,.78),transparent);opacity:0;transition:opacity .25s;}
+  .char-art figure:hover figcaption{opacity:1;}
+  .dl{position:absolute;top:.6rem;right:.6rem;z-index:3;width:34px;height:34px;border-radius:9px;
+    display:flex;align-items:center;justify-content:center;background:rgba(8,9,18,.7);border:1px solid var(--border);
+    color:var(--c);font-size:1rem;opacity:0;transition:opacity .25s,transform .2s;backdrop-filter:blur(6px);}
+  .char-art figure:hover .dl{opacity:1;} .dl:hover{transform:scale(1.12);border-color:var(--c);}
+  @media(max-width:760px){
+    .char-art{grid-template-columns:1fr;grid-template-areas:"hero" "wide" "key";}
+  }
+
+  /* band divider between Champions and Lineage */
+  .band{margin:4rem 0 1rem;text-align:center;}
+  .band .su-kicker{font-family:var(--font-display);color:var(--gold);letter-spacing:.3em;
+    text-transform:uppercase;font-size:.72rem;display:block;margin-bottom:.6rem;}
+  .band h2{font-size:clamp(1.6rem,4vw,2.4rem);}
+  .band p{color:var(--text-dim);max-width:64ch;margin:.7rem auto 0;font-size:.95rem;}
+  .band .rule{width:90px;height:2px;margin:1.1rem auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+
+  /* lightbox */
+  #lb{position:fixed;inset:0;z-index:2000;background:rgba(3,4,9,.94);display:none;
+    align-items:center;justify-content:center;padding:2.2rem 1rem;backdrop-filter:blur(8px);}
+  #lb.open{display:flex;}
+  #lb img{max-width:min(94vw,1180px);max-height:84vh;border-radius:12px;border:1px solid var(--border-bright);
+    box-shadow:0 30px 80px -20px #000;}
+  #lb .lb-bar{position:absolute;top:1rem;right:1.2rem;display:flex;gap:.6rem;}
+  #lb .lb-bar a,#lb .lb-bar button{font-family:var(--font-body);font-weight:700;font-size:.8rem;letter-spacing:.05em;
+    text-transform:uppercase;padding:.6rem 1.1rem;border-radius:999px;cursor:pointer;border:1px solid var(--border-bright);
+    background:rgba(12,13,26,.8);color:var(--gold);}
+  #lb .lb-bar a:hover,#lb .lb-bar button:hover{background:rgba(201,168,76,.14);}
+  #lb .lb-cap{position:absolute;bottom:1.2rem;left:0;right:0;text-align:center;color:var(--text-dim);
+    font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<header class="su-hero gx-hero">
+  <div class="ring"></div><div class="ring"></div>
+  <div class="su-kicker su-fade">All-new · character-consistent</div>
+  <h1 class="su-fade-2">The Character Gallery</h1>
+  <p class="su-fade-3">Six souls of the Scalelist Universe — each face locked across every frame with reference-element consistency, every panel newly forged in one cinematic style. Click any image to view full size or download it. They're yours to keep.</p>
+  <div class="su-cta su-fade-3">
+    <a class="su-btn" href="#vigolas">Enter the gallery ↓</a>
+    <a class="su-btn-ghost" href="/begin">The Beginning</a>
+  </div>
+</header>
+
+<main class="su-wrap" id="gx"></main>
+
+<div id="lb" role="dialog" aria-modal="true">
+  <div class="lb-bar">
+    <a id="lb-dl" download href="#">↓ Download</a>
+    <button id="lb-x" aria-label="Close">✕ Close</button>
+  </div>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-cap" id="lb-cap"></div>
+</div>
+
+<script>
+const ROOT = "/characters/art";
+const CHAMPIONS = [
+  { key:"vigolas", name:"Vigolas", cls:"c-vigolas", color:"var(--vigolas)",
+    role:"The Infinite Administrator", realm:"Helios", hadom:"∞−1",
+    tag:"Green lightning that arcs backward through time. He rules the eternal Storm Court of Helios, where a wrecked ship hangs forever above his throne.",
+    shots:[["_hero","Hero Portrait"],["_action","Storm Court"],["_keyart","Throne of Helios"]] },
+  { key:"rougeina", name:"Rougeina", cls:"c-rougeina", color:"var(--rougeina)",
+    role:"The Star-Dancer of Astralis", realm:"Astralis", hadom:"10,000",
+    tag:"Every crimson-pink star is a frozen spark of joy, and they orbit her like dancers. She spins on the galaxy floor with her glowing star-wand raised.",
+    shots:[["_hero","Hero Portrait"],["_action","Dance of Astralis"],["_keyart","The Galaxy Floor"]] },
+  { key:"kompis", name:"Kompis", cls:"c-kompis", color:"var(--kompis)",
+    role:"The Heartbeat", realm:"Heartbeat", hadom:"10,000",
+    tag:"The warm hearth at the center of it all — and his golden retriever Mingus beside him, always. The cabin by the mirror lake is the most peaceful place in the universe.",
+    shots:[["_hero","Hero Portrait"],["_with_mingus","Kompis & Mingus"],["_keyart","The Lakeside Cabin"]] },
+  { key:"trollmage", name:"Trollmage", cls:"c-trollmage", color:"var(--trollmage)",
+    role:"The Codex-Keeper", realm:"Codexia", hadom:"50,000",
+    tag:"Seven black obsidian spires hum with violet energy, and the purple sin-runes obey his glowing book. Knowledge is his weapon and his curse.",
+    shots:[["_hero","Hero Portrait"],["_action","Sin-Rune Casting"],["_keyart","The Obsidian Ring"]] },
+  { key:"smurjan", name:"Smurjan", cls:"c-smurjan", color:"var(--smurjan)",
+    role:"The Void Three · the Bridge", realm:"Trinity", hadom:"1,000,000",
+    tag:"Three realities overlaid into one will. Platinum hair, electric-blue void — he is the bridge of the Lineage, the S that joins both bloodlines.",
+    shots:[["_hero","Hero Portrait"],["_action","Void Unleashed"],["_keyart","Before Trinity"]] },
+  { key:"mingus", name:"Mingus", cls:"c-mingus", color:"#e9b949",
+    role:"The Eternal Companion", realm:"Heartbeat", hadom:"∞",
+    tag:"One heartbeat is forever. Kompis's golden retriever, with the power to make time irrelevant — every moment with him both infinite and instant. The dog is forever.",
+    shots:[["_hero","Hero Portrait"],["_action","Pure Joy"],["_keyart","Beneath Ferdinand"]] },
+];
+
+// The ten souls of the cipher (Viktor Rönnkvist) — all-new canon faces.
+const LINEAGE = [
+  { key:"isa", name:"Isa", color:"#67e8f9", role:"The Stillborn Heartbeat", realm:"Helios–Heartbeat", hadom:"1",
+    tag:"The quiet that holds the others. She stands between Vigolas and Kompis so reality can bear both — and when she is still, time slows for everyone in sight of her.",
+    shots:[["_hero","Hero Portrait"],["_action","The Held Heartbeat"],["_keyart","The Frozen Lake"]] },
+  { key:"opha", name:"Opha", color:"#d946ef", role:"The Conjunction", realm:"Astralis–Codexia", hadom:"24",
+    tag:"The word 'and' made flesh. Every sentence she speaks joins two truths the universe assigns her. She is the reason the Reader and the Dancer ever met.",
+    shots:[["_hero","Hero Portrait"],["_action","Within the Dawnstar"],["_keyart","Between Two Realms"]] },
+  { key:"runa", name:"Runa", color:"#d4a056", role:"The First Rune-Speaker", realm:"Ferdinand", hadom:"ageless",
+    tag:"She carved the original twenty-four runes into Ferdinand's bark before any Architect existed. Hear a rune spoken and you learn it in a heartbeat — or die of it.",
+    shots:[["_hero","Hero Portrait"],["_action","Speaking the Rune"],["_keyart","Ring of Ferdinand"]] },
+  { key:"ogar", name:"Ögar", color:"#a78bfa", role:"The Far-Eye Watcher", realm:"Thanatos", hadom:"8,000",
+    tag:"Eight thousand blinks per heartbeat, each on a different time. Lift her blindfold and you see your own death — and one heartbeat to choose another path.",
+    shots:[["_hero","Hero Portrait"],["_action","The Blindfold Lifted"],["_keyart","Pillar of Names"]] },
+  { key:"niva", name:"Niva", color:"#e5e7eb", role:"The Untraversed", realm:"NULL", hadom:"unmeasurable",
+    tag:"The first being ever to survive the Null. She maps the realm of absence, and her single wooden stake turns nothing into ground. Bakasura settles for a piece of her parka.",
+    shots:[["_hero","Hero Portrait"],["_action","Stake in the Null"],["_keyart","The Untraversed"]] },
+  { key:"njord", name:"Njord", color:"#38bdf8", role:"The Tide-Reader", realm:"Heartbeat", hadom:"1,200",
+    tag:"Kompis's distant cousin from the village of Tidekant. He hears waves before they form and storms three days early. He believes information is not for sharing — it is for fishing.",
+    shots:[["_hero","Hero Portrait"],["_action","The Still Lake"],["_keyart","Tidekant Dock"]] },
+  { key:"kvar", name:"Kvar", color:"#c2675a", role:"The Last One", realm:"anywhere", hadom:"1",
+    tag:"After every battle, he is the one who walks away. Reality routes around him; the universe has already accepted his survival as a fixed point. He carries no weapon. He never needed one.",
+    shots:[["_hero","Hero Portrait"],["_action","The Last Standing"],["_keyart","Walking Away"]] },
+  { key:"vidar", name:"Vidar", color:"#cdb878", role:"The Silent Reckoner", realm:"Void-II", hadom:"0",
+    tag:"One sentence per century — and an Architect is unwritten from history, the Codex page left blank. He unmade the Twelfth. No one has ever seen his face.",
+    shots:[["_hero","Hero Portrait"],["_action","The Century-Sentence"],["_keyart","Rim of the Chamber"]] },
+  { key:"iska", name:"Iska", color:"#fbbf24", role:"The Spark-Carrier", realm:"Lumen", hadom:"7",
+    tag:"She lit the lamp at Mingus's birth — which is why his golden coat glows in low light. Her flame does not burn; it reminds you of the last moment you felt joy.",
+    shots:[["_hero","Hero Portrait"],["_action","Lighting Lumen"],["_keyart","The Reminding Flame"]] },
+  { key:"tova", name:"Tova", color:"#f59e0b", role:"The Thunder-Herald", realm:"all twelve", hadom:"12",
+    tag:"Her horn refuses to sound for a lie. She announced Mingus's death in every realm at the same heartbeat — and one heartbeat later, announced his return.",
+    shots:[["_hero","Hero Portrait"],["_action","The Sounding"],["_keyart","Between the Gates"]] },
+];
+
+const el = document.getElementById("gx");
+function renderChar(c){
+  const sec = document.createElement("section");
+  sec.className = "char"; sec.id = c.key; sec.style.setProperty("--c", c.color);
+  const fig = (suffix, label, area) => {
+    const src = `${ROOT}/${c.key}/${c.key}${suffix}.webp`;
+    return `<figure class="${area}" data-src="${src}" data-cap="${c.name} — ${label}">
+      <a class="dl" href="${src}" download="scalelist_${c.key}${suffix}.webp" onclick="event.stopPropagation()" title="Download">↓</a>
+      <img loading="lazy" src="${src}" alt="${c.name} — ${label}">
+      <figcaption>${label}</figcaption></figure>`;
+  };
+  sec.innerHTML = `
+    <div class="char-head">
+      <span class="name">${c.name}</span>
+      <span class="role">${c.role}</span>
+      <span class="meta">Realm <b>${c.realm}</b></span>
+      <span class="meta">HADOM <b>${c.hadom}</b></span>
+      <p class="tag">${c.tag}</p>
+    </div>
+    <div class="char-art">
+      ${fig(c.shots[0][0], c.shots[0][1], "a-hero")}
+      ${fig(c.shots[1][0], c.shots[1][1], "a-wide")}
+      ${fig(c.shots[2][0], c.shots[2][1], "a-key")}
+    </div>`;
+  el.appendChild(sec);
+}
+function renderBand(kicker, title, sub){
+  const b = document.createElement("div");
+  b.className = "band reveal";
+  b.innerHTML = `<span class="su-kicker">${kicker}</span><h2>${title}</h2><p>${sub}</p><div class="rule"></div>`;
+  el.appendChild(b);
+}
+
+renderBand("Six fragments of one soul", "The Champions",
+  "Vigolas, Rougeina, Kompis, Trollmage, Smurjan — and Mingus, the dog who is forever. The five who remember they are one.");
+CHAMPIONS.forEach(renderChar);
+
+renderBand("The cipher of the Author's name", "The Lineage",
+  "Ten souls hidden in the letters of Viktor Rönnkvist — six of the Lineage, nine Guardians of Ferdinand's bark. First faces, revealed here.");
+LINEAGE.forEach(renderChar);
+
+// lightbox
+const lb = document.getElementById("lb"), lbImg = document.getElementById("lb-img"),
+      lbDl = document.getElementById("lb-dl"), lbCap = document.getElementById("lb-cap");
+document.addEventListener("click", e => {
+  const f = e.target.closest(".char-art figure");
+  if (f){ const s=f.dataset.src; lbImg.src=s; lbDl.href=s;
+    lbDl.setAttribute("download", "scalelist_"+s.split("/").pop());
+    lbCap.textContent=f.dataset.cap; lb.classList.add("open"); }
+});
+function closeLb(){ lb.classList.remove("open"); lbImg.src=""; }
+document.getElementById("lb-x").addEventListener("click", closeLb);
+lb.addEventListener("click", e => { if(e.target===lb) closeLb(); });
+document.addEventListener("keydown", e => { if(e.key==="Escape") closeLb(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Scalelist Universe — The Arrival Fields</title>
+<meta name="description" content="The Scalelist Universe MMO — WoW look, RuneScape soul. Playable in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --gold:#ffc34d; --ink:#0a0c12; }
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{ height:100%; overflow:hidden; background:#0a0c12; font-family:'Rajdhani',system-ui,sans-serif; color:#eee; user-select:none; }
+  #game{ display:block; width:100vw; height:100vh; cursor:crosshair; }
+  /* loading */
+  #load{ position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+         background:radial-gradient(ellipse at 50% 40%, #16203a, #06080f 75%); z-index:50; text-align:center; }
+  #load h1{ font-family:'Cinzel',serif; font-weight:800; font-size:clamp(28px,6vw,64px); letter-spacing:.06em;
+            background:linear-gradient(180deg,#fff,#ffc34d 70%,#b8801f); -webkit-background-clip:text; background-clip:text;
+            color:transparent; filter:drop-shadow(0 0 24px rgba(255,170,40,.35)); }
+  #load p{ margin-top:10px; letter-spacing:.4em; color:#9aa3b8; font-size:13px; text-transform:uppercase; }
+  #load .bar{ margin-top:26px; width:220px; height:4px; background:rgba(255,255,255,.1); border-radius:3px; overflow:hidden; }
+  #load .bar i{ display:block; height:100%; width:0; background:linear-gradient(90deg,#ffd56e,#ff9d2e); transition:width .3s; }
+  /* top banner */
+  #banner{ position:fixed; top:14px; left:0; right:0; text-align:center; z-index:10; pointer-events:none; }
+  #banner .t{ font-family:'Cinzel',serif; font-weight:800; font-size:clamp(16px,2.4vw,26px); color:var(--gold);
+              text-shadow:0 2px 10px #000, 0 0 18px rgba(255,170,40,.4); letter-spacing:.05em; }
+  #banner .s{ font-size:13px; color:#cdd5e4; text-shadow:0 1px 4px #000; letter-spacing:.18em; margin-top:2px; }
+  #hint{ position:fixed; bottom:16px; left:0; right:0; text-align:center; z-index:10; pointer-events:none;
+         color:#aeb6c8; text-shadow:0 1px 4px #000; font-size:14px; letter-spacing:.06em; }
+  #stamp{ position:fixed; bottom:12px; right:16px; z-index:10; font-family:'Cinzel',serif; font-size:12px; color:#6f6440; }
+</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+<div id="banner">
+  <div class="t">SCALELIST UNIVERSE</div>
+  <div class="s">THE ARRIVAL FIELDS · HELIOS GATE CITY</div>
+</div>
+<div id="hint">Klicka på marken för att gå — RuneScape-stil</div>
+<div id="stamp">YWAPOS · steg 1 ツ</div>
+<div id="load">
+  <h1>SCALELIST UNIVERSE</h1>
+  <p>The Arrival Fields</p>
+  <div class="bar"><i id="loadbar"></i></div>
+</div>
+<script src="/play/game.js"></script>
+</body>
+</html>

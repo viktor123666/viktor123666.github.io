@@ -2,240 +2,180 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Relationship Graph — Scalelist Universe</title>
-<meta name="description" content="Every named soul, every cross-soul thread. The empire's relationships rendered as a D3 force-directed graph. Drag, zoom, click.">
-<meta property="og:image" content="https://scalelistuniverse.com/og.png">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400&display=swap" rel="stylesheet">
+<meta name="description" content="Every soul, realm and thread of the Scalelist Universe as a living force-directed graph. The five fragments orbit the source-soul; the nine guardians hold Ferdinand. Drag, zoom, click through to the wiki.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--gold:#c9a84c; --void:#050510; --panel:#0a0a14; --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060}
-html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;height:100vh;overflow:hidden}
-a{color:var(--gold);text-decoration:none}
-
-header{padding:14px 26px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:relative;z-index:10}
-header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
-header nav{display:flex;gap:18px;flex-wrap:wrap}
-header nav a{color:var(--dim);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:'Cinzel',serif}
-header nav a:hover{color:var(--gold)}
-
-#stage{position:fixed;top:51px;left:0;right:0;bottom:0;cursor:grab}
-#stage.grabbing{cursor:grabbing}
-#stage svg{width:100%;height:100%;display:block}
-
-.panel{position:fixed;top:65px;left:14px;background:rgba(10,10,20,0.92);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:10px;padding:14px 16px;max-width:280px;z-index:5}
-.panel h2{font-family:'Cinzel',serif;color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
-.panel p{font-size:.82rem;line-height:1.5;color:var(--text);opacity:.88}
-.panel .key{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.panel .key .k{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.14em;color:var(--dim);text-transform:uppercase;padding:3px 8px;border:1px solid var(--border);border-radius:99px}
-.panel .key .k::before{content:'•';color:var(--c);margin-right:4px;font-size:1rem;line-height:0}
-
-.detail{position:fixed;top:65px;right:14px;background:rgba(10,10,20,0.92);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:10px;padding:18px;max-width:300px;z-index:5;display:none}
-.detail.open{display:block}
-.detail h3{font-family:'Cinzel',serif;color:#fff;font-size:1.05rem;font-weight:700;letter-spacing:.04em;margin-bottom:4px}
-.detail .role{color:var(--accent,var(--gold));font-style:italic;font-size:.86rem;margin-bottom:10px}
-.detail .stat{font-family:'Space Mono',monospace;color:var(--dim);font-size:.74rem;margin-bottom:6px}
-.detail .links{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
-.detail .links a{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;color:var(--gold);border:1px solid var(--gold);padding:4px 10px;border-radius:99px;text-decoration:none}
-
-.help{position:fixed;bottom:14px;left:14px;font-family:'Space Mono',monospace;color:var(--dim);font-size:.7rem;background:rgba(10,10,20,0.7);padding:6px 12px;border-radius:99px;border:1px solid var(--border);z-index:5}
-
-text{font-family:'Cinzel',serif;font-size:11px;fill:#fff;font-weight:700;letter-spacing:.08em;pointer-events:none;text-shadow:0 0 4px rgba(0,0,0,0.9)}
-.link{stroke-opacity:0.4;transition:stroke-opacity .3s}
-.link.dim{stroke-opacity:0.1}
-.node{cursor:pointer;transition:transform .2s,filter .2s}
-.node:hover{filter:drop-shadow(0 0 8px currentColor)}
+  .gr-head{text-align:center;padding:2.4rem 1.2rem 1rem;}
+  .gr-head h1{font-family:var(--font-display);font-size:clamp(1.8rem,4.5vw,2.8rem);color:#fff;letter-spacing:.06em;}
+  .gr-head .su-kicker{margin-bottom:.6rem;}
+  .gr-head p{color:var(--text-dim);max-width:60ch;margin:.6rem auto 0;font-size:.92rem;}
+  .legend{display:flex;flex-wrap:wrap;gap:.5rem .9rem;justify-content:center;margin:1rem auto 0;max-width:760px;}
+  .legend span{display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--text-dim);letter-spacing:.04em;}
+  .legend i{width:11px;height:11px;border-radius:50%;display:inline-block;}
+  #wrap{position:relative;width:100%;height:74vh;min-height:520px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    background:radial-gradient(900px 500px at 50% 40%,rgba(0,170,255,.05),transparent 70%);overflow:hidden;}
+  #wrap svg{width:100%;height:100%;cursor:grab;}
+  #wrap svg:active{cursor:grabbing;}
+  .link{stroke-opacity:.35;}
+  .node circle,.node rect{cursor:pointer;transition:stroke-width .15s;}
+  .node text{font-family:var(--font-display);fill:#e7dfc6;font-size:9px;pointer-events:none;text-anchor:middle;
+    paint-order:stroke;stroke:rgba(5,5,9,.85);stroke-width:2.4px;}
+  .node.big text{font-size:11px;fill:#fff;}
+  .tip{position:absolute;pointer-events:none;z-index:10;background:var(--panel-solid);border:1px solid var(--c,var(--border-bright));
+    border-radius:10px;padding:.5rem .7rem;display:none;max-width:220px;box-shadow:0 12px 30px -12px #000;}
+  .tip.show{display:block;}
+  .tip img{width:100%;height:84px;object-fit:cover;object-position:center top;border-radius:6px;margin-bottom:.4rem;}
+  .tip .nm{font-family:var(--font-display);color:#fff;font-size:.95rem;}
+  .tip .ro{color:var(--c,var(--gold));font-size:.72rem;font-weight:700;}
+  .tip .go{color:var(--text-dim);font-size:.66rem;margin-top:.25rem;letter-spacing:.06em;text-transform:uppercase;}
+  .ctrl{position:absolute;top:.7rem;right:.7rem;display:flex;gap:.4rem;}
+  .ctrl button{background:rgba(8,9,18,.8);border:1px solid var(--border);color:var(--gold);border-radius:8px;
+    width:34px;height:34px;cursor:pointer;font-size:1rem;backdrop-filter:blur(4px);}
+  .ctrl button:hover{border-color:var(--border-bright);}
 </style>
 </head>
 <body>
 
-<header>
-  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
-  <nav>
-    <a href="/lineage">Lineage</a>
-    <a href="/wiki">Wiki</a>
-    <a href="/empire">Empire</a>
-    <a href="/cosmos">Cosmos</a>
-    <a href="/graph" style="color:var(--gold)">Graph</a>
-  </nav>
-</header>
-
-<div id="stage"><svg id="svg"></svg></div>
-
-<div class="panel">
-  <h2>Relationship Graph</h2>
-  <p>Every cipher soul. Every thread that binds them.</p>
-  <div class="key">
-    <span class="k" style="--c:#4ade80">Active Champion</span>
-    <span class="k" style="--c:#c9a84c">Open Seat</span>
-    <span class="k" style="--c:#ff6677">Antagonist</span>
-    <span class="k" style="--c:#fef3c7">Mingus</span>
+<div class="gr-head">
+  <div class="su-kicker">How it all connects</div>
+  <h1>The Relationship Graph</h1>
+  <p>The five fragments orbit the source-soul. The nine guardians hold Ferdinand. The threads between are canon. Drag a node, scroll to zoom, click any soul to open its wiki entry.</p>
+  <div class="legend">
+    <span><i style="background:#c9a84c"></i>Source / Tree</span>
+    <span><i style="background:#00ff88"></i>Fragment (champion)</span>
+    <span><i style="background:#67e8f9"></i>Lineage soul</span>
+    <span><i style="background:#38bdf8"></i>Guardian</span>
+    <span><i style="background:#888;border-radius:2px"></i>Realm</span>
   </div>
 </div>
 
-<div class="detail" id="detail">
-  <h3 id="dName"></h3>
-  <div class="role" id="dRole"></div>
-  <div class="stat" id="dStats"></div>
-  <p style="font-size:.86rem;margin-top:8px;line-height:1.5;color:var(--text);opacity:.9" id="dBlurb"></p>
-  <div class="links" id="dLinks"></div>
+<div id="wrap">
+  <div class="ctrl"><button id="zin">+</button><button id="zout">−</button><button id="zfit" title="reset">⟲</button></div>
+  <div class="tip" id="tip"></div>
 </div>
 
-<div class="help">drag • scroll to zoom • click a soul</div>
-
 <script>
-// ============================================================
-// Empire Relationship Graph — D3 force-directed
-// Built from canon-anchored data: 15 souls + Mingus + 12 villains
-// ============================================================
-const DATA = {
-  nodes: [
-    // Active 5 (champions)
-    {id:'vigolas',name:'Vigolas',role:'The Last Tide',type:'active',color:'#4ade80',realm:'Helios',hadom:'∞−1',bio:'/cosmos'},
-    {id:'rougeina',name:'Rougeina',role:'The Dancer',type:'active',color:'#ff6b9d',realm:'Astralis',hadom:'12,000',bio:'/cosmos'},
-    {id:'trollmage',name:'Trollmage',role:'The Reader',type:'active',color:'#9333ea',realm:'Codexia',hadom:'10⁵',bio:'/cosmos'},
-    {id:'kompis',name:'Kompis',role:'The Buddy',type:'active',color:'#fbbf24',realm:'Heartbeat',hadom:'10⁹',bio:'/cosmos'},
-    {id:'smurjan',name:'Smurjan',role:'The Third-Voice',type:'active',color:'#0ea5e9',realm:'Trinity',hadom:'∞ folded',bio:'/cosmos'},
-    {id:'mingus',name:'Mingus',role:'The Sacred Companion',type:'mingus',color:'#fef3c7',realm:'with Kompis',hadom:'unclassified',bio:'/cosmos'},
-    // Open 10 (lineage)
-    {id:'isa',name:'Isa',role:'The Stillborn Heartbeat',type:'open',color:'#67e8f9',realm:'Helios-Heartbeat',hadom:'1',bio:'/characters/isa'},
-    {id:'opha',name:'Opha',role:'The Conjunction',type:'open',color:'#ff6b9d',realm:'Astralis-Codexia',hadom:'24',bio:'/characters/opha'},
-    {id:'runa',name:'Runa',role:'The First Rune-Speaker',type:'open',color:'#fbbf24',realm:'Inside Ferdinand',hadom:'ageless',bio:'/characters/runa'},
-    {id:'ogar',name:'Ögar',role:'The Far-Eye Watcher',type:'open',color:'#9b9b9b',realm:'Thanatos',hadom:'8,000',bio:'/characters/ogar'},
-    {id:'niva',name:'Niva',role:'The Untraversed',type:'open',color:'#ffffff',realm:'NULL',hadom:'unmeasurable',bio:'/characters/niva'},
-    {id:'njord',name:'Njord',role:'The Tide-Reader',type:'open',color:'#3b82f6',realm:'Heartbeat-east',hadom:'1,200',bio:'/characters/njord'},
-    {id:'kvar',name:'Kvar',role:'The Last One',type:'open',color:'#71717a',realm:'anywhere',hadom:'1 (uncountable)',bio:'/characters/kvar'},
-    {id:'vidar',name:'Vidar',role:'The Silent Reckoner',type:'open',color:'#1f2937',realm:'Void-II',hadom:'0',bio:'/characters/vidar'},
-    {id:'iska',name:'Iska',role:'The Spark-Carrier',type:'open',color:'#fef3c7',realm:'Lumen',hadom:'7',bio:'/characters/iska'},
-    {id:'tova',name:'Tova',role:'The Thunder-Herald',type:'open',color:'#d97706',realm:'all 12',hadom:'12',bio:'/characters/tova'},
-    // Major antagonists
-    {id:'vass',name:'Captain Vass',role:'Reformed rival',type:'villain',color:'#3a6a3a',realm:'Helios',hadom:'high',bio:'/cosmos/atlas'},
-    {id:'darkdancer',name:'Dark Dancer',role:'Inverted twin',type:'villain',color:'#9a3a9a',realm:'Astralis',hadom:'high',bio:'/cosmos/atlas'},
-    {id:'kasper',name:'Old Kasper',role:'Subtick mentor',type:'villain',color:'#aa8800',realm:'Heartbeat',hadom:'high',bio:'/cosmos/atlas'},
-    {id:'echo',name:'Echo',role:'The Fourth Voice',type:'villain',color:'#9e8eff',realm:'Echo',hadom:'high',bio:'/cosmos/atlas'},
-    {id:'bakasura',name:'Bakasura',role:'The Hunger',type:'villain',color:'#1a0a1a',realm:'NULL',hadom:'cosmic',bio:'/cosmos/atlas'},
-    {id:'k_xii',name:'K-XII (Unwritten)',role:'Erased Architect',type:'villain',color:'#c9a84c',realm:'Void-II',hadom:'sealed',bio:'/cosmos/atlas'},
-  ],
-  links: [
-    // Champion ↔ Realm partnerships
-    {source:'vigolas',target:'kompis',type:'ally',label:'cousins-in-arms'},
-    {source:'vigolas',target:'mingus',type:'sacred',label:'protects'},
-    {source:'kompis',target:'mingus',type:'sacred',label:'eternal companion'},
-    {source:'rougeina',target:'trollmage',type:'ally',label:'page+star'},
-    {source:'smurjan',target:'vigolas',type:'ally',label:'storm+vote'},
-    {source:'smurjan',target:'trollmage',type:'ally',label:'codex+vote'},
-    // Lineage debut partnerships (S5)
-    {source:'isa',target:'vigolas',type:'lineage',label:'lake-edge stillness'},
-    {source:'isa',target:'kompis',type:'lineage',label:'unmet (the gap)'},
-    {source:'opha',target:'rougeina',type:'lineage',label:'bridged'},
-    {source:'opha',target:'trollmage',type:'lineage',label:'bridged'},
-    {source:'runa',target:'trollmage',type:'lineage',label:'great-grandmother'},
-    {source:'ogar',target:'mingus',type:'lineage',label:'wept silver coins'},
-    {source:'niva',target:'kompis',type:'lineage',label:'tea at the dock'},
-    {source:'niva',target:'bakasura',type:'enemy',label:'gave him parka pieces'},
-    {source:'niva',target:'mingus',type:'lineage',label:'parka piece on collar'},
-    {source:'njord',target:'kompis',type:'lineage',label:'distant cousins'},
-    {source:'njord',target:'vigolas',type:'lineage',label:'forecast the storm'},
-    {source:'kvar',target:'vigolas',type:'lineage',label:'always here'},
-    {source:'kvar',target:'vidar',type:'lineage',label:'decade-nod'},
-    {source:'vidar',target:'runa',type:'lineage',label:'pre-cipher kin'},
-    {source:'vidar',target:'k_xii',type:'enemy',label:'unwrote'},
-    {source:'iska',target:'mingus',type:'sacred',label:'lit the lamp at his birth'},
-    {source:'iska',target:'kompis',type:'lineage',label:'told him to hold him'},
-    {source:'iska',target:'bakasura',type:'enemy',label:'made him laugh once'},
-    {source:'tova',target:'smurjan',type:'lineage',label:'horn for the Tetrad'},
-    {source:'tova',target:'vigolas',type:'lineage',label:'horn at Stormhold'},
-    {source:'tova',target:'mingus',type:'sacred',label:'announced his return'},
-    // Antagonist threads
-    {source:'vass',target:'vigolas',type:'enemy',label:'reformed rival'},
-    {source:'darkdancer',target:'rougeina',type:'enemy',label:'inverted shadow'},
-    {source:'kasper',target:'kompis',type:'enemy',label:'old mentor turned hunter'},
-    {source:'echo',target:'smurjan',type:'enemy',label:'sealed inside'},
-    {source:'bakasura',target:'mingus',type:'enemy',label:'tried to consume'},
-    {source:'k_xii',target:'vigolas',type:'enemy',label:'soul-thread sealed'},
-  ],
-};
+const ROOT="/characters/art";
+const N=[
+ {id:"source",label:"The Author",grp:"source",c:"#c9a84c",r:26,role:"The source-soul · the cipher",wiki:"lineage"},
+ {id:"ferdinand",label:"Ferdinand",grp:"tree",c:"#d4a056",r:21,role:"The cork-oak world-tree",wiki:"ferdinand"},
+ // fragments
+ {id:"vigolas",label:"Vigolas",grp:"frag",c:"#00ff88",r:17,role:"The Infinite Administrator",img:1},
+ {id:"kompis",label:"Kompis",grp:"frag",c:"#ffaa00",r:17,role:"The Buddy",img:1},
+ {id:"smurjan",label:"Smurjan",grp:"frag",c:"#00aaff",r:17,role:"The Void Three · the bridge",img:1},
+ {id:"rougeina",label:"Rougeina",grp:"frag",c:"#ff3366",r:17,role:"The Star-Dancer",img:1},
+ {id:"trollmage",label:"Trollmage",grp:"frag",c:"#9933ff",r:17,role:"The Codex-Keeper",img:1},
+ {id:"mingus",label:"Mingus",grp:"comp",c:"#e9b949",r:14,role:"The Eternal Companion",img:1},
+ // viktor lineage (non-champion letters)
+ {id:"isa",label:"Isa",grp:"line",c:"#67e8f9",r:12,role:"The Stillborn Heartbeat",img:1},
+ {id:"opha",label:"Opha",grp:"line",c:"#d946ef",r:12,role:"The Conjunction",img:1},
+ // ronnkvist council
+ {id:"runa",label:"Runa",grp:"guard",c:"#d4a056",r:12,role:"The First Rune-Speaker",img:1},
+ {id:"ogar",label:"Ögar",grp:"guard",c:"#a78bfa",r:12,role:"The Far-Eye Watcher",img:1},
+ {id:"niva",label:"Niva",grp:"guard",c:"#e5e7eb",r:12,role:"The Untraversed",img:1},
+ {id:"njord",label:"Njord",grp:"guard",c:"#38bdf8",r:12,role:"The Tide-Reader",img:1},
+ {id:"kvar",label:"Kvar",grp:"guard",c:"#c2675a",r:12,role:"The Last One",img:1},
+ {id:"vidar",label:"Vidar",grp:"guard",c:"#cdb878",r:12,role:"The Silent Reckoner",img:1},
+ {id:"iska",label:"Iska",grp:"guard",c:"#fbbf24",r:12,role:"The Spark-Carrier",img:1},
+ {id:"tova",label:"Tova",grp:"guard",c:"#f59e0b",r:12,role:"The Thunder-Herald",img:1},
+ // realms (rect)
+ {id:"helios",label:"Helios",grp:"realm",c:"#00ff88",r:12,role:"Vigolas's Storm Court"},
+ {id:"astralis",label:"Astralis",grp:"realm",c:"#ff3366",r:12,role:"Rougeina's galaxy floor"},
+ {id:"codexia",label:"Codexia",grp:"realm",c:"#9933ff",r:12,role:"Trollmage's obsidian ring"},
+ {id:"heartbeat",label:"Heartbeat",grp:"realm",c:"#ffaa00",r:12,role:"Kompis & Mingus's realm"},
+ {id:"trinity",label:"Trinity",grp:"realm",c:"#00aaff",r:12,role:"Smurjan's triple void"},
+ {id:"thanatos",label:"Thanatos",grp:"realm",c:"#a78bfa",r:11,role:"The spiral graveyard"},
+ {id:"null",label:"The Null",grp:"realm",c:"#e5e7eb",r:11,role:"The realm of absence"},
+ {id:"void2",label:"Void-II",grp:"realm",c:"#cdb878",r:11,role:"The Architects' chamber"},
+];
+const L=[
+ // exodia: source -> fragments
+ ...["vigolas","kompis","smurjan","rougeina","trollmage"].map(target=>({source:"source",target,k:"exodia"})),
+ // the name also holds isa + opha (VIKTOR letters)
+ {source:"source",target:"isa",k:"name"},{source:"source",target:"opha",k:"name"},
+ // rules: champion -> realm
+ {source:"vigolas",target:"helios",k:"rule"},{source:"rougeina",target:"astralis",k:"rule"},{source:"trollmage",target:"codexia",k:"rule"},
+ {source:"kompis",target:"heartbeat",k:"rule"},{source:"smurjan",target:"trinity",k:"rule"},
+ // companion
+ {source:"kompis",target:"mingus",k:"bond"},{source:"mingus",target:"heartbeat",k:"thread"},
+ // ferdinand holds the realms
+ ...["helios","astralis","codexia","heartbeat","trinity","thanatos","null","void2"].map(target=>({source:"ferdinand",target,k:"holds"})),
+ // the nine guardians hold ferdinand
+ ...["runa","ogar","niva","njord","kvar","vidar","iska","smurjan","tova"].map(source=>({source,target:"ferdinand",k:"guard"})),
+ // canon threads
+ {source:"isa",target:"vigolas",k:"thread"},{source:"isa",target:"kompis",k:"thread"},
+ {source:"opha",target:"trollmage",k:"thread"},{source:"opha",target:"rougeina",k:"thread"},
+ {source:"runa",target:"trollmage",k:"thread"},{source:"ogar",target:"thanatos",k:"thread"},{source:"ogar",target:"niva",k:"thread"},
+ {source:"niva",target:"null",k:"thread"},{source:"niva",target:"mingus",k:"thread"},
+ {source:"njord",target:"kompis",k:"thread"},{source:"iska",target:"mingus",k:"thread"},
+ {source:"vidar",target:"void2",k:"thread"},{source:"kvar",target:"void2",k:"thread"},
+];
+const EK={exodia:{c:"#c9a84c",w:2.6},name:{c:"#c9a84c",w:1.2},rule:{c:"#8a8",w:1.4},holds:{c:"#d4a056",w:1},
+  guard:{c:"#cdb878",w:1},bond:{c:"#e9b949",w:2},thread:{c:"#5b8cff",w:1}};
 
-const svg = d3.select('#svg');
-const W = window.innerWidth, H = window.innerHeight - 51;
-
-const root = svg.append('g');
-const linkLayer = root.append('g').attr('stroke-linecap', 'round');
-const nodeLayer = root.append('g');
-
-const zoom = d3.zoom().scaleExtent([0.4, 3]).on('zoom', (e) => root.attr('transform', e.transform));
+const wrap=document.getElementById("wrap"); let W=wrap.clientWidth,H=wrap.clientHeight;
+const svg=d3.select("#wrap").append("svg").attr("viewBox",[0,0,W,H]);
+const g=svg.append("g");
+const zoom=d3.zoom().scaleExtent([.35,3]).on("zoom",e=>g.attr("transform",e.transform));
 svg.call(zoom);
 
-const sim = d3.forceSimulation(DATA.nodes)
-  .force('link', d3.forceLink(DATA.links).id(d => d.id).distance(d => d.type === 'sacred' ? 70 : 110).strength(0.5))
-  .force('charge', d3.forceManyBody().strength(-380))
-  .force('center', d3.forceCenter(W/2, H/2))
-  .force('collide', d3.forceCollide(40))
-  .alpha(1).alphaDecay(0.018);
+const link=g.append("g").selectAll("line").data(L).join("line")
+  .attr("class","link").attr("stroke",d=>EK[d.k].c).attr("stroke-width",d=>EK[d.k].w);
 
-const linkColor = (l) => l.type === 'enemy' ? '#ef4444' : l.type === 'sacred' ? '#fef3c7' : l.type === 'lineage' ? '#c9a84c' : '#67e8f9';
+const node=g.append("g").selectAll("g").data(N).join("g")
+  .attr("class",d=>"node"+(d.grp==="source"||d.grp==="tree"?" big":""))
+  .call(d3.drag().on("start",ds).on("drag",dd).on("end",de))
+  .on("click",(e,d)=>{ location.href="/wiki#"+(d.wiki||d.id); })
+  .on("mousemove",(e,d)=>showTip(e,d)).on("mouseleave",hideTip);
 
-const links = linkLayer.selectAll('line')
-  .data(DATA.links).enter().append('line')
-  .attr('class', 'link')
-  .attr('stroke', linkColor)
-  .attr('stroke-width', d => d.type === 'sacred' ? 2.5 : 1.4);
-
-const sizeFor = (d) => d.type === 'mingus' ? 22 : d.type === 'active' ? 18 : d.type === 'open' ? 14 : 12;
-
-const nodes = nodeLayer.selectAll('g.node')
-  .data(DATA.nodes).enter().append('g')
-  .attr('class', 'node')
-  .style('color', d => d.color)
-  .call(d3.drag()
-    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
-    .on('drag',  (e, d) => { d.fx = e.x; d.fy = e.y; })
-    .on('end',   (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
-
-nodes.append('circle')
-  .attr('r', sizeFor)
-  .attr('fill', d => d.color)
-  .attr('stroke', '#050510')
-  .attr('stroke-width', 2);
-
-nodes.append('text')
-  .attr('text-anchor', 'middle')
-  .attr('dy', d => sizeFor(d) + 16)
-  .text(d => d.name);
-
-nodes.on('click', (e, d) => showDetail(d));
-
-sim.on('tick', () => {
-  links.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
-  nodes.attr('transform', d => `translate(${d.x},${d.y})`);
-});
-
-function showDetail(d) {
-  const el = document.getElementById('detail');
-  el.style.setProperty('--accent', d.color);
-  el.classList.add('open');
-  document.getElementById('dName').textContent = d.name;
-  document.getElementById('dRole').textContent = d.role;
-  document.getElementById('dStats').innerHTML = `<b>Realm:</b> ${d.realm}<br><b>HADOM:</b> ${d.hadom}`;
-  // Find connections
-  const conns = DATA.links.filter(l => l.source.id === d.id || l.target.id === d.id || l.source === d.id || l.target === d.id);
-  const connNames = conns.map(l => {
-    const otherId = (l.source.id || l.source) === d.id ? (l.target.id || l.target) : (l.source.id || l.source);
-    const other = DATA.nodes.find(n => n.id === otherId);
-    return other ? `${other.name} <span style='opacity:.6'>· ${l.type}</span>` : '';
-  }).filter(Boolean).join(' · ');
-  document.getElementById('dBlurb').innerHTML = `<b style='color:var(--gold);font-family:Cinzel,serif;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase'>Connected to:</b><br>${connNames}`;
-  document.getElementById('dLinks').innerHTML = `<a href="${d.bio}">Open profile →</a>`;
-  // Highlight
-  links.classed('dim', l => !((l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id));
-}
-document.getElementById('stage').addEventListener('click', (e) => {
-  if (e.target.id === 'svg' || e.target.id === 'stage') {
-    document.getElementById('detail').classList.remove('open');
-    links.classed('dim', false);
+node.each(function(d){
+  const el=d3.select(this);
+  if(d.grp==="realm"){
+    el.append("rect").attr("x",-d.r).attr("y",-d.r).attr("width",d.r*2).attr("height",d.r*2)
+      .attr("rx",3).attr("transform","rotate(45)").attr("fill","rgba(10,11,22,.9)").attr("stroke",d.c).attr("stroke-width",1.6);
+  } else {
+    el.append("circle").attr("r",d.r).attr("fill",d.grp==="source"?"radial-gradient":"rgba(10,11,22,.92)")
+      .attr("fill",`color-mix(in srgb,${d.c} 22%,#0a0b16)`).attr("stroke",d.c)
+      .attr("stroke-width",d.grp==="source"?3:2);
+    if(d.grp==="source") el.select("circle").style("filter","drop-shadow(0 0 14px "+d.c+")")
+      .append("animate").attr("attributeName","r").attr("values",d.r+";"+(d.r+3)+";"+d.r).attr("dur","2.6s").attr("repeatCount","indefinite");
   }
+  el.append("text").attr("dy",d.r+11).text(d.label);
 });
+
+const sim=d3.forceSimulation(N)
+  .force("link",d3.forceLink(L).id(d=>d.id).distance(d=>d.k==="exodia"?70:d.k==="holds"?60:d.k==="guard"?80:75).strength(d=>d.k==="exodia"?.5:.18))
+  .force("charge",d3.forceManyBody().strength(-260))
+  .force("center",d3.forceCenter(W/2,H/2))
+  .force("collide",d3.forceCollide().radius(d=>d.r+16))
+  .on("tick",()=>{
+    link.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+    node.attr("transform",d=>`translate(${d.x},${d.y})`);
+  });
+
+function ds(e,d){if(!e.active)sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y;}
+function dd(e,d){d.fx=e.x;d.fy=e.y;}
+function de(e,d){if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}
+
+const tip=document.getElementById("tip");
+function showTip(e,d){
+  tip.style.setProperty("--c",d.c);
+  const img=d.img?`<img src="${ROOT}/${d.id}/${d.id}_hero.webp" alt="">`:"";
+  tip.innerHTML=`${img}<div class="nm">${d.label}</div><div class="ro">${d.role}</div><div class="go">click → wiki</div>`;
+  tip.classList.add("show");
+  const x=Math.min(e.offsetX+16,wrap.clientWidth-230), y=Math.min(e.offsetY+16,wrap.clientHeight-150);
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+}
+function hideTip(){tip.classList.remove("show");}
+
+document.getElementById("zin").onclick=()=>svg.transition().call(zoom.scaleBy,1.4);
+document.getElementById("zout").onclick=()=>svg.transition().call(zoom.scaleBy,.7);
+document.getElementById("zfit").onclick=()=>svg.transition().call(zoom.transform,d3.zoomIdentity);
+addEventListener("resize",()=>{W=wrap.clientWidth;H=wrap.clientHeight;svg.attr("viewBox",[0,0,W,H]);sim.force("center",d3.forceCenter(W/2,H/2)).alpha(.3).restart();});
 </script>
 </body>
 </html>

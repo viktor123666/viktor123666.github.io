@@ -12,6 +12,10 @@ manga/vigolas_s*.png
 manga/chapter_*.png
 manga/enhanced/
 
+# New consistent character gallery — heavy PNG originals (~2MB each).
+# WebP q90 (~150-260KB) sits beside each PNG and ships instead; gallery points there.
+characters/art/**/*.png
+
 # Wan21 enhanced clips (290MB)
 clips_assets/enhanced/
 

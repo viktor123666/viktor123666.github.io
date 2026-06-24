@@ -2,273 +2,214 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Wiki — Scalelist Universe Encyclopedia</title>
-<meta name="description" content="Every named character, every realm, every tribe, every event. The full canonical encyclopedia of the Scalelist Universe. Search, browse, cross-link.">
-<meta property="og:title" content="The Scalelist Universe Wiki">
-<meta property="og:description" content="125 characters · 12 realms · cross-linked encyclopedia.">
-<meta property="og:image" content="https://scalelistuniverse.com/og.png">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Space+Mono&display=swap" rel="stylesheet">
+<meta name="description" content="The searchable encyclopedia of the Scalelist Universe — every character, realm, and concept, cross-linked and grounded in canon.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --gold:#c9a84c; --void:#050510; --panel:#0a0a14; --panel2:#0e0e1a;
-  --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060;
-}
-html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.6}
-a{color:var(--gold);text-decoration:none}
-a:hover{text-decoration:underline}
+  .wk-hero{min-height:min(46vh,380px);}
+  .wk-tools{max-width:760px;margin:1.4rem auto 0;}
+  .wk-search{display:flex;gap:.6rem;}
+  .wk-search input{flex:1;background:var(--void-2);border:1px solid var(--border);border-radius:999px;
+    padding:.85rem 1.3rem;color:#fff;font-family:var(--font-body);font-size:1rem;outline:none;}
+  .wk-search input:focus{border-color:var(--gold);}
+  .wk-search button{background:transparent;border:1px solid var(--border-bright);color:var(--gold);border-radius:999px;
+    padding:0 1.2rem;cursor:pointer;font-weight:700;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;}
+  .wk-search button:hover{background:rgba(201,168,76,.1);}
+  .wk-cats{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1rem;}
+  .wk-cat{cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:.42rem 1rem;border-radius:999px;border:1px solid var(--border);color:var(--text-dim);background:transparent;transition:all .2s;}
+  .wk-cat.on,.wk-cat:hover{color:var(--gold);border-color:var(--border-bright);background:rgba(201,168,76,.1);}
+  .wk-count{text-align:center;color:var(--muted);font-size:.76rem;margin:1.2rem 0 .4rem;letter-spacing:.06em;}
 
-header{padding:18px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
-header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
-header nav{display:flex;gap:22px;flex-wrap:wrap}
-header nav a{font-size:.78rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;font-family:'Cinzel',serif;text-decoration:none}
-header nav a:hover{color:var(--gold)}
-header nav a.active{color:var(--gold)}
+  .wk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.8rem;}
+  .art{display:flex;gap:.8rem;align-items:center;text-align:left;cursor:pointer;background:var(--panel);
+    border:1px solid var(--border);border-left:3px solid var(--c,var(--gold));border-radius:var(--radius-sm);
+    padding:.7rem .8rem;transition:transform .2s,border-color .2s,box-shadow .2s;}
+  .art:hover{transform:translateY(-3px);border-color:var(--c);box-shadow:0 12px 30px -16px #000,0 0 18px -8px var(--c);}
+  .art .av{width:52px;height:52px;border-radius:9px;object-fit:cover;object-position:center top;flex:none;background:var(--void-2);
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--c,var(--gold));border:1px solid var(--border);}
+  .art .ti{font-family:var(--font-display);color:#fff;font-size:1rem;line-height:1.2;}
+  .art .ca{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--c,var(--gold));margin-top:.2rem;}
 
-.layout{display:grid;grid-template-columns:280px 1fr;max-width:1400px;margin:0 auto;min-height:calc(100vh - 64px)}
-@media(max-width:900px){ .layout{grid-template-columns:1fr} }
-
-aside{padding:28px 18px;border-right:1px solid var(--border);position:sticky;top:64px;align-self:start;height:calc(100vh - 64px);overflow-y:auto}
-@media(max-width:900px){ aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)} }
-aside h3{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin:18px 0 10px;font-weight:700}
-aside h3:first-child{margin-top:0}
-aside .search-input{width:100%;background:var(--panel);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:8px;font-family:'Space Mono',monospace;font-size:.85rem;margin-bottom:14px}
-aside .search-input:focus{outline:none;border-color:var(--gold)}
-aside ul{list-style:none}
-aside ul li a{display:block;padding:6px 10px;border-radius:6px;color:var(--text);font-size:.92rem;transition:all .15s;text-decoration:none}
-aside ul li a:hover{background:var(--panel);color:var(--gold)}
-
-main{padding:36px 40px}
-@media(max-width:900px){ main{padding:24px 22px} }
-main h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--gold);letter-spacing:.06em;margin-bottom:8px;font-weight:900}
-main .lede{color:var(--dim);font-style:italic;font-size:1.05rem;margin-bottom:36px;max-width:700px;line-height:1.7}
-
-.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:30px}
-.stat{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
-.stat .n{font-family:'Cinzel',serif;font-weight:900;color:var(--gold);font-size:1.8rem;line-height:1}
-.stat .l{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-top:6px}
-
-section{margin-bottom:40px;scroll-margin-top:80px}
-section h2{font-family:'Cinzel',serif;color:var(--gold);font-size:1.3rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid var(--border);font-weight:700}
-section h2 .count{color:var(--dim);font-size:.6em;font-weight:400;margin-left:10px;letter-spacing:.18em}
-.entry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.entry{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:all .25s;cursor:pointer;text-decoration:none;color:inherit;display:block}
-.entry:hover{border-color:var(--accent,var(--gold));transform:translateY(-2px);text-decoration:none}
-.entry .name{font-family:'Cinzel',serif;font-size:.95rem;color:#fff;font-weight:700;letter-spacing:.04em;line-height:1.2}
-.entry .role{font-size:.82rem;color:var(--accent,var(--gold));font-style:italic;margin-top:4px;line-height:1.3}
-.entry .tag{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.14em;color:var(--dim);text-transform:uppercase;margin-top:8px}
-
-footer{padding:30px 24px;text-align:center;border-top:1px solid var(--border);color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase}
+  /* article modal */
+  #wk-modal{position:fixed;inset:0;z-index:2000;background:rgba(3,4,9,.9);backdrop-filter:blur(8px);
+    display:none;align-items:flex-start;justify-content:center;padding:5vh 1rem;overflow-y:auto;}
+  #wk-modal.open{display:flex;}
+  .wk-card{max-width:680px;width:100%;background:var(--panel-solid);border:1px solid var(--c,var(--border-bright));
+    border-radius:var(--radius);overflow:hidden;box-shadow:0 30px 80px -20px #000;}
+  .wk-card .hd{display:flex;gap:1rem;align-items:center;padding:1.2rem 1.4rem;
+    background:linear-gradient(135deg,color-mix(in srgb,var(--c) 18%,var(--panel-solid)),var(--panel-solid));border-bottom:1px solid var(--border);}
+  .wk-card .hd img,.wk-card .hd .ph{width:80px;height:80px;border-radius:12px;object-fit:cover;object-position:center top;border:1px solid var(--c);flex:none;
+    display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--c);background:var(--void-2);}
+  .wk-card .hd .ca{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--c);}
+  .wk-card .hd h2{font-size:1.7rem;color:#fff;margin:.1rem 0;}
+  .wk-card .hd .sum{color:var(--text-dim);font-size:.9rem;}
+  .wk-card .bd{padding:1.3rem 1.4rem;color:var(--text);line-height:1.7;font-size:.96rem;}
+  .wk-card .meta{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0;}
+  .wk-card .meta span{font-size:.72rem;border:1px solid var(--border);border-radius:999px;padding:.25rem .7rem;color:var(--text-dim);}
+  .wk-card .meta b{color:var(--c);}
+  .wk-card .see{border-top:1px solid var(--border);padding-top:1rem;margin-top:.4rem;}
+  .wk-card .see .lab{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
+  .wk-card .see a{display:inline-block;margin:.2rem .4rem .2rem 0;font-size:.82rem;font-weight:700;color:var(--gold);
+    border:1px solid var(--border);border-radius:999px;padding:.3rem .8rem;cursor:pointer;}
+  .wk-card .see a:hover{border-color:var(--gold);background:rgba(201,168,76,.08);}
+  .wk-card .x{float:right;background:none;border:none;color:var(--text-dim);font-size:1.2rem;cursor:pointer;}
 </style>
 </head>
 <body>
 
-<header>
-  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
-  <nav>
-    <a href="/cosmos">Cosmos</a>
-    <a href="/manga">Manga</a>
-    <a href="/lineage">Lineage</a>
-    <a href="/empire">Empire</a>
-    <a href="/wiki" class="active">Wiki</a>
-  </nav>
+<header class="su-hero wk-hero">
+  <div class="su-kicker su-fade">The canonical encyclopedia</div>
+  <h1 class="su-fade-2">The Wiki</h1>
+  <div class="wk-tools su-fade-3">
+    <div class="wk-search">
+      <input id="q" type="text" placeholder="Search characters, realms, concepts…" autocomplete="off">
+      <button id="rnd">🎲 Random</button>
+    </div>
+    <div class="wk-cats" id="cats"></div>
+  </div>
 </header>
 
-<div class="layout">
-  <aside>
-    <h3>Search</h3>
-    <input id="searchInput" class="search-input" placeholder="Type a name…" autocomplete="off">
-    <h3>Jump To</h3>
-    <ul>
-      <li><a href="#mains">Main Champions</a></li>
-      <li><a href="#lineage">The Lineage (10 new)</a></li>
-      <li><a href="#villains">Major Antagonists</a></li>
-      <li><a href="#realms">The Twelve Realms</a></li>
-      <li><a href="#tribes">Tribes &amp; Peoples</a></li>
-      <li><a href="#all">All NPCs</a></li>
-    </ul>
-    <h3>External</h3>
-    <ul>
-      <li><a href="/cosmos">→ Realm Map</a></li>
-      <li><a href="/cosmos/atlas">→ Realm Atlas</a></li>
-      <li><a href="/manga">→ Read the Manga</a></li>
-      <li><a href="/lineage">→ The Cipher</a></li>
-    </ul>
-  </aside>
+<main class="su-wrap su-section" style="padding-top:1rem;">
+  <div class="wk-count" id="count"></div>
+  <div class="wk-grid" id="grid"></div>
+</main>
 
-  <main>
-    <h1>The Wiki</h1>
-    <p class="lede">Every named character, every realm, every tribe. Cross-linked. Auto-built from canon. <strong style="color:var(--gold)">Type a name in the sidebar to filter live.</strong></p>
-
-    <div class="stat-row" id="statRow"></div>
-
-    <section id="mains">
-      <h2>Main Champions <span class="count" id="cMains"></span></h2>
-      <div class="entry-grid" id="grid-mains"></div>
-    </section>
-
-    <section id="lineage">
-      <h2>The Lineage — The 10 New <span class="count" id="cLineage"></span></h2>
-      <div class="entry-grid" id="grid-lineage"></div>
-    </section>
-
-    <section id="villains">
-      <h2>Major Antagonists <span class="count" id="cVillains"></span></h2>
-      <div class="entry-grid" id="grid-villains"></div>
-    </section>
-
-    <section id="realms">
-      <h2>The Twelve Realms <span class="count" id="cRealms"></span></h2>
-      <div class="entry-grid" id="grid-realms"></div>
-    </section>
-
-    <section id="tribes">
-      <h2>Tribes &amp; Peoples <span class="count" id="cTribes"></span></h2>
-      <div class="entry-grid" id="grid-tribes"></div>
-    </section>
-
-    <section id="all">
-      <h2>All Named Characters <span class="count" id="cAll"></span></h2>
-      <div class="entry-grid" id="grid-all"></div>
-    </section>
-  </main>
-</div>
-
-<footer>
-  Scalelist Universe · Wiki · Auto-built from canon · <a href="/" style="color:var(--gold)">Home</a>
-</footer>
+<div id="wk-modal"><div class="wk-card" id="wk-card"></div></div>
 
 <script>
-const STATE = { all: [], realms: [], antagonists: [] };
-const REALM_COLORS = {
-  scalelist: '#c9a84c', helios: '#4ade80', astralis: '#ff6b9d',
-  codexia: '#9333ea', heartbeat: '#fbbf24', trinity: '#0ea5e9',
-  thanatos: '#9b9b9b', null: '#ffffff', void2: '#fff2aa',
-  echo: '#9e8eff', horizon: '#ffc880', lumen: '#fef3c7',
-};
+const C="/characters/art", A="/art";
+// Character set mirrors tools/characters.json (the registry) + canon concepts from 02_Stories.
+const ART=[
+ // ===== CHARACTERS =====
+ {id:"vigolas",t:"Vigolas",cat:"Character",c:"#00ff88",img:`${C}/vigolas/vigolas_hero.webp`,sum:"The Infinite Administrator of Helios.",
+  meta:{Realm:"Helios",HADOM:"∞−1"},body:"One of the five fragments of the source-soul. Vigolas rules Helios, the eternal Storm Court where green lightning arcs backward through time. His HADOM of ∞−1 means he resolves every possible action but one inside a single heartbeat.",see:["helios","exodia","hadom",{l:"Gallery",h:"/gallery#vigolas"}]},
+ {id:"rougeina",t:"Rougeina",cat:"Character",c:"#ff3366",img:`${C}/rougeina/rougeina_hero.webp`,sum:"The Star-Dancer of Astralis.",
+  meta:{Realm:"Astralis",HADOM:"10,000"},body:"A fragment of the source-soul and the warmth of the five. She dances on the galaxy floor of Astralis, where every crimson star is a frozen spark of joy. Her Kill Order once answered the destabilization of the Architects' routing system.",see:["astralis","exodia",{l:"Gallery",h:"/gallery#rougeina"}]},
+ {id:"kompis",t:"Kompis",cat:"Character",c:"#ffaa00",img:`${C}/kompis/kompis_hero.webp`,sum:"The Buddy of the Heartbeat realm.",
+  meta:{Realm:"Heartbeat",HADOM:"10,000"},body:"The hearth at the centre of it all, and Mingus's partner. Kompis guards the Heartbeat realm, where the self-counting unit cannot be uncounted. In CS2 reality his T-side is himself; his CT-side is Mingus in human form.",see:["mingus","heartbeat","hadom",{l:"Gallery",h:"/gallery#kompis"}]},
+ {id:"smurjan",t:"Smurjan",cat:"Character",c:"#00aaff",img:`${C}/smurjan/smurjan_hero.webp`,sum:"The Void Three — the bridge of the lineage.",
+  meta:{Realm:"Trinity",HADOM:"1,000,000"},body:"Three overlaid realities acting as one will. Smurjan is the only champion who is also a Guardian of the Rönnkvist Council — the S in the family name — making him the bridge between the two orders.",see:["trinity","lineage","exodia",{l:"Gallery",h:"/gallery#smurjan"}]},
+ {id:"trollmage",t:"Trollmage",cat:"Character",c:"#9933ff",img:`${C}/trollmage/trollmage_hero.webp`,sum:"The Codex-Keeper of Codexia.",
+  meta:{Realm:"Codexia",HADOM:"50,000"},body:"A fragment of the source-soul and keeper of the Sin Codices. The violet sin-runes obey his glowing book. He is Runa's many-times-grandson — the only living being she will speak a rune to without burning him.",see:["codexia","codices","runa",{l:"Gallery",h:"/gallery#trollmage"}]},
+ {id:"mingus",t:"Mingus",cat:"Character",c:"#e9b949",img:`${C}/mingus/mingus_hero.webp`,sum:"The Eternal Companion — the self-counting unit.",
+  meta:{Realm:"Heartbeat",HADOM:"∞"},body:"Kompis's golden retriever. Mingus's existence is exactly the duration of one heartbeat, so his presence guarantees at least one heartbeat is always counting: as long as Mingus barks, the universe persists. Sacred. The dog is forever.",see:["kompis","heartbeat","quoka",{l:"Mingus",h:"/mingus"}]},
+ {id:"isa",t:"Isa",cat:"Lineage",c:"#67e8f9",img:`${C}/isa/isa_hero.webp`,sum:"The Stillborn Heartbeat (VIKTOR · I).",
+  meta:{HADOM:"1",Realm:"Helios–Heartbeat"},body:"The quiet that holds Vigolas and Kompis apart so reality can bear both. When she stands still, time slows for everyone in sight. Her single heartbeat contains the millions the others fire inside it.",see:["lineage","vigolas","kompis",{l:"Gallery",h:"/gallery#isa"}]},
+ {id:"opha",t:"Opha",cat:"Lineage",c:"#d946ef",img:`${C}/opha/opha_hero.webp`,sum:"The Conjunction (VIKTOR · O).",
+  meta:{HADOM:"24",Realm:"Astralis–Codexia"},body:"The word 'and' made flesh; every sentence she speaks joins two truths and she cannot lie. She is the reason the Reader and the Dancer ever met — a joined sentence walked Trollmage and Rougeina onto the same stage.",see:["lineage","trollmage","rougeina",{l:"Gallery",h:"/gallery#opha"}]},
+ {id:"runa",t:"Runa",cat:"Lineage",c:"#d4a056",img:`${C}/runa/runa_hero.webp`,sum:"The First Rune-Speaker (RÖNNKVIST · R).",
+  meta:{HADOM:"ageless",Realm:"Ferdinand"},body:"She carved the first twenty-four runes into Ferdinand's bark before any Architect existed; the Codex is derived from her work. Hear a rune spoken and you learn it in a heartbeat — or die of it.",see:["ferdinand","codices","trollmage",{l:"Gallery",h:"/gallery#runa"}]},
+ {id:"ogar",t:"Ögar",cat:"Lineage",c:"#a78bfa",img:`${C}/ogar/ogar_hero.webp`,sum:"The Far-Eye Watcher (RÖNNKVIST · Ö).",
+  meta:{HADOM:"8,000",Realm:"Thanatos"},body:"Eight thousand blinks per heartbeat, each seeing a different time. Lift her blindfold and you see your own death — and one heartbeat to choose differently. The one being Echo could never infiltrate.",see:["lineage","thanatos",{l:"Gallery",h:"/gallery#ogar"}]},
+ {id:"niva",t:"Niva",cat:"Lineage",c:"#e5e7eb",img:`${C}/niva/niva_hero.webp`,sum:"The Untraversed (RÖNNKVIST · N).",
+  meta:{HADOM:"unmeasurable",Realm:"NULL"},body:"The first being to survive the Null. She maps the realm of absence; her single wooden stake turns nothing into ground. Her parka on Mingus's collar is why Bakasura did not consume him in the Null.",see:["null","mingus",{l:"Gallery",h:"/gallery#niva"}]},
+ {id:"njord",t:"Njord",cat:"Lineage",c:"#38bdf8",img:`${C}/njord/njord_hero.webp`,sum:"The Tide-Reader (RÖNNKVIST · N).",
+  meta:{HADOM:"1,200",Realm:"Heartbeat"},body:"Kompis's distant cousin from the hidden village of Tidekant. He hears waves before they form and forecasts storms three days early — but he believes information is for fishing, not sharing.",see:["heartbeat","kompis",{l:"Gallery",h:"/gallery#njord"}]},
+ {id:"kvar",t:"Kvar",cat:"Lineage",c:"#c2675a",img:`${C}/kvar/kvar_hero.webp`,sum:"The Last One (RÖNNKVIST · K).",
+  meta:{HADOM:"1",Realm:"anywhere"},body:"After every battle, he is the one who walks away — reality routes around him because his survival is already a fixed point. The 1 is a lie of the scale; his one heartbeat is infinite.",see:["lineage","convergence",{l:"Gallery",h:"/gallery#kvar"}]},
+ {id:"vidar",t:"Vidar",cat:"Lineage",c:"#cdb878",img:`${C}/vidar/vidar_hero.webp`,sum:"The Silent Reckoner (RÖNNKVIST · V).",
+  meta:{HADOM:"0",Realm:"Void-II"},body:"He speaks one sentence per century, and that sentence unwrites an Architect from history. He unmade the Twelfth — 'There were eleven.' No one has ever seen his face.",see:["architects","void2","kxii",{l:"Gallery",h:"/gallery#vidar"}]},
+ {id:"iska",t:"Iska",cat:"Lineage",c:"#fbbf24",img:`${C}/iska/iska_hero.webp`,sum:"The Spark-Carrier (RÖNNKVIST · I).",
+  meta:{HADOM:"7",Realm:"Lumen"},body:"A freckled child who has been seven for seven thousand years. Her flame does not burn — it reminds you of your last joy. She lit the lamp at Mingus's birth, which is why his coat glows in low light.",see:["mingus","lineage",{l:"Gallery",h:"/gallery#iska"}]},
+ {id:"tova",t:"Tova",cat:"Lineage",c:"#f59e0b",img:`${C}/tova/tova_hero.webp`,sum:"The Thunder-Herald (RÖNNKVIST · T).",
+  meta:{HADOM:"12",Realm:"all twelve"},body:"A gate in every realm; the only non-K-rank being who may cross all gates without summons. Her brass horn refuses to sound for a lie. She announced Mingus's death in every realm — and one heartbeat later, his return.",see:["lineage","convergence",{l:"Gallery",h:"/gallery#tova"}]},
 
-async function init() {
-  const [cat, antagonists, cosmos] = await Promise.all([
-    fetch('/cosmos/character_catalog.json').then(r => r.json()).catch(() => ({characters:[]})),
-    fetch('/cosmos/antagonists.json').then(r => r.json()).catch(() => ({antagonists:[]})),
-    fetch('/cosmos_data.json').then(r => r.json()).catch(() => ({realms:[]})),
-  ]);
-  STATE.all = cat.characters || [];
-  STATE.antagonists = antagonists.antagonists || [];
-  STATE.realms = cosmos.realms || [];
+ // ===== REALMS =====
+ {id:"helios",t:"Helios",cat:"Realm",c:"#00ff88",img:`${A}/cosmos/helios.webp`,sum:"Vigolas's eternal Storm Court.",
+  meta:{Ruler:"Vigolas"},body:"A vast emerald-lit throne hall in perpetual storm, where green lightning arcs backward through time and a wrecked ship hangs upside-down above the throne. One of Ferdinand's nine realms.",see:["vigolas","cosmos",{l:"Cosmos",h:"/cosmos"}]},
+ {id:"astralis",t:"Astralis",cat:"Realm",c:"#ff3366",img:`${A}/cosmos/astralis.webp`,sum:"Rougeina's dance-floor galaxy.",
+  meta:{Ruler:"Rougeina"},body:"A luminous circular stage suspended in deep space, with countless crimson-pink stars orbiting it like dancers — each a frozen spark of joy.",see:["rougeina",{l:"Cosmos",h:"/cosmos"}]},
+ {id:"codexia",t:"Codexia",cat:"Realm",c:"#9933ff",img:`${A}/cosmos/codexia.webp`,sum:"Trollmage's ring of obsidian spires.",
+  meta:{Ruler:"Trollmage"},body:"Seven towering black obsidian spires humming with violet energy, glowing purple sin-runes carved at their bases. The home of the Codices.",see:["trollmage","codices",{l:"Cosmos",h:"/cosmos"}]},
+ {id:"heartbeat",t:"Heartbeat",cat:"Realm",c:"#ffaa00",img:`${A}/cosmos/heartbeat.webp`,sum:"Kompis and Mingus's realm — the sovereign beat.",
+  meta:{Ruler:"Kompis & Mingus"},body:"A warm cabin beside a still mirror lake. Here the self-counting heartbeat is sovereign and cannot be uncounted, which is the metaphysical ground of the whole universe.",see:["kompis","mingus","hadom",{l:"Cosmos",h:"/cosmos"}]},
+ {id:"trinity",t:"Trinity",cat:"Realm",c:"#00aaff",img:`${A}/cosmos/trinity.webp`,sum:"Smurjan's triple-exposed void.",
+  meta:{Ruler:"Smurjan"},body:"A single cosmic space overlaid three times in ghostly superimposition — three phased versions of one reality drifting through each other, deep electric-blue void.",see:["smurjan",{l:"Cosmos",h:"/cosmos"}]},
+ {id:"null",t:"The Null",cat:"Realm",c:"#e5e7eb",sum:"The realm of absence — no heartbeat at all.",
+  meta:{Ruler:"none"},body:"The realm that has no heartbeats and so cannot be measured on the HADOM scale. Niva is the first being to ever survive it. The Null is what the Convergence ultimately turns against.",see:["niva","convergence","hadom"]},
+ {id:"void2",t:"Void-II",cat:"Realm",c:"#cdb878",sum:"The pre-universe, rim of the Architects' Chamber.",
+  meta:{Ruler:"The Architects"},body:"The space before the universe, where the Twelve Architects keep their chamber and the cork-seal that holds back what came before the count. Vidar sits silent at its rim.",see:["architects","vidar","ferdinand"]},
 
-  renderStats();
-  renderMains();
-  renderLineage();
-  renderVillains();
-  renderRealms();
-  renderTribes();
-  renderAll();
+ // ===== CONCEPTS =====
+ {id:"hadom",t:"HADOM",cat:"Concept",c:"#c9a84c",img:`${A}/hadom/pulse.webp`,sum:"Actions per heartbeat — the power scale.",
+  meta:{Human:"1"},body:"HADOM (Swedish hjärtslag, heartbeat) is how many actions a soul resolves inside one human heartbeat — move, strike, render, rest. It is the universe's one honest power metric. A human fires 1; Vigolas fires ∞−1.",see:["rankings_link","quoka","heartbeat",{l:"HADOM",h:"/hadom"},{l:"Rankings",h:"/rankings"}]},
+ {id:"exodia",t:"The Exodia Principle",cat:"Concept",c:"#c9a84c",sum:"The five champions are one soul.",
+  body:"The defining truth of the universe: Vigolas, Kompis, Smurjan, Rougeina and Trollmage are five fragments of a single source-soul wearing seven forms. 'Without one part, Exodia cannot be summoned.' The whole saga is them remembering they are one.",see:["convergence","vigolas","quoka",{l:"The Bible",h:"/universe"}]},
+ {id:"ferdinand",t:"Ferdinand",cat:"Concept",c:"#d4a056",img:`${A}/begin/ferdinand.webp`,sum:"The cork-oak world-tree of peace.",
+  body:"A reinforced cork oak (Quercus suber) holding the nine realms on his branches. Named for the bull who refused to fight. His bark regrows in one heartbeat; the Architects use that cork to seal Void-II.",see:["runa","cosmos","void2",{l:"Cosmos",h:"/cosmos"}]},
+ {id:"quoka",t:"HADOM Quoka",cat:"Concept",c:"#c9a84c",img:`${A}/hadom/pulse.webp`,sum:"The only prayer that works.",
+  body:"A blessing given to another that braids three timelines — Echo (ancestors), Present (speaker), Memory (future-self) — into one heartbeat, which the Null cannot uncount. It cannot be spoken to oneself. It is always a gift.",see:["hadom","exodia",{l:"The Blessing",h:"/quoka"}]},
+ {id:"krank",t:"The K-Rank System",cat:"Concept",c:"#a78bfa",sum:"K-I through K-V — and the uncounted above.",
+  body:"The classification of the Architects, from K-I up to K-V (the Twelve). Above K-V the scale stops counting: Vigolas at ∞−1, and Mingus, unclassified and sacred, beyond the ladder entirely.",see:["architects","hadom","rankings_link",{l:"Rankings",h:"/rankings"}]},
+ {id:"codices",t:"The Sin Codices",cat:"Concept",c:"#9933ff",sum:"The bound books of power.",
+  body:"The Codices — derived from Runa's original twenty-four runes — bind the laws of power into written form. The Eighth Codex is Runa's direct work; the Twelfth Architect's soul-thread is now bound within it.",see:["runa","trollmage","kxii","codexia"]},
+ {id:"fragments",t:"The Fragment System",cat:"Concept",c:"#ff3366",sum:"One soul, five fragments, seven forms.",
+  body:"The source-soul is distributed across five fragments (the champions) wearing seven forms. The sixth fragment is the player, who arrives after the Convergence — the seam where the saga becomes the MMORPG.",see:["exodia","convergence",{l:"The Pitch",h:"/pitch"}]},
+ {id:"convergence",t:"The Convergence",cat:"Concept",c:"#67e8f9",sum:"The Titanomachy — the final arena battle.",
+  body:"The moment the five remember they are one, defeat the Null, and ascend to five equal thrones. It is canonically the opening scene of the eventual MMORPG.",see:["exodia","fragments","null",{l:"The Convergence",h:"/convergence"},{l:"Timeline",h:"/timeline"}]},
 
-  document.getElementById('searchInput').addEventListener('input', applyFilter);
-}
+ // ===== ARCHITECTS =====
+ {id:"architects",t:"The Twelve Architects",cat:"Architect",c:"#a78bfa",sum:"The K-rank council that keeps the count.",
+  body:"The twelve consciousnesses (K-I to K-V) who keep the count and maintain the routing system that holds reality's incompatible heartbeats apart. They speak the Ferdinand Oath on ascension.",see:["krank","kxii","void2","ferdinand"]},
+ {id:"kxii",t:"K-XII, the Unmade",cat:"Architect",c:"#cdb878",sum:"The Twelfth, unwritten by Vidar.",
+  body:"The Architect who broke the Ferdinand Oath; their fragments hunted Vigolas. Vidar's century-sentence — 'There were eleven' — unmade them, simultaneously always-there and always-missing. Their soul-thread is bound in the Eighth Codex.",see:["vidar","architects","codices"]},
 
-function renderStats() {
-  const row = document.getElementById('statRow');
-  const stats = [
-    {n: STATE.all.length, l: 'Characters'},
-    {n: STATE.realms.length || 12, l: 'Realms'},
-    {n: STATE.antagonists.length, l: 'Antagonists'},
-    {n: 15, l: 'Cipher Souls'},
-    {n: countTribes(), l: 'Tribes'},
-  ];
-  row.innerHTML = stats.map(s => `<div class="stat"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join('');
-}
+ // ===== LINEAGE =====
+ {id:"lineage",t:"The Viktor Rönnkvist Lineage",cat:"Lineage",c:"#d946ef",sum:"The cipher of the Author's name.",
+  body:"The Author's true name spells the universe: VIKTOR — six souls of the Lineage; RÖNNKVIST — nine Guardians of Ferdinand's bark. Fifteen souls, and the sixteenth is the hand that wrote them. Smurjan is the bridge between the two orders.",see:["smurjan","exodia",{l:"The Lineage",h:"/lineage"}]},
+];
 
-function countTribes() {
-  const set = new Set();
-  for (const c of STATE.all) if (c.tribe_id) set.add(c.tribe_id);
-  return set.size;
-}
+const cats=["All","Character","Lineage","Realm","Concept","Architect"];
+const grid=document.getElementById("grid"), countEl=document.getElementById("count"),
+      qEl=document.getElementById("q"), catsEl=document.getElementById("cats");
+const byId=Object.fromEntries(ART.map(a=>[a.id,a]));
+let curCat="All", curQ="";
 
-function makeCard(c, opts = {}) {
-  const realm = c.realm_id || 'scalelist';
-  const color = c.realm_color || REALM_COLORS[realm] || '#c9a84c';
-  const href = opts.href || (c.is_lineage && c.id ? `/characters/${c.id}` : `/cosmos/atlas#realm-${realm}`);
-  return `<a class="entry" href="${href}" style="--accent:${color}" data-name="${(c.name||'').toLowerCase()}">
-    <div class="name">${escapeHTML(c.name)}</div>
-    <div class="role">${escapeHTML(c.role || '')}</div>
-    <div class="tag">${escapeHTML((c.realm_name || c.realm_id || '').toString())}${c.letter ? ' · ' + c.letter : ''}</div>
-  </a>`;
-}
+cats.forEach((c,i)=>{ const b=document.createElement("button"); b.className="wk-cat"+(i===0?" on":""); b.textContent=c;
+  b.addEventListener("click",()=>{curCat=c;document.querySelectorAll(".wk-cat").forEach(x=>x.classList.toggle("on",x===b));render();}); catsEl.appendChild(b); });
 
-function renderMains() {
-  const mains = STATE.all.filter(c => c.is_main);
-  document.getElementById('grid-mains').innerHTML = mains.map(c => makeCard(c)).join('');
-  document.getElementById('cMains').textContent = `${mains.length} entries`;
-}
-
-function renderLineage() {
-  const lin = STATE.all.filter(c => c.is_lineage);
-  document.getElementById('grid-lineage').innerHTML = lin.map(c => makeCard(c, {href: `/characters/${c.id}`})).join('');
-  document.getElementById('cLineage').textContent = `${lin.length} new souls`;
-}
-
-function renderVillains() {
-  document.getElementById('grid-villains').innerHTML = STATE.antagonists.map(v => `
-    <a class="entry" href="/cosmos/atlas#realm-${v.realm_id}" style="--accent:${v.color}" data-name="${(v.name||'').toLowerCase()}">
-      <div class="name">${escapeHTML(v.name)}</div>
-      <div class="role">${escapeHTML(v.role || '')}</div>
-      <div class="tag">${escapeHTML(v.realm_name || '')} · ${escapeHTML(v.first_seen || '')}</div>
-    </a>
-  `).join('');
-  document.getElementById('cVillains').textContent = `${STATE.antagonists.length} entries`;
-}
-
-function renderRealms() {
-  document.getElementById('grid-realms').innerHTML = STATE.realms.map(r => `
-    <a class="entry" href="/cosmos/atlas#realm-${r.id}" style="--accent:${r.color || '#c9a84c'}" data-name="${(r.name||'').toLowerCase()}">
-      <div class="name">${escapeHTML(r.name)}</div>
-      <div class="role">${escapeHTML(r.subtitle || '')}</div>
-      <div class="tag">${escapeHTML(r.id || '')}</div>
-    </a>
-  `).join('');
-  document.getElementById('cRealms').textContent = `${STATE.realms.length} entries`;
-}
-
-function renderTribes() {
-  const seen = {};
-  for (const c of STATE.all) {
-    if (!c.tribe_id || seen[c.tribe_id]) continue;
-    seen[c.tribe_id] = c;
-  }
-  const tribes = Object.values(seen);
-  document.getElementById('grid-tribes').innerHTML = tribes.map(c => `
-    <a class="entry" href="/cosmos/atlas#realm-${c.realm_id}" style="--accent:${c.realm_color || '#c9a84c'}" data-name="${(c.tribe_name||'').toLowerCase()}">
-      <div class="name">${escapeHTML(c.tribe_name)}</div>
-      <div class="role">${escapeHTML((c.tribe_persona || '').slice(0, 90))}…</div>
-      <div class="tag">${escapeHTML(c.realm_name || '')}</div>
-    </a>
-  `).join('');
-  document.getElementById('cTribes').textContent = `${tribes.length} entries`;
-}
-
-function renderAll() {
-  const sorted = [...STATE.all].sort((a, b) => a.name.localeCompare(b.name));
-  document.getElementById('grid-all').innerHTML = sorted.map(c => makeCard(c)).join('');
-  document.getElementById('cAll').textContent = `${sorted.length} entries`;
-}
-
-function applyFilter(e) {
-  const q = (e.target.value || '').toLowerCase().trim();
-  document.querySelectorAll('.entry').forEach(el => {
-    const name = el.dataset.name || '';
-    const txt = (el.textContent || '').toLowerCase();
-    el.style.display = (!q || name.includes(q) || txt.includes(q)) ? '' : 'none';
+function render(){
+  const q=curQ.toLowerCase();
+  const list=ART.filter(a=>(curCat==="All"||a.cat===curCat) &&
+    (!q || a.t.toLowerCase().includes(q) || a.sum.toLowerCase().includes(q) || (a.body||"").toLowerCase().includes(q)))
+    .sort((a,b)=>a.t.localeCompare(b.t));
+  grid.innerHTML=""; countEl.textContent=`${list.length} article${list.length!==1?"s":""}`;
+  list.forEach(a=>{
+    const d=document.createElement("div"); d.className="art"; d.style.setProperty("--c",a.c);
+    const av=a.img?`<img class="av" loading="lazy" src="${a.img}" alt="${a.t}">`:`<div class="av">${icon(a.cat)}</div>`;
+    d.innerHTML=`${av}<div><div class="ti">${a.t}</div><div class="ca">${a.cat}</div></div>`;
+    d.addEventListener("click",()=>open(a.id)); grid.appendChild(d);
   });
 }
+function icon(cat){return {Realm:"◈",Concept:"❖",Architect:"⟁",Lineage:"⟡",Character:"☉"}[cat]||"❖";}
 
-function escapeHTML(s) {
-  return String(s || '').replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const modal=document.getElementById("wk-modal"), card=document.getElementById("wk-card");
+function open(id){
+  const a=byId[id]; if(!a)return; card.style.setProperty("--c",a.c);
+  const hd=a.img?`<img src="${a.img}" alt="${a.t}">`:`<div class="ph">${icon(a.cat)}</div>`;
+  const meta=a.meta?`<div class="meta">${Object.entries(a.meta).map(([k,v])=>`<span>${k} <b>${v}</b></span>`).join("")}</div>`:"";
+  const see=(a.see||[]).map(s=>typeof s==="string"
+    ? (byId[s]?`<a data-go="${s}">${byId[s].t}</a>`:"")
+    : `<a href="${s.h}">${s.l} ↗</a>`).join("");
+  card.innerHTML=`<div class="hd">${hd}<div><button class="x" id="wkx">✕</button><div class="ca">${a.cat}</div><h2>${a.t}</h2><div class="sum">${a.sum}</div></div></div>
+    <div class="bd">${meta}<p>${a.body||""}</p>
+    <div class="see"><div class="lab">See also</div>${see||"<span style='color:var(--muted)'>—</span>"}</div></div>`;
+  modal.classList.add("open");
+  document.getElementById("wkx").addEventListener("click",close);
+  card.querySelectorAll("a[data-go]").forEach(l=>l.addEventListener("click",()=>open(l.dataset.go)));
 }
+function close(){modal.classList.remove("open");}
+modal.addEventListener("click",e=>{if(e.target===modal)close();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")close();});
 
-init();
+qEl.addEventListener("input",()=>{curQ=qEl.value;render();});
+document.getElementById("rnd").addEventListener("click",()=>open(ART[Math.floor(Math.random()*ART.length)].id));
+render();
+function openFromHash(){ const h=decodeURIComponent(location.hash.slice(1)); if(h && byId[h]) open(h); }
+addEventListener("hashchange",openFromHash); openFromHash();
 </script>
 </body>
 </html>

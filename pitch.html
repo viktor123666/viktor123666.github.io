@@ -2,224 +2,181 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Scalelist Universe — Press Kit & One-Page Pitch</title>
-<meta name="description" content="An anime/manga universe built on a cipher: the Author's true name spells fifteen souls. Five live, ten waiting. A family-staffed media empire.">
-<meta property="og:title" content="Scalelist Universe — Press Kit">
-<meta property="og:description" content="The cipher. The empire. The next franchise.">
-<meta property="og:image" content="https://scalelistuniverse.com/og.png">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scalelist Universe — The Pitch</title>
+<meta name="description" content="A complete transmedia anime universe — manga, music, characters and a game — authored by one person with AI as co-builder. An honest look at what exists, and where it's going.">
+<meta property="og:title" content="Scalelist Universe — The Pitch">
+<meta property="og:description" content="A transmedia anime IP built with AI. A father's legacy.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--gold:#c9a84c; --void:#050510; --panel:#0a0a14; --panel2:#0e0e1a; --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060}
-html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.65}
-a{color:var(--gold);text-decoration:none}
-a:hover{text-decoration:underline}
+  .pt-hero{min-height:min(82vh,680px);position:relative;}
+  .pt-hero::before{content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(5,5,9,.55),rgba(5,5,9,.82) 70%,var(--void)),
+      url('/art/begin/ferdinand.webp') center 30%/cover no-repeat var(--void-2);}
+  .pt-hero .su-cta{margin-top:1.8rem;}
 
-header{padding:18px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
-header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
-header nav{display:flex;gap:18px;flex-wrap:wrap}
-header nav a{color:var(--dim);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:'Cinzel',serif;text-decoration:none}
-header nav a:hover{color:var(--gold)}
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.9rem;margin-top:1rem;}
+  .stat{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.1rem 1rem;text-align:center;}
+  .stat .n{font-family:var(--font-display);font-size:1.9rem;color:var(--gold);line-height:1;}
+  .stat .l{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-top:.4rem;}
 
-.hero{padding:90px 28px 60px;max-width:1100px;margin:0 auto;text-align:center;position:relative}
-.eyebrow{font-family:'Cinzel',serif;color:var(--dim);font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:20px}
-.hero h1{font-family:'Cinzel',serif;font-size:clamp(2.4rem,5.5vw,4.4rem);color:var(--gold);letter-spacing:.06em;font-weight:900;line-height:1.05;margin-bottom:14px;text-shadow:0 0 40px rgba(201,168,76,0.3)}
-.hero h1 em{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:.42em;color:var(--text);letter-spacing:.05em;margin-top:18px;text-shadow:none;opacity:.92}
-.hero .lede{max-width:780px;margin:24px auto 0;font-size:1.18rem;line-height:1.75;font-style:italic;opacity:.92}
+  .hook{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;}
+  .hook .su-card h3{color:var(--accent,var(--gold));}
 
-.section{max-width:1100px;margin:0 auto;padding:50px 28px;border-top:1px solid var(--border)}
-.section h2{font-family:'Cinzel',serif;color:var(--gold);font-size:.95rem;letter-spacing:.32em;text-transform:uppercase;margin-bottom:22px;font-weight:700}
-.section .body p{font-size:1.05rem;line-height:1.8;margin-bottom:14px;opacity:.95}
-.section .body p:last-child{margin-bottom:0}
+  .asset-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin-bottom:1.4rem;}
+  .asset-strip img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;border-radius:var(--radius-sm);border:1px solid var(--border);}
+  @media(max-width:640px){.asset-strip{grid-template-columns:repeat(2,1fr);}}
 
-.numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:24px}
-.num{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;text-align:center}
-.num .n{font-family:'Cinzel',serif;font-weight:900;color:var(--gold);font-size:2.4rem;line-height:1}
-.num .l{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-top:8px}
+  .roadmap{list-style:none;border-left:2px solid var(--border);margin-left:.5rem;}
+  .roadmap li{position:relative;padding:0 0 1.5rem 1.6rem;}
+  .roadmap li::before{content:"";position:absolute;left:-7px;top:.35rem;width:12px;height:12px;border-radius:50%;
+    background:var(--void);border:2px solid var(--gold);}
+  .roadmap li.now::before{background:var(--gold);box-shadow:0 0 14px var(--gold);}
+  .roadmap b{color:#fff;font-family:var(--font-display);}
+  .roadmap .ph{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
 
-.cipher-row{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:22px 0;font-family:'Cinzel',serif}
-.cipher-letter{display:flex;align-items:center;justify-content:center;width:46px;height:56px;border:1px solid var(--border);border-radius:6px;background:var(--panel);font-size:1.4rem;font-weight:900;color:var(--gold);transition:all .25s}
-.cipher-letter.open{border-style:dashed;color:var(--text);opacity:.55}
-.cipher-row-label{text-align:center;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.32em;color:var(--dim);text-transform:uppercase;margin-bottom:14px}
+  .author-note{background:linear-gradient(135deg,rgba(201,168,76,.07),transparent);border:1px solid var(--border);
+    border-radius:var(--radius);padding:1.8rem;text-align:center;}
+  .author-note p{color:var(--text);font-size:1.08rem;max-width:60ch;margin:0 auto;line-height:1.7;}
+  .author-note .sig{font-family:var(--font-display);color:var(--gold);margin-top:1rem;letter-spacing:.05em;}
 
-.quote{margin:24px 0;padding:20px 26px;border-left:3px solid var(--gold);background:rgba(201,168,76,0.05);font-style:italic;font-size:1.1rem;line-height:1.8}
-.quote .attrib{display:block;font-style:normal;font-size:.75rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-top:14px;font-family:'Cinzel',serif}
+  .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.7rem;}
+  .contact-grid a{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;background:var(--panel);
+    border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-weight:600;font-size:.86rem;transition:all .2s;}
+  .contact-grid a:hover{border-color:var(--border-bright);color:var(--gold);transform:translateY(-2px);}
+  .contact-grid .dot{width:9px;height:9px;border-radius:50%;background:var(--c,var(--gold));flex:none;}
 
-.list{margin-top:14px;padding-left:24px}
-.list li{margin-bottom:10px;font-size:1.02rem;line-height:1.7;opacity:.94}
-
-.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:24px}
-.contact .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px}
-.contact .card h3{font-family:'Cinzel',serif;color:var(--gold);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
-.contact .card p{font-size:.95rem;line-height:1.6;color:var(--text);opacity:.92}
-.contact .card a{font-family:'Space Mono',monospace;font-size:.82rem}
-
-.cta{padding:80px 28px;text-align:center;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,0.08),transparent 70%);border-top:1px solid var(--border);margin-top:40px}
-.cta h3{font-family:'Cinzel',serif;color:var(--gold);font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
-.cta .btn{display:inline-block;padding:14px 32px;background:var(--gold);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:.85rem;border-radius:8px;text-decoration:none;transition:transform .2s;margin:6px}
-.cta .btn.outline{background:transparent;border:1px solid var(--gold);color:var(--gold)}
-.cta .btn:hover{transform:scale(1.04)}
-
-footer{padding:30px 24px;text-align:center;border-top:1px solid var(--border);color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase}
-footer a{color:var(--gold)}
+  /* ===== printable one-pager (hidden on screen) ===== */
+  .onepager{display:none;}
+  @media print{
+    @page{size:A4;margin:14mm;}
+    body{padding:0!important;background:#fff!important;color:#111!important;}
+    body>*{display:none!important;}
+    #su-nav,#su-footer,#su-stars,#su-mobile{display:none!important;}
+    .onepager{display:block!important;font-family:Georgia,serif;color:#111;}
+    .onepager h1{font-size:24pt;margin-bottom:2pt;color:#111;}
+    .onepager .tag{font-style:italic;color:#444;margin-bottom:10pt;}
+    .onepager h2{font-size:11pt;letter-spacing:.12em;text-transform:uppercase;color:#8a6f2e;border-bottom:1px solid #ccc;padding-bottom:2pt;margin:12pt 0 5pt;}
+    .onepager ul{margin:0 0 0 16pt;} .onepager li{margin:2pt 0;font-size:10.5pt;}
+    .onepager p{font-size:10.5pt;line-height:1.5;}
+    .onepager .foot{margin-top:14pt;font-size:9.5pt;color:#555;border-top:1px solid #ccc;padding-top:6pt;}
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/empire">Empire</a>
-    <a href="/lineage">Lineage</a>
-    <a href="/wiki">Wiki</a>
-    <a href="/manga">Manga</a>
-  </nav>
+<header class="su-hero pt-hero">
+  <div class="su-kicker su-fade">Transmedia anime universe · built with AI</div>
+  <h1 class="su-fade-2">Scalelist Universe</h1>
+  <p class="su-fade-3">A complete anime/manga world — bible, manga, music, sixteen characters and a game in development — authored by one person with AI as co-builder. Not a hype deck. A real, growing universe, built as a father's legacy for his children.</p>
+  <div class="su-cta su-fade-3">
+    <a class="su-btn" href="#follow">Follow the universe</a>
+    <button class="su-btn-ghost" onclick="window.print()">⬇ One-pager (PDF)</button>
+  </div>
 </header>
 
-<section class="hero">
-  <div class="eyebrow">Press Kit · One-Page Pitch · 2026</div>
-  <h1>SCALELIST UNIVERSE
-    <em>An anime/manga universe built on a cipher. Fifteen souls. One Author. Family-staffed forever.</em>
-  </h1>
-  <p class="lede">
-    The Author's real name is <strong style="color:var(--gold)">Viktor Rönnkvist</strong> —
-    fifteen letters, fifteen souls. The Lineage walks publicly; the Council guards the cosmic
-    cork oak <em>Ferdinand</em>. Five voices already broadcast across YouTube, TikTok, Instagram.
-    Ten more are canon-locked, awaiting blood.
-  </p>
-</section>
+<main class="su-wrap">
 
-<section class="section">
-  <h2>The Numbers</h2>
-  <div class="numbers">
-    <div class="num"><div class="n">15</div><div class="l">Cipher Souls</div></div>
-    <div class="num"><div class="n">125</div><div class="l">Named Characters</div></div>
-    <div class="num"><div class="n">12</div><div class="l">Realms</div></div>
-    <div class="num"><div class="n">240+</div><div class="l">Manga Chapters</div></div>
-    <div class="num"><div class="n">5</div><div class="l">Live YouTube Channels</div></div>
-    <div class="num"><div class="n">$0</div><div class="l">Forever-mode Cost</div></div>
-  </div>
-</section>
+  <section class="su-section">
+    <div class="su-section-title">What exists today</div>
+    <div class="stat-grid reveal">
+      <div class="stat"><div class="n">119</div><div class="l">Manga chapters</div></div>
+      <div class="stat"><div class="n">16</div><div class="l">Canon characters</div></div>
+      <div class="stat"><div class="n">5</div><div class="l">Trained LoRA models</div></div>
+      <div class="stat"><div class="n">5</div><div class="l">Character channels</div></div>
+      <div class="stat"><div class="n">1</div><div class="l">MMO in dev (Godot)</div></div>
+    </div>
+    <p class="su-dim" style="margin-top:1rem;font-size:.85rem;">Honest framing: this is an early-stage, independently-built IP. Every asset above is real and live or in active development — nothing here is a mockup.</p>
+  </section>
 
-<section class="section">
-  <h2>The Cipher</h2>
-  <p class="body" style="margin-bottom:18px">The Author's true name spells the empire. Each letter is a soul. The cipher is read on
-  <a href="/lineage">the Lineage page</a>.</p>
-  <div class="cipher-row-label">— Viktor (six champions who walk) —</div>
-  <div class="cipher-row">
-    <div class="cipher-letter">V</div>
-    <div class="cipher-letter open">I</div>
-    <div class="cipher-letter">K</div>
-    <div class="cipher-letter">T</div>
-    <div class="cipher-letter open">O</div>
-    <div class="cipher-letter">R</div>
-  </div>
-  <div class="cipher-row-label">— Rönnkvist (nine guardians of Ferdinand) —</div>
-  <div class="cipher-row">
-    <div class="cipher-letter open">R</div>
-    <div class="cipher-letter open">Ö</div>
-    <div class="cipher-letter open">N</div>
-    <div class="cipher-letter open">N</div>
-    <div class="cipher-letter open">K</div>
-    <div class="cipher-letter open">V</div>
-    <div class="cipher-letter open">I</div>
-    <div class="cipher-letter">S</div>
-    <div class="cipher-letter open">T</div>
-  </div>
-  <p class="body" style="margin-top:14px;color:var(--dim);font-style:italic">
-    Solid: live. Dashed: open seat — written into canon, awaiting a real Rönnkvist family
-    member to walk into the role.
-  </p>
-</section>
+  <section class="su-section">
+    <div class="su-section-title">Why it's different</div>
+    <div class="hook">
+      <div class="su-card" style="--accent:var(--vigolas)"><h3>The Exodia Principle</h3><p>The five champions aren't five heroes — they're five fragments of one source-soul. The whole series is the story of them remembering they are one. A built-in mythological spine most IPs never have.</p></div>
+      <div class="su-card" style="--accent:var(--rougeina)"><h3>The Cipher</h3><p>The Author's real name — Viktor Rönnkvist — spells fifteen souls, letter by letter. He is the sixteenth. The universe's structure is hidden inside the creator's own name.</p></div>
+      <div class="su-card" style="--accent:var(--smurjan)"><h3>HADOM</h3><p>One original power system: actions per heartbeat. Every character ranks on one honest scale, from a human's single beat to the infinite-folded. Clean, ownable, merch-and-game ready.</p></div>
+      <div class="su-card" style="--accent:var(--kompis)"><h3>Ferdinand &amp; the realms</h3><p>A cosmology with a soul: a cork-oak world-tree of peace holding nine realms. Whole, mapped, and already rendered — <a href="/cosmos">explore it</a>.</p></div>
+    </div>
+  </section>
 
-<section class="section">
-  <h2>The Pitch — One Sentence</h2>
-  <div class="quote">
-    A family-staffed anime/manga universe where every character is a letter of the
-    Author's true name, and every channel is one of those letters speaking.
-    <span class="attrib">— Viktor Rönnkvist (Vigolas), Author</span>
-  </div>
-</section>
+  <section class="su-section">
+    <div class="su-section-title">The assets</div>
+    <div class="asset-strip reveal">
+      <img loading="lazy" src="/characters/art/vigolas/vigolas_keyart.webp" alt="Vigolas key-art">
+      <img loading="lazy" src="/characters/art/rougeina/rougeina_hero.webp" alt="Rougeina">
+      <img loading="lazy" src="/characters/art/smurjan/smurjan_keyart.webp" alt="Smurjan key-art">
+      <img loading="lazy" src="/characters/art/mingus/mingus_keyart.webp" alt="Mingus key-art">
+    </div>
+    <div class="su-grid">
+      <div class="su-card"><h3>Manga</h3><p>119 chapters published with a custom web reader — <a href="/manga">read now</a>. New seasons produced on a repeatable pipeline.</p></div>
+      <div class="su-card"><h3>Characters</h3><p>16 canon souls with locked, reference-consistent art across full galleries — <a href="/gallery">see the gallery</a>. 5 trained LoRA models for infinite on-model output.</p></div>
+      <div class="su-card"><h3>Music</h3><p>An original catalogue — a distinct musical identity per character, from Sámi-jojk hardstyle to void-cosmic.</p></div>
+      <div class="su-card"><h3>The Game</h3><p>An MMORPG in active development in Godot — canonically the opening scene of the universe's climax, the Convergence. The player is the sixth fragment.</p></div>
+      <div class="su-card"><h3>The Canon</h3><p>A full written bible — two master pillars, a cosmology, a lineage, and dozens of locked lore documents. The world is finished on paper.</p></div>
+      <div class="su-card"><h3>The Pipeline</h3><p>Built on AI tooling (Higgsfield, Civitai, local models) with automated daily content. One author can run a studio-sized output.</p></div>
+    </div>
+  </section>
 
-<section class="section">
-  <h2>The Moat</h2>
-  <p class="body">Marvel cannot copy this. DC cannot copy this. They invented characters and paid writers to
-  forget them. <strong style="color:var(--gold)">Our characters are blood.</strong></p>
-  <p class="body">When Aunt Linnea performs Isa, when Cousin Markus performs Tova, when Grandfather Ole
-  voices Vidar — that performance carries a weight no studio can manufacture. The empire's
-  gravity well isn't a budget. It's a family.</p>
-  <p class="body">Every channel grows the gravity well for every other channel. Every viewer who
-  recognizes one face is one Google search away from the other fourteen. The recognition
-  compounds. Marvel needed 80 years and a billion dollars; we have a cipher and a cron job.</p>
-</section>
+  <section class="su-section">
+    <div class="su-section-title">Traction — honestly</div>
+    <div class="su-card reveal">
+      <p>Live at <a href="https://scalelistuniverse.com">scalelistuniverse.com</a>. Five character channels publish regularly; the flagship channel sits around <strong>8,800 subscribers</strong>. 119 chapters are out, music is shipping, and a daily automated pipeline keeps the world growing without a team. This is the honest starting line — small, real, and compounding. The value is the <em>complete, ownable IP</em> sitting underneath it, ready to scale.</p>
+    </div>
+  </section>
 
-<section class="section">
-  <h2>What's Already Live</h2>
-  <ul class="list">
-    <li><strong style="color:var(--gold)">Five YouTube channels</strong> broadcasting daily across Vigolas, Rougeina, Trollmage, Kompis, Smurjan</li>
-    <li><strong style="color:var(--gold)">240+ manga chapters</strong> readable at <a href="/manga">scalelistuniverse.com/manga</a></li>
-    <li><strong style="color:var(--gold)">Four full TV-style seasons</strong> in canon (Origins OVA, S1 Rougeina, S2 Trollmage, S3 Stormcoast Reckoning, S4 Fates Unravel)</li>
-    <li><strong style="color:var(--gold)">Interactive realm map</strong> at <a href="/cosmos">scalelistuniverse.com/cosmos</a> — 12 cosmic realms, 125 named characters</li>
-    <li><strong style="color:var(--gold)">Cross-channel discovery hub</strong> at <a href="/empire">scalelistuniverse.com/empire</a></li>
-    <li><strong style="color:var(--gold)">Solo Leveling-style anime portraits</strong> for every character (free Pollinations.ai pipeline, autonomous re-generation every 6 hours via GitHub Actions)</li>
-    <li><strong style="color:var(--gold)">Original soundtrack</strong> with character-specific genres (Sami throat-singing hardstyle, Jamaican dark trap, void-cosmic, more)</li>
-    <li><strong style="color:var(--gold)">Custom-trained character LoRAs</strong> on HuggingFace for image consistency across thousands of generations</li>
+  <section class="su-section">
+    <div class="su-section-title">The roadmap</div>
+    <ul class="roadmap reveal">
+      <li class="now"><span class="ph">Now</span><br><b>Manga + characters + canon</b> — published, consistent, live.</li>
+      <li><span class="ph">Next</span><br><b>Music albums + animated shorts</b> per character, on the existing pipeline.</li>
+      <li><span class="ph">Then</span><br><b>The Convergence</b> — the Titanomachy, released as the launch cinematic.</li>
+      <li><span class="ph">The horizon</span><br><b>The MMORPG</b> — players arrive as the sixth fragment, after the Convergence.</li>
+    </ul>
+  </section>
+
+  <section class="su-section">
+    <div class="author-note reveal">
+      <p>The Scalelist Universe is being built in its author's lifetime, with AI as his co-builder, so that his children inherit a finished world — not an idea, but a place they can walk into. Everything here is made to outlast the making of it.</p>
+      <div class="sig">— Vigolas, the Author · HADOM Quoka ツ</div>
+    </div>
+  </section>
+
+  <section class="su-section" id="follow">
+    <div class="su-section-title">Follow · partner · reach out</div>
+    <div class="contact-grid reveal">
+      <a href="https://scalelistuniverse.com"><span class="dot"></span>scalelistuniverse.com</a>
+      <a href="mailto:vigge.holmstrom@gmail.com"><span class="dot"></span>Contact the Author</a>
+      <a href="https://www.youtube.com/@Vigolas-Scalelist"><span class="dot" style="--c:var(--vigolas)"></span>Vigolas · YouTube</a>
+      <a href="https://www.youtube.com/@Rougeina-RaveLooks"><span class="dot" style="--c:var(--rougeina)"></span>Rougeina · YouTube</a>
+      <a href="https://www.youtube.com/@Kompis-scale"><span class="dot" style="--c:var(--kompis)"></span>Kompis · YouTube</a>
+      <a href="https://www.youtube.com/@Smurjan"><span class="dot" style="--c:var(--smurjan)"></span>Smurjan · YouTube</a>
+      <a href="https://www.youtube.com/@trollmage7709"><span class="dot" style="--c:var(--trollmage)"></span>Trollmage · YouTube</a>
+      <a href="/gallery"><span class="dot"></span>The Character Gallery</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- printable one-pager -->
+<div class="onepager">
+  <h1>Scalelist Universe</h1>
+  <div class="tag">A transmedia anime universe — manga, music, 16 characters and a game — built by one author with AI, as a legacy.</div>
+  <h2>What it is</h2>
+  <p>A complete, original anime/manga IP with a finished written canon. Five champions are fragments of one soul (the Exodia Principle); the Author's own name is the cipher for all sixteen characters. One ownable power system, HADOM — actions per heartbeat.</p>
+  <h2>What exists today</h2>
+  <ul>
+    <li>119 manga chapters, published with a custom web reader</li>
+    <li>16 canon characters with locked, reference-consistent art + 5 trained LoRA models</li>
+    <li>Original music catalogue — a distinct identity per character</li>
+    <li>An MMORPG in active development (Godot) — the universe's climax, playable</li>
+    <li>5 character channels (flagship ~8,800 subscribers) + a daily AI content pipeline</li>
+    <li>Full canon bible: two master pillars, a cosmology, a lineage, dozens of locked docs</li>
   </ul>
-</section>
-
-<section class="section">
-  <h2>What's Coming</h2>
-  <ul class="list">
-    <li><strong style="color:var(--gold)">Season 5 — The Branches Unfurl</strong> (25 chapters) — debut arcs for all 10 newly-canonized lineage souls. <a href="/02_Stories/SEASON_5_SKELETON.md">Read the skeleton →</a></li>
-    <li><strong style="color:var(--gold)">Season 6 — The Twelve-City Convergence</strong> — every realm walks to Scalelist's twelve-city road</li>
-    <li><strong style="color:var(--gold)">Family casting</strong> — real Rönnkvist family members stepping into the open seats. Each one a new live channel. Each one a new gravity well.</li>
-    <li><strong style="color:var(--gold)">Print volumes</strong> — bound editions of S1–S4 + Origins OVA. KDP pipeline already built.</li>
-    <li><strong style="color:var(--gold)">Continuous autonomous generation</strong> via GitHub Actions cron + free APIs — the empire grows even when no one is at a desk.</li>
-  </ul>
-</section>
-
-<section class="section">
-  <h2>The Author</h2>
-  <p class="body">Viktor "Vigge" Rönnkvist Holmström. Sweden. Independent worldbuilder. Builds the
-  Scalelist Universe in partnership with YWAPOS — a long-running creative orchestration
-  system. The Author writes canon; the orchestration system extends, illustrates, voices,
-  and publishes within the canon's bounds.</p>
-  <div class="quote">
-    Yet we are part of something. HADOM Quoka.
-    <span class="attrib">— The Empire's anthem</span>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Contact</h2>
-  <div class="contact">
-    <div class="card">
-      <h3>General / Press</h3>
-      <p><a href="mailto:vigge.holmstrom@gmail.com">vigge.holmstrom@gmail.com</a></p>
-    </div>
-    <div class="card">
-      <h3>Family Casting</h3>
-      <p>By introduction only. The handoff protocol is documented in <code>MYTHOS_MODE.md</code>; queries go to the same email.</p>
-    </div>
-    <div class="card">
-      <h3>Web</h3>
-      <p><a href="https://scalelistuniverse.com" target="_blank">scalelistuniverse.com</a></p>
-    </div>
-  </div>
-</section>
-
-<section class="cta">
-  <h3>Read the Cipher</h3>
-  <a href="/lineage" class="btn">The Lineage</a>
-  <a href="/empire" class="btn outline">The Empire Hub</a>
-  <a href="/manga" class="btn outline">The Manga</a>
-</section>
-
-<footer>
-  Scalelist Universe · Press Kit · 2026 · <a href="/">Home</a> · HADOM Quoka
-</footer>
+  <h2>Why it matters</h2>
+  <p>A studio-scale, ownable IP produced by a single author with AI — finished on paper, growing in public, and ready to scale into animation, games and merchandise.</p>
+  <div class="foot">scalelistuniverse.com · vigge.holmstrom@gmail.com · Built with YWAPOS · © Vigolas</div>
+</div>
 
 </body>
 </html>
