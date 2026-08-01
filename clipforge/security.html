@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Security — ClipForge</title>
+<meta name="description" content="How sign-in works, how we hold your footage, what we do not have, and what happens if we are breached."/>
+<link rel="stylesheet" href="/clipforge/cf.css"/>
+<script defer src="/clipforge/cf.js"></script>
+<style>
+.flow{border:1px solid var(--edge);counter-reset:s}
+.fs{display:grid;grid-template-columns:2.6rem 1fr;gap:1.1rem;padding:1.2rem 1.3rem;
+  border-bottom:1px solid var(--edge)}
+.fs:last-child{border-bottom:0}
+.fs .ix{font-family:var(--mono);font-size:.72rem;color:var(--gold);padding-top:.2rem}
+.fs b{display:block;margin-bottom:.35rem;font-size:.98rem}
+.fs p{margin:0;color:var(--dim);font-size:.91rem;line-height:1.62;max-width:62ch}
+.fs code{font-family:var(--mono);font-size:.82rem;color:var(--gold2)}
+table.s{width:100%;border-collapse:collapse;font-size:.88rem}
+table.s th,table.s td{padding:.6rem .85rem;border:1px solid var(--edge);text-align:left}
+table.s th{background:var(--bg2);font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim2);font-weight:500}
+table.s td{color:var(--dim)}
+table.s td:first-child{color:var(--ink)}
+.clock{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));border:1px solid var(--edge)}
+.ck{padding:1.3rem 1.4rem;border-right:1px solid var(--edge)}
+.ck:last-child{border-right:0}
+.ck .when{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:.6rem}
+.ck ul{margin:0;padding-left:1.05rem;color:var(--dim);font-size:.88rem;line-height:1.65}
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<header class="cf"></header>
+
+<section class="first"><div class="w">
+  <div class="head rv" style="max-width:48ch">
+    <span class="lbl">Security</span>
+    <h1 style="font-size:clamp(1.7rem,3.6vw,2.4rem)">How we hold your footage</h1>
+    <p class="lede">Including the parts we do not have. A security page that lists only
+      strengths is marketing.</p>
+  </div>
+
+  <div class="note ok rv">
+    <span class="lbl">The strongest control is architectural</span>
+    <ul><li>Your source video is deleted when you collect your clips — at the latest after
+      seven days. Clips last thirty. <b>A breach can only expose data that still exists</b>,
+      and that single design decision removes more risk than any firewall we could buy.</li></ul>
+  </div>
+</div></section>
+
+<!-- SIGN IN -->
+<section><div class="w">
+  <div class="head rv">
+    <span class="lbl">Sign in</span>
+    <h2>No passwords, anywhere</h2>
+    <p>We never create, store or ask for a password — so there is no password database to leak,
+      no reuse risk, and no reset flow to get wrong.</p>
+  </div>
+  <div class="flow rv">
+    <div class="fs"><span class="ix">01</span><div><b>You enter your email</b>
+      <p>We generate 32 bytes of cryptographic randomness and store only its
+        <code>SHA-256</code> hash. The raw token exists in exactly one place: the email we
+        just sent you.</p></div></div>
+    <div class="fs"><span class="ix">02</span><div><b>You click the link</b>
+      <p>Valid for fifteen minutes and usable once. Expired, reused or unknown tokens all
+        return the same generic response, so the page cannot be used to discover which email
+        addresses have accounts.</p></div></div>
+    <div class="fs"><span class="ix">03</span><div><b>A session is created</b>
+      <p>An opaque identifier in an <code>httpOnly · Secure · SameSite</code> cookie — never a
+        token in browser storage where a script could read it. The session lives server-side,
+        which means we can revoke every session everywhere, instantly.</p></div></div>
+    <div class="fs"><span class="ix">04</span><div><b>First sign-in creates the account</b>
+      <p>There is no separate signup form. The same link that signs you in creates your
+        account and grants the free hour — one less flow to secure.</p></div></div>
+  </div>
+  <div class="note rv" style="margin-top:1.4rem">
+    <span class="lbl">The honest trade-off</span>
+    <ul><li>Passwordless means <b>your account security equals your email security</b>. That is
+      better than most passwords in practice, but it is one factor. If you need a second, ask
+      us — we will prioritise it for Studio customers.</li></ul>
+  </div>
+</div></section>
+
+<!-- CREDITS -->
+<section><div class="w">
+  <div class="head rv">
+    <span class="lbl">Credits</span>
+    <h2>Charged on completion, never on submission</h2>
+    <p>Billing is measured in minutes of source material, shown to you as hours.</p>
+  </div>
+  <table class="s rv">
+    <tr><th>Rule</th><th>Value</th><th>Why</th></tr>
+    <tr><td>Billing unit</td><td>1 minute of source</td><td>Hour-rounding punishes short uploads</td></tr>
+    <tr><td>Minimum per job</td><td>10 minutes</td><td>Stops tiny uploads flooding the queue at no cost</td></tr>
+    <tr><td>Maximum per job</td><td>12 hours</td><td>Matches storage and queue limits</td></tr>
+    <tr><td>Charged</td><td>on success only</td><td>A failed job costs you nothing</td></tr>
+    <tr><td>Shorts produced</td><td>does not affect price</td><td>Compute follows source length, so price should too</td></tr>
+    <tr><td>Top-up credits</td><td>never expire</td><td>Spent after your monthly allowance, so you never lose what you paid extra for</td></tr>
+  </table>
+  <div class="note rv" style="margin-top:1.4rem">
+    <span class="lbl">How a job reserves credit</span>
+    <ul><li>On submit we place a <b>hold</b> for the estimated length and refuse the job if your
+      available balance is short. On completion the hold converts to a charge using the
+      <b>actual measured</b> duration and the difference is released. If the job fails, the
+      whole hold is released. Without this, ten long jobs could be queued against one hour of
+      balance.</li></ul>
+  </div>
+</div></section>
+
+<!-- CONTROLS -->
+<section><div class="w">
+  <div class="head rv"><span class="lbl">Controls</span><h2>What protects what</h2></div>
+  <table class="s rv">
+    <tr><th>Layer</th><th>Control</th></tr>
+    <tr><td>Upload</td><td>Your file goes straight from your browser to storage with a signed,
+      expiring URL. It never passes through our application server.</td></tr>
+    <tr><td>Download</td><td>Signed URLs with short expiry. No bucket is ever public.</td></tr>
+    <tr><td>Payments</td><td>Handled entirely by Stripe on their pages.
+      <b>Card details never touch our systems.</b></td></tr>
+    <tr><td>Transport</td><td>TLS everywhere, HSTS.</td></tr>
+    <tr><td>Database</td><td>Row-level security — a query cannot reach another account's rows
+      even if application logic is wrong.</td></tr>
+    <tr><td>Auth gate</td><td>Fails <b>closed</b>. A broken verifier denies access; it never
+      defaults to allowing it.</td></tr>
+    <tr><td>Secrets</td><td>Environment only, never committed, rotated on staff change.</td></tr>
+    <tr><td>Voice profiles</td><td>Stored as a numeric vector, not audio. It cannot be played
+      back or turned into a voice. Deletion is immediate and permanent.</td></tr>
+  </table>
+</div></section>
+
+<!-- WHAT WE LACK -->
+<section><div class="w">
+  <div class="head rv"><span class="lbl">Gaps</span><h2>What we do not have</h2>
+    <p>You are entitled to know this before trusting us with anything.</p></div>
+  <div class="note warn rv">
+    <span class="lbl">Missing, as of today</span>
+    <ul>
+      <li>No SOC 2, no ISO 27001, and no third-party penetration test.</li>
+      <li>No web application firewall beyond host-level intrusion blocking.</li>
+      <li>No bug bounty programme.</li>
+      <li>No two-factor authentication yet — sign-in is one factor.</li>
+      <li>One region, one render cluster. <b>We therefore offer no uptime guarantee</b>,
+        because we could not honestly honour one.</li>
+      <li>No formal on-call rotation. Out of hours, response is best-effort.</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- BREACH -->
+<section><div class="w">
+  <div class="head rv">
+    <span class="lbl">Incident response</span>
+    <h2>If we are breached</h2>
+    <p>Written down in advance, because the middle of an incident is the worst time to decide
+      what to do.</p>
+  </div>
+  <div class="clock rv">
+    <div class="ck"><div class="when">Hour 0–1 · contain</div>
+      <ul><li>Revoke every session everywhere</li><li>Rotate all keys and secrets</li>
+        <li>Pause uploads and the queue</li><li>Ship logs off-box before anything is touched</li>
+        <li>Invalidate all signed links</li></ul></div>
+    <div class="ck"><div class="when">Hour 1–24 · assess</div>
+      <ul><li>Establish exactly which data classes were reachable</li>
+        <li>Most source video will already be deleted by retention</li>
+        <li>Preserve evidence for the authority</li></ul></div>
+    <div class="ck"><div class="when">Within 72 hours · notify</div>
+      <ul><li>Swedish authority (IMY), as GDPR requires</li>
+        <li>Affected users without undue delay</li>
+        <li>Plain language: what happened, what data, what we did, what you should do</li></ul></div>
+    <div class="ck"><div class="when">After · publish</div>
+      <ul><li>Rebuild from clean images, not by cleaning the compromised host</li>
+        <li>Public post-mortem with a timeline</li>
+        <li>Reputation survives handled breaches — not hidden ones</li></ul></div>
+  </div>
+  <p class="lbl rv" style="margin-top:1.2rem">Report a vulnerability:
+    <span class="gld mono">security@scalelistuniverse.com</span> — we will not pursue anyone
+    acting in good faith</p>
+</div></section>
+
+<section><div class="w">
+  <div class="head rv" style="max-width:42ch">
+    <span class="lbl">Questions</span>
+    <h2>Ask us anything about this</h2>
+    <p>If something here is unclear or you need it in a signed document, write to us.</p>
+  </div>
+  <div class="acts rv">
+    <a class="b2" href="/clipforge/dpa.html">Data processing terms</a>
+    <a class="b2" href="/clipforge/privacy.html">Privacy notice</a>
+  </div>
+  <div class="note warn rv" style="margin-top:2rem">
+    <span class="lbl">Status</span>
+    <ul><li>ClipForge is pre-launch. This page describes the design as built and intended. The
+      data protection impact assessment required for voice profiles, and a Swedish legal
+      review, are both still outstanding — and both must be complete before we process anyone
+      else's footage.</li></ul>
+  </div>
+</div></section>
+
+<footer class="cf"></footer>
+</body>
+</html>

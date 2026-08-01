@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Workspace — ClipForge</title>
+<meta name="description" content="Upload a stream, watch each measured stage, and collect your finished shorts."/>
+<link rel="stylesheet" href="/clipforge/cf.css"/>
+<script defer src="/clipforge/cf.js"></script>
+<style>
+.drop{border:1px dashed var(--edge2);background:var(--bg2);padding:3.4rem 1.5rem;text-align:center;
+  cursor:pointer;transition:border-color .2s,background .2s}
+.drop:hover,.drop.hot{border-color:var(--gold);background:rgba(217,165,49,.05)}
+.drop .ic{font-family:var(--mono);font-size:1.5rem;color:var(--gold);margin-bottom:.8rem}
+.drop h2{margin:0 0 .4rem;font-size:1.15rem}
+.drop p{margin:0 0 1.4rem;color:var(--dim2);font-family:var(--mono);font-size:.76rem}
+.or{display:flex;align-items:center;gap:1rem;margin:1.5rem 0;color:var(--dim2)}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--edge)}
+.or span{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em}
+.urow{display:flex;gap:.6rem;flex-wrap:wrap}
+.urow input{flex:1;min-width:17rem}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));border:1px solid var(--edge);margin:1.6rem 0}
+.opt{padding:1.1rem 1.2rem;border-right:1px solid var(--edge)}
+.opt:last-child{border-right:0}
+.gauge{display:grid;gap:0;border:1px solid var(--edge)}
+.gr{display:grid;grid-template-columns:1.6rem 1fr 5.5rem;gap:.9rem;align-items:center;
+  padding:.85rem 1.1rem;border-bottom:1px solid var(--edge);font-size:.92rem}
+.gr:last-child{border-bottom:0}
+.gr .d{width:.55rem;height:.55rem;background:var(--edge2);justify-self:center}
+.gr.go{background:rgba(217,165,49,.06)}
+.gr.go .d{background:var(--gold);animation:bl 1s ease-in-out infinite}
+.gr.ok .d{background:var(--sig)}
+.gr .why{color:var(--dim2);font-size:.83rem;display:block;margin-top:.1rem}
+.gr .t{font-family:var(--mono);font-size:.72rem;color:var(--dim2);text-align:right}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.25}}
+.bar{height:2px;background:var(--edge);overflow:hidden;margin:0}
+.bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .6s}
+.clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(12.5rem,1fr));gap:1px;
+  background:var(--edge);border:1px solid var(--edge)}
+.clip{background:var(--panel);transition:background .2s;opacity:0;animation:in .5s forwards}
+@keyframes in{to{opacity:1}}
+.clip:hover{background:var(--bg2)}
+.clip .th{aspect-ratio:9/16;background:linear-gradient(170deg,#16191c,#0a0b0c);
+  display:grid;place-items:center;color:var(--dim2);font-family:var(--mono);position:relative}
+.clip .sc{position:absolute;top:.5rem;left:.5rem;font-family:var(--mono);font-size:.64rem;
+  color:var(--gold2);border:1px solid var(--edge2);padding:.1rem .35rem;background:rgba(0,0,0,.6)}
+.clip .mt{padding:.7rem .8rem}
+.clip .mt b{display:block;font-size:.85rem;font-weight:500;line-height:1.35}
+.clip .mt span{font-family:var(--mono);font-size:.68rem;color:var(--dim2)}
+.why-list{border:1px solid var(--edge);margin-top:1rem}
+.why-list .wr{padding:.7rem 1rem;border-bottom:1px solid var(--edge);font-family:var(--mono);
+  font-size:.76rem;color:var(--dim);display:flex;gap:.8rem;flex-wrap:wrap}
+.why-list .wr:last-child{border-bottom:0}
+.why-list .wr b{color:var(--gold2);font-weight:500}
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<header class="cf" data-cta="app"></header>
+
+<section class="first"><div class="w">
+  <div class="head rv" style="max-width:46ch;margin-bottom:2rem">
+    <span class="lbl">Workspace</span>
+    <h1 style="font-size:clamp(1.7rem,3.6vw,2.4rem)">Turn a stream into shorts</h1>
+    <p>Upload once. Everything heavy runs on our servers — close the tab if you like.</p>
+  </div>
+
+  <div class="panel rv" style="margin-bottom:1.4rem">
+    <div class="ph"><span class="t">CREDITS <b id="cred">1.0 h</b></span>
+      <span class="t">PLAN <b>Free</b></span>
+      <span class="t" style="margin-left:auto"><a href="/clipforge/pricing.html" class="gld">Add credits →</a></span></div>
+  </div>
+
+  <!-- SOURCE -->
+  <div id="src">
+    <div class="drop" id="drop">
+      <div class="ic">[ ↑ ]</div>
+      <h2>Drop a stream file here</h2>
+      <p>MP4 · MKV · MOV · WEBM — UP TO 12 HOURS</p>
+      <button class="b1" type="button" id="pick">Choose file</button>
+      <input type="file" id="file" accept="video/*" class="hide"/>
+    </div>
+    <div class="or"><span>OR PASTE A LINK — YOUTUBE · TWITCH · KICK</span></div>
+    <div class="urow">
+      <input type="text" id="url" placeholder="youtube.com/watch?v=…   twitch.tv/videos/…   kick.com/…"/>
+      <button class="b2" type="button" id="fetch">Fetch</button>
+    </div>
+
+    <div class="opts">
+      <div class="opt"><label class="fl" for="lang">Language</label>
+        <select id="lang"><option value="sv" selected>Swedish + English mixed</option>
+          <option value="en">English</option><option value="auto">Detect</option></select>
+        <div class="hint">Mid-sentence switching is expected.</div></div>
+      <div class="opt"><label class="fl">Shorts produced</label>
+        <div class="mono" style="padding:.75rem 0 .1rem;color:var(--gold2);font-size:.95rem">
+          Decided by the stream</div>
+        <div class="hint">Every moment that clears the bar becomes a short — no quota to fill
+          and none discarded to hit a number.</div></div>
+      <div class="opt"><label class="fl" for="focus">Focus on</label>
+        <input type="text" id="focus" placeholder="voice profile name"/>
+        <div class="hint">Favours clips with that person.</div></div>
+      <div class="opt"><label class="fl" for="len">Clip length</label>
+        <select id="len"><option value="auto" selected>Content-driven</option>
+          <option value="short">Short (&lt; 30 s)</option><option value="long">Long (45–60 s)</option></select>
+        <div class="hint">Content-driven retains best.</div></div>
+    </div>
+
+    <button class="b1" type="button" id="go" style="width:100%;padding:1rem">Start clipping →</button>
+    <p class="hint" style="text-align:center;margin-top:.8rem">
+      Your file is deleted once you collect the results. We never train on your content.</p>
+  </div>
+
+  <!-- RUNNING -->
+  <div id="run" class="hide">
+    <div class="panel">
+      <div class="ph"><span class="t">PROCESSING <b id="runName">stream.mp4</b></span>
+        <span class="t" id="eta" style="margin-left:auto">estimating…</span></div>
+      <div class="bar"><i id="fill"></i></div>
+      <div class="gauge" id="gauge"></div>
+    </div>
+    <p class="hint" style="margin-top:1rem">We will email you when it is done. Nothing runs on
+      your machine — you can close this tab safely.</p>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="out" class="hide">
+    <div class="panel" style="margin-bottom:1.2rem">
+      <div class="ph"><span class="t">DELIVERED <b id="outName">stream.mp4</b></span>
+        <span class="tag ok" style="margin-left:auto">QUALITY GATE PASSED</span></div>
+      <div class="pb" style="display:flex;gap:1.6rem;flex-wrap:wrap">
+        <span class="t mono" style="font-size:.78rem;color:var(--dim)">CAPTION COVERAGE <b class="gld">83 %</b></span>
+        <span class="t mono" style="font-size:.78rem;color:var(--dim)">PIXEL CHECK <b class="gld">24/24</b></span>
+        <span class="t mono" style="font-size:.78rem;color:var(--dim)">WORDS CENSORED <b class="gld">7</b></span>
+        <span class="t mono" style="font-size:.78rem;color:var(--dim)">MOMENTS BLOCKED <b class="gld">5</b></span>
+      </div>
+    </div>
+    <div class="clips" id="clipGrid"></div>
+    <div class="why-list rv" id="whyList"></div>
+    <div class="acts" style="margin-top:1.4rem">
+      <button class="b1" type="button">Download all</button>
+      <button class="b2" type="button">Publish to YouTube</button>
+      <button class="b2" type="button">Publish to TikTok</button>
+      <button class="b2" type="button" id="again">Clip another</button>
+    </div>
+  </div>
+
+  <div class="note warn rv" style="margin-top:2.5rem">
+    <span class="lbl">Demo mode</span>
+    <ul><li>This workspace walks the real pipeline using sample data. The engine behind it is
+      built and has processed full-length streams — upload and the job queue are the remaining
+      wiring. Nothing here charges you.</li></ul>
+  </div>
+</div></section>
+
+<footer class="cf"></footer>
+<script>
+(function(){
+  const STEPS=[
+    ["Read the source","resolution and frame rate from the file",4],
+    ["Clean the audio","speech isolation, de-click, loudness",300],
+    ["Transcribe","game-aware vocabulary",900],
+    ["Identify speakers","cohort-normalised voice matching",360],
+    ["Hunt highlights","laughter, hype density, game events",40],
+    ["Cut for context","sentences finish, length follows content",10],
+    ["Caption and render","karaoke subs, titles, progress bar",840],
+    ["Quality gate","pixel-verify the text is on screen",4]
+  ];
+  const CLIPS=[["The knife pull","0:34",94,"case density 5 · laughter 1.4×"],
+    ["Everyone lost it","0:41",91,"laughter 1.4× · 3 voices"],
+    ["Clutch 1v3","0:28",88,"hype 4 / 20 s · energy peak"],
+    ["The case run","0:52",85,"case density 4 · laughter 0.9×"],
+    ["He never saw it","0:37",81,"hype 3 / 20 s"],
+    ["Called it early","0:45",78,"laughter 1.1× · 2 voices"],
+    ["Back-to-back","0:31",74,"hype 3 / 20 s"],
+    ["Full team wipe","0:49",71,"energy peak · hype 2"],
+    ["Told you so","0:26",68,"laughter 0.8×"],
+    ["Last-second defuse","0:43",66,"hype 2 / 20 s"],
+    ["Nobody believed it","0:39",63,"laughter 0.8×"],
+    ["One more case","0:55",61,"case density 3"],
+    ["The reaction","0:29",58,"laughter 0.7×"],
+    ["Perfect timing","0:47",55,"hype 2 / 20 s"],
+    ["Straight up robbery","0:35",52,"case density 2"]];
+  const SKIPPED=[["00:19:59","content gate","truncated slur in the passage"],
+    ["01:25:04","weak hook","best line scored 1.6, floor is 5.0"],
+    ["01:45:01","content gate","slur in the passage"],
+    ["00:16:31","dull","tactical callouts only, no reaction density"]];
+
+  const $=i=>document.getElementById(i), show=(e,o)=>e.classList.toggle("hide",!o);
+  const secs=n=>{const m=Math.floor(n/60);return m?m+" min":n+" s"};
+
+  $("pick").onclick=()=>$("file").click();
+  $("file").onchange=e=>{if(e.target.files[0])start(e.target.files[0].name)};
+  $("fetch").onclick=()=>{const u=$("url").value.trim();if(u)start(nice(u))};
+  $("go").onclick=()=>{const f=$("file").files[0],u=$("url").value.trim();
+    start(f?f.name:(u?nice(u):"your-stream.mp4"))};
+  $("again").onclick=()=>{show($("out"),false);show($("src"),true);scrollTo({top:0,behavior:"smooth"})};
+  function nice(u){try{return new URL(u).hostname.replace(/^www\./,"")+" link"}catch{return "pasted link"}}
+
+  // lank fran landningssidans hero
+  (function(){
+    const q=new URLSearchParams(location.search).get("src");
+    if(q){ $("url").value=q; $("url").scrollIntoView({block:"center"}); }
+  })();
+
+  const d=$("drop");
+  ["dragenter","dragover"].forEach(t=>d.addEventListener(t,e=>{e.preventDefault();d.classList.add("hot")}));
+  ["dragleave","drop"].forEach(t=>d.addEventListener(t,e=>{e.preventDefault();d.classList.remove("hot")}));
+  d.addEventListener("drop",e=>{const f=e.dataTransfer.files[0];if(f)start(f.name)});
+
+  function start(name){
+    show($("src"),false);show($("out"),false);show($("run"),true);
+    $("runName").textContent=name;$("fill").style.width="0%";
+    const total=STEPS.reduce((a,s)=>a+s[2],0);
+    $("eta").textContent="≈ "+secs(total)+" remaining";
+    const g=$("gauge");g.innerHTML="";
+    STEPS.forEach((s,i)=>{
+      const r=document.createElement("div");r.className="gr";r.id="g"+i;
+      r.innerHTML='<span class="d"></span><span><b>'+s[0]+
+        '</b><span class="why">'+s[1]+'</span></span><span class="t"></span>';
+      g.appendChild(r);
+    });
+    let i=0,left=total;
+    (function tick(){
+      if(i>0){const p=$("g"+(i-1));p.className="gr ok";p.querySelector(".t").textContent="done"}
+      $("fill").style.width=Math.round(i/STEPS.length*100)+"%";
+      if(i>=STEPS.length)return done(name);
+      const c=$("g"+i);c.className="gr go";c.querySelector(".t").textContent="running";
+      left-=STEPS[i][2];
+      $("eta").textContent=left>0?"≈ "+secs(left)+" remaining":"finishing";
+      i++;setTimeout(tick,650+Math.random()*850);
+    })();
+  }
+
+  function done(name){
+    show($("run"),false);show($("out"),true);
+    $("outName").textContent=name;
+    const n=CLIPS.length;   // motorn levererar allt som klarade grinden
+    $("clipGrid").innerHTML=CLIPS.slice(0,n).map(([t,dur,sc,why],k)=>
+      '<div class="clip" style="animation-delay:'+(k*55)+'ms"><div class="th">'+
+      '<span class="sc">'+sc+'</span>▶</div><div class="mt"><b>'+t+'</b>'+
+      '<span>'+dur+' · '+why+'</span></div></div>').join("");
+    $("whyList").innerHTML='<div class="wr" style="background:var(--bg2)">'+
+      '<b>NOT CLIPPED</b> — every rejection is logged</div>'+
+      SKIPPED.map(([t,r,w])=>'<div class="wr"><b>'+t+'</b>'+r+' — '+w+'</div>').join("");
+  }
+})();
+</script>
+</body>
+</html>

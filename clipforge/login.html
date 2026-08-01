@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sign in — ClipForge</title>
+<meta name="description" content="Sign in to ClipForge with a one-time link. No password to remember."/>
+<link rel="stylesheet" href="/clipforge/cf.css"/>
+<script defer src="/clipforge/cf.js"></script>
+<style>
+.auth{max-width:26rem;margin:0 auto}
+.auth .panel{padding:2.2rem 2rem}
+.sent{display:none}
+.sent.on{display:block}
+.form.off{display:none}
+.side{display:grid;gap:.9rem;margin-top:2rem}
+.side .it{display:flex;gap:.75rem;font-size:.87rem;color:var(--dim);line-height:1.55}
+.side .it s{color:var(--gold);text-decoration:none;flex:none;font-family:var(--mono)}
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<header class="cf"></header>
+
+<section class="first"><div class="w">
+  <div class="auth rv">
+    <div class="head" style="text-align:center;margin-bottom:1.6rem;max-width:none">
+      <span class="lbl">Account</span>
+      <h1 style="font-size:1.7rem;margin:.6rem 0 .5rem">Sign in to ClipForge</h1>
+      <p style="margin:0;font-size:.92rem">We send a one-time link. There is no password to
+        forget or leak.</p>
+    </div>
+
+    <div class="panel">
+      <form class="form" id="form" novalidate>
+        <div class="field">
+          <label class="fl" for="email">Email address</label>
+          <input type="email" id="email" required autocomplete="email"
+                 placeholder="you@example.com"/>
+          <div class="hint" id="err" style="color:var(--warn);display:none">
+            Enter a valid email address.</div>
+        </div>
+        <button class="b1" type="submit" style="width:100%">Send sign-in link</button>
+        <p class="hint" style="text-align:center;margin-top:1rem">
+          New here? The same link creates your account and starts the free hour.</p>
+      </form>
+
+      <div class="sent" id="sent">
+        <div style="text-align:center">
+          <div class="mono" style="color:var(--sig);font-size:1.4rem;margin-bottom:.6rem">[ ✓ ]</div>
+          <h3 style="margin-bottom:.5rem">Check your inbox</h3>
+          <p style="color:var(--dim);font-size:.9rem;margin:0 0 1.2rem">
+            We sent a link to <b class="mono gld" id="addr"></b>. It works once and expires in
+            fifteen minutes.</p>
+          <button class="b2 sm" type="button" id="back">Use a different address</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="it"><s>01</s><span>Your first hour of stream is free and full quality —
+        no card needed to see what the engine finds.</span></div>
+      <div class="it"><s>02</s><span>Source footage is deleted once you collect your clips.
+        We never train models on your content.</span></div>
+      <div class="it"><s>03</s><span>Cancel in one click from the same portal you subscribe in.</span></div>
+    </div>
+
+    <p class="hint" style="text-align:center;margin-top:1.8rem">
+      By signing in you accept our <a href="/clipforge/terms.html" class="gld">terms</a> and
+      <a href="/clipforge/privacy.html" class="gld">privacy notice</a>.</p>
+
+    <div class="note warn" style="margin-top:1.8rem">
+      <span class="lbl">Demo mode</span>
+      <ul><li>Authentication is not wired yet — this form does not send anything.</li></ul>
+    </div>
+  </div>
+</div></section>
+
+<footer class="cf"></footer>
+<script>
+(function(){
+  const f=document.getElementById("form"), s=document.getElementById("sent"),
+        e=document.getElementById("email"), err=document.getElementById("err");
+  f.addEventListener("submit",ev=>{
+    ev.preventDefault();
+    const v=e.value.trim();
+    const ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    err.style.display=ok?"none":"block";
+    if(!ok){e.focus();return}
+    document.getElementById("addr").textContent=v;
+    f.classList.add("off"); s.classList.add("on");
+  });
+  document.getElementById("back").onclick=()=>{
+    s.classList.remove("on"); f.classList.remove("off"); e.focus();
+  };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pricing — ClipForge</title>
+<meta name="description" content="One credit is one hour of stream. Credits never expire and failed jobs are never charged."/>
+<link rel="stylesheet" href="/clipforge/cf.css"/>
+<script defer src="/clipforge/cf.js"></script>
+<style>
+.cmp{border:1px solid var(--edge);overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:44rem}
+th,td{padding:.85rem 1.1rem;text-align:left;border-bottom:1px solid var(--edge);font-size:.9rem}
+th{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dim2);background:var(--bg2);font-weight:500}
+td:first-child{color:var(--ink)}
+td:not(:first-child){font-family:var(--mono);color:var(--dim);text-align:center;width:11rem}
+tr:hover td{background:var(--bg2)}
+.yes{color:var(--sig)}.no{color:var(--dim2)}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--edge)}
+.calc>div{padding:1.5rem 1.6rem}
+.calc>div:first-child{border-right:1px solid var(--edge)}
+.calc output{display:block;font-family:var(--mono);font-size:2rem;color:var(--gold2);
+  margin-top:.6rem;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--gold);margin-top:.6rem}
+@media(max-width:680px){.calc{grid-template-columns:1fr}.calc>div:first-child{border-right:0;border-bottom:1px solid var(--edge)}}
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<header class="cf"></header>
+
+<section class="first"><div class="w">
+  <div class="head rv" style="max-width:44ch">
+    <span class="lbl">Pricing</span>
+    <h1>You pay for stream length, not clips</h1>
+    <p class="lede">Billed per minute of source, shown as hours. Minimum 10 minutes per job,
+      maximum 12 hours. Charged only when a job succeeds — and the number of shorts never
+      affects the price, because the engine decides that, not you.</p>
+  </div>
+
+  <div class="plans rv">
+    <div class="pl">
+      <div class="nm">Free</div><div class="pr">$0</div>
+      <div class="for">Enough to judge the engine on your own footage.</div>
+      <ul><li>1 hour of stream, once</li><li>3 shorts, watermarked</li>
+        <li>Captions and audio mastering</li><li>Full detector readout</li>
+        <li>720p export</li></ul>
+      <div class="go"><a class="b2" href="/clipforge/app.html">Start free</a></div>
+    </div>
+    <div class="pl mid">
+      <div class="nm">Creator</div><div class="pr">$24<s> / month</s></div>
+      <div class="for">One channel, posting every week.</div>
+      <ul><li>20 hours of stream monthly</li><li>Unlimited shorts per stream</li>
+        <li>No watermark</li><li>Voice profiles and per-speaker colours</li>
+        <li>Publish to YouTube, TikTok, Instagram</li><li>Priority queue</li>
+        <li>1080p export</li></ul>
+      <div class="go"><a class="b1" href="/clipforge/app.html">Get started</a></div>
+    </div>
+    <div class="pl">
+      <div class="nm">Studio</div><div class="pr">$79<s> / month</s></div>
+      <div class="for">Several channels and more than one editor.</div>
+      <ul><li>100 hours of stream monthly</li><li>Multiple channels and seats</li>
+        <li>Custom word lists and safety rules</li><li>Own intro/outro and fonts</li>
+        <li>API access</li><li>Direct support line</li></ul>
+      <div class="go"><a class="b2" href="/clipforge/app.html">Talk to us</a></div>
+    </div>
+  </div>
+
+  <p class="lbl rv" style="margin-top:1rem">Prices exclude VAT · billed monthly · cancel any time</p>
+</div></section>
+
+<!-- calculator -->
+<section><div class="w">
+  <div class="head rv">
+    <span class="lbl">Estimate</span>
+    <h2>How many credits do you need?</h2>
+    <p>Move the sliders. Billing follows source length only — a stream that yields twelve good
+      moments costs exactly the same as one that yields three.</p>
+  </div>
+  <div class="calc rv">
+    <div>
+      <label class="fl" for="hrs">Hours streamed per week</label>
+      <input type="range" id="hrs" min="1" max="40" value="8"/>
+      <output id="ohrs" class="mono" style="font-size:1rem;color:var(--ink)">8 h / week</output>
+      <label class="fl" for="wks" style="margin-top:1.4rem">Streams clipped per month</label>
+      <input type="range" id="wks" min="1" max="30" value="4"/>
+      <output id="owks" class="mono" style="font-size:1rem;color:var(--ink)">4 streams</output>
+    </div>
+    <div>
+      <span class="lbl">Credits needed monthly</span>
+      <output id="need">32 hours</output>
+      <p style="color:var(--dim);font-size:.88rem;margin:.8rem 0 0" id="rec">
+        Recommended: <b class="gld">Studio</b> — Creator covers 20 hours.</p>
+      <p class="hint" id="cost"></p>
+    </div>
+  </div>
+</div></section>
+
+<!-- comparison -->
+<section><div class="w">
+  <div class="head rv"><span class="lbl">Comparison</span><h2>What each tier includes</h2></div>
+  <div class="cmp rv">
+    <table>
+      <thead><tr><th>Capability</th><th>Free</th><th>Creator</th><th>Studio</th></tr></thead>
+      <tbody>
+        <tr><td>Hours of stream monthly</td><td>1 once</td><td>20</td><td>100</td></tr>
+        <tr><td>Shorts per stream</td><td>3</td><td>Unlimited</td><td>Unlimited</td></tr>
+        <tr><td>Watermark</td><td class="wrn">Yes</td><td class="yes">No</td><td class="yes">No</td></tr>
+        <tr><td>Export resolution</td><td>720p</td><td>1080p</td><td>1080p</td></tr>
+        <tr><td>Captions &amp; karaoke sync</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Audio mastering</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Content safety gate</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Detector readout</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Voice profiles</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Per-speaker subtitle colours</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Direct publishing</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Priority render queue</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Custom word lists</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+        <tr><td>Own fonts and branding</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+        <tr><td>Team seats</td><td class="no">—</td><td>1</td><td>5</td></tr>
+        <tr><td>API access</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div></section>
+
+<!-- honesty -->
+<section><div class="w">
+  <div class="head rv"><span class="lbl">Before you pay</span><h2>Things worth knowing</h2></div>
+  <div class="note warn rv">
+    <span class="lbl">We are new — this is what that means for you</span>
+    <ul>
+      <li>No published case studies except our own channels. If you need a vendor with a
+        track record, we are not there yet.</li>
+      <li>One region, one render cluster. We cannot honestly offer a Studio-grade uptime
+        guarantee, so we do not.</li>
+      <li>Our hype score is a measured heuristic — <b>not</b> a prediction of views.</li>
+      <li>Kill counts come from what people say, not from the game HUD. Silent multi-kills
+        are missed.</li>
+    </ul>
+  </div>
+  <div class="note ok rv" style="margin-top:1rem">
+    <span class="lbl">What we will always do</span>
+    <ul>
+      <li>Never charge for a job that failed.</li>
+      <li>Delete your source footage once you have collected the results.</li>
+      <li>Never train models on your content.</li>
+      <li>Let you cancel in one click, from the same portal you subscribed in.</li>
+    </ul>
+  </div>
+</div></section>
+
+<section><div class="w w-narrow">
+  <div class="head rv"><span class="lbl">Billing questions</span><h2>Straight answers</h2></div>
+  <div class="rv">
+    <details open><summary>What exactly counts as a credit?</summary>
+      <p class="dp">Minutes of source material, rounded up to the whole minute and billed on
+        completion. A 95-minute stream costs 95 minutes of your allowance. There is a 10-minute
+        minimum per job and a 12-hour maximum. The number of shorts produced is irrelevant to
+        the price — the engine decides how many the stream deserves.</p></details>
+    <details><summary>What if a job fails?</summary>
+      <p class="dp">You are not charged. Credits are deducted when a job finishes
+        successfully, never when it is submitted. If our engine cannot read your file we
+        tell you why and the credit stays in your account.</p></details>
+    <details><summary>Do unused credits roll over?</summary>
+      <p class="dp">Monthly allowances reset each billing period. Credits you buy separately
+        as top-ups never expire.</p></details>
+    <details><summary>Can I cancel whenever?</summary>
+      <p class="dp">Yes, from the billing portal. You keep access until the end of the period
+        you already paid for, and your finished clips stay downloadable for 30 days after
+        that.</p></details>
+    <details><summary>Is VAT included?</summary>
+      <p class="dp">Prices are shown excluding VAT. EU customers are charged the correct rate
+        at checkout, and businesses can enter a VAT number for reverse charge.</p></details>
+  </div>
+</div></section>
+
+<section><div class="w">
+  <div class="head rv" style="max-width:40ch">
+    <span class="lbl">Get started</span>
+    <h2>Judge it on your own footage</h2>
+    <p>The free hour is a full-quality run. Read the detector output and decide.</p>
+  </div>
+  <div class="acts rv"><a class="b1" href="/clipforge/app.html">Clip a VOD free</a>
+    <a class="b2" href="/clipforge/engine.html">How the engine works</a></div>
+</div></section>
+
+<footer class="cf"></footer>
+<script>
+(function(){
+  const h=document.getElementById("hrs"), w=document.getElementById("wks");
+  const oh=document.getElementById("ohrs"), ow=document.getElementById("owks");
+  const need=document.getElementById("need"), rec=document.getElementById("rec"),
+        cost=document.getElementById("cost");
+  function upd(){
+    const hv=+h.value, wv=+w.value;
+    const monthly=hv*wv;              // hours per stream × streams per month
+    oh.textContent=hv+" h / week";
+    ow.textContent=wv+(wv===1?" stream":" streams");
+    need.textContent=monthly+(monthly===1?" hour":" hours");
+    let tier="Free", price=0;
+    if(monthly>20){tier="Studio";price=79}
+    else if(monthly>1){tier="Creator";price=24}
+    if(monthly>100){tier="Studio + top-ups";price=79}
+    rec.innerHTML='Recommended: <b class="gld">'+tier+'</b>'+
+      (tier==="Creator"?" — 20 hours included.":
+       tier.startsWith("Studio")?" — 100 hours included.":" — the free hour covers it.");
+    cost.textContent = price ? "≈ $"+price+" per month, excluding VAT."
+      : "No payment needed at this volume.";
+  }
+  h.oninput=w.oninput=upd; upd();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Documentation — ClipForge</title>
+<meta name="description" content="Supported formats, how the settings work, what the detector readout means, and the API."/>
+<link rel="stylesheet" href="/clipforge/cf.css"/>
+<script defer src="/clipforge/cf.js"></script>
+<style>
+.doc{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}
+@media(max-width:900px){.doc{grid-template-columns:1fr;gap:1.5rem}}
+.side{position:sticky;top:5.5rem}
+.side a{display:block;font-family:var(--mono);font-size:.76rem;color:var(--dim);
+  padding:.35rem 0 .35rem .8rem;border-left:1px solid var(--edge);transition:.2s}
+.side a:hover{color:var(--ink);border-left-color:var(--gold)}
+.side .grp{font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;color:var(--dim2);
+  text-transform:uppercase;margin:1.2rem 0 .4rem}
+.side .grp:first-child{margin-top:0}
+table.d{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.88rem}
+table.d th,table.d td{padding:.6rem .8rem;border:1px solid var(--edge);text-align:left}
+table.d th{background:var(--bg2);font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim2);font-weight:500}
+table.d td{color:var(--dim)}
+table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem}
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<header class="cf"></header>
+
+<section class="first"><div class="w">
+  <div class="head rv" style="max-width:46ch">
+    <span class="lbl">Documentation</span>
+    <h1 style="font-size:clamp(1.7rem,3.6vw,2.4rem)">How to get good output</h1>
+    <p class="lede">Short version: give it clean audio, tell it the right language, and read
+      the rejection log when a clip you wanted is missing.</p>
+  </div>
+
+  <div class="doc">
+    <aside class="side rv">
+      <div class="grp">Getting started</div>
+      <a href="#formats">Supported formats</a>
+      <a href="#settings">Settings explained</a>
+      <a href="#readout">Reading the detector</a>
+      <div class="grp">Quality</div>
+      <a href="#audio">Audio that works</a>
+      <a href="#voices">Voice profiles</a>
+      <a href="#missing">Why a clip is missing</a>
+      <div class="grp">Reference</div>
+      <a href="#api">API</a>
+      <a href="#limits">Limits</a>
+    </aside>
+
+    <div class="prose rv">
+      <h2 id="formats">Supported formats</h2>
+      <p>Resolution and frame rate are read from the file itself — nothing is assumed. A
+        720p 30 fps recording is handled exactly as well as 1080p60.</p>
+      <table class="d">
+        <tr><th>Property</th><th>Accepted</th></tr>
+        <tr><td>Container</td><td>MP4, MKV, MOV, WEBM</td></tr>
+        <tr><td>Video codec</td><td>H.264, H.265, VP9, AV1</td></tr>
+        <tr><td>Frame rate</td><td>24–120 fps, constant. Variable frame rate is rejected.</td></tr>
+        <tr><td>Audio</td><td>One track, 32 kHz or higher, mono or stereo</td></tr>
+        <tr><td>Duration</td><td>Up to 12 hours</td></tr>
+        <tr><td>Links</td><td>YouTube, Twitch, Kick — your own content only</td></tr>
+      </table>
+      <p>Variable frame rate is the one hard rejection. VFR files lie about their timing grid,
+        which makes frame-accurate cutting impossible — we would rather refuse than deliver
+        clips with drifting audio.</p>
+
+      <h2 id="settings">Settings explained</h2>
+      <table class="d">
+        <tr><th>Setting</th><th>What it changes</th></tr>
+        <tr><td>Language</td><td>Selects the vocabulary bias. Wrong language does not degrade
+          gracefully — it produces confident nonsense. Set it correctly.</td></tr>
+        <tr><td>Shorts produced</td><td>Not a setting. Every moment that clears the hook and safety
+          bars becomes a short — none are discarded to hit a number, and none are invented to
+          fill one.</td></tr>
+        <tr><td>Focus on</td><td>Multiplies the score of moments where that voice profile is
+          speaking, up to 1.6×. Others still appear.</td></tr>
+        <tr><td>Clip length</td><td>Content-driven adapts to the conversation. The fixed options
+          override that and generally retain worse.</td></tr>
+      </table>
+
+      <h2 id="readout">Reading the detector</h2>
+      <p>Every delivered clip carries the measurements that selected it, and every rejected
+        moment carries its reason. The four values you will see:</p>
+      <table class="d">
+        <tr><th>Value</th><th>Meaning</th></tr>
+        <tr><td>laughter</td><td>Amplitude modulation in the 4–8 Hz band, relative to this
+          stream's own reference. Above 1.0× is a real burst.</td></tr>
+        <tr><td>hype / 20 s</td><td>Distinct reaction words inside a rolling twenty-second
+          window. Three or more is a burst.</td></tr>
+        <tr><td>case terms</td><td>Game-event vocabulary in the same window. Five or more
+          usually means an opening session.</td></tr>
+        <tr><td>speaker</td><td>Which voice profile matched, if any. Blank means the engine
+          would rather say nothing than guess.</td></tr>
+      </table>
+
+      <h2 id="audio">Audio that works</h2>
+      <p>The single biggest factor in output quality is not your microphone — it is
+        cross-talk. Background noise we can remove; two people speaking simultaneously we
+        cannot separate.</p>
+      <ul>
+        <li><b>Fan noise, keyboard, mic handling</b> — handled. Neural speech isolation removes
+          these without hollowing out the voice.</li>
+        <li><b>Music under speech</b> — mostly handled, but it lowers transcription confidence
+          and can suppress lines entirely.</li>
+        <li><b>Everyone talking at once</b> — this is the real ceiling. Captions still appear,
+          but speaker colours become unreliable and we deliberately leave them off rather
+          than guess.</li>
+      </ul>
+
+      <h2 id="voices">Voice profiles</h2>
+      <p>Record two to three minutes of one person talking with nobody else audible. A solo
+        intro works; so does any stretch where you are alone in the call.</p>
+      <p>What matters is <b>solo</b>, not clean. We measured this: noise reduction made almost
+        no difference to profile quality, while window length mattered enormously. Speaker
+        embeddings need continuous speech to stabilise, so a two-minute monologue beats twenty
+        scattered ten-second clips.</p>
+      <p>Each additional profile improves every existing one, because the engine can compare
+        against a named person rather than an anonymous group.</p>
+
+      <h2 id="missing">Why a clip is missing</h2>
+      <p>Check the rejection log on the results screen. The four common reasons:</p>
+      <table class="d">
+        <tr><th>Reason</th><th>What to do</th></tr>
+        <tr><td>content gate</td><td>The passage contains a term on the safety list. This is
+          deliberate and cannot be overridden per clip — edit your safety rules if the list is
+          too broad for you.</td></tr>
+        <tr><td>weak hook</td><td>No line in the moment scored high enough to be a title. Often
+          means the moment is visual, which we cannot yet read.</td></tr>
+        <tr><td>dull</td><td>Tactical chatter with no reaction density. Working as intended.</td></tr>
+        <tr><td>no clean boundary</td><td>The moment could not be cut without breaking a
+          sentence, so it was left out rather than clipped badly.</td></tr>
+      </table>
+
+      <h2 id="api">API</h2>
+      <p>Available on the Studio plan. Submit a job, poll for status, collect signed URLs.</p>
+      <pre><code>POST /v1/jobs
+Authorization: Bearer &lt;key&gt;
+Content-Type: application/json
+
+{
+  "source": "https://your-storage/stream.mp4",
+  "language": "sv",
+  "shorts": 6,
+  "focus": "vigge",
+  "length": "auto"
+}
+
+→ 202 { "id": "job_8f2a…", "status": "queued" }</code></pre>
+      <pre><code>GET /v1/jobs/job_8f2a…
+
+→ 200 {
+  "status": "done",
+  "stage": null,
+  "video": "https://…signed…",
+  "shorts": [
+    { "url": "…", "title": "The knife pull", "seconds": 34,
+      "score": 94, "why": "case density 5 · laughter 1.4x" }
+  ],
+  "rejected": [
+    { "at": 1199, "reason": "dull", "detail": "no reaction density" }
+  ]
+}</code></pre>
+      <p>Webhooks are delivered on completion and failure. Failed jobs never consume credit.</p>
+
+      <h2 id="limits">Limits</h2>
+      <table class="d">
+        <tr><th>Limit</th><th>Value</th></tr>
+        <tr><td>Max source duration</td><td>12 hours</td></tr>
+        <tr><td>Max file size</td><td>60 GB</td></tr>
+        <tr><td>Concurrent jobs</td><td>1 free · 2 Creator · 5 Studio</td></tr>
+        <tr><td>Minimum billed per job</td><td>10 minutes</td></tr>
+        <tr><td>Result retention</td><td>30 days</td></tr>
+        <tr><td>Source retention</td><td>Deleted on collection</td></tr>
+        <tr><td>Typical turnaround</td><td>≈ 40 min for a 2-hour stream</td></tr>
+      </table>
+
+      <div class="note warn" style="margin-top:2rem">
+        <span class="lbl">Not yet available</span>
+        <ul><li>The API is specified but not deployed. Endpoints above describe the intended
+          contract, not a live service.</li></ul>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer class="cf"></footer>
+</body>
+</html>

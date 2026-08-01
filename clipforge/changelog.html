@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Changelog — ClipForge</title>
+<meta name="description" content="What changed, what it measured before and after, and what is still broken."/>
+<link rel="stylesheet" href="/clipforge/cf.css"/>
+<script defer src="/clipforge/cf.js"></script>
+<style>
+.log{border-left:1px solid var(--edge);padding-left:1.8rem;margin-left:.4rem}
+.entry{position:relative;padding-bottom:2.6rem}
+.entry::before{content:"";position:absolute;left:-2.3rem;top:.45rem;width:.55rem;height:.55rem;
+  background:var(--gold);border:2px solid var(--bg)}
+.entry.fix::before{background:var(--sig)}
+.entry.known::before{background:var(--warn)}
+.entry .when{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--dim2);
+  text-transform:uppercase}
+.entry h3{margin:.4rem 0 .5rem;font-size1.05rem}
+.entry p{margin:0 0 .7rem;color:var(--dim);font-size:.93rem;line-height:1.65;max-width:64ch}
+.delta{display:inline-flex;gap:.5rem;font-family:var(--mono);font-size:.76rem;
+  border:1px solid var(--edge2);padding:.28rem .6rem;margin:.15rem .4rem .15rem 0}
+.delta b{color:var(--sig)}.delta s{text-decoration:none;color:var(--dim2)}
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<header class="cf"></header>
+
+<section class="first"><div class="w w-narrow">
+  <div class="head rv">
+    <span class="lbl">Changelog</span>
+    <h1 style="font-size:clamp(1.7rem,3.4vw,2.3rem)">What changed, and what it measured</h1>
+    <p class="lede">Every entry carries the before-and-after number. Where something is still
+      broken, it says so.</p>
+  </div>
+
+  <div class="log rv">
+
+    <div class="entry known">
+      <div class="when">Known limitation · open</div>
+      <h3>Kill counts are read from speech, not the game</h3>
+      <p>Multi-kills are detected only when someone reacts out loud. A silent three-kill is
+        invisible to us. Fixing this properly means reading the game's kill feed from the
+        picture, which is not built.</p>
+      <span class="delta"><s>impact</s> <b>quiet highlights missed</b></span>
+    </div>
+
+    <div class="entry known">
+      <div class="when">Known limitation · open</div>
+      <h3>Speaker colours stop at cross-talk</h3>
+      <p>When two people talk simultaneously the voice embedding blends and matches neither
+        cleanly. We colour fewer lines rather than colour them wrongly. More voice profiles
+        raise the ceiling; nothing else we have tried does.</p>
+      <span class="delta"><s>coloured lines</s> <b>~9 % of a busy stream</b></span>
+    </div>
+
+    <div class="entry fix">
+      <div class="when">30 July 2026 · accuracy</div>
+      <h3>Cohort normalisation for speaker matching</h3>
+      <p>With a single voice profile there was nothing to compare against, so the threshold
+        alone decided — and it failed in both directions at once, missing the right person and
+        occasionally colouring the wrong one. Now the engine builds a cohort from the other
+        voices in the same stream and asks whether a line resembles you <em>more than anyone
+        else present</em>.</p>
+      <span class="delta"><s>separation</s> 0.341 → <b>0.559</b></span>
+      <span class="delta"><s>recall</s> 95 % → <b>100 %</b></span>
+    </div>
+
+    <div class="entry fix">
+      <div class="when">30 July 2026 · safety</div>
+      <h3>Moments, not just words</h3>
+      <p>Masking a slur does not save a clip that is <em>about</em> the joke. A separate gate now
+        removes such passages from selection entirely, before any clip is built. It matches word
+        stems rather than whole words, after a truncated slur slipped past a list that required
+        full endings.</p>
+      <span class="delta"><s>reference stream</s> <b>5 of 194 segments blocked</b></span>
+    </div>
+
+    <div class="entry fix">
+      <div class="when">29 July 2026 · quality</div>
+      <h3>Highlight detection rebuilt around measurement</h3>
+      <p>Laughter is now found in the audio's amplitude modulation rather than by hoping the
+        transcript spells it out — and gated, because rhythmic speech modulates identically and
+        was ranking highest. Hype is counted as density over a rolling window instead of per
+        line, since a single exclamation carries no signal.</p>
+      <span class="delta"><s>dull callouts</s> <b>score 0.00</b></span>
+      <span class="delta"><s>clip length spread</s> 5.6 s → <b>11.5 s</b></span>
+    </div>
+
+    <div class="entry fix">
+      <div class="when">29 July 2026 · transcription</div>
+      <h3>Invented lines removed</h3>
+      <p>On silent passages the transcriber was repeating its own instructions back as if
+        someone had said them — over two hundred fabricated lines reached the screen in one
+        stream. Output is now compared against the instruction and matches are discarded, and
+        the instructions themselves are written in a register nobody speaks aloud.</p>
+      <span class="delta"><s>invented lines</s> 202 → <b>0</b></span>
+      <span class="delta"><s>high-confidence</s> 81 % → <b>95 %</b></span>
+    </div>
+
+    <div class="entry fix">
+      <div class="when">28 July 2026 · transcription</div>
+      <h3>Game-aware vocabulary</h3>
+      <p>The transcriber was being fed one game's terminology while a different game was on
+        screen. Vocabulary is a bias, not a hint — the wrong one produces confident nonsense
+        rather than degrading gracefully. The game is now detected first, from three short
+        unbiased samples.</p>
+      <span class="delta"><s>detection</s> <b>~35 s</b></span>
+      <span class="delta"><s>lines below floor</s> 21.1 % → <b>7.6 %</b></span>
+    </div>
+
+    <div class="entry fix">
+      <div class="when">28 July 2026 · infrastructure</div>
+      <h3>Rendering moved off the operator's machine</h3>
+      <p>Audio cleaning, speaker matching and all rendering now run on our own servers. The one
+        stage that still needs a graphics card is transcription, which is rented by the minute
+        on demand.</p>
+      <span class="delta"><s>local CPU load</s> <b>0 %</b></span>
+      <span class="delta"><s>speaker matching</s> 8 min 35 s → <b>6 min, remote</b></span>
+    </div>
+
+    <div class="entry fix">
+      <div class="when">28 July 2026 · compatibility</div>
+      <h3>Any source profile, not just one</h3>
+      <p>The pipeline assumed 1080p60 at 48 kHz and silently produced nothing on a 720p 30 fps
+        recording. Resolution, frame rate and audio are now read from the file. Thresholds that
+        describe areas scale quadratically rather than linearly.</p>
+      <span class="delta"><s>subtitle pixel check</s> 0 % → <b>100 %</b></span>
+    </div>
+
+    <div class="entry">
+      <div class="when">17 July 2026 · first delivery</div>
+      <h3>First full stream through the pipeline</h3>
+      <p>End to end: transcription, speaker separation, cutting, captions, audio mastering,
+        thumbnail and shorts — from a raw two-and-a-half-hour recording with no manual editing.</p>
+    </div>
+
+  </div>
+
+  <div class="note rv">
+    <span class="lbl">How to read this page</span>
+    <ul><li>Gold marks a new capability, green a fix with a measured improvement, red an open
+      limitation we have not solved. We publish the red ones on purpose — a changelog with no
+      known issues is a marketing document, not a changelog.</li></ul>
+  </div>
+</div></section>
+
+<footer class="cf"></footer>
+</body>
+</html>

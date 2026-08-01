@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ClipForge — the clipper that shows its work</title>
+<meta name="description" content="Most clip tools hand you a score. ClipForge shows you the waveform, the laughter it measured and the reason each moment was chosen. Built for Swedish streams."/>
+<meta property="og:title" content="ClipForge — the clipper that shows its work"/>
+<meta property="og:description" content="Measured, not guessed. Long streams in, publish-ready shorts out."/>
+<link rel="stylesheet" href="/clipforge/cf.css"/>
+<script defer src="/clipforge/cf.js"></script>
+<style>/* Sidspecifik CSS — delade regler bor i cf.css */
+/* ── HERO ───────────────────────────────────────────────────────────────── */
+.hero{padding:8.5rem 0 3.5rem}
+.hero .rule{display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
+.hero .rule i{flex:1;height:1px;background:var(--edge2)}
+h1{font-size:clamp(2.2rem,5.4vw,4rem);line-height:1.04;letter-spacing:-.035em;
+  font-weight:700;margin:0 0 1.4rem;max-width:34ch}
+h1 em{font-style:normal;color:var(--gold2)}
+.lede{max-width:46ch;color:var(--dim);font-size:1.06rem;line-height:1.62;margin:0 0 2.2rem}
+.acts{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.acts .fine{font-family:var(--mono);font-size:.7rem;color:var(--dim2);margin-left:.4rem}
+
+
+.linkbox{display:flex;gap:.6rem;max-width:34rem;margin:0 0 .2rem;flex-wrap:wrap}
+.linkbox input{flex:1;min-width:15rem;padding:.85rem 1rem;background:rgba(0,0,0,.4);
+  border:1px solid var(--edge2);color:var(--ink);font:inherit;font-size:.95rem;transition:border-color .2s}
+.linkbox input:focus{outline:none;border-color:var(--gold)}
+.linkbox input::placeholder{color:var(--dim2)}
+.linkbox.bad input{border-color:var(--warn)}
+
+/* ── THE INSTRUMENT ─────────────────────────────────────────────────────── */
+.inst{margin-top:4rem;border:1px solid var(--edge);background:var(--panel)}
+.inst .top{display:flex;align-items:center;gap:1rem;padding:.7rem 1rem;
+  border-bottom:1px solid var(--edge);background:var(--bg2);flex-wrap:wrap}
+.inst .top .f{font-family:var(--mono);font-size:.72rem;color:var(--dim)}
+.inst .top .f b{color:var(--ink);font-weight:500}
+.inst .top .live{margin-left:auto;display:flex;align-items:center;gap:.45rem;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;color:var(--sig)}
+.inst .top .live i{width:.4rem;height:.4rem;border-radius:99px;background:var(--sig);
+  animation:bl 1.8s ease-in-out infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.25}}
+
+.scope{position:relative;height:13rem;cursor:crosshair;overflow:hidden}
+.scope svg{display:block;width:100%;height:100%}
+.ticks{display:flex;border-top:1px solid var(--edge);background:var(--bg2)}
+.ticks div{flex:1;padding:.32rem .5rem;font-family:var(--mono);font-size:.62rem;
+  color:var(--dim2);border-right:1px solid var(--edge)}
+.ticks div:last-child{border-right:0}
+
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));
+  border-top:1px solid var(--edge)}
+.rd{padding:.85rem 1rem;border-right:1px solid var(--edge)}
+.rd:last-child{border-right:0}
+.rd .k{font-family:var(--mono);font-size:.63rem;letter-spacing:.14em;color:var(--dim2);
+  text-transform:uppercase;margin-bottom:.3rem}
+.rd .v{font-family:var(--mono);font-size:1.02rem;font-variant-numeric:tabular-nums;
+  transition:color .2s}
+.rd.hi .v{color:var(--gold2)}
+.verdict{padding:.8rem 1rem;border-top:1px solid var(--edge);background:var(--bg2);
+  font-family:var(--mono);font-size:.76rem;color:var(--dim);min-height:2.6rem;
+  display:flex;align-items:center;gap:.6rem}
+.verdict b{color:var(--sig);font-weight:500}
+.verdict.no b{color:var(--warn)}
+
+
+/* spec table */
+.spec{border:1px solid var(--edge);border-bottom:0}
+.sr{display:grid;grid-template-columns:2.4rem 1fr 8rem 6rem;gap:1rem;align-items:center;
+  padding:.95rem 1.1rem;border-bottom:1px solid var(--edge);transition:background .2s}
+.sr:hover{background:var(--bg2)}
+.sr .n{font-family:var(--mono);font-size:.7rem;color:var(--dim2)}
+.sr .t{font-size:.95rem}
+.sr .t s{display:block;text-decoration:none;color:var(--dim2);font-size:.82rem;margin-top:.12rem}
+.sr .m{font-family:var(--mono);font-size:.78rem;color:var(--gold2);text-align:right}
+.sr .p{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--dim2);
+  text-align:right;text-transform:uppercase}
+@media(max-width:720px){.sr{grid-template-columns:2rem 1fr;}.sr .m,.sr .p{display:none}}
+
+/* capability list */
+.caps{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:0;
+  border:1px solid var(--edge)}
+.cap{padding:1.6rem 1.5rem;border-right:1px solid var(--edge);border-bottom:1px solid var(--edge);
+  transition:background .2s}
+.cap:hover{background:var(--bg2)}
+.cap .h{display:flex;align-items:baseline;gap:.7rem;margin-bottom:.6rem}
+.cap .h b{font-size:1rem;font-weight:600}
+.cap .h s{font-family:var(--mono);font-size:.64rem;color:var(--gold);text-decoration:none;
+  letter-spacing:.1em}
+.cap p{margin:0;color:var(--dim);font-size:.9rem;line-height:1.62}
+.cap .fig{margin-top:.9rem;font-family:var(--mono);font-size:.74rem;color:var(--ink);
+  padding-top:.7rem;border-top:1px dashed var(--edge2)}
+.cap .fig s{text-decoration:none;color:var(--dim2)}
+
+/* honest box */
+.honest{border:1px solid var(--edge2);background:var(--bg2);padding:1.6rem 1.7rem;margin-top:2rem}
+.honest .lbl{color:var(--warn);margin-bottom:.7rem;display:block}
+.honest ul{margin:0;padding-left:1.1rem;color:var(--dim);font-size:.92rem;line-height:1.75}
+
+</style>
+</head>
+<body>
+<div class="grid"></div>
+
+<header class="cf"></header>
+
+<!-- HERO ------------------------------------------------------------------ -->
+<div class="hero"><div class="w">
+  <div class="rule rv"><span class="lbl">Scalelist Universe · Clip engine v5</span><i></i></div>
+  <h1 class="rv">Every other clipper hands you a score.<br/><em>This one shows you the waveform.</em></h1>
+  <p class="lede rv">
+    ClipForge measures your stream — the rhythm of laughter, the density of reactions, the
+    moment a case opens — then tells you exactly why it cut where it did. Built for Swedish
+    streams that switch to English mid-sentence.
+  </p>
+  <form class="linkbox rv" id="lb" novalidate>
+    <input type="text" id="lbu" aria-label="Paste a video link"
+           placeholder="Paste a YouTube, Twitch or Kick link…"/>
+    <button class="b1" type="submit">Get my shorts</button>
+  </form>
+  <div class="acts rv" style="margin-top:1rem">
+    <span class="fine">First hour free · no card · your link is not stored until you sign in</span>
+  </div>
+  <div class="acts rv" style="margin-top:1.4rem">
+    <a class="b2" href="/clipforge/app.html">Upload a file instead</a>
+    <a class="b2" href="#work">See the detector</a>
+  </div>
+
+  <!-- THE INSTRUMENT -->
+  <div class="inst rv" id="work">
+    <div class="top">
+      <span class="f">SOURCE <b>stream_cs2_2h.mp4</b></span>
+      <span class="f">1280×720 · 30 fps · 44.1 kHz</span>
+      <span class="live"><i></i>DETECTOR ACTIVE</span>
+    </div>
+    <div class="scope" id="scope">
+      <svg id="svg" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-label="Audio waveform with detected highlights"></svg>
+    </div>
+    <div class="ticks" id="ticks"></div>
+    <div class="readout">
+      <div class="rd" id="r1"><div class="k">Position</div><div class="v">—</div></div>
+      <div class="rd" id="r2"><div class="k">Laughter (4–8 Hz)</div><div class="v">—</div></div>
+      <div class="rd" id="r3"><div class="k">Hype density</div><div class="v">—</div></div>
+      <div class="rd" id="r4"><div class="k">Case terms /20 s</div><div class="v">—</div></div>
+      <div class="rd" id="r5"><div class="k">Speaker</div><div class="v">—</div></div>
+    </div>
+    <div class="verdict" id="vd">Move across the waveform — the detector reports what it measured at that point.</div>
+  </div>
+</div></div>
+
+<!-- PIPELINE -------------------------------------------------------------- -->
+<section id="pipeline"><div class="w">
+  <div class="head rv">
+    <span class="lbl">The pipeline</span>
+    <h2>Eight stages, every one measured</h2>
+    <p>These are real timings from a 115-minute CS2 VOD. Nothing here is a projection.</p>
+  </div>
+  <div class="spec rv">
+    <div class="sr"><span class="n">01</span><span class="t">Read the source
+      <s>Resolution and frame rate read from the file — never assumed</s></span>
+      <span class="m">&lt; 5 s</span><span class="p">cloud</span></div>
+    <div class="sr"><span class="n">02</span><span class="t">Clean the audio
+      <s>Neural speech isolation, de-click, loudness to −14 LUFS</s></span>
+      <span class="m">5 min</span><span class="p">cloud</span></div>
+    <div class="sr"><span class="n">03</span><span class="t">Transcribe
+      <s>Game-aware vocabulary; Swedish with English mixed in</s></span>
+      <span class="m">15 min</span><span class="p">gpu</span></div>
+    <div class="sr"><span class="n">04</span><span class="t">Identify speakers
+      <s>Voice profiles, cohort-normalised so the wrong person never gets your colour</s></span>
+      <span class="m">6 min</span><span class="p">cloud</span></div>
+    <div class="sr"><span class="n">05</span><span class="t">Hunt highlights
+      <s>Laughter physics, reaction density, game events</s></span>
+      <span class="m">40 s</span><span class="p">cloud</span></div>
+    <div class="sr"><span class="n">06</span><span class="t">Cut for context
+      <s>Sentences finish; length follows the conversation</s></span>
+      <span class="m">10 s</span><span class="p">cloud</span></div>
+    <div class="sr"><span class="n">07</span><span class="t">Caption and render
+      <s>Karaoke subs, per-speaker colour, hook title, progress bar</s></span>
+      <span class="m">14 min</span><span class="p">cloud</span></div>
+    <div class="sr"><span class="n">08</span><span class="t">Quality gate
+      <s>Samples the output and verifies the text is actually on screen</s></span>
+      <span class="m">4 s</span><span class="p">cloud</span></div>
+  </div>
+  <p class="lbl rv" style="margin-top:1rem">Total ≈ 40 min for a 2-hour stream · nothing runs on your machine</p>
+</div></section>
+
+<!-- CAPABILITIES ---------------------------------------------------------- -->
+<section id="caps"><div class="w">
+  <div class="head rv">
+    <span class="lbl">Capabilities</span>
+    <h2>What the numbers actually say</h2>
+    <p>Each figure below came from testing against real footage. Where we are weak, it says so.</p>
+  </div>
+  <div class="caps rv">
+
+    <div class="cap"><div class="h"><b>Laughter detection</b><s>ACOUSTIC</s></div>
+      <p>A laugh has a measurable rhythm — amplitude modulation between 4 and 8 Hz. We read
+         that from the audio instead of hoping the transcript spells out "haha". Rhythmic
+         speech modulates the same way, so we gate it against intelligible words.</p>
+      <div class="fig">Dull tactical callouts score <s>→</s> 0.00</div></div>
+
+    <div class="cap"><div class="h"><b>Speaker identity</b><s>ECAPA</s></div>
+      <p>Two minutes of you talking alone builds a voice profile. From then on you are
+         recognised in every upload and get your own subtitle colour. Scores are
+         cohort-normalised against the other voices in the room.</p>
+      <div class="fig">Separation <s>→</s> +0.56 · recall 100 %</div></div>
+
+    <div class="cap"><div class="h"><b>Swedish + English</b><s>ASR</s></div>
+      <p>The transcriber receives the vocabulary of the game being played. That is the
+         difference between "spin the wheel" and phonetic nonsense. Language switching
+         mid-sentence is expected, not an error case.</p>
+      <div class="fig">High-confidence lines <s>→</s> 95 %</div></div>
+
+    <div class="cap"><div class="h"><b>Channel protection</b><s>GATE</s></div>
+      <p>Slurs are masked in text and bleeped in audio. Beyond that, moments that read as
+         racist are never cut into a clip at all — because a bleep does not save a clip that
+         is <em>about</em> the joke.</p>
+      <div class="fig">Runs <s>before</s> selection, on word stems</div></div>
+
+    <div class="cap"><div class="h"><b>Caption sync</b><s>VERIFIED</s></div>
+      <p>Word-by-word karaoke, several speakers in separate screen zones, and a hard cap on
+         how long one line may span. We then sample the finished file and check the pixels.</p>
+      <div class="fig">Burned-in text present <s>→</s> 24/24 frames</div></div>
+
+    <div class="cap"><div class="h"><b>Clip length</b><s>ADAPTIVE</s></div>
+      <p>Length follows content, not a template. A quick beat stays short; a twelve-turn
+         exchange gets room. Sentences always finish.</p>
+      <div class="fig">Spread <s>→</s> 18–55 s across one batch</div></div>
+
+  </div>
+
+  <div class="honest rv">
+    <span class="lbl">Where we are not the best choice — read this before paying</span>
+    <ul>
+      <li>Our hype score is a measured heuristic. It is <b>not</b> a prediction of views, and we will not pretend it is.</li>
+      <li>No template library, no brand kit, no team seats, no mobile app.</li>
+      <li>Kill counts are read from what people <b>say</b>, not from the game HUD. Silent multi-kills are missed.</li>
+      <li>We are new. No case studies but our own channels. If you need a vendor with a track record, that is not us yet.</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- PRICING --------------------------------------------------------------- -->
+<section id="price"><div class="w">
+  <div class="head rv">
+    <span class="lbl">Pricing</span>
+    <h2>One credit is one hour of stream</h2>
+    <p>Credits never expire. A failed job is never charged.</p>
+  </div>
+  <div class="plans rv">
+    <div class="pl">
+      <div class="nm">Free</div><div class="pr">$0</div>
+      <div class="for">Enough to judge the engine on your own footage.</div>
+      <ul><li>1 hour of stream</li><li>3 shorts, watermarked</li><li>Captions and audio mastering</li>
+          <li>Full detector readout</li></ul>
+      <div class="go"><a class="b2" href="/clipforge/app.html">Start free</a></div>
+    </div>
+    <div class="pl mid">
+      <div class="nm">Creator</div><div class="pr">$24<s> / month</s></div>
+      <div class="for">One channel, posting every week.</div>
+      <ul><li>20 hours of stream monthly</li><li>Unlimited shorts</li><li>No watermark</li>
+          <li>Voice profiles and colours</li><li>Publish to YouTube, TikTok, Instagram</li>
+          <li>Priority queue</li></ul>
+      <div class="go"><a class="b1" href="/clipforge/app.html">Get started</a></div>
+    </div>
+    <div class="pl">
+      <div class="nm">Studio</div><div class="pr">$79<s> / month</s></div>
+      <div class="for">Several channels and more than one editor.</div>
+      <ul><li>100 hours of stream monthly</li><li>Multiple channels and seats</li>
+          <li>Custom word lists</li><li>API access</li></ul>
+      <div class="go"><a class="b2" href="/clipforge/app.html">Talk to us</a></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ ------------------------------------------------------------------- -->
+<section><div class="w" style="max-width:52rem">
+  <div class="head rv"><span class="lbl">Questions</span><h2>Straight answers</h2></div>
+  <div class="rv">
+    <details open><summary>How do you decide what is a highlight?</summary>
+      <p>Four independent signals, weighted: laughter via amplitude modulation in the speech
+        band, the density of reaction words across a rolling twenty-second window,
+        game-specific events such as case openings, and audio energy. The check we run on
+        every video is that the dullest tactical callouts must land on zero — if they score,
+        something is wrong with the detector.</p></details>
+    <details><summary>Why does the language matter so much?</summary>
+      <p>Because vocabulary is a bias, and the wrong one actively pulls transcription in the
+        wrong direction. Feeding a Counter-Strike stream the words from a different game
+        produces confident nonsense. We detect the game first, then transcribe.</p></details>
+    <details><summary>What happens to my footage?</summary>
+      <p>The upload is stored for processing and deleted once you have collected the results.
+        We do not train models on your content. Voice profiles exist only if you create them
+        and can be deleted at any time.</p></details>
+    <details><summary>Can I steer the output?</summary>
+      <p>Yes. Pick who should be in focus, set preferred length, and extend the list of words
+        that disqualify a moment entirely. Every choice the engine made is visible to you
+        afterwards.</p></details>
+    <details><summary>How long does a stream take?</summary>
+      <p>About forty minutes for a two-hour VOD. All of it runs on our servers — start the
+        job and close the tab.</p></details>
+  </div>
+</div></section>
+
+<!-- CLOSE ----------------------------------------------------------------- -->
+<section><div class="w">
+  <div class="head rv" style="max-width:40ch">
+    <span class="lbl">Get started</span>
+    <h2>Your next short is already in your last stream</h2>
+    <p>Upload an hour and read the detector output yourself. That is the whole pitch.</p>
+  </div>
+  <div class="acts rv"><a class="b1" href="/clipforge/app.html">Clip a VOD free</a></div>
+</div></section>
+
+<footer class="cf"></footer>
+
+<script>
+/* ── waveform + detector ─────────────────────────────────────────────────
+   Deterministic pseudo-audio so the picture is stable between reloads.
+   Marked regions mirror the real detector categories.                     */
+const N = 200, W = 1000, H = 220, MID = H / 2;
+let seed = 20260730;
+const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+
+const ZONES = [
+  { a:.06,b:.11, k:"laugh", t:"Laughter burst — 3 voices overlapping",  l:1.42,h:2,c:0 },
+  { a:.20,b:.27, k:"case",  t:"Case opening — 5 case terms in 20 s",     l:.31,h:1,c:5 },
+  { a:.38,b:.42, k:"hype",  t:"Reaction burst — 4 hype words in 14 s",   l:.66,h:4,c:0 },
+  { a:.55,b:.62, k:"laugh", t:"Laughter burst — sustained, 2 voices",    l:1.18,h:2,c:1 },
+  { a:.74,b:.82, k:"case",  t:"Case opening — knife pull",               l:.94,h:3,c:4 },
+  { a:.90,b:.95, k:"hype",  t:"Clutch call — energy peak",               l:.48,h:3,c:0 }
+];
+const CS = getComputedStyle(document.documentElement);
+const tok = n => CS.getPropertyValue(n).trim();
+const COL = { laugh: tok("--sig"), case: tok("--gold"), hype: tok("--info") };
+const C_LINE = tok("--edge2"), C_BAR = tok("--wave"), C_HEAD = tok("--gold2");
+const inZone = f => ZONES.find(z => f >= z.a && f <= z.b);
+
+// build bars
+const amps = [];
+for (let i = 0; i < N; i++) {
+  const f = i / N;
+  const z = inZone(f);
+  let a = .16 + rnd() * .2;                       // conversational floor
+  a += Math.abs(Math.sin(f * 34)) * .07;
+  if (z) a = Math.min(.97, a + .34 + rnd() * .3); // detected region is louder
+  amps.push(a);
+}
+
+const svg = document.getElementById("svg");
+let s = "";
+// zone bands behind the bars
+ZONES.forEach(z => {
+  s += `<rect x="${z.a*W}" y="0" width="${(z.b-z.a)*W}" height="${H}"
+        fill="${COL[z.k]}" opacity=".085"/>`;
+  s += `<rect x="${z.a*W}" y="0" width="${(z.b-z.a)*W}" height="2" fill="${COL[z.k]}" opacity=".75"/>`;
+});
+// centre line
+s += `<line x1="0" y1="${MID}" x2="${W}" y2="${MID}" stroke="${C_LINE}" stroke-width="1"/>`;
+// bars
+const bw = W / N;
+amps.forEach((a, i) => {
+  const f = i / N, z = inZone(f);
+  const h = a * (H - 26), y = MID - h / 2;
+  s += `<rect class="bar" data-f="${f.toFixed(4)}" x="${(i*bw)+bw*.18}" y="${y}"
+        width="${bw*.64}" height="${h}" fill="${z ? COL[z.k] : C_BAR}"
+        opacity="${z ? .95 : .62}"/>`;
+});
+// playhead
+s += `<line id="ph" x1="0" y1="0" x2="0" y2="${H}" stroke="${C_HEAD}" stroke-width="1.5" opacity="0"/>`;
+svg.innerHTML = s;
+
+// time ticks
+const DUR = 115 * 60;
+const tk = document.getElementById("ticks");
+tk.innerHTML = Array.from({length:6}, (_,i) => {
+  const sec = Math.round(DUR * i / 6), m = Math.floor(sec/60);
+  return `<div>${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}:00</div>`;
+}).join("");
+
+// readout
+const rd = { 1:document.getElementById("r1"), 2:document.getElementById("r2"),
+             3:document.getElementById("r3"), 4:document.getElementById("r4"),
+             5:document.getElementById("r5") };
+const vd = document.getElementById("vd"), ph = document.getElementById("ph");
+const scope = document.getElementById("scope");
+const NAMES = ["you (gold)","hammer","dhr","jeppson"];
+
+function probe(f) {
+  const z = inZone(f), sec = Math.round(f * DUR);
+  const mm = String(Math.floor(sec/60)).padStart(2,"0"), ss = String(sec%60).padStart(2,"0");
+  const lg = z ? z.l : (.04 + (f*37 % 1) * .22);
+  const hy = z ? z.h : Math.floor((f*53 % 1) * 2);
+  const cs = z ? z.c : 0;
+  rd[1].querySelector(".v").textContent = `${mm}:${ss}`;
+  rd[2].querySelector(".v").textContent = lg.toFixed(2) + "×";
+  rd[3].querySelector(".v").textContent = hy + " / 20 s";
+  rd[4].querySelector(".v").textContent = cs;
+  rd[5].querySelector(".v").textContent = NAMES[Math.floor(f*137) % NAMES.length];
+  rd[2].classList.toggle("hi", lg >= 1);
+  rd[3].classList.toggle("hi", hy >= 3);
+  rd[4].classList.toggle("hi", cs >= 3);
+  if (z) {
+    vd.className = "verdict";
+    vd.innerHTML = `<b>CUT HERE</b> ${z.t} — this became a short.`;
+  } else {
+    vd.className = "verdict no";
+    vd.innerHTML = `<b>SKIP</b> tactical chatter, no reaction density — not clipped.`;
+  }
+  ph.setAttribute("x1", f*W); ph.setAttribute("x2", f*W); ph.setAttribute("opacity", ".9");
+}
+
+scope.addEventListener("pointermove", e => {
+  const r = scope.getBoundingClientRect();
+  probe(Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)));
+});
+scope.addEventListener("pointerleave", () => {
+  ph.setAttribute("opacity", "0");
+  vd.className = "verdict";
+  vd.textContent = "Move across the waveform — the detector reports what it measured at that point.";
+  Object.values(rd).forEach(d => { d.querySelector(".v").textContent = "—"; d.classList.remove("hi"); });
+});
+
+// idle sweep so the panel is alive before anyone touches it
+let sweep = 0, idle = true;
+scope.addEventListener("pointerenter", () => idle = false);
+setInterval(() => { if (idle) { sweep = (sweep + .004) % 1; probe(sweep); } }, 55);
+
+// hero link box -> workspace
+(function(){
+  const f=document.getElementById("lb"), i=document.getElementById("lbu");
+  if(!f) return;
+  const OK=/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|twitch\.tv|kick\.com)\//i;
+  f.addEventListener("submit",e=>{
+    e.preventDefault();
+    const v=i.value.trim();
+    if(!v || !OK.test(v)){ f.classList.add("bad"); i.focus(); return; }
+    f.classList.remove("bad");
+    location.href="/clipforge/app.html?src="+encodeURIComponent(v);
+  });
+  i.addEventListener("input",()=>f.classList.remove("bad"));
+})();
+
+// nav + reveals hanteras av cf.js
+</script>
+</body>
+</html>
