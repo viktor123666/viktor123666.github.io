@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Staff — ClipForge</title>
+<meta name="description" content="Queue, tickets, staff and margin."/>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="stylesheet" href="/clipforge/cf.css"/>
+<script defer src="/clipforge/cf.js"></script>
+<style>
+.tabs{display:flex;border:1px solid var(--edge);border-bottom:0;overflow-x:auto}
+.tab{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.85rem 1.3rem;color:var(--dim);border-right:1px solid var(--edge);cursor:pointer;
+  background:transparent;border-top:0;border-bottom:0;border-left:0;white-space:nowrap;
+  transition:color .2s,background .2s}
+.tab:hover{color:var(--ink);background:var(--bg2)}
+.tab[aria-selected=true]{color:var(--gold2);background:var(--panel);box-shadow:inset 0 2px 0 var(--gold)}
+.tab[hidden]{display:none}
+.pane{border:1px solid var(--edge);padding:1.4rem;background:var(--panel)}
+.jt{width:100%;border-collapse:collapse}
+.jt th{font-family:var(--mono);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--dim2);text-align:left;padding:.6rem .8rem;border-bottom:1px solid var(--edge2)}
+.jt td{padding:.75rem .8rem;border-bottom:1px solid var(--edge);font-size:.88rem;vertical-align:top}
+.jt tr:last-child td{border-bottom:0}
+.pill{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.2rem .5rem;border:1px solid var(--edge2);color:var(--dim)}
+.pill.open{color:var(--gold2);border-color:var(--gold)}
+.pill.us{color:var(--warn);border-color:var(--warn)}
+.pill.ok{color:var(--sig);border-color:var(--sig)}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.stat{border:1px solid var(--edge);padding:1rem 1.1rem;background:var(--bg2)}
+.stat b{display:block;font-size:1.7rem;font-family:var(--mono);color:var(--gold2);line-height:1.1}
+.stat span{font-family:var(--mono);font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--dim2);display:block;margin-top:.35rem}
+.rowact{display:flex;gap:.4rem;flex-wrap:wrap}
+.mini{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.35rem .7rem;border:1px solid var(--edge2);background:transparent;color:var(--dim);
+  cursor:pointer;transition:color .15s,border-color .15s}
+.mini:hover{color:var(--ink);border-color:var(--dim)}
+.mini.danger:hover{color:var(--warn);border-color:var(--warn)}
+.locked{opacity:.4;pointer-events:none}
+.empty{color:var(--dim2);font-size:.9rem;padding:1.4rem 0;text-align:center}
+</style>
+</head>
+<body>
+<nav class="cf"></nav>
+
+<section class="first"><div class="w">
+  <p class="lbl rv">Staff</p>
+  <h1 class="rv">Runs the service</h1>
+  <p class="lead rv">What is waiting, who is asking, and what it costs.
+    Everything on this page is limited by your role — you cannot see or do
+    something this account is not entitled to, and the buttons that are not yours
+    are not here at all.</p>
+
+  <div class="tabs rv" role="tablist" style="margin-top:2rem">
+    <button class="tab" role="tab" aria-selected="true" data-pane="queue"
+            data-need="ops.queue">Queue</button>
+    <button class="tab" role="tab" aria-selected="false" data-pane="tickets"
+            data-need="ticket.view">Tickets</button>
+    <button class="tab" role="tab" aria-selected="false" data-pane="staff"
+            data-need="staff.list">Staff</button>
+    <button class="tab" role="tab" aria-selected="false" data-pane="money"
+            data-need="billing.view">Margin</button>
+  </div>
+
+  <div class="pane rv" id="pane-queue">
+    <div class="grid" id="queueStats"></div>
+    <table class="jt" style="margin-top:1.3rem">
+      <thead><tr><th>Job</th><th>Customer</th><th>Stage</th><th>Waiting</th><th></th></tr></thead>
+      <tbody id="queueRows"></tbody>
+    </table>
+    <p class="empty" id="queueEmpty" hidden>Nothing waiting. The queue is clear.</p>
+  </div>
+
+  <div class="pane rv" id="pane-tickets" hidden>
+    <div class="grid" id="ticketStats"></div>
+    <table class="jt" style="margin-top:1.3rem">
+      <thead><tr><th>Ref</th><th>Subject</th><th>Category</th><th>State</th>
+                 <th>Waiting</th><th></th></tr></thead>
+      <tbody id="ticketRows"></tbody>
+    </table>
+    <p class="empty" id="ticketEmpty" hidden>No open tickets.</p>
+  </div>
+
+  <div class="pane rv" id="pane-staff" hidden>
+    <table class="jt">
+      <thead><tr><th>Account</th><th>Role</th><th>Since</th><th></th></tr></thead>
+      <tbody id="staffRows"></tbody>
+    </table>
+    <div class="note rv" style="margin-top:1.4rem">
+      <span class="lbl">How roles work</span>
+      <ul>
+        <li>Nobody can grant a role at or above their own. An admin who could appoint
+          an owner would <em>be</em> an owner, one step removed.</li>
+        <li>The owner cannot be removed by anyone, including themselves. A company
+          nobody can administer is worse than whatever that rule would prevent.</li>
+        <li>Every change is recorded with who made it.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pane rv" id="pane-money" hidden>
+    <div class="grid" id="moneyStats"></div>
+    <p class="hint" style="margin-top:1.2rem">Cost figures come from measured GPU
+      seconds per job. The model behind them is in
+      <span class="mono">CLIPFORGE_COST_MODEL.md</span>.</p>
+  </div>
+
+  <div class="note warn rv" style="margin-top:2.5rem">
+    <span class="lbl">Not live yet</span>
+    <ul><li>This screen reads sample data. Roles, permissions, tickets and the margin
+      view are built and tested behind it — what is missing is the deployed API.
+      Nothing here changes anything yet.</li></ul>
+  </div>
+</div></section>
+
+<footer class="cf"></footer>
+
+<script>
+(function(){
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+
+  /**
+   * The permission table, mirrored from clipforge.role_can().
+   *
+   * This hides what you cannot use. It is NOT the security boundary — the server
+   * checks every request independently, because anything a browser enforces is
+   * something a browser can be told not to enforce. This exists so staff are not
+   * shown buttons that will refuse them.
+   */
+  const CAN = {
+    owner:    ["ops.queue","ticket.view","staff.list","staff.assign","billing.view","content.view"],
+    co_owner: ["ops.queue","ticket.view","staff.list","staff.assign","billing.view","content.view"],
+    admin:    ["ops.queue","ticket.view","staff.list","content.view"],
+    finance:  ["ticket.view","billing.view"],
+    moderator:["ticket.view","content.view"],
+    member:   []
+  };
+
+  // Sample data until the API is deployed. Shaped exactly like the real responses,
+  // so wiring it later is a fetch call and nothing else.
+  const ME = { role: "owner", email: "vigge@scalelistuniverse.com" };
+  const QUEUE = [
+    ["a4f2","smorjhan17@…","transcribing",  "4 min", 42],
+    ["b881","kompis@…",    "cutting",       "11 min", 88],
+    ["c103","dhr@…",       "waiting",       "22 min", 0]
+  ];
+  const TICKETS = [
+    ["CF-260802-K7M3PQ","Gold subtitles on the wrong voice","quality","waiting_us","3 h"],
+    ["CF-260802-R2XW9F","Charged twice for August","billing","waiting_customer","1 d"],
+    ["CF-260801-B4NHTY","Can I clip someone else's stream?","rights","open","2 d"]
+  ];
+  const STAFF = [
+    ["vigge@scalelistuniverse.com","owner","2026-01-04"],
+    ["kompis@scalelistuniverse.com","admin","2026-06-11"],
+    ["rougeina@scalelistuniverse.com","moderator","2026-07-02"]
+  ];
+
+  const can = (action) => (CAN[ME.role] || []).includes(action);
+
+  function stat(v, label){
+    return '<div class="stat"><b>'+v+'</b><span>'+label+'</span></div>';
+  }
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, c =>
+      ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  }
+
+  function renderQueue(){
+    $("queueStats").innerHTML =
+      stat(QUEUE.length,"in flight") + stat("2","workers") +
+      stat("6 min","median wait") + stat("0","failed today");
+    $("queueRows").innerHTML = QUEUE.map(([id,who,stage,wait,pct]) =>
+      '<tr><td class="mono">'+esc(id)+'</td><td>'+esc(who)+'</td>'+
+      '<td><span class="pill '+(stage==="waiting"?"":"open")+'">'+esc(stage)+'</span></td>'+
+      '<td class="mono">'+esc(wait)+'</td>'+
+      '<td><div class="rowact">'+
+        '<button class="mini">Open</button>'+
+        '<button class="mini danger">Cancel</button>'+
+      '</div></td></tr>').join("");
+    $("queueEmpty").hidden = QUEUE.length > 0;
+  }
+
+  function renderTickets(){
+    const waiting = TICKETS.filter(t => t[3] === "waiting_us").length;
+    $("ticketStats").innerHTML =
+      stat(TICKETS.length,"open") + stat(waiting,"waiting on us") +
+      stat("2 h","median first reply") + stat("0","over 24 h");
+    $("ticketRows").innerHTML = TICKETS.map(([ref,subj,cat,state,age]) => {
+      const cls = state === "waiting_us" ? "us" : state === "open" ? "open" : "ok";
+      return '<tr><td class="mono">'+esc(ref)+'</td><td>'+esc(subj)+'</td>'+
+        '<td class="mono">'+esc(cat)+'</td>'+
+        '<td><span class="pill '+cls+'">'+esc(state.replace("_"," "))+'</span></td>'+
+        '<td class="mono">'+esc(age)+'</td>'+
+        '<td><button class="mini">Reply</button></td></tr>';
+    }).join("");
+    $("ticketEmpty").hidden = TICKETS.length > 0;
+  }
+
+  function renderStaff(){
+    const mayAssign = can("staff.assign");
+    $("staffRows").innerHTML = STAFF.map(([email,role,since]) => {
+      // The owner row carries no controls at all — not disabled ones. A greyed-out
+      // button invites someone to wonder how to enable it.
+      const owner = role === "owner";
+      const actions = (!mayAssign || owner) ? "" :
+        '<div class="rowact">'+
+          '<button class="mini">Change role</button>'+
+          '<button class="mini danger">Remove access</button>'+
+        '</div>';
+      return '<tr><td>'+esc(email)+'</td>'+
+        '<td><span class="pill '+(owner?"open":"")+'">'+esc(role)+'</span></td>'+
+        '<td class="mono">'+esc(since)+'</td><td>'+actions+'</td></tr>';
+    }).join("");
+  }
+
+  function renderMoney(){
+    $("moneyStats").innerHTML =
+      stat("62 917 kr","revenue / month") + stat("20 226 kr","cost / month") +
+      stat("68 %","gross margin") + stat("4,41 kr","cost per job") +
+      stat("0,034 kr","per source minute") + stat("96 %","of cost is GPU");
+  }
+
+  function applyRole(){
+    // Hide the tabs this role has no business seeing, and land on the first one that
+    // is actually available — an admin should not open onto an empty Margin pane.
+    let first = null;
+    document.querySelectorAll(".tab").forEach(t => {
+      const allowed = can(t.dataset.need);
+      t.hidden = !allowed;
+      if (allowed && !first) first = t;
+    });
+    document.querySelectorAll(".tab").forEach(t =>
+      t.setAttribute("aria-selected", String(t === first)));
+    document.querySelectorAll(".pane").forEach(p =>
+      p.hidden = !first || p.id !== "pane-" + first.dataset.pane);
+  }
+
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(t =>
+        t.setAttribute("aria-selected", String(t === tab)));
+      document.querySelectorAll(".pane").forEach(p =>
+        p.hidden = p.id !== "pane-" + tab.dataset.pane);
+    });
+  });
+
+  renderQueue(); renderTickets(); renderStaff(); renderMoney(); applyRole();
+})();
+</script>
+</body>
+</html>

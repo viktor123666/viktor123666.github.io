@@ -1,0 +1,18 @@
+# RFC 9116 — how to reach us about a security problem.
+#
+# Published because a researcher who cannot find a contact address posts publicly
+# instead, and we would much rather hear it first.
+
+Contact: mailto:security@scalelistuniverse.com
+Expires: 2027-08-01T22:24:38.000Z
+Preferred-Languages: sv, en
+Canonical: https://scalelistuniverse.com/.well-known/security.txt
+Policy: https://scalelistuniverse.com/clipforge/security.html
+
+# We will not pursue anyone who reports a problem in good faith and gives us a
+# reasonable chance to fix it before publishing.
+#
+# Most valuable to us, in order:
+#   1. Anything that reaches another customer's video, transcript or voice profile
+#   2. Anything that can post to a connected channel that is not the caller's
+#   3. Anything that grants credit without payment, or charges without work

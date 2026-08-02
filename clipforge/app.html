@@ -80,11 +80,14 @@
       <button class="b1" type="button" id="pick">Choose file</button>
       <input type="file" id="file" accept="video/*" class="hide"/>
     </div>
-    <div class="or"><span>OR PASTE A LINK — YOUTUBE · TWITCH · KICK</span></div>
+    <div class="or"><span>OR PASTE A TWITCH VOD LINK</span></div>
     <div class="urow">
-      <input type="text" id="url" placeholder="youtube.com/watch?v=…   twitch.tv/videos/…   kick.com/…"/>
+      <input type="text" id="url" placeholder="twitch.tv/videos/…"/>
       <button class="b2" type="button" id="fetch">Fetch</button>
     </div>
+    <p class="hint" style="margin:.6rem 0 0">
+      YouTube and Kick block downloads from server addresses, so those links have to be
+      uploaded as files instead. Paste one and we will tell you rather than fail quietly.</p>
 
     <div class="opts">
       <div class="opt"><label class="fl" for="lang">Language</label>
@@ -145,10 +148,11 @@
   </div>
 
   <div class="note warn rv" style="margin-top:2.5rem">
-    <span class="lbl">Demo mode</span>
-    <ul><li>This workspace walks the real pipeline using sample data. The engine behind it is
-      built and has processed full-length streams — upload and the job queue are the remaining
-      wiring. Nothing here charges you.</li></ul>
+    <span class="lbl">Not live yet</span>
+    <ul><li>This workspace walks the real pipeline using sample data. The engine has
+      processed full-length streams, and upload, the job queue and accounts are built and
+      tested behind this screen. What remains is object storage and a deployed API.
+      Nothing here charges you.</li></ul>
   </div>
 </div></section>
 
