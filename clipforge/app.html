@@ -149,10 +149,12 @@
 
   <div class="note warn rv" style="margin-top:2.5rem">
     <span class="lbl">Not live yet</span>
-    <ul><li>This workspace walks the real pipeline using sample data. The engine has
-      processed full-length streams, and upload, the job queue and accounts are built and
-      tested behind this screen. What remains is object storage and a deployed API.
-      Nothing here charges you.</li></ul>
+    <ul><li>This screen walks the pipeline using sample data, but the pipeline behind it
+      is not a mock: a stream submitted to the queue is claimed by a worker, run through
+      the engine stage by stage, and delivered as finished vertical shorts — measured end
+      to end, charged on the real duration, source deleted on collection. What is missing
+      is the part that lets <b>you</b> reach it: a deployed API. Nothing here charges
+      you.</li></ul>
   </div>
 </div></section>
 

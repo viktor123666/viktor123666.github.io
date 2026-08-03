@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Granskning — ClipForge</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="stylesheet" href="/clipforge/cf.css"/>
+<style>
+.sec{margin-top:2.6rem}
+.sec>h2{font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold2);border-bottom:1px solid var(--edge2);padding-bottom:.6rem;margin-bottom:0}
+.rows{border:1px solid var(--edge);border-top:0}
+.row{display:grid;grid-template-columns:minmax(150px,220px) 1fr auto;gap:1rem;
+  align-items:baseline;padding:.85rem 1.1rem;border-bottom:1px solid var(--edge);
+  transition:background .15s}
+.row:last-child{border-bottom:0}
+.row:hover{background:var(--bg2)}
+.row a{font-family:var(--mono);font-size:.86rem;color:var(--ink);text-decoration:none;
+  border-bottom:1px solid var(--edge2)}
+.row a:hover{color:var(--gold2);border-color:var(--gold)}
+.row p{margin:0;color:var(--dim);font-size:.87rem;line-height:1.5}
+.tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;
+  padding:.18rem .5rem;border:1px solid var(--edge2);color:var(--dim2);white-space:nowrap}
+.tag.live{color:var(--sig);border-color:var(--sig)}
+.tag.local{color:var(--gold2);border-color:var(--gold)}
+.tag.off{color:var(--dim2)}
+.tag.risk{color:var(--warn);border-color:var(--warn)}
+.stats{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  margin-top:1.6rem}
+.st{border:1px solid var(--edge);padding:1rem 1.1rem;background:var(--bg2)}
+.st b{display:block;font-size:1.55rem;font-family:var(--mono);color:var(--gold2);line-height:1.1}
+.st span{font-family:var(--mono);font-size:.65rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--dim2);display:block;margin-top:.3rem}
+@media(max-width:760px){.row{grid-template-columns:1fr;gap:.3rem}}
+</style>
+</head>
+<body>
+<nav class="cf"></nav>
+
+<section class="first"><div class="w">
+  <p class="lbl rv">Granskning</p>
+  <h1 class="rv">Allt som är byggt</h1>
+  <p class="lead rv">Varje sida, varje modul, varje dokument — på ett ställe.
+    Klicka igenom dem. Det som står <span class="tag local">LOKALT</span> kör på din
+    egen dator just nu; <span class="tag off">AV</span> är byggt och avstängt tills
+    det behövs.</p>
+
+  <div class="stats rv">
+    <div class="st"><b>15</b><span>sidor</span></div>
+    <div class="st"><b>774</b><span>tester gröna</span></div>
+    <div class="st"><b>17</b><span>migrationer</span></div>
+    <div class="st"><b>0 kr</b><span>per månad</span></div>
+  </div>
+
+  <div class="sec rv">
+    <h2>Sidor kunden ser</h2>
+    <div class="rows">
+      <div class="row"><a href="/clipforge/index.html">index.html</a>
+        <p>Startsidan. Interaktiv vågform där du hovrar och ser vad detektorn hörde —
+          skratt, hype, case-öppning, talare — och domen KLIPP HÄR eller HOPPA.</p>
+        <span class="tag live">SKYLTFÖNSTER</span></div>
+      <div class="row"><a href="/clipforge/engine.html">engine.html</a>
+        <p>Hur motorn väljer. Det som skiljer oss från konkurrenterna: vi visar arbetet.</p>
+        <span class="tag live">SKYLTFÖNSTER</span></div>
+      <div class="row"><a href="/clipforge/pricing.html">pricing.html</a>
+        <p>Free 1 h en gång · Creator $24/20 h · Studio $79/100 h. <b>Sidan är
+          kontraktet</b> — koden svarar till den, och ett test hävdar att de stämmer.</p>
+        <span class="tag off">AV</span></div>
+      <div class="row"><a href="/clipforge/app.html">app.html</a>
+        <p>Arbetsytan. Ladda upp, följ stegen live, hämta klippen, se vad som
+          <em>inte</em> blev klipp och varför.</p>
+        <span class="tag local">LOKALT</span></div>
+      <div class="row"><a href="/clipforge/account.html">account.html</a>
+        <p>Kundens egen sida: jobbhistorik, krediter, röstprofiler, fakturor.</p>
+        <span class="tag off">AV</span></div>
+      <div class="row"><a href="/clipforge/login.html">login.html</a>
+        <p>Inloggning utan lösenord. Engångslänk, 15 minuter, kan bara användas en gång.</p>
+        <span class="tag off">AV</span></div>
+      <div class="row"><a href="/clipforge/docs.html">docs.html</a>
+        <p>Dokumentation, inklusive <b>REST API</b> och <b>MCP</b> — en AI-assistent
+          kan driva klippfabriken direkt utan att någon öppnar en webbläsare.</p>
+        <span class="tag live">SKYLTFÖNSTER</span></div>
+      <div class="row"><a href="/clipforge/changelog.html">changelog.html</a>
+        <p>Vad som ändrats. Ärlighet som produktegenskap.</p>
+        <span class="tag live">SKYLTFÖNSTER</span></div>
+      <div class="row"><a href="/clipforge/404.html">404.html</a>
+        <p>Sidan som inte fanns.</p>
+        <span class="tag live">SKYLTFÖNSTER</span></div>
+    </div>
+  </div>
+
+  <div class="sec rv">
+    <h2>Sidor bara du ser</h2>
+    <div class="rows">
+      <div class="row"><a href="/clipforge/admin.html">admin.html</a>
+        <p>Personalkonsolen: kö, ärenden, personal, marginal. Flikar din roll inte får
+          se finns <em>inte i sidan</em> — de är inte gråade, de är borta.</p>
+        <span class="tag local">LOKALT</span></div>
+      <div class="row"><a href="/clipforge/review.html">review.html</a>
+        <p>Den här sidan.</p>
+        <span class="tag local">LOKALT</span></div>
+    </div>
+  </div>
+
+  <div class="sec rv">
+    <h2>Juridiska sidor</h2>
+    <div class="rows">
+      <div class="row"><a href="/clipforge/terms.html">terms.html</a>
+        <p>Användarvillkor. <b>Ogranskade av jurist</b> — och det är rätt så länge du
+          frilansar, för då gäller ditt klientavtal, inte dessa.</p>
+        <span class="tag risk">OGRANSKAD</span></div>
+      <div class="row"><a href="/clipforge/privacy.html">privacy.html</a>
+        <p>Integritetspolicy.</p>
+        <span class="tag risk">OGRANSKAD</span></div>
+      <div class="row"><a href="/clipforge/dpa.html">dpa.html</a>
+        <p>Personuppgiftsbiträdesavtal.</p>
+        <span class="tag risk">OGRANSKAD</span></div>
+      <div class="row"><a href="/clipforge/security.html">security.html</a>
+        <p>Hur vi skyddar materialet, och hur en forskare når oss.</p>
+        <span class="tag live">SKYLTFÖNSTER</span></div>
+      <div class="row"><a href="/.well-known/security.txt">.well-known/security.txt</a>
+        <p>RFC 9116. En forskare som inte hittar en kontaktväg publicerar i stället.</p>
+        <span class="tag live">SKYLTFÖNSTER</span></div>
+    </div>
+  </div>
+
+  <div class="sec rv">
+    <h2>AI-integration</h2>
+    <div class="rows">
+      <div class="row"><a href="/clipforge/docs.html#mcp">MCP-server</a>
+        <p>Sju verktyg: saldo, jobblista, status, skicka in, hämta klipp, lägg till
+          länk, förklara motorn. Testad genom att faktiskt prata protokollet — inte
+          genom att anropa funktionerna.</p>
+        <span class="tag live">FUNGERAR</span></div>
+      <div class="row"><a href="/clipforge/docs.html#api">REST API</a>
+        <p>Samma kod som gränssnittet använder, så det finns ingen andra implementation
+          som kan glida isär.</p>
+        <span class="tag local">LOKALT</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">assistentens gränser</span>
+        <p>Ett konto, låst vid start — inget verktyg tar emot "vilken användare".
+          Rättighetsintyg måste skickas uttryckligen och vägrar som standard.
+          Lässkommandon kan aldrig spendera kredit.</p>
+        <span class="tag live">AKTIV</span></div>
+    </div>
+  </div>
+
+  <div class="sec rv">
+    <h2>Vad som skyddar krediterna</h2>
+    <div class="rows">
+      <div class="row"><span class="mono" style="font-size:.86rem">huvudboken</span>
+        <p><b>Saldot lagras aldrig</b> — det räknas fram ur en append-only-huvudbok.
+          Ett lagrat saldo kan ändras med ett UPDATE; en summa kan inte.</p>
+        <span class="tag live">AKTIV</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">reservationer</span>
+        <p>Krediten hålls vid start, debiteras vid <em>lyckat</em> jobb. Ett misslyckat
+          jobb kostar aldrig något — det finns exakt <b>ett</b> anrop i hela systemet
+          som debiterar en kund.</p>
+        <span class="tag live">AKTIV</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">prisvalidering</span>
+        <p>Priset kommer <b>aldrig</b> från webbläsaren. Annars kunde vem som helst
+          prenumerera på Studio för en krona.</p>
+        <span class="tag live">AKTIV</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">idempotens</span>
+        <p>Nyckeln är (prenumeration, periodstart) — aldrig event-id. Stripe levererar
+          samma faktura med <em>olika</em> id, så en dubbelutdelning vore annars gratis
+          pengar varje månad.</p>
+        <span class="tag live">AKTIV</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">radlås</span>
+        <p>Användarraden låses innan saldot läses. Utan det gick tre samtidiga jobb
+          igenom på ett saldo som räckte till ett — <b>hittat av ett test som försökte
+          göra just det</b>.</p>
+        <span class="tag live">AKTIV</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">RLS</span>
+        <p>Row-level security: en fråga kan inte nå ett annat konto ens om
+          applikationslogiken har fel. Gäller rollen appen faktiskt kopplar upp som —
+          det var en riktig bugg en gång.</p>
+        <span class="tag live">AKTIV</span></div>
+    </div>
+  </div>
+
+  <div class="sec rv">
+    <h2>Dokumenten</h2>
+    <div class="rows">
+      <div class="row"><span class="mono" style="font-size:.86rem">CLIPFORGE_FRILANS.md</span>
+        <p><b>Läs denna först.</b> Så här jobbar du just nu, gratis, utan jurist.</p>
+        <span class="tag local">NU</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">CLIPFORGE_MASTERPLAN.md</span>
+        <p>Vägen till företag, steg för steg med kostnader. Väntar tills pengar kommer in.</p>
+        <span class="tag off">SENARE</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">CLIPFORGE_COST_MODEL.md</span>
+        <p>Vad allt kostar, mätt. 96 % är GPU — och den siffran är den enda som
+          fortfarande är en uppskattning.</p>
+        <span class="tag live">MÄTT</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">CLIPFORGE_RUNBOOK.md</span>
+        <p>Värsta dagen, i ordning, med kompletta kommandon. Läs den <em>före</em> panik.</p>
+        <span class="tag live">BEREDSKAP</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">CLIPFORGE_BUILD_TREE.md</span>
+        <p>Alla nio grenar, vad varje uppgift krävde, och varje bugg som hittades.</p>
+        <span class="tag live">HISTORIK</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">CLIPFORGE_SECURITY.md</span>
+        <p>Intrångsplan, GDPR, biometri.</p>
+        <span class="tag live">BEREDSKAP</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">CLIPFORGE_LEGAL_PACKAGE.md</span>
+        <p>13 numrerade frågor till en jurist, DPIA-utkast, personuppgiftskarta.
+          Behövs den dag främlingar registrerar sig.</p>
+        <span class="tag off">SENARE</span></div>
+      <div class="row"><span class="mono" style="font-size:.86rem">CLIPFORGE_OPERATIONS.md</span>
+        <p>Kapacitet, kostnad, marginal.</p>
+        <span class="tag live">DRIFT</span></div>
+    </div>
+  </div>
+
+  <div class="note rv" style="margin-top:2.6rem">
+    <span class="lbl">Nästa steg</span>
+    <ul>
+      <li><b>Nu:</b> gå igenom designen. Säg vad som ska ändras.</li>
+      <li><b>Sedan:</b> säkerhetsgranskning — front door (inloggning, sessioner,
+        rate limits) och back door (kreditförfalskning, RLS, tokens, SSRF).</li>
+      <li>Den granskningen ska köras som <em>angripare</em>, inte som utvecklare.
+        Samma metod som hittade sex riktiga fel i gren A+B.</li>
+    </ul>
+  </div>
+</div></section>
+
+<footer class="cf"></footer>
+<script defer src="/clipforge/cf.js"></script>
+</body>
+</html>

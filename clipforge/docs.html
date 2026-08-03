@@ -48,7 +48,8 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
       <a href="#voices">Voice profiles</a>
       <a href="#missing">Why a clip is missing</a>
       <div class="grp">Reference</div>
-      <a href="#api">API</a>
+      <a href="#api">REST API</a>
+      <a href="#mcp">MCP &amp; AI</a>
       <a href="#limits">Limits</a>
     </aside>
 
@@ -63,7 +64,7 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
         <tr><td>Frame rate</td><td>24–120 fps, constant. Variable frame rate is rejected.</td></tr>
         <tr><td>Audio</td><td>One track, 32 kHz or higher, mono or stereo</td></tr>
         <tr><td>Duration</td><td>Up to 12 hours</td></tr>
-        <tr><td>Links</td><td>YouTube, Twitch, Kick — your own content only</td></tr>
+        <tr><td>Links</td><td>Twitch VODs — your own content only. YouTube and Kick block downloads from server addresses, so those are uploaded as files.</td></tr>
       </table>
       <p>Variable frame rate is the one hard rejection. VFR files lie about their timing grid,
         which makes frame-accurate cutting impossible — we would rather refuse than deliver
@@ -113,6 +114,9 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
       </ul>
 
       <h2 id="voices">Voice profiles</h2>
+      <p class="hint"><b>Not self-serve yet.</b> There is no upload path for enrolment —
+        send us the audio and we build the profile by hand. The guidance below is what
+        we measured, and it is what we follow when we do it for you.</p>
       <p>Record two to three minutes of one person talking with nobody else audible. A solo
         intro works; so does any stretch where you are alone in the call.</p>
       <p>What matters is <b>solo</b>, not clean. We measured this: noise reduction made almost
@@ -136,36 +140,76 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
           sentence, so it was left out rather than clipped badly.</td></tr>
       </table>
 
-      <h2 id="api">API</h2>
-      <p>Available on the Studio plan. Submit a job, poll for status, collect signed URLs.</p>
-      <pre><code>POST /v1/jobs
-Authorization: Bearer &lt;key&gt;
+      <h2 id="api">REST API</h2>
+      <p>Everything the workspace does is available programmatically: submit a
+        recording, follow the stages, collect the clips. The interface and the API run
+        through the same code, so there is no second implementation to drift.</p>
+      <pre><code>POST /api/jobs
+Cookie: cf_session=&lt;session&gt;
 Content-Type: application/json
 
 {
-  "source": "https://your-storage/stream.mp4",
-  "language": "sv",
-  "shorts": 6,
-  "focus": "vigge",
-  "length": "auto"
+  "sourceId": "3f2504e0-4f89-41d3-9a0c-0305e82c3301",
+  "language": "sv"
 }
 
-→ 202 { "id": "job_8f2a…", "status": "queued" }</code></pre>
-      <pre><code>GET /v1/jobs/job_8f2a…
+&rarr; 200 { "jobId": "8f2a1c04-…" }</code></pre>
+      <p>Note what the request does <em>not</em> carry: a number of clips. The engine
+        decides that from the moments it finds. Asking for ten guarantees either four
+        are padding or six good ones were discarded.</p>
+      <pre><code>GET /api/jobs/8f2a1c04-…
 
-→ 200 {
-  "status": "done",
-  "stage": null,
-  "video": "https://…signed…",
-  "shorts": [
-    { "url": "…", "title": "The knife pull", "seconds": 34,
-      "score": 94, "why": "case density 5 · laughter 1.4x" }
+&rarr; 200 {
+  "job": { "state": "done", "stage": null, "progress": 100,
+           "billedMinutes": 115, "clipCount": 9 },
+  "clips": [
+    { "idx": 1, "title": "…", "seconds": 41.2, "score": 18.4,
+      "url": "…expiring link…",
+      "why": { "hook": "…", "speakers": ["…"], "parts": [ … ] } }
   ],
-  "rejected": [
-    { "at": 1199, "reason": "dull", "detail": "no reaction density" }
+  "rejections": [
+    { "at": "20:03", "atS": 1203.4,
+      "reason": "The opening line said nothing on its own, so it would not hold a viewer." }
   ]
 }</code></pre>
-      <p>Webhooks are delivered on completion and failure. Failed jobs never consume credit.</p>
+      <p>The <code>rejections</code> array is the part worth building against: every
+        discarded moment carries a timecode you can scrub to in the source and a reason
+        in plain words. Download links are minted per request and expire, so fetch them
+        when you need them rather than storing them.</p>
+
+      <h2 id="mcp">MCP — connect an AI assistant</h2>
+      <p>ClipForge speaks the <b>Model Context Protocol</b>, so an assistant can drive
+        the clip factory directly: hand it a recording, watch the stages, collect the
+        clips, and explain the result — without anyone opening a browser.</p>
+      <pre><code>{
+  "mcpServers": {
+    "clipforge": {
+      "command": "npx",
+      "args": ["tsx", "F:/scalelistuniverse/platform/src/mcp/server.ts"],
+      "env": { "CF_MODE": "local" }
+    }
+  }
+}</code></pre>
+      <table class="d">
+        <tr><th>Tool</th><th>What it does</th></tr>
+        <tr><td><code>credit_balance</code></td><td>Minutes of source video still available</td></tr>
+        <tr><td><code>list_jobs</code></td><td>Recent jobs. Read-only.</td></tr>
+        <tr><td><code>job_status</code></td><td>Live stage, clips, and every rejection with its reason</td></tr>
+        <tr><td><code>submit_job</code></td><td>Queues an uploaded recording</td></tr>
+        <tr><td><code>get_clips</code></td><td>Download links for a finished job</td></tr>
+        <tr><td><code>add_link</code></td><td>Adds a VOD from a link — requires an explicit rights confirmation</td></tr>
+        <tr><td><code>engine_notes</code></td><td>How the detectors choose, for explaining a result</td></tr>
+      </table>
+      <p>Three rules govern what an assistant may do, because an assistant is a client
+        that will cheerfully fill a missing argument with its best guess:</p>
+      <ul>
+        <li><b>One account, fixed at startup.</b> There is no tool argument for
+          &ldquo;which user&rdquo; — that would be an authentication bypass with a
+          friendly interface.</li>
+        <li><b>Nothing irreversible by omission.</b> Confirming that someone holds the
+          rights to a recording must be passed explicitly, and defaults to refusing.</li>
+        <li><b>Read tools cannot spend.</b> Exploring an account never costs credit.</li>
+      </ul>
 
       <h2 id="limits">Limits</h2>
       <table class="d">
@@ -176,7 +220,7 @@ Content-Type: application/json
         <tr><td>Minimum billed per job</td><td>10 minutes</td></tr>
         <tr><td>Result retention</td><td>30 days</td></tr>
         <tr><td>Source retention</td><td>Deleted on collection</td></tr>
-        <tr><td>Typical turnaround</td><td>≈ 40 min for a 2-hour stream</td></tr>
+        <tr><td>Typical turnaround</td><td>≈ 0.57× stream length (115-min stream → 65 min), measured on an RTX 3060 Ti</td></tr>
       </table>
 
       <div class="note warn" style="margin-top:2rem">

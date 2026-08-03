@@ -153,7 +153,9 @@ h1 em{font-style:normal;color:var(--gold2)}
   <div class="head rv">
     <span class="lbl">The pipeline</span>
     <h2>Eight stages, every one measured</h2>
-    <p>These are real timings from a 115-minute CS2 VOD. Nothing here is a projection.</p>
+    <p>Stage timings from our reference 115-minute CS2 VOD on server GPU hardware.
+       Your own numbers depend on the card the job lands on — the measured
+       end-to-end figure is below.</p>
   </div>
   <div class="spec rv">
     <div class="sr"><span class="n">01</span><span class="t">Read the source
@@ -181,7 +183,7 @@ h1 em{font-style:normal;color:var(--gold2)}
       <s>Samples the output and verifies the text is actually on screen</s></span>
       <span class="m">4 s</span><span class="p">cloud</span></div>
   </div>
-  <p class="lbl rv" style="margin-top:1rem">Total ≈ 40 min for a 2-hour stream · nothing runs on your machine</p>
+  <p class="lbl rv" style="margin-top:1rem">Measured end to end on a 115-minute stream: 0.57× its length on a consumer RTX 3060 Ti · nothing runs on your machine</p>
 </div></section>
 
 <!-- CAPABILITIES ---------------------------------------------------------- -->
@@ -200,9 +202,10 @@ h1 em{font-style:normal;color:var(--gold2)}
       <div class="fig">Dull tactical callouts score <s>→</s> 0.00</div></div>
 
     <div class="cap"><div class="h"><b>Speaker identity</b><s>ECAPA</s></div>
-      <p>Two minutes of you talking alone builds a voice profile. From then on you are
-         recognised in every upload and get your own subtitle colour. Scores are
-         cohort-normalised against the other voices in the room.</p>
+      <p>The engine separates speakers and gives each their own subtitle colour, scored
+         cohort-normalised against the other voices in the room. Profiles are built for
+         you by hand today — self-serve enrolment from two minutes of your own audio is
+         not built yet, and is listed below as a gap.</p>
       <div class="fig">Separation <s>→</s> +0.56 · recall 100 %</div></div>
 
     <div class="cap"><div class="h"><b>Swedish + English</b><s>ASR</s></div>
@@ -235,6 +238,7 @@ h1 em{font-style:normal;color:var(--gold2)}
       <li>Our hype score is a measured heuristic. It is <b>not</b> a prediction of views, and we will not pretend it is.</li>
       <li>No template library, no brand kit, no team seats, no mobile app.</li>
       <li>Kill counts are read from what people <b>say</b>, not from the game HUD. Silent multi-kills are missed.</li>
+      <li>You cannot enrol your own voice yet. Speaker separation works; teaching the engine <b>which</b> voice is yours is done by hand, not by you.</li>
       <li>We are new. No case studies but our own channels. If you need a vendor with a track record, that is not us yet.</li>
     </ul>
   </div>
