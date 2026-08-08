@@ -43,3 +43,7 @@ node_modules/
 *.bak
 tools/youtube_creds/
 **/youtube_creds/
+
+# ClipForge — local mode only. app/admin/review are NOT for the public
+# site until the attacker review (K5) has run. Brochure launch = own decision.
+clipforge/

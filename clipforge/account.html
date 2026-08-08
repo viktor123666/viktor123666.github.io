@@ -7,6 +7,7 @@
 <meta name="description" content="Your jobs, credits, voice profiles and billing."/>
 <link rel="stylesheet" href="/clipforge/cf.css"/>
 <script defer src="/clipforge/cf.js"></script>
+<script defer src="/clipforge/live.js?v=3"></script>
 <style>
 .tabs{display:flex;border:1px solid var(--edge);border-bottom:0;overflow-x:auto}
 .tab{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
@@ -45,13 +46,13 @@
     <div class="head rv" style="margin:0;flex:1;min-width:16rem">
       <span class="lbl">Dashboard</span>
       <h1 style="font-size:clamp(1.6rem,3.2vw,2.2rem);margin-bottom:.4rem">Your workspace</h1>
-      <p style="margin:0">Signed in as <span class="mono gld">vigge@scalelistuniverse.com</span></p>
+      <p style="margin:0">Signed in as <span class="mono gld" data-cf-email>vigge@scalelistuniverse.com</span></p>
     </div>
     <a class="b1 rv" href="/clipforge/app.html">New job</a>
   </div>
 
   <div class="stats rv" style="margin-bottom:2rem">
-    <div class="st"><b>14.2 h</b><span>credits remaining</span></div>
+    <div class="st"><b><span data-cf-credits>14.2</span> h</b><span>credits remaining</span></div>
     <div class="st"><b>5.8 h</b><span>used this period</span></div>
     <div class="st"><b>37</b><span>shorts delivered</span></div>
     <div class="st"><b>2</b><span>voice profiles</span></div>
