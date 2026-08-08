@@ -239,6 +239,7 @@ for(;pos<end;pos++){const v=list[pos],c=CH[v.c];const d=document.createElement('
 d.innerHTML=`<div class="thumb"><img loading="lazy" decoding="async" src="${thumbUrl(v)}" alt="">${v.d!=null?`<span class="dur">${fmtD(v.d)}</span>`:''}<span class="kind">${v.k==='short'?'SHORT':v.k==='stream'?'LIVE':'VIDEO'}</span>${has(MIRROR,v.id)?'<span class="mbadge">AD-FREE</span>':''}</div>
 <div class="meta"><div class="title"></div><div class="ch">${c.name}${v.v!=null?` <span class="vw">· ${fmtV(v.v)}</span>`:''}</div></div>`;
 d.querySelector('.title').textContent=v.t;
+d.querySelector('img').alt=v.t;
 d.onclick=()=>openPlayer(v);
 attachPreview(d,v);
 frag.appendChild(d);}
