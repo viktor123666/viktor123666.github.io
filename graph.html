@@ -164,7 +164,7 @@ function de(e,d){if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}
 const tip=document.getElementById("tip");
 function showTip(e,d){
   tip.style.setProperty("--c",d.c);
-  const img=d.img?`<img src="${ROOT}/${d.id}/${d.id}_hero.webp" alt="">`:"";
+  const img=d.img?`<img src="${ROOT}/${d.id}/${d.id}_hero.webp" alt="${d.label}">`:"";
   tip.innerHTML=`${img}<div class="nm">${d.label}</div><div class="ro">${d.role}</div><div class="go">click → wiki</div>`;
   tip.classList.add("show");
   const x=Math.min(e.offsetX+16,wrap.clientWidth-230), y=Math.min(e.offsetY+16,wrap.clientHeight-150);

@@ -205,7 +205,7 @@ const lb = document.getElementById("lb"), lbImg = document.getElementById("lb-im
       lbDl = document.getElementById("lb-dl"), lbCap = document.getElementById("lb-cap");
 document.addEventListener("click", e => {
   const f = e.target.closest(".char-art figure");
-  if (f){ const s=f.dataset.src; lbImg.src=s; lbDl.href=s;
+  if (f){ const s=f.dataset.src; lbImg.src=s; lbImg.alt=f.dataset.cap||""; lbDl.href=s;
     lbDl.setAttribute("download", "scalelist_"+s.split("/").pop());
     lbCap.textContent=f.dataset.cap; lb.classList.add("open"); }
 });

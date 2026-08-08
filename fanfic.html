@@ -126,7 +126,7 @@ CHARS.forEach(ch=>{
 });
 function select(ch){ cur=ch; form.style.setProperty("--c",ch.c);
   document.querySelectorAll(".pick").forEach(p=>p.classList.toggle("on",p.dataset.k===ch.k));
-  charImg.src=`${ROOT}/${ch.k}/${ch.k}_hero.webp`; charLabel.textContent=ch.n; }
+  charImg.src=`${ROOT}/${ch.k}/${ch.k}_hero.webp`; charImg.alt=ch.n; charLabel.textContent=ch.n; }
 
 const statusEl=document.getElementById("status"), out=document.getElementById("out"),
       stTitle=document.getElementById("st-title"), stBy=document.getElementById("st-by"), stTxt=document.getElementById("st-txt"),

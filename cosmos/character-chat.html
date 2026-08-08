@@ -133,7 +133,7 @@ function select(ch){
   cur=ch; thread=[];
   panel.style.setProperty("--c",ch.c);
   document.querySelectorAll(".pick").forEach(p=>p.classList.toggle("on",p.dataset.k===ch.k));
-  tImg.src=`${ROOT}/${ch.k}/${ch.k}_hero.webp`; tNm.textContent=ch.n; tVibe.textContent=ch.vibe;
+  tImg.src=`${ROOT}/${ch.k}/${ch.k}_hero.webp`; tImg.alt=ch.n; tNm.textContent=ch.n; tVibe.textContent=ch.vibe;
   threadEl.innerHTML=""; bubble("them",ch.greet);
 }
 async function send(){
