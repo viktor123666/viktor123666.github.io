@@ -13,8 +13,8 @@
   const FOOT = [
     ["Product", [["/clipforge/", "Overview"], ["/clipforge/engine.html", "The engine"],
       ["/clipforge/pricing.html", "Pricing"], ["/clipforge/app.html", "Workspace"]]],
-    ["Account", [["/clipforge/login.html", "Sign in"], ["/clipforge/account.html", "Dashboard"],
-      ["/clipforge/docs.html", "Documentation"], ["/clipforge/platform.html", "Plattformen"], ["/clipforge/changelog.html", "Changelog"]]],
+    ["Account", [["/clipforge/login.html", "Sign in"], ["/clipforge/account.html", "Dashboard"], ["/clipforge/history.html", "History"],
+      ["/clipforge/docs.html", "Documentation"], ["/clipforge/platform.html", "The Platform"], ["/clipforge/changelog.html", "Changelog"]]],
     ["Legal", [["/clipforge/security.html", "Security"], ["/clipforge/privacy.html", "Privacy"], ["/clipforge/terms.html", "Terms"],
       ["/clipforge/dpa.html", "Data processing"]]],
     ["Universe", [["/", "Scalelist Universe"], ["/cosmos", "The Cosmos"]]]
@@ -31,9 +31,8 @@
         '<a class="mark" href="/clipforge/"><s></s>ClipForge</a><nav>' +
         NAV.map(([h, t]) => `<a href="${h}"${h.replace(/index\.html$/, "") === here ? ' aria-current="page"' : ""}>${t}</a>`).join("") +
         '</nav>' +
-        (hd.dataset.cta === "app"
-          ? '<a class="b2 sm" href="/clipforge/account.html">Dashboard</a>'
-          : '<a class="b1 sm" href="/clipforge/app.html">Start free</a>') +
+        '<a class="b1 sm" href="/clipforge/app.html">Create new video</a> ' +
+        '<a class="b2 sm" href="/clipforge/history.html" style="margin-left:.5rem">History</a>' +
         '</div>';
     }
 

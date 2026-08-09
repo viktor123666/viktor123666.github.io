@@ -140,6 +140,14 @@
     // error invisible.
     const panel = (id, on) => { const e = $(id); if (e) e.classList.toggle("hide", !on); };
 
+    // "Clip a video" must work BEFORE any delivery too — on the upload view it
+    // simply brings you back to the form. render() upgrades it to a full reset.
+    const navClip = $("again");
+    if (navClip) navClip.onclick = () => {
+      panel("out", false); panel("src", true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
     let chosen = null;
     let jobId = null;
 
@@ -183,8 +191,8 @@
       // reported as broken within one minute of the first real user touching it.
       const h = drop ? drop.querySelector("h2") : null;
       const pp = drop ? drop.querySelector("p") : null;
-      if (h) h.textContent = "VALD: " + chosen.name;
-      if (pp) pp.textContent = mb + " MB — tryck »Start clipping« nedanför";
+      if (h) h.textContent = "SELECTED: " + chosen.name;
+      if (pp) pp.textContent = mb + " MB — press »Start clipping« below";
       if (go) {
         go.style.outline = "2px solid var(--gold)";
         go.scrollIntoView({ block: "center", behavior: "smooth" });
@@ -212,10 +220,14 @@
         });
 
         show("Queueing…");
+        const fontSel = $("font");
         const sub = await json("/api/jobs", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ sourceId }),
+          body: JSON.stringify({
+            sourceId,
+            subtitleFont: fontSel && fontSel.value !== "standard" ? fontSel.value : null,
+          }),
         });
         if (!sub.ok) {
           panel("run", false);
@@ -248,7 +260,8 @@
       if (job.state === "done") {
         panel("run", false);
         panel("out", true);
-        render(r.body.clips || [], r.body.rejections || []);
+        render(r.body.clips || [], r.body.rejections || [], job);
+        showTranscript(r.body);
         go.disabled = false;
         return;
       }
@@ -267,19 +280,136 @@
       setTimeout(poll, 4000);
     }
 
-    function render(clips, rejections) {
+    /** The whole stream's words — a by-product worth more than any single clip. */
+    function showTranscript(body) {
+      const stats = $("outStats");
+      if (!stats || !body || !body.transcriptUrl) return;
+      const old = document.getElementById("trLinks");
+      if (old) old.remove();
+      stats.insertAdjacentHTML("beforeend",
+        `<span class="t mono" id="trLinks" style="font-size:.78rem">FULL TRANSCRIPT ` +
+        `<a class="gld" href="${body.transcriptUrl}" download>.srt</a> · ` +
+        `<a class="gld" href="${body.transcriptTxtUrl || body.transcriptUrl}" download>.txt</a></span>`);
+      showBonus(body);
+    }
+
+    /**
+     * BONUS, at the very bottom, in the source's own format: the ORIGINAL video in
+     * full with the transcript burned in. Only rendered when the worker actually
+     * produced it — no empty promise slots.
+     */
+    function showBonus(body) {
+      const out = $("out");
+      const old = document.getElementById("bonusRow");
+      if (old) old.remove();
+      if (!out || !body.bonusUrl) return;
+      out.insertAdjacentHTML("beforeend",
+        `<div id="bonusRow" style="margin-top:2rem;border:1px solid var(--edge);padding:1.1rem 1.2rem">
+           <span class="t mono" style="font-size:.7rem;color:var(--gold2);letter-spacing:.14em">BONUS</span>
+           <p style="margin:.4rem 0 .8rem;font-size:.9rem">The full original video — untouched
+           length, original format, subtitles burned in from the transcript.</p>
+           <a class="b1" href="${body.bonusUrl}" download>Download full video (subtitled)</a>
+         </div>`);
+    }
+
+    function render(clips, rejections, job) {
+      // The page's OWN card anatomy — .th (9:16 stage), .sc (score badge), .mt (meta).
+      // The first version invented its own <figure> markup, so the CSS matched nothing:
+      // videos rendered at natural size, the grid warped, and the result looked broken
+      // on the very first job a real user completed.
       if (clipGrid) {
-        clipGrid.innerHTML = clips.map((c) =>
-          `<figure class="clip"><figcaption>${
-            String(c.idx)}. ${escapeHtml(c.title || "")} — ${
-            Number(c.seconds).toFixed(0)}s</figcaption>${
-            c.url ? `<video src="${escapeHtml(c.url)}" controls preload="none"></video>` : ""
-          }</figure>`).join("");
+        clipGrid.innerHTML = clips.map((c) => `
+          <div class="clip">
+            <div class="th">
+              ${c.url ? `<video src="${escapeHtml(c.url)}" controls preload="metadata"
+                                playsinline></video>` : ""}
+              <span class="sc">${Number(c.score).toFixed(1)}</span>
+            </div>
+            <div class="mt">
+              <b>${String(c.idx)}. ${escapeHtml(c.title || "Untitled")}</b>
+              <span>${Number(c.seconds).toFixed(0)} s</span>
+              <button class="b2 sm" data-report="${escapeHtml(c.id || "")}"
+                      style="margin-top:.5rem;font-size:.66rem">Report</button>
+            </div>
+          </div>`).join("");
       }
+
+      // Rejections in the page's own row style, trimmed to what a human scans —
+      // the full quotes made the list an unreadable wall on the first real render.
       if (whyList) {
-        whyList.innerHTML = rejections.map((x) =>
-          `<li><b>${clock(x.atS ?? x.at_s)}</b> ${escapeHtml(x.detail || "")}</li>`).join("");
+        whyList.innerHTML = rejections.map((x) => {
+          // No scores for clips that do not exist (Vigges order): the skipped list
+          // shows WHEN and WHAT WAS SAID. The full reasoning stays in the tooltip.
+          const raw = String(x.detail || "");
+          const q = raw.search(/["“]/);
+          const d = /^scored/i.test(raw) ? (q >= 0 ? raw.slice(q) : "") : raw;
+          const short = d.length > 150 ? d.slice(0, 147) + "…" : d;
+          return `<div class="wr" title="${escapeHtml(d)}"><b>${
+            clock(x.atS ?? x.at_s)}</b> ${escapeHtml(short)}</div>`;
+        }).join("");
       }
+
+      // TRUE numbers where the demo showed invented ones ("83 % · 24/24 · 7 censored").
+      const stats = $("outStats");
+      if (stats) {
+        const bits = [
+          [clips.length, "clips"],
+          [rejections.length, "skipped moments logged"],
+        ];
+        if (job && job.billedMinutes != null) bits.push([job.billedMinutes, "minutes charged"]);
+        stats.innerHTML = bits.map(([v, l]) =>
+          `<span class="t mono" style="font-size:.78rem;color:var(--dim)">${
+            escapeHtml(String(l).toUpperCase())} <b class="gld">${escapeHtml(String(v))}</b></span>`).join("");
+      }
+      const outName = $("outName");
+      if (outName) outName.textContent = (runName && runName.textContent) || `${clips.length} clips`;
+
+      // "This was not good enough" — one sentence from the customer, straight into
+      // clip_reports. The button confirms itself instead of pretending via a toast.
+      clipGrid?.querySelectorAll("[data-report]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const reason = window.prompt("What was wrong with this clip?");
+          if (!reason || !reason.trim()) return;
+          const r = await json(`/api/clips/${btn.dataset.report}/report`, {
+            method: "POST", headers: { "content-type": "application/json" },
+            body: JSON.stringify({ reason: reason.trim() }),
+          });
+          btn.textContent = r.ok ? "Reported ✓" : (r.body?.error || "Could not send");
+          if (r.ok) btn.disabled = true;
+        });
+      });
+
+      // All three buttons are always present; GOLD marks where you are. A delivery
+      // makes Download all the gold action; Clip a video steps back to outline.
+      const dl = $("dlAll"), nav = $("again");
+      if (dl) { dl.disabled = false; dl.classList.remove("b2"); dl.classList.add("b1"); }
+      if (nav) { nav.classList.remove("b1"); nav.classList.add("b2"); }
+      if (dl) dl.onclick = () => {
+        // One download per clip via its signed URL. No zip endpoint exists locally,
+        // and pretending with a dead button is how the old demo page lied.
+        clips.forEach((c, i) => {
+          if (!c.url) return;
+          setTimeout(() => {
+            const a = document.createElement("a");
+            a.href = c.url; a.download = `short${String(c.idx).padStart(2, "0")}.mp4`;
+            document.body.appendChild(a); a.click(); a.remove();
+          }, i * 400);
+        });
+      };
+      const again = $("again");
+      if (again) again.onclick = () => {
+        chosen = null; jobId = null;
+        if (dl) { dl.classList.remove("b1"); dl.classList.add("b2"); }
+        again.classList.remove("b2"); again.classList.add("b1");
+        panel("out", false); panel("src", true);
+        const h = drop ? drop.querySelector("h2") : null;
+        const pp = drop ? drop.querySelector("p") : null;
+        if (h) h.textContent = "Drop a stream file here";
+        if (pp) pp.textContent = "MP4 · MKV · MOV · WEBM — UP TO 12 HOURS";
+        if (go) go.style.outline = "";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
       show(`${clips.length} clips ready. ${rejections.length} moments logged as skipped.`);
     }
 
@@ -307,28 +437,28 @@
     const urlIn = $("url"), fetchBtn = $("fetch");
     if (fetchBtn && urlIn) fetchBtn.addEventListener("click", async () => {
       const url = urlIn.value.trim();
-      if (!url) { alertLine("Klistra in en länk först."); return; }
+      if (!url) { alertLine("Paste a link first."); return; }
       fetchBtn.disabled = true;
       try {
         const r = await json("/api/links/resolve", { method: "POST",
           headers: { "content-type": "application/json" }, body: JSON.stringify({ url }) });
         if (!r.ok) {
-          alertLine((r.body && r.body.error) || "Den länken stöds inte än."); return;
+          alertLine((r.body && r.body.error) || "That link is not supported yet."); return;
         }
         const meta = r.body || {};
-        const mins = meta.durationS ? Math.round(meta.durationS / 60) + " min" : "okänd längd";
+        const mins = meta.durationS ? Math.round(meta.durationS / 60) + " min" : "unknown length";
         // The API refuses without rightsConfirmed, and the page must not invent it:
         // the confirmation is the customer's own act, recorded server-side.
         const okGo = window.confirm(
           (meta.title || url) + "\n" + mins + "\n\n" +
-          "Jag intygar att detta är mitt eget material, eller att jag har " +
-          "rättighetsinnehavarens tillstånd att bearbeta det.");
+          "I confirm this recording is my own content, or that I have the " +
+          "rights holder's permission to process it.");
         if (!okGo) return;
         const acc = await json("/api/links/accept", { method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({ url, rightsConfirmed: true }) });
         if (!acc.ok) {
-          alertLine((acc.body && acc.body.error) || "Kunde inte ta emot länken."); return;
+          alertLine((acc.body && acc.body.error) || "Could not accept that link."); return;
         }
         await fetchThenSubmit(acc.body.sourceId, meta.title || url);
       } finally { fetchBtn.disabled = false; }
@@ -338,7 +468,7 @@
     async function fetchThenSubmit(sourceId, label) {
       panel("src", false); panel("run", true);
       if (runName) runName.textContent = label;
-      show("Hämtar videon från källan…");
+      show("Fetching the video from the source…");
       for (let i = 0; i < 450; i++) {                     // up to ~30 min
         const sub = await json("/api/jobs", { method: "POST",
           headers: { "content-type": "application/json" },
@@ -348,12 +478,12 @@
         const stillFetching = sub.status === 409 || /not ready|fetch/i.test(msg);
         if (!stillFetching) {
           panel("run", false); panel("src", true);
-          alertLine(msg || "Hämtningen misslyckades."); return;
+          alertLine(msg || "The fetch failed."); return;
         }
         await new Promise((r) => setTimeout(r, 4000));
       }
       panel("run", false); panel("src", true);
-      alertLine("Hämtningen tog för länge — ladda upp filen i stället.");
+      alertLine("The fetch took too long — upload the file instead.");
     }
 
     /**
@@ -365,8 +495,10 @@
      * the form, and the page had no idea it had ever owned a job.
      */
     async function resumeLatest() {
+      const wanted = new URLSearchParams(location.search).get("job");
       const r = await json("/api/jobs");
-      const latest = r.ok && r.body && r.body.jobs && r.body.jobs[0];
+      const all = (r.ok && r.body && r.body.jobs) || [];
+      const latest = wanted ? all.find((j) => j.id === wanted) : all[0];
       if (!latest) return;
       if (latest.state === "queued" || latest.state === "running") {
         jobId = latest.id;
@@ -382,7 +514,8 @@
         const d = await json("/api/jobs/" + latest.id);
         if (d.ok && d.body) {
           panel("src", false); panel("out", true);
-          render(d.body.clips || [], d.body.rejections || []);
+          render(d.body.clips || [], d.body.rejections || [], d.body.job);
+          showTranscript(d.body);
         }
         return;
       }
@@ -397,6 +530,29 @@
   async function wireAccount() {
     const r = await json("/api/auth/me");
     if (!r.ok || !r.body) return;
+
+    // The history the first real user asked for: what ran, when, how long the
+    // delivered clips are, and what it cost in tokens. Real rows replace the sample.
+    const tbody = document.getElementById("jobsBody");
+    if (tbody) {
+      const jr = await json("/api/jobs");
+      if (jr.ok && jr.body && Array.isArray(jr.body.jobs)) {
+        const fmt = (sec) => {
+          const t = Math.round(Number(sec) || 0);
+          return t >= 60 ? Math.floor(t / 60) + " min " + (t % 60) + " s" : t + " s";
+        };
+        tbody.innerHTML = jr.body.jobs.map((j) => `
+          <tr>
+            <td>${(j.title || "—").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]))}</td>
+            <td>${new Date(j.createdAt).toLocaleString("sv-SE", { dateStyle: "short", timeStyle: "short" })}</td>
+            <td>${j.clipCount ? fmt(j.clipSeconds) : "—"}</td>
+            <td>${j.clipCount}</td>
+            <td>${j.billedMinutes != null ? j.billedMinutes + " min" : "0"}</td>
+            <td><span class="stbadge st-${j.state}">${j.state}</span></td>
+            <td><a class="gld" href="/clipforge/app.html?job=${j.id}">Open →</a></td>
+          </tr>`).join("") || `<tr><td colspan="7">No jobs yet.</td></tr>`;
+      }
+    }
     document.querySelectorAll("[data-cf-email]").forEach((el) => {
       el.textContent = r.body.email;
     });

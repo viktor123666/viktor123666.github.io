@@ -7,7 +7,7 @@
 <meta name="description" content="Your jobs, credits, voice profiles and billing."/>
 <link rel="stylesheet" href="/clipforge/cf.css"/>
 <script defer src="/clipforge/cf.js"></script>
-<script defer src="/clipforge/live.js?v=3"></script>
+<script defer src="/clipforge/live.js?v=13"></script>
 <style>
 .tabs{display:flex;border:1px solid var(--edge);border-bottom:0;overflow-x:auto}
 .tab{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
@@ -68,8 +68,8 @@
   <!-- JOBS -->
   <div class="pane rv" id="p-jobs" style="padding:0">
     <table class="jt">
-      <thead><tr><th>Source</th><th>Submitted</th><th>Length</th><th>Shorts</th><th>Status</th><th></th></tr></thead>
-      <tbody>
+      <thead><tr><th>Source</th><th>Submitted</th><th>Length</th><th>Shorts</th><th>Tokens</th><th>Status</th><th></th></tr></thead>
+      <tbody id="jobsBody">
         <tr><td class="nm">stream_cs2_2h.mp4</td><td class="mono">30 Jul 09:14</td>
           <td class="mono">1:55:00</td><td class="mono">6</td>
           <td><span class="tag ok">Delivered</span></td>

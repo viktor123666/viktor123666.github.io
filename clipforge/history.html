@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>History — ClipForge</title>
+<meta name="description" content="Every job you have run: length, date, tokens charged, status."/>
+<link rel="stylesheet" href="/clipforge/cf.css"/>
+<script defer src="/clipforge/cf.js"></script>
+<script defer src="/clipforge/live.js?v=8"></script>
+<style>
+table.jt{width:100%;border-collapse:collapse;font-size:.9rem}
+.jt th,.jt td{text-align:left;padding:.85rem .9rem;border-bottom:1px solid var(--edge);vertical-align:middle}
+.jt th{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);font-weight:500}
+.jt td{color:var(--dim)}.jt td:first-child{color:var(--ink);font-weight:600;max-width:26ch}
+.jt tbody tr{transition:background .15s;cursor:default}
+.jt tbody tr:hover{background:var(--bg2)}
+.jt td:nth-child(3),.jt td:nth-child(4),.jt td:nth-child(5){font-family:var(--mono);font-size:.82rem}
+.stbadge{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.18rem .5rem;border:1px solid var(--edge2);border-radius:2px;white-space:nowrap}
+.st-done{color:var(--sig);border-color:var(--sig)}
+.st-failed{color:var(--warn);border-color:var(--warn)}
+.st-running,.st-queued{color:var(--gold2);border-color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<header class="cf"></header>
+
+<section class="first"><div class="w">
+  <div class="head rv" style="max-width:46ch;margin-bottom:2rem">
+    <span class="lbl">History</span>
+    <h1 style="font-size:clamp(1.7rem,3.6vw,2.4rem)">Everything you have run</h1>
+    <p>Every job, newest first — how long the delivered clips are, when it ran,
+       what it cost in tokens, and a link straight back to the result.</p>
+  </div>
+
+  <div class="acts" style="margin-bottom:1rem">
+    <button class="b2" type="button" disabled title="Open a job to download its clips">Download all</button>
+    <a class="b2" href="/clipforge/app.html">Clip a video</a>
+    <a class="b1" href="/clipforge/history.html">History / Recent</a>
+  </div>
+
+  <div class="panel rv">
+    <table class="jt">
+      <thead><tr><th>Source</th><th>Submitted</th><th>Length</th><th>Shorts</th><th>Tokens</th><th>Status</th><th></th></tr></thead>
+      <tbody id="jobsBody"><tr><td colspan="7">Sign in to see your history.</td></tr></tbody>
+    </table>
+  </div>
+</div></section>
+
+<footer class="cf"></footer>
+</body>
+</html>

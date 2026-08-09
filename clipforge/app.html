@@ -7,8 +7,8 @@
 <meta name="description" content="Upload a stream, watch each measured stage, and collect your finished shorts."/>
 <link rel="stylesheet" href="/clipforge/cf.css"/>
 <script defer src="/clipforge/cf.js"></script>
-<script defer src="/clipforge/upload.js?v=4"></script>
-<script defer src="/clipforge/live.js?v=4"></script>
+<script defer src="/clipforge/upload.js?v=13"></script>
+<script defer src="/clipforge/live.js?v=13"></script>
 <style>
 .drop{border:1px dashed var(--edge2);background:var(--bg2);padding:3.4rem 1.5rem;text-align:center;
   cursor:pointer;transition:border-color .2s,background .2s}
@@ -43,7 +43,8 @@
 @keyframes in{to{opacity:1}}
 .clip:hover{background:var(--bg2)}
 .clip .th{aspect-ratio:9/16;background:linear-gradient(170deg,#16191c,#0a0b0c);
-  display:grid;place-items:center;color:var(--dim2);font-family:var(--mono);position:relative}
+  display:grid;place-items:center;color:var(--dim2);font-family:var(--mono);position:relative;overflow:hidden}
+.clip .th video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000}
 .clip .sc{position:absolute;top:.5rem;left:.5rem;font-family:var(--mono);font-size:.64rem;
   color:var(--gold2);border:1px solid var(--edge2);padding:.1rem .35rem;background:rgba(0,0,0,.6)}
 .clip .mt{padding:.7rem .8rem}
@@ -67,6 +68,15 @@
     <p>Upload once. Everything heavy runs on our servers — close the tab if you like.</p>
   </div>
 
+  <!-- Result actions live ABOVE the credits bar so a finished job greets you with
+       its buttons, not with a scroll hunt past every clip. Hidden until delivery. -->
+  <!-- Workspace nav — ALWAYS visible: switch between clipping and history without
+       hunting. "Download all" joins the row only when a delivery exists. -->
+  <div class="acts" id="outActions" style="margin-bottom:1rem">
+    <button class="b2" type="button" id="dlAll" disabled title="Finish a job to download">Download all</button>
+    <button class="b1" type="button" id="again">Clip a video</button>
+    <a class="b2" href="/clipforge/history.html">History / Recent</a>
+  </div>
   <div class="panel rv" style="margin-bottom:1.4rem">
     <div class="ph"><span class="t">CREDITS <b id="cred">1.0 h</b></span>
       <span class="t">PLAN <b>Free</b></span>
@@ -104,6 +114,12 @@
       <div class="opt"><label class="fl" for="focus">Focus on</label>
         <input type="text" id="focus" placeholder="voice profile name"/>
         <div class="hint">Favours clips with that person.</div></div>
+      <div class="opt"><label class="fl" for="font">Subtitle style</label>
+        <select id="font"><option value="standard" selected>ClipForge standard</option>
+          <option value="bangers">Bangers — comic weight</option>
+          <option value="bebas">Bebas Neue — clean &amp; tight</option>
+          <option value="bungee">Bungee — round display</option></select>
+        <div class="hint">Same words, your look.</div></div>
       <div class="opt"><label class="fl" for="len">Clip length</label>
         <select id="len"><option value="auto" selected>Content-driven</option>
           <option value="short">Short (&lt; 30 s)</option><option value="long">Long (45–60 s)</option></select>
@@ -132,21 +148,10 @@
     <div class="panel" style="margin-bottom:1.2rem">
       <div class="ph"><span class="t">DELIVERED <b id="outName">stream.mp4</b></span>
         <span class="tag ok" style="margin-left:auto">QUALITY GATE PASSED</span></div>
-      <div class="pb" style="display:flex;gap:1.6rem;flex-wrap:wrap">
-        <span class="t mono" style="font-size:.78rem;color:var(--dim)">CAPTION COVERAGE <b class="gld">83 %</b></span>
-        <span class="t mono" style="font-size:.78rem;color:var(--dim)">PIXEL CHECK <b class="gld">24/24</b></span>
-        <span class="t mono" style="font-size:.78rem;color:var(--dim)">WORDS CENSORED <b class="gld">7</b></span>
-        <span class="t mono" style="font-size:.78rem;color:var(--dim)">MOMENTS BLOCKED <b class="gld">5</b></span>
-      </div>
+      <div class="pb" id="outStats" style="display:flex;gap:1.6rem;flex-wrap:wrap"></div>
     </div>
     <div class="clips" id="clipGrid"></div>
     <div class="why-list rv" id="whyList"></div>
-    <div class="acts" style="margin-top:1.4rem">
-      <button class="b1" type="button">Download all</button>
-      <button class="b2" type="button">Publish to YouTube</button>
-      <button class="b2" type="button">Publish to TikTok</button>
-      <button class="b2" type="button" id="again">Clip another</button>
-    </div>
   </div>
 
   <div class="note warn rv" style="margin-top:2.5rem">

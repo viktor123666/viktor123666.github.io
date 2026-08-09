@@ -37,13 +37,18 @@
 
   <div class="log rv">
 
-    <div class="entry known">
-      <div class="when">Known limitation · open</div>
-      <h3>Kill counts are read from speech, not the game</h3>
-      <p>Multi-kills are detected only when someone reacts out loud. A silent three-kill is
-        invisible to us. Fixing this properly means reading the game's kill feed from the
-        picture, which is not built.</p>
-      <span class="delta"><s>impact</s> <b>quiet highlights missed</b></span>
+    <div class="entry fix">
+      <div class="when">9 August 2026 · Detection</div>
+      <h3>Kills are now read from the picture</h3>
+      <p>The engine reads both teams' kill counters from the scoreboard — a tiny strip of
+        pixels, OCR only when they change, a value accepted only after two identical
+        consecutive reads. A silent multi-kill nobody reacted to out loud now scores like
+        the fight it was. Match resets are recognised, other games without a scoreboard are
+        detected and skipped, and the signal is additive — when it is absent, selection
+        behaves exactly as before. Timing granularity is ~2 seconds (keyframe sampling);
+        confirmed kills land in selection with an 8-second reach.</p>
+      <span class="delta"><s>silent multi-kills on an 82-min stream</s> <b>0 →
+        3 bursts caught (+4, +3, +5)</b></span>
     </div>
 
     <div class="entry known">
@@ -51,7 +56,8 @@
       <h3>Speaker colours stop at cross-talk</h3>
       <p>When two people talk simultaneously the voice embedding blends and matches neither
         cleanly. We colour fewer lines rather than colour them wrongly. More voice profiles
-        raise the ceiling; nothing else we have tried does.</p>
+        raise the ceiling; nothing else we have tried does. The enrolment pipeline is built
+        and waiting — this closes the day the remaining voice recordings are enrolled.</p>
       <span class="delta"><s>coloured lines</s> <b>~9 % of a busy stream</b></span>
     </div>
 
