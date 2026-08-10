@@ -3,8 +3,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Documentation — ClipForge</title>
+<title>Documentation — ViggeClips</title>
 <meta name="description" content="Supported formats, how the settings work, what the detector readout means, and the API."/>
+<link rel="icon" href="/clipforge/favicon.ico" sizes="any"/>
+<link rel="icon" href="/clipforge/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/clipforge/apple-touch-icon.png"/>
 <link rel="stylesheet" href="/clipforge/cf.css"/>
 <script defer src="/clipforge/cf.js"></script>
 <style>
@@ -64,7 +67,7 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
         <tr><td>Frame rate</td><td>24–120 fps, constant. Variable frame rate is rejected.</td></tr>
         <tr><td>Audio</td><td>One track, 32 kHz or higher, mono or stereo</td></tr>
         <tr><td>Duration</td><td>Up to 12 hours</td></tr>
-        <tr><td>Links</td><td>Twitch VODs — your own content only. YouTube and Kick block downloads from server addresses, so those are uploaded as files.</td></tr>
+        <tr><td>Links</td><td>Twitch and YouTube VODs — your own content only. Kick blocks downloads from our addresses, so Kick recordings are uploaded as files.</td></tr>
       </table>
       <p>Variable frame rate is the one hard rejection. VFR files lie about their timing grid,
         which makes frame-accurate cutting impossible — we would rather refuse than deliver
@@ -93,8 +96,8 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
           stream's own reference. Above 1.0× is a real burst.</td></tr>
         <tr><td>hype / 20 s</td><td>Distinct reaction words inside a rolling twenty-second
           window. Three or more is a burst.</td></tr>
-        <tr><td>case terms</td><td>Game-event vocabulary in the same window. Five or more
-          usually means an opening session.</td></tr>
+        <tr><td>event terms</td><td>Recognised event vocabulary in the same window. Five or
+          more usually means a whole session worth keeping.</td></tr>
         <tr><td>speaker</td><td>Which voice profile matched, if any. Blank means the engine
           would rather say nothing than guess.</td></tr>
       </table>
@@ -178,7 +181,7 @@ Content-Type: application/json
         when you need them rather than storing them.</p>
 
       <h2 id="mcp">MCP — connect an AI assistant</h2>
-      <p>ClipForge speaks the <b>Model Context Protocol</b>, so an assistant can drive
+      <p>ViggeClips speaks the <b>Model Context Protocol</b>, so an assistant can drive
         the clip factory directly: hand it a recording, watch the stages, collect the
         clips, and explain the result — without anyone opening a browser.</p>
       <pre><code>{
@@ -225,8 +228,10 @@ Content-Type: application/json
 
       <div class="note warn" style="margin-top:2rem">
         <span class="lbl">Not yet available</span>
-        <ul><li>The API is specified but not deployed. Endpoints above describe the intended
-          contract, not a live service.</li></ul>
+        <ul><li>The API is built and running — every endpoint above is live in the solo
+          runtime today (localhost). Public deployment is gated on one thing: the
+          adversarial security review passing. Until then the contract is exercised
+          end-to-end daily, just not internet-reachable.</li></ul>
       </div>
     </div>
   </div>

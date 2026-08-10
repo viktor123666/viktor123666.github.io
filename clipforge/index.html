@@ -3,15 +3,23 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ClipForge — the clipper that shows its work</title>
-<meta name="description" content="Most clip tools hand you a score. ClipForge shows you the waveform, the laughter it measured and the reason each moment was chosen. Built for Swedish streams."/>
-<meta property="og:title" content="ClipForge — the clipper that shows its work"/>
+<title>ViggeClips — the clipper that shows its work</title>
+<meta name="description" content="Most clip tools hand you a score. ViggeClips shows you the waveform, the laughter it measured and the reason each moment was chosen. Any spoken recording, any language."/>
+<meta property="og:title" content="ViggeClips — the clipper that shows its work"/>
 <meta property="og:description" content="Measured, not guessed. Long streams in, publish-ready shorts out."/>
+<link rel="icon" href="/clipforge/favicon.ico" sizes="any"/>
+<link rel="icon" href="/clipforge/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/clipforge/apple-touch-icon.png"/>
 <link rel="stylesheet" href="/clipforge/cf.css"/>
 <script defer src="/clipforge/cf.js"></script>
 <style>/* Sidspecifik CSS — delade regler bor i cf.css */
 /* ── HERO ───────────────────────────────────────────────────────────────── */
-.hero{padding:8.5rem 0 3.5rem}
+.hero{padding:6.6rem 0 3.5rem}
+/* The showcase is the argument — it must PEEK above the fold, not hide under it.
+   Measured: at 1280x900 the phone started 664 px down and only its top third showed. */
+@media(min-width:901px){.hero .claim{margin-bottom:.9rem}
+  .hero .lede{margin-bottom:1.4rem}
+  .stage{margin-top:2.4rem}}
 .hero .rule{display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
 .hero .rule i{flex:1;height:1px;background:var(--edge2)}
 h1{font-size:clamp(2.2rem,5.4vw,4rem);line-height:1.04;letter-spacing:-.035em;
@@ -106,12 +114,12 @@ h1 em{font-style:normal;color:var(--gold2)}
 
 <!-- HERO ------------------------------------------------------------------ -->
 <div class="hero"><div class="w">
-  <div class="rule rv"><span class="lbl">Scalelist Universe · Clip engine v5</span><i></i></div>
-  <h1 class="rv">Every other clipper hands you a score.<br/><em>This one shows you the waveform.</em></h1>
-  <p class="lede rv">
-    ClipForge measures your stream — the rhythm of laughter, the density of reactions, the
-    moment a case opens — then tells you exactly why it cut where it did. Built for Swedish
-    streams that switch to English mid-sentence.
+  <span class="kicker rv"><i></i>Clip engine v5 · measured, not guessed</span>
+  <h1 class="claim rv">Two hours of stream.<em>Six shorts, by morning.</em></h1>
+  <p class="lede rv" style="max-width:44ch">
+    Drop in a recording. The engine listens for laughter, reaction density and the moment
+    the room turns — then hands you finished vertical shorts with captions, and tells you
+    exactly why it cut where it did.
   </p>
   <form class="linkbox rv" id="lb" novalidate>
     <input type="text" id="lbu" aria-label="Paste a video link"
@@ -123,13 +131,44 @@ h1 em{font-style:normal;color:var(--gold2)}
   </div>
   <div class="acts rv" style="margin-top:1.4rem">
     <a class="b2" href="/clipforge/app.html">Upload a file instead</a>
-    <a class="b2" href="#work">See the detector</a>
+    <a class="b2" href="#work">See how it decides</a>
+  </div>
+
+  <!-- SHOWCASE: what comes out, moving ------------------------------------- -->
+  <div class="stage rv">
+    <div>
+      <div class="collapse">
+        <span class="lbl">The whole recording, scored end to end</span>
+        <div class="bar" id="cbar" style="margin-top:.9rem">
+          <span class="scan"></span>
+        </div>
+        <div class="lg"><span>00:00</span><span>SCORING EVERY SECOND</span><span>02:00:00</span></div>
+        <div class="reel" id="creel"></div>
+        <p class="fine" style="margin:.9rem 0 0">Gold marks a moment that cleared the bar.
+          Everything else is logged with the score it got and the reason it lost.</p>
+      </div>
+    </div>
+
+    <div class="phone" aria-hidden="true">
+      <span class="notch"></span>
+      <span class="film"></span>
+      <span class="badge">9:16 · CAPTIONED</span>
+      <div class="cap" id="pcap"></div>
+      <div class="wavestrip" id="pwave"></div>
+    </div>
+  </div>
+
+  <div class="figs rv">
+    <div class="fg"><b data-count="0.57" data-suffix="×">0×</b><span>realtime, end to end</span></div>
+    <div class="fg"><b data-count="28" data-suffix="">0</b><span>shorts from one 82-min stream</span></div>
+    <div class="fg"><b data-count="100" data-suffix=" %">0 %</b><span>captions verified on screen</span></div>
+    <div class="fg"><b data-count="0" data-suffix="">0</b><span>charged for a failed job</span></div>
   </div>
 
   <!-- THE INSTRUMENT -->
   <div class="inst rv" id="work">
     <div class="top">
-      <span class="f">SOURCE <b>stream_cs2_2h.mp4</b></span>
+      <span class="f">SOURCE <b>stream_2h.mp4</b></span>
       <span class="f">1280×720 · 30 fps · 44.1 kHz</span>
       <span class="live"><i></i>DETECTOR ACTIVE</span>
     </div>
@@ -141,7 +180,7 @@ h1 em{font-style:normal;color:var(--gold2)}
       <div class="rd" id="r1"><div class="k">Position</div><div class="v">—</div></div>
       <div class="rd" id="r2"><div class="k">Laughter (4–8 Hz)</div><div class="v">—</div></div>
       <div class="rd" id="r3"><div class="k">Hype density</div><div class="v">—</div></div>
-      <div class="rd" id="r4"><div class="k">Case terms /20 s</div><div class="v">—</div></div>
+      <div class="rd" id="r4"><div class="k">Event terms /20 s</div><div class="v">—</div></div>
       <div class="rd" id="r5"><div class="k">Speaker</div><div class="v">—</div></div>
     </div>
     <div class="verdict" id="vd">Move across the waveform — the detector reports what it measured at that point.</div>
@@ -153,7 +192,7 @@ h1 em{font-style:normal;color:var(--gold2)}
   <div class="head rv">
     <span class="lbl">The pipeline</span>
     <h2>Eight stages, every one measured</h2>
-    <p>Stage timings from our reference 115-minute CS2 VOD on server GPU hardware.
+    <p>Stage timings from our 115-minute reference recording on server GPU hardware.
        Your own numbers depend on the card the job lands on — the measured
        end-to-end figure is below.</p>
   </div>
@@ -199,7 +238,7 @@ h1 em{font-style:normal;color:var(--gold2)}
       <p>A laugh has a measurable rhythm — amplitude modulation between 4 and 8 Hz. We read
          that from the audio instead of hoping the transcript spells out "haha". Rhythmic
          speech modulates the same way, so we gate it against intelligible words.</p>
-      <div class="fig">Dull tactical callouts score <s>→</s> 0.00</div></div>
+      <div class="fig">Flat routine chatter scores <s>→</s> 0.00</div></div>
 
     <div class="cap"><div class="h"><b>Speaker identity</b><s>ECAPA</s></div>
       <p>The engine separates speakers and gives each their own subtitle colour, scored
@@ -235,11 +274,11 @@ h1 em{font-style:normal;color:var(--gold2)}
   <div class="honest rv">
     <span class="lbl">Where we are not the best choice — read this before paying</span>
     <ul>
-      <li>Our hype score is a measured heuristic. It is <b>not</b> a prediction of views, and we will not pretend it is.</li>
-      <li>No template library, no brand kit, no team seats, no mobile app.</li>
-      <li>Kill counts are read from what people <b>say</b>, not from the game HUD. Silent multi-kills are missed.</li>
-      <li>You cannot enrol your own voice yet. Speaker separation works; teaching the engine <b>which</b> voice is yours is done by hand, not by you.</li>
-      <li>We are new. No case studies but our own channels. If you need a vendor with a track record, that is not us yet.</li>
+      <li>The hype score measures reactions in <b>your</b> recording. It selects moments; it does not promise views — no tool can.</li>
+      <li>We build one thing: the clipping engine. No template library, no brand kit, no team seats, no mobile app.</li>
+      <li>Works on any spoken recording — gaming, vlogs, podcasts, music sessions. For supported game HUDs the engine also reads the <b>picture</b>, so even moments nobody reacted to out loud can score; everywhere else, selection runs on voice reactions and audio energy.</li>
+      <li>Voice profiles are set up for you when you start. Self-serve enrolment is on the roadmap.</li>
+      <li>Launched 2026. Every number on this site is measured on our own channels — the free tier exists so you can measure us on yours.</li>
     </ul>
   </div>
 </div></section>
@@ -256,6 +295,7 @@ h1 em{font-style:normal;color:var(--gold2)}
       <div class="nm">Free</div><div class="pr">$0</div>
       <div class="for">Enough to judge the engine on your own footage.</div>
       <ul><li>1 hour of stream</li><li>3 shorts, watermarked</li><li>Captions and audio mastering</li>
+          <li>Full transcript (SRT + TXT)</li><li>The whole video subtitled, as a bonus</li>
           <li>Full detector readout</li></ul>
       <div class="go"><a class="b2" href="/clipforge/app.html">Create new video</a> <a class="b2" href="/clipforge/history.html">History</a></div>
     </div>
@@ -284,12 +324,12 @@ h1 em{font-style:normal;color:var(--gold2)}
     <details open><summary>How do you decide what is a highlight?</summary>
       <p>Four independent signals, weighted: laughter via amplitude modulation in the speech
         band, the density of reaction words across a rolling twenty-second window,
-        game-specific events such as case openings, and audio energy. The check we run on
-        every video is that the dullest tactical callouts must land on zero — if they score,
+        recognised on-screen or spoken events, and audio energy. The check we run on
+        every video is that the flattest routine chatter must land on zero — if it scores,
         something is wrong with the detector.</p></details>
     <details><summary>Why does the language matter so much?</summary>
       <p>Because vocabulary is a bias, and the wrong one actively pulls transcription in the
-        wrong direction. Feeding a Counter-Strike stream the words from a different game
+        wrong direction. Feeding one game’s stream the words from another
         produces confident nonsense. We detect the game first, then transcribe.</p></details>
     <details><summary>What happens to my footage?</summary>
       <p>The upload is stored for processing and deleted once you have collected the results.
@@ -327,10 +367,10 @@ const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff
 
 const ZONES = [
   { a:.06,b:.11, k:"laugh", t:"Laughter burst — 3 voices overlapping",  l:1.42,h:2,c:0 },
-  { a:.20,b:.27, k:"case",  t:"Case opening — 5 case terms in 20 s",     l:.31,h:1,c:5 },
+  { a:.20,b:.27, k:"case",  t:"Event cluster — 5 event terms in 20 s",   l:.31,h:1,c:5 },
   { a:.38,b:.42, k:"hype",  t:"Reaction burst — 4 hype words in 14 s",   l:.66,h:4,c:0 },
   { a:.55,b:.62, k:"laugh", t:"Laughter burst — sustained, 2 voices",    l:1.18,h:2,c:1 },
-  { a:.74,b:.82, k:"case",  t:"Case opening — knife pull",               l:.94,h:3,c:4 },
+  { a:.74,b:.82, k:"case",  t:"Event cluster — rare-drop reaction",      l:.94,h:3,c:4 },
   { a:.90,b:.95, k:"hype",  t:"Clutch call — energy peak",               l:.48,h:3,c:0 }
 ];
 const CS = getComputedStyle(document.documentElement);
@@ -387,7 +427,7 @@ const rd = { 1:document.getElementById("r1"), 2:document.getElementById("r2"),
              5:document.getElementById("r5") };
 const vd = document.getElementById("vd"), ph = document.getElementById("ph");
 const scope = document.getElementById("scope");
-const NAMES = ["you (gold)","hammer","dhr","jeppson"];
+const NAMES = ["you (gold)","speaker 2","speaker 3","speaker 4"];
 
 function probe(f) {
   const z = inZone(f), sec = Math.round(f * DUR);
@@ -408,7 +448,7 @@ function probe(f) {
     vd.innerHTML = `<b>CUT HERE</b> ${z.t} — this became a short.`;
   } else {
     vd.className = "verdict no";
-    vd.innerHTML = `<b>SKIP</b> tactical chatter, no reaction density — not clipped.`;
+    vd.innerHTML = `<b>SKIP</b> routine chatter, no reaction density — not clipped.`;
   }
   ph.setAttribute("x1", f*W); ph.setAttribute("x2", f*W); ph.setAttribute("opacity", ".9");
 }
@@ -423,6 +463,92 @@ scope.addEventListener("pointerleave", () => {
   vd.textContent = "Move across the waveform — the detector reports what it measured at that point.";
   Object.values(rd).forEach(d => { d.querySelector(".v").textContent = "—"; d.classList.remove("hi"); });
 });
+
+
+/* ── SHOWCASE MOTION ───────────────────────────────────────────────────────
+   Three small machines, each demonstrating one claim:
+     · the phone types the captions the way the renderer lands them (word by word)
+     · the bar collapses two hours into the moments that cleared the bar
+     · the figures count up only once, when they are actually on screen
+   All of it pauses under prefers-reduced-motion — the page still SAYS everything.
+   ─────────────────────────────────────────────────────────────────────────── */
+(function showcase() {
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // 1. karaoke captions
+  const cap = document.getElementById("pcap");
+  if (cap) {
+    const LINES = [
+      "NO WAY HE ACTUALLY DID THAT",
+      "EVERYONE LOST IT AT ONCE",
+      "THAT IS GOING STRAIGHT IN",
+    ];
+    let li = 0;
+    const play = () => {
+      const words = LINES[li % LINES.length].split(" ");
+      cap.innerHTML = words.map((w) => `<span>${w}</span>`).join(" ");
+      const spans = cap.querySelectorAll("span");
+      if (still) { spans.forEach((s) => s.classList.add("on")); return; }
+      spans.forEach((s, k) => setTimeout(() => s.classList.add("on"), 170 * k));
+      setTimeout(() => { li++; play(); }, 170 * words.length + 1500);
+    };
+    play();
+  }
+
+  // 2. the waveform strip
+  const wv = document.getElementById("pwave");
+  if (wv) {
+    for (let i = 0; i < 34; i++) {
+      const b = document.createElement("i");
+      b.style.animationDelay = (i * 0.055).toFixed(2) + "s";
+      b.style.animationDuration = (0.8 + (i % 5) * 0.14).toFixed(2) + "s";
+      wv.appendChild(b);
+    }
+  }
+
+  // 3. the collapse — the same six zones the detector panel uses, so the two
+  //    halves of the page tell one story rather than two.
+  const bar = document.getElementById("cbar"), reel = document.getElementById("creel");
+  if (bar && reel) {
+    const SCORES = [18.5, 16.4, 13.2, 11.0, 9.4, 7.6];
+    ZONES.forEach((z, k) => {
+      const hit = document.createElement("i");
+      hit.style.left = (z.a * 100).toFixed(2) + "%";
+      hit.style.width = ((z.b - z.a) * 100).toFixed(2) + "%";
+      hit.style.animationDelay = still ? "0s" : (0.25 + k * 0.13).toFixed(2) + "s";
+      bar.appendChild(hit);
+
+      const card = document.createElement("div");
+      card.className = "r";
+      card.setAttribute("data-s", SCORES[k].toFixed(1));
+      card.style.animationDelay = still ? "0s" : (0.5 + k * 0.13).toFixed(2) + "s";
+      reel.appendChild(card);
+    });
+  }
+
+  // 4. figures count up on first sight
+  const figs = document.querySelectorAll(".figs b[data-count]");
+  const run = (el) => {
+    const target = parseFloat(el.dataset.count), suffix = el.dataset.suffix || "";
+    const dec = (el.dataset.count.split(".")[1] || "").length;
+    if (still || target === 0) { el.textContent = target.toFixed(dec) + suffix; return; }
+    const t0 = performance.now(), dur = 900;
+    const tick = (t) => {
+      const p = Math.min(1, (t - t0) / dur);
+      el.textContent = (target * (1 - Math.pow(1 - p, 3))).toFixed(dec) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) { run(e.target); io.unobserve(e.target); }
+    }), { threshold: .6 });
+    figs.forEach((f) => io.observe(f));
+  } else {
+    figs.forEach(run);
+  }
+})();
 
 // idle sweep so the panel is alive before anyone touches it
 let sweep = 0, idle = true;

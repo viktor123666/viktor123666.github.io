@@ -3,8 +3,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The engine — ClipForge</title>
-<meta name="description" content="How ClipForge measures laughter, hype density and game moments — and why every threshold was set by testing against real footage."/>
+<title>The engine — ViggeClips</title>
+<meta name="description" content="How ViggeClips measures laughter, hype density and game moments — and why every threshold was set by testing against real footage."/>
+<link rel="icon" href="/clipforge/favicon.ico" sizes="any"/>
+<link rel="icon" href="/clipforge/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/clipforge/apple-touch-icon.png"/>
 <link rel="stylesheet" href="/clipforge/cf.css"/>
 <script defer src="/clipforge/cf.js"></script>
 <style>
@@ -91,16 +94,16 @@
 
     <div class="sg"><div class="ix">S3</div><div>
       <h3>Game events</h3>
-      <p>Case openings, knife pulls, rare drops — these are the moments an audience actively
-        seeks out, and they announce themselves in vocabulary. The word list is per-game and
-        selected automatically, because feeding one game's terms to another produces
-        confident nonsense.</p>
+      <p>Openings, rare drops, boss kills, the reveal in a podcast — the moments an audience
+        actively seeks out announce themselves in vocabulary. The word list is picked to match
+        what is actually being recorded, automatically, because feeding one context's terms to
+        another produces confident nonsense.</p>
       <div class="ev"><span class="lbl">Clustering in the reference VOD</span>
         <table class="mini-table">
           <tr><th>window</th><th>75–80 min</th><th>35–40 min</th><th>rest of stream</th></tr>
-          <tr><td>case terms</td><td class="win">21</td><td>15</td><td>0–2</td></tr>
+          <tr><td>event terms</td><td class="win">21</td><td>15</td><td>0–2</td></tr>
         </table>
-        <p class="hint" style="margin-top:.6rem">Case openings happen in sessions, not moments.
+        <p class="hint" style="margin-top:.6rem">These events happen in sessions, not moments.
           The density measure finds the session; a keyword match would scatter across it.</p></div>
     </div></div>
 
@@ -110,10 +113,10 @@
         same as interesting — gunfire is loud. Energy is used to confirm the other three
         rather than to nominate moments by itself.</p>
       <div class="ev"><span class="lbl">The check we run on every video</span>
-        <code>dullest tactical callouts must score 0.00</code>
-        <p class="hint" style="margin-top:.5rem">"He is in the bomb site, it is down" and
-          "two mid, two mid" are the most common lines in a Counter-Strike stream and the
-          least interesting. If they score above zero, the detector is broken.</p></div>
+        <code>the flattest routine chatter must score 0.00</code>
+        <p class="hint" style="margin-top:.5rem">Routine callouts and filler — the most common
+          lines in any recording and the least interesting. If they score above zero, the
+          detector is broken.</p></div>
     </div></div>
 
   </div>

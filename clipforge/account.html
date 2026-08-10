@@ -3,11 +3,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Dashboard — ClipForge</title>
+<title>Dashboard — ViggeClips</title>
 <meta name="description" content="Your jobs, credits, voice profiles and billing."/>
+<link rel="icon" href="/clipforge/favicon.ico" sizes="any"/>
+<link rel="icon" href="/clipforge/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/clipforge/apple-touch-icon.png"/>
 <link rel="stylesheet" href="/clipforge/cf.css"/>
 <script defer src="/clipforge/cf.js"></script>
-<script defer src="/clipforge/live.js?v=13"></script>
+<script defer src="/clipforge/live.js?v=16"></script>
 <style>
 .tabs{display:flex;border:1px solid var(--edge);border-bottom:0;overflow-x:auto}
 .tab{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
@@ -46,9 +49,33 @@
     <div class="head rv" style="margin:0;flex:1;min-width:16rem">
       <span class="lbl">Dashboard</span>
       <h1 style="font-size:clamp(1.6rem,3.2vw,2.2rem);margin-bottom:.4rem">Your workspace</h1>
-      <p style="margin:0">Signed in as <span class="mono gld" data-cf-email>vigge@scalelistuniverse.com</span></p>
+      <p style="margin:0">Signed in as <span class="mono gld" data-cf-email>you@example.com</span></p>
     </div>
     <a class="b1 rv" href="/clipforge/app.html">New job</a>
+  </div>
+
+  <div class="rv" id="tfCard" style="border:1px solid var(--edge);padding:1.1rem 1.2rem;
+       margin-bottom:2rem;display:none">
+    <span class="t mono" style="font-size:.7rem;color:var(--gold2);letter-spacing:.14em">
+      TWO-FACTOR AUTHENTICATION</span>
+    <p id="tfState" style="margin:.5rem 0 .9rem;font-size:.9rem">Checking…</p>
+    <div id="tfSetup" style="display:none">
+      <p class="mono" style="font-size:.78rem;word-break:break-all;margin:0 0 .6rem">
+        Secret: <b class="gld" id="tfSecret"></b></p>
+      <p class="mono" style="font-size:.72rem;color:var(--dim);word-break:break-all;
+        margin:0 0 .9rem" id="tfUri"></p>
+      <p style="font-size:.82rem;margin:0 0 .9rem">Add it to any authenticator app
+        (Aegis, Google Authenticator, 1Password), then confirm with the current code.</p>
+    </div>
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+      <input id="tfCode" inputmode="numeric" maxlength="6" placeholder="000000"
+             style="width:7rem;text-align:center;font-family:var(--mono);
+                    background:transparent;border:1px solid var(--edge);
+                    color:var(--ink);padding:.45rem;display:none"/>
+      <button class="b1 sm" id="tfBtn" type="button">Enable 2FA</button>
+    </div>
+    <p id="tfMsg" class="mono" style="color:#e5484d;font-size:.76rem;
+       margin:.7rem 0 0;display:none"></p>
   </div>
 
   <div class="stats rv" style="margin-bottom:2rem">
@@ -70,7 +97,7 @@
     <table class="jt">
       <thead><tr><th>Source</th><th>Submitted</th><th>Length</th><th>Shorts</th><th>Tokens</th><th>Status</th><th></th></tr></thead>
       <tbody id="jobsBody">
-        <tr><td class="nm">stream_cs2_2h.mp4</td><td class="mono">30 Jul 09:14</td>
+        <tr><td class="nm">stream_2h.mp4</td><td class="mono">30 Jul 09:14</td>
           <td class="mono">1:55:00</td><td class="mono">6</td>
           <td><span class="tag ok">Delivered</span></td>
           <td class="mono"><a href="#" class="gld">Open →</a></td></tr>
@@ -107,7 +134,7 @@
         <span class="mono" style="font-size:.72rem;color:var(--dim2)">QUALITY 88 % · 190 s of audio · gold</span>
       </div>
       <div class="vpc">
-        <b><span class="sw" style="background:var(--info)"></span>Hammer</b>
+        <b><span class="sw" style="background:var(--info)"></span>Speaker 2</b>
         <div class="qb"><i style="width:61%;background:var(--gold)"></i></div>
         <span class="mono" style="font-size:.72rem;color:var(--dim2)">QUALITY 61 % · 74 s of audio · needs more</span>
       </div>

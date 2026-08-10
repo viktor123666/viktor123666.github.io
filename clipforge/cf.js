@@ -1,4 +1,4 @@
-/* ClipForge — shared behaviour: header state, scroll reveals, nav/footer injection.
+/* ViggeClips — shared behaviour: header state, scroll reveals, nav/footer injection.
    Every page loads this. Page-specific logic stays in the page. */
 (function () {
   "use strict";
@@ -17,7 +17,7 @@
       ["/clipforge/docs.html", "Documentation"], ["/clipforge/platform.html", "The Platform"], ["/clipforge/changelog.html", "Changelog"]]],
     ["Legal", [["/clipforge/security.html", "Security"], ["/clipforge/privacy.html", "Privacy"], ["/clipforge/terms.html", "Terms"],
       ["/clipforge/dpa.html", "Data processing"]]],
-    ["Universe", [["/", "Scalelist Universe"], ["/cosmos", "The Cosmos"]]]
+    // (no external-universe column: the product stands alone)
   ];
 
   function mount() {
@@ -28,7 +28,12 @@
     if (hd && !hd.dataset.built) {
       hd.dataset.built = "1";
       hd.innerHTML = '<div class="w in">' +
-        '<a class="mark" href="/clipforge/"><s></s>ClipForge</a><nav>' +
+        '<a class="mark" href="/clipforge/">'
+        + '<svg class="em" viewBox="0 0 100 100" aria-hidden="true">'
+        + '<g fill="none" stroke-linecap="round" stroke-width="13.2">'
+        + '<path d="M25.5 27.2 L50 74.2" stroke="#e9edf0"/>'
+        + '<path d="M50 74.2 L74.5 27.2" stroke="#d9a531"/></g></svg>'
+        + 'ViggeClips</a><nav>' +
         NAV.map(([h, t]) => `<a href="${h}"${h.replace(/index\.html$/, "") === here ? ' aria-current="page"' : ""}>${t}</a>`).join("") +
         '</nav>' +
         '<a class="b1 sm" href="/clipforge/app.html">Create new video</a> ' +
@@ -44,7 +49,7 @@
         FOOT.map(([title, links]) =>
           `<div class="col"><span class="lbl">${title}</span>` +
           links.map(([h, t]) => `<a href="${h}">${t}</a>`).join("") + "</div>").join("") +
-        '<div class="end"><span>© 2026 Scalelist Universe</span>' +
+        '<div class="end"><span>© 2026 ViggeClips</span>' +
         '<span>Built in Sweden</span>' +
         '<span>Clip engine v5 · measured, not guessed</span></div></div>';
     }

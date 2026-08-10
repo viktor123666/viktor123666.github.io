@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="ViggeClips">
+  <!-- The stream goes in (white), the clips come out (gold). -->
+  <g fill="none" stroke-linecap="round" stroke-width="13.2">
+    <path d="M25.5 27.2 L50 74.2" stroke="#e9edf0"/>
+    <path d="M50 74.2 L74.5 27.2" stroke="#d9a531"/>
+  </g>
+</svg>

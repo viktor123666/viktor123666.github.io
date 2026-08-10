@@ -328,8 +328,11 @@
             <div class="mt">
               <b>${String(c.idx)}. ${escapeHtml(c.title || "Untitled")}</b>
               <span>${Number(c.seconds).toFixed(0)} s</span>
+              <a class="b2 sm" href="${c.url ? escapeHtml(c.url) : "#"}"
+                 download="short${String(c.idx).padStart(2, "0")}.mp4"
+                 style="margin-top:.5rem;font-size:.66rem">Download</a>
               <button class="b2 sm" data-report="${escapeHtml(c.id || "")}"
-                      style="margin-top:.5rem;font-size:.66rem">Report</button>
+                      style="margin-top:.5rem;margin-left:.4rem;font-size:.66rem">Report</button>
             </div>
           </div>`).join("");
       }
@@ -385,9 +388,9 @@
       if (dl) { dl.disabled = false; dl.classList.remove("b2"); dl.classList.add("b1"); }
       if (nav) { nav.classList.remove("b1"); nav.classList.add("b2"); }
       if (dl) dl.onclick = () => {
-        // One download per clip via its signed URL. No zip endpoint exists locally,
-        // and pretending with a dead button is how the old demo page lied.
-        clips.forEach((c, i) => {
+        // ONE archive with every clip of this stream, named after it (Vigges order).
+        if (job && job.id) { window.location.href = `/api/jobs/${job.id}/download.zip`; return; }
+        clips.forEach((c, i) => {           // fallback: per-clip when no job id exists
           if (!c.url) return;
           setTimeout(() => {
             const a = document.createElement("a");
@@ -507,6 +510,10 @@
         poll();
         return;
       }
+      // A FINISHED job opens only when the link asked for it (?job=...). Auto-opening
+      // the latest delivery hijacked every plain reload of the upload form straight
+      // into the results view — reported by the first real user.
+      if (!wanted) return;
       const ageH = latest.finishedAt
         ? (Date.now() - new Date(latest.finishedAt).getTime()) / 3600000 : 999;
       if (ageH > 48) return;                       // old history is the dashboard's job
@@ -553,12 +560,71 @@
           </tr>`).join("") || `<tr><td colspan="7">No jobs yet.</td></tr>`;
       }
     }
+    wireTotp();
+
     document.querySelectorAll("[data-cf-email]").forEach((el) => {
       el.textContent = r.body.email;
     });
     document.querySelectorAll("[data-cf-credits]").forEach((el) => {
       el.textContent = (Number(r.body.minutes) / 60).toFixed(1);
     });
+  }
+
+  /** The 2FA card on the dashboard: status → enable (secret shown once) → confirm. */
+  async function wireTotp() {
+    const card = $("tfCard");
+    if (!card) return;
+    const state = $("tfState"), setup = $("tfSetup"), secretEl = $("tfSecret"),
+          uriEl = $("tfUri"), codeEl = $("tfCode"), btn = $("tfBtn"), msg = $("tfMsg");
+    const fail = (t) => { msg.textContent = t; msg.style.display = "block"; };
+    const st = await json("/api/auth/totp");
+    if (!st.ok) return;                       // no session — leave the card hidden
+    card.style.display = "block";
+    let mode = st.body.enabled ? "on" : "off";
+
+    const paint = () => {
+      msg.style.display = "none";
+      if (mode === "on") {
+        state.textContent = "ON — your sign-in link asks for an authenticator code.";
+        btn.textContent = "Disable 2FA";
+        codeEl.style.display = "inline-block"; codeEl.placeholder = "code to disable";
+        setup.style.display = "none";
+      } else if (mode === "pending") {
+        state.textContent = "Scan the secret, then confirm with the current code.";
+        btn.textContent = "Confirm code";
+        codeEl.style.display = "inline-block"; codeEl.placeholder = "000000";
+        setup.style.display = "block";
+      } else {
+        state.textContent = "OFF — sign-in is the email link alone.";
+        btn.textContent = "Enable 2FA";
+        codeEl.style.display = "none";
+        setup.style.display = "none";
+      }
+    };
+    paint();
+
+    btn.onclick = async () => {
+      msg.style.display = "none";
+      if (mode === "off") {
+        const r = await json("/api/auth/totp/setup", { method: "POST" });
+        if (!r.ok) return fail("Could not start setup.");
+        secretEl.textContent = r.body.secret;
+        uriEl.textContent = r.body.uri;
+        mode = "pending"; paint(); codeEl.focus();
+      } else if (mode === "pending") {
+        const r = await json("/api/auth/totp/confirm", { method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ code: codeEl.value.trim() }) });
+        if (!r.ok) return fail((r.body && r.body.error) || "Wrong code.");
+        mode = "on"; codeEl.value = ""; paint();
+      } else {
+        const r = await json("/api/auth/totp/disable", { method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ code: codeEl.value.trim() }) });
+        if (!r.ok) return fail((r.body && r.body.error) || "A current code is required.");
+        mode = "off"; codeEl.value = ""; paint();
+      }
+    };
   }
 
   document.addEventListener("DOMContentLoaded", async () => {

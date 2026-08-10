@@ -3,9 +3,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Staff — ClipForge</title>
+<title>Staff — ViggeClips</title>
 <meta name="description" content="Queue, tickets, staff and margin."/>
 <meta name="robots" content="noindex, nofollow"/>
+<link rel="icon" href="/clipforge/favicon.ico" sizes="any"/>
+<link rel="icon" href="/clipforge/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/clipforge/apple-touch-icon.png"/>
 <link rel="stylesheet" href="/clipforge/cf.css"/>
 <script defer src="/clipforge/cf.js"></script>
 <style>
@@ -142,11 +145,11 @@
 
   // Sample data until the API is deployed. Shaped exactly like the real responses,
   // so wiring it later is a fetch call and nothing else.
-  const ME = { role: "owner", email: "vigge@scalelistuniverse.com" };
+  const ME = { role: "owner", email: "owner@example.com" };
   const QUEUE = [
-    ["a4f2","smorjhan17@…","transcribing",  "4 min", 42],
+    ["a4f2","creator1@…","transcribing",  "4 min", 42],
     ["b881","kompis@…",    "cutting",       "11 min", 88],
-    ["c103","dhr@…",       "waiting",       "22 min", 0]
+    ["c103","creator2@…",       "waiting",       "22 min", 0]
   ];
   const TICKETS = [
     ["CF-260802-K7M3PQ","Gold subtitles on the wrong voice","quality","waiting_us","3 h"],
@@ -154,9 +157,9 @@
     ["CF-260801-B4NHTY","Can I clip someone else's stream?","rights","open","2 d"]
   ];
   const STAFF = [
-    ["vigge@scalelistuniverse.com","owner","2026-01-04"],
-    ["kompis@scalelistuniverse.com","admin","2026-06-11"],
-    ["rougeina@scalelistuniverse.com","moderator","2026-07-02"]
+    ["owner@example.com","owner","2026-01-04"],
+    ["admin@example.com","admin","2026-06-11"],
+    ["moderator@example.com","moderator","2026-07-02"]
   ];
 
   const can = (action) => (CAN[ME.role] || []).includes(action);

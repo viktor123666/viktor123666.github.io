@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Two-factor — ViggeClips</title>
+<meta name="robots" content="noindex"/>
+<link rel="icon" href="/clipforge/favicon.ico" sizes="any"/>
+<link rel="icon" href="/clipforge/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/clipforge/apple-touch-icon.png"/>
+<link rel="stylesheet" href="/clipforge/cf.css"/>
+<script defer src="/clipforge/cf.js"></script>
+</head>
+<body>
+<div class="grid"></div>
+<header class="cf"></header>
+
+<section class="first"><div class="w" style="max-width:26rem;text-align:center">
+  <div class="mono" style="color:var(--gold);font-size:.72rem;letter-spacing:.18em;
+    margin-bottom:1.2rem">SECOND FACTOR</div>
+  <h1 style="font-size:clamp(1.6rem,3.5vw,2.2rem)">Enter your code</h1>
+  <p class="lede" style="margin:0 auto 2rem">The sign-in link checked out. Now the
+    six digits from your authenticator app.</p>
+
+  <form id="tf" style="display:flex;gap:.6rem;justify-content:center">
+    <input id="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}"
+           maxlength="6" placeholder="000000" required autofocus
+           style="width:9rem;text-align:center;font-family:var(--mono);font-size:1.4rem;
+                  letter-spacing:.3em;background:transparent;border:1px solid var(--edge);
+                  color:var(--ink);padding:.6rem"/>
+    <button class="b1" type="submit">Verify</button>
+  </form>
+  <p id="msg" class="mono" style="color:#e5484d;font-size:.8rem;margin-top:1rem;display:none"></p>
+</div></section>
+
+<script>
+(function () {
+  const form = document.getElementById("tf"), code = document.getElementById("code"),
+        msg = document.getElementById("msg");
+  const challenge = new URLSearchParams(location.search).get("c") || "";
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    msg.style.display = "none";
+    let r, body = null;
+    try {
+      r = await fetch("/api/auth/totp/verify", {
+        method: "POST", credentials: "same-origin",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ challenge, code: code.value.trim() }),
+      });
+      try { body = await r.json(); } catch {}
+    } catch { r = null; }
+    if (r && r.ok && body && body.redirectTo) { location.href = body.redirectTo; return; }
+    msg.textContent = (body && body.error) ||
+      "Could not verify the code. Is the server running?";
+    msg.style.display = "block";
+    code.select();
+  });
+})();
+</script>
+</body>
+</html>

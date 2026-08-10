@@ -3,12 +3,15 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Workspace — ClipForge</title>
+<title>Workspace — ViggeClips</title>
 <meta name="description" content="Upload a stream, watch each measured stage, and collect your finished shorts."/>
+<link rel="icon" href="/clipforge/favicon.ico" sizes="any"/>
+<link rel="icon" href="/clipforge/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/clipforge/apple-touch-icon.png"/>
 <link rel="stylesheet" href="/clipforge/cf.css"/>
 <script defer src="/clipforge/cf.js"></script>
-<script defer src="/clipforge/upload.js?v=13"></script>
-<script defer src="/clipforge/live.js?v=13"></script>
+<script defer src="/clipforge/upload.js?v=14"></script>
+<script defer src="/clipforge/live.js?v=16"></script>
 <style>
 .drop{border:1px dashed var(--edge2);background:var(--bg2);padding:3.4rem 1.5rem;text-align:center;
   cursor:pointer;transition:border-color .2s,background .2s}
@@ -115,7 +118,7 @@
         <input type="text" id="focus" placeholder="voice profile name"/>
         <div class="hint">Favours clips with that person.</div></div>
       <div class="opt"><label class="fl" for="font">Subtitle style</label>
-        <select id="font"><option value="standard" selected>ClipForge standard</option>
+        <select id="font"><option value="standard" selected>ViggeClips standard</option>
           <option value="bangers">Bangers — comic weight</option>
           <option value="bebas">Bebas Neue — clean &amp; tight</option>
           <option value="bungee">Bungee — round display</option></select>
@@ -178,25 +181,25 @@
     ["Caption and render","karaoke subs, titles, progress bar",840],
     ["Quality gate","pixel-verify the text is on screen",4]
   ];
-  const CLIPS=[["The knife pull","0:34",94,"case density 5 · laughter 1.4×"],
+  const CLIPS=[["The big reveal","0:34",94,"event density 5 · laughter 1.4×"],
     ["Everyone lost it","0:41",91,"laughter 1.4× · 3 voices"],
-    ["Clutch 1v3","0:28",88,"hype 4 / 20 s · energy peak"],
-    ["The case run","0:52",85,"case density 4 · laughter 0.9×"],
+    ["The comeback","0:28",88,"hype 4 / 20 s · energy peak"],
+    ["The run","0:52",85,"event density 4 · laughter 0.9×"],
     ["He never saw it","0:37",81,"hype 3 / 20 s"],
     ["Called it early","0:45",78,"laughter 1.1× · 2 voices"],
     ["Back-to-back","0:31",74,"hype 3 / 20 s"],
-    ["Full team wipe","0:49",71,"energy peak · hype 2"],
+    ["All at once","0:49",71,"energy peak · hype 2"],
     ["Told you so","0:26",68,"laughter 0.8×"],
-    ["Last-second defuse","0:43",66,"hype 2 / 20 s"],
+    ["Down to the wire","0:43",66,"hype 2 / 20 s"],
     ["Nobody believed it","0:39",63,"laughter 0.8×"],
-    ["One more case","0:55",61,"case density 3"],
+    ["One more time","0:55",61,"event density 3"],
     ["The reaction","0:29",58,"laughter 0.7×"],
     ["Perfect timing","0:47",55,"hype 2 / 20 s"],
-    ["Straight up robbery","0:35",52,"case density 2"]];
+    ["Straight up robbery","0:35",52,"event density 2"]];
   const SKIPPED=[["00:19:59","content gate","truncated slur in the passage"],
     ["01:25:04","weak hook","best line scored 1.6, floor is 5.0"],
     ["01:45:01","content gate","slur in the passage"],
-    ["00:16:31","dull","tactical callouts only, no reaction density"]];
+    ["00:16:31","dull","routine chatter only, no reaction density"]];
 
   const $=i=>document.getElementById(i), show=(e,o)=>e.classList.toggle("hide",!o);
   const secs=n=>{const m=Math.floor(n/60);return m?m+" min":n+" s"};
