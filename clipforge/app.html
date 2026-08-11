@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/clipforge/cf.css"/>
 <script defer src="/clipforge/cf.js"></script>
 <script defer src="/clipforge/upload.js?v=14"></script>
-<script defer src="/clipforge/live.js?v=16"></script>
+<script defer src="/clipforge/live.js?v=17"></script>
 <style>
 .drop{border:1px dashed var(--edge2);background:var(--bg2);padding:3.4rem 1.5rem;text-align:center;
   cursor:pointer;transition:border-color .2s,background .2s}
@@ -158,13 +158,11 @@
   </div>
 
   <div class="note warn rv" style="margin-top:2.5rem">
-    <span class="lbl">Not live yet</span>
-    <ul><li>This screen walks the pipeline using sample data, but the pipeline behind it
-      is not a mock: a stream submitted to the queue is claimed by a worker, run through
-      the engine stage by stage, and delivered as finished vertical shorts — measured end
-      to end, charged on the real duration, source deleted on collection. What is missing
-      is the part that lets <b>you</b> reach it: a deployed API. Nothing here charges
-      you.</li></ul>
+    <span class="lbl">While you are here</span>
+    <ul><li>Jobs run on our servers, not on your machine — close the tab whenever you like
+      and come back to History. You are charged on the real duration of what you send, only
+      when clips actually arrive, and your source file is deleted once you collect the
+      results. A job that produces nothing costs nothing.</li></ul>
   </div>
 </div></section>
 
@@ -173,9 +171,9 @@
 (function(){
   const STEPS=[
     ["Read the source","resolution and frame rate from the file",4],
-    ["Clean the audio","speech isolation, de-click, loudness",300],
-    ["Transcribe","game-aware vocabulary",900],
-    ["Identify speakers","cohort-normalised voice matching",360],
+    ["Clean the audio","isolating speech from everything else",300],
+    ["Transcribe","every word, in both languages",900],
+    ["Identify speakers","matching voices to profiles",360],
     ["Hunt highlights","laughter, hype density, game events",40],
     ["Cut for context","sentences finish, length follows content",10],
     ["Caption and render","karaoke subs, titles, progress bar",840],

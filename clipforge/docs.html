@@ -59,7 +59,7 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
     <div class="prose rv">
       <h2 id="formats">Supported formats</h2>
       <p>Resolution and frame rate are read from the file itself — nothing is assumed. A
-        720p 30 fps recording is handled exactly as well as 1080p60.</p>
+        phone capture is handled exactly as well as a studio stream.</p>
       <table class="d">
         <tr><th>Property</th><th>Accepted</th></tr>
         <tr><td>Container</td><td>MP4, MKV, MOV, WEBM</td></tr>
@@ -92,12 +92,12 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
         moment carries its reason. The four values you will see:</p>
       <table class="d">
         <tr><th>Value</th><th>Meaning</th></tr>
-        <tr><td>laughter</td><td>Amplitude modulation in the 4–8 Hz band, relative to this
-          stream's own reference. Above 1.0× is a real burst.</td></tr>
-        <tr><td>hype / 20 s</td><td>Distinct reaction words inside a rolling twenty-second
-          window. Three or more is a burst.</td></tr>
-        <tr><td>event terms</td><td>Recognised event vocabulary in the same window. Five or
-          more usually means a whole session worth keeping.</td></tr>
+        <tr><td>laughter</td><td>How much the room is laughing at this point,
+          relative to how this particular recording normally sounds.</td></tr>
+        <tr><td>reactions</td><td>How densely people are reacting around this moment. A
+          single exclamation is noise; a run of them is a moment.</td></tr>
+        <tr><td>events</td><td>Recognised events near this point, from the audio and — where
+          the game is supported — from the picture.</td></tr>
         <tr><td>speaker</td><td>Which voice profile matched, if any. Blank means the engine
           would rather say nothing than guess.</td></tr>
       </table>
@@ -107,7 +107,7 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
         cross-talk. Background noise we can remove; two people speaking simultaneously we
         cannot separate.</p>
       <ul>
-        <li><b>Fan noise, keyboard, mic handling</b> — handled. Neural speech isolation removes
+        <li><b>Fan noise, keyboard, mic handling</b> — handled. Speech is separated from
           these without hollowing out the voice.</li>
         <li><b>Music under speech</b> — mostly handled, but it lowers transcription confidence
           and can suppress lines entirely.</li>
@@ -123,8 +123,8 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
       <p>Record two to three minutes of one person talking with nobody else audible. A solo
         intro works; so does any stretch where you are alone in the call.</p>
       <p>What matters is <b>solo</b>, not clean. We measured this: noise reduction made almost
-        no difference to profile quality, while window length mattered enormously. Speaker
-        embeddings need continuous speech to stabilise, so a two-minute monologue beats twenty
+        no difference to profile quality, while the length of the sample mattered enormously. Speaker
+        voice profiles need continuous speech to settle, so a two-minute monologue beats twenty
         scattered ten-second clips.</p>
       <p>Each additional profile improves every existing one, because the engine can compare
         against a named person rather than an anonymous group.</p>

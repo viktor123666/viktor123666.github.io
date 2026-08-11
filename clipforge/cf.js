@@ -14,7 +14,7 @@
     ["Product", [["/clipforge/", "Overview"], ["/clipforge/engine.html", "The engine"],
       ["/clipforge/pricing.html", "Pricing"], ["/clipforge/app.html", "Workspace"]]],
     ["Account", [["/clipforge/login.html", "Sign in"], ["/clipforge/account.html", "Dashboard"], ["/clipforge/history.html", "History"],
-      ["/clipforge/docs.html", "Documentation"], ["/clipforge/platform.html", "The Platform"], ["/clipforge/changelog.html", "Changelog"]]],
+      ["/clipforge/docs.html", "Documentation"], ["/clipforge/changelog.html", "Changelog"]]],
     ["Legal", [["/clipforge/security.html", "Security"], ["/clipforge/privacy.html", "Privacy"], ["/clipforge/terms.html", "Terms"],
       ["/clipforge/dpa.html", "Data processing"]]],
     // (no external-universe column: the product stands alone)

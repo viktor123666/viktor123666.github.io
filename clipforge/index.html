@@ -187,99 +187,81 @@ h1 em{font-style:normal;color:var(--gold2)}
   </div>
 </div></div>
 
-<!-- PIPELINE -------------------------------------------------------------- -->
+<!-- WHAT YOU GET ---------------------------------------------------------- -->
 <section id="pipeline"><div class="w">
   <div class="head rv">
-    <span class="lbl">The pipeline</span>
-    <h2>Eight stages, every one measured</h2>
-    <p>Stage timings from our 115-minute reference recording on server GPU hardware.
-       Your own numbers depend on the card the job lands on — the measured
-       end-to-end figure is below.</p>
+    <span class="lbl">What arrives</span>
+    <h2>You send one file. You get a delivery.</h2>
+    <p>Everything heavy runs on our servers. Close the tab if you like — the work carries
+       on without you, and nothing touches your machine.</p>
   </div>
   <div class="spec rv">
-    <div class="sr"><span class="n">01</span><span class="t">Read the source
-      <s>Resolution and frame rate read from the file — never assumed</s></span>
-      <span class="m">&lt; 5 s</span><span class="p">cloud</span></div>
-    <div class="sr"><span class="n">02</span><span class="t">Clean the audio
-      <s>Neural speech isolation, de-click, loudness to −14 LUFS</s></span>
-      <span class="m">5 min</span><span class="p">cloud</span></div>
-    <div class="sr"><span class="n">03</span><span class="t">Transcribe
-      <s>Game-aware vocabulary; Swedish with English mixed in</s></span>
-      <span class="m">15 min</span><span class="p">gpu</span></div>
-    <div class="sr"><span class="n">04</span><span class="t">Identify speakers
-      <s>Voice profiles, cohort-normalised so the wrong person never gets your colour</s></span>
-      <span class="m">6 min</span><span class="p">cloud</span></div>
-    <div class="sr"><span class="n">05</span><span class="t">Hunt highlights
-      <s>Laughter physics, reaction density, game events</s></span>
-      <span class="m">40 s</span><span class="p">cloud</span></div>
-    <div class="sr"><span class="n">06</span><span class="t">Cut for context
-      <s>Sentences finish; length follows the conversation</s></span>
-      <span class="m">10 s</span><span class="p">cloud</span></div>
-    <div class="sr"><span class="n">07</span><span class="t">Caption and render
-      <s>Karaoke subs, per-speaker colour, hook title, progress bar</s></span>
-      <span class="m">14 min</span><span class="p">cloud</span></div>
-    <div class="sr"><span class="n">08</span><span class="t">Quality gate
-      <s>Samples the output and verifies the text is actually on screen</s></span>
-      <span class="m">4 s</span><span class="p">cloud</span></div>
+    <div class="sr"><span class="n">01</span><span class="t">Vertical shorts, captioned
+      <span class="why">Ready for TikTok, Reels and Shorts. Karaoke captions, a hook title,
+      a progress bar. Every moment that clears the bar becomes a clip — no quota to fill.</span></span>
+      <span class="v">9:16</span><span class="m">MP4</span></div>
+    <div class="sr"><span class="n">02</span><span class="t">The full transcript
+      <span class="why">The whole recording as text, timed and speaker-labelled. Yours to
+      re-use for descriptions, chapters, subtitles or search.</span></span>
+      <span class="v">SRT + TXT</span><span class="m">FULL</span></div>
+    <div class="sr"><span class="n">03</span><span class="t">Your original video, subtitled
+      <span class="why">Full length, original quality, captions burned in. A by-product of
+      the analysis — we hand it over rather than throw it away.</span></span>
+      <span class="v">BONUS</span><span class="m">MP4</span></div>
+    <div class="sr"><span class="n">04</span><span class="t">The report on what we skipped
+      <span class="why">Every moment we scored and did not keep, with its timestamp and what
+      was said. You can check our judgement instead of trusting it.</span></span>
+      <span class="v">PER JOB</span><span class="m">LOG</span></div>
   </div>
-  <p class="lbl rv" style="margin-top:1rem">Measured end to end on a 115-minute stream: 0.57× its length on a consumer RTX 3060 Ti · nothing runs on your machine</p>
+  <p class="fine rv" style="margin-top:1.6rem;text-align:center">
+    MEASURED END TO END ON A 115-MINUTE STREAM: 0.57× ITS LENGTH · NOTHING RUNS ON YOUR MACHINE
+  </p>
 </div></section>
 
 <!-- CAPABILITIES ---------------------------------------------------------- -->
 <section id="caps"><div class="w">
   <div class="head rv">
-    <span class="lbl">Capabilities</span>
-    <h2>What the numbers actually say</h2>
-    <p>Each figure below came from testing against real footage. Where we are weak, it says so.</p>
+    <span class="lbl">What it handles</span>
+    <h2>Measured on real recordings</h2>
+    <p>Every figure below came from testing against real footage. Where we are weak, it
+       says so — the methods behind them are ours.</p>
   </div>
   <div class="caps rv">
 
-    <div class="cap"><div class="h"><b>Laughter detection</b><s>ACOUSTIC</s></div>
-      <p>A laugh has a measurable rhythm — amplitude modulation between 4 and 8 Hz. We read
-         that from the audio instead of hoping the transcript spells out "haha". Rhythmic
-         speech modulates the same way, so we gate it against intelligible words.</p>
-      <div class="fig">Flat routine chatter scores <s>→</s> 0.00</div></div>
+    <div class="cap"><div class="h"><b>Finds the reactions</b><s>DETECTION</s></div>
+      <p>Laughter, sudden energy, the moment several people talk at once — the engine
+         hears the room turn and does not need the transcript to spell it out. Flat
+         routine chatter is checked on every job and must score zero.</p>
+      <div class="fig">Flat routine chatter scores <s>&rarr;</s> 0.00</div></div>
 
-    <div class="cap"><div class="h"><b>Speaker identity</b><s>ECAPA</s></div>
-      <p>The engine separates speakers and gives each their own subtitle colour, scored
-         cohort-normalised against the other voices in the room. Profiles are built for
-         you by hand today — self-serve enrolment from two minutes of your own audio is
-         not built yet, and is listed below as a gap.</p>
-      <div class="fig">Separation <s>→</s> +0.56 · recall 100 %</div></div>
+    <div class="cap"><div class="h"><b>Knows who is speaking</b><s>VOICES</s></div>
+      <p>Separates speakers and gives each their own caption colour. When two voices
+         overlap and it cannot be certain, it leaves the line uncoloured rather than
+         colour it wrongly. Voice profiles are set up for you.</p>
+      <div class="fig">Recall on a named voice <s>&rarr;</s> 100 %</div></div>
 
-    <div class="cap"><div class="h"><b>Swedish + English</b><s>ASR</s></div>
-      <p>The transcriber receives the vocabulary of the game being played. That is the
-         difference between "spin the wheel" and phonetic nonsense. Language switching
-         mid-sentence is expected, not an error case.</p>
-      <div class="fig">High-confidence lines <s>→</s> 95 %</div></div>
+    <div class="cap"><div class="h"><b>Swedish and English together</b><s>LANGUAGE</s></div>
+      <p>Switching language mid-sentence is expected, not an error case. The engine adapts
+         to what is actually being talked about before it writes a word down.</p>
+      <div class="fig">High-confidence lines <s>&rarr;</s> 95 %</div></div>
 
-    <div class="cap"><div class="h"><b>Channel protection</b><s>GATE</s></div>
+    <div class="cap"><div class="h"><b>Protects your channel</b><s>GATE</s></div>
       <p>Slurs are masked in text and bleeped in audio. Beyond that, moments that read as
-         racist are never cut into a clip at all — because a bleep does not save a clip that
-         is <em>about</em> the joke.</p>
-      <div class="fig">Runs <s>before</s> selection, on word stems</div></div>
+         racist are never cut into a clip at all — because a bleep does not save a clip
+         that is about the joke.</p>
+      <div class="fig">Runs before selection, on every job</div></div>
 
-    <div class="cap"><div class="h"><b>Caption sync</b><s>VERIFIED</s></div>
-      <p>Word-by-word karaoke, several speakers in separate screen zones, and a hard cap on
-         how long one line may span. We then sample the finished file and check the pixels.</p>
-      <div class="fig">Burned-in text present <s>→</s> 24/24 frames</div></div>
+    <div class="cap"><div class="h"><b>Captions that are really there</b><s>VERIFIED</s></div>
+      <p>Word-by-word karaoke, several speakers in separate screen zones. We then sample
+         the finished file and check the pixels — a caption that failed to render is
+         caught before you ever see it.</p>
+      <div class="fig">Burned-in text present <s>&rarr;</s> 24/24 frames</div></div>
 
-    <div class="cap"><div class="h"><b>Clip length</b><s>ADAPTIVE</s></div>
-      <p>Length follows content, not a template. A quick beat stays short; a twelve-turn
-         exchange gets room. Sentences always finish.</p>
-      <div class="fig">Spread <s>→</s> 18–55 s across one batch</div></div>
+    <div class="cap"><div class="h"><b>Length follows content</b><s>ADAPTIVE</s></div>
+      <p>Not a template. A quick beat stays short; a twelve-turn exchange gets room.
+         Sentences always finish.</p>
+      <div class="fig">Spread <s>&rarr;</s> 18–55 s across one batch</div></div>
 
-  </div>
-
-  <div class="honest rv">
-    <span class="lbl">Where we are not the best choice — read this before paying</span>
-    <ul>
-      <li>The hype score measures reactions in <b>your</b> recording. It selects moments; it does not promise views — no tool can.</li>
-      <li>We build one thing: the clipping engine. No template library, no brand kit, no team seats, no mobile app.</li>
-      <li>Works on any spoken recording — gaming, vlogs, podcasts, music sessions. For supported game HUDs the engine also reads the <b>picture</b>, so even moments nobody reacted to out loud can score; everywhere else, selection runs on voice reactions and audio energy.</li>
-      <li>Voice profiles are set up for you when you start. Self-serve enrolment is on the roadmap.</li>
-      <li>Launched 2026. Every number on this site is measured on our own channels — the free tier exists so you can measure us on yours.</li>
-    </ul>
   </div>
 </div></section>
 
@@ -322,15 +304,16 @@ h1 em{font-style:normal;color:var(--gold2)}
   <div class="head rv"><span class="lbl">Questions</span><h2>Straight answers</h2></div>
   <div class="rv">
     <details open><summary>How do you decide what is a highlight?</summary>
-      <p>Four independent signals, weighted: laughter via amplitude modulation in the speech
-        band, the density of reaction words across a rolling twenty-second window,
-        recognised on-screen or spoken events, and audio energy. The check we run on
-        every video is that the flattest routine chatter must land on zero — if it scores,
-        something is wrong with the detector.</p></details>
+      <p>Several independent signals from the audio and the picture, weighted and scored
+        across the whole recording. We publish the result rather than the recipe: every
+        job comes with the score each moment got and the reason the ones we skipped lost.
+        You can check the judgement on your own footage — that is the point of the free
+        hour.</p></details>
     <details><summary>Why does the language matter so much?</summary>
-      <p>Because vocabulary is a bias, and the wrong one actively pulls transcription in the
-        wrong direction. Feeding one game’s stream the words from another
-        produces confident nonsense. We detect the game first, then transcribe.</p></details>
+      <p>Because a transcriber that guesses the wrong context does not degrade gracefully —
+        it produces confident nonsense. The engine works out what is actually being talked
+        about before it commits, which is why Swedish streams that slide into English come
+        out readable instead of mangled.</p></details>
     <details><summary>What happens to my footage?</summary>
       <p>The upload is stored for processing and deleted once you have collected the results.
         We do not train models on your content. Voice profiles exist only if you create them

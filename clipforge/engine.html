@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The engine — ViggeClips</title>
-<meta name="description" content="How ViggeClips measures laughter, hype density and game moments — and why every threshold was set by testing against real footage."/>
+<title>How it decides — ViggeClips</title>
+<meta name="description" content="ViggeClips shows its work on your video: a score on every clip, the moments it skipped, and the rules it will not break."/>
 <link rel="icon" href="/clipforge/favicon.ico" sizes="any"/>
 <link rel="icon" href="/clipforge/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/clipforge/apple-touch-icon.png"/>
@@ -35,204 +35,71 @@
 <header class="cf"></header>
 
 <section class="first"><div class="w">
-  <div class="head rv" style="max-width:46ch">
+  <div class="head rv" style="max-width:48ch">
     <span class="lbl">The engine</span>
-    <h1>Every threshold here was measured</h1>
-    <p class="lede">Not one number in this document was chosen because it sounded right. Each
-      came from testing against real footage, and where a measurement contradicted our
-      assumption, the assumption lost.</p>
-  </div>
-  <div class="stats rv">
-    <div class="st"><b>8</b><span>pipeline stages</span></div>
-    <div class="st"><b>4</b><span>independent highlight signals</span></div>
-    <div class="st"><b>1 851</b><span>segments in the reference VOD</span></div>
-    <div class="st"><b>24/24</b><span>frames pixel-verified</span></div>
+    <h1>It shows its work on <em>your</em> video</h1>
+    <p class="lede">Most clippers hand you files and a number. This one hands you the
+      reasoning: what each moment scored, and why the ones it skipped lost. What we do not
+      publish is the recipe — that took a thousand hours and it stays ours.</p>
   </div>
 </div></section>
 
-<!-- SIGNALS --------------------------------------------------------------- -->
 <section><div class="w">
   <div class="head rv">
-    <span class="lbl">Highlight detection</span>
-    <h2>Four signals, weighted</h2>
-    <p>A moment becomes a clip when several of these agree. Any one alone is weak.</p>
+    <span class="lbl">What you get to see</span>
+    <h2>The report, not the algorithm</h2>
+    <p>Every finished job carries its own evidence. You never have to take our word for a cut.</p>
   </div>
-  <div class="sig-list rv">
-
-    <div class="sg"><div class="ix">S1</div><div>
-      <h3>Laughter, from acoustics</h3>
-      <p>A laugh has a physical signature: amplitude modulation between 4 and 8 Hz in the
-        speech band. We band-pass 300–3000 Hz, take the envelope, and look for a peak in
-        that range. This is far more reliable than hoping the transcriber writes "haha".</p>
-      <p>The catch we found the hard way: <b>rhythmic speech modulates identically</b>. Raw
-        detection ranked repeated phrases highest — someone saying the same word four times
-        looks exactly like laughter to a frequency analyser. So the signal is gated: a
-        window only counts as laughter if the text there is empty, a laugh token, or
-        low-confidence.</p>
-      <div class="ev"><span class="lbl">Reference distribution, non-zero points</span>
-        <table class="mini-table">
-          <tr><th>percentile</th><th>p50</th><th>p85</th><th>p95</th><th>p98</th><th>max</th></tr>
-          <tr><td>value</td><td>0.017</td><td>0.039</td><td>0.065</td><td class="win">0.092</td><td>0.195</td></tr>
-        </table>
-        <p class="hint" style="margin-top:.6rem">A segment takes the <b>maximum</b> over 10–60
-          curve points, so it lands naturally high. Normalising against p85 made almost every
-          segment saturate and the signal stopped discriminating. p98 is the working
-          reference.</p></div>
-    </div></div>
-
-    <div class="sg"><div class="ix">S2</div><div>
-      <h3>Hype, as density</h3>
-      <p>One exclamation means nothing. Four in fourteen seconds is the moment. Reaction
-        words are therefore counted in a rolling twenty-second window rather than per line —
-        the unit of excitement is a burst, not a word.</p>
-      <div class="ev"><span class="lbl">Why density and not keywords</span>
-        <code>"no way" × 1 → noise · "no way" × 4 in 14 s → clip</code>
-        <p class="hint" style="margin-top:.5rem">Measured on the reference VOD: reaction words
-          appeared 49 times across the whole stream, never more than once per line. Counted
-          per line the signal is invisible; counted per window it is obvious.</p></div>
-    </div></div>
-
-    <div class="sg"><div class="ix">S3</div><div>
-      <h3>Game events</h3>
-      <p>Openings, rare drops, boss kills, the reveal in a podcast — the moments an audience
-        actively seeks out announce themselves in vocabulary. The word list is picked to match
-        what is actually being recorded, automatically, because feeding one context's terms to
-        another produces confident nonsense.</p>
-      <div class="ev"><span class="lbl">Clustering in the reference VOD</span>
-        <table class="mini-table">
-          <tr><th>window</th><th>75–80 min</th><th>35–40 min</th><th>rest of stream</th></tr>
-          <tr><td>event terms</td><td class="win">21</td><td>15</td><td>0–2</td></tr>
-        </table>
-        <p class="hint" style="margin-top:.6rem">These events happen in sessions, not moments.
-          The density measure finds the session; a keyword match would scatter across it.</p></div>
-    </div></div>
-
-    <div class="sg"><div class="ix">S4</div><div>
-      <h3>Audio energy</h3>
-      <p>The weakest of the four on its own, and deliberately weighted lowest. Loud is not the
-        same as interesting — gunfire is loud. Energy is used to confirm the other three
-        rather than to nominate moments by itself.</p>
-      <div class="ev"><span class="lbl">The check we run on every video</span>
-        <code>the flattest routine chatter must score 0.00</code>
-        <p class="hint" style="margin-top:.5rem">Routine callouts and filler — the most common
-          lines in any recording and the least interesting. If they score above zero, the
-          detector is broken.</p></div>
-    </div></div>
-
+  <div class="spec rv">
+    <div class="sr"><span class="n">01</span><span class="t">A score on every clip
+      <span class="why">Each delivered short carries the score that earned it a place, so
+      you can see which moments the engine was confident about and which were marginal.</span></span>
+      <span class="v">PER CLIP</span></div>
+    <div class="sr"><span class="n">02</span><span class="t">The moments we skipped
+      <span class="why">Timestamped, with what was said. If you disagree with a call, you
+      can point at it — and that is the loop that improves the engine.</span></span>
+      <span class="v">PER JOB</span></div>
+    <div class="sr"><span class="n">03</span><span class="t">Traceable back to your source
+      <span class="why">A short is a jumpcut, so 0:25 in the clip is not 0:25 in your VOD.
+      Each clip keeps the map back to the original timestamps.</span></span>
+      <span class="v">EXACT</span></div>
+    <div class="sr"><span class="n">04</span><span class="t">A report button on every clip
+      <span class="why">One click when something is wrong. Reports are read, not collected —
+      several entries in the changelog started as one.</span></span>
+      <span class="v">ALWAYS</span></div>
   </div>
 </div></section>
 
-<!-- SPEAKERS -------------------------------------------------------------- -->
 <section><div class="w">
   <div class="head rv">
-    <span class="lbl">Speaker identity</span>
-    <h2>Why we ask for two minutes alone</h2>
-    <p>Getting this wrong is worse than not doing it, so the bar is deliberately high.</p>
+    <span class="lbl">The rules it will not break</span>
+    <h2>What the engine refuses to do</h2>
+    <p>These are commitments, not settings. They hold on every job.</p>
   </div>
-  <div class="cells rv">
-    <div class="cell"><div class="h"><b>Window length is everything</b><s>MEASURED</s></div>
-      <p>Speaker embeddings need speech time to stabilise. We tested the same clean recording
-        at three window lengths, with and without noise reduction.</p>
-      <table class="mini-table">
-        <tr><th>audio</th><th>3 s</th><th>5 s</th><th>8 s</th></tr>
-        <tr><td>raw</td><td>0.571</td><td>0.658</td><td>0.730</td></tr>
-        <tr><td>noise-reduced</td><td>0.577</td><td class="win">0.665</td><td>0.736</td></tr>
-      </table>
-      <div class="fig">Noise reduction is <s>irrelevant</s> — window length is the variable</div></div>
-
-    <div class="cell"><div class="h"><b>Cohort normalisation</b><s>WHY IT WORKS</s></div>
-      <p>With a single voice profile, "is this you?" has nothing to compare against, so the
-        threshold alone decides and it fails in both directions. We build a cohort from the
-        other voices in your own stream and ask a better question: does this resemble you
-        <em>more than anyone else in the room?</em></p>
-      <table class="mini-table">
-        <tr><th>method</th><th>your voice</th><th>others</th><th>separation</th></tr>
-        <tr><td>threshold only</td><td>0.549</td><td>0.208</td><td>0.341</td></tr>
-        <tr><td>cohort-normalised</td><td>0.247</td><td>−0.312</td><td class="win">0.559</td></tr>
-      </table>
-      <div class="fig">Recall on own voice <s>→</s> 95 % rose to 100 %</div></div>
-
-    <div class="cell"><div class="h"><b>Cross-talk is the ceiling</b><s>HONEST</s></div>
-      <p>When two people speak at once the embedding is a blend of both and matches neither
-        cleanly. In a lively Discord call that is most of the stream. We would rather colour
-        fewer lines correctly than colour many lines wrongly.</p>
-      <div class="fig">Lowering the threshold <s>returns</s> the wrong-person problem</div></div>
-
-    <div class="cell"><div class="h"><b>More profiles, better results</b><s>ROADMAP</s></div>
-      <p>Each additional voice profile sharpens every other one, because the comparison moves
-        from an anonymous cohort to a named rival. Profiles for your regular co-streamers is
-        the single biggest accuracy gain available.</p>
-      <div class="fig">Two minutes of solo audio <s>per person</s></div></div>
+  <div class="caps rv">
+    <div class="cap"><div class="h"><b>It will not colour a line it is unsure of</b></div>
+      <p>When two people talk over each other and the match is not certain, the caption
+        stays uncoloured. Fewer coloured lines beats putting your name on someone
+        else's sentence.</p></div>
+    <div class="cap"><div class="h"><b>It will not fill a quota</b></div>
+      <p>There is no target number of clips. A quiet recording returns few, or none, with
+        the reasons attached. A brilliant one returns everything that cleared the bar.</p></div>
+    <div class="cap"><div class="h"><b>It will not ship an unverified caption</b></div>
+      <p>The finished file is sampled and the pixels are checked. A caption that failed to
+        render is caught before delivery, not by you afterwards.</p></div>
+    <div class="cap"><div class="h"><b>It will not charge for a failure</b></div>
+      <p>A job that produces nothing costs nothing. There is exactly one place in the whole
+        system where a customer is charged, and it runs after the files exist.</p></div>
+    <div class="cap"><div class="h"><b>It will not put a slur in your feed</b></div>
+      <p>Masked in text, bleeped in audio — and moments that read as racist are removed from
+        selection entirely, because a bleep does not save a clip that is about the joke.</p></div>
+    <div class="cap"><div class="h"><b>It will not train on your content</b></div>
+      <p>Your source is deleted once you collect the results. Nothing you upload teaches
+        the engine anything.</p></div>
   </div>
 </div></section>
 
-<!-- LANGUAGE -------------------------------------------------------------- -->
-<section><div class="w">
-  <div class="head rv">
-    <span class="lbl">Language</span>
-    <h2>Vocabulary is a bias, not a hint</h2>
-    <p>This is the mistake that cost us the most, and fixing it produced the single largest
-      quality jump in the project.</p>
-  </div>
-  <div class="rows rv">
-    <div class="row"><span class="n">01</span><span class="grow"><b>Wrong game's vocabulary</b>
-      <div class="sub">Feeding one game's terms into another stream actively pulls transcription
-        off course. It does not degrade gracefully — it produces confident nonsense.</div></span>
-      <span class="p">fixed</span></div>
-    <div class="row"><span class="n">02</span><span class="grow"><b>Game detection first</b>
-      <div class="sub">Three short samples are transcribed with no bias at all; whichever
-        domain's marker words appear most wins. Takes about thirty-five seconds.</div></span>
-      <span class="m">35 s</span></div>
-    <div class="row"><span class="n">03</span><span class="grow"><b>Confidence floor</b>
-      <div class="sub">Lines below a measured confidence threshold are dropped rather than
-        shown. Band analysis of real output put the boundary at a specific value — above it
-        the text is correct Swedish, below it is invented.</div></span>
-      <span class="m">−2.0</span></div>
-    <div class="row"><span class="n">04</span><span class="grow"><b>Prompt echo removal</b>
-      <div class="sub">On silent passages a transcriber will repeat its own instructions back
-        as if someone said them. We compare output against the instruction and discard
-        matches — and we write instructions that nobody would ever say aloud.</div></span>
-      <span class="p">fixed</span></div>
-  </div>
-  <div class="note ok rv" style="margin-top:1.4rem">
-    <span class="lbl">Result on the reference VOD</span>
-    <ul>
-      <li>High-confidence lines: <b class="gld">81 % → 95 %</b></li>
-      <li>Lines below the confidence floor: <b class="gld">21.1 % → 7.6 %</b></li>
-      <li>Invented lines reaching the screen: <b class="gld">202 → 0</b></li>
-    </ul>
-  </div>
-</div></section>
-
-<!-- SAFETY ---------------------------------------------------------------- -->
-<section><div class="w">
-  <div class="head rv">
-    <span class="lbl">Channel safety</span>
-    <h2>Two different problems</h2>
-    <p>Masking a word and refusing a moment are not the same thing, and conflating them is
-      how channels get struck.</p>
-  </div>
-  <div class="cells rv">
-    <div class="cell"><div class="h"><b>Word level — mask and bleep</b><s>CENSOR</s></div>
-      <p>Slurs are replaced in the subtitle and covered with a tone in the audio. Ordinary
-        swearing is left alone — it is part of how people actually talk, and removing it
-        makes the clip feel sanitised.</p>
-      <div class="fig">The tone is applied <s>after</s> noise reduction, or it gets erased</div></div>
-    <div class="cell"><div class="h"><b>Moment level — never cut it</b><s>GATE</s></div>
-      <p>If a passage reads as racist, no clip is made from it at all. A bleep does not save a
-        clip that is <em>about</em> the joke — it just means your viewer hears a bleep in the
-        middle of it.</p>
-      <div class="fig">Runs <s>before</s> selection, on word stems not whole words</div></div>
-  </div>
-  <div class="note rv" style="margin-top:1.4rem">
-    <span class="lbl">Why stems and not whole words</span>
-    <ul><li>Our first word list required full endings and therefore missed a truncated slur
-      that sat in a delivered clip. A false positive costs one discarded moment; a miss costs
-      the channel. We match stems and accept the occasional over-caution.</li></ul>
-  </div>
-</div></section>
-
-<section><div class="w">
+<section><div class="w" style="max-width:52rem">
   <div class="head rv" style="max-width:42ch">
     <span class="lbl">See it on your footage</span>
     <h2>The detector readout is free</h2>

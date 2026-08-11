@@ -43,13 +43,10 @@
     <div class="entry fix">
       <div class="when">9 August 2026 · Detection</div>
       <h3>Kills are now read from the picture</h3>
-      <p>The engine reads both teams' kill counters from the scoreboard — a tiny strip of
-        pixels, OCR only when they change, a value accepted only after two identical
-        consecutive reads. A silent multi-kill nobody reacted to out loud now scores like
-        the fight it was. Match resets are recognised, other games without a scoreboard are
-        detected and skipped, and the signal is additive — when it is absent, selection
-        behaves exactly as before. Timing granularity is ~2 seconds (keyframe sampling);
-        confirmed kills land in selection with an 8-second reach.</p>
+      <p>The engine now takes game events from the picture as well as the audio. A silent
+        multi-kill that nobody reacted to out loud scores like the fight it was. Where a
+        game is not supported the signal is simply absent and selection behaves exactly as
+        before — nothing gets worse, some recordings get better.</p>
       <span class="delta"><s>silent multi-kills on an 82-min stream</s> <b>0 →
         3 bursts caught (+4, +3, +5)</b></span>
     </div>
@@ -57,21 +54,18 @@
     <div class="entry known">
       <div class="when">Known limitation · open</div>
       <h3>Speaker colours stop at cross-talk</h3>
-      <p>When two people talk simultaneously the voice embedding blends and matches neither
-        cleanly. We colour fewer lines rather than colour them wrongly. More voice profiles
-        raise the ceiling; nothing else we have tried does. The enrolment pipeline is built
-        and waiting — this closes the day the remaining voice recordings are enrolled.</p>
+      <p>When two people talk at once the engine often cannot be certain who said what. We
+        colour fewer lines rather than colour them wrongly. More voice profiles raise the
+        ceiling, and adding them is the fix in progress.</p>
       <span class="delta"><s>coloured lines</s> <b>~9 % of a busy stream</b></span>
     </div>
 
     <div class="entry fix">
       <div class="when">30 July 2026 · accuracy</div>
-      <h3>Cohort normalisation for speaker matching</h3>
-      <p>With a single voice profile there was nothing to compare against, so the threshold
-        alone decided — and it failed in both directions at once, missing the right person and
-        occasionally colouring the wrong one. Now the engine builds a cohort from the other
-        voices in the same stream and asks whether a line resembles you <em>more than anyone
-        else present</em>.</p>
+      <h3>Speaker matching stopped failing both ways at once</h3>
+      <p>Speaker matching used to fail in both directions at once — missing the right person
+        and occasionally colouring the wrong one. It now weighs a voice against the others
+        actually present in the same recording, which removed both failures together.</p>
       <span class="delta"><s>separation</s> 0.341 → <b>0.559</b></span>
       <span class="delta"><s>recall</s> 95 % → <b>100 %</b></span>
     </div>
@@ -79,20 +73,18 @@
     <div class="entry fix">
       <div class="when">30 July 2026 · safety</div>
       <h3>Moments, not just words</h3>
-      <p>Masking a slur does not save a clip that is <em>about</em> the joke. A separate gate now
-        removes such passages from selection entirely, before any clip is built. It matches word
-        stems rather than whole words, after a truncated slur slipped past a list that required
-        full endings.</p>
+      <p>Masking a slur does not save a clip that is <em>about</em> the joke. Such passages are
+        now removed from selection entirely, before any clip is built — and the gate was
+        hardened after one slipped past an earlier version.</p>
       <span class="delta"><s>reference stream</s> <b>5 of 194 segments blocked</b></span>
     </div>
 
     <div class="entry fix">
       <div class="when">29 July 2026 · quality</div>
       <h3>Highlight detection rebuilt around measurement</h3>
-      <p>Laughter is now found in the audio's amplitude modulation rather than by hoping the
-        transcript spells it out — and gated, because rhythmic speech modulates identically and
-        was ranking highest. Hype is counted as density over a rolling window instead of per
-        line, since a single exclamation carries no signal.</p>
+      <p>Laughter is now heard in the audio itself instead of hoped for in the transcript, and
+        reactions are measured as a build-up rather than line by line — a single exclamation
+        carries no signal, a run of them does.</p>
       <span class="delta"><s>dull callouts</s> <b>score 0.00</b></span>
       <span class="delta"><s>clip length spread</s> 5.6 s → <b>11.5 s</b></span>
     </div>
@@ -100,10 +92,9 @@
     <div class="entry fix">
       <div class="when">29 July 2026 · transcription</div>
       <h3>Invented lines removed</h3>
-      <p>On silent passages the transcriber was repeating its own instructions back as if
-        someone had said them — over two hundred fabricated lines reached the screen in one
-        stream. Output is now compared against the instruction and matches are discarded, and
-        the instructions themselves are written in a register nobody speaks aloud.</p>
+      <p>On silent passages the transcriber was inventing lines that nobody said — over two
+        hundred of them reached the screen in a single stream. They are now caught and
+        discarded before anything is written to your captions.</p>
       <span class="delta"><s>invented lines</s> 202 → <b>0</b></span>
       <span class="delta"><s>high-confidence</s> 81 % → <b>95 %</b></span>
     </div>
@@ -111,10 +102,9 @@
     <div class="entry fix">
       <div class="when">28 July 2026 · transcription</div>
       <h3>Game-aware vocabulary</h3>
-      <p>The transcriber was being fed one game's terminology while a different game was on
-        screen. Vocabulary is a bias, not a hint — the wrong one produces confident nonsense
-        rather than degrading gracefully. The game is now detected first, from three short
-        unbiased samples.</p>
+      <p>The transcriber was working from the wrong context, which does not degrade gracefully —
+        it produces confident nonsense. The engine now works out what is actually being
+        recorded before it commits to a word.</p>
       <span class="delta"><s>detection</s> <b>~35 s</b></span>
       <span class="delta"><s>lines below floor</s> 21.1 % → <b>7.6 %</b></span>
     </div>
@@ -122,9 +112,8 @@
     <div class="entry fix">
       <div class="when">28 July 2026 · infrastructure</div>
       <h3>Rendering moved off the operator's machine</h3>
-      <p>Audio cleaning, speaker matching and all rendering now run on our own servers. The one
-        stage that still needs a graphics card is transcription, which is rented by the minute
-        on demand.</p>
+      <p>All heavy processing now runs on our own servers. Nothing touches the customer's
+        machine, and capacity is rented by the minute when demand needs it.</p>
       <span class="delta"><s>local CPU load</s> <b>0 %</b></span>
       <span class="delta"><s>speaker matching</s> 8 min 35 s → <b>6 min, remote</b></span>
     </div>
@@ -132,17 +121,17 @@
     <div class="entry fix">
       <div class="when">28 July 2026 · compatibility</div>
       <h3>Any source profile, not just one</h3>
-      <p>The pipeline assumed 1080p60 at 48 kHz and silently produced nothing on a 720p 30 fps
-        recording. Resolution, frame rate and audio are now read from the file. Thresholds that
-        describe areas scale quadratically rather than linearly.</p>
+      <p>The engine assumed one recording profile and silently produced nothing on anything
+        else. It now reads the actual properties of every file it is given, so a phone
+        capture and a studio stream both work.</p>
       <span class="delta"><s>subtitle pixel check</s> 0 % → <b>100 %</b></span>
     </div>
 
     <div class="entry">
       <div class="when">17 July 2026 · first delivery</div>
       <h3>First full stream through the pipeline</h3>
-      <p>End to end: transcription, speaker separation, cutting, captions, audio mastering,
-        thumbnail and shorts — from a raw two-and-a-half-hour recording with no manual editing.</p>
+      <p>A raw two-and-a-half-hour recording in, finished shorts out, with no manual editing
+        anywhere in between.</p>
     </div>
 
   </div>

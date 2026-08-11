@@ -534,9 +534,31 @@
   }
 
   // ── account ───────────────────────────────────────────────────────────────
+  /**
+   * Blanks the sample dashboard for a visitor who is not signed in.
+   *
+   * The private pages ship with demonstration numbers so they can be designed. Live,
+   * a logged-out stranger was shown "you@example.com", 14.2 h of credit and four
+   * delivered jobs — invented figures presented exactly like real account data.
+   * Nobody is fooled for long, but a page that shows a stranger a fake balance is
+   * the same lie as a demo that says "check your inbox" without sending anything.
+   */
+  function showSignedOut() {
+    const body = document.getElementById("jobsBody");
+    if (body) {
+      body.innerHTML = `<tr><td colspan="9" style="text-align:center;padding:2rem">` +
+        `<a class="gld" href="/login.html">Sign in</a> to see your jobs.</td></tr>`;
+    }
+    document.querySelectorAll("[data-cf-email]").forEach((el) => { el.textContent = "—"; });
+    document.querySelectorAll("[data-cf-credits]").forEach((el) => { el.textContent = "—"; });
+    document.querySelectorAll(".stats .st b").forEach((el) => { el.textContent = "—"; });
+    const card = document.getElementById("tfCard");
+    if (card) card.style.display = "none";
+  }
+
   async function wireAccount() {
     const r = await json("/api/auth/me");
-    if (!r.ok || !r.body) return;
+    if (!r.ok || !r.body) { showSignedOut(); return; }
 
     // The history the first real user asked for: what ran, when, how long the
     // delivered clips are, and what it cost in tokens. Real rows replace the sample.
