@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Documentation — ViggeClips</title>
 <meta name="description" content="Supported formats, how the settings work, what the detector readout means, and the API."/>
-<link rel="icon" href="/clipforge/favicon.ico" sizes="any"/>
-<link rel="icon" href="/clipforge/emblem.svg" type="image/svg+xml"/>
-<link rel="apple-touch-icon" href="/clipforge/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/clipforge/cf.css"/>
-<script defer src="/clipforge/cf.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="stylesheet" href="/cf.css?v=202608122025"/>
+<script defer src="/cf.js?v=202608122025"></script>
 <style>
 .doc{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}
 @media(max-width:900px){.doc{grid-template-columns:1fr;gap:1.5rem}}
@@ -37,7 +37,7 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
     <span class="lbl">Documentation</span>
     <h1 style="font-size:clamp(1.7rem,3.6vw,2.4rem)">How to get good output</h1>
     <p class="lede">Short version: give it clean audio, tell it the right language, and read
-      the rejection log when a clip you wanted is missing.</p>
+      the report that explains every moment it chose not to clip.</p>
   </div>
 
   <div class="doc">
@@ -49,7 +49,7 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
       <div class="grp">Quality</div>
       <a href="#audio">Audio that works</a>
       <a href="#voices">Voice profiles</a>
-      <a href="#missing">Why a clip is missing</a>
+      <a href="#missing">Why a clip wasn’t chosen</a>
       <div class="grp">Reference</div>
       <a href="#api">REST API</a>
       <a href="#mcp">MCP &amp; AI</a>
@@ -129,15 +129,15 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
       <p>Each additional profile improves every existing one, because the engine can compare
         against a named person rather than an anonymous group.</p>
 
-      <h2 id="missing">Why a clip is missing</h2>
+      <h2 id="missing">Why a clip wasn’t chosen</h2>
       <p>Check the rejection log on the results screen. The four common reasons:</p>
       <table class="d">
         <tr><th>Reason</th><th>What to do</th></tr>
         <tr><td>content gate</td><td>The passage contains a term on the safety list. This is
           deliberate and cannot be overridden per clip — edit your safety rules if the list is
           too broad for you.</td></tr>
-        <tr><td>weak hook</td><td>No line in the moment scored high enough to be a title. Often
-          means the moment is visual, which we cannot yet read.</td></tr>
+        <tr><td>weak hook</td><td>No line in the moment scored high enough to make a title. Usually the moment is
+          visual rather than spoken.</td></tr>
         <tr><td>dull</td><td>Tactical chatter with no reaction density. Working as intended.</td></tr>
         <tr><td>no clean boundary</td><td>The moment could not be cut without breaking a
           sentence, so it was left out rather than clipped badly.</td></tr>

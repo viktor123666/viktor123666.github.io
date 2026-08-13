@@ -57,63 +57,81 @@
     form = takeOver(form);
 
     // Re-query AFTER the clone: the originals belong to a node no longer in the page.
-    const email = $("email"), err = $("err"), sent = $("sent"), addr = $("addr");
+    const email = $("email"), pw = $("password"), err = $("err"), sent = $("sent"),
+          addr = $("addr"), title = $("authTitle"), sub = $("authSub"),
+          tabIn = $("tabIn"), tabUp = $("tabUp"), btn = $("submitBtn"),
+          pwField = $("pwField"), pwHint = $("pwHint"), forgot = $("forgot"),
+          note = $("signupNote");
 
-    // The page's own mechanism, not `hidden`. `.sent{display:none}` / `.sent.on` and an
-    // inline `display:none` on the error — setting `.hidden` moves nothing on screen.
-    const showError = (msg) => { err.textContent = msg; err.style.display = "block"; };
+    // The page's own mechanism, not `hidden`: `.sent{display:none}` / `.sent.on`.
+    const showError = (m) => { err.textContent = m; err.style.display = "block"; };
     const hideError = () => { err.style.display = "none"; };
-    const showSent = (to) => {
-      addr.textContent = to;
-      form.classList.add("off");
-      sent.classList.add("on");
-    };
-
+    const showSent = (to) => { addr.textContent = to; form.classList.add("off"); sent.classList.add("on"); };
     const back = $("back");
-    if (back) back.onclick = () => {
-      sent.classList.remove("on"); form.classList.remove("off"); email.focus();
+    if (back) back.onclick = () => { sent.classList.remove("on"); form.classList.remove("off"); email.focus(); };
+
+    // signin | signup | recover — one form, three jobs, so nobody hunts for a
+    // "create account" page that looks like a different product.
+    let mode = new URLSearchParams(location.search).has("new") ? "signup" : "signin";
+    const paint = () => {
+      hideError();
+      const up = mode === "signup", rec = mode === "recover";
+      if (tabIn) tabIn.classList.toggle("b1", mode === "signin");
+      if (tabUp) tabUp.classList.toggle("b1", up);
+      if (pwField) pwField.style.display = rec ? "none" : "block";
+      if (pwHint) pwHint.style.display = up ? "block" : "none";
+      if (note) note.style.display = up ? "inline" : "none";
+      if (forgot) forgot.style.display = rec ? "none" : "inline";
+      if (pw) pw.setAttribute("autocomplete", up ? "new-password" : "current-password");
+      title.textContent = rec ? "Reset your password"
+                        : up ? "Create your account" : "Sign in to ViggeClips";
+      sub.textContent = rec ? "We email a one-time link that signs you in. Set a new password from your dashboard."
+                       : "Two hours of clipping free every month.";
+      btn.textContent = rec ? "Email me a link" : up ? "Create account" : "Sign in";
     };
+    if (tabIn) tabIn.onclick = () => { mode = "signin"; paint(); };
+    if (tabUp) tabUp.onclick = () => { mode = "signup"; paint(); };
+    if (forgot) forgot.onclick = (e) => { e.preventDefault(); mode = "recover"; paint(); };
+    paint();
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const value = email.value.trim();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
-        showError("Enter a valid email address.");
-        email.focus();
-        return;
+        showError("Enter a valid email address."); email.focus(); return;
       }
       hideError();
+      btn.disabled = true;
+      const done = () => { btn.disabled = false; };
 
-      let r;
       try {
-        r = await json("/api/auth/request", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ email: value }),
+        if (mode === "recover") {
+          const r = await json("/api/auth/request", {
+            method: "POST", headers: { "content-type": "application/json" },
+            body: JSON.stringify({ email: value }),
+          });
+          // A 2xx means the request was accepted, and the screen must then look the
+          // same whether or not that address has an account. Anything else means the
+          // request did NOT land — saying "check your inbox" for that is the lie that
+          // once left somebody refreshing an empty mailbox.
+          if (r.ok) { showSent(value); return; }
+          showError((r.body && r.body.message) ||
+            `The server refused the request (HTTP ${r.status}). Nothing was sent.`);
+          return;
+        }
+
+        const path = mode === "signup" ? "/api/auth/register" : "/api/auth/signin";
+        const r = await json(path, {
+          method: "POST", headers: { "content-type": "application/json" },
+          body: JSON.stringify({ email: value, password: pw ? pw.value : "" }),
         });
+        if (r.ok) { location.href = mode === "signup" ? "/app.html?welcome=1" : "/app.html"; return; }
+        showError((r.body && r.body.message) ||
+          (r.status === 0 ? "Could not reach the server. Is it running?"
+                          : `That did not work (HTTP ${r.status}).`));
       } catch {
-        r = { ok: false, status: 0, body: null };
-      }
-
-      // Two different things, and conflating them cost somebody a real wait.
-      //
-      // A 2xx means the server accepted the request, and THEN the screen must look
-      // identical whether or not that address has an account — the endpoint is
-      // deliberately silent about which addresses exist, and the page must not undo
-      // that by rendering two outcomes.
-      //
-      // Anything else means the request did not land: the API is down, the key is
-      // refused, the port is empty. None of that is a secret, and showing "check your
-      // inbox" for it is a lie that leaves someone refreshing an inbox for a message
-      // nobody ever tried to send. That is exactly what happened on 2026-08-03.
-      if (r.ok) { showSent(value); return; }
-
-      showError(r.status === 0
-        ? "Could not reach the server. Is it running?"
-        : (r.body && r.body.error)
-          ? r.body.error
-          : `The server refused the request (HTTP ${r.status}). Nothing was sent.`);
-      console.warn("sign-in request failed", r.status, r.body);
+        showError("Could not reach the server.");
+      } finally { done(); }
     });
   }
 
@@ -578,7 +596,7 @@
             <td>${j.clipCount}</td>
             <td>${j.billedMinutes != null ? j.billedMinutes + " min" : "0"}</td>
             <td><span class="stbadge st-${j.state}">${j.state}</span></td>
-            <td><a class="gld" href="/clipforge/app.html?job=${j.id}">Open →</a></td>
+            <td><a class="gld" href="/app.html?job=${j.id}">Open →</a></td>
           </tr>`).join("") || `<tr><td colspan="7">No jobs yet.</td></tr>`;
       }
     }
@@ -649,9 +667,28 @@
     };
   }
 
+  /**
+   * The header's sign-in button, told the truth about who is looking at it.
+   *
+   * cf.js renders "Sign in" because it runs before any session is known. A visitor
+   * who IS signed in should not be invited to sign in again — that reads as "you are
+   * logged out" and sends people round a loop they did not need.
+   */
+  async function wireNavAuth() {
+    const el = document.getElementById("navAuth");
+    if (!el) return;
+    const r = await json("/api/auth/me");
+    if (r.ok && r.body && r.body.email) {
+      el.textContent = "Account";
+      el.setAttribute("href", "/account.html");
+      el.title = r.body.email;
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", async () => {
     if (!(await live())) return;             // static host: leave the brochure alone
     document.documentElement.setAttribute("data-cf-live", "1");
+    wireNavAuth();
     wireLogin();
     wireApp();
     wireAccount();

@@ -4,19 +4,19 @@
   "use strict";
 
   const NAV = [
-    ["/clipforge/", "Overview"],
-    ["/clipforge/engine.html", "Engine"],
-    ["/clipforge/pricing.html", "Pricing"],
-    ["/clipforge/security.html", "Security"],
-    ["/clipforge/docs.html", "Docs"]
+    ["/", "Overview"],
+    ["/engine.html", "Engine"],
+    ["/pricing.html", "Pricing"],
+    ["/security.html", "Security"],
+    ["/docs.html", "Docs"]
   ];
   const FOOT = [
-    ["Product", [["/clipforge/", "Overview"], ["/clipforge/engine.html", "The engine"],
-      ["/clipforge/pricing.html", "Pricing"], ["/clipforge/app.html", "Workspace"]]],
-    ["Account", [["/clipforge/login.html", "Sign in"], ["/clipforge/account.html", "Dashboard"], ["/clipforge/history.html", "History"],
-      ["/clipforge/docs.html", "Documentation"], ["/clipforge/changelog.html", "Changelog"]]],
-    ["Legal", [["/clipforge/security.html", "Security"], ["/clipforge/privacy.html", "Privacy"], ["/clipforge/terms.html", "Terms"],
-      ["/clipforge/dpa.html", "Data processing"]]],
+    ["Product", [["/", "Overview"], ["/engine.html", "The engine"],
+      ["/pricing.html", "Pricing"], ["/app.html", "Workspace"]]],
+    ["Account", [["/login.html", "Sign in"], ["/account.html", "Dashboard"], ["/history.html", "History"],
+      ["/docs.html", "Documentation"], ["/changelog.html", "Changelog"]]],
+    ["Legal", [["/security.html", "Security"], ["/privacy.html", "Privacy"], ["/terms.html", "Terms"],
+      ["/dpa.html", "Data processing"]]],
     // (no external-universe column: the product stands alone)
   ];
 
@@ -28,7 +28,7 @@
     if (hd && !hd.dataset.built) {
       hd.dataset.built = "1";
       hd.innerHTML = '<div class="w in">' +
-        '<a class="mark" href="/clipforge/">'
+        '<a class="mark" href="/">'
         + '<svg class="em" viewBox="0 0 100 100" aria-hidden="true">'
         + '<g fill="none" stroke-linecap="round" stroke-width="13.2">'
         + '<path d="M25.5 27.2 L50 74.2" stroke="#e9edf0"/>'
@@ -36,8 +36,12 @@
         + 'ViggeClips</a><nav>' +
         NAV.map(([h, t]) => `<a href="${h}"${h.replace(/index\.html$/, "") === here ? ' aria-current="page"' : ""}>${t}</a>`).join("") +
         '</nav>' +
-        '<a class="b1 sm" href="/clipforge/app.html">Create new video</a> ' +
-        '<a class="b2 sm" href="/clipforge/history.html" style="margin-left:.5rem">History</a>' +
+        '<a class="b1 sm" href="/app.html">Create new video</a> ' +
+        '<a class="b2 sm" href="/history.html" style="margin-left:.5rem">History</a>' +
+        // Sign in lives at the far right, where every site puts it. live.js swaps it
+        // to "Account" once a session answers, so it never invites someone who is
+        // already signed in to sign in again.
+        '<a class="b2 sm" id="navAuth" href="/login.html" style="margin-left:.5rem">Sign in</a>' +
         '</div>';
     }
 

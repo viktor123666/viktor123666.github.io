@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ViggeClips — the clipper that shows its work</title>
-<meta name="description" content="Most clip tools hand you a score. ViggeClips shows you the waveform, the laughter it measured and the reason each moment was chosen. Any spoken recording, any language."/>
-<meta property="og:title" content="ViggeClips — the clipper that shows its work"/>
-<meta property="og:description" content="Measured, not guessed. Long streams in, publish-ready shorts out."/>
-<link rel="icon" href="/clipforge/favicon.ico" sizes="any"/>
-<link rel="icon" href="/clipforge/emblem.svg" type="image/svg+xml"/>
-<link rel="apple-touch-icon" href="/clipforge/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/clipforge/cf.css"/>
-<script defer src="/clipforge/cf.js"></script>
+<title>ViggeClips — every short worth posting, found automatically</title>
+<meta name="description" content="Upload one stream and get back every short worth posting — captioned, vertical, ready for TikTok, Reels and Shorts. Any recording, any language. First hour free."/>
+<meta property="og:title" content="ViggeClips — turn one stream into every short worth posting"/>
+<meta property="og:description" content="Upload once. The engine finds every clip-worthy moment and hands back finished vertical shorts — captioned and ready to post."/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="stylesheet" href="/cf.css?v=202608122025"/>
+<script defer src="/cf.js?v=202608122025"></script>
 <style>/* Sidspecifik CSS — delade regler bor i cf.css */
 /* ── HERO ───────────────────────────────────────────────────────────────── */
 .hero{padding:6.6rem 0 3.5rem}
@@ -115,11 +115,11 @@ h1 em{font-style:normal;color:var(--gold2)}
 <!-- HERO ------------------------------------------------------------------ -->
 <div class="hero"><div class="w">
   <span class="kicker rv"><i></i>Clip engine v5 · measured, not guessed</span>
-  <h1 class="claim rv">Two hours of stream.<em>Six shorts, by morning.</em></h1>
+  <h1 class="claim rv">Upload once.<em>Get every short worth posting.</em></h1>
   <p class="lede rv" style="max-width:44ch">
-    Drop in a recording. The engine listens for laughter, reaction density and the moment
-    the room turns — then hands you finished vertical shorts with captions, and tells you
-    exactly why it cut where it did.
+    The engine watches your whole stream — the laughs, the reactions, the moment the room
+    turns — and hands back finished vertical shorts, captioned and ready for TikTok, Reels
+    and Shorts. One 82-minute stream gave 28 of them.
   </p>
   <form class="linkbox rv" id="lb" novalidate>
     <input type="text" id="lbu" aria-label="Paste a video link"
@@ -130,7 +130,7 @@ h1 em{font-style:normal;color:var(--gold2)}
     <span class="fine">First hour free · no card · your link is not stored until you sign in</span>
   </div>
   <div class="acts rv" style="margin-top:1.4rem">
-    <a class="b2" href="/clipforge/app.html">Upload a file instead</a>
+    <a class="b2" href="/app.html">Upload a file instead</a>
     <a class="b2" href="#work">See how it decides</a>
   </div>
 
@@ -144,8 +144,8 @@ h1 em{font-style:normal;color:var(--gold2)}
         </div>
         <div class="lg"><span>00:00</span><span>SCORING EVERY SECOND</span><span>02:00:00</span></div>
         <div class="reel" id="creel"></div>
-        <p class="fine" style="margin:.9rem 0 0">Gold marks a moment that cleared the bar.
-          Everything else is logged with the score it got and the reason it lost.</p>
+        <p class="fine" style="margin:.9rem 0 0">Gold marks every moment that cleared the bar — and they all become clips. You also
+          get the score for the ones that didn’t.</p>
       </div>
     </div>
 
@@ -159,10 +159,10 @@ h1 em{font-style:normal;color:var(--gold2)}
   </div>
 
   <div class="figs rv">
-    <div class="fg"><b data-count="0.57" data-suffix="×">0×</b><span>realtime, end to end</span></div>
-    <div class="fg"><b data-count="28" data-suffix="">0</b><span>shorts from one 82-min stream</span></div>
+    <div class="fg"><b data-count="28" data-suffix="">0</b><span>shorts from one 82-minute stream</span></div>
+    <div class="fg"><b data-count="0.57" data-suffix="×">0×</b><span>faster than realtime</span></div>
     <div class="fg"><b data-count="100" data-suffix=" %">0 %</b><span>captions verified on screen</span></div>
-    <div class="fg"><b data-count="0" data-suffix="">0</b><span>charged for a failed job</span></div>
+    <div class="fg"><b data-count="0" data-suffix="">0</b><span>plugins or timelines to touch</span></div>
   </div>
 
   <!-- THE INSTRUMENT -->
@@ -223,8 +223,8 @@ h1 em{font-style:normal;color:var(--gold2)}
   <div class="head rv">
     <span class="lbl">What it handles</span>
     <h2>Measured on real recordings</h2>
-    <p>Every figure below came from testing against real footage. Where we are weak, it
-       says so — the methods behind them are ours.</p>
+    <p>Every number below we measured on real footage and can prove. The methods behind
+       them are ours.</p>
   </div>
   <div class="caps rv">
 
@@ -279,7 +279,7 @@ h1 em{font-style:normal;color:var(--gold2)}
       <ul><li>1 hour of stream</li><li>3 shorts, watermarked</li><li>Captions and audio mastering</li>
           <li>Full transcript (SRT + TXT)</li><li>The whole video subtitled, as a bonus</li>
           <li>Full detector readout</li></ul>
-      <div class="go"><a class="b2" href="/clipforge/app.html">Create new video</a> <a class="b2" href="/clipforge/history.html">History</a></div>
+      <div class="go"><a class="b2" href="/app.html">Create new video</a> <a class="b2" href="/history.html">History</a></div>
     </div>
     <div class="pl mid">
       <div class="nm">Creator</div><div class="pr">$24<s> / month</s></div>
@@ -287,14 +287,14 @@ h1 em{font-style:normal;color:var(--gold2)}
       <ul><li>20 hours of stream monthly</li><li>Unlimited shorts</li><li>No watermark</li>
           <li>Voice profiles and colours</li><li>Publish to YouTube, TikTok, Instagram</li>
           <li>Priority queue</li></ul>
-      <div class="go"><a class="b1" href="/clipforge/app.html">Get started</a></div>
+      <div class="go"><a class="b1" href="/app.html">Get started</a></div>
     </div>
     <div class="pl">
       <div class="nm">Studio</div><div class="pr">$79<s> / month</s></div>
       <div class="for">Several channels and more than one editor.</div>
       <ul><li>100 hours of stream monthly</li><li>Multiple channels and seats</li>
           <li>Custom word lists</li><li>API access</li></ul>
-      <div class="go"><a class="b2" href="/clipforge/app.html">Talk to us</a></div>
+      <div class="go"><a class="b2" href="/app.html">Talk to us</a></div>
     </div>
   </div>
 </div></section>
@@ -335,7 +335,7 @@ h1 em{font-style:normal;color:var(--gold2)}
     <h2>Your next short is already in your last stream</h2>
     <p>Upload an hour and read the detector output yourself. That is the whole pitch.</p>
   </div>
-  <div class="acts rv"><a class="b1" href="/clipforge/app.html">Clip a VOD free</a></div>
+  <div class="acts rv"><a class="b1" href="/app.html">Clip a VOD free</a></div>
 </div></section>
 
 <footer class="cf"></footer>
@@ -493,18 +493,18 @@ scope.addEventListener("pointerleave", () => {
   //    halves of the page tell one story rather than two.
   const bar = document.getElementById("cbar"), reel = document.getElementById("creel");
   if (bar && reel) {
-    const SCORES = [18.5, 16.4, 13.2, 11.0, 9.4, 7.6];
-    ZONES.forEach((z, k) => {
+    const SCORES = [18.5, 17.3, 16.4, 15.1, 13.2, 12.6, 11.0, 10.4, 9.4, 8.7, 7.9, 6.2];
+    SCORES.forEach((sc, k) => {
+      const at = 0.04 + (k / SCORES.length) * 0.92;
       const hit = document.createElement("i");
-      hit.style.left = (z.a * 100).toFixed(2) + "%";
-      hit.style.width = ((z.b - z.a) * 100).toFixed(2) + "%";
-      hit.style.animationDelay = still ? "0s" : (0.25 + k * 0.13).toFixed(2) + "s";
+      hit.style.left = (at * 100).toFixed(2) + "%";
+      hit.style.width = "2.1%";
+      hit.style.animationDelay = still ? "0s" : (0.2 + k * 0.06).toFixed(2) + "s";
       bar.appendChild(hit);
-
       const card = document.createElement("div");
       card.className = "r";
-      card.setAttribute("data-s", SCORES[k].toFixed(1));
-      card.style.animationDelay = still ? "0s" : (0.5 + k * 0.13).toFixed(2) + "s";
+      card.setAttribute("data-s", sc.toFixed(1));
+      card.style.animationDelay = still ? "0s" : (0.4 + k * 0.06).toFixed(2) + "s";
       reel.appendChild(card);
     });
   }
@@ -523,14 +523,32 @@ scope.addEventListener("pointerleave", () => {
     };
     requestAnimationFrame(tick);
   };
+  // A figure that never animates reads "0", which looks broken. So: animate on first
+  // sight, but ALSO guarantee the real number lands even if the observer never fires
+  // (already in view on a tall screen, a browser that throttles it, etc.).
+  const done = new WeakSet();
+  const fire = (el) => { if (!done.has(el)) { done.add(el); run(el); } };
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((es) => es.forEach((e) => {
-      if (e.isIntersecting) { run(e.target); io.unobserve(e.target); }
-    }), { threshold: .6 });
-    figs.forEach((f) => io.observe(f));
+      if (e.isIntersecting) { fire(e.target); io.unobserve(e.target); }
+    }), { threshold: .35 });
+    figs.forEach((f) => {
+      // Already in the viewport at load? Animate it now — the observer may never say so.
+      const r = f.getBoundingClientRect();
+      if (r.top < innerHeight && r.bottom > 0) fire(f); else io.observe(f);
+    });
   } else {
-    figs.forEach(run);
+    figs.forEach(fire);
   }
+  // Last-resort safety net. requestAnimationFrame is throttled when the tab is not
+  // focused, so the animated path can leave a figure reading "0". This sets the true
+  // value DIRECTLY — no rAF — guaranteeing the real number is on screen by 2.5s no
+  // matter what the observer or the animation did.
+  setTimeout(() => figs.forEach((el) => {
+    done.add(el);
+    const dec = (el.dataset.count.split(".")[1] || "").length;
+    el.textContent = parseFloat(el.dataset.count).toFixed(dec) + (el.dataset.suffix || "");
+  }), 2500);
 })();
 
 // idle sweep so the panel is alive before anyone touches it
@@ -548,7 +566,7 @@ setInterval(() => { if (idle) { sweep = (sweep + .004) % 1; probe(sweep); } }, 5
     const v=i.value.trim();
     if(!v || !OK.test(v)){ f.classList.add("bad"); i.focus(); return; }
     f.classList.remove("bad");
-    location.href="/clipforge/app.html?src="+encodeURIComponent(v);
+    location.href="/app.html?src="+encodeURIComponent(v);
   });
   i.addEventListener("input",()=>f.classList.remove("bad"));
 })();

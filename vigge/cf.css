@@ -51,10 +51,18 @@ header.cf nav a:hover::after,header.cf nav a[aria-current]::after{width:100%}
    wrap into a three-line block. Measured at 375 px, where "Create new video" broke
    across three rows and pushed the bar to 4 rem tall. */
 @media(max-width:560px){
-  header.cf .in{gap:.7rem}
-  header.cf .b1.sm,header.cf .b2.sm{padding:.42rem .6rem;font-size:.62rem;
-    letter-spacing:.06em;white-space:nowrap}
-  header.cf .b1.sm{margin-left:auto}
+  header.cf .in{gap:.4rem}
+  header.cf .b1.sm,header.cf .b2.sm{padding:.42rem .5rem;font-size:.6rem;
+    letter-spacing:.04em;white-space:nowrap;margin-left:.3rem!important}
+  header.cf .b1.sm{margin-left:auto!important}
+  /* Three actions do not fit a phone at full length: measured at 375 px the third
+     one landed 52 px off-screen and was simply unreachable. Shorten the labels with
+     CSS rather than dropping a button — a sign-in nobody can tap is worse than a
+     terse one. The long words return the moment there is room. */
+  header.cf .b1.sm{font-size:0}
+  header.cf .b1.sm::after{content:"New";font-size:.6rem;letter-spacing:.04em}
+  header.cf a[href="/history.html"].b2.sm{font-size:0}
+  header.cf a[href="/history.html"].b2.sm::after{content:"History";font-size:.6rem;letter-spacing:.04em}
 }
 
 /* ── buttons: mechanical ────────────────────────────────────────────────── */

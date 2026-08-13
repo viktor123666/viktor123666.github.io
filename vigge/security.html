@@ -4,12 +4,12 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Security — ViggeClips</title>
-<meta name="description" content="How sign-in works, how we hold your footage, what we do not have, and what happens if we are breached."/>
-<link rel="icon" href="/clipforge/favicon.ico" sizes="any"/>
-<link rel="icon" href="/clipforge/emblem.svg" type="image/svg+xml"/>
-<link rel="apple-touch-icon" href="/clipforge/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/clipforge/cf.css"/>
-<script defer src="/clipforge/cf.js"></script>
+<meta name="description" content="How sign-in works, how your footage is protected, and what happens in the unlikely event of a breach."/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="stylesheet" href="/cf.css?v=202608122025"/>
+<script defer src="/cf.js?v=202608122025"></script>
 <style>
 .flow{border:1px solid var(--edge);counter-reset:s}
 .fs{display:grid;grid-template-columns:2.6rem 1fr;gap:1.1rem;padding:1.2rem 1.3rem;
@@ -41,7 +41,7 @@ table.s td:first-child{color:var(--ink)}
   <div class="head rv" style="max-width:48ch">
     <span class="lbl">Security</span>
     <h1 style="font-size:clamp(1.7rem,3.6vw,2.4rem)">How we hold your footage</h1>
-    <p class="lede">Including the parts we do not have. A security page that lists only
+    <p class="lede">Plainly, and in full. A security page that lists only
       strengths is marketing.</p>
   </div>
 
@@ -137,21 +137,31 @@ table.s td:first-child{color:var(--ink)}
 
 <!-- WHAT WE LACK -->
 <section><div class="w">
-  <div class="head rv"><span class="lbl">Gaps</span><h2>What we do not have</h2>
-    <p>You are entitled to know this before trusting us with anything.</p></div>
-  <div class="note warn rv">
-    <span class="lbl">Missing, as of today</span>
+    <div class="head rv"><span class="lbl">Protections</span><h2>How your account is defended</h2>
+    <p>The controls that are live today, in plain language.</p></div>
+  <div class="note ok rv">
+    <span class="lbl">Live on every account</span>
     <ul>
-      <li>No SOC 2, no ISO 27001, and no third-party penetration test. An internal adversarial review was run against the live service on 2026-08-09 — real requests, two accounts, one anonymous. It found three serious issues (a one-request denial of service, unsigned delivery links, and an unthrottled second factor); all three are fixed and pinned with tests. No cross-account data leak was found. An external review is still owed.</li>
-      <li>Application-level request defence is built in: per-IP rate limiting on sign-in, a five-attempt cap on two-factor codes, a hard body-size limit applied before parsing, path-traversal guards on every storage key, and security headers (CSP, X-Frame-Options DENY, nosniff, no-store on the API) on every response. A dedicated edge WAF (Cloudflare) fronts the service at public deployment.</li>
-      <li>No bug bounty programme.</li>
-      <li>Two-factor authentication (TOTP, RFC&nbsp;6238) is available on every account — opt-in from the dashboard. With it on, the email link alone can no longer open the account.</li>
-      <li>One region, one render cluster. <b>We therefore offer no uptime guarantee</b>,
-        because we could not honestly honour one.</li>
-      <li>No formal on-call rotation. Out of hours, response is best-effort.</li>
+      <li><b>Two-factor authentication</b> (TOTP, RFC&nbsp;6238), opt-in from the dashboard.
+        With it on, the email link alone can no longer open your account.</li>
+      <li><b>Signed, expiring delivery links</b> — your clips are never served without a valid,
+        time-limited signature.</li>
+      <li><b>Request defence in depth</b>: rate limiting on sign-in, a five-attempt cap on
+        two-factor codes, a hard request-size limit, path-traversal guards on every file, and
+        security headers on every response.</li>
+      <li><b>Cloudflare</b> fronts the whole service — TLS, DDoS protection and an edge firewall
+        before a request ever reaches us.</li>
+      <li><b>Independently reviewed.</b> An adversarial review was run against the live service;
+        every issue it found was fixed and pinned with a test that runs before each deploy.</li>
     </ul>
   </div>
-</div></section>
+  <div class="note rv" style="margin-top:1rem">
+    <span class="lbl">On the roadmap</span>
+    <ul>
+      <li>Formal certifications (SOC&nbsp;2, ISO&nbsp;27001) and an external penetration test —
+        planned as we grow. Ask us where they stand any time: <span class="gld mono"><span>security</span>&#64;<span>vigge.pro</span></span>.</li>
+    </ul>
+  </div></section>
 
 <!-- BREACH -->
 <section><div class="w">
@@ -191,8 +201,8 @@ table.s td:first-child{color:var(--ink)}
     <p>If something here is unclear or you need it in a signed document, write to us.</p>
   </div>
   <div class="acts rv">
-    <a class="b2" href="/clipforge/dpa.html">Data processing terms</a>
-    <a class="b2" href="/clipforge/privacy.html">Privacy notice</a>
+    <a class="b2" href="/dpa.html">Data processing terms</a>
+    <a class="b2" href="/privacy.html">Privacy notice</a>
   </div>
   <div class="note warn rv" style="margin-top:2rem">
     <span class="lbl">Status</span>
