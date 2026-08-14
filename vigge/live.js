@@ -136,6 +136,31 @@
   }
 
   // ── the workspace ─────────────────────────────────────────────────────────
+/**
+ * Fills every [data-cf-*] tile from /api/account/stats.
+ *
+ * The tiles ship as "—" and STAY "—" unless a real number arrives — a dash is
+ * honest about not knowing, a mockup figure is a lie with confidence. (The page
+ * once told a customer with zero jobs that 37 shorts had been delivered.)
+ */
+async function refreshStats() {
+  const r = await json("/api/account/stats");
+  if (!r.ok || !r.body) return;
+  const put = (sel, v) => {
+    for (const el of document.querySelectorAll(sel)) el.textContent = v;
+  };
+  const usedH = Number(r.body.usedPeriodMin || 0) / 60;
+  put("[data-cf-used]", usedH.toFixed(1));
+  put("[data-cf-shorts]", String(r.body.shortsDelivered ?? 0));
+  put("[data-cf-jobs]", String(r.body.jobsTotal ?? 0));
+  const freeH = Number(r.body.monthlyFreeMinutes || 120) / 60;
+  const bar = document.querySelector("[data-cf-usagebar]");
+  if (bar) bar.style.width =
+    Math.min(100, Math.round((usedH / freeH) * 100)) + "%";
+  put("[data-cf-usagelabel]",
+      usedH.toFixed(1) + " OF " + freeH.toFixed(1) + " HOURS USED");
+}
+
   function wireApp() {
     if (!$("file") || !$("go")) return;
 
@@ -176,6 +201,7 @@
       if (r.ok && r.body && cred) {
         cred.textContent = (Number(r.body.minutes) / 60).toFixed(1) + " h";
       }
+      if (r.ok) refreshStats();          // the dashboard tiles, measured not mocked
       return r.ok;
     }
 
@@ -273,7 +299,13 @@
       const job = r.body.job || {};
       const pct = Number(job.progress || 0);
       if (fill) fill.style.width = pct + "%";
-      show(`${job.stage || job.state} — ${pct}%`);
+      // The honest clock: measured on the CPU engine, a job takes about four times
+      // the video's length. billedMinutes is set by the worker's own measurement
+      // BEFORE the heavy stages, so the estimate is grounded, not guessed.
+      const etaTxt = job.billedMinutes
+        ? ` · ~${Math.max(1, Math.round(job.billedMinutes * 3 * (1 - pct / 100)))} min left`
+        : "";
+      show(`${job.stage || job.state} — ${pct}%${etaTxt}`);
 
       if (job.state === "done") {
         panel("run", false);
@@ -608,6 +640,7 @@
     document.querySelectorAll("[data-cf-credits]").forEach((el) => {
       el.textContent = (Number(r.body.minutes) / 60).toFixed(1);
     });
+    refreshStats();                      // mätvärden till plattorna + usage-baren
   }
 
   /** The 2FA card on the dashboard: status → enable (secret shown once) → confirm. */

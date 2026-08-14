@@ -8,9 +8,9 @@
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608122025"/>
-<script defer src="/cf.js?v=202608122025"></script>
-<script defer src="/live.js?v=202608122025"></script>
+<link rel="stylesheet" href="/cf.css?v=202608140358"/>
+<script defer src="/cf.js?v=202608140358"></script>
+<script defer src="/live.js?v=202608140358"></script>
 <style>
 .tabs{display:flex;border:1px solid var(--edge);border-bottom:0;overflow-x:auto}
 .tab{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
@@ -79,10 +79,13 @@
   </div>
 
   <div class="stats rv" style="margin-bottom:2rem">
-    <div class="st"><b><span data-cf-credits>14.2</span> h</b><span>credits remaining</span></div>
-    <div class="st"><b>5.8 h</b><span>used this period</span></div>
-    <div class="st"><b>37</b><span>shorts delivered</span></div>
-    <div class="st"><b>2</b><span>voice profiles</span></div>
+    <!-- Every number below is fetched from /api/account/stats — the caller's own
+         rows. This block once showed the design mockup's figures ("37 shorts
+         delivered") to a real customer with zero jobs; never again. -->
+    <div class="st"><b><span data-cf-credits>—</span> h</b><span>credits remaining</span></div>
+    <div class="st"><b><span data-cf-used>—</span> h</b><span>used this period</span></div>
+    <div class="st"><b><span data-cf-shorts>—</span></b><span>shorts delivered</span></div>
+    <div class="st"><b><span data-cf-jobs>—</span></b><span>jobs run</span></div>
   </div>
 
   <div class="tabs rv" role="tablist">
@@ -124,34 +127,12 @@
   <!-- VOICES -->
   <div class="pane rv hide" id="p-voices">
     <p class="lede" style="font-size:.95rem;margin-bottom:1.4rem">
-      Two minutes of someone talking alone is enough. Every profile you add sharpens the
-      others, because the engine can then compare against a named person instead of an
-      anonymous group.</p>
-    <div class="vp">
-      <div class="vpc">
-        <b><span class="sw" style="background:var(--gold)"></span>You</b>
-        <div class="qb"><i style="width:88%"></i></div>
-        <span class="mono" style="font-size:.72rem;color:var(--dim2)">QUALITY 88 % · 190 s of audio · gold</span>
-      </div>
-      <div class="vpc">
-        <b><span class="sw" style="background:var(--info)"></span>Speaker 2</b>
-        <div class="qb"><i style="width:61%;background:var(--gold)"></i></div>
-        <span class="mono" style="font-size:.72rem;color:var(--dim2)">QUALITY 61 % · 74 s of audio · needs more</span>
-      </div>
-      <div class="vpc" style="display:grid;place-items:center;text-align:center">
-        <div><div class="mono" style="color:var(--gold);font-size:1.2rem">[ + ]</div>
-          <button class="b2 sm" style="margin-top:.7rem">Add a voice</button></div>
-      </div>
-    </div>
-    <div class="note rv" style="margin-top:1.4rem">
-      <span class="lbl">How to record one</span>
-      <ul><li>Talk normally for two to three minutes with nobody else audible — a solo intro,
-        or a stretch where you are alone in the call. Cross-talk is what degrades a profile,
-        not background noise.</li></ul>
-    </div>
+      The engine already separates speakers automatically in every job. Named voice
+      profiles — teach it who is who, once, for sharper labels — are being rolled
+      out and are not enabled on accounts yet.</p>
+    <p class="mono" style="font-size:.78rem;color:var(--dim2)">NO VOICE PROFILES ON THIS ACCOUNT</p>
   </div>
 
-  <!-- SAFETY -->
   <div class="pane rv hide" id="p-safety">
     <p class="lede" style="font-size:.95rem;margin-bottom:1.4rem">
       Two independent controls. Masking changes a word; the gate removes a whole moment from
@@ -176,14 +157,16 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.6rem">
       <div>
         <span class="lbl">Current plan</span>
-        <h3 style="margin:.5rem 0 .3rem;font-size:1.3rem">Creator — $24 / month</h3>
-        <p style="color:var(--dim);font-size:.88rem;margin:0 0 1rem">Renews 12 August 2026</p>
-        <div class="usage"><i style="width:29%"></i></div>
-        <span class="mono" style="font-size:.74rem;color:var(--dim2)">5.8 OF 20 HOURS USED</span>
+        <h3 style="margin:.5rem 0 .3rem;font-size:1.3rem">Free</h3>
+        <p style="color:var(--dim);font-size:.88rem;margin:0 0 1rem">
+          2 hours of clipping every month, refreshed automatically. Paid plans open
+          when billing goes live.</p>
+        <div class="usage"><i data-cf-usagebar style="width:0%"></i></div>
+        <span class="mono" style="font-size:.74rem;color:var(--dim2)"
+              data-cf-usagelabel>— OF 2.0 HOURS USED</span>
         <div class="acts" style="margin-top:1.4rem">
-          <a class="b2 sm" href="/pricing.html">Change plan</a>
-          <a class="b3 sm" href="#">Billing portal</a>
-        </div>
+          <a class="b2 sm" href="/pricing.html">See planned pricing</a>
+        </div></div>
       </div>
       <div>
         <span class="lbl">Recent invoices</span>
