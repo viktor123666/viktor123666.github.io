@@ -1,0 +1,13 @@
+{
+  "name": "ViggeClips",
+  "short_name": "ViggeClips",
+  "description": "Upload once. Get every short worth posting.",
+  "start_url": "/app.html",
+  "display": "standalone",
+  "background_color": "#0a0a0b",
+  "theme_color": "#0a0a0b",
+  "icons": [
+    { "src": "/emblem.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>History — ViggeClips</title>
+<title>Edited videos — ViggeClips</title>
 <meta name="description" content="Every job you have run: length, date, tokens charged, status."/>
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608140358"/>
-<script defer src="/cf.js?v=202608140358"></script>
-<script defer src="/live.js?v=202608140358"></script>
+<link rel="stylesheet" href="/cf.css?v=202608150303"/>
+<script defer src="/cf.js?v=202608150303"></script>
+<script defer src="/live.js?v=202608150303"></script>
 <style>
 table.jt{width:100%;border-collapse:collapse;font-size:.9rem}
 .jt th,.jt td{text-align:left;padding:.85rem .9rem;border-bottom:1px solid var(--edge);vertical-align:middle}
@@ -25,6 +25,17 @@ table.jt{width:100%;border-collapse:collapse;font-size:.9rem}
 .st-failed{color:var(--warn);border-color:var(--warn)}
 .st-running,.st-queued{color:var(--gold2);border-color:var(--gold)}
 </style>
+<meta property="og:title" content="Edited videos — ViggeClips"/>
+<meta property="og:url" content="https://vigge.pro/history.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="ViggeClips"/>
+<meta property="og:image" content="https://vigge.pro/og.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://vigge.pro/og.png"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0a0a0b"/>
 </head>
 <body>
 <div class="grid"></div>
@@ -32,21 +43,53 @@ table.jt{width:100%;border-collapse:collapse;font-size:.9rem}
 
 <section class="first"><div class="w">
   <div class="head rv" style="max-width:46ch;margin-bottom:2rem">
-    <span class="lbl">History</span>
+    <span class="lbl">Edited videos</span>
     <h1 style="font-size:clamp(1.7rem,3.6vw,2.4rem)">Everything you have run</h1>
     <p>Every job, newest first — how long the delivered clips are, when it ran,
        what it cost in tokens, and a link straight back to the result.</p>
   </div>
 
+  <!-- SCHEMALÄGGAREN, omöjlig att missa (Vigges order 2026-08-14): kortet förklarar
+       hela funktionen och visar kopplingsläget. live.js fyller [data-sched-state]. -->
+  <div class="rv" id="schedCard" style="margin-bottom:1.6rem;background:var(--panel);
+       padding:1.3rem 1.5rem;border-left:4px solid var(--gold)">
+    <span class="lbl">Publish to YouTube — spread out, never spammed</span>
+    <p style="font-size:.95rem;color:var(--dim);margin:.6rem 0 .9rem;max-width:60ch">
+      Press <b style="color:var(--gold2)">Schedule to YouTube</b> on any finished job
+      below and pick how they go out:</p>
+    <p style="font-size:.9rem;color:var(--dim);margin:0 0 .9rem;max-width:62ch">
+      <b style="color:var(--gold2)">Public now</b> — live the second each upload
+      finishes &nbsp;·&nbsp; <b>1/hour</b> — first clip in one hour, then one every
+      hour &nbsp;·&nbsp; <b>3/day</b> — released at 10:00 · 15:00 · 19:00 starting
+      tomorrow. Scheduled clips wait as private and YouTube flips them public at
+      their time — a big batch never floods your channel in one second.</p>
+    <p class="mono" data-sched-state style="font-size:.8rem;color:var(--dim2)">
+      CHECKING YOUR CHANNEL…</p>
+  </div>
+
+  <!-- #35 Sök/filter: listan växer med varje körning; utan detta blir den en vägg. -->
+  <div class="acts" style="margin-bottom:1rem;gap:.6rem;flex-wrap:wrap">
+    <input type="search" id="jobSearch" placeholder="Search by title…"
+      style="flex:1;min-width:12rem;background:var(--bg2);color:var(--fg);
+             border:1px solid var(--line);padding:.55rem .8rem;font:inherit;font-size:.88rem"/>
+    <select id="jobFilter" style="background:var(--bg2);color:var(--fg);
+             border:1px solid var(--line);padding:.55rem .7rem;font:inherit;font-size:.85rem">
+      <option value="">All jobs</option>
+      <option value="done">Finished</option>
+      <option value="running">In progress</option>
+      <option value="failed">Failed</option>
+    </select>
+  </div>
+
   <div class="acts" style="margin-bottom:1rem">
     <button class="b2" type="button" disabled title="Open a job to download its clips">Download all</button>
     <a class="b2" href="/app.html">Clip a video</a>
-    <a class="b1" href="/history.html">History / Recent</a>
+    <a class="b1" href="/history.html" aria-current="page">Edited videos</a>
   </div>
 
   <div class="panel rv">
     <table class="jt">
-      <thead><tr><th>Source</th><th>Submitted</th><th>Length</th><th>Shorts</th><th>Tokens</th><th>Status</th><th></th></tr></thead>
+      <thead><tr><th>Source</th><th>Submitted</th><th>Length</th><th>Shorts</th><th>Tokens</th><th>Status</th><th>Publish</th></tr></thead>
       <tbody id="jobsBody"><tr><td colspan="7">Sign in to see your history.</td></tr></tbody>
     </table>
   </div>

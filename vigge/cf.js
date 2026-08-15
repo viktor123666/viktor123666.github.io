@@ -16,11 +16,64 @@
     ["Account", [["/login.html", "Sign in"], ["/account.html", "Dashboard"], ["/history.html", "History"],
       ["/docs.html", "Documentation"], ["/changelog.html", "Changelog"]]],
     ["Legal", [["/security.html", "Security"], ["/privacy.html", "Privacy"], ["/terms.html", "Terms"],
-      ["/dpa.html", "Data processing"]]],
-    // (no external-universe column: the product stands alone)
+      ["/dpa.html", "Data processing"], ["/subprocessors.html", "Subprocessors"],
+      ["/acceptable-use.html", "Acceptable use"], ["/dmca.html", "Copyright"]]],
+    ["Use cases", [["/compare.html", "vs Opus Clip"], ["/clip-twitch-vods.html", "Clip Twitch VODs"],
+      ["/clip-youtube-videos.html", "Clip YouTube"], ["/clip-kick-streams.html", "Clip Kick"]]],
   ];
 
+  // #53 Fånga ?ref= på VILKEN sida som helst och spara den. Besökaren klickar
+  // sällan "skapa konto" i samma andetag som de klickar vännens länk — utan detta
+  // tappas värvningen tyst mellan förstasidan och registreringen.
+  (function captureRef() {
+    try {
+      const c = new URLSearchParams(location.search).get("ref");
+      if (c && /^[a-z0-9]{4,32}$/i.test(c)) localStorage.setItem("cf_ref", c.toLowerCase());
+    } catch (e) { /* privatläge: värvningen tappas, allt annat fungerar */ }
+  })();
+
+  /**
+   * #85 Funnel: fyra mätpunkter, noll personuppgifter.
+   *
+   * Vi mäter STEGET, inte personen — ingen id, ingen fingerprint, ingen ip sparas
+   * med raden. Det räcker gott för den enda fråga mätningen finns för: var tappar
+   * vi folk mellan förstasidan och första klippet?
+   */
+  window.cfTrack = function (step, source) {
+    try {
+      fetch("/api/track", { method: "POST", keepalive: true,
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ step, source: source || null }) }).catch(() => {});
+    } catch (e) { /* mätning får aldrig märkas av besökaren */ }
+  };
+
+  (function trackPage() {
+    const p = location.pathname;
+    const step = p === "/" || p.endsWith("index.html") ? "visit_home"
+               : p.endsWith("app.html") ? "visit_workspace"
+               : p.endsWith("login.html") ? "visit_signup"
+               : p.endsWith("pricing.html") ? "visit_pricing" : null;
+    if (step) window.cfTrack(step, document.referrer ? "referred" : "direct");
+  })();
+
+  function cookieNote() {
+    try {
+      if (localStorage.getItem("cf_cookie_ok")) return;
+    } catch (e) { return; }
+    const bar = document.createElement("div");
+    bar.className = "cfcookie";
+    bar.innerHTML = '<span>We use one essential cookie to keep you signed in — no tracking, ' +
+      'no ads. <a href="/privacy.html">Privacy</a>.</span>' +
+      '<button type="button">Got it</button>';
+    bar.querySelector("button").addEventListener("click", () => {
+      try { localStorage.setItem("cf_cookie_ok", "1"); } catch (e) {}
+      bar.remove();
+    });
+    document.body.appendChild(bar);
+  }
+
   function mount() {
+    cookieNote();
     const here = location.pathname.replace(/index\.html$/, "");
 
     // header
@@ -36,14 +89,30 @@
         + 'ViggeClips</a><nav>' +
         NAV.map(([h, t]) => `<a href="${h}"${h.replace(/index\.html$/, "") === here ? ' aria-current="page"' : ""}>${t}</a>`).join("") +
         '</nav>' +
-        '<a class="b1 sm" href="/app.html">Create new video</a> ' +
-        '<a class="b2 sm" href="/history.html" style="margin-left:.5rem">History</a>' +
-        // Sign in lives at the far right, where every site puts it. live.js swaps it
-        // to "Account" once a session answers, so it never invites someone who is
-        // already signed in to sign in again.
-        '<a class="b2 sm" id="navAuth" href="/login.html" style="margin-left:.5rem">Sign in</a>' +
-        '</div>';
+        '<div class="navgrp">' +
+        '<a class="b1 sm" href="/app.html">Create new video</a>' +
+        '<a class="b2 sm" href="/history.html">Edited videos</a>' +
+        '<a class="b2 sm" id="navAuth" href="/login.html">Sign in</a>' +
+        '</div></div>';
     }
+
+    // Auth-swappen bor HÄR, hos den som äger navigationen — den låg i live.js, och
+    // startsidan laddar inte live.js, så inloggade möttes av "Sign in" på exakt den
+    // sida de landar på först. Navigationen ska aldrig bero på en annan fils närvaro.
+    (async () => {
+      const el = document.getElementById("navAuth");
+      if (!el) return;
+      try {
+        const r = await fetch("/api/auth/me", { credentials: "same-origin" });
+        if (!r.ok) return;                       // utloggad: "Sign in" är sanningen
+        const me = await r.json();
+        if (me && me.email) {
+          el.textContent = "Account";
+          el.setAttribute("href", "/account.html");
+          el.title = me.email;
+        }
+      } catch { /* statiskt läge: lämna orört */ }
+    })();
 
     // footer
     const ft = document.querySelector("footer.cf");

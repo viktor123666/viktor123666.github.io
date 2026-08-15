@@ -8,9 +8,9 @@
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608140358"/>
-<script defer src="/cf.js?v=202608140358"></script>
-<script defer src="/live.js?v=202608140358"></script>
+<link rel="stylesheet" href="/cf.css?v=202608150303"/>
+<script defer src="/cf.js?v=202608150303"></script>
+<script defer src="/live.js?v=202608150303"></script>
 <style>
 .tabs{display:flex;border:1px solid var(--edge);border-bottom:0;overflow-x:auto}
 .tab{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
@@ -39,6 +39,17 @@
 .usage{height:.45rem;background:var(--edge);margin:.7rem 0 .3rem}
 .usage i{display:block;height:100%;background:var(--gold)}
 </style>
+<meta property="og:title" content="Dashboard — ViggeClips"/>
+<meta property="og:url" content="https://vigge.pro/account.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="ViggeClips"/>
+<meta property="og:image" content="https://vigge.pro/og.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://vigge.pro/og.png"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0a0a0b"/>
 </head>
 <body>
 <div class="grid"></div>
@@ -78,6 +89,60 @@
        margin:.7rem 0 0;display:none"></p>
   </div>
 
+  <!-- Kopplade kanaler: kundens egna. Varje koppling godkänns i plattformens EGEN
+       ruta; vi lagrar aldrig lösenord, bara en återkallbar uppladdningsnyckel. -->
+  <div class="rv" id="channelsCard" style="margin-bottom:2rem;background:var(--panel);
+       padding:1.2rem 1.4rem;border-left:3px solid var(--gold)">
+    <span class="lbl">Connected channels</span>
+    <p id="ytStatusLine" class="mono" hidden
+       style="font-size:.78rem;margin:.5rem 0 0"></p>
+    <div id="channelsList" style="margin:.8rem 0 0">
+      <p class="mono" style="font-size:.78rem;color:var(--dim2)">Loading…</p>
+    </div>
+    <div class="acts" style="margin-top:1rem">
+      <a class="b1 sm" href="/api/publish/oauth/youtube/start">Connect YouTube</a>
+      <span class="mono" style="font-size:.7rem;color:var(--dim2);align-self:center">
+        TIKTOK &amp; INSTAGRAM — AWAITING PLATFORM APPROVAL</span>
+    </div>
+    <p style="font-size:.8rem;color:var(--dim);margin:.8rem 0 0">
+      Finished clips can then be sent straight to your channel. Uploads always arrive
+      as <b>private</b> — you press publish on YouTube, not us.</p>
+  </div>
+
+  <!-- #53 Värvning: tillväxt som jobbar medan vi sover. -->
+  <div class="rv" style="margin-bottom:2rem;background:var(--panel);padding:1.2rem 1.4rem;
+       border-left:3px solid var(--gold)">
+    <span class="lbl">Invite a creator</span>
+    <p style="font-size:.88rem;color:var(--dim);margin:.5rem 0 .8rem;max-width:60ch">
+      They get <b style="color:var(--gold2)">1 extra hour</b> the moment they sign up.
+      You get <b style="color:var(--gold2)">1 hour</b> once they have actually made
+      their first clips — no reward for empty accounts.</p>
+    <div class="acts" style="gap:.5rem;flex-wrap:wrap">
+      <input id="refUrl" readonly value="—"
+        style="flex:1;min-width:14rem;background:var(--bg2);color:var(--gold2);
+               border:1px solid var(--line);padding:.55rem .8rem;font:inherit;
+               font-size:.85rem;font-family:ui-monospace,monospace"/>
+      <button class="b2 sm" type="button" id="refCopy">Copy link</button>
+    </div>
+    <p class="mono" id="refStats" style="font-size:.72rem;color:var(--dim2);margin:.7rem 0 0"></p>
+  </div>
+
+  <!-- #16 Kundens ordlista: namn och termer motorn annars stavar fonetiskt fel. -->
+  <div class="rv" style="margin-bottom:2rem;background:var(--panel);padding:1.2rem 1.4rem">
+    <span class="lbl">Your words</span>
+    <p style="font-size:.88rem;color:var(--dim);margin:.5rem 0 .8rem;max-width:60ch">
+      Names, nicknames and terms the engine should spell correctly — your squad, your
+      game, your in-jokes. Comma separated. Nothing here is required; it just stops
+      "Smörjhan" becoming "Smorjan" in your captions.</p>
+    <textarea id="vocab" rows="2" placeholder="Smörjhan17, Gurrimurra, Krydog, poggers"
+      style="width:100%;background:var(--bg2);color:var(--fg);border:1px solid var(--line);
+             padding:.7rem .8rem;font:inherit;font-size:.9rem"></textarea>
+    <div class="acts" style="margin-top:.7rem">
+      <button class="b2 sm" type="button" id="vocabSave">Save words</button>
+      <span class="mono" id="vocabMsg" style="font-size:.72rem;color:var(--dim2);align-self:center"></span>
+    </div>
+  </div>
+
   <div class="stats rv" style="margin-bottom:2rem">
     <!-- Every number below is fetched from /api/account/stats — the caller's own
          rows. This block once showed the design mockup's figures ("37 shorts
@@ -86,6 +151,31 @@
     <div class="st"><b><span data-cf-used>—</span> h</b><span>used this period</span></div>
     <div class="st"><b><span data-cf-shorts>—</span></b><span>shorts delivered</span></div>
     <div class="st"><b><span data-cf-jobs>—</span></b><span>jobs run</span></div>
+  </div>
+
+  <!-- Gren F: kontroll över sitt eget konto (#62,#64,#65). -->
+  <div class="rv" style="margin-bottom:2rem;background:var(--panel);padding:1.2rem 1.4rem">
+    <span class="lbl">Your account</span>
+    <p class="mono" id="sessList" style="font-size:.76rem;color:var(--dim2);margin:.6rem 0 0">
+      CHECKING SESSIONS…</p>
+    <div class="acts" style="margin-top:1rem;gap:.5rem;flex-wrap:wrap">
+      <a class="b2 sm" href="/api/account/export" download>Download my data</a>
+      <button class="b2 sm" type="button" id="logoutAll">Sign out everywhere</button>
+      <button class="b3 sm" type="button" id="delAcct">Delete my account</button>
+    </div>
+    <div id="delBox" hidden style="margin-top:1rem;padding:1rem;background:var(--bg2);
+         border-left:3px solid var(--warn)">
+      <p style="font-size:.86rem;color:var(--dim);margin:0 0 .7rem">
+        This cannot be undone. Your jobs, credits and connected channels go with it.
+        Type your email address to confirm.</p>
+      <div class="acts" style="gap:.5rem;flex-wrap:wrap">
+        <input id="delEmail" type="email" placeholder="your@email.com"
+          style="flex:1;min-width:12rem;background:var(--bg);color:var(--fg);
+                 border:1px solid var(--line);padding:.5rem .7rem;font:inherit;font-size:.88rem"/>
+        <button class="b3 sm" type="button" id="delConfirm">Delete permanently</button>
+      </div>
+      <p class="mono" id="delMsg" style="font-size:.72rem;color:var(--warn);margin:.6rem 0 0"></p>
+    </div>
   </div>
 
   <div class="tabs rv" role="tablist">

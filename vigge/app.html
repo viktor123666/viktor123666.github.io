@@ -8,10 +8,10 @@
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608140358"/>
-<script defer src="/cf.js?v=202608140358"></script>
-<script defer src="/upload.js?v=202608140358"></script>
-<script defer src="/live.js?v=202608140358"></script>
+<link rel="stylesheet" href="/cf.css?v=202608150303"/>
+<script defer src="/cf.js?v=202608150303"></script>
+<script defer src="/upload.js?v=202608150303"></script>
+<script defer src="/live.js?v=202608150303"></script>
 <style>
 .drop{border:1px dashed var(--edge2);background:var(--bg2);padding:3.4rem 1.5rem;text-align:center;
   cursor:pointer;transition:border-color .2s,background .2s}
@@ -59,6 +59,17 @@
 .why-list .wr:last-child{border-bottom:0}
 .why-list .wr b{color:var(--gold2);font-weight:500}
 </style>
+<meta property="og:title" content="Workspace — ViggeClips"/>
+<meta property="og:url" content="https://vigge.pro/app.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="ViggeClips"/>
+<meta property="og:image" content="https://vigge.pro/og.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://vigge.pro/og.png"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0a0a0b"/>
 </head>
 <body>
 <div class="grid"></div>
@@ -101,6 +112,22 @@
     <div class="urow">
       <input type="text" id="url" placeholder="twitch.tv/videos/…"/>
       <button class="b2" type="button" id="fetch">Fetch</button>
+    </div>
+    <!-- Länkens egen statusrad: varje läge är SYNLIGT — knappen får aldrig se död ut. -->
+    <p id="fetchStatus" class="mono" hidden
+       style="margin:.7rem 0 0;font-size:.82rem;color:var(--dim)"></p>
+    <!-- Mobilsäker rättighetsbekräftelse: window.confirm åts upp av vissa in-app-webbläsare. -->
+    <div id="fetchConfirm" hidden
+         style="margin:.9rem 0 0;padding:1rem 1.1rem;background:var(--panel);border-left:3px solid var(--gold)">
+      <b id="fcTitle" style="display:block;margin-bottom:.25rem"></b>
+      <span id="fcMeta" class="mono" style="font-size:.78rem;color:var(--dim2)"></span>
+      <p style="font-size:.85rem;color:var(--dim);margin:.7rem 0">
+        I confirm this recording is my own content, or that I have the rights
+        holder's permission to process it.</p>
+      <div class="acts">
+        <button class="b1 sm" type="button" id="fcGo">I have the rights — clip it</button>
+        <button class="b3 sm" type="button" id="fcCancel">Cancel</button>
+      </div>
     </div>
     <p class="hint" style="margin:.6rem 0 0">
       Twitch, YouTube and Kick are supported. If a platform refuses the download we say so

@@ -10,8 +10,8 @@
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608140358"/>
-<script defer src="/cf.js?v=202608140358"></script>
+<link rel="stylesheet" href="/cf.css?v=202608150303"/>
+<script defer src="/cf.js?v=202608150303"></script>
 <style>/* Sidspecifik CSS — delade regler bor i cf.css */
 /* ── HERO ───────────────────────────────────────────────────────────────── */
 .hero{padding:6.6rem 0 3.5rem}
@@ -106,6 +106,17 @@ h1 em{font-style:normal;color:var(--gold2)}
 .honest ul{margin:0;padding-left:1.1rem;color:var(--dim);font-size:.92rem;line-height:1.75}
 
 </style>
+<meta property="og:title" content="ViggeClips — every short worth posting, found automatically"/>
+<meta property="og:url" content="https://vigge.pro/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="ViggeClips"/>
+<meta property="og:image" content="https://vigge.pro/og.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://vigge.pro/og.png"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0a0a0b"/>
 </head>
 <body>
 <div class="grid"></div>
@@ -129,6 +140,8 @@ h1 em{font-style:normal;color:var(--gold2)}
   <div class="acts rv" style="margin-top:1rem">
     <span class="fine">First hour free · no card · your link is not stored until you sign in</span>
   </div>
+  <!-- #2 Prova utan konto: förhandsvisning INNAN registrering. Kostar bara metadata. -->
+  <div id="lbPreview" class="lbprev rv" hidden></div>
   <div class="acts rv" style="margin-top:1.4rem">
     <a class="b2" href="/app.html">Upload a file instead</a>
     <a class="b2" href="#work">See how it decides</a>
@@ -279,7 +292,7 @@ h1 em{font-style:normal;color:var(--gold2)}
       <ul><li>1 hour of stream</li><li>3 shorts, watermarked</li><li>Captions and audio mastering</li>
           <li>Full transcript (SRT + TXT)</li><li>The whole video subtitled, as a bonus</li>
           <li>Full detector readout</li></ul>
-      <div class="go"><a class="b2" href="/app.html">Create new video</a> <a class="b2" href="/history.html">History</a></div>
+      <div class="go"><a class="b2" href="/app.html">Create new video</a> <a class="b2" href="/history.html">Edited videos</a></div>
     </div>
     <div class="pl mid">
       <div class="nm">Creator</div><div class="pr">$24<s> / month</s></div>
@@ -561,14 +574,45 @@ setInterval(() => { if (idle) { sweep = (sweep + .004) % 1; probe(sweep); } }, 5
   const f=document.getElementById("lb"), i=document.getElementById("lbu");
   if(!f) return;
   const OK=/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|twitch\.tv|kick\.com)\//i;
-  f.addEventListener("submit",e=>{
+  const prev=document.getElementById("lbPreview");
+  const btn=f.querySelector("button");
+  const esc=t=>String(t).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  f.addEventListener("submit",async e=>{
     e.preventDefault();
     const v=i.value.trim();
     if(!v || !OK.test(v)){ f.classList.add("bad"); i.focus(); return; }
     f.classList.remove("bad");
-    location.href="/app.html?src="+encodeURIComponent(v);
+    btn.disabled=true; const t0=btn.textContent; btn.textContent="Looking…";
+    prev.hidden=false; prev.innerHTML='<span class="spin"></span> Reading the video…';
+    try{
+      const r=await fetch("/api/preview",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({url:v})});
+      const b=await r.json().catch(()=>({}));
+      if(!r.ok){ prev.innerHTML='<span style="color:var(--warn)">'+esc(b.error||"Could not read that link.")+'</span>'; return; }
+      const mm=Math.floor((b.durationS||0)/60);
+      prev.innerHTML='<b>'+esc(b.title||"That video")+'</b>'
+        +'<span class="mono">'+mm+' MIN · WE'LL FIND UP TO '+b.estimatedClips+' CLIPS WORTH POSTING</span>'
+        +'<a class="b1 sm" href="/app.html?src='+encodeURIComponent(v)+'">Make these shorts — free account</a>';
+    }catch(err){ prev.innerHTML='<span style="color:var(--warn)">Network hiccup — try again.</span>'; }
+    finally{ btn.disabled=false; btn.textContent=t0; }
   });
   i.addEventListener("input",()=>f.classList.remove("bad"));
+})();
+
+// #4 Levande räknare: riktiga DB-siffror, men bara NÄR de är värda att visa —
+// annars står den ärliga mätta bragden kvar ("28 från en 82-min-stream").
+(async function(){
+  try{
+    const r=await fetch("/api/stats/public"); if(!r.ok) return;
+    const s=await r.json();
+    if((s.clipsDelivered||0)>=50){
+      const set=(sel,val,suf)=>{const el=document.querySelector(sel);
+        if(el){el.setAttribute("data-count",val);el.setAttribute("data-suffix",suf||"");el.textContent="0"+(suf||"");}};
+      const figs=document.querySelectorAll(".figs .fg b");
+      if(figs[0]) set(".figs .fg:nth-child(1) b", s.clipsDelivered, "");
+      const lbl0=document.querySelector(".figs .fg:nth-child(1) span");
+      if(lbl0) lbl0.textContent="shorts delivered to creators";
+    }
+  }catch(e){}
 })();
 
 // nav + reveals hanteras av cf.js

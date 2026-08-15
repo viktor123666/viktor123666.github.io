@@ -327,3 +327,36 @@ footer.cf .end{width:100%;padding-top:1.8rem;margin-top:.6rem;border-top:1px sol
   .reel .r,.collapse .bar i{animation:none!important}
   .phone .cap span{opacity:1;color:#f4f7f9}
 }
+
+/* Inline-spinnern för länkhämtning: syns i statusraden så inget läge ser dött ut. */
+.spin{display:inline-block;width:.85em;height:.85em;border:2px solid var(--dim2);
+  border-top-color:var(--gold);border-radius:50%;vertical-align:-2px;margin-right:.45em;
+  animation:cfspin .8s linear infinite}
+@keyframes cfspin{to{transform:rotate(360deg)}}
+
+/* Knappgruppen till höger i headern: jämna mellanrum i stället för margin-hack. */
+.navgrp{display:flex;gap:.55rem;align-items:center;flex-wrap:wrap}
+
+/* Trevalsraden när man schemalägger: kompakt, på samma rad som knappen satt. */
+.schedpick{display:inline-flex;gap:.35rem;align-items:center;flex-wrap:wrap;margin-left:.5rem}
+
+/* #94 Cookie-notis: en rad, endast nödvändig cookie, kan stängas. Ingen mörk mönster. */
+.cfcookie{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:1rem;
+  align-items:center;justify-content:center;flex-wrap:wrap;
+  padding:.75rem 1.1rem;background:var(--panel);border-top:1px solid var(--line);
+  font-size:.82rem;color:var(--dim)}
+.cfcookie a{color:var(--gold2)}
+.cfcookie button{padding:.35rem 1rem;background:var(--gold);color:#0a0a0a;border:0;
+  border-radius:4px;font:inherit;font-size:.78rem;cursor:pointer}
+/* #93 ToS-rad vid registrering */
+.tos{display:flex;gap:.6rem;align-items:flex-start;margin:.3rem 0 1rem;
+  font-size:.82rem;color:var(--dim);line-height:1.4;cursor:pointer}
+.tos input{margin-top:.15rem;flex-shrink:0}
+.tos a{color:var(--gold2)}
+
+/* #2 Förhandsvisning under hjälte-länkboxen */
+.lbprev{margin-top:1rem;padding:1rem 1.2rem;background:var(--panel);border-left:3px solid var(--gold);
+  display:flex;flex-direction:column;gap:.5rem;max-width:44ch}
+.lbprev b{font-size:1rem}
+.lbprev .mono{font-size:.72rem;color:var(--dim2);letter-spacing:.04em}
+.lbprev .b1{align-self:flex-start;margin-top:.3rem}
