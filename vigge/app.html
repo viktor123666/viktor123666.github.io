@@ -8,10 +8,10 @@
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608150303"/>
-<script defer src="/cf.js?v=202608150303"></script>
-<script defer src="/upload.js?v=202608150303"></script>
-<script defer src="/live.js?v=202608150303"></script>
+<link rel="stylesheet" href="/cf.css?v=202608160016"/>
+<script defer src="/cf.js?v=202608160016"></script>
+<script defer src="/upload.js?v=202608160016"></script>
+<script defer src="/live.js?v=202608160016"></script>
 <style>
 .drop{border:1px dashed var(--edge2);background:var(--bg2);padding:3.4rem 1.5rem;text-align:center;
   cursor:pointer;transition:border-color .2s,background .2s}
@@ -89,7 +89,7 @@
   <div class="acts" id="outActions" style="margin-bottom:1rem">
     <button class="b2" type="button" id="dlAll" disabled title="Finish a job to download">Download all</button>
     <button class="b1" type="button" id="again">Clip a video</button>
-    <a class="b2" href="/history.html">History / Recent</a>
+    <a class="b2" href="/history.html">Edited videos</a>
   </div>
   <div class="panel rv" style="margin-bottom:1.4rem">
     <div class="ph"><span class="t">CREDITS <b id="cred">1.0 h</b></span>
@@ -106,7 +106,7 @@
       <p class="mono" style="font-size:.72rem;color:var(--dim2);margin-top:.4rem">
         PROCESSING TAKES ABOUT 3× THE VIDEO'S LENGTH — A 15 MIN VIDEO IS READY IN ~45 MIN</p>
       <button class="b1" type="button" id="pick">Choose file</button>
-      <input type="file" id="file" accept="video/*" class="hide"/>
+      <input type="file" id="file" accept="video/*" class="hide" multiple/>
     </div>
     <div class="or"><span>OR PASTE A TWITCH / YOUTUBE / KICK LINK</span></div>
     <div class="urow">
@@ -154,7 +154,7 @@
         <div class="hint">Same words, your look.</div></div>
       <div class="opt"><label class="fl" for="len">Clip length</label>
         <select id="len"><option value="auto" selected>Content-driven</option>
-          <option value="short">Short (&lt; 30 s)</option><option value="long">Long (45–60 s)</option></select>
+          <option value="short">Short (&lt; 30 s)</option><option value="long">Long (30–90 s)</option></select>
         <div class="hint">Content-driven retains best.</div></div>
     </div>
 

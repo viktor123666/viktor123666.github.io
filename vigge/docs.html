@@ -8,8 +8,8 @@
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608150303"/>
-<script defer src="/cf.js?v=202608150303"></script>
+<link rel="stylesheet" href="/cf.css?v=202608160016"/>
+<script defer src="/cf.js?v=202608160016"></script>
 <style>
 .doc{display:grid;grid-template-columns:14rem 1fr;gap:3rem;align-items:start}
 @media(max-width:900px){.doc{grid-template-columns:1fr;gap:1.5rem}}
@@ -54,7 +54,7 @@ table.d td:first-child{color:var(--ink);font-family:var(--mono);font-size:.82rem
       <a href="#missing">Why a clip wasn’t chosen</a>
       <div class="grp">Reference</div>
       <a href="#api">REST API</a>
-      <a href="#mcp">MCP &amp; AI</a>
+      <a href="#api">MCP &amp; AI</a>
       <a href="#limits">Limits</a>
     </aside>
 
@@ -182,29 +182,16 @@ Content-Type: application/json
         in plain words. Download links are minted per request and expire, so fetch them
         when you need them rather than storing them.</p>
 
-      <h2 id="mcp">MCP — connect an AI assistant</h2>
-      <p>ViggeClips speaks the <b>Model Context Protocol</b>, so an assistant can drive
-        the clip factory directly: hand it a recording, watch the stages, collect the
-        clips, and explain the result — without anyone opening a browser.</p>
-      <pre><code>{
-  "mcpServers": {
-    "clipforge": {
-      "command": "npx",
-      "args": ["tsx", "F:/scalelistuniverse/platform/src/mcp/server.ts"],
-      "env": { "CF_MODE": "local" }
-    }
-  }
-}</code></pre>
-      <table class="d">
-        <tr><th>Tool</th><th>What it does</th></tr>
-        <tr><td><code>credit_balance</code></td><td>Minutes of source video still available</td></tr>
-        <tr><td><code>list_jobs</code></td><td>Recent jobs. Read-only.</td></tr>
-        <tr><td><code>job_status</code></td><td>Live stage, clips, and every rejection with its reason</td></tr>
-        <tr><td><code>submit_job</code></td><td>Queues an uploaded recording</td></tr>
-        <tr><td><code>get_clips</code></td><td>Download links for a finished job</td></tr>
-        <tr><td><code>add_link</code></td><td>Adds a VOD from a link — requires an explicit rights confirmation</td></tr>
-        <tr><td><code>engine_notes</code></td><td>How the detectors choose, for explaining a result</td></tr>
-      </table>
+      <h2 id="api">API — build on top of ViggeClips</h2>
+      <p>Send a link in from your own scripts and get finished shorts back. One key,
+        three endpoints, no SDK required — the full contract is on the
+        <a class="gld" href="/api-docs.html">API page</a>. Create a key under
+        <a class="gld" href="/account.html">Account → API</a>; it is shown once and stored hashed.</p>
+      <pre><code>curl -X POST https://vigge.pro/api/v1/jobs   -H "Authorization: Bearer vc_live_…"   -H "Content-Type: application/json"   -d '{"url":"https://www.youtube.com/watch?v=…","language":"en"}'
+→ 202 {"id":"…","status":"fetching"}</code></pre>
+      <p>Poll <code>GET /api/v1/jobs/{id}</code> every 30 seconds; when <code>status</code>
+        is <code>done</code> the response carries every clip as a signed URL, and a
+        <code>failed</code> job always carries a reason — and is never charged.</p>
       <p>Three rules govern what an assistant may do, because an assistant is a client
         that will cheerfully fill a missing argument with its best guess:</p>
       <ul>

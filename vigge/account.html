@@ -8,9 +8,9 @@
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608150303"/>
-<script defer src="/cf.js?v=202608150303"></script>
-<script defer src="/live.js?v=202608150303"></script>
+<link rel="stylesheet" href="/cf.css?v=202608160016"/>
+<script defer src="/cf.js?v=202608160016"></script>
+<script defer src="/live.js?v=202608160016"></script>
 <style>
 .tabs{display:flex;border:1px solid var(--edge);border-bottom:0;overflow-x:auto}
 .tab{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
@@ -109,6 +109,38 @@
       as <b>private</b> — you press publish on YouTube, not us.</p>
   </div>
 
+  <!-- #100 API-nycklar: byråer och power users bygger ovanpå oss. -->
+  <div class="rv" style="margin-bottom:2rem;background:var(--panel);padding:1.2rem 1.4rem">
+    <span class="lbl">API</span>
+    <p style="font-size:.88rem;color:var(--dim);margin:.5rem 0 .8rem;max-width:60ch">
+      Send links in, get finished clips back — from your own scripts.
+      <a class="gld" href="/api-docs.html">Read the docs</a>. Keys are shown once.</p>
+    <div id="keyList" style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:.8rem"></div>
+    <div class="acts" style="gap:.5rem;flex-wrap:wrap">
+      <input id="keyLabel" placeholder="Key label (e.g. my-pipeline)" maxlength="60"
+        style="flex:1;min-width:11rem;background:var(--bg2);color:var(--fg);
+               border:1px solid var(--line);padding:.55rem .8rem;font:inherit;font-size:.88rem"/>
+      <button class="b2 sm" type="button" id="keyCreate">Create key</button>
+    </div>
+    <p class="mono" id="keyMsg" style="font-size:.72rem;color:var(--gold2);margin:.6rem 0 0;
+       word-break:break-all"></p>
+  </div>
+
+  <!-- #96 Portfölj: samlade publicerade klipp, publik sida med kundens namn. -->
+  <div class="rv" style="margin-bottom:2rem;background:var(--panel);padding:1.2rem 1.4rem">
+    <span class="lbl">Public portfolio</span>
+    <p style="font-size:.88rem;color:var(--dim);margin:.5rem 0 .8rem;max-width:60ch">
+      One page with every short you have published through ViggeClips — link it in
+      your bio or send it to sponsors. Only clips already public on your channel.</p>
+    <div class="acts" style="gap:.5rem;flex-wrap:wrap">
+      <input id="pfDisplayName" placeholder="Display name (optional)" maxlength="60"
+        style="flex:1;min-width:11rem;background:var(--bg2);color:var(--fg);
+               border:1px solid var(--line);padding:.55rem .8rem;font:inherit;font-size:.88rem"/>
+      <button class="b2 sm" type="button" id="pfToggle">Create my page</button>
+    </div>
+    <p class="mono" id="pfMsg" style="font-size:.72rem;color:var(--dim2);margin:.6rem 0 0"></p>
+  </div>
+
   <!-- #53 Värvning: tillväxt som jobbar medan vi sover. -->
   <div class="rv" style="margin-bottom:2rem;background:var(--panel);padding:1.2rem 1.4rem;
        border-left:3px solid var(--gold)">
@@ -129,16 +161,22 @@
 
   <!-- #16 Kundens ordlista: namn och termer motorn annars stavar fonetiskt fel. -->
   <div class="rv" style="margin-bottom:2rem;background:var(--panel);padding:1.2rem 1.4rem">
-    <span class="lbl">Your words</span>
+    <span class="lbl">Your titles &amp; words</span>
     <p style="font-size:.88rem;color:var(--dim);margin:.5rem 0 .8rem;max-width:60ch">
-      Names, nicknames and terms the engine should spell correctly — your squad, your
-      game, your in-jokes. Comma separated. Nothing here is required; it just stops
-      "Smörjhan" becoming "Smorjan" in your captions.</p>
+      A title template for everything you publish, and the names, nicknames and terms the
+      engine should spell correctly — your squad, your game, your in-jokes. Nothing here
+      is required; it just stops "Smörjhan" becoming "Smorjan" in your captions.</p>
+    <label class="fl" style="display:block;margin-bottom:.4rem">Title template
+      <span style="color:var(--dim2);font-weight:400"> — {title} is the clip's own hook</span></label>
+    <input id="titleTpl" placeholder='e.g. "SMITE MOMENTS — {title}"' maxlength="90"
+      style="width:100%;background:var(--bg2);color:var(--fg);border:1px solid var(--line);
+             padding:.6rem .8rem;font:inherit;font-size:.9rem;margin-bottom:1rem"/>
+    <label class="fl" style="display:block;margin-bottom:.4rem">Words to spell right <span style="color:var(--dim2);font-weight:400">— comma separated</span></label>
     <textarea id="vocab" rows="2" placeholder="Smörjhan17, Gurrimurra, Krydog, poggers"
       style="width:100%;background:var(--bg2);color:var(--fg);border:1px solid var(--line);
              padding:.7rem .8rem;font:inherit;font-size:.9rem"></textarea>
     <div class="acts" style="margin-top:.7rem">
-      <button class="b2 sm" type="button" id="vocabSave">Save words</button>
+      <button class="b2 sm" type="button" id="vocabSave">Save</button>
       <span class="mono" id="vocabMsg" style="font-size:.72rem;color:var(--dim2);align-self:center"></span>
     </div>
   </div>
@@ -150,6 +188,7 @@
     <div class="st"><b><span data-cf-credits>—</span> h</b><span>credits remaining</span></div>
     <div class="st"><b><span data-cf-used>—</span> h</b><span>used this period</span></div>
     <div class="st"><b><span data-cf-shorts>—</span></b><span>shorts delivered</span></div>
+    <div class="st" data-cf-viewsbox style="display:none"><b><span data-cf-views>—</span></b><span>views your clips created</span></div>
     <div class="st"><b><span data-cf-jobs>—</span></b><span>jobs run</span></div>
   </div>
 
@@ -188,7 +227,7 @@
   <!-- JOBS -->
   <div class="pane rv" id="p-jobs" style="padding:0">
     <table class="jt">
-      <thead><tr><th>Source</th><th>Submitted</th><th>Length</th><th>Shorts</th><th>Tokens</th><th>Status</th><th></th></tr></thead>
+      <thead><tr><th>Source</th><th>Submitted</th><th>Length</th><th>Shorts</th><th>Minutes</th><th>Status</th><th></th></tr></thead>
       <tbody id="jobsBody">
         <tr><td class="nm">stream_2h.mp4</td><td class="mono">30 Jul 09:14</td>
           <td class="mono">1:55:00</td><td class="mono">6</td>
@@ -210,7 +249,7 @@
     </table>
     <div class="pb" style="border-top:1px solid var(--edge);color:var(--dim2);font-family:var(--mono);font-size:.74rem">
       Finished files stay downloadable for 30 days. Source footage is deleted on collection.
-      The failed job was not charged.
+      A failed job is never charged.
     </div>
   </div>
 

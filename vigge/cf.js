@@ -8,7 +8,7 @@
     ["/engine.html", "Engine"],
     ["/pricing.html", "Pricing"],
     ["/security.html", "Security"],
-    ["/docs.html", "Docs"]
+    ["/docs.html", "Docs"], ["/api-docs.html", "API"]
   ];
   const FOOT = [
     ["Product", [["/", "Overview"], ["/engine.html", "The engine"],
@@ -28,7 +28,13 @@
   (function captureRef() {
     try {
       const c = new URLSearchParams(location.search).get("ref");
-      if (c && /^[a-z0-9]{4,32}$/i.test(c)) localStorage.setItem("cf_ref", c.toLowerCase());
+      if (c && /^[a-z0-9]{4,32}$/i.test(c)) {
+        localStorage.setItem("cf_ref", c.toLowerCase());
+        // #98 Affiliatespårningens första länk: landningen räknas per kod, så
+        // rev-share har verklig data den dag betalningen slås på. Ingen identitet —
+        // koden är källan, steget är händelsen.
+        if (window.cfTrack) window.cfTrack("ref_landing", c.toLowerCase());
+      }
     } catch (e) { /* privatläge: värvningen tappas, allt annat fungerar */ }
   })();
 
@@ -110,6 +116,16 @@
           el.textContent = "Account";
           el.setAttribute("href", "/account.html");
           el.title = me.email;
+          // Footern också: en inloggad kund ska aldrig se "Sign in" någonstans.
+          document.querySelectorAll('footer.cf a[href="/login.html"]').forEach((a) => {
+            a.textContent = "Sign out";
+            a.setAttribute("href", "#");
+            a.addEventListener("click", async (e) => {
+              e.preventDefault();
+              await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
+              location.href = "/";
+            });
+          });
         }
       } catch { /* statiskt läge: lämna orört */ }
     })();

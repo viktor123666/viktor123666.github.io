@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>API — ViggeClips</title>
+<meta name="description" content="The companies that help us run ViggeClips, and what each one touches."/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="/cf.css?v=202608160016"/>
+<script defer src="/cf.js?v=202608160016"></script>
+<meta property="og:title" content="Subprocessors — ViggeClips"/>
+<meta property="og:url" content="https://vigge.pro/subprocessors.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="ViggeClips"/>
+<meta property="og:image" content="https://vigge.pro/og.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://vigge.pro/og.png"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0a0a0b"/>
+</head>
+<body>
+<div class="grid"></div>
+<header class="cf"></header>
+<section class="first"><div class="w w-narrow">
+  <div class="head rv"><span class="lbl">Developers</span>
+    <h1 style="font-size:clamp(1.7rem,3.4vw,2.3rem)">The ViggeClips API</h1>
+    <p class="lede">Send a link in, get finished vertical shorts back. Three endpoints,
+      one key, no SDK required.</p></div>
+  <div class="prose rv" style="margin-top:2.2rem">
+
+    <h2>Authentication</h2>
+    <p>Create a key under <a class="gld" href="/account.html">Account → API</a>.
+      Send it with every request:</p>
+    <pre>Authorization: Bearer vc_live_…</pre>
+    <p>Keys are shown once and stored hashed. Revoking a key kills it instantly.
+      Rate limit: 60 requests/minute per key.</p>
+
+    <h2>Start a job</h2>
+    <pre>POST https://vigge.pro/api/v1/jobs
+Content-Type: application/json
+
+{
+  "url": "https://www.youtube.com/watch?v=…",
+  "language": "sv" | "en" | "auto",
+  "clipLength": "auto" | "short" | "long",
+  "webhookUrl": "https://your-server.example/hook"   // optional
+}
+
+→ 202 { "id": "…", "status": "fetching" }</pre>
+    <p>YouTube, Twitch and Kick links are supported. The job draws from the same
+      minute balance as the web app — a job that fails is never charged.</p>
+
+    <h2>Poll the job</h2>
+    <pre>GET https://vigge.pro/api/v1/jobs/{id}
+
+→ { "status": "fetching" | "queued" | "running" | "done" | "failed",
+    "progress": 0–100,
+    "error":  "…",          // only when failed — always says why
+    "clips": [               // only when done
+      { "idx": 1, "title": "…", "seconds": 27,
+        "url": "https://…",       // signed, valid for hours — download promptly
+        "thumbUrl": "https://…" }
+    ] }</pre>
+    <p>Poll every 30 seconds. A typical job takes about three times the video's
+      length. If you set <code>webhookUrl</code> we POST
+      <code>{ id, status, clips }</code> once when the job ends — but polling is
+      the source of truth; treat the webhook as a doorbell, not a delivery.</p>
+
+    <h2>Check your balance</h2>
+    <pre>GET https://vigge.pro/api/v1/me
+→ { "minutes": 87 }</pre>
+
+    <h2>Honesty rules</h2>
+    <ul>
+      <li>A failed job always carries a reason — and is never charged.</li>
+      <li>Files are kept 30 days, then deleted. Download what you want to keep.</li>
+      <li>You are responsible for the rights to what you send in — same terms as
+        the web app (<a class="gld" href="/acceptable-use.html">acceptable use</a>).</li>
+    </ul>
+
+    <div class="acts" style="margin-top:2.4rem">
+      <a class="b1" href="/account.html">Create your key</a>
+      <a class="b2" href="/docs.html">Product docs</a>
+    </div>
+  </div>
+</div></section>
+<footer class="cf"></footer>
+</body>
+</html>

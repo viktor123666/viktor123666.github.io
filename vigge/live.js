@@ -165,6 +165,12 @@ async function refreshStats() {
   put("[data-cf-used]", usedH.toFixed(1));
   put("[data-cf-shorts]", String(r.body.shortsDelivered ?? 0));
   put("[data-cf-jobs]", String(r.body.jobsTotal ?? 0));
+  // #82 Views-plattan visas FÖRST när det finns något att visa: "0 views" på ett
+  // konto som aldrig publicerat är brus; 4 700 views är värdebeviset som säljer.
+  const vw = Number(r.body.viewsCreated || 0);
+  const vwBox = document.querySelector("[data-cf-viewsbox]");
+  if (vwBox) vwBox.style.display = vw > 0 ? "" : "none";
+  put("[data-cf-views]", vw >= 10000 ? (vw / 1000).toFixed(1) + "k" : String(vw));
   const freeH = Number(r.body.monthlyFreeMinutes || 120) / 60;
   const bar = document.querySelector("[data-cf-usagebar]");
   if (bar) bar.style.width =
@@ -203,7 +209,8 @@ async function refreshStats() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
-    let chosen = null;
+    let chosen = null;        // första filen (bakåtkompatibel med hela vyn)
+    let chosenAll = [];       // #26 hela batchen
     let jobId = null;
 
     const show = (msg) => { if (eta) eta.textContent = msg; };
@@ -259,6 +266,65 @@ async function refreshStats() {
       eta.parentNode.insertBefore(b, eta.nextSibling);
     }
 
+    /**
+     * #33 Pling när jobbet blir klart och fliken är öppen. WebAudio, ingen fil —
+     * två korta toner i sajtens tonläge. Tystnad om ljudkontexten nekas (autoplay-
+     * policy): plinget är grädde, aldrig ett krav.
+     */
+    function donePing() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        [[880, 0], [1318.5, 0.12]].forEach(([f, t]) => {
+          const o = ctx.createOscillator(), g = ctx.createGain();
+          o.frequency.value = f; o.type = "sine";
+          g.gain.setValueAtTime(0.0001, ctx.currentTime + t);
+          g.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime + t + 0.02);
+          g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + t + 0.25);
+          o.connect(g).connect(ctx.destination);
+          o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + 0.3);
+        });
+      } catch (e) { /* ingen ljudkontext = inget pling, allt annat som vanligt */ }
+    }
+
+    /**
+     * #87 Feedbackrutan: EN gång per jobb, EFTER leveransen, aldrig blockerande.
+     * Rå kundröst utan mellanhand — betyg eller text, båda frivilliga.
+     */
+    function askFeedback(id) {
+      try { if (localStorage.getItem("cf_fb_" + id)) return; } catch (e) {}
+      const out = document.getElementById("out");
+      if (!out || document.getElementById("fbBox")) return;
+      const box = document.createElement("div");
+      box.id = "fbBox";
+      box.style.cssText = "margin-top:1.6rem;padding:1rem 1.2rem;background:var(--panel);" +
+        "border-left:3px solid var(--line)";
+      box.innerHTML = '<span class="lbl">How did the engine do?</span>' +
+        '<div style="display:flex;gap:.4rem;margin:.6rem 0">' +
+        [1,2,3,4,5].map((n) => `<button class="b2 sm" data-star="${n}" type="button"` +
+          ` style="font-size:.8rem;padding:.35rem .7rem">${n}★</button>`).join("") + "</div>" +
+        '<textarea id="fbMsg" rows="2" placeholder="Anything we should know? (optional)"' +
+        ' style="width:100%;background:var(--bg2);color:var(--fg);border:1px solid var(--line);' +
+        'padding:.5rem .7rem;font:inherit;font-size:.85rem"></textarea>' +
+        '<div class="acts" style="margin-top:.5rem"><button class="b2 sm" id="fbSend" type="button">Send</button></div>';
+      out.appendChild(box);
+      let stars = 0;
+      box.querySelectorAll("[data-star]").forEach((b) => b.addEventListener("click", () => {
+        stars = Number(b.getAttribute("data-star"));
+        box.querySelectorAll("[data-star]").forEach((x) =>
+          x.classList.toggle("b1", Number(x.getAttribute("data-star")) <= stars));
+      }));
+      box.querySelector("#fbSend").addEventListener("click", async () => {
+        const msg = (box.querySelector("#fbMsg").value || "").trim();
+        if (!stars && !msg) { box.remove(); return; }   // inget att säga = inget att skicka
+        await json("/api/feedback", { method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ jobId: id, rating: stars || undefined, message: msg }) });
+        try { localStorage.setItem("cf_fb_" + id, "1"); } catch (e) {}
+        box.innerHTML = '<span class="lbl">Thank you — read by a human.</span>';
+        setTimeout(() => box.remove(), 4000);
+      });
+    }
+
     function pulseStop() {
       showCancel(false);
       if (pulse.timer) clearInterval(pulse.timer);
@@ -288,23 +354,32 @@ async function refreshStats() {
         e.preventDefault(); drop.classList.remove("hot");
       }));
       drop.addEventListener("drop", (e) => {
-        if (e.dataTransfer?.files?.[0]) { chosen = e.dataTransfer.files[0]; paint(); }
+        if (e.dataTransfer?.files?.[0]) {
+          chosenAll = Array.from(e.dataTransfer.files);
+          chosen = chosenAll[0]; paint();
+        }
       });
     }
     file.addEventListener("change", () => {
-      if (file.files?.[0]) { chosen = file.files[0]; paint(); }
+      if (file.files?.[0]) {
+        chosenAll = Array.from(file.files);
+        chosen = chosenAll[0]; paint();
+      }
     });
 
     function paint() {
       if (!chosen) return;
       const mb = (chosen.size / 1048576).toFixed(0);
-      if (runName) runName.textContent = chosen.name;
+      if (runName) runName.textContent = chosenAll.length > 1
+        ? `${chosen.name} + ${chosenAll.length - 1} more` : chosen.name;
       // Feedback where the user is LOOKING. The first version wrote its confirmation
       // into the hidden progress panel — so choosing a file appeared to do nothing,
       // reported as broken within one minute of the first real user touching it.
       const h = drop ? drop.querySelector("h2") : null;
       const pp = drop ? drop.querySelector("p") : null;
-      if (h) h.textContent = "SELECTED: " + chosen.name;
+      if (h) h.textContent = chosenAll.length > 1
+        ? `SELECTED: ${chosenAll.length} VIDEOS — QUEUED ONE BY ONE`
+        : "SELECTED: " + chosen.name;
       if (pp) pp.textContent = mb + " MB — press »Start clipping« below";
       if (go) {
         go.style.outline = "2px solid var(--gold)";
@@ -324,33 +399,45 @@ async function refreshStats() {
         panel("run", true);
         show("Uploading…");
 
-        const { sourceId } = await window.CFUpload.upload(chosen, {
-          onProgress: (done, total) => {
-            const pct = total ? Math.round((done / total) * 100) : 0;
-            if (fill) fill.style.width = pct + "%";
-            show(`Uploading… ${pct}%`);
-          },
-        });
-
-        show("Queueing…");
-        const fontSel = $("font");
-        const sub = await json("/api/jobs", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({
-            sourceId,
-            subtitleFont: fontSel && fontSel.value !== "standard" ? fontSel.value : null,
-          }),
-        });
-        if (!sub.ok) {
-          panel("run", false);
-          panel("src", true);
-          alertLine(sub.body?.error || "The queue refused this job.");
-          go.disabled = false;
+        const batch = chosenAll.length > 1 ? chosenAll : [chosen];
+        let firstJob = null;
+        for (let i = 0; i < batch.length; i++) {
+          const f = batch[i];
+          const tag = batch.length > 1 ? `Video ${i + 1} of ${batch.length}: ` : "";
+          const { sourceId } = await window.CFUpload.upload(f, {
+            onProgress: (done, total) => {
+              const pct = total ? Math.round((done / total) * 100) : 0;
+              if (fill) fill.style.width = pct + "%";
+              show(`${tag}Uploading… ${pct}%`);
+            },
+          });
+          show(`${tag}Queueing…`);
+          const sub = await json("/api/jobs", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ sourceId, ...jobOptions() }),
+          });
+          if (!sub.ok) {
+            // Ärligt mitt i en batch: säg VILKEN fil som stoppade och varför —
+            // de som redan köats står kvar i kön, inget rivs upp.
+            panel("run", false);
+            panel("src", true);
+            alertLine(`${f.name}: ${sub.body?.error || "The queue refused this job."}` +
+              (i > 0 ? ` (${i} earlier ${i === 1 ? "video is" : "videos are"} already queued.)` : ""));
+            go.disabled = false;
+            return;
+          }
+          if (!firstJob) firstJob = sub.body.jobId;
+        }
+        await refreshCredits();
+        if (batch.length > 1) {
+          // Batchen följs bäst i historiken: ett mejl per klart jobb kommer ändå.
+          show(`${batch.length} videos queued. The engine takes them one by one — ` +
+               "you get an email as each one finishes.");
+          setTimeout(() => { location.href = "/history.html"; }, 2600);
           return;
         }
-        jobId = sub.body.jobId;
-        await refreshCredits();
+        jobId = firstJob;
         poll();
       } catch (ex) {
         panel("run", false);
@@ -384,6 +471,8 @@ async function refreshStats() {
         render(r.body.clips || [], r.body.rejections || [], job);
         showTranscript(r.body);
         go.disabled = false;
+        donePing();
+        askFeedback(jobId);
         return;
       }
       if (job.state === "failed" || job.state === "cancelled") {
@@ -480,14 +569,20 @@ async function refreshStats() {
       // on the very first job a real user completed.
       if (clipGrid) {
         clipGrid.innerHTML = clips.map((c) => `
-          <div class="clip">
+          <div class="clip" data-clip="${escapeHtml(c.id || "")}">
             <div class="th">
               ${c.url ? `<video src="${escapeHtml(c.url)}" controls preload="metadata"
+                                ${c.thumbUrl ? `poster="${escapeHtml(c.thumbUrl)}"` : ""}
                                 playsinline></video>` : ""}
               <span class="sc">${Number(c.score).toFixed(1)}</span>
+              ${c.why && c.why.kind && c.why.kind !== "HYPE" ? `<span class="kind kind-${escapeHtml(String(c.why.kind).toLowerCase())}"
+                title="${escapeHtml((c.why.kind_why || []).join(" · "))}">${
+                ({ KILL: "KILL", STORY: "STORY", LAUGH: "LAUGHS", TEACH: "EXPLAINS", SCENERY: "SCENERY" })[c.why.kind] || escapeHtml(c.why.kind)
+              }</span>` : ""}
             </div>
             <div class="mt">
-              <b>${String(c.idx)}. ${escapeHtml(c.title || "Untitled")}</b>
+              <b class="cTitle" data-rename="${escapeHtml(c.id || "")}"
+                 title="Click to rename">${String(c.idx)}. ${escapeHtml(c.title || "Untitled")}</b>
               <span>${Number(c.seconds).toFixed(0)} s</span>
               <a class="b2 sm" href="${c.url ? escapeHtml(c.url) : "#"}"
                  download="short${String(c.idx).padStart(2, "0")}.mp4"
@@ -497,15 +592,134 @@ async function refreshStats() {
                       style="margin-top:.5rem;margin-left:.4rem;font-size:.66rem">→ YouTube</button>` : ""}
               <button class="b2 sm" data-report="${escapeHtml(c.id || "")}"
                       style="margin-top:.5rem;margin-left:.4rem;font-size:.66rem">Report</button>
+              <button class="b3 sm" data-hide="${escapeHtml(c.id || "")}"
+                      style="margin-top:.5rem;margin-left:.4rem;font-size:.66rem">Remove</button>
+              <button class="b2 sm" data-trim="${escapeHtml(c.id || "")}"
+                      style="margin-top:.5rem;margin-left:.4rem;font-size:.66rem">Trim</button>
+              <div class="trimbox" data-trimbox="${escapeHtml(c.id || "")}" hidden
+                   style="margin-top:.7rem;padding:.7rem .8rem;background:var(--bg2);font-size:.78rem">
+                <div style="display:flex;gap:.8rem;flex-wrap:wrap;align-items:center">
+                  <label>Start <input type="number" data-head step="0.5" min="-15" max="15" value="0"
+                    style="width:4.2rem;background:var(--bg);color:var(--fg);border:1px solid var(--line);padding:.2rem .3rem;font:inherit"/> s</label>
+                  <label>End <input type="number" data-tail step="0.5" min="-15" max="15" value="0"
+                    style="width:4.2rem;background:var(--bg);color:var(--fg);border:1px solid var(--line);padding:.2rem .3rem;font:inherit"/> s</label>
+                  <button class="b2 sm" data-trim-preview style="font-size:.62rem">Preview</button>
+                  <button class="b1 sm" data-trim-commit style="font-size:.62rem" disabled>Apply</button>
+                </div>
+                <p class="mono" data-trim-msg style="margin:.5rem 0 0;font-size:.66rem;color:var(--dim2)">
+                  Negative start = earlier. Positive end = later. Preview is quick and rough; Apply re-renders in full quality.</p>
+              </div>
             </div>
           </div>`).join("");
+
+        // #27/#28 Trim: ±sekunder → snabb preview → Apply i full kvalitet.
+        // Ingen omanalys, inga nya krediter — trimmen är en tjänst på ett betalt klipp.
+        clipGrid.querySelectorAll("[data-trim]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const box = clipGrid.querySelector(`[data-trimbox="${btn.getAttribute("data-trim")}"]`);
+            if (box) box.hidden = !box.hidden;
+          });
+        });
+        clipGrid.querySelectorAll("[data-trimbox]").forEach((box) => {
+          const id = box.getAttribute("data-trimbox");
+          const head = box.querySelector("[data-head]"), tail = box.querySelector("[data-tail]");
+          const pv = box.querySelector("[data-trim-preview]"), ap = box.querySelector("[data-trim-commit]");
+          const msg = box.querySelector("[data-trim-msg]");
+          const card = clipGrid.querySelector(`[data-clip="${id}"]`);
+          const video = card && card.querySelector("video");
+          const originalSrc = video ? video.getAttribute("src") : null;
+          let ticker = null;
+          const stopTick = () => { if (ticker) { clearInterval(ticker); ticker = null; } };
+          async function run(mode) {
+            const h = Number(head.value) || 0, t = Number(tail.value) || 0;
+            if (!h && !t) { msg.textContent = "MOVE THE START OR THE END FIRST"; return; }
+            pv.disabled = ap.disabled = true;
+            const r = await json("/api/clips/trim", { method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({ clipId: id, mode, head: h, tail: t }) });
+            if (!r.ok) { msg.textContent = (r.body && r.body.error) || "Could not start the trim."; pv.disabled = false; return; }
+            const rid = r.body.retrimId; const t0 = Date.now();
+            // Levande räknare: samma lag som jobbpulsen — kunden ska aldrig tro att det hängt.
+            ticker = setInterval(() => {
+              msg.textContent = `${mode === "preview" ? "RENDERING PREVIEW" : "RE-RENDERING IN FULL QUALITY"}… ${Math.round((Date.now() - t0) / 1000)}s`;
+            }, 500);
+            for (let i = 0; i < 240; i++) {                    // upp till 20 min
+              await new Promise((res) => setTimeout(res, 5000));
+              const s = await json(`/api/clips/trim/${rid}`);
+              if (!s.ok) continue;
+              if (s.body.state === "done") {
+                stopTick();
+                if (mode === "preview" && s.body.previewUrl && video) {
+                  video.setAttribute("src", s.body.previewUrl); video.load();
+                  msg.textContent = "PREVIEW LOADED IN THE PLAYER — LIKE IT? PRESS APPLY";
+                  ap.disabled = false;
+                } else if (mode === "commit" && video) {
+                  if (s.body.url) { video.setAttribute("src", s.body.url); video.load(); }
+                  const secEl = card && card.querySelector(".mt > span");
+                  if (secEl && s.body.seconds) secEl.textContent = `${Math.round(s.body.seconds)} s`;
+                  msg.textContent = "APPLIED — THIS IS NOW THE CLIP";
+                  ap.disabled = true;
+                }
+                pv.disabled = false; return;
+              }
+              if (s.body.state === "failed") {
+                stopTick(); msg.textContent = s.body.error || "The trim failed."; pv.disabled = false; return;
+              }
+            }
+            stopTick(); msg.textContent = "STILL RENDERING — CHECK BACK IN A MINUTE"; pv.disabled = false;
+          }
+          pv.addEventListener("click", () => run("preview"));
+          ap.addEventListener("click", () => run("commit"));
+          // Ändrar kunden siffrorna efter en preview måste hen förhandsvisa igen —
+          // Apply får aldrig rendera något annat än det som visades i spelaren.
+          [head, tail].forEach((el) => el.addEventListener("input", () => {
+            ap.disabled = true;
+            if (video && originalSrc && video.getAttribute("src") !== originalSrc) {
+              video.setAttribute("src", originalSrc); video.load();
+            }
+          }));
+        });
+
+        // #30 Byt titel: klicka på rubriken, skriv, Enter. Kundens röst — och den
+        // nya titeln följer med till publiceringen (claim_publish läser clips.title).
+        clipGrid.querySelectorAll("[data-rename]").forEach((el) => {
+          el.addEventListener("click", async () => {
+            const id = el.getAttribute("data-rename");
+            const current = el.textContent.replace(/^\d+\.\s*/, "");
+            const next = prompt("New title for this clip:", current);
+            if (next === null || next.trim() === "" || next.trim() === current) return;
+            const r = await json("/api/clips/rename", { method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({ clipId: id, title: next.trim() }) });
+            if (r.ok) el.textContent = el.textContent.split(".")[0] + ". " + next.trim();
+            else alertLine((r.body && r.body.error) || "Could not rename.");
+          });
+        });
+
+        // #29 Kurering: "Remove" gömmer klippet och avbokar köade publiceringar av
+        // det. Tvåstegs — ett felklick ska inte kasta ett klipp.
+        clipGrid.querySelectorAll("[data-hide]").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            if (btn.dataset.armed !== "1") {
+              btn.dataset.armed = "1"; btn.textContent = "Remove — sure?";
+              setTimeout(() => { if (btn.isConnected) { btn.dataset.armed = "0"; btn.textContent = "Remove"; } }, 4000);
+              return;
+            }
+            const id = btn.getAttribute("data-hide");
+            const r = await json("/api/clips/hide", { method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({ clipId: id, hidden: true }) });
+            if (r.ok) { const card = clipGrid.querySelector(`[data-clip="${id}"]`); if (card) card.remove(); }
+            else alertLine("Could not remove that clip.");
+          });
+        });
       }
 
       // Rejections in the page's own row style, trimmed to what a human scans —
       // the full quotes made the list an unreadable wall on the first real render.
       if (whyList) {
         whyList.innerHTML = rejections.map((x) => {
-          // No scores for clips that do not exist (Vigges order): the skipped list
+          // No scores for clips that do not exist: the skipped list
           // shows WHEN and WHAT WAS SAID. The full reasoning stays in the tooltip.
           const raw = String(x.detail || "");
           const q = raw.search(/["“]/);
@@ -552,7 +766,7 @@ async function refreshStats() {
       if (dl) { dl.disabled = false; dl.classList.remove("b2"); dl.classList.add("b1"); }
       if (nav) { nav.classList.remove("b1"); nav.classList.add("b2"); }
       if (dl) dl.onclick = () => {
-        // ONE archive with every clip of this stream, named after it (Vigges order).
+        // ONE archive with every clip of this stream, named after it.
         if (job && job.id) { window.location.href = `/api/jobs/${job.id}/download.zip`; return; }
         clips.forEach((c, i) => {           // fallback: per-clip when no job id exists
           if (!c.url) return;
@@ -669,8 +883,13 @@ async function refreshStats() {
      */
     function jobOptions() {
       const g = (id) => { const el = document.getElementById(id); return el ? el.value : undefined; };
-      const o = { language: g("lang"), clipLength: g("len"), subtitleFont: g("font") };
-      Object.keys(o).forEach((k) => { if (!o[k]) delete o[k]; });
+      const font = g("font");
+      const o = { language: g("lang"), clipLength: g("len"),
+                  // "standard" är UI:ts namn på "ingen särskild font" — API:t vill ha
+                  // null där. Revision 2026-08-15: att skicka "standard" gav 400
+                  // "That subtitle style does not exist" på VARJE uppladdning.
+                  subtitleFont: font && font !== "standard" ? font : null };
+      Object.keys(o).forEach((k) => { if (o[k] === undefined || o[k] === "") delete o[k]; });
       return o;
     }
 
@@ -783,7 +1002,11 @@ async function refreshStats() {
         };
         tbody.innerHTML = jr.body.jobs.map((j) => `
           <tr>
-            <td>${(j.title || "—").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]))}</td>
+            <td style="display:flex;gap:.6rem;align-items:center">${
+              j.thumbUrl ? `<img src="${j.thumbUrl.replace(/"/g, "")}" alt=""
+                loading="lazy" style="width:44px;height:78px;object-fit:cover;
+                background:var(--bg2);flex-shrink:0"/>` : ""
+            }<span>${(j.title || "—").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]))}</span></td>
             <td>${new Date(j.createdAt).toLocaleString("sv-SE", { dateStyle: "short", timeStyle: "short" })}</td>
             <td>${j.clipCount ? fmt(j.clipSeconds) : "—"}</td>
             <td>${j.clipCount}</td>
@@ -792,9 +1015,34 @@ async function refreshStats() {
             <td><a class="gld" href="/app.html?job=${j.id}">Open →</a>${
               j.state === "done" && j.clipCount > 0
                 ? ` <button class="b1 sm" data-sched="${j.id}" data-n="${j.clipCount}"
-                       style="margin-left:.5rem;white-space:nowrap">Schedule to YouTube</button>` : ""
+                       style="margin-left:.5rem;white-space:nowrap">Schedule to YouTube</button>
+                    <button class="b2 sm" data-share="${j.id}"
+                       style="margin-left:.4rem;white-space:nowrap">Share</button>` : ""
             }</td>
           </tr>`).join("") || `<tr><td colspan="7">No jobs yet.</td></tr>`;
+
+        // #38 Delning: första klicket skapar länken och kopierar den; "Turn off"
+        // återkallar — alla gamla länkar dör i samma sekund. Ärligt båda vägarna.
+        tbody.querySelectorAll("[data-share]").forEach((b) => {
+          b.addEventListener("click", async () => {
+            if (b.dataset.on === "1") {
+              const r0 = await json(`/api/jobs/${b.dataset.share}/share`, { method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({ enabled: false }) });
+              if (r0.ok) { b.dataset.on = "0"; b.textContent = "Share"; b.classList.remove("b1"); }
+              return;
+            }
+            b.disabled = true; b.textContent = "Creating…";
+            const r = await json(`/api/jobs/${b.dataset.share}/share`, { method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({ enabled: true }) });
+            b.disabled = false;
+            if (!r.ok || !r.body.url) { b.textContent = "Share"; return; }
+            try { await navigator.clipboard.writeText(r.body.url); b.textContent = "Link copied ✓ · Turn off"; }
+            catch (e) { prompt("Your share link:", r.body.url); b.textContent = "Turn off sharing"; }
+            b.dataset.on = "1"; b.classList.add("b1");
+          });
+        });
 
         // ── Schemalagd utspridning: klippen släpps av YouTube själv, utspritt ──
         // över dagar i kanalens bästa timmar — aldrig trettio shorts på en sekund.
@@ -814,7 +1062,11 @@ async function refreshStats() {
             if (!tr.querySelector("td")) return;
             const title = (tr.cells[0]?.textContent || "").toLowerCase();
             const state = (tr.querySelector(".stbadge")?.textContent || "").trim();
-            const hit = (!needle || title.includes(needle)) && (!want || state === want);
+            // "In progress" = running ELLER queued: kunden bryr sig om "pågår det?",
+            // inte om vår interna tillståndsmaskin.
+            const match = want === "running" ? (state === "running" || state === "queued")
+                                             : state === want;
+            const hit = (!needle || title.includes(needle)) && (!want || match);
             tr.style.display = hit ? "" : "none";
             if (hit) shown++;
           });
@@ -876,6 +1128,16 @@ async function refreshStats() {
                 if (c.dataset.ch === "cancel") { box.remove(); b.hidden = false; return; }
                 box.dataset.pickedTarget = c.dataset.ch;
                 renderModes();
+                // #50 Ärlighet exakt där risken tas: samma video på flera kanaler
+                // kan YouTube läsa som dubblettinnehåll. Varningen står bredvid
+                // knapparna — inte i ett dokument ingen läser.
+                if (c.dataset.ch === "all") {
+                  const w = document.createElement("span");
+                  w.className = "mono";
+                  w.style.cssText = "display:block;font-size:.62rem;color:var(--warn);margin-top:.4rem";
+                  w.textContent = "SAME VIDEO ON EVERY CHANNEL CAN READ AS DUPLICATE CONTENT ON YOUTUBE — CONSIDER ONE CHANNEL PER CLIP.";
+                  box.appendChild(w);
+                }
               });
               return;
             }
@@ -932,6 +1194,8 @@ async function refreshStats() {
     wireVocabulary();
     wireReferral();
     wireAccountControl();
+    wirePortfolio();
+    wireApiKeys();
 
     document.querySelectorAll("[data-cf-email]").forEach((el) => {
       el.textContent = r.body.email;
@@ -940,6 +1204,74 @@ async function refreshStats() {
       el.textContent = (Number(r.body.minutes) / 60).toFixed(1);
     });
     refreshStats();                      // mätvärden till plattorna + usage-baren
+  }
+
+  /** #100 API-nycklar: lista, skapa (visas EN gång), återkalla. */
+  async function wireApiKeys() {
+    const list = document.getElementById("keyList");
+    const btn = document.getElementById("keyCreate");
+    const label = document.getElementById("keyLabel");
+    const msg = document.getElementById("keyMsg");
+    if (!list || !btn) return;
+    async function paintKeys() {
+      const r = await json("/api/account/apikeys");
+      const keys = (r.ok && r.body && r.body.keys) || [];
+      list.innerHTML = keys.map((k) => `
+        <div style="display:flex;gap:.6rem;align-items:center;font-size:.82rem">
+          <span class="mono" style="flex:1">${String(k.label).replace(/[&<>]/g, "")}</span>
+          <span class="mono" style="color:var(--dim2);font-size:.68rem">${
+            k.last_used_at ? "USED " + new Date(k.last_used_at).toLocaleDateString("sv-SE") : "NEVER USED"}</span>
+          <button class="b3 sm" data-revoke="${k.id}" style="font-size:.62rem">Revoke</button>
+        </div>`).join("") || '<span class="mono" style="font-size:.72rem;color:var(--dim2)">NO KEYS YET</span>';
+      list.querySelectorAll("[data-revoke]").forEach((b) => b.addEventListener("click", async () => {
+        // Återkallning är omedelbar och slutgiltig — det är hela poängen med den.
+        await json("/api/account/apikeys/revoke", { method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ id: b.getAttribute("data-revoke") }) });
+        paintKeys();
+      }));
+    }
+    paintKeys();
+    btn.addEventListener("click", async () => {
+      btn.disabled = true;
+      const r = await json("/api/account/apikeys", { method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ label: (label && label.value) || "" }) });
+      btn.disabled = false;
+      if (r.ok && r.body.key) {
+        // En gång, i klartext, hos kunden — sen finns bara hashen.
+        msg.textContent = "COPY THIS NOW — SHOWN ONCE: " + r.body.key;
+        if (label) label.value = "";
+        paintKeys();
+      } else { msg.textContent = "COULD NOT CREATE THE KEY"; }
+    });
+  }
+
+  /** #96 Portföljen: skapa/stäng av, kopiera länken, ärligt läge. */
+  async function wirePortfolio() {
+    const btn = document.getElementById("pfToggle");
+    const name = document.getElementById("pfDisplayName");
+    const msg = document.getElementById("pfMsg");
+    if (!btn) return;
+    btn.addEventListener("click", async () => {
+      const off = btn.dataset.on === "1";
+      btn.disabled = true;
+      const r = await json("/api/account/portfolio", { method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(off ? { enabled: false }
+                                 : { enabled: true, name: (name && name.value) || "" }) });
+      btn.disabled = false;
+      if (!r.ok) { msg.textContent = "COULD NOT UPDATE"; return; }
+      if (off || !r.body.url) {
+        btn.dataset.on = "0"; btn.textContent = "Create my page"; btn.classList.remove("b1");
+        msg.textContent = "PORTFOLIO OFF — OLD LINKS ARE DEAD";
+        return;
+      }
+      btn.dataset.on = "1"; btn.textContent = "Turn off"; btn.classList.add("b1");
+      try { await navigator.clipboard.writeText(r.body.url);
+            msg.textContent = "LINK COPIED: " + r.body.url; }
+      catch (e) { msg.textContent = r.body.url; }
+    });
   }
 
   /** Gren F: sessioner, utloggning överallt, radering (#62,#65). */
@@ -1002,19 +1334,22 @@ async function refreshStats() {
     });
   }
 
-  /** #16 Kundens ordlista: hämta, spara, säg ärligt vad som hände. */
+  /** #16+#43 Ordlistan och titelmallen: hämta, spara, säg ärligt vad som hände. */
   async function wireVocabulary() {
     const box = document.getElementById("vocab");
     const btn = document.getElementById("vocabSave");
     const msg = document.getElementById("vocabMsg");
+    const tpl = document.getElementById("titleTpl");
     if (!box || !btn) return;
     const r = await json("/api/account/vocabulary");
-    if (r.ok && r.body) box.value = r.body.vocabulary || "";
+    if (r.ok && r.body) { box.value = r.body.vocabulary || "";
+      if (tpl) tpl.value = r.body.titleTemplate || ""; }
     btn.addEventListener("click", async () => {
       btn.disabled = true; msg.textContent = "Saving…";
       const s = await json("/api/account/vocabulary", { method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ vocabulary: box.value }) });
+        body: JSON.stringify({ vocabulary: box.value,
+                               titleTemplate: tpl ? tpl.value : undefined }) });
       btn.disabled = false;
       if (s.ok) {
         // Servern trimmar och kapar — visa DET tillbaka, aldrig bara "sparat":
@@ -1027,6 +1362,24 @@ async function refreshStats() {
       setTimeout(() => { msg.textContent = ""; }, 4000);
     });
   }
+
+    // #39 Kortkommandon i resultatvyn: siffra spelar det klippet, D = ladda ner allt.
+    // Lyssnar bara när resultatpanelen är synlig och inget fält har fokus — en
+    // genväg som stjäl bokstäver ur ett formulär är värre än ingen genväg.
+    document.addEventListener("keydown", (e) => {
+      const out = document.getElementById("out");
+      if (!out || out.hidden || /input|textarea|select/i.test(document.activeElement.tagName)) return;
+      if (/^[1-9]$/.test(e.key)) {
+        const vids = out.querySelectorAll(".clip video");
+        const v = vids[Number(e.key) - 1];
+        if (v) { v.scrollIntoView({ behavior: "smooth", block: "center" });
+                 vids.forEach((x) => { if (x !== v) x.pause(); }); v.play().catch(() => {}); }
+      } else if (e.key.toLowerCase() === "d") {
+        const dl = document.getElementById("dlAll") || out.querySelector('a[download][href*="download.zip"]');
+        if (dl) dl.click();
+      }
+    });
+
 
   /** Kopplade kanaler på kontosidan: lista, koppla bort, och ärlig OAuth-status. */
   async function wireChannels() {
@@ -1101,7 +1454,7 @@ async function refreshStats() {
         codeEl.style.display = "inline-block"; codeEl.placeholder = "000000";
         setup.style.display = "block";
       } else {
-        state.textContent = "OFF — sign-in is the email link alone.";
+        state.textContent = "OFF — sign-in is your password or email link alone.";
         btn.textContent = "Enable 2FA";
         codeEl.style.display = "none";
         setup.style.display = "none";
