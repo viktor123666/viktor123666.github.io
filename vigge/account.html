@@ -8,9 +8,9 @@
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608160016"/>
-<script defer src="/cf.js?v=202608160016"></script>
-<script defer src="/live.js?v=202608160016"></script>
+<link rel="stylesheet" href="/cf.css?v=202608161602"/>
+<script defer src="/cf.js?v=202608161602"></script>
+<script defer src="/live.js?v=202608162118"></script>
 <style>
 .tabs{display:flex;border:1px solid var(--edge);border-bottom:0;overflow-x:auto}
 .tab{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
@@ -124,6 +124,23 @@
     </div>
     <p class="mono" id="keyMsg" style="font-size:.72rem;color:var(--gold2);margin:.6rem 0 0;
        word-break:break-all"></p>
+  </div>
+
+  <!-- #99 Veckans klipp: opt-in, av som default. Motorn visar upp sig med kundens tillstånd. -->
+  <div class="rv" style="margin-bottom:2rem;background:var(--panel);padding:1.2rem 1.4rem">
+    <span class="lbl">Clip of the week</span>
+    <p style="font-size:.88rem;color:var(--dim);margin:.5rem 0 .8rem;max-width:60ch">
+      Opt in and your best clip may be featured on our own channel once a week, credited
+      to you by name with a link. Free exposure for you, real footage for us. Off by
+      default — turn it on only if you are happy for a clip to appear on a channel you
+      do not control. Already-featured clips stay up if you turn it off later.</p>
+    <div class="acts" style="gap:.5rem;flex-wrap:wrap;align-items:center">
+      <input id="scName" placeholder="Credit me as (e.g. your channel name)" maxlength="60"
+        style="flex:1;min-width:11rem;background:var(--bg2);color:var(--fg);
+               border:1px solid var(--line);padding:.55rem .8rem;font:inherit;font-size:.88rem"/>
+      <button class="b2 sm" type="button" id="scToggle">Opt in</button>
+    </div>
+    <p class="mono" id="scMsg" style="font-size:.72rem;color:var(--dim2);margin:.6rem 0 0"></p>
   </div>
 
   <!-- #96 Portfölj: samlade publicerade klipp, publik sida med kundens namn. -->
@@ -248,7 +265,7 @@
       </tbody>
     </table>
     <div class="pb" style="border-top:1px solid var(--edge);color:var(--dim2);font-family:var(--mono);font-size:.74rem">
-      Finished files stay downloadable for 30 days. Source footage is deleted on collection.
+      Finished files stay downloadable for 30 days. Source footage is deleted automatically within 7 days of delivery.
       A failed job is never charged.
     </div>
   </div>
@@ -286,27 +303,26 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.6rem">
       <div>
         <span class="lbl">Current plan</span>
-        <h3 style="margin:.5rem 0 .3rem;font-size:1.3rem">Free</h3>
-        <p style="color:var(--dim);font-size:.88rem;margin:0 0 1rem">
-          2 hours of clipping every month, refreshed automatically. Paid plans open
-          when billing goes live.</p>
+        <h3 style="margin:.5rem 0 .3rem;font-size:1.3rem" data-cf-planname>Free</h3>
+        <p style="color:var(--dim);font-size:.88rem;margin:0 0 1rem" data-cf-plandesc>
+          2 hours of clipping every month, refreshed automatically.</p>
         <div class="usage"><i data-cf-usagebar style="width:0%"></i></div>
         <span class="mono" style="font-size:.74rem;color:var(--dim2)"
               data-cf-usagelabel>— OF 2.0 HOURS USED</span>
-        <div class="acts" style="margin-top:1.4rem">
-          <a class="b2 sm" href="/pricing.html">See planned pricing</a>
-        </div></div>
+        <div class="acts" style="margin-top:1.4rem;gap:.5rem;flex-wrap:wrap" id="billingActs">
+          <button class="b1 sm" type="button" id="goPro">Upgrade to Pro — $24/month</button>
+          <a class="b2 sm" href="/pricing.html">See pricing</a>
+        </div>
+        <p class="mono" id="billingMsg" style="font-size:.72rem;color:var(--dim2);margin:.6rem 0 0"></p>
       </div>
       <div>
-        <span class="lbl">Recent invoices</span>
-        <table class="jt" style="margin-top:.6rem">
-          <tbody>
-            <tr><td class="mono">12 Jul 2026</td><td class="mono">$24.00</td>
-              <td><span class="tag ok">Paid</span></td><td class="mono"><a href="#" class="gld">PDF</a></td></tr>
-            <tr><td class="mono">12 Jun 2026</td><td class="mono">$24.00</td>
-              <td><span class="tag ok">Paid</span></td><td class="mono"><a href="#" class="gld">PDF</a></td></tr>
-          </tbody>
-        </table>
+        <span class="lbl">Buy extra hours</span>
+        <p style="color:var(--dim);font-size:.88rem;margin:.5rem 0 .8rem">
+          Pro accounts can add hours on top of the monthly 100. They never expire.</p>
+        <div class="acts" style="gap:.5rem;flex-wrap:wrap">
+          <button class="b2 sm" type="button" data-topup="h10">+10 hours · $5</button>
+          <button class="b2 sm" type="button" data-topup="h50">+50 hours · $20</button>
+        </div>
         <p class="hint" style="margin-top:1rem">Cancel any time from the billing portal. You keep
           access until the end of the period you have paid for.</p>
       </div>

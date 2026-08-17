@@ -26,9 +26,15 @@
   };
 
   /** Is there an API behind this page at all? */
+  // Når mejlen kunder? Sätts av live() ur /api/healthz. false = Resend i sandbox
+  // (bara kontoägaren får post) — då lovar UI:t ALDRIG "check your inbox".
+  let MAIL_OK = true;
   async function live() {
     try {
       const r = await fetch("/api/healthz", { credentials: "same-origin" });
+      if (r.ok) {
+        try { const b = await r.json(); if (b && b.mail === false) MAIL_OK = false; } catch (e) {}
+      }
       return r.ok;
     } catch { return false; }
   }
@@ -83,7 +89,18 @@
       if (note) note.style.display = up ? "inline" : "none";
       const tosField = document.getElementById("tosField");
       if (tosField) tosField.style.display = up ? "flex" : "none";
-      if (forgot) forgot.style.display = rec ? "none" : "inline";
+      // Mejlvägen (glömt lösenord = engångslänk) döljs när mejlen inte når kunder.
+      // Hellre en saknad länk än en länk som säger "check your inbox" till ingenting.
+      if (forgot) forgot.style.display = (rec || !MAIL_OK) ? "none" : "inline";
+      let mailNote = document.getElementById("mailNote");
+      if (!MAIL_OK && !mailNote && forgot) {
+        mailNote = document.createElement("span");
+        mailNote.id = "mailNote";
+        mailNote.className = "hint";
+        mailNote.textContent = "Email delivery is being set up — sign in with your password.";
+        forgot.parentNode.insertBefore(mailNote, forgot);
+      }
+      if (mailNote) mailNote.style.display = (!MAIL_OK && !rec) ? "inline" : "none";
       if (pw) pw.setAttribute("autocomplete", up ? "new-password" : "current-password");
       title.textContent = rec ? "Reset your password"
                         : up ? "Create your account" : "Sign in to ViggeClips";
@@ -177,6 +194,46 @@ async function refreshStats() {
     Math.min(100, Math.round((usedH / freeH) * 100)) + "%";
   put("[data-cf-usagelabel]",
       usedH.toFixed(1) + " OF " + freeH.toFixed(1) + " HOURS USED");
+  // Två planer: visa den man HAR, och rätt knappar för den.
+  const pro = r.body.plan === "pro";
+  put("[data-cf-planname]", pro ? "Pro" : "Free");
+  put("[data-cf-plandesc]", pro
+    ? "100 hours of clipping every month, everything unlocked. Top up whenever you need."
+    : "2 hours of clipping every month, refreshed automatically.");
+  const goPro = document.getElementById("goPro");
+  if (goPro) {
+    goPro.textContent = pro ? "Manage subscription" : "Upgrade to Pro — $24/month";
+    goPro.dataset.mode = pro ? "portal" : "checkout";
+  }
+  document.querySelectorAll("[data-topup]").forEach((b) => { b.disabled = !pro; });
+}
+
+/**
+ * Billing-knapparna: Pro → Stripe Checkout, Manage → Customer Portal, top-up →
+ * engångsköp. Är billing inte konfigurerat svarar API:t 503 — då säger vi det
+ * ärligt i stället för att låtsas att knappen gör något.
+ */
+function wireBilling() {
+  const goPro = document.getElementById("goPro");
+  const msg = document.getElementById("billingMsg");
+  const say = (t) => { if (msg) msg.textContent = t; };
+  const go = async (path, body) => {
+    const r = await json(path, { method: "POST",
+      headers: { "content-type": "application/json" }, body: JSON.stringify(body || {}) });
+    if (r.ok && r.body && r.body.url) { location.href = r.body.url; return; }
+    if (r.status === 503) { say("PAYMENTS OPEN SOON — YOUR FREE HOURS KEEP COMING EVERY MONTH"); return; }
+    say((r.body && r.body.error) || "COULD NOT OPEN CHECKOUT");
+  };
+  if (goPro) goPro.addEventListener("click", () => {
+    goPro.disabled = true; say("OPENING…");
+    const p = goPro.dataset.mode === "portal"
+      ? go("/api/billing/portal") : go("/api/billing/checkout", { plan: "pro" });
+    p.finally(() => { goPro.disabled = false; });
+  });
+  document.querySelectorAll("[data-topup]").forEach((b) => b.addEventListener("click", () => {
+    b.disabled = true; say("OPENING…");
+    go("/api/billing/topup", { pack: b.getAttribute("data-topup") }).finally(() => { b.disabled = false; });
+  }));
 }
 
   function wireApp() {
@@ -455,12 +512,22 @@ async function refreshStats() {
       const job = r.body.job || {};
       const pct = Number(job.progress || 0);
       if (fill) fill.style.width = pct + "%";
-      // The honest clock: measured on the CPU engine, a job takes about four times
-      // the video's length. billedMinutes is set by the worker's own measurement
-      // BEFORE the heavy stages, so the estimate is grounded, not guessed.
-      const etaTxt = job.billedMinutes
-        ? ` · ~${Math.max(1, Math.round(job.billedMinutes * 3 * (1 - pct / 100)))} min left`
+      // The honest clock, re-measured 2026-08-16 after the engine got its speed laws
+      // (parallel audio clean, batched gap ASR, early scoreboard verdict, plan cap
+      // before render): about 1× the video's length, long streams well under.
+      // billedMinutes is set by the worker's own measurement BEFORE the heavy stages.
+      const srcMin = job.sourceMinutes || job.billedMinutes;
+      let etaTxt = srcMin
+        ? ` · ~${Math.max(1, Math.round(srcMin * 1.2 * (1 - pct / 100)))} min left`
         : "";
+      // I kön: säg VAR i kön och ungefär hur länge — en kund som ser "queued" i tre
+      // timmar utan förklaring tror att det hängt. Grovt avrundat, aldrig sekunder.
+      if (job.state === "queued" && typeof job.queueAhead === "number") {
+        const n = job.queueAhead, m = Number(job.queueEtaMin || 0);
+        const when = m >= 90 ? `about ${Math.round(m / 60)} h` : m > 0 ? `about ${Math.max(5, Math.round(m / 5) * 5)} min` : "shortly";
+        etaTxt = n === 0 ? " · you are next — starts " + when
+                         : ` · ${n} job${n === 1 ? "" : "s"} ahead of you · starts ${when}`;
+      }
       pulseSet(job.stage || job.state, pct, etaTxt);
       showCancel(job.state === "running" || job.state === "queued");
 
@@ -857,14 +924,16 @@ async function refreshStats() {
         const accept = async () => {
           fConfirm.hidden = true;
           fetchState("busy", "Queueing the download…");
+          // The job options ride along (2026-08-16): the SERVER queues the job the
+          // moment the download lands — close the tab, come back to the clips.
           const acc = await json("/api/links/accept", { method: "POST",
             headers: { "content-type": "application/json" },
-            body: JSON.stringify({ url, rightsConfirmed: true }) });
+            body: JSON.stringify({ url, rightsConfirmed: true, job: jobOptions() }) });
           if (!acc.ok) {
             fetchState("err", (acc.body && acc.body.error) || "Could not accept that link.");
             return;
           }
-          await fetchThenSubmit(acc.body.sourceId, meta.title || url);
+          await watchLink(acc.body.sourceId, meta.title || url);
         };
         if (fcGo) fcGo.onclick = accept;
         if (fcCancel) fcCancel.onclick = () => { fConfirm.hidden = true; fetchState("", ""); };
@@ -893,30 +962,34 @@ async function refreshStats() {
       return o;
     }
 
-    /** The fetcher daemon downloads; we submit the moment the source turns ready. */
-    async function fetchThenSubmit(sourceId, label) {
+    /**
+     * The fetcher daemon downloads, the server's pump queues the job; the browser only
+     * WATCHES. Before 2026-08-16 the browser itself submitted the job by polling POST
+     * /api/jobs — give up after 30 minutes, close the tab, or hit a failed download and
+     * the customer saw "took too long" or nothing at all, never the real reason.
+     */
+    async function watchLink(sourceId, label) {
       panel("src", false); panel("run", true);
       if (runName) runName.textContent = label;
       const t0 = Date.now();
       show("Downloading to our server…");
-      for (let i = 0; i < 450; i++) {                     // up to ~30 min
-        const sub = await json("/api/jobs", { method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ sourceId, ...jobOptions() }) });
-        if (sub.ok) { jobId = sub.body.jobId; poll(); return; }
-        const msg = (sub.body && sub.body.error) || "";
-        const stillFetching = sub.status === 409 || /not ready|fetch/i.test(msg);
-        if (stillFetching) {
-          show(`Downloading to our server… ${Math.round((Date.now() - t0) / 1000)}s`);
-        }
-        if (!stillFetching) {
+      // Long VODs on a busy fetcher can take an hour; the poll gets lazier over time and
+      // never gives up on its own — the server owns the outcome now.
+      for (let i = 0; ; i++) {
+        const st = await json("/api/links/status?sourceId=" + encodeURIComponent(sourceId));
+        const b = (st.ok && st.body) || {};
+        if (b.jobId) { jobId = b.jobId; poll(); return; }
+        if (b.error || b.fetchState === "failed") {
           panel("run", false); panel("src", true);
-          alertLine(msg || "The fetch failed."); return;
+          alertLine(b.error || b.fetchError || "We could not download that video. Nothing was charged.");
+          return;
         }
-        await new Promise((r) => setTimeout(r, 4000));
+        const secs = Math.round((Date.now() - t0) / 1000);
+        show(b.fetchState === "ready" ? "Downloaded — queueing your job…"
+             : `Downloading to our server… ${secs < 120 ? secs + "s" : Math.round(secs / 60) + " min"}` +
+               (secs > 600 ? " · you can close this tab, we email you when the clips are ready" : ""));
+        await new Promise((r) => setTimeout(r, i < 30 ? 4000 : 10000));
       }
-      panel("run", false); panel("src", true);
-      alertLine("The fetch took too long — upload the file instead.");
     }
 
     /**
@@ -931,11 +1004,27 @@ async function refreshStats() {
       const wanted = new URLSearchParams(location.search).get("job");
       const r = await json("/api/jobs");
       const all = (r.ok && r.body && r.body.jobs) || [];
-      const latest = wanted ? all.find((j) => j.id === wanted) : all[0];
+      // The job that is actually RUNNING (or queued) wins over a newer one that was
+      // cancelled: cancelling a second job must not hide the first from its owner.
+      const live = all.find((j) => j.state === "running" || j.state === "queued");
+      const latest = wanted ? all.find((j) => j.id === wanted) : (live || all[0]);
+      // A link still downloading is the newest thing this account is doing, even
+      // though no job exists yet — reattach to it rather than show an empty form.
+      if (!wanted && !live) {
+        const ln = await json("/api/links/status");
+        const b = (ln.ok && ln.body) || {};
+        if (b.sourceId && !b.jobId && !b.error) {
+          watchLink(b.sourceId, b.title || "Your link");
+          return;
+        }
+      }
       if (!latest) return;
       if (latest.state === "queued" || latest.state === "running") {
         jobId = latest.id;
         panel("src", false); panel("run", true);
+        // Name the job by its source, not "stream.mp4": a reopened tab should read the
+        // same header the tab that started it did.
+        if (runName && latest.title) runName.textContent = latest.title;
         show((latest.stage || latest.state) + " — " + (latest.progress || 0) + "%");
         poll();
         return;
@@ -1011,7 +1100,11 @@ async function refreshStats() {
             <td>${j.clipCount ? fmt(j.clipSeconds) : "—"}</td>
             <td>${j.clipCount}</td>
             <td>${j.billedMinutes != null ? j.billedMinutes + " min" : "0"}</td>
-            <td><span class="stbadge st-${j.state}">${j.state}</span></td>
+            <td><span class="stbadge st-${j.state}">${j.state}</span>${
+              j.state === "failed" && j.message
+                ? `<div style="font-size:.72rem;color:var(--dim);max-width:26ch;line-height:1.35;margin-top:.25rem">${
+                    String(j.message).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]))}</div>` : ""
+            }</td>
             <td><a class="gld" href="/app.html?job=${j.id}">Open →</a>${
               j.state === "done" && j.clipCount > 0
                 ? ` <button class="b1 sm" data-sched="${j.id}" data-n="${j.clipCount}"
@@ -1196,6 +1289,8 @@ async function refreshStats() {
     wireAccountControl();
     wirePortfolio();
     wireApiKeys();
+    wireBilling();
+    wireShowcase();
 
     document.querySelectorAll("[data-cf-email]").forEach((el) => {
       el.textContent = r.body.email;
@@ -1244,6 +1339,29 @@ async function refreshStats() {
         if (label) label.value = "";
         paintKeys();
       } else { msg.textContent = "COULD NOT CREATE THE KEY"; }
+    });
+  }
+
+  /** #99 Veckans klipp: opt-in/opt-out. Av som default — ett medvetet val. */
+  function wireShowcase() {
+    const btn = document.getElementById("scToggle");
+    const name = document.getElementById("scName");
+    const msg = document.getElementById("scMsg");
+    if (!btn) return;
+    btn.addEventListener("click", async () => {
+      const on = btn.dataset.on !== "1";
+      btn.disabled = true;
+      const r = await json("/api/account/showcase", { method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ enabled: on, name: (name && name.value) || "" }) });
+      btn.disabled = false;
+      if (!r.ok) { msg.textContent = "COULD NOT UPDATE"; return; }
+      btn.dataset.on = on ? "1" : "0";
+      btn.textContent = on ? "Opt out" : "Opt in";
+      btn.classList.toggle("b1", on);
+      msg.textContent = on
+        ? "OPTED IN — YOUR BEST CLIP MAY BE FEATURED, CREDITED TO " + ((name && name.value) || "YOU").toUpperCase()
+        : "OPTED OUT — NOTHING NEW WILL BE FEATURED";
     });
   }
 

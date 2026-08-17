@@ -8,8 +8,8 @@
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608160016"/>
-<script defer src="/cf.js?v=202608160016"></script>
+<link rel="stylesheet" href="/cf.css?v=202608161602"/>
+<script defer src="/cf.js?v=202608161602"></script>
 <style>
 .cmp{border:1px solid var(--edge);overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:44rem}
@@ -64,21 +64,15 @@ input[type=range]{width:100%;accent-color:var(--gold);margin-top:.6rem}
       <div class="go"><a class="b2" href="/app.html">Create new video</a> <a class="b2" href="/history.html">Edited videos</a></div>
     </div>
     <div class="pl mid">
-      <div class="nm">Creator</div><div class="pr">$24<s> / month</s></div>
-      <div class="for">One channel, posting every week.</div>
-      <ul><li>20 hours of stream monthly</li><li>Unlimited shorts per stream</li>
-        <li>No watermark</li><li>Voice profiles and per-speaker colours</li>
-        <li>Publish straight to YouTube</li><li>Priority queue</li>
-        <li>1080p export</li></ul>
+      <div class="nm">Pro</div><div class="pr">$24<s> / month</s></div>
+      <div class="for">Everything the engine can do. One flat price.</div>
+      <ul><li>100 hours of stream every month</li><li>Unlimited shorts per stream</li>
+        <li>No watermark · 1080p export</li><li>Publish straight to YouTube, scheduled or instant</li>
+        <li>Face-tracking 9:16 crop, custom words, title templates</li>
+        <li>Trim any clip, share pages, public portfolio</li>
+        <li>API access · priority queue</li>
+        <li>Top up more hours whenever you need them</li></ul>
       <div class="go"><a class="b1" href="/app.html">Get started</a></div>
-    </div>
-    <div class="pl">
-      <div class="nm">Studio</div><div class="pr">$79<s> / month</s></div>
-      <div class="for">Several channels and more than one editor.</div>
-      <ul><li>100 hours of stream monthly</li><li>Multiple channels and seats</li>
-        <li>Custom word lists and safety rules</li><li>Own intro/outro and fonts</li>
-        <li>API access</li><li>Direct support line</li></ul>
-      <div class="go"><a class="b2" href="/app.html">Talk to us</a></div>
     </div>
   </div>
 
@@ -110,7 +104,7 @@ input[type=range]{width:100%;accent-color:var(--gold);margin-top:.6rem}
       <span class="lbl">Credits needed monthly</span>
       <output id="need">32 hours</output>
       <p style="color:var(--dim);font-size:.88rem;margin:.8rem 0 0" id="rec">
-        Recommended: <b class="gld">Studio</b> — Creator covers 20 hours.</p>
+        Recommended: <b class="gld">Pro</b> — 100 hours included.</p>
       <p class="hint" id="cost"></p>
     </div>
   </div>
@@ -121,24 +115,23 @@ input[type=range]{width:100%;accent-color:var(--gold);margin-top:.6rem}
   <div class="head rv"><span class="lbl">Comparison</span><h2>What each tier includes</h2></div>
   <div class="cmp rv">
     <table>
-      <thead><tr><th>Capability</th><th>Free</th><th>Creator</th><th>Studio</th></tr></thead>
+      <thead><tr><th>Capability</th><th>Free</th><th>Pro</th></tr></thead>
       <tbody>
-        <tr><td>Hours of stream monthly</td><td>2 / month</td><td>20</td><td>100</td></tr>
-        <tr><td>Shorts per stream</td><td>3</td><td>Unlimited</td><td>Unlimited</td></tr>
-        <tr><td>Watermark</td><td class="wrn">Yes</td><td class="yes">No</td><td class="yes">No</td></tr>
-        <tr><td>Export resolution</td><td>720p</td><td>1080p</td><td>1080p</td></tr>
-        <tr><td>Captions &amp; karaoke sync</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-        <tr><td>Audio mastering</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-        <tr><td>Content safety gate</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-        <tr><td>Detector readout</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-        <tr><td>Voice profiles</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-        <tr><td>Per-speaker subtitle colours</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-        <tr><td>Direct publishing</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-        <tr><td>Priority render queue</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-        <tr><td>Custom word lists</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
-        <tr><td>Own fonts and branding</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
-        <tr><td>Team seats</td><td class="no">—</td><td>1</td><td>5</td></tr>
-        <tr><td>API access</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+        <tr><td>Hours of stream monthly</td><td>2</td><td>100 + top-ups</td></tr>
+        <tr><td>Shorts per stream</td><td>3</td><td>Unlimited</td></tr>
+        <tr><td>Watermark</td><td class="wrn">Yes</td><td class="yes">No</td></tr>
+        <tr><td>Export resolution</td><td>720p</td><td>1080p</td></tr>
+        <tr><td>Captions &amp; karaoke sync</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Audio mastering</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Content safety gate</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Detector readout</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Face-tracking 9:16 crop</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Custom words &amp; title templates</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Trim clips · share pages · portfolio</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Publish to YouTube</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>API access</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Priority render queue</td><td class="no">—</td><td class="yes">✓</td></tr>
+        <tr><td>Buy extra hours</td><td class="no">—</td><td class="yes">✓</td></tr>
       </tbody>
     </table>
   </div>
@@ -154,14 +147,14 @@ input[type=range]{width:100%;accent-color:var(--gold);margin-top:.6rem}
       <li>A score on every clip and the full report of what it skipped, so you can trust the cut.</li>
       <li>Works on anything spoken — gaming, vlogs, podcasts, music. Supported game HUDs are
         read from the picture too, so silent highlights still get caught.</li>
-      <li>Your source is deleted once you collect the results. We never train on your content.</li>
+      <li>Your source is deleted automatically within 7 days of delivery. We never train on your content.</li>
     </ul>
   </div>
   <div class="note ok rv" style="margin-top:1rem">
     <span class="lbl">What we will always do</span>
     <ul>
       <li>Never charge for a job that failed.</li>
-      <li>Delete your source footage once you have collected the results.</li>
+      <li>Delete your source footage automatically within 7 days of delivery.</li>
       <li>Never train models on your content.</li>
       <li>Let you cancel in one click, from the same portal you subscribed in.</li>
     </ul>
@@ -217,12 +210,11 @@ input[type=range]{width:100%;accent-color:var(--gold);margin-top:.6rem}
     ow.textContent=wv+(wv===1?" stream":" streams");
     need.textContent=monthly+(monthly===1?" hour":" hours");
     let tier="Free", price=0;
-    if(monthly>20){tier="Studio";price=79}
-    else if(monthly>1){tier="Creator";price=24}
-    if(monthly>100){tier="Studio + top-ups";price=79}
+    if(monthly>2){tier="Pro";price=24}
+    if(monthly>100){tier="Pro + top-ups";price=24}
     rec.innerHTML='Recommended: <b class="gld">'+tier+'</b>'+
-      (tier==="Creator"?" — 20 hours included.":
-       tier.startsWith("Studio")?" — 100 hours included.":" — the free hour covers it.");
+      (tier==="Pro"?" — 100 hours included.":
+       tier.startsWith("Pro")?" — 100 hours included, buy the rest as you go.":" — the two free hours cover it.");
     cost.textContent = price ? "≈ $"+price+" per month, excluding VAT."
       : "No payment needed at this volume.";
   }

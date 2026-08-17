@@ -7,8 +7,8 @@
 <meta name="description" content="The companies that help us run ViggeClips, and what each one touches."/>
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
-<link rel="stylesheet" href="/cf.css?v=202608160016"/>
-<script defer src="/cf.js?v=202608160016"></script>
+<link rel="stylesheet" href="/cf.css?v=202608161602"/>
+<script defer src="/cf.js?v=202608161602"></script>
 <meta property="og:title" content="Subprocessors — ViggeClips"/>
 <meta property="og:url" content="https://vigge.pro/subprocessors.html"/>
 <meta property="og:type" content="website"/>
@@ -30,6 +30,28 @@
     <p class="lede">Send a link in, get finished vertical shorts back. Three endpoints,
       one key, no SDK required.</p></div>
   <div class="prose rv" style="margin-top:2.2rem">
+
+    <div class="note ok" style="margin-bottom:2rem">
+      <span class="lbl">Who is this for, in one minute</span>
+      <p><b>You do not need the API to use ViggeClips.</b> The website does everything.
+        The API is for people who want clips <em>without opening a browser</em> — a
+        stream ends, a script sends the VOD link, and the shorts are waiting in the
+        morning. Typical users: a Discord bot for your community, an agency running
+        fifty channels, a Zapier/Make automation, or your own dashboard.</p>
+      <p style="margin-top:.8rem"><b>Five steps, no coding experience needed to follow along:</b></p>
+      <ol style="margin:.5rem 0 0 1.2rem;line-height:1.7">
+        <li>Sign in → <a class="gld" href="/account.html">Account</a> → <b>API</b> → <i>Create key</i>.
+          Copy the key <b>now</b> — it is shown once.</li>
+        <li>Open a terminal (Windows: PowerShell · Mac: Terminal).</li>
+        <li>Paste the <b>Start a job</b> command below, replacing <code>vc_live_…</code> with your key
+          and the URL with your video. Press Enter. You get back an <code>id</code>.</li>
+        <li>Paste the <b>Poll the job</b> command with that id. Run it again every minute or so.</li>
+        <li>When <code>status</code> says <code>done</code>, the response lists every clip with a
+          download link. That is it.</li>
+      </ol>
+      <p style="margin-top:.8rem">Anything you can do here you can also do by clicking on the
+        website — the API just lets a machine do the clicking.</p>
+    </div>
 
     <h2>Authentication</h2>
     <p>Create a key under <a class="gld" href="/account.html">Account → API</a>.
@@ -64,8 +86,8 @@ Content-Type: application/json
         "url": "https://…",       // signed, valid for hours — download promptly
         "thumbUrl": "https://…" }
     ] }</pre>
-    <p>Poll every 30 seconds. A typical job takes about three times the video's
-      length. If you set <code>webhookUrl</code> we POST
+    <p>Poll every 30 seconds. A typical job takes about as long as the video itself
+      (long streams finish faster than that). If you set <code>webhookUrl</code> we POST
       <code>{ id, status, clips }</code> once when the job ends — but polling is
       the source of truth; treat the webhook as a doorbell, not a delivery.</p>
 

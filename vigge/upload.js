@@ -132,8 +132,12 @@
       });
       if (!res.ok) {
         let detail = `HTTP ${res.status}`;
-        try { detail = (await res.json()).error || detail; } catch { /* keep status */ }
-        throw new Error(detail);
+        let body = null;
+        try { body = await res.json(); detail = body.error || detail; } catch { /* keep status */ }
+        const err = new Error(detail);
+        err.status = res.status;
+        err.body = body;
+        throw err;
       }
       return res.json();
     };
@@ -172,42 +176,63 @@
     let sent = Object.keys(state.done)
       .reduce((a, n) => a + (state.parts[n - 1].to - state.parts[n - 1].from), 0);
 
-    onStage(`Uploading ${(total / 1024 ** 3).toFixed(2)} GB`);
-    for (const part of state.parts) {
-      if (state.done[part.partNumber]) continue;
-      if (signal && signal.aborted) throw new Error("aborted");
+    const sendMissing = async () => {
+      onStage(`Uploading ${(total / 1024 ** 3).toFixed(2)} GB`);
+      for (const part of state.parts) {
+        if (state.done[part.partNumber]) continue;
+        if (signal && signal.aborted) throw new Error("aborted");
 
-      const base = sent;
-      const etag = await putPart(
-        part.url, file.slice(part.from, part.to),
-        (loaded) => {
-          const s = base + loaded;
-          onProgress({
-            sent: s, total, percent: Math.min(99, Math.round((s / total) * 100)),
-            partsDone: Object.keys(state.done).length, partsTotal,
-          });
-        },
-        signal,
-      );
+        const base = sent;
+        const etag = await putPart(
+          part.url, file.slice(part.from, part.to),
+          (loaded) => {
+            const s = base + loaded;
+            onProgress({
+              sent: s, total, percent: Math.min(99, Math.round((s / total) * 100)),
+              partsDone: Object.keys(state.done).length, partsTotal,
+            });
+          },
+          signal,
+        );
 
-      state.done[part.partNumber] = etag;
-      sent += part.to - part.from;
-      saveState(fp, state);            // persist after every part — this is the resume point
-      onProgress({
-        sent, total, percent: Math.min(99, Math.round((sent / total) * 100)),
-        partsDone: Object.keys(state.done).length, partsTotal,
-      });
-    }
+        state.done[part.partNumber] = etag;
+        sent += part.to - part.from;
+        saveState(fp, state);            // persist after every part — this is the resume point
+        onProgress({
+          sent, total, percent: Math.min(99, Math.round((sent / total) * 100)),
+          partsDone: Object.keys(state.done).length, partsTotal,
+        });
+      }
+    };
+    await sendMissing();
 
     // ── finish ──────────────────────────────────────────────────────────────
-    onStage("Finalising");
-    await post("/complete", {
-      sourceId: state.sourceId,
-      uploadId: state.uploadId,
-      durationS: state.durationS,
-      parts: Object.entries(state.done)
-        .map(([partNumber, etag]) => ({ partNumber: Number(partNumber), etag })),
-    });
+    // The server verifies every part's SIZE against its plan (2026-08-16: one 62 MB
+    // part arrived short, was accepted, and the file was "ready" with a hole). A 409
+    // names the parts to send again — we forget just those and go once more, twice.
+    for (let attempt = 0; ; attempt++) {
+      onStage("Finalising");
+      try {
+        await post("/complete", {
+          sourceId: state.sourceId,
+          uploadId: state.uploadId,
+          durationS: state.durationS,
+          parts: Object.entries(state.done)
+            .map(([partNumber, etag]) => ({ partNumber: Number(partNumber), etag })),
+        });
+        break;
+      } catch (e) {
+        const miss = e && e.status === 409 && e.body && Array.isArray(e.body.missingParts)
+          ? e.body.missingParts : null;
+        if (!miss || !miss.length || attempt >= 2) throw e;
+        for (const n of miss) {
+          if (state.done[n]) { sent -= state.parts[n - 1].to - state.parts[n - 1].from; delete state.done[n]; }
+        }
+        saveState(fp, state);
+        onStage(`Re-sending ${miss.length} part${miss.length > 1 ? "s" : ""} that did not arrive whole`);
+        await sendMissing();
+      }
+    }
 
     clearState(fp);
     onProgress({ sent: total, total, percent: 100, partsDone: partsTotal, partsTotal });
