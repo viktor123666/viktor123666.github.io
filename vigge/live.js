@@ -952,15 +952,93 @@ function wireBilling() {
      */
     function jobOptions() {
       const g = (id) => { const el = document.getElementById(id); return el ? el.value : undefined; };
-      const font = g("font");
+      const fontEl = document.querySelector('input[name="font"]:checked');
+      const font = fontEl ? fontEl.value : g("font");
+      const kinds = [...document.querySelectorAll("#kinds .chip.on")].map((c) => c.dataset.k);
+      const bar = document.getElementById("bar");
       const o = { language: g("lang"), clipLength: g("len"),
                   // "standard" är UI:ts namn på "ingen särskild font" — API:t vill ha
                   // null där. Revision 2026-08-15: att skicka "standard" gav 400
                   // "That subtitle style does not exist" på VARJE uppladdning.
-                  subtitleFont: font && font !== "standard" ? font : null };
+                  subtitleFont: font && font !== "standard" ? font : null,
+                  // Momenttyper + kvalitetsribban (2026-08-17). Tom lista = ingen
+                  // preferens; ribban skickas i PROCENT och översätts till poäng på
+                  // servern så mappningen bor på ett enda ställe.
+                  kinds: kinds,
+                  qualityPct: bar ? Number(bar.value) : null };
       Object.keys(o).forEach((k) => { if (o[k] === undefined || o[k] === "") delete o[k]; });
+      if (!o.kinds || !o.kinds.length) delete o.kinds;
       return o;
     }
+
+    /**
+     * The controls that TALK BACK (2026-08-17).
+     *
+     * Every one of these used to be a silent dropdown: "Content-driven", "Focus on"
+     * with a free-text person's name, a sentence about a bar with no number and no
+     * handle. A control the customer cannot predict is a control they do not touch.
+     */
+    (function wireControls() {
+      // moment types — chips toggle, and the hint says what the selection means
+      const chips = document.getElementById("kinds");
+      const kindsHint = document.getElementById("kindsHint");
+      if (chips) {
+        chips.addEventListener("click", (e) => {
+          const c = e.target.closest(".chip");
+          if (!c) return;
+          c.classList.toggle("on");
+          c.setAttribute("aria-pressed", c.classList.contains("on") ? "true" : "false");
+          const on = [...chips.querySelectorAll(".chip.on")].map((x) => x.querySelector("b").textContent);
+          kindsHint.innerHTML = on.length
+            ? `Favouring <b class="gld">${on.join(" · ")}</b> — other moments still qualify when they are strong enough.`
+            : "Nothing selected = every type, judged on merit. Select one or more and those moments are favoured — never the only ones, so a quiet stream still returns its best.";
+        });
+      }
+      // the bar — percent in, score out, in the customer's own words
+      const bar = document.getElementById("bar"), barVal = document.getElementById("barVal"),
+            barScore = document.getElementById("barScore"), barHint = document.getElementById("barHint");
+      if (bar) {
+        const upd = () => {
+          const pct = Number(bar.value);
+          // Same mapping as the server (api/jobs.ts qualityToScore) — 25 % = 5.5, the
+          // bar every job ran at before this slider existed.
+          const score = Math.round((4.0 + ((pct - 10) / 90) * 9.0) * 10) / 10;
+          barVal.textContent = pct + " %";
+          if (barScore && barScore.isConnected) barScore.textContent = score.toFixed(1);
+          const mood = pct <= 20 ? "Generous — you will get the near-misses too, and can delete what you do not want."
+            : pct <= 40 ? "The standard bar — what every stream has run at so far."
+            : pct <= 70 ? "Selective — fewer clips, each one stronger."
+            : "Only the peaks. Long streams may return a handful; short ones may return none.";
+          // Keep the id alive: the first update used to replace the node holding it,
+          // leaving every later update writing into a detached element.
+          barHint.innerHTML = `Every moment scoring <b class="mono gld" id="barScore">${score.toFixed(1)}</b> or higher becomes a clip — `
+            + `no quota to fill, none discarded to hit a number.<br><span style="color:var(--dim2)">${mood}</span>`;
+        };
+        bar.addEventListener("input", upd); upd();
+      }
+      // subtitle style — the picked card carries the ring
+      const sp = document.getElementById("subpick");
+      if (sp) {
+        sp.addEventListener("change", () => {
+          sp.querySelectorAll(".sp").forEach((l) =>
+            l.classList.toggle("on", !!l.querySelector("input:checked")));
+        });
+      }
+      // clip length — say the real range, and what mixed actually means
+      const len = document.getElementById("len"), lenHint = document.getElementById("lenHint");
+      if (len) {
+        const TXT = {
+          auto: "Mixed keeps a kill tight and lets a story breathe — every clip gets the length its own moment needs. Pick a preset when the platform decides for you.",
+          snappy: "8–20 s. Punchlines and single reactions — the TikTok scroll-stopper length.",
+          short: "15–30 s. One beat with its setup. Safe everywhere.",
+          standard: "25–45 s. Room for a build-up and a payoff — the most-watched short length.",
+          long: "40–75 s. Conversations and multi-step plays, still inside Shorts and Reels limits.",
+          extended: "60–120 s. Full exchanges. Fine on TikTok and YouTube, too long for Reels.",
+          "talk": "90–240 s. Podcast-style excerpts and full explanations — for the feed, not the shorts shelf.",
+        };
+        len.addEventListener("change", () => { lenHint.textContent = TXT[len.value] || TXT.auto; });
+      }
+    })();
 
     /**
      * The fetcher daemon downloads, the server's pump queues the job; the browser only

@@ -290,8 +290,14 @@ footer.cf .end{width:100%;padding-top:1.8rem;margin-top:.6rem;border-top:1px sol
   font-size:.68rem;color:var(--dim2);letter-spacing:.08em;margin-top:.5rem}
 
 /* ── result strip: the clips that came out ────────────────────────────────── */
+/* min-width:0 on the grid cell + max-width on the reel: a flex row of 25 cards has an
+   intrinsic width of ~2500 px, and without these two lines the grid track GREW to fit
+   it and the whole page became three screens wide (2026-08-17, Vigge had to zoom to
+   33 % to see the site). The reel scrolls inside its own box; the page never widens. */
+.stage>div{min-width:0}
 .reel{display:flex;gap:.7rem;margin-top:1.2rem;overflow-x:auto;padding-bottom:.4rem;
-  scrollbar-width:thin}
+  scrollbar-width:thin;max-width:100%}
+html,body{overflow-x:clip}
 .reel .r{flex:0 0 5.4rem;aspect-ratio:9/16;border:1px solid var(--edge2);border-radius:.4rem;
   background:linear-gradient(170deg,#141a1f,#0b0e11);position:relative;overflow:hidden;
   animation:rise .6s ease both}
@@ -357,6 +363,7 @@ footer.cf .end{width:100%;padding-top:1.8rem;margin-top:.6rem;border-top:1px sol
 /* #2 Förhandsvisning under hjälte-länkboxen */
 .lbprev{margin-top:1rem;padding:1rem 1.2rem;background:var(--panel);border-left:3px solid var(--gold);
   display:flex;flex-direction:column;gap:.5rem;max-width:44ch}
+.lbprev[hidden]{display:none}   /* display:flex used to beat the hidden attribute — an empty gold-edged box on the hero */
 .lbprev b{font-size:1rem}
 .lbprev .mono{font-size:.72rem;color:var(--dim2);letter-spacing:.04em}
 .lbprev .b1{align-self:flex-start;margin-top:.3rem}

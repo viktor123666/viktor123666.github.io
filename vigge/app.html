@@ -8,10 +8,10 @@
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608161602"/>
-<script defer src="/cf.js?v=202608161602"></script>
+<link rel="stylesheet" href="/cf.css?v=202608172116"/>
+<script defer src="/cf.js?v=202608172116"></script>
 <script defer src="/upload.js?v=202608162023"></script>
-<script defer src="/live.js?v=202608162118"></script>
+<script defer src="/live.js?v=202608180120"></script>
 <style>
 .drop{border:1px dashed var(--edge2);background:var(--bg2);padding:3.4rem 1.5rem;text-align:center;
   cursor:pointer;transition:border-color .2s,background .2s}
@@ -27,6 +27,47 @@
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));border:1px solid var(--edge);margin:1.6rem 0}
 .opt{padding:1.1rem 1.2rem;border-right:1px solid var(--edge)}
 .opt:last-child{border-right:0}
+/* ── the workspace form, 2026-08-17 ─────────────────────────────────────────
+   The link box leads (it is the fastest way in), the options grid can span two
+   columns for the wide controls, and every control now SHOWS what it does:
+   the subtitle styles are real renders, the bar has a number, the moment types
+   are named things rather than a person's name typed from memory. */
+.linkfirst{border:1px solid var(--edge2);background:var(--panel);padding:1.2rem 1.3rem;
+  border-radius:.5rem;box-shadow:0 0 0 1px rgba(217,165,49,.07)}
+.linkfirst .fl{margin-bottom:.6rem}
+.opt.span2{grid-column:1/-1;border-right:0;border-top:1px solid var(--edge)}
+.opts .opt{border-bottom:1px solid var(--edge)}
+
+/* moment-type chips */
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .1rem}
+.chip{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;
+  padding:.55rem .8rem;border:1px solid var(--edge2);background:var(--bg2);color:var(--dim);
+  border-radius:.35rem;cursor:pointer;text-align:left;font:inherit;
+  transition:border-color .18s,background .18s,color .18s,transform .18s}
+.chip b{font-size:.86rem;font-weight:600;color:var(--ink)}
+.chip span{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--dim2)}
+.chip:hover{border-color:var(--edge2);transform:translateY(-1px)}
+.chip.on{border-color:var(--gold);background:rgba(217,165,49,.10)}
+.chip.on b{color:var(--gold2)}
+
+/* the bar slider */
+.opt input[type=range]{width:100%;accent-color:var(--gold);margin:.5rem 0 .2rem}
+.barscale{display:flex;justify-content:space-between;font-size:.62rem;letter-spacing:.1em;
+  color:var(--dim2);text-transform:uppercase}
+
+/* subtitle style picker — real renders, not a mock-up */
+.subpick{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.7rem;margin:.3rem 0 .2rem}
+.sp{display:block;border:1px solid var(--edge2);border-radius:.4rem;overflow:hidden;cursor:pointer;
+  background:var(--bg2);transition:border-color .2s,box-shadow .2s,transform .2s}
+.sp:hover{transform:translateY(-2px)}
+.sp input{position:absolute;opacity:0;pointer-events:none}
+.sp img{display:block;width:100%;height:auto;background:#0b0e11}
+.sp b{display:block;padding:.5rem .7rem;font-size:.8rem;font-weight:500;color:var(--dim)}
+.sp.on{border-color:var(--gold);box-shadow:0 0 0 1px rgba(217,165,49,.35)}
+.sp.on b{color:var(--gold2)}
+.sp:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+@media(max-width:640px){.subpick{grid-template-columns:1fr 1fr}}
+
 .gauge{display:grid;gap:0;border:1px solid var(--edge)}
 .gr{display:grid;grid-template-columns:1.6rem 1fr 5.5rem;gap:.9rem;align-items:center;
   padding:.85rem 1.1rem;border-bottom:1px solid var(--edge);font-size:.92rem}
@@ -99,19 +140,18 @@
 
   <!-- SOURCE -->
   <div id="src">
-    <div class="drop" id="drop">
-      <div class="ic">[ ↑ ]</div>
-      <h2>Drop a stream file here</h2>
-      <p>MP4 · MKV · MOV · WEBM — UP TO 12 HOURS</p>
-      <p class="mono" style="font-size:.72rem;color:var(--dim2);margin-top:.4rem">
-        PROCESSING TAKES ABOUT AS LONG AS THE VIDEO — A 15 MIN VIDEO IS READY IN ~15 MIN, A 2 H STREAM IN UNDER AN HOUR</p>
-      <button class="b1" type="button" id="pick">Choose file</button>
-      <input type="file" id="file" accept="video/*" class="hide" multiple/>
-    </div>
-    <div class="or"><span>OR PASTE A TWITCH / YOUTUBE / KICK LINK</span></div>
-    <div class="urow">
-      <input type="text" id="url" placeholder="twitch.tv/videos/…"/>
-      <button class="b2" type="button" id="fetch">Fetch</button>
+    <!-- THE LINK COMES FIRST (2026-08-17). It was tucked under the drop zone as an
+         afterthought — but pasting a link is the fastest way in and the one that needs
+         no file at hand, so it leads. -->
+    <div class="linkfirst">
+      <label class="fl" for="url">Paste a Twitch, YouTube or Kick link</label>
+      <div class="urow">
+        <input type="text" id="url" placeholder="twitch.tv/videos/…  ·  youtube.com/watch?v=…  ·  kick.com/…"/>
+        <button class="b1" type="button" id="fetch">Fetch</button>
+      </div>
+      <p class="hint" style="margin:.5rem 0 0">
+        If a platform refuses the download we say so instead of failing quietly — and a
+        file upload always works.</p>
     </div>
     <!-- Länkens egen statusrad: varje läge är SYNLIGT — knappen får aldrig se död ut. -->
     <p id="fetchStatus" class="mono" hidden
@@ -129,33 +169,122 @@
         <button class="b3 sm" type="button" id="fcCancel">Cancel</button>
       </div>
     </div>
-    <p class="hint" style="margin:.6rem 0 0">
-      Twitch, YouTube and Kick are supported. If a platform refuses the download we say so
-      instead of failing quietly — and a file upload always works.</p>
+
+    <div class="or"><span>OR UPLOAD THE FILE</span></div>
+
+    <div class="drop" id="drop">
+      <div class="ic">[ ↑ ]</div>
+      <h2>Drop a stream file here</h2>
+      <p>MP4 · MKV · MOV · WEBM — UP TO 12 HOURS</p>
+      <p class="mono" style="font-size:.72rem;color:var(--dim2);margin-top:.4rem">
+        PROCESSING TAKES ABOUT AS LONG AS THE VIDEO — A 15 MIN VIDEO IS READY IN ~15 MIN, A 2 H STREAM IN UNDER AN HOUR</p>
+      <button class="b1" type="button" id="pick">Choose file</button>
+      <input type="file" id="file" accept="video/*" class="hide" multiple/>
+    </div>
 
     <div class="opts">
-      <div class="opt"><label class="fl" for="lang">Language</label>
-        <select id="lang"><option value="sv" selected>Swedish + English mixed</option>
-          <option value="en">English</option><option value="auto">Detect</option></select>
-        <div class="hint">Mid-sentence switching is expected.</div></div>
-      <div class="opt"><label class="fl">Shorts produced</label>
-        <div class="mono" style="padding:.75rem 0 .1rem;color:var(--gold2);font-size:.95rem">
-          Decided by the stream</div>
-        <div class="hint">Every moment that clears the bar becomes a short — no quota to fill
-          and none discarded to hit a number.</div></div>
-      <div class="opt"><label class="fl" for="focus">Focus on</label>
-        <input type="text" id="focus" placeholder="voice profile name"/>
-        <div class="hint">Favours clips with that person.</div></div>
-      <div class="opt"><label class="fl" for="font">Subtitle style</label>
-        <select id="font"><option value="standard" selected>ViggeClips standard</option>
-          <option value="bangers">Bangers — comic weight</option>
-          <option value="bebas">Bebas Neue — clean &amp; tight</option>
-          <option value="bungee">Bungee — round display</option></select>
-        <div class="hint">Same words, your look.</div></div>
+      <div class="opt"><label class="fl" for="lang">Spoken language</label>
+        <select id="lang">
+          <option value="auto" selected>Detect it for me</option>
+          <option value="sv+en">Swedish + English mixed</option>
+          <optgroup label="Common">
+            <option value="en">English</option>
+            <option value="es">Spanish · Español</option>
+            <option value="pt">Portuguese · Português</option>
+            <option value="fr">French · Français</option>
+            <option value="de">German · Deutsch</option>
+            <option value="it">Italian · Italiano</option>
+            <option value="nl">Dutch · Nederlands</option>
+            <option value="pl">Polish · Polski</option>
+            <option value="tr">Turkish · Türkçe</option>
+            <option value="ru">Russian · Русский</option>
+            <option value="uk">Ukrainian · Українська</option>
+            <option value="ar">Arabic · العربية</option>
+            <option value="hi">Hindi · हिन्दी</option>
+            <option value="id">Indonesian</option>
+            <option value="vi">Vietnamese · Tiếng Việt</option>
+            <option value="th">Thai · ไทย</option>
+            <option value="ja">Japanese · 日本語</option>
+            <option value="ko">Korean · 한국어</option>
+            <option value="zh">Chinese · 中文</option>
+          </optgroup>
+          <optgroup label="Nordic &amp; more">
+            <option value="sv">Swedish · Svenska</option>
+            <option value="no">Norwegian · Norsk</option>
+            <option value="da">Danish · Dansk</option>
+            <option value="fi">Finnish · Suomi</option>
+            <option value="cs">Czech · Čeština</option>
+            <option value="sk">Slovak · Slovenčina</option>
+            <option value="sl">Slovenian</option>
+            <option value="hr">Croatian · Hrvatski</option>
+            <option value="sr">Serbian · Српски</option>
+            <option value="bg">Bulgarian · Български</option>
+            <option value="ro">Romanian · Română</option>
+            <option value="hu">Hungarian · Magyar</option>
+            <option value="el">Greek · Ελληνικά</option>
+            <option value="he">Hebrew · עברית</option>
+            <option value="fa">Persian · فارسی</option>
+            <option value="et">Estonian</option>
+            <option value="lv">Latvian</option>
+            <option value="lt">Lithuanian</option>
+            <option value="ms">Malay</option>
+            <option value="tl">Filipino · Tagalog</option>
+          </optgroup>
+        </select>
+        <div class="hint">Detection reads the actual speech — leave it unless the stream
+          starts in another language than it continues in. Mid-sentence switching is fine.</div></div>
+
       <div class="opt"><label class="fl" for="len">Clip length</label>
-        <select id="len"><option value="auto" selected>Content-driven</option>
-          <option value="short">Short (&lt; 30 s)</option><option value="long">Long (30–90 s)</option></select>
-        <div class="hint">Content-driven retains best.</div></div>
+        <select id="len">
+          <option value="auto" selected>Mixed — the moment decides</option>
+          <option value="snappy">Snappy · 8–20 s</option>
+          <option value="short">Short · 15–30 s</option>
+          <option value="standard">Standard · 25–45 s</option>
+          <option value="long">Long · 40–75 s</option>
+          <option value="extended">Extended · 60–120 s</option>
+          <option value="talk">Talk cut · 90–240 s</option>
+        </select>
+        <div class="hint" id="lenHint">Mixed keeps a kill tight and lets a story breathe —
+          every clip gets the length its own moment needs. Pick a preset when the platform
+          decides for you.</div></div>
+
+      <div class="opt span2"><label class="fl">What to look for</label>
+        <div class="chips" id="kinds" role="group" aria-label="Moment types to favour">
+          <button type="button" class="chip" data-k="laugh"><b>Laughs</b><span>bursts, jokes landing</span></button>
+          <button type="button" class="chip" data-k="kill"><b>Kills &amp; clutch</b><span>plays, multikills, comebacks</span></button>
+          <button type="button" class="chip" data-k="story"><b>Storytelling</b><span>the whole anecdote, start to point</span></button>
+          <button type="button" class="chip" data-k="teach"><b>Explaining</b><span>how-to, builds, advice</span></button>
+          <button type="button" class="chip" data-k="scenery"><b>Scenery</b><span>calm, views, no jumpcuts</span></button>
+          <button type="button" class="chip" data-k="hype"><b>Hype</b><span>shouting, energy spikes</span></button>
+        </div>
+        <div class="hint" id="kindsHint">Nothing selected = every type, judged on merit.
+          Select one or more and those moments are favoured — never the only ones, so a
+          quiet stream still returns its best.</div></div>
+
+      <div class="opt span2"><label class="fl" for="bar">Where the bar sits
+          <b class="gld mono" id="barVal">25 %</b></label>
+        <input type="range" id="bar" min="10" max="100" step="5" value="25"/>
+        <div class="barscale mono"><span>More clips</span><span>Only the best</span></div>
+        <div class="hint" id="barHint">Every moment scoring <b class="mono" id="barScore">5.5</b>
+          or higher becomes a clip — no quota to fill, none discarded to hit a number.</div></div>
+
+      <div class="opt span2"><label class="fl">Subtitle style</label>
+        <div class="subpick" id="subpick" role="radiogroup" aria-label="Subtitle style">
+          <label class="sp on"><input type="radio" name="font" value="standard" checked/>
+            <img src="/demo/subs-standard.png" alt="ViggeClips standard subtitle style" loading="lazy" width="520" height="230"/>
+            <b>ViggeClips standard</b></label>
+          <label class="sp"><input type="radio" name="font" value="bangers"/>
+            <img src="/demo/subs-bangers.png" alt="Bangers subtitle style" loading="lazy" width="520" height="230"/>
+            <b>Bangers — comic weight</b></label>
+          <label class="sp"><input type="radio" name="font" value="bebas"/>
+            <img src="/demo/subs-bebas.png" alt="Bebas Neue subtitle style" loading="lazy" width="520" height="230"/>
+            <b>Bebas Neue — clean &amp; tight</b></label>
+          <label class="sp"><input type="radio" name="font" value="bungee"/>
+            <img src="/demo/subs-bungee.png" alt="Bungee subtitle style" loading="lazy" width="520" height="230"/>
+            <b>Bungee — round display</b></label>
+        </div>
+        <div class="hint">Rendered with the real fonts and the real styling — the words
+          light up one at a time, the speaker keeps their colour, your title sits on top.</div></div>
     </div>
 
     <button class="b1" type="button" id="go" style="width:100%;padding:1rem">Start clipping →</button>

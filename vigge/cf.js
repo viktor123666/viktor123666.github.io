@@ -162,7 +162,17 @@
     }
   }
 
+  // Ambient FX layer (2026-08-17): dust, light leaks, progress line, section glow.
+  // Loaded here so every page has it and no page can forget it; fx.js itself
+  // stands down under prefers-reduced-motion and when the tab is hidden.
+  const FXV = (function () { try { const me = document.querySelector('script[src*="cf.js"]'); const m = /v=(\d+)/.exec(me ? me.getAttribute("src") : ""); return m ? m[1] : "202608170200"; } catch { return "202608170200"; } })();
+  function fxLoad() {
+    if (document.getElementById("fxjs")) return;
+    const s = document.createElement("script"); s.id = "fxjs"; s.defer = true; s.src = "/fx.js?v=" + FXV;
+    document.head.appendChild(s);
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mount);
-  } else { mount(); }
+    document.addEventListener("DOMContentLoaded", () => { mount(); fxLoad(); });
+  } else { mount(); fxLoad(); }
 })();

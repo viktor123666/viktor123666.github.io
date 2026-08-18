@@ -8,8 +8,8 @@
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608161602"/>
-<script defer src="/cf.js?v=202608161602"></script>
+<link rel="stylesheet" href="/cf.css?v=202608172116"/>
+<script defer src="/cf.js?v=202608172116"></script>
 <style>
 .cmp{border:1px solid var(--edge);overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:44rem}
@@ -61,7 +61,7 @@ input[type=range]{width:100%;accent-color:var(--gold);margin-top:.6rem}
         <li>Captions and audio mastering</li><li>Full transcript (SRT + TXT)</li>
         <li>The whole video subtitled, as a bonus</li><li>Full detector readout</li>
         <li>720p export</li></ul>
-      <div class="go"><a class="b2" href="/app.html">Create new video</a> <a class="b2" href="/history.html">Edited videos</a></div>
+      <div class="go" id="freeGo"><a class="b2" href="/app.html">Start free — no card</a></div>
     </div>
     <div class="pl mid">
       <div class="nm">Pro</div><div class="pr">$24<s> / month</s></div>
@@ -72,7 +72,7 @@ input[type=range]{width:100%;accent-color:var(--gold);margin-top:.6rem}
         <li>Trim any clip, share pages, public portfolio</li>
         <li>API access · priority queue</li>
         <li>Top up more hours whenever you need them</li></ul>
-      <div class="go"><a class="b1" href="/app.html">Get started</a></div>
+      <div class="go" id="proGo"><a class="b1" href="/app.html">Get started</a></div>
     </div>
   </div>
 
@@ -198,6 +198,42 @@ input[type=range]{width:100%;accent-color:var(--gold);margin-top:.6rem}
 
 <footer class="cf"></footer>
 <script>
+// THE BUTTONS KNOW WHO YOU ARE (2026-08-17). Signed out: start free / get started.
+// Signed in on Free: "Create new video" + a real Upgrade button that opens Stripe
+// checkout. Signed in on Pro: "Your plan" + Manage subscription (portal). Before this,
+// every state saw the same "Get started → /app.html" — a Pro customer was told to get
+// started with what they already pay for.
+(async function(){
+  const freeGo=document.getElementById("freeGo"), proGo=document.getElementById("proGo");
+  if(!freeGo||!proGo) return;
+  let me=null, plan="free";
+  try{ const r=await fetch("/api/auth/me",{credentials:"same-origin"}); if(r.ok) me=await r.json(); }catch(e){}
+  if(!me||!me.email) return;                                   // signed out: leave as is
+  try{ const r=await fetch("/api/account/stats",{credentials:"same-origin"}); if(r.ok){ const st=await r.json(); plan=(st&&st.plan)||"free"; } }catch(e){}
+  const esc=(t)=>String(t).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const go=async(btn,path,body)=>{
+    btn.disabled=true; const t=btn.textContent; btn.textContent="Opening…";
+    try{ const r=await fetch(path,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body||{})});
+      const b=await r.json().catch(()=>({}));
+      if(r.ok&&b.url){ location.href=b.url; return; }
+      btn.textContent=(b&&b.error)||"Could not open — try again"; setTimeout(()=>{btn.textContent=t;btn.disabled=false;},2500);
+    }catch(e){ btn.textContent="Network hiccup"; setTimeout(()=>{btn.textContent=t;btn.disabled=false;},2500); }
+  };
+  if(plan==="pro"){
+    freeGo.innerHTML='<a class="b2" href="/app.html">Create new video</a>';
+    proGo.innerHTML='<span class="lbl" style="display:block;margin-bottom:.5rem">YOUR PLAN · '+esc(me.email)+'</span>'
+      +'<button class="b1" type="button" id="prPortal">Manage subscription</button> '
+      +'<button class="b2" type="button" id="prTop10">+10 h · $5</button> '
+      +'<button class="b2" type="button" id="prTop50">+50 h · $20</button>';
+    document.getElementById("prPortal").onclick=(e)=>go(e.currentTarget,"/api/billing/portal");
+    document.getElementById("prTop10").onclick=(e)=>go(e.currentTarget,"/api/billing/topup",{pack:"h10"});
+    document.getElementById("prTop50").onclick=(e)=>go(e.currentTarget,"/api/billing/topup",{pack:"h50"});
+  }else{
+    freeGo.innerHTML='<span class="lbl" style="display:block;margin-bottom:.5rem">YOUR PLAN</span><a class="b2" href="/app.html">Create new video</a> <a class="b2" href="/history.html">Edited videos</a>';
+    proGo.innerHTML='<button class="b1" type="button" id="prUp">Upgrade to Pro — $24 / month</button>';
+    document.getElementById("prUp").onclick=(e)=>go(e.currentTarget,"/api/billing/checkout",{plan:"pro"});
+  }
+})();
 (function(){
   const h=document.getElementById("hrs"), w=document.getElementById("wks");
   const oh=document.getElementById("ohrs"), ow=document.getElementById("owks");

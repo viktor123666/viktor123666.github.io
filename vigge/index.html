@@ -10,9 +10,61 @@
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<link rel="stylesheet" href="/cf.css?v=202608161602"/>
-<script defer src="/cf.js?v=202608161602"></script>
+<link rel="stylesheet" href="/cf.css?v=202608172116"/>
+<script defer src="/cf.js?v=202608172116"></script>
 <style>/* Sidspecifik CSS — delade regler bor i cf.css */
+/* see it happen — the walkthrough */
+.demo{margin-top:1.8rem;display:grid;grid-template-columns:1fr auto;gap:1.4rem;align-items:start}
+@media(max-width:820px){.demo{grid-template-columns:1fr}.dnav{display:none}}
+.dwin{border:1px solid var(--edge2);border-radius:.7rem;background:linear-gradient(180deg,#0f1316,#0a0c0e);
+  box-shadow:0 2rem 4rem rgba(0,0,0,.55),0 0 0 1px rgba(217,165,49,.06);overflow:hidden;min-height:22rem}
+.dbar{display:flex;align-items:center;gap:.4rem;padding:.6rem .8rem;border-bottom:1px solid var(--edge);background:var(--bg2)}
+.dbar i{width:.6rem;height:.6rem;border-radius:50%;background:var(--edge2)}
+.dbar .durl{margin-left:.6rem;font-family:var(--mono);font-size:.68rem;color:var(--dim2);letter-spacing:.08em}
+.dbody{position:relative;padding:1.4rem 1.4rem 1.6rem;min-height:27rem}
+.dstep{position:absolute;inset:1.4rem 1.4rem 1.6rem;opacity:0;transform:translateY(10px);pointer-events:none;
+  transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1)}
+.dstep.on{opacity:1;transform:none;pointer-events:auto}
+.dlbl{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.9rem}
+.dlbl b{color:var(--ink);font-weight:500;text-transform:none;letter-spacing:0}
+.dsm{color:var(--dim2)}
+.dlink{display:flex;gap:.6rem;align-items:stretch}
+.dinput{flex:1;min-height:2.6rem;border:1px solid var(--edge2);background:#0b0e11;border-radius:.3rem;padding:.6rem .8rem;
+  font-family:var(--mono);font-size:.82rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dinput .caret{display:inline-block;width:1px;height:1em;background:var(--gold2);vertical-align:-.15em;margin-left:1px;animation:dblink 1s steps(1) infinite}
+@keyframes dblink{50%{opacity:0}}
+.dbtn{display:inline-flex;align-items:center;padding:.6rem 1rem;background:var(--gold);color:#0a0805;font-family:var(--mono);
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-radius:.3rem;transition:transform .2s,box-shadow .2s}
+.dbtn.pulse{transform:scale(.97);box-shadow:0 0 0 .5rem rgba(217,165,49,.18)}
+.dbtn2{display:inline-flex;align-items:center;padding:.6rem 1rem;border:1px solid var(--edge2);color:var(--ink);font-family:var(--mono);
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-radius:.3rem}
+.dfine{margin-top:.9rem;font-family:var(--mono);font-size:.66rem;color:var(--dim2)}
+.dprog{height:.4rem;background:var(--edge);border-radius:.2rem;overflow:hidden;margin:.2rem 0 1rem}
+.dprog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));box-shadow:0 0 12px rgba(217,165,49,.5)}
+.dstages{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.35rem .8rem}
+.dstages li{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--dim2);display:flex;justify-content:space-between;gap:.5rem;
+  padding:.28rem 0;border-bottom:1px solid var(--edge);transition:color .3s}
+.dstages li.run{color:var(--gold2)}.dstages li.done{color:var(--dim)}
+.dstages li.done::after{content:"✓";color:var(--sig)}
+.dstages li.run::after{content:"…";color:var(--gold2)}
+.dstages li b{font-weight:500;color:inherit}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(8.4rem,1fr));gap:.7rem;margin-bottom:1rem}
+.dcard{border:1px solid var(--edge2);border-radius:.4rem;overflow:hidden;background:#0b0e11;opacity:0;transform:translateY(12px) scale(.98);
+  transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1)}
+.dcard.on{opacity:1;transform:none}
+.dcard .th{aspect-ratio:9/16;max-height:9.2rem;position:relative;
+  background:radial-gradient(60% 40% at 50% 38%,rgba(217,165,49,.22),transparent 70%),linear-gradient(170deg,#141a1f,#0b0e11)}
+.dcard .th::after{content:attr(data-kind);position:absolute;left:.4rem;top:.4rem;font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;
+  color:var(--gold2);border:1px solid rgba(217,165,49,.5);padding:.1rem .35rem;border-radius:.2rem;background:rgba(0,0,0,.55)}
+.dcard .tt{padding:.5rem .6rem;font-size:.74rem;line-height:1.3}
+.dcard .tt span{display:block;font-family:var(--mono);font-size:.6rem;color:var(--dim2);margin-top:.25rem;letter-spacing:.08em}
+.dacts{display:flex;gap:.6rem;flex-wrap:wrap}
+.dnav{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.9rem;font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim2)}
+.dnav li{position:relative;padding-left:1.4rem;transition:color .3s}
+.dnav li::before{content:"";position:absolute;left:0;top:.2rem;width:.55rem;height:.55rem;border-radius:50%;border:1px solid var(--edge2);transition:background .3s,border-color .3s}
+.dnav li.on{color:var(--ink)}.dnav li.on::before{background:var(--gold);border-color:var(--gold);box-shadow:0 0 10px rgba(217,165,49,.6)}
+
 /* ── HERO ───────────────────────────────────────────────────────────────── */
 .hero{padding:6.6rem 0 3.5rem}
 /* The showcase is the argument — it must PEEK above the fold, not hide under it.
@@ -130,7 +182,7 @@ h1 em{font-style:normal;color:var(--gold2)}
   <p class="lede rv" style="max-width:44ch">
     The engine watches your whole stream — the laughs, the reactions, the moment the room
     turns — and hands back finished vertical shorts, captioned and ready for TikTok, Reels
-    and Shorts. One 82-minute stream gave 28 of them.
+    and Shorts. One ten-hour stream gave 25 of them — in 91 minutes.
   </p>
   <form class="linkbox rv" id="lb" novalidate>
     <input type="text" id="lbu" aria-label="Paste a video link"
@@ -155,7 +207,7 @@ h1 em{font-style:normal;color:var(--gold2)}
         <div class="bar" id="cbar" style="margin-top:.9rem">
           <span class="scan"></span>
         </div>
-        <div class="lg"><span>00:00</span><span>SCORING EVERY SECOND</span><span>02:00:00</span></div>
+        <div class="lg"><span>00:00</span><span>SCORING EVERY SECOND</span><span>09:54:00</span></div>
         <div class="reel" id="creel"></div>
         <p class="fine" style="margin:.9rem 0 0">Gold marks every moment that cleared the bar — and they all become clips. You also
           get the score for the ones that didn’t.</p>
@@ -164,6 +216,7 @@ h1 em{font-style:normal;color:var(--gold2)}
 
     <div class="phone" aria-hidden="true">
       <span class="notch"></span>
+      <!-- Abstract footage until Vigge hands over an approved sample clip (2026-08-17). -->
       <span class="film"></span>
       <span class="badge">9:16 · CAPTIONED</span>
       <div class="cap" id="pcap"></div>
@@ -172,8 +225,8 @@ h1 em{font-style:normal;color:var(--gold2)}
   </div>
 
   <div class="figs rv">
-    <div class="fg"><b data-count="28" data-suffix="">0</b><span>shorts from one 82-minute stream</span></div>
-    <div class="fg"><b data-count="0.57" data-suffix="×">0×</b><span>faster than realtime</span></div>
+    <div class="fg"><b data-count="25" data-suffix="">0</b><span>shorts from one 10-hour stream</span></div>
+    <div class="fg"><b data-count="6.5" data-suffix="×">0×</b><span>faster than realtime</span></div>
     <div class="fg"><b data-count="100" data-suffix=" %">0 %</b><span>captions verified on screen</span></div>
     <div class="fg"><b data-count="0" data-suffix="">0</b><span>plugins or timelines to touch</span></div>
   </div>
@@ -181,7 +234,7 @@ h1 em{font-style:normal;color:var(--gold2)}
   <!-- THE INSTRUMENT -->
   <div class="inst rv" id="work">
     <div class="top">
-      <span class="f">SOURCE <b>stream_2h.mp4</b></span>
+      <span class="f">SOURCE <b>stream_10h.mp4</b></span>
       <span class="f">1280×720 · 30 fps · 44.1 kHz</span>
       <span class="live"><i></i>DETECTOR ACTIVE</span>
     </div>
@@ -201,6 +254,43 @@ h1 em{font-style:normal;color:var(--gold2)}
 </div></div>
 
 <!-- WHAT YOU GET ---------------------------------------------------------- -->
+<!-- SEE IT HAPPEN: the whole customer journey, animated from real timings ------- -->
+<section id="see"><div class="w">
+  <div class="head rv">
+    <span class="lbl">See it happen</span>
+    <h2>Paste a link. Come back to clips.</h2>
+    <p>This is the workspace doing a real job, replayed in forty seconds: the stages are the engine’s
+       own, in the proportions they took on the ten-hour stream; the clips at the end are the ones it delivered.</p>
+  </div>
+  <div class="demo rv" id="demo" aria-label="Animated walkthrough of a job">
+    <div class="dwin">
+      <div class="dbar"><i></i><i></i><i></i><span class="durl">vigge.pro/app</span></div>
+      <div class="dbody">
+        <!-- 1 · paste -->
+        <div class="dstep on" data-step="1">
+          <div class="dlbl">Paste a Twitch, YouTube or Kick link — or drop a file</div>
+          <div class="dlink"><span class="dinput" id="dinput"><i class="caret"></i></span><span class="dbtn" id="dbtn">Get my shorts</span></div>
+          <div class="dfine">Two free hours every month · no card</div>
+        </div>
+        <!-- 2 · run -->
+        <div class="dstep" data-step="2">
+          <div class="dlbl">Processing <b id="dname">stream_10h.mp4</b> <span class="dsm" id="deta">· ~91 min</span></div>
+          <div class="dprog"><i id="dfill"></i></div>
+          <ol class="dstages" id="dstages"></ol>
+          <div class="dfine">Nothing runs on your machine — close the tab, we email you when it lands.</div>
+        </div>
+        <!-- 3 · deliver -->
+        <div class="dstep" data-step="3">
+          <div class="dlbl">Delivered · <b id="dcount">25 shorts</b> <span class="dsm">· 91 minutes · nothing charged until now</span></div>
+          <div class="dgrid" id="dgrid"></div>
+          <div class="dacts"><span class="dbtn">Download all</span><span class="dbtn2">Schedule to YouTube</span><span class="dbtn2">Share</span></div>
+        </div>
+      </div>
+    </div>
+    <ol class="dnav" id="dnav"><li class="on">Paste</li><li>Engine</li><li>Delivery</li></ol>
+  </div>
+</div></section>
+
 <section id="pipeline"><div class="w">
   <div class="head rv">
     <span class="lbl">What arrives</span>
@@ -227,7 +317,7 @@ h1 em{font-style:normal;color:var(--gold2)}
       <span class="v">PER JOB</span><span class="m">LOG</span></div>
   </div>
   <p class="fine rv" style="margin-top:1.6rem;text-align:center">
-    MEASURED END TO END ON A 115-MINUTE STREAM: 0.57× ITS LENGTH · NOTHING RUNS ON YOUR MACHINE
+    MEASURED END TO END ON A 10-HOUR STREAM: 91 MINUTES, DOOR TO DOOR · NOTHING RUNS ON YOUR MACHINE
   </p>
 </div></section>
 
@@ -349,98 +439,89 @@ h1 em{font-style:normal;color:var(--gold2)}
 
 <script>
 /* ── waveform + detector ─────────────────────────────────────────────────
-   Deterministic pseudo-audio so the picture is stable between reloads.
-   Marked regions mirror the real detector categories.                     */
-const N = 200, W = 1000, H = 220, MID = H / 2;
-let seed = 20260730;
-const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
-
-const ZONES = [
-  { a:.06,b:.11, k:"laugh", t:"Laughter burst — 3 voices overlapping",  l:1.42,h:2,c:0 },
-  { a:.20,b:.27, k:"case",  t:"Event cluster — 5 event terms in 20 s",   l:.31,h:1,c:5 },
-  { a:.38,b:.42, k:"hype",  t:"Reaction burst — 4 hype words in 14 s",   l:.66,h:4,c:0 },
-  { a:.55,b:.62, k:"laugh", t:"Laughter burst — sustained, 2 voices",    l:1.18,h:2,c:1 },
-  { a:.74,b:.82, k:"case",  t:"Event cluster — rare-drop reaction",      l:.94,h:3,c:4 },
-  { a:.90,b:.95, k:"hype",  t:"Clutch call — energy peak",               l:.48,h:3,c:0 }
-];
+   REAL DATA (2026-08-17): /demo/detector.json is exported from an actual job —
+   a ten-hour stream, measured end to end. The bars are its audio envelope, the
+   coloured bands are the shorts that were delivered (by type), the dim ticks are
+   near-misses, and every readout is the number the engine measured at that point.
+   Nothing here is invented; if the file cannot load, the panel says so instead of
+   drawing something pretty.                                                       */
+const N = 1000, W = 1000, H = 220, MID = H / 2;
 const CS = getComputedStyle(document.documentElement);
 const tok = n => CS.getPropertyValue(n).trim();
-const COL = { laugh: tok("--sig"), case: tok("--gold"), hype: tok("--info") };
+const KCOL = { LAUGH: tok("--sig"), KILL: tok("--gold"), HYPE: tok("--info"), TEACH: "#c9a0ff",
+               STORY: "#ffb070", SCENERY: "#7fd7d0" };
+const KTXT = { LAUGH: "Laugh", KILL: "Kill", HYPE: "Hype", TEACH: "Teach", STORY: "Story", SCENERY: "Scenery" };
 const C_LINE = tok("--edge2"), C_BAR = tok("--wave"), C_HEAD = tok("--gold2");
-const inZone = f => ZONES.find(z => f >= z.a && f <= z.b);
-
-// build bars
-const amps = [];
-for (let i = 0; i < N; i++) {
-  const f = i / N;
-  const z = inZone(f);
-  let a = .16 + rnd() * .2;                       // conversational floor
-  a += Math.abs(Math.sin(f * 34)) * .07;
-  if (z) a = Math.min(.97, a + .34 + rnd() * .3); // detected region is louder
-  amps.push(a);
-}
-
-const svg = document.getElementById("svg");
-let s = "";
-// zone bands behind the bars
-ZONES.forEach(z => {
-  s += `<rect x="${z.a*W}" y="0" width="${(z.b-z.a)*W}" height="${H}"
-        fill="${COL[z.k]}" opacity=".085"/>`;
-  s += `<rect x="${z.a*W}" y="0" width="${(z.b-z.a)*W}" height="2" fill="${COL[z.k]}" opacity=".75"/>`;
-});
-// centre line
-s += `<line x1="0" y1="${MID}" x2="${W}" y2="${MID}" stroke="${C_LINE}" stroke-width="1"/>`;
-// bars
-const bw = W / N;
-amps.forEach((a, i) => {
-  const f = i / N, z = inZone(f);
-  const h = a * (H - 26), y = MID - h / 2;
-  s += `<rect class="bar" data-f="${f.toFixed(4)}" x="${(i*bw)+bw*.18}" y="${y}"
-        width="${bw*.64}" height="${h}" fill="${z ? COL[z.k] : C_BAR}"
-        opacity="${z ? .95 : .62}"/>`;
-});
-// playhead
-s += `<line id="ph" x1="0" y1="0" x2="0" y2="${H}" stroke="${C_HEAD}" stroke-width="1.5" opacity="0"/>`;
-svg.innerHTML = s;
-
-// time ticks
-const DUR = 115 * 60;
-const tk = document.getElementById("ticks");
-tk.innerHTML = Array.from({length:6}, (_,i) => {
-  const sec = Math.round(DUR * i / 6), m = Math.floor(sec/60);
-  return `<div>${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}:00</div>`;
-}).join("");
-
-// readout
+const svg = document.getElementById("svg"), tk = document.getElementById("ticks");
 const rd = { 1:document.getElementById("r1"), 2:document.getElementById("r2"),
              3:document.getElementById("r3"), 4:document.getElementById("r4"),
              5:document.getElementById("r5") };
-const vd = document.getElementById("vd"), ph = document.getElementById("ph");
+const vd = document.getElementById("vd");
 const scope = document.getElementById("scope");
-const NAMES = ["you (gold)","speaker 2","speaker 3","speaker 4"];
+let D = null, ph = null;
+const fmt = (sec) => { sec = Math.max(0, Math.round(sec)); const h = Math.floor(sec/3600), m = Math.floor(sec%3600/60), s = sec%60;
+  return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`; };
+const esc = t => String(t).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+function draw() {
+  const env = D.env, dur = D.dur;
+  let s = "";
+  // delivered shorts: a band per clip, coloured by type
+  for (const c of D.clips) {
+    if (!c.src) continue;
+    const a = c.src[0] / dur * W, b = Math.max(c.src[1] / dur * W, a + 3);
+    const col = KCOL[c.kind] || KCOL.HYPE;
+    s += `<rect x="${a.toFixed(1)}" y="0" width="${(b-a).toFixed(1)}" height="${H}" fill="${col}" opacity=".16"/>`;
+    s += `<rect x="${a.toFixed(1)}" y="0" width="${(b-a).toFixed(1)}" height="2" fill="${col}" opacity=".9"/>`;
+  }
+  // near-misses: dim ticks at the top
+  for (const n of D.near) {
+    const x = n.t / dur * W;
+    s += `<rect x="${x.toFixed(1)}" y="0" width="1.4" height="7" fill="${C_HEAD}" opacity=".35"/>`;
+  }
+  s += `<line x1="0" y1="${MID}" x2="${W}" y2="${MID}" stroke="${C_LINE}" stroke-width="1"/>`;
+  const bw = W / N;
+  for (let i = 0; i < N; i++) {
+    const a = 0.06 + env[i] * 0.9, h = a * (H - 26), y = MID - h / 2;
+    const t = (i + 0.5) / N * dur;
+    const c = clipAt(t);
+    s += `<rect x="${(i*bw + bw*.15).toFixed(2)}" y="${y.toFixed(1)}" width="${(bw*.7).toFixed(2)}" height="${h.toFixed(1)}" fill="${c ? (KCOL[c.kind]||KCOL.HYPE) : C_BAR}" opacity="${c ? .95 : .6}"/>`;
+  }
+  s += `<line id="ph" x1="0" y1="0" x2="0" y2="${H}" stroke="${C_HEAD}" stroke-width="1.5" opacity="0"/>`;
+  svg.innerHTML = s;
+  ph = document.getElementById("ph");
+  tk.innerHTML = Array.from({length: 6}, (_, i) => `<div>${fmt(dur * i / 6)}</div>`).join("");
+  const top = document.querySelector(".inst .top");
+  if (top) top.querySelectorAll(".f")[1].textContent = `${D.w}×${D.h} · ${D.fps} fps · ${(D.sr/1000).toFixed(1)} kHz · ${fmt(dur).slice(0,5).replace(":", " h ")} min · ${D.job_minutes} min door to door`;
+}
+function clipAt(t) { return D.clips.find(c => c.src && t >= c.src[0] - 2 && t <= c.src[1] + 2) || null; }
+function nearAt(t) { let best = null; for (const n of D.near) { const d = Math.abs(n.t - t); if (d < 45 && (!best || d < best.d)) best = { ...n, d }; } return best; }
 
 function probe(f) {
-  const z = inZone(f), sec = Math.round(f * DUR);
-  const mm = String(Math.floor(sec/60)).padStart(2,"0"), ss = String(sec%60).padStart(2,"0");
-  const lg = z ? z.l : (.04 + (f*37 % 1) * .22);
-  const hy = z ? z.h : Math.floor((f*53 % 1) * 2);
-  const cs = z ? z.c : 0;
-  rd[1].querySelector(".v").textContent = `${mm}:${ss}`;
+  if (!D) return;
+  const t = f * D.dur, i = Math.min(N - 1, Math.floor(f * N));
+  const lg = D.laugh[i] || 0, hy = D.hype[i] || 0, tm = (D.terms[i] || 0) + (D.kill[i] || 0);
+  const c = clipAt(t), nr = c ? null : nearAt(t);
+  rd[1].querySelector(".v").textContent = fmt(t);
   rd[2].querySelector(".v").textContent = lg.toFixed(2) + "×";
   rd[3].querySelector(".v").textContent = hy + " / 20 s";
-  rd[4].querySelector(".v").textContent = cs;
-  rd[5].querySelector(".v").textContent = NAMES[Math.floor(f*137) % NAMES.length];
+  rd[4].querySelector(".v").textContent = String(tm);
+  rd[5].querySelector(".v").textContent = c ? `${KTXT[c.kind] || c.kind} · ${c.score.toFixed(1)}` : (nr ? `near · ${nr.score.toFixed(1)}` : "—");
   rd[2].classList.toggle("hi", lg >= 1);
   rd[3].classList.toggle("hi", hy >= 3);
-  rd[4].classList.toggle("hi", cs >= 3);
-  if (z) {
+  rd[4].classList.toggle("hi", tm >= 2);
+  rd[5].classList.toggle("hi", !!c);
+  if (c) {
     vd.className = "verdict";
-    vd.innerHTML = `<b>CUT HERE</b> ${z.t} — this became a short.`;
+    vd.innerHTML = `<b>CUT HERE</b> ${KTXT[c.kind] || c.kind} moment, score ${c.score.toFixed(1)} — “${esc(c.title)}” became a ${Math.round(c.seconds)} s short.`;
+  } else if (nr) {
+    vd.className = "verdict no";
+    vd.innerHTML = `<b>NEAR MISS</b> scored ${nr.score.toFixed(1)} but no clean start and end could be built around it — listed for you, not clipped.`;
   } else {
     vd.className = "verdict no";
-    vd.innerHTML = `<b>SKIP</b> routine chatter, no reaction density — not clipped.`;
+    vd.innerHTML = `<b>SKIP</b> routine play — no reaction density here, not clipped.`;
   }
-  ph.setAttribute("x1", f*W); ph.setAttribute("x2", f*W); ph.setAttribute("opacity", ".9");
+  if (ph) { ph.setAttribute("x1", f*W); ph.setAttribute("x2", f*W); ph.setAttribute("opacity", ".9"); }
 }
 
 scope.addEventListener("pointermove", e => {
@@ -448,10 +529,21 @@ scope.addEventListener("pointermove", e => {
   probe(Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)));
 });
 scope.addEventListener("pointerleave", () => {
-  ph.setAttribute("opacity", "0");
+  if (ph) ph.setAttribute("opacity", "0");
   vd.className = "verdict";
   vd.textContent = "Move across the waveform — the detector reports what it measured at that point.";
   Object.values(rd).forEach(d => { d.querySelector(".v").textContent = "—"; d.classList.remove("hi"); });
+});
+// idle sweep so the panel is alive before anyone touches it
+let sweep = 0, idle = true;
+scope.addEventListener("pointerenter", () => idle = false);
+setInterval(() => { if (idle && D) { sweep = (sweep + .0025) % 1; probe(sweep); } }, 55);
+
+fetch("/demo/detector.json").then(r => r.ok ? r.json() : null).then(d => {
+  if (!d || !d.env) throw new Error("no data");
+  D = d; draw();
+}).catch(() => {
+  svg.innerHTML = `<text x="500" y="${MID}" fill="${C_LINE}" font-size="14" text-anchor="middle" font-family="monospace">detector data unavailable right now</text>`;
 });
 
 
@@ -467,11 +559,15 @@ scope.addEventListener("pointerleave", () => {
 
   // 1. karaoke captions
   const cap = document.getElementById("pcap");
-  if (cap) {
+  if (cap && !cap.hidden) {
+    // Real opening lines from delivered shorts — never invented.
     const LINES = [
-      "NO WAY HE ACTUALLY DID THAT",
-      "EVERYONE LOST IT AT ONCE",
-      "THAT IS GOING STRAIGHT IN",
+      "OH WAIT, ARE YOU ON ONE OF THE ROOFS?",
+      "THERE'S SO MANY THAT SPAWN THOUGH",
+      "HOW FAST CAN YOU SPIN THOUGH?",
+      "I'VE BEEN IN THE AIR TOO LONG",
+      "HOW MANY GYMS HAVE YOU DEFEATED?",
+      "I SHOULD POST MY SHINY TIER LIST",
     ];
     let li = 0;
     const play = () => {
@@ -487,7 +583,7 @@ scope.addEventListener("pointerleave", () => {
 
   // 2. the waveform strip
   const wv = document.getElementById("pwave");
-  if (wv) {
+  if (wv && !wv.hidden) {
     for (let i = 0; i < 34; i++) {
       const b = document.createElement("i");
       b.style.animationDelay = (i * 0.055).toFixed(2) + "s";
@@ -499,22 +595,36 @@ scope.addEventListener("pointerleave", () => {
   // 3. the collapse — the same six zones the detector panel uses, so the two
   //    halves of the page tell one story rather than two.
   const bar = document.getElementById("cbar"), reel = document.getElementById("creel");
-  if (bar && reel) {
-    const SCORES = [18.5, 17.3, 16.4, 15.1, 13.2, 12.6, 11.0, 10.4, 9.4, 8.7, 7.9, 6.2];
-    SCORES.forEach((sc, k) => {
-      const at = 0.04 + (k / SCORES.length) * 0.92;
+  // The collapse is drawn from the SAME real data as the detector below (25 shorts of a
+  // ten-hour stream, at their real positions). Until the JSON lands, the twelve highest
+  // scores stand in at even spacing so the page never shows an empty bar.
+  const FALLBACK = [14.1, 13.1, 11.8, 11.6, 11.2, 10.4, 10.4, 10.2, 10.0, 9.9, 9.3, 8.9];
+  window.buildCollapse = function (items) {
+    if (!bar || !reel) return;
+    bar.querySelectorAll("i").forEach((e) => e.remove()); reel.innerHTML = "";
+    items.forEach((it, k) => {
       const hit = document.createElement("i");
-      hit.style.left = (at * 100).toFixed(2) + "%";
-      hit.style.width = "2.1%";
-      hit.style.animationDelay = still ? "0s" : (0.2 + k * 0.06).toFixed(2) + "s";
+      hit.style.left = (it.at * 100).toFixed(2) + "%";
+      hit.style.width = Math.max(0.55, it.w * 100).toFixed(2) + "%";
+      hit.style.animationDelay = still ? "0s" : (0.2 + k * 0.05).toFixed(2) + "s";
+      if (it.title) hit.title = it.title;
       bar.appendChild(hit);
       const card = document.createElement("div");
       card.className = "r";
-      card.setAttribute("data-s", sc.toFixed(1));
-      card.style.animationDelay = still ? "0s" : (0.4 + k * 0.06).toFixed(2) + "s";
+      card.setAttribute("data-s", it.score.toFixed(1));
+      card.style.animationDelay = still ? "0s" : (0.4 + k * 0.05).toFixed(2) + "s";
       reel.appendChild(card);
     });
-  }
+  };
+  window.buildCollapse(FALLBACK.map((sc, k) => ({ at: 0.04 + (k / FALLBACK.length) * 0.92, w: 0.021, score: sc })));
+  fetch("/demo/detector.json").then(r => r.ok ? r.json() : null).then(d => {
+    if (!d || !d.clips) return;
+    const items = d.clips.filter(c => c.src).sort((a, b) => a.src[0] - b.src[0])
+      .map(c => ({ at: c.src[0] / d.dur, w: c.seconds / d.dur, score: c.score, title: c.title }));
+    window.buildCollapse(items);
+    const lg = document.querySelector(".collapse .lg span:last-child");
+    if (lg) lg.textContent = fmt(d.dur);
+  }).catch(() => {});
 
   // 4. figures count up on first sight
   const figs = document.querySelectorAll(".figs b[data-count]");
@@ -558,10 +668,6 @@ scope.addEventListener("pointerleave", () => {
   }), 2500);
 })();
 
-// idle sweep so the panel is alive before anyone touches it
-let sweep = 0, idle = true;
-scope.addEventListener("pointerenter", () => idle = false);
-setInterval(() => { if (idle) { sweep = (sweep + .004) % 1; probe(sweep); } }, 55);
 
 // hero link box -> workspace
 (function(){
@@ -584,7 +690,7 @@ setInterval(() => { if (idle) { sweep = (sweep + .004) % 1; probe(sweep); } }, 5
       if(!r.ok){ prev.innerHTML='<span style="color:var(--warn)">'+esc(b.error||"Could not read that link.")+'</span>'; return; }
       const mm=Math.floor((b.durationS||0)/60);
       prev.innerHTML='<b>'+esc(b.title||"That video")+'</b>'
-        +'<span class="mono">'+mm+' MIN · WE'LL FIND UP TO '+b.estimatedClips+' CLIPS WORTH POSTING</span>'
+        +'<span class="mono">'+mm+' MIN · WE’LL FIND UP TO '+b.estimatedClips+' CLIPS WORTH POSTING</span>'
         +'<a class="b1 sm" href="/app.html?src='+encodeURIComponent(v)+'">Make these shorts — free account</a>';
     }catch(err){ prev.innerHTML='<span style="color:var(--warn)">Network hiccup — try again.</span>'; }
     finally{ btn.disabled=false; btn.textContent=t0; }
@@ -607,6 +713,86 @@ setInterval(() => { if (idle) { sweep = (sweep + .004) % 1; probe(sweep); } }, 5
       if(lbl0) lbl0.textContent="shorts delivered to creators";
     }
   }catch(e){}
+})();
+
+/* ── SEE IT HAPPEN ────────────────────────────────────────────────────────
+   Replays a real job in ~40 s. Stage names are the engine's own; their widths are
+   the seconds each took on the ten-hour stream (2026-08-17), scaled. The clips are
+   four of the twenty-five it delivered. Under prefers-reduced-motion it shows the
+   delivery straight away.                                                       */
+(function () {
+  const root = document.getElementById("demo");
+  if (!root) return;
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const steps = [...root.querySelectorAll(".dstep")], nav = [...root.querySelectorAll("#dnav li")];
+  const dinput = document.getElementById("dinput"), dbtn = document.getElementById("dbtn");
+  const fill = document.getElementById("dfill"), stagesEl = document.getElementById("dstages"), eta = document.getElementById("deta");
+  const grid = document.getElementById("dgrid");
+  const URL = "https://www.twitch.tv/videos/2314987110";
+  // real per-stage seconds from the ten-hour job
+  const STAGES = [["scanning",1],["audio",927],["transcribing",503],["speakers",7],["watching",1988],["planning",38],
+                  ["filling gaps",125],["scoreboard",196],["selecting",35],["subtitling",1],["cutting",1408],["uploading",40]];
+  const TOTAL = STAGES.reduce((a, s) => a + s[1], 0);
+  const CLIPS = [
+    { t: "How fast can you spin though?", k: "HYPE", s: 11.6, l: "20 s" },
+    { t: "Oh wait, are you on one of the roofs?", k: "LAUGH", s: 14.1, l: "42 s" },
+    { t: "I’ve been in the air too long", k: "HYPE", s: 10.4, l: "33 s" },
+    { t: "How many gyms have you defeated?", k: "HYPE", s: 7.9, l: "35 s" },
+  ];
+  stagesEl.innerHTML = STAGES.map(([n, s]) => `<li data-n="${n}"><span>${n}</span><b>${s >= 60 ? Math.round(s / 60) + " min" : s + " s"}</b></li>`).join("");
+  grid.innerHTML = CLIPS.map((c) => `<div class="dcard"><div class="th" data-kind="${c.k}"></div><div class="tt">“${c.t}”<span>${c.k} · ${c.l} · SCORE ${c.s.toFixed(1)}</span></div></div>`).join("");
+  const cards = [...grid.querySelectorAll(".dcard")], lis = [...stagesEl.querySelectorAll("li")];
+
+  const show = (n) => { steps.forEach((s) => s.classList.toggle("on", +s.dataset.step === n)); nav.forEach((l, i) => l.classList.toggle("on", i === n - 1)); };
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  let running = false, gen = 0;
+
+  async function play() {
+    if (running) return; running = true; const my = ++gen;
+    const alive = () => my === gen;
+    // 1 · paste
+    show(1); dinput.innerHTML = '<i class="caret"></i>'; dbtn.classList.remove("pulse");
+    fill.style.transition = "none"; fill.style.width = "0"; lis.forEach((l) => l.className = ""); cards.forEach((c) => c.classList.remove("on"));
+    await sleep(700); if (!alive()) return;
+    for (let i = 1; i <= URL.length; i++) { dinput.innerHTML = URL.slice(0, i) + '<i class="caret"></i>'; await sleep(28); if (!alive()) return; }
+    await sleep(500); dbtn.classList.add("pulse"); await sleep(600); if (!alive()) return;
+    // 2 · engine
+    show(2); await sleep(600); if (!alive()) return;
+    const SCALE = 16000 / TOTAL;                       // whole job ≈ 16 s on screen
+    let acc = 0;
+    fill.style.transition = "width .3s linear";
+    for (let i = 0; i < STAGES.length; i++) {
+      const [n, sec] = STAGES[i];
+      lis[i].className = "run";
+      const dur = Math.max(260, sec * SCALE), t0 = performance.now();
+      while (performance.now() - t0 < dur) {
+        const p = (acc + sec * Math.min(1, (performance.now() - t0) / dur)) / TOTAL;
+        fill.style.width = (p * 100).toFixed(2) + "%";
+        eta.textContent = "· ~" + Math.max(1, Math.round(91 * (1 - p))) + " min left";
+        await sleep(90); if (!alive()) return;
+      }
+      acc += sec; lis[i].className = "done";
+    }
+    fill.style.width = "100%"; eta.textContent = "· done";
+    await sleep(700); if (!alive()) return;
+    // 3 · delivery
+    show(3);
+    for (let i = 0; i < cards.length; i++) { await sleep(220); if (!alive()) return; cards[i].classList.add("on"); }
+    await sleep(6500); if (!alive()) return;
+    running = false;
+    play();
+  }
+  if (still) {
+    show(3); cards.forEach((c) => c.classList.add("on")); lis.forEach((l) => l.className = "done"); fill.style.width = "100%";
+    return;
+  }
+  // start when it scrolls into view; pause when the tab hides
+  const start = () => { if (!running) play(); };
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { start(); io.disconnect(); } }), { threshold: 0.25 });
+    io.observe(root);
+  } else start();
+  document.addEventListener("visibilitychange", () => { if (document.hidden) { gen++; running = false; } else start(); });
 })();
 
 // nav + reveals hanteras av cf.js
