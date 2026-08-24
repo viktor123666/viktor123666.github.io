@@ -1,0 +1,36 @@
+{
+  "id": "s4e07_the_pillar_sighs",
+  "number": 7,
+  "title": "The Pillar Sighs",
+  "subtitle": "Episode 7 of 12 · Season 4: The Fates Unravel",
+  "realm_id": "thanatos",
+  "fate_triggered": "Fenna hears the Central Pillar speak its first word in 400 years. The word is K-XII's true name.",
+  "pov_characters": ["fenna_the_reader", "brother_vel"],
+  "supporting": ["master_carver_ost", "elder_griever_ond", "current_watcher"],
+  "synopsis": "It is the dawn of an ordinary day in Thanatos. Fenna stands at her desk, reading the Central Pillar in its endless update, releasing souls to Horizon as she has for 400 years. At the third hour of her shift, the Pillar SIGHS. Fenna hears it as a single voiced word — a NAME. She does not flinch. She has known this name for 400 years. She has been WAITING for the Pillar to know it too. Brother Vel, who is in the Sanctum sweeping (his weekly Wednesday duty), hears nothing. Fenna says nothing aloud. She walks to the Memorial Walk, finds Master Carver Ost mid-shift, and whispers the name. Ost goes white. He kneels and asks if he is to carve it. Fenna says NO. The name must remain unwritten. Ost stands and bows. The Memorial Walk is closed for the rest of the day. Elder Griever Ond, sensing something — Grievers always do — arrives at the Sanctum at sundown and asks Fenna a single question: 'Was it the one who broke the Oath?' Fenna nods once. Ond says: 'Then we mourn quietly.' That night, every bell in Thanatos rings except the Thirteenth. The Current Watcher of the Thirteenth Bell Tower hears the not-ringing. He weeps for the first time in his seven-year shift. The shift is 4 years and 8 months from over.",
+  "key_scenes": [
+    {"location": "Fenna's Desk, Sanctum, dawn", "action": "Fenna reading the Pillar. Third hour of shift."},
+    {"location": "The Pillar sighs", "action": "The Pillar speaks one voiced word. K-XII's true name. Fenna alone hears."},
+    {"location": "The Memorial Walk", "action": "Fenna whispers the name to Master Carver Ost. Ost goes white. Asks if he must carve. Fenna says no."},
+    {"location": "Elder Griever Ond's arrival", "action": "Ond arrives at sundown. Asks: 'Was it the one who broke the Oath?' Fenna nods."},
+    {"location": "Bells of Thanatos", "action": "Every bell rings except the Thirteenth."},
+    {"location": "The Thirteenth Bell Tower", "action": "The Current Watcher weeps for the first time in his shift."}
+  ],
+  "cliffhanger": "Fenna, that night, writes the name on a single sheet of paper, folds it twice, places it in a cork-lined drawer in her desk, and locks the drawer. The drawer key has never been seen since.",
+  "panel_storyboard": [
+    {"panel": 1, "composition": "Wide of Fenna's Sanctum at dawn. Marble floor. The Central Pillar at center, glyphs flowing on its surface. Fenna at her desk standing, reading.", "character": "fenna_the_reader", "camera": "establishing wide", "emotion": "routine"},
+    {"panel": 2, "composition": "Close-up of the Pillar's surface. A single glyph SIGHING — emanating sound, visible as soft concentric ripples.", "character": null, "camera": "macro pillar", "emotion": "ancient utterance", "caption": "The Pillar had not spoken in 400 years."},
+    {"panel": 3, "composition": "Fenna's face, totally calm. Not surprised. Closes her eyes briefly.", "character": "fenna_the_reader", "camera": "tight three-quarter", "emotion": "expected confirmation", "dialogue": "Fenna (thought): 'I have known this name for four centuries.'"},
+    {"panel": 4, "composition": "Fenna walking the Memorial Walk. Pale stones either side. Master Carver Ost at her chisel mid-stroke.", "character": "fenna_the_reader", "camera": "long lens corridor", "emotion": "duty"},
+    {"panel": 5, "composition": "Ost on his knees, eyes wet. Fenna leaning down, whispering. The viewer cannot see the name.", "character": "master_carver_ost", "camera": "tight whisper two-shot", "emotion": "sacred terror", "dialogue": "Fenna (silent): [REDACTED] Ost: 'Shall I carve it?' Fenna: 'No.'"},
+    {"panel": 6, "composition": "Elder Griever Ond arriving at the Sanctum at sundown, single rose in hand.", "character": "elder_griever_ond", "camera": "wide doorway", "emotion": "intuition", "dialogue": "Ond: 'Was it the one who broke the Oath?'"},
+    {"panel": 7, "composition": "Fenna nodding once. Behind her, the Pillar glyphs slow.", "character": "fenna_the_reader", "camera": "two-shot doorway", "emotion": "shared knowledge"},
+    {"panel": 8, "composition": "Wide of Thanatos at night. All bell-towers ringing in sequence. The Thirteenth tower DARK and SILENT, in dramatic contrast.", "character": null, "camera": "establishing nighttime aerial", "emotion": "honor + absence", "caption": "Every bell in Thanatos rang. Except one."},
+    {"panel": 9, "composition": "The Current Watcher in his cold tower. Tears falling silently. Hand on the still bell-rope.", "character": "current_watcher", "camera": "tight on face", "emotion": "first tears in seven years"},
+    {"panel": 10, "composition": "Fenna at her desk that night. Folded paper in her hand. Cork-lined drawer open. The paper goes in. The drawer locks.", "character": "fenna_the_reader", "camera": "tight on hands and drawer", "emotion": "containment", "caption": "The key has not been seen since."}
+  ],
+  "cosmic_price_paid": "K-XII's true name is now stored in Fenna's drawer. The drawer key is missing. The Thirteenth Bell remains unrung. The Watcher counts another tear-mark on his sleeve.",
+  "callout_for_cosmos_drawer": "In Season 4, Fenna heard the Central Pillar speak K-XII's true name. She wrote it once. She locked it away. The Thirteenth Bell did not ring.",
+  "watch_chapter": null,
+  "read_chapter": null
+}

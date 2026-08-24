@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NULL — The Absence | Scalelist Universe</title>
+<meta name="description" content="NULL: The Absence. A realm on Ferdinand the Cosmic Cork Oak.">
+<meta property="og:title" content="NULL — The Absence">
+<meta property="og:description" content="The Absence. A realm on the cosmic cork oak Ferdinand.">
+<meta property="og:image" content="https://scalelistuniverse.com/cosmos/scenery/null.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a84c; --void:#050510; --panel:#0a0a14; --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060; --accent:#0a0a10}
+html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.7}
+a{color:inherit;text-decoration:none}
+
+header{padding:18px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
+header nav{display:flex;gap:18px;flex-wrap:wrap}
+header nav a{color:var(--dim);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:'Cinzel',serif}
+header nav a:hover{color:var(--gold)}
+
+.hero{position:relative;height:60vh;min-height:420px;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,transparent 50%,var(--void) 100%),radial-gradient(ellipse at 50% 100%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 70%);pointer-events:none}
+.hero .body{position:relative;z-index:2;padding:50px 32px;max-width:1100px;width:100%;margin:0 auto}
+.hero .eyebrow{font-family:'Cinzel',serif;color:var(--accent);font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(2.4rem,6vw,5rem);color:#fff;letter-spacing:.06em;font-weight:900;line-height:1;text-shadow:0 0 40px color-mix(in srgb,var(--accent) 40%,transparent)}
+.hero h1 em{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:.36em;color:var(--accent);letter-spacing:.04em;margin-top:12px;text-shadow:none;opacity:.95}
+
+.section{max-width:1100px;margin:0 auto;padding:50px 32px;border-top:1px solid var(--border)}
+.section h2{font-family:'Cinzel',serif;color:var(--accent);font-size:.86rem;letter-spacing:.32em;text-transform:uppercase;margin-bottom:24px;font-weight:700}
+.section .blurb{font-size:1.18rem;line-height:1.85;font-style:italic;opacity:.94;max-width:760px}
+
+.grid-2{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
+@media(min-width:780px){.grid-2{grid-template-columns:1fr 1fr}}
+.entry{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 22px;transition:all .25s}
+.entry:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+.entry h3{font-family:'Cinzel',serif;color:#fff;font-size:1.04rem;font-weight:700;letter-spacing:.04em;margin-bottom:6px;line-height:1.2}
+.entry .biome{color:var(--accent);font-style:italic;font-size:.84rem;margin-bottom:10px;letter-spacing:.04em}
+.entry p{font-size:.94rem;line-height:1.65;opacity:.92;margin-bottom:8px}
+.entry p:last-child{margin-bottom:0}
+
+.char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:14px}
+.char-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;transition:all .2s;display:block}
+.char-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.char-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#080812}
+.char-card .char-name{padding:10px 12px 4px;font-family:'Cinzel',serif;color:#fff;font-size:.88rem;font-weight:700;letter-spacing:.04em;line-height:1.2}
+.char-card .char-role{padding:0 12px 12px;color:var(--accent);font-style:italic;font-size:.78rem;line-height:1.3}
+
+.fate{margin-top:28px;background:linear-gradient(135deg,rgba(204,51,51,0.08),var(--panel));border:1px solid rgba(204,51,51,0.4);border-radius:12px;padding:20px 24px}
+.fate-label{font-family:'Cinzel',serif;color:#ff6677;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:8px;font-weight:700}
+.fate p{font-size:1rem;line-height:1.7;font-style:italic;color:var(--text)}
+
+.cta{padding:60px 32px;text-align:center;border-top:1px solid var(--border)}
+.cta a{display:inline-block;margin:6px;padding:12px 28px;background:var(--accent);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;border-radius:8px;text-decoration:none}
+.cta a.outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.cta a:hover{transform:scale(1.04);transition:transform .15s}
+
+footer{padding:30px;text-align:center;color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
+  <nav>
+    <a href="/cosmos">All Realms</a>
+    <a href="/cosmos/atlas">Atlas</a>
+    <a href="/lineage">Lineage</a>
+    <a href="/manga">Manga</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <img src="/cosmos/scenery/null.jpg" alt="NULL scenery" onerror="this.style.display='none'">
+  <div class="body">
+    <div class="eyebrow">A realm on Ferdinand</div>
+    <h1>NULL<em>The Absence</em></h1>
+  </div>
+</section>
+
+<section class="section">
+  <h2>The Realm</h2>
+  <p class="blurb">NULL is one of the twelve realms of the Scalelist Universe.</p>
+  <div class="fate"><div class="fate-label">Realm Fate</div><p>{'threat': "Ferdinand's roots withdraw. If Ferdinand ever chose to stop drinking from Null — for whatever cosmic reason — the universe would lose its heartbeat supply. Every HADOM tick would slow, then stop. The Oldest Root is theoretically unmovable, but nothing is theoretically-always in the Scalelist Universe.", 'consequence': "The universe slows to a halt within 12 cosmic cycles. Every realm's HADOM drops to 0. Static existence. Ferdinand becomes an ornament, not an engine. Scholars call this 'the Quiet End.'", 'prophecy_line': 'The tree drinks what the void offers. Do not make the tree refuse.', 'destroyable_by': 'Only Ferdinand himself, by choice. No attack can sever his roots — they grow back faster than they can be cut. This is why the cosmology is safe: the universe depends on a tree who refuses to stop holding. And Ferdinand has never broken his Oath.'}</p></div>
+</section>
+
+<section class="section">
+  <h2>Continents · 3 regions</h2>
+  <div class="grid-2"><div class="entry">
+          <h3>The Absence</h3>
+          <div class="biome">Nothing. No light. No air. No ground. You have a body here only because the universe is being polite.</div>
+          <p>The whole of Null is one continent because it is nothing. Subdividing it would require something to subdivide.</p>
+        </div><div class="entry">
+          <h3>Ferdinand's Roots</h3>
+          <div class="biome">Silver-barked roots descending impossibly far through the absence.</div>
+          <p>The only 'continent' in Null that has structure — Ferdinand's silver roots. They are not Null's; they are Ferdinand's, but they are Null's only furniture.</p>
+        </div><div class="entry">
+          <h3>The Inscriptions</h3>
+          <div class="biome">Non-spatial region where the Seven Sin Codices were etched on Null's 'inside.'</div>
+          <p>The theoretical continent of Null. Where the pre-written things exist. Non-spatial. Non-temporal. Real.</p>
+        </div></div>
+</section>
+
+<section class="section">
+  <h2>Tribes &amp; Peoples · 5 groups</h2>
+  <div class="grid-2"><div class="entry">
+          <h3>The Void-Worms</h3>
+          <div class="biome">on the_absence</div>
+          <p><b>Look:</b> Translucent. Long, thin. Visible only in peripheral vision. Eyes like small white pupils.</p>
+          <p><b>Persona:</b> Unintelligent in any conventional sense. Essential. Peaceful. Have never attacked anything in recorded history.</p>
+        </div><div class="entry">
+          <h3>The Root-Spirits</h3>
+          <div class="biome">on ferdinands_roots</div>
+          <p><b>Look:</b> Bark-skinned. Thin. Each has a numeric tattoo on their forearm — their heartbeat count. Silver eyes.</p>
+          <p><b>Persona:</b> Patient beyond mortal reckoning. Slow-speaking. Kind to visitors they choose to notice. Most visitors they do not.</p>
+        </div><div class="entry">
+          <h3>The Root-Tenders</h3>
+          <div class="biome">on ferdinands_roots</div>
+          <p><b>Look:</b> Cork-bodied. Hollow eyes — literally, they are carved. Move smoothly. Do not age.</p>
+          <p><b>Persona:</b> Serene. Devoted. Considered by some scholars to be Ferdinand's own remote limbs.</p>
+        </div><div class="entry">
+          <h3>The Codex-Readers of Null</h3>
+          <div class="biome">on the_inscriptions</div>
+          <p><b>Look:</b> Pale, hollow-eyed. Single-robed. Always bearing a small mirror — they read the Inscriptions by reflection.</p>
+          <p><b>Persona:</b> Traumatized. Devout. A few have gone mad; the rest have gone quiet.</p>
+        </div><div class="entry">
+          <h3>The Pre-Writers</h3>
+          <div class="biome">on the_inscriptions</div>
+          <p><b>Look:</b> Rumored. Theoretical. No confirmed sighting. Smurjan has said he 'has met one.' He will not name them.</p>
+          <p><b>Persona:</b> Unknown.</p>
+        </div></div>
+</section>
+
+<section class="section">
+  <h2>Named Characters Here · 9 souls</h2>
+  <div class="char-grid"><a class="char-card" href="/cosmos/atlas#realm-null">
+          <img src="/characters/smurjan.png" alt="Smurjan (Null-walker)" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Smurjan (Null-walker)</div>
+          <div class="char-role">The only mortal who walks Null casually</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-null">
+          <img src="/characters/npcs/root_spirit_48000000000.png" alt="Elder 4.8 (Root-Spirit)" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Elder 4.8 (Root-Spirit)</div>
+          <div class="char-role">Oldest known Root-Spirit</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-null">
+          <img src="/characters/npcs/root_spirit_1.png" alt="Root-Spirit One" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Root-Spirit One</div>
+          <div class="char-role">The first Root-Spirit — nameless, numbered</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-null">
+          <img src="/characters/npcs/junior_root_spirit.png" alt="Junior Root-Spirit (unassigned)" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Junior Root-Spirit (unassigned)</div>
+          <div class="char-role">A new Root-Spirit awaiting a root</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-null">
+          <img src="/characters/npcs/first_tender.png" alt="First Tender" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">First Tender</div>
+          <div class="char-role">Eldest Root-Tender</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-null">
+          <img src="/characters/npcs/trollmage_visiting.png" alt="Trollmage (visiting)" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Trollmage (visiting)</div>
+          <div class="char-role">Only living being to have read the Inscription backwards</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-null">
+          <img src="/characters/npcs/reader_of_the_fifth_line.png" alt="Reader of the Fifth Line" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Reader of the Fifth Line</div>
+          <div class="char-role">Specialist in the fifth Inscription</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-null">
+          <img src="/characters/npcs/the_hand_that_wrote.png" alt="[REDACTED]" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">[REDACTED]</div>
+          <div class="char-role">The hand that wrote the Codex Inscriptions</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-null">
+          <img src="/characters/lineage/niva.png" alt="Niva" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Niva</div>
+          <div class="char-role">The Untraversed</div>
+        </a></div>
+</section>
+
+<section class="cta">
+  <a href="/cosmos">All 12 Realms</a>
+  <a href="/cosmos/atlas" class="outline">Open Atlas</a>
+  <a href="/lineage" class="outline">The Lineage</a>
+</section>
+
+<footer>
+  Scalelist Universe · NULL · <a href="/" style="color:var(--accent)">Home</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Workspace — ViggeClips</title>
+<meta name="description" content="Upload a stream, watch each measured stage, and collect your finished shorts."/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="stylesheet" href="/cf.css?v=202608232310"/>
+<script defer src="/cf.js?v=202608232310"></script>
+<script defer src="/upload.js?v=202608162023"></script>
+<script defer src="/live.js?v=202608232310"></script>
+<style>
+.drop{border:1px dashed var(--edge2);background:var(--bg2);padding:3.4rem 1.5rem;text-align:center;
+  cursor:pointer;transition:border-color .2s,background .2s}
+.drop:hover,.drop.hot{border-color:var(--gold);background:rgba(217,165,49,.05)}
+.drop .ic{font-family:var(--mono);font-size:1.5rem;color:var(--gold);margin-bottom:.8rem}
+.drop h2{margin:0 0 .4rem;font-size:1.15rem}
+.drop p{margin:0 0 1.4rem;color:var(--dim2);font-family:var(--mono);font-size:.76rem}
+.or{display:flex;align-items:center;gap:1rem;margin:1.5rem 0;color:var(--dim2)}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--edge)}
+.or span{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em}
+.urow{display:flex;gap:.6rem;flex-wrap:wrap}
+.urow input{flex:1;min-width:17rem}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));border:1px solid var(--edge);margin:1.6rem 0}
+.opt{padding:1.1rem 1.2rem;border-right:1px solid var(--edge)}
+.opt:last-child{border-right:0}
+/* ── the workspace form, 2026-08-17 ─────────────────────────────────────────
+   The link box leads (it is the fastest way in), the options grid can span two
+   columns for the wide controls, and every control now SHOWS what it does:
+   the subtitle styles are real renders, the bar has a number, the moment types
+   are named things rather than a person's name typed from memory. */
+.linkfirst{border:1px solid var(--edge2);background:var(--panel);padding:1.2rem 1.3rem;
+  border-radius:.5rem;box-shadow:0 0 0 1px rgba(217,165,49,.07)}
+.linkfirst .fl{margin-bottom:.6rem}
+.opt.span2{grid-column:1/-1;border-right:0;border-top:1px solid var(--edge)}
+.opts .opt{border-bottom:1px solid var(--edge)}
+
+/* moment-type chips */
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .1rem}
+.chip{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;
+  padding:.55rem .8rem;border:1px solid var(--edge2);background:var(--bg2);color:var(--dim);
+  border-radius:.35rem;cursor:pointer;text-align:left;font:inherit;
+  transition:border-color .18s,background .18s,color .18s,transform .18s}
+.chip b{font-size:.86rem;font-weight:600;color:var(--ink)}
+.chip span{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--dim2)}
+.chip:hover{border-color:var(--edge2);transform:translateY(-1px)}
+.chip.on{border-color:var(--gold);background:rgba(217,165,49,.10)}
+.chip.on b{color:var(--gold2)}
+
+/* the bar slider */
+.opt input[type=range]{width:100%;accent-color:var(--gold);margin:.5rem 0 .2rem}
+.barscale{display:flex;justify-content:space-between;font-size:.62rem;letter-spacing:.1em;
+  color:var(--dim2);text-transform:uppercase}
+
+/* subtitle style picker — real renders, not a mock-up */
+.subpick{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.7rem;margin:.3rem 0 .2rem}
+.sp{display:block;border:1px solid var(--edge2);border-radius:.4rem;overflow:hidden;cursor:pointer;
+  background:var(--bg2);transition:border-color .2s,box-shadow .2s,transform .2s}
+.sp:hover{transform:translateY(-2px)}
+.sp input{position:absolute;opacity:0;pointer-events:none}
+.sp img{display:block;width:100%;height:auto;background:#0b0e11}
+.sp b{display:block;padding:.5rem .7rem;font-size:.8rem;font-weight:500;color:var(--dim)}
+.sp.on{border-color:var(--gold);box-shadow:0 0 0 1px rgba(217,165,49,.35)}
+.sp.on b{color:var(--gold2)}
+.sp:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+@media(max-width:640px){.subpick{grid-template-columns:1fr 1fr}}
+
+.gauge{display:grid;gap:0;border:1px solid var(--edge)}
+.gr{display:grid;grid-template-columns:1.6rem 1fr 5.5rem;gap:.9rem;align-items:center;
+  padding:.85rem 1.1rem;border-bottom:1px solid var(--edge);font-size:.92rem}
+.gr:last-child{border-bottom:0}
+.gr .d{width:.55rem;height:.55rem;background:var(--edge2);justify-self:center}
+.gr.go{background:rgba(217,165,49,.06)}
+.gr.go .d{background:var(--gold);animation:bl 1s ease-in-out infinite}
+.gr.ok .d{background:var(--sig)}
+.gr .why{color:var(--dim2);font-size:.83rem;display:block;margin-top:.1rem}
+.gr .t{font-family:var(--mono);font-size:.72rem;color:var(--dim2);text-align:right}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.25}}
+.bar{height:2px;background:var(--edge);overflow:hidden;margin:0}
+.bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .6s}
+.clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(12.5rem,1fr));gap:1px;
+  background:var(--edge);border:1px solid var(--edge)}
+.clip{background:var(--panel);transition:background .2s;opacity:0;animation:in .5s forwards}
+@keyframes in{to{opacity:1}}
+.clip:hover{background:var(--bg2)}
+.clip .th{aspect-ratio:9/16;background:linear-gradient(170deg,#16191c,#0a0b0c);
+  display:grid;place-items:center;color:var(--dim2);font-family:var(--mono);position:relative;overflow:hidden}
+.clip .th video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000}
+.clip .sc{position:absolute;top:.5rem;left:.5rem;font-family:var(--mono);font-size:.64rem;
+  color:var(--gold2);border:1px solid var(--edge2);padding:.1rem .35rem;background:rgba(0,0,0,.6)}
+.clip .mt{padding:.7rem .8rem}
+.clip .mt b{display:block;font-size:.85rem;font-weight:500;line-height:1.35}
+.clip .mt span{font-family:var(--mono);font-size:.68rem;color:var(--dim2)}
+.why-list{border:1px solid var(--edge);margin-top:1rem}
+.why-list .wr{padding:.7rem 1rem;border-bottom:1px solid var(--edge);font-family:var(--mono);
+  font-size:.76rem;color:var(--dim);display:flex;gap:.8rem;flex-wrap:wrap}
+.why-list .wr:last-child{border-bottom:0}
+.why-list .wr b{color:var(--gold2);font-weight:500}
+</style>
+<meta property="og:title" content="Workspace — ViggeClips"/>
+<meta property="og:url" content="https://vigge.pro/app.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="ViggeClips"/>
+<meta property="og:image" content="https://vigge.pro/og.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://vigge.pro/og.png"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0a0a0b"/>
+</head>
+<body>
+<div class="grid"></div>
+<header class="cf" data-cta="app"></header>
+
+<section class="first"><div class="w">
+  <div class="head rv" style="max-width:46ch;margin-bottom:2rem">
+    <span class="lbl">Workspace</span>
+    <h1 style="font-size:clamp(1.7rem,3.6vw,2.4rem)">Turn a stream into shorts</h1>
+    <p>Upload once. Everything heavy runs on our servers — close the tab if you like.</p>
+  </div>
+
+  <!-- Result actions live ABOVE the credits bar so a finished job greets you with
+       its buttons, not with a scroll hunt past every clip. Hidden until delivery. -->
+  <!-- Workspace nav — ALWAYS visible: switch between clipping and history without
+       hunting. "Download all" joins the row only when a delivery exists. -->
+  <div class="acts" id="outActions" style="margin-bottom:1rem">
+    <button class="b2" type="button" id="dlAll" disabled title="Finish a job to download">Download all</button>
+    <button class="b1" type="button" id="again">Clip a video</button>
+    <a class="b2" href="/history.html">Edited videos</a>
+  </div>
+  <div class="panel rv" style="margin-bottom:1.4rem">
+    <div class="ph"><span class="t">CREDITS <b id="cred">1.0 h</b></span>
+      <span class="t">PLAN <b>Free</b></span>
+      <span class="t" style="margin-left:auto"><a href="/pricing.html" class="gld">Add credits →</a></span></div>
+  </div>
+
+  <!-- SOURCE -->
+  <div id="src">
+    <!-- THE LINK COMES FIRST (2026-08-17). It was tucked under the drop zone as an
+         afterthought — but pasting a link is the fastest way in and the one that needs
+         no file at hand, so it leads. -->
+    <div class="linkfirst">
+      <label class="fl" for="url">Paste a Twitch, YouTube or Kick link</label>
+      <div class="urow">
+        <input type="text" id="url" placeholder="twitch.tv/videos/…  ·  youtube.com/watch?v=…  ·  kick.com/…"/>
+        <button class="b1" type="button" id="fetch">Fetch</button>
+      </div>
+      <p class="hint" style="margin:.5rem 0 0">
+        If a platform refuses the download we say so instead of failing quietly — and a
+        file upload always works.</p>
+    </div>
+    <!-- Länkens egen statusrad: varje läge är SYNLIGT — knappen får aldrig se död ut. -->
+    <p id="fetchStatus" class="mono" hidden
+       style="margin:.7rem 0 0;font-size:.82rem;color:var(--dim)"></p>
+    <!-- Mobilsäker rättighetsbekräftelse: window.confirm åts upp av vissa in-app-webbläsare. -->
+    <div id="fetchConfirm" hidden
+         style="margin:.9rem 0 0;padding:1rem 1.1rem;background:var(--panel);border-left:3px solid var(--gold)">
+      <b id="fcTitle" style="display:block;margin-bottom:.25rem"></b>
+      <span id="fcMeta" class="mono" style="font-size:.78rem;color:var(--dim2)"></span>
+      <p style="font-size:.85rem;color:var(--dim);margin:.7rem 0">
+        I confirm this recording is my own content, or that I have the rights
+        holder's permission to process it.</p>
+      <div class="acts">
+        <button class="b1 sm" type="button" id="fcGo">I have the rights — clip it</button>
+        <button class="b3 sm" type="button" id="fcCancel">Cancel</button>
+      </div>
+    </div>
+
+    <div class="or"><span>OR UPLOAD THE FILE</span></div>
+
+    <div class="drop" id="drop">
+      <div class="ic">[ ↑ ]</div>
+      <h2>Drop a stream file here</h2>
+      <p>MP4 · MKV · MOV · WEBM — UP TO 12 HOURS</p>
+      <p class="mono" style="font-size:.72rem;color:var(--dim2);margin-top:.4rem">
+        PROCESSING TAKES ABOUT AS LONG AS THE VIDEO — A 15 MIN VIDEO IS READY IN ~15 MIN, A 2 H STREAM IN UNDER AN HOUR</p>
+      <button class="b1" type="button" id="pick">Choose file</button>
+      <input type="file" id="file" accept="video/*" class="hide" multiple/>
+    </div>
+
+    <div class="opts">
+      <div class="opt"><label class="fl" for="lang">Spoken language</label>
+        <select id="lang">
+          <option value="auto" selected>Detect automatically</option>
+          <option value="sv+en">Swedish + English mixed</option>
+          <optgroup label="Common">
+            <option value="en">English</option>
+            <option value="es">Spanish · Español</option>
+            <option value="pt">Portuguese · Português</option>
+            <option value="fr">French · Français</option>
+            <option value="de">German · Deutsch</option>
+            <option value="it">Italian · Italiano</option>
+            <option value="nl">Dutch · Nederlands</option>
+            <option value="pl">Polish · Polski</option>
+            <option value="tr">Turkish · Türkçe</option>
+            <option value="ru">Russian · Русский</option>
+            <option value="uk">Ukrainian · Українська</option>
+            <option value="ar">Arabic · العربية</option>
+            <option value="hi">Hindi · हिन्दी</option>
+            <option value="id">Indonesian</option>
+            <option value="vi">Vietnamese · Tiếng Việt</option>
+            <option value="th">Thai · ไทย</option>
+            <option value="ja">Japanese · 日本語</option>
+            <option value="ko">Korean · 한국어</option>
+            <option value="zh">Chinese · 中文</option>
+          </optgroup>
+          <optgroup label="Nordic &amp; more">
+            <option value="sv">Swedish · Svenska</option>
+            <option value="no">Norwegian · Norsk</option>
+            <option value="da">Danish · Dansk</option>
+            <option value="fi">Finnish · Suomi</option>
+            <option value="cs">Czech · Čeština</option>
+            <option value="sk">Slovak · Slovenčina</option>
+            <option value="sl">Slovenian</option>
+            <option value="hr">Croatian · Hrvatski</option>
+            <option value="sr">Serbian · Српски</option>
+            <option value="bg">Bulgarian · Български</option>
+            <option value="ro">Romanian · Română</option>
+            <option value="hu">Hungarian · Magyar</option>
+            <option value="el">Greek · Ελληνικά</option>
+            <option value="he">Hebrew · עברית</option>
+            <option value="fa">Persian · فارسی</option>
+            <option value="et">Estonian</option>
+            <option value="lv">Latvian</option>
+            <option value="lt">Lithuanian</option>
+            <option value="ms">Malay</option>
+            <option value="tl">Filipino · Tagalog</option>
+          </optgroup>
+        </select>
+        <div class="hint">Detection reads the actual speech — leave it unless the stream
+          starts in another language than it continues in. Mid-sentence switching is fine.</div></div>
+
+      <div class="opt"><label class="fl" for="len">Clip length</label>
+        <select id="len">
+          <option value="auto" selected>Mixed — the moment decides</option>
+          <option value="snappy">Snappy · 8–20 s</option>
+          <option value="short">Short · 15–30 s</option>
+          <option value="standard">Standard · 25–45 s</option>
+          <option value="long">Long · 40–75 s</option>
+          <option value="extended">Extended · 60–120 s</option>
+          <option value="talk">Talk cut · 90–240 s</option>
+        </select>
+        <div class="hint" id="lenHint">Mixed keeps a kill tight and lets a story breathe —
+          every clip gets the length its own moment needs. Pick a preset when the platform
+          decides for you.</div></div>
+
+      <div class="opt span2"><label class="fl">What to look for</label>
+        <div class="chips" id="kinds" role="group" aria-label="Moment types to favour">
+          <button type="button" class="chip auto on" data-k="" aria-pressed="true"><b>Detect moments automatically</b><span>every type, judged on merit</span></button>
+          <button type="button" class="chip" data-k="laugh"><b>Laughs</b><span>bursts, jokes landing</span></button>
+          <button type="button" class="chip" data-k="kill"><b>Kills &amp; clutch</b><span>plays, multikills, comebacks</span></button>
+          <button type="button" class="chip" data-k="story"><b>Storytelling</b><span>the whole anecdote, start to point</span></button>
+          <button type="button" class="chip" data-k="teach"><b>Explaining</b><span>how-to, builds, advice</span></button>
+          <button type="button" class="chip" data-k="scenery"><b>Scenery</b><span>calm, views, no jumpcuts</span></button>
+          <button type="button" class="chip" data-k="hype"><b>Hype</b><span>shouting, energy spikes</span></button>
+        </div>
+        <div class="hint" id="kindsHint">We look for every kind of moment and keep the
+          strongest. Pick one or more to push those to the front — they are favoured, never
+          the only ones, so a quiet stream still returns its best.</div></div>
+
+      <div class="opt span2"><label class="fl" for="bar">Where the bar sits
+          <b class="gld mono" id="barVal">25 %</b>
+          <button type="button" class="infob" id="ptsBtn" aria-expanded="false"
+                  aria-controls="ptsBox" title="What is a point?">i</button></label>
+        <div class="infopanel" id="ptsBox" hidden>
+          <b>What a point is</b>
+          <p>Every second of your recording is scored on what is actually happening in it.
+            A moment&rsquo;s points are the sum of its signals — nothing is random, and nothing
+            is a quota.</p>
+          <table class="ptbl">
+            <tr><td class="pp">+3.0</td><td>each real laugh, up to three — heard in the audio
+              (a spectral laugh gate), not guessed from loudness</td></tr>
+            <tr><td class="pp">+2.0</td><td>two or more people talking in the moment — banter
+              beats monologue</td></tr>
+            <tr><td class="pp">+2.0</td><td>a burst of energy, scaled by how much of the moment
+              sits in your stream&rsquo;s own loudest fifth</td></tr>
+            <tr><td class="pp">+1.5</td><td>each exclamation in the speech, up to three</td></tr>
+            <tr><td class="pp">+1.0</td><td>dense speech — a lot said in little time</td></tr>
+            <tr><td class="pp">+</td><td>game events we can read on screen (kills, multikills,
+              openings) and the moment&rsquo;s own type bonus</td></tr>
+            <tr><td class="pm">&minus;</td><td>rambling: everything past 25 seconds costs points,
+              so a long dull stretch cannot coast on its length</td></tr>
+            <tr><td class="pm">out</td><td>anything the content gate refuses never becomes a
+              clip at any bar</td></tr>
+          </table>
+          <p class="fine">Typical moments land between 4 and 15. The bar is simply the number a
+            moment has to beat. It is <b>your</b> number — we do not fill a quota, and we never
+            discard a moment that cleared it.</p>
+        </div>
+        <input type="range" id="bar" min="10" max="100" step="5" value="25"/>
+        <div class="barscale mono"><span>More clips</span><span>Only the best</span></div>
+        <div class="hint" id="barHint">Every moment scoring <b class="mono" id="barScore">5.5</b>
+          or higher becomes a clip — no quota to fill, none discarded to hit a number.</div></div>
+
+      <div class="opt span2"><label class="fl">Subtitle style</label>
+        <div class="subpick" id="subpick" role="radiogroup" aria-label="Subtitle style">
+          <label class="sp on"><input type="radio" name="font" value="standard" checked/>
+            <img src="/demo/subs-standard.png?v=202608180300" alt="ViggeClips standard subtitle style"
+                 loading="lazy" width="900" height="383"/>
+            <b>ViggeClips standard<span>engraved, our default</span></b></label>
+          <label class="sp"><input type="radio" name="font" value="bangers"/>
+            <img src="/demo/subs-bangers.png?v=202608180300" alt="Bangers subtitle style"
+                 loading="lazy" width="900" height="383"/>
+            <b>Bangers<span>comic weight, loud</span></b></label>
+          <label class="sp"><input type="radio" name="font" value="bebas"/>
+            <img src="/demo/subs-bebas.png?v=202608180300" alt="Bebas Neue subtitle style"
+                 loading="lazy" width="900" height="383"/>
+            <b>Bebas Neue<span>clean and tight</span></b></label>
+          <label class="sp"><input type="radio" name="font" value="bungee"/>
+            <img src="/demo/subs-bungee.png?v=202608180300" alt="Bungee subtitle style"
+                 loading="lazy" width="900" height="383"/>
+            <b>Bungee<span>round display</span></b></label>
+          <label class="sp"><input type="radio" name="font" value="comic"/>
+            <img src="/demo/subs-comic.png?v=202608180300" alt="Comic Sans subtitle style"
+                 loading="lazy" width="900" height="383"/>
+            <b>Comic Sans<span>meme energy, unironically works</span></b></label>
+          <label class="sp"><input type="radio" name="font" value="marcellus"/>
+            <img src="/demo/subs-marcellus.png?v=202608180300" alt="Marcellus subtitle style"
+                 loading="lazy" width="900" height="383"/>
+            <b>Marcellus<span>calm serif, for talk clips</span></b></label>
+          <label class="sp"><input type="radio" name="font" value="metamorphous"/>
+            <img src="/demo/subs-metamorphous.png?v=202608180300" alt="Metamorphous subtitle style"
+                 loading="lazy" width="900" height="383"/>
+            <b>Metamorphous<span>fantasy and RPG streams</span></b></label>
+          <label class="sp"><input type="radio" name="font" value="newrocker"/>
+            <img src="/demo/subs-newrocker.png?v=202608180300" alt="New Rocker subtitle style"
+                 loading="lazy" width="900" height="383"/>
+            <b>New Rocker<span>heavy, gothic</span></b></label>
+          <label class="sp"><input type="radio" name="font" value="medieval"/>
+            <img src="/demo/subs-medieval.png?v=202608180300" alt="MedievalSharp subtitle style"
+                 loading="lazy" width="900" height="383"/>
+            <b>MedievalSharp<span>hand-cut, old world</span></b></label>
+          <label class="sp"><input type="radio" name="font" value="pirata"/>
+            <img src="/demo/subs-pirata.png?v=202608180300" alt="Pirata One subtitle style"
+                 loading="lazy" width="900" height="383"/>
+            <b>Pirata One<span>blackletter, dramatic</span></b></label>
+        </div>
+        <div class="hint">Every one of these is a real frame from the renderer — same fonts,
+          same outline, same karaoke. The words light up one at a time as they are spoken, each
+          speaker keeps their own colour, and your title sits on top.</div></div>
+    </div>
+
+    <button class="b1" type="button" id="go" style="width:100%;padding:1rem">Start clipping →</button>
+    <p class="hint" style="text-align:center;margin-top:.8rem">
+      Your file is deleted automatically within 7 days of delivery. We never train on your content.</p>
+  </div>
+
+  <!-- RUNNING -->
+  <div id="run" class="hide">
+    <div class="panel">
+      <div class="ph"><span class="t">PROCESSING <b id="runName">stream.mp4</b></span>
+        <span class="t" id="eta" style="margin-left:auto">estimating…</span></div>
+      <div class="bar"><i id="fill"></i></div>
+      <div class="gauge" id="gauge"></div>
+    </div>
+    <p class="hint" style="margin-top:1rem">We will email you when it is done. Nothing runs on
+      your machine — you can close this tab safely.</p>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="out" class="hide">
+    <div class="panel" style="margin-bottom:1.2rem">
+      <div class="ph"><span class="t">DELIVERED <b id="outName">stream.mp4</b></span>
+        <span class="tag ok" style="margin-left:auto">QUALITY GATE PASSED</span></div>
+      <div class="pb" id="outStats" style="display:flex;gap:1.6rem;flex-wrap:wrap"></div>
+    </div>
+    <div class="clips" id="clipGrid"></div>
+    <div class="why-list rv" id="whyList"></div>
+  </div>
+
+  <div class="note warn rv" style="margin-top:2.5rem">
+    <span class="lbl">While you are here</span>
+    <ul><li>Jobs run on our servers, not on your machine — close the tab whenever you like
+      and come back to History. You are charged on the real duration of what you send, only
+      when clips actually arrive, and your source file is deleted automatically within 7 days
+      of delivery. A job that produces nothing costs nothing.</li></ul>
+  </div>
+</div></section>
+
+<footer class="cf"></footer>
+<script>
+(function(){
+  const STEPS=[
+    ["Read the source","resolution and frame rate from the file",4],
+    ["Clean the audio","isolating speech from everything else",300],
+    ["Transcribe","every word, in both languages",900],
+    ["Identify speakers","matching voices to profiles",360],
+    ["Hunt highlights","laughter, hype density, game events",40],
+    ["Cut for context","sentences finish, length follows content",10],
+    ["Caption and render","karaoke subs, titles, progress bar",840],
+    ["Quality gate","pixel-verify the text is on screen",4]
+  ];
+  const CLIPS=[["The big reveal","0:34",94,"event density 5 · laughter 1.4×"],
+    ["Everyone lost it","0:41",91,"laughter 1.4× · 3 voices"],
+    ["The comeback","0:28",88,"hype 4 / 20 s · energy peak"],
+    ["The run","0:52",85,"event density 4 · laughter 0.9×"],
+    ["He never saw it","0:37",81,"hype 3 / 20 s"],
+    ["Called it early","0:45",78,"laughter 1.1× · 2 voices"],
+    ["Back-to-back","0:31",74,"hype 3 / 20 s"],
+    ["All at once","0:49",71,"energy peak · hype 2"],
+    ["Told you so","0:26",68,"laughter 0.8×"],
+    ["Down to the wire","0:43",66,"hype 2 / 20 s"],
+    ["Nobody believed it","0:39",63,"laughter 0.8×"],
+    ["One more time","0:55",61,"event density 3"],
+    ["The reaction","0:29",58,"laughter 0.7×"],
+    ["Perfect timing","0:47",55,"hype 2 / 20 s"],
+    ["Straight up robbery","0:35",52,"event density 2"]];
+  const SKIPPED=[["00:19:59","content gate","truncated slur in the passage"],
+    ["01:25:04","weak hook","best line scored 1.6, floor is 5.0"],
+    ["01:45:01","content gate","slur in the passage"],
+    ["00:16:31","dull","routine chatter only, no reaction density"]];
+
+  const $=i=>document.getElementById(i), show=(e,o)=>e.classList.toggle("hide",!o);
+  const secs=n=>{const m=Math.floor(n/60);return m?m+" min":n+" s"};
+
+  $("pick").onclick=()=>$("file").click();
+  $("file").onchange=e=>{if(e.target.files[0])start(e.target.files[0].name)};
+  $("fetch").onclick=()=>{const u=$("url").value.trim();if(u)start(nice(u))};
+  $("go").onclick=()=>{const f=$("file").files[0],u=$("url").value.trim();
+    start(f?f.name:(u?nice(u):"your-stream.mp4"))};
+  $("again").onclick=()=>{show($("out"),false);show($("src"),true);scrollTo({top:0,behavior:"smooth"})};
+  function nice(u){try{return new URL(u).hostname.replace(/^www\./,"")+" link"}catch{return "pasted link"}}
+
+  // lank fran landningssidans hero
+  (function(){
+    const q=new URLSearchParams(location.search).get("src");
+    if(q){ $("url").value=q; $("url").scrollIntoView({block:"center"}); }
+  })();
+
+  const d=$("drop");
+  ["dragenter","dragover"].forEach(t=>d.addEventListener(t,e=>{e.preventDefault();d.classList.add("hot")}));
+  ["dragleave","drop"].forEach(t=>d.addEventListener(t,e=>{e.preventDefault();d.classList.remove("hot")}));
+  d.addEventListener("drop",e=>{const f=e.dataTransfer.files[0];if(f)start(f.name)});
+
+  function start(name){
+    show($("src"),false);show($("out"),false);show($("run"),true);
+    $("runName").textContent=name;$("fill").style.width="0%";
+    const total=STEPS.reduce((a,s)=>a+s[2],0);
+    $("eta").textContent="≈ "+secs(total)+" remaining";
+    const g=$("gauge");g.innerHTML="";
+    STEPS.forEach((s,i)=>{
+      const r=document.createElement("div");r.className="gr";r.id="g"+i;
+      r.innerHTML='<span class="d"></span><span><b>'+s[0]+
+        '</b><span class="why">'+s[1]+'</span></span><span class="t"></span>';
+      g.appendChild(r);
+    });
+    let i=0,left=total;
+    (function tick(){
+      if(i>0){const p=$("g"+(i-1));p.className="gr ok";p.querySelector(".t").textContent="done"}
+      $("fill").style.width=Math.round(i/STEPS.length*100)+"%";
+      if(i>=STEPS.length)return done(name);
+      const c=$("g"+i);c.className="gr go";c.querySelector(".t").textContent="running";
+      left-=STEPS[i][2];
+      $("eta").textContent=left>0?"≈ "+secs(left)+" remaining":"finishing";
+      i++;setTimeout(tick,650+Math.random()*850);
+    })();
+  }
+
+  function done(name){
+    show($("run"),false);show($("out"),true);
+    $("outName").textContent=name;
+    const n=CLIPS.length;   // motorn levererar allt som klarade grinden
+    $("clipGrid").innerHTML=CLIPS.slice(0,n).map(([t,dur,sc,why],k)=>
+      '<div class="clip" style="animation-delay:'+(k*55)+'ms"><div class="th">'+
+      '<span class="sc">'+sc+'</span>▶</div><div class="mt"><b>'+t+'</b>'+
+      '<span>'+dur+' · '+why+'</span></div></div>').join("");
+    $("whyList").innerHTML='<div class="wr" style="background:var(--bg2)">'+
+      '<b>NOT CLIPPED</b> — every rejection is logged</div>'+
+      SKIPPED.map(([t,r,w])=>'<div class="wr"><b>'+t+'</b>'+r+' — '+w+'</div>').join("");
+  }
+})();
+</script>
+</body>
+</html>

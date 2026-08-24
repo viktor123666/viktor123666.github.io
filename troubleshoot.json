@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-04-08 03:55:40",
+  "comfyui": {
+    "alive": true,
+    "error": null
+  },
+  "processes": {
+    "queue": true,
+    "enhancer": true,
+    "uploader": true
+  },
+  "flags": {
+    "PAUSE.flag": false,
+    "STOP.flag": false
+  },
+  "heartbeat": {
+    "exists": true,
+    "age_sec": 18,
+    "stale": false,
+    "content": "1775613323.6522076\n2026-04-08 03:55:23\nWORKING elapsed=1632s prompt=53b02587"
+  },
+  "disk": {
+    "free_gb": 494.8,
+    "ok": true
+  },
+  "gpu": {
+    "ok": true,
+    "info": "NVIDIA GeForce RTX 3060 Ti, 50, 6294 MiB, 8192 MiB"
+  },
+  "sources": {
+    "kompis": 35,
+    "vigolas": 25,
+    "trollmage": 25,
+    "rougeina": 25,
+    "smurjan": 25
+  },
+  "stderr": {
+    "exists": true,
+    "size": 242,
+    "tail": [
+      "C:\\Users\\vigge\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\requests\\__init__.py:113: RequestsDependencyWarning: urllib3 (2.5.0) or chardet (7.2.0)/charset_normalizer (3.4.2) doesn't match a supported version!",
+      "  warnings.warn("
+    ]
+  }
+}

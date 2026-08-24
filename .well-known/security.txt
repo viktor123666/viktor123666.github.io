@@ -1,0 +1,6 @@
+# ViggeClips vulnerability disclosure (RFC 9116)
+Contact: mailto:security@vigge.pro
+Expires: 2027-08-09T00:00:00.000Z
+Preferred-Languages: en, sv
+Policy: https://vigge.pro/security.html
+# We will not pursue anyone acting in good faith.

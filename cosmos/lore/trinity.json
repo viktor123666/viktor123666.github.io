@@ -1,0 +1,156 @@
+{
+  "realm_id": "trinity",
+  "continents": [
+    {
+      "id": "balis_garden",
+      "name": "Bali's Garden",
+      "biome": "Terraced flower-gardens on a green-gold hillside. Always late morning.",
+      "position": {"x": 220, "y": 420, "w": 320, "h": 320},
+      "tribes": ["bali_gardeners", "white_lotus_monks"],
+      "places": [
+        {"name": "The Pale Lotus Pond", "blurb": "A pond of white lotus that closes its petals the moment someone dangerous approaches. Frequently closed."},
+        {"name": "The Forgiveness Terrace", "blurb": "A stone terrace where Bali hears grievances. Visitors speak their grudge aloud, and the terrace takes it. Grudges do not survive the walk home."},
+        {"name": "The Breath Garden", "blurb": "A garden where breathing slows by half. Combat-trained visitors sometimes forget how to fight here."},
+        {"name": "Bali's Tea House", "blurb": "A modest wooden tea house. Tea served by Bali personally. Seats seven — she will close early before admitting an eighth."}
+      ],
+      "blurb": "The calm continent. Bali's domain. The only place in Trinity where Kali's fire cannot light."
+    },
+    {
+      "id": "kalis_burn",
+      "name": "Kali's Burn",
+      "biome": "Volcanic plateau. Black obsidian fields, perpetual dusk, red sky.",
+      "position": {"x": 1080, "y": 420, "w": 320, "h": 320},
+      "tribes": ["blade_dancers", "obsidian_widows"],
+      "places": [
+        {"name": "Kali's Forge", "blurb": "A volcanic forge where Kali makes her own blades. Twelve blades at all times. One always missing — she keeps it moving."},
+        {"name": "The Blood Terrace", "blurb": "A red-stone terrace where Kali's Blade Dancers train. The floor stays warm even at night."},
+        {"name": "The Ash Canyons", "blurb": "Canyons of cooled volcanic ash. Walking through without a Bali-token triggers the ash to rise and accuse you of whatever you last lied about."},
+        {"name": "The Widow's Bell", "blurb": "A bronze bell that rings once per sunset. Kali rings it personally. It mourns the day's losses — her losses. She has lost a great deal."}
+      ],
+      "blurb": "The fire continent. Kali's domain. The only place in Trinity where Bali's calm cannot settle."
+    },
+    {
+      "id": "fused_court",
+      "name": "The Fused Court",
+      "biome": "A circular plateau between the Garden and the Burn. Always dusk. Stone, silver, still water.",
+      "position": {"x": 640, "y": 360, "w": 340, "h": 280},
+      "tribes": ["three_voiced_priests", "pulse_dancers"],
+      "places": [
+        {"name": "The Triad Throne", "blurb": "A single throne with three seats fused into one. Only Smurjan (Fused) may sit. Bali and Kali flank him during audiences."},
+        {"name": "The Voting Stones", "blurb": "Three stones, one for each voice. A decision is made when two stones glow. The third stone's silence is binding."},
+        {"name": "The Pulse Plaza", "blurb": "An open plaza where Pulse-Dancers keep the realm's triple rhythm. When the rhythm breaks, the realm trembles."},
+        {"name": "The Third Chair", "blurb": "A fourth chair placed at the edge of the court. It is not Bali's. It is not Kali's. It is not Fused's. Smurjan will not say whose it is. Echo suspects."}
+      ],
+      "blurb": "The balance continent. Where Smurjan's Fused voice holds the council. The realm's political and ritual heart."
+    },
+    {
+      "id": "echo_marches",
+      "name": "The Echo Marches",
+      "biome": "Grey borderlands between Trinity and Echo realm. Mist. Silence. Mirrors embedded in stone.",
+      "position": {"x": 640, "y": 720, "w": 340, "h": 240},
+      "tribes": ["the_rejected", "mirror_wardens"],
+      "places": [
+        {"name": "The Silent Border", "blurb": "A boundary marked by a line of cracked mirrors. Echo presses against it nightly, asking to be admitted."},
+        {"name": "The Rejected's Camp", "blurb": "A settlement of people from other realms whom Smurjan refused to integrate into the Trinity. They live here, friendly with the Trinity but not of it."},
+        {"name": "The Fourth Chair Reflection", "blurb": "A mirror in the Marches reflects the Fused Court's Third Chair. It shows someone sitting in it. The reflection is always blurred."}
+      ],
+      "blurb": "The disputed edge. Where Echo's lobby for admission is carried out peacefully but endlessly. The Rejected live here as both buffer and witness."
+    }
+  ],
+  "tribes": [
+    {
+      "id": "bali_gardeners",
+      "name": "The Bali-Gardeners",
+      "continent_id": "balis_garden",
+      "look": "White or cream robes. Braided hair woven with pale-lotus petals. Bare feet. Hands always dirty from soil.",
+      "customs": "Kneel before a grudge. Plant one seed per grievance heard. Never speak angrily. Apologize before any unkindness.",
+      "persona": "Calm. Slow to offend. Enormous patience. Forgive so readily that the universe sometimes forgets to assign them guilt.",
+      "notable_members": ["bali_herself", "gardener_sen"]
+    },
+    {
+      "id": "white_lotus_monks",
+      "name": "The White Lotus Monks",
+      "continent_id": "balis_garden",
+      "look": "Shaved heads. Simple robes. Calluses on their palms from the Lotus Pond's edge.",
+      "customs": "Rise before the Pond. Sit still until a lotus opens. Breathe as a collective — inhale together, exhale together.",
+      "persona": "Soft-spoken. Deeply focused. The universe's quietest disciplinarians.",
+      "notable_members": ["abbot_pel", "junior_monk_el"]
+    },
+    {
+      "id": "blade_dancers",
+      "name": "The Blade-Dancers",
+      "continent_id": "kalis_burn",
+      "look": "Red-lacquered armor. Short hair, often scarred. Twelve-blade sashes. Eyes burnished with fire-coal.",
+      "customs": "Never sheath a blade the same way twice. Dance before combat — a ritual warm-up. Speak in challenges.",
+      "persona": "Fierce. Loyal. Rarely laugh but laugh from the chest when they do.",
+      "notable_members": ["kali_herself", "blade_master_seven"]
+    },
+    {
+      "id": "obsidian_widows",
+      "name": "The Obsidian Widows",
+      "continent_id": "kalis_burn",
+      "look": "Veiled in black obsidian-thread. Hair cropped short. One silver piercing per loss.",
+      "customs": "Ring the Widow's Bell at sunset. Keep a single item from every person they've lost. Do not speak of them — only carry them.",
+      "persona": "Grieving. Dignified. Strong. Their grief is not weakness — it is Kali's truest expression.",
+      "notable_members": ["widow_oria", "the_twelfth_widow"]
+    },
+    {
+      "id": "three_voiced_priests",
+      "name": "The Three-Voiced Priests",
+      "continent_id": "fused_court",
+      "look": "Robed in grey-silver with three braids — one black (Bali), one red (Kali), one white (Fused). Voice shifts between three tones mid-sentence.",
+      "customs": "Never speak in one voice alone. Every sentence must include two of the three. A priest who speaks only in one tone is censured.",
+      "persona": "Balanced. Careful. Impossible to pin to one opinion — which is the point.",
+      "notable_members": ["high_priest_triad", "priest_of_the_middle_voice"]
+    },
+    {
+      "id": "pulse_dancers",
+      "name": "The Pulse-Dancers",
+      "continent_id": "fused_court",
+      "look": "Sleek. Muscled. Ankle-bells in trios. Wear form-fitting triple-colored garments (black/red/white).",
+      "customs": "Keep the Pulse rhythm day and night in shifts. A dropped beat is a realm-wide shudder. The three dancers who keep the rhythm each dawn are called 'The Morning Three.'",
+      "persona": "Disciplined. Warm. The realm's heart-keepers. Without them, the Trinity's balance collapses.",
+      "notable_members": ["morning_three_veen", "morning_three_sek", "morning_three_iku"]
+    },
+    {
+      "id": "the_rejected",
+      "name": "The Rejected",
+      "continent_id": "echo_marches",
+      "look": "Mixed origins — travelers from other realms who asked to join the Trinity and were politely refused. Carry one gift each from Smurjan as a parting mercy.",
+      "customs": "Live peacefully on the Marches. Do not cross into Trinity proper. Tell their stories to each other every evening. Hold no grudge.",
+      "persona": "Weary. Generous. Often the kindest tribe in the realm. Their rejection has taught them, not hardened them.",
+      "notable_members": ["rejected_elder_am", "young_rejected_ona"]
+    },
+    {
+      "id": "mirror_wardens",
+      "name": "The Mirror-Wardens",
+      "continent_id": "echo_marches",
+      "look": "Half-masked silver. Robes stitched with tiny cracked mirror-fragments. One ear covered at all times — Echo whispers into open ears.",
+      "customs": "Patrol the Silent Border each dawn. Repair any mirror-crack with silver thread. Never look fully into any mirror.",
+      "persona": "Watchful. Stoic. Slightly paranoid — but justly so.",
+      "notable_members": ["warden_of_first_mirror", "silent_border_captain"]
+    }
+  ],
+  "characters": [
+    {"id": "smurjan_fused", "name": "Smurjan (Fused)", "tribe_id": "three_voiced_priests", "role": "The Sovereign Voice when all three align", "portrait_blurb": "See /characters/smurjan.png — tall, three-colored robes, triple-braided. When all three voices speak in unison, the floor trembles. Appears rarely — only in 30-second windows."},
+    {"id": "bali_herself", "name": "Bali", "tribe_id": "bali_gardeners", "role": "The Calm Voice", "portrait_blurb": "Slender, bare-foot, cream robe, white braid woven with lotus. Serves tea herself. Has not raised her voice in 2000 years."},
+    {"id": "kali_herself", "name": "Kali", "tribe_id": "blade_dancers", "role": "The Fire Voice", "portrait_blurb": "Short-haired, scarred, red-lacquered armor. Twelve blades at all times, one always missing (in motion). Laughs in battle. Weeps at sunset."},
+    {"id": "gardener_sen", "name": "Gardener Sen", "tribe_id": "bali_gardeners", "role": "Bali's head apprentice", "portrait_blurb": "Younger than she looks. Hands permanently soil-stained. Forgives by planting."},
+    {"id": "abbot_pel", "name": "Abbot Pel", "tribe_id": "white_lotus_monks", "role": "Abbot of the White Lotus monastery", "portrait_blurb": "Bald, kind-eyed, grey robe. Sits at the Pond every dawn. Has never been late."},
+    {"id": "blade_master_seven", "name": "Blade-Master Seven", "tribe_id": "blade_dancers", "role": "Kali's head instructor", "portrait_blurb": "Named for her seven duels. Won seven. Left-handed. Missing one earring — pair lost in a duel she still remembers."},
+    {"id": "widow_oria", "name": "Widow Oria", "tribe_id": "obsidian_widows", "role": "Eldest Obsidian Widow", "portrait_blurb": "Veiled in dense obsidian-thread. Seven silver piercings in her left ear. Carries a locket with no portrait — 'the portrait would be too much to carry.'"},
+    {"id": "high_priest_triad", "name": "High Priest Triad", "tribe_id": "three_voiced_priests", "role": "Head of the Three-Voiced order", "portrait_blurb": "Silver-robed. Three-braided. Speaks all three voices evenly. Considered the finest orator in the realm."},
+    {"id": "morning_three_veen", "name": "Morning Three — Veen", "tribe_id": "pulse_dancers", "role": "Keeper of the Bali-beat", "portrait_blurb": "Quiet, steady, ankle-belled. Holds the 'calm' tempo in the Morning Three."},
+    {"id": "morning_three_sek", "name": "Morning Three — Sek", "tribe_id": "pulse_dancers", "role": "Keeper of the Kali-beat", "portrait_blurb": "Fierce, scarred shoulders, ankle-belled in red. Holds the 'fire' tempo."},
+    {"id": "morning_three_iku", "name": "Morning Three — Iku", "tribe_id": "pulse_dancers", "role": "Keeper of the Fused-beat", "portrait_blurb": "Balanced in every sense. Ankle-belled in white. Holds the 'middle' tempo — the hardest."},
+    {"id": "rejected_elder_am", "name": "Elder Am", "tribe_id": "the_rejected", "role": "The Rejected's informal chief", "portrait_blurb": "Old. Kind-eyed. Originally from Astralis. Smurjan refused her admission 80 years ago. She has forgiven him."},
+    {"id": "warden_of_first_mirror", "name": "Warden of the First Mirror", "tribe_id": "mirror_wardens", "role": "Senior Mirror-Warden", "portrait_blurb": "Half-masked, one ear permanently covered. Eyes slightly unfocused from years of NOT looking directly into mirrors."}
+  ],
+  "fate": {
+    "threat": "Smurjan admits the Fourth Voice. If Smurjan ever relents and welcomes Echo as the fourth, the Triad becomes the Tetrad. Balance becomes an unstable four-way. Bali, Kali, and Fused have unanimously refused this for 3000 years.",
+    "consequence": "The Fused Court shatters. The Triad Throne cannot hold a fourth. The realm splits into four sub-realms, each ruled by a single voice. Civil cosmic war. Trinity as a realm ends — four new realms take its place. Ferdinand would need to grow three more branches and nobody knows if he would consent.",
+    "prophecy_line": "When three become four, Trinity ends. Balance is a number; it does not negotiate.",
+    "destroyable_by": "Echo itself — the ONLY entity that gains by this collapse. Echo has waited 3000 years and will wait more."
+  },
+  "cultural_notes": "Trinity is the realm that disproves the saying 'you cannot serve two masters.' They serve three. The culture is triadic in everything — conversation, decision, dance, grief. Visitors from other realms find it disorienting at first and restorative later. The Rejected on the Marches are the realm's conscience, reminding every Trinity citizen that balance includes those not chosen."
+}

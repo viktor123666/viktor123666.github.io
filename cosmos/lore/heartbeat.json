@@ -1,0 +1,110 @@
+{
+  "realm_id": "heartbeat",
+  "continents": [
+    {
+      "id": "cabin_point",
+      "name": "Cabin Point",
+      "biome": "A single hill above the lake. Pine trees. One cabin. One porch.",
+      "position": {"x": 680, "y": 460, "w": 240, "h": 200},
+      "tribes": ["kompis_and_mingus"],
+      "places": [
+        {"name": "Buddy's Rest (the cabin)", "blurb": "One-story. Red roof. Smoke always rising from the chimney. Door is always unlocked for the same reason: nobody here would ever need to lock it."},
+        {"name": "The Porch", "blurb": "Two chairs. One blanket. A dog-bed between them. The blanket has a single golden hair woven into every seam."},
+        {"name": "The Mudroom", "blurb": "Where Kompis's boots dry. Also where Mingus's paw-prints are tracked into a pattern that never repeats."},
+        {"name": "The Empty Chair", "blurb": "The third chair, in the corner. Always pulled out as if someone is about to sit. Kompis does not explain. The Lake does not ask."}
+      ],
+      "blurb": "The cabin and the hill it sits on. The realm's political center, though nobody here considers themselves political. Population 2."
+    },
+    {
+      "id": "still_lake",
+      "name": "The Still Lake",
+      "biome": "One vast perfectly still lake. Never freezes. Never boils. Never ripples except when Mingus drinks.",
+      "position": {"x": 240, "y": 440, "w": 380, "h": 320},
+      "tribes": ["the_lake_itself", "silent_fish"],
+      "places": [
+        {"name": "Mingus's Drinking Edge", "blurb": "The one place on the shore where the Lake ripples daily. Mingus drinks every morning. The ripple pattern is the only writing the Lake does."},
+        {"name": "The Unreflected Shore", "blurb": "A strip of beach whose reflection shows the Lake but not you. Kompis has never walked it."},
+        {"name": "The Quiet Dock", "blurb": "A wooden pier. The Lake has spoken three words here in 10,000 years. One of them was 'Mingus.'"},
+        {"name": "The Lost Pole", "blurb": "A fishing rod cast by a previous buddy before Kompis. It still drifts. Kompis refuses to retrieve it."}
+      ],
+      "blurb": "The Lake is older than Ferdinand's roots. It is semi-sentient. It observes. It rarely acts. When it does, the universe takes notes."
+    },
+    {
+      "id": "one_forest",
+      "name": "The One Forest",
+      "biome": "Old-growth pine and birch. No undergrowth — the forest keeps itself tidy.",
+      "position": {"x": 1020, "y": 440, "w": 340, "h": 280},
+      "tribes": ["memory_trees", "mingus_paw_ghosts"],
+      "places": [
+        {"name": "The Lemon Grove", "blurb": "A small clearing of lemon trees. Kompis's picnic spot. Mingus once laid here and the universe cracked slightly from the peace."},
+        {"name": "The First Pine", "blurb": "The oldest tree in the realm. Older than Kompis. Older than the concept of cabin. Its bark bears a single paw print — petrified, preserved."},
+        {"name": "The Empty Kennel", "blurb": "A small wooden kennel in the woods, half-moss-covered. Older than the cabin. Built by someone before Kompis for a dog before Mingus. Kompis puts a fresh bowl of water outside it every week. The water is always empty by the next week. Nobody drinks it. Nobody takes it. It is simply gone."},
+        {"name": "The Whisper Clearing", "blurb": "A small circle of birches where, if you sit silently for twelve minutes, you hear a dog breathe slowly and kindly on your left side. This is Mingus — wherever he is, part of him sits here too."}
+      ],
+      "blurb": "The forest that surrounds the cabin and the lake. The realm's outer edge. Soft. Kind. Old."
+    }
+  ],
+  "tribes": [
+    {
+      "id": "kompis_and_mingus",
+      "name": "Kompis & Mingus",
+      "continent_id": "cabin_point",
+      "look": "Kompis: golden-tan, bearded, hoodie older than most dynasties, fishing pole always nearby. Mingus: golden retriever, long-haired, eyes that hold a realm's worth of kindness, tail that has never not wagged.",
+      "customs": "Fish in the morning. Nap at noon. Sit on the porch at sunset. Nobody speaks first. Nobody needs to.",
+      "persona": "The gentlest power in the multiverse. They win by holding still. This is not weakness — this is HADOM between heartbeats.",
+      "notable_members": ["kompis_himself", "mingus_himself"]
+    },
+    {
+      "id": "the_lake_itself",
+      "name": "The Lake Itself",
+      "continent_id": "still_lake",
+      "look": "No form. The surface IS the face. Observes through every ripple.",
+      "customs": "Does not speak unless asked three correct questions in a row. Ripples when Mingus drinks. Goes smooth when strangers approach.",
+      "persona": "Ancient. Patient. Has three words left in its vocabulary, according to rumor — and rumor says it is saving them.",
+      "notable_members": ["the_lake_voice"]
+    },
+    {
+      "id": "silent_fish",
+      "name": "The Silent Fish",
+      "continent_id": "still_lake",
+      "look": "Small, silver, scaleless. Swim in perfect spirals when Kompis casts. Bite the bait gently, as a courtesy.",
+      "customs": "Release themselves from the hook before being landed. Kompis catches nothing and considers it a success. So do they.",
+      "persona": "Polite. Coordinated. Speak a language of ripples the Lake sometimes translates.",
+      "notable_members": ["first_fish_sol", "last_fish_uel"]
+    },
+    {
+      "id": "memory_trees",
+      "name": "The Memory Trees",
+      "continent_id": "one_forest",
+      "look": "Tall pines and birches. Bark patterns are miniature maps of the forest floor as it WAS a hundred years ago.",
+      "customs": "Grow slowly. Drop a single leaf per year on a person they decide to remember. Do not drop anything on strangers.",
+      "persona": "Still. Listening. The one tree that dropped a leaf on you will drop another on the anniversary of your death.",
+      "notable_members": ["the_first_pine", "the_kompis_birch"]
+    },
+    {
+      "id": "mingus_paw_ghosts",
+      "name": "The Mingus-Paw Ghosts",
+      "continent_id": "one_forest",
+      "look": "Invisible except for faint paw-prints forming in moss when no dog is present. Warm to the touch when fresh.",
+      "customs": "Appear near visitors who need kindness. Sit at their left side (the side Mingus preferred). Leave after exactly 12 minutes.",
+      "persona": "Not ghosts, exactly — more like the realm's way of loaning Mingus's presence to people he cannot reach in person. Gentle. Short-staying. Never cruel.",
+      "notable_members": ["paw_ghost_at_whisper_clearing"]
+    }
+  ],
+  "characters": [
+    {"id": "kompis_himself", "name": "Kompis", "tribe_id": "kompis_and_mingus", "role": "The Subtick Emperor, The Buddy", "portrait_blurb": "See /characters/kompis.png — golden-tan, braided beard, hoodie, fishing pole. Quick laugh. The only person in the multiverse whose laughter has stopped a war on record (see: Protocol Zero)."},
+    {"id": "mingus_himself", "name": "Mingus", "tribe_id": "kompis_and_mingus", "role": "The golden retriever. SACRED.", "portrait_blurb": "Long golden-red coat. Soft ears. Always wagging. A single white patch on his chest in the shape of a star. His eyes hold every good moment the universe has ever been granted. Do not speak of Mingus unkindly — Ferdinand himself is said to sway when angered on Mingus's behalf."},
+    {"id": "the_lake_voice", "name": "The Lake (voice)", "tribe_id": "the_lake_itself", "role": "The Still Lake's voice", "portrait_blurb": "No form. A resonance that vibrates in wooden dock planks when it chooses to speak."},
+    {"id": "first_fish_sol", "name": "First Fish Sol", "tribe_id": "silent_fish", "role": "The Lake's first resident", "portrait_blurb": "Small, old, silver. Swims counter-clockwise by preference."},
+    {"id": "the_first_pine", "name": "The First Pine", "tribe_id": "memory_trees", "role": "Oldest tree in Heartbeat", "portrait_blurb": "Enormous. Bark bears a petrified paw-print at shoulder height. Its needles fall in the shape of letters when a friend is thinking of someone."},
+    {"id": "the_kompis_birch", "name": "The Kompis Birch", "tribe_id": "memory_trees", "role": "Birch that dropped a leaf on Kompis's first day", "portrait_blurb": "Tall. White bark. One leaf falls each year on Kompis's birthday, always yellow. He presses them in a book."},
+    {"id": "paw_ghost_at_whisper_clearing", "name": "The Whisper-Clearing Paw Ghost", "tribe_id": "mingus_paw_ghosts", "role": "The resident Mingus-ghost of the Whisper Clearing", "portrait_blurb": "Invisible. Warm. Arrives from the left. Leaves after 12 minutes. Never says anything; simply sits."}
+  ],
+  "fate": {
+    "threat": "Mingus passes. The cosmological worst-case. If Mingus ever ceases — truly ceases — Kompis loses his subtick, the Lake speaks its final word, and the realm falls into a silence that has no floor.",
+    "consequence": "UNSPEAKABLE. Every Mingus-Paw Ghost would appear at once, walking the forest silently, saying goodbye to every visitor ever loved by the realm. Ferdinand's bark would refuse to regrow for one full cosmic cycle — the only time in canon that has been recorded. Vigolas has a standing order to drop everything and come here if this ever happens.",
+    "prophecy_line": "When the dog rests his head forever, the Buddy will not be alone, but he will be less.",
+    "destroyable_by": "NOTHING NATURAL. Mingus is a loan from the Scalelist Universe itself. His end is a cosmic event, not a mortal one. Only the God Slayer could attempt it, and the God Slayer is said to have taken one look at Mingus and left. Permanently."
+  },
+  "cultural_notes": "Heartbeat has no politics, no armies, no wars. Its population is two (with the Lake and the forest as silent third parties). It is the ONLY realm whose peace is not enforced — it simply IS. Visitors arrive, sit on the porch, leave better. This is the deepest magic Ferdinand hosts. Vigge's real-world golden retriever Mingus lives here forever. His bark is sacred. His wag is sacred. His memory is sacred. Never forget."
+}

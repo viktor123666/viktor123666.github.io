@@ -1,0 +1,55 @@
+{
+  "bgm_dir": "F:\\scalelistuniverse\\public\\audio\\bgm",
+  "characters": {
+    "vigolas": {
+      "name": "Vigolas",
+      "theme_full": "vigolas_theme_full.mp3",
+      "theme_loop": "vigolas_theme_loop.mp3",
+      "battle_full": "vigolas_battle_full.mp3",
+      "battle_loop": "vigolas_battle_loop.mp3",
+      "theme_exists": false,
+      "battle_exists": false
+    },
+    "rougeina": {
+      "name": "Rougeina",
+      "theme_full": "rougeina_theme_full.mp3",
+      "theme_loop": "rougeina_theme_loop.mp3",
+      "battle_full": "rougeina_battle_full.mp3",
+      "battle_loop": "rougeina_battle_loop.mp3",
+      "theme_exists": false,
+      "battle_exists": false
+    },
+    "trollmage": {
+      "name": "Trollmage",
+      "theme_full": "trollmage_theme_full.mp3",
+      "theme_loop": "trollmage_theme_loop.mp3",
+      "battle_full": "trollmage_battle_full.mp3",
+      "battle_loop": "trollmage_battle_loop.mp3",
+      "theme_exists": false,
+      "battle_exists": false
+    },
+    "kompis": {
+      "name": "Kompis",
+      "theme_full": "kompis_theme_full.mp3",
+      "theme_loop": "kompis_theme_loop.mp3",
+      "battle_full": "kompis_battle_full.mp3",
+      "battle_loop": "kompis_battle_loop.mp3",
+      "theme_exists": false,
+      "battle_exists": false
+    },
+    "smurjan": {
+      "name": "Smurjan",
+      "theme_full": "smurjan_theme_full.mp3",
+      "theme_loop": "smurjan_theme_loop.mp3",
+      "battle_full": "smurjan_battle_full.mp3",
+      "battle_loop": "smurjan_battle_loop.mp3",
+      "theme_exists": false,
+      "battle_exists": false
+    }
+  },
+  "main_theme": {
+    "full": "main_theme_full.mp3",
+    "loop": "main_theme_loop.mp3",
+    "exists": false
+  }
+}

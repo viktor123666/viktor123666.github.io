@@ -1,0 +1,39 @@
+{
+  "id": "s4e11_k_ii_disappears",
+  "number": 11,
+  "title": "K-II Disappears",
+  "subtitle": "Episode 11 of 12 · Season 4: The Fates Unravel",
+  "realm_id": "horizon",
+  "fate_triggered": "K-II vanishes for one cosmic minute. Souls back up. The Horizon Fox finally moves.",
+  "pov_characters": ["horizon_fox_mysterious", "head_warden_pen"],
+  "supporting": ["k_ii_at_desk", "head_handler_juv", "head_whisperer_mir", "old_halla"],
+  "synopsis": "K-II is at his desk. He is processing the soul of a child from Scalelist (the Helios Gate City reincarnation queue is long today). Mid-name-write, K-II VANISHES. Just gone. The Cork-Quill clatters to the desk. The child's soul, mid-transit, is suspended. Head Warden Pen is the first to notice. Pen rings the silver bell. Every soul on every bench freezes — they have been TRAINED to freeze if K-II is interrupted, a contingency the Architects implemented at K-II's birth. Pen calls for the Whisperers, the Sparrow Handlers, and the Fishers. Within 30 cosmic seconds the Platform's full staff is searching. K-II is GONE. For the first time in cosmic memory, the Horizon Fox MOVES. She walks to K-II's desk. She picks up the Cork-Quill in her teeth. She walks to the Dawn Door. She nudges it open. K-II steps through. He has been on the OTHER SIDE of his own door — the Helios Gate City side — for the first time in canon. He has been there exactly one cosmic minute. He looks shaken. Pen runs to him. K-II says: 'I had to greet someone.' He resumes his desk. The child's name is written. The Fox walks back to her usual waiting spot. Pen, that night, finds the Fox has left a single cream-colored hair on K-II's desk. Pen does not move it.",
+  "key_scenes": [
+    {"location": "Horizon Platform, K-II's Desk", "action": "K-II processing a Scalelist child's reincarnation. Mid-write, vanishes."},
+    {"location": "Cork-Quill clatters", "action": "The Quill falls. The child's soul is suspended."},
+    {"location": "Pen's silver bell", "action": "Head Warden Pen rings the bell. Every soul on every bench freezes by training."},
+    {"location": "Search", "action": "Platform staff searching. K-II nowhere on the Platform. The Sparrow Handlers, Whisperers, Fishers all involved."},
+    {"location": "The Fox moves", "action": "The Horizon Fox — for the first time in cosmic memory — walks to the desk, takes the Quill in her teeth, walks to the Dawn Door, nudges it open."},
+    {"location": "K-II returns", "action": "K-II steps through the Dawn Door from the OTHER SIDE. He has been on the Helios Gate City side for one cosmic minute."},
+    {"location": "K-II's explanation", "action": "K-II says: 'I had to greet someone.' Resumes desk. Child's name is written."},
+    {"location": "The Fox's gift", "action": "The Fox leaves a single cream-colored hair on K-II's desk. Pen does not move it."}
+  ],
+  "cliffhanger": "K-II writes the child's name. The child is born in Helios Gate City. Mother Ila, who greets every arriving soul, takes one look at the child and BOWS — for the first time in 1.2 cosmic ages. The child is named Halla. The current Old Halla, in Scalelist, smiles in her sleep.",
+  "panel_storyboard": [
+    {"panel": 1, "composition": "Wide of the Horizon Platform at midday. Soft pink-gold light. K-II at his desk. A line of waiting souls visible in the distance.", "character": "k_ii_at_desk", "camera": "establishing wide", "emotion": "routine"},
+    {"panel": 2, "composition": "Close-up of K-II's hand mid-write. The Cork-Quill begins to fall. K-II's silhouette vanishing — fading from the wrist up.", "character": "k_ii_at_desk", "camera": "macro on hand and quill", "emotion": "abrupt absence", "caption": "He had been on the other side of his own door."},
+    {"panel": 3, "composition": "The Cork-Quill on the desk. The child's soul, mid-transit, suspended in golden light a foot above the platform.", "character": null, "camera": "tight on quill and floating soul", "emotion": "suspension"},
+    {"panel": 4, "composition": "Head Warden Pen ringing the silver bell. Every soul on every bench in the foreground frozen mid-pose.", "character": "head_warden_pen", "camera": "wide ensemble", "emotion": "trained response"},
+    {"panel": 5, "composition": "The Horizon Fox standing for the first time. Cream fur. Green eyes. Stepping toward the desk.", "character": "horizon_fox_mysterious", "camera": "low fox-level wide", "emotion": "purpose", "caption": "She had not moved in cosmic memory. She moved now."},
+    {"panel": 6, "composition": "The Fox at the desk, Cork-Quill gently in her teeth, eyes meeting the camera.", "character": "horizon_fox_mysterious", "camera": "tight on muzzle", "emotion": "ancient knowing"},
+    {"panel": 7, "composition": "The Fox at the Dawn Door. She nudges it open with her muzzle. The other side faintly visible — Helios Gate City's plaza.", "character": "horizon_fox_mysterious", "camera": "wide door open", "emotion": "ritual"},
+    {"panel": 8, "composition": "K-II stepping through the Dawn Door from the OTHER side. Cloak slightly disheveled. Eyes widened.", "character": "k_ii_at_desk", "camera": "tight returning", "emotion": "shaken acceptance", "dialogue": "K-II: 'I had to greet someone.'"},
+    {"panel": 9, "composition": "K-II at his desk, resumed. Cream-colored hair on the desk beside the Quill. Pen watching from a respectful distance.", "character": "k_ii_at_desk", "camera": "wide", "emotion": "altered calm"},
+    {"panel": 10, "composition": "Cut to Helios Gate City. Mother Ila bowing to a newborn soul. The child's first word visible faintly: 'Halla.'", "character": null, "camera": "wide arrival plaza", "emotion": "recognition", "caption": "The child was named Halla."},
+    {"panel": 11, "composition": "Cut to Old Halla's parlor in Scalelist. Halla asleep. A soft smile on her face. The thirteenth crease in her palm visible.", "character": "old_halla", "camera": "tight on face", "emotion": "knowing peace"}
+  ],
+  "cosmic_price_paid": "The Horizon Fox has moved. Once. K-II has crossed his own door. The next Halla has been born — the soul that will eventually inherit the thirteenth crease.",
+  "callout_for_cosmos_drawer": "In Season 4, K-II vanished for one cosmic minute. The Horizon Fox moved. K-II had crossed to Helios Gate City — to greet a soul. The next Halla was born.",
+  "watch_chapter": null,
+  "read_chapter": null
+}

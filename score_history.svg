@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 500" font-family="Segoe UI, Arial, sans-serif">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#06060e"/>
+    <stop offset="100%" stop-color="#0c0c1c"/>
+  </linearGradient>
+</defs>
+<rect width="1400" height="500" fill="url(#bg)"/>
+<text x="70" y="40" fill="#ffd166" font-size="22" font-weight="bold">SCORE HISTORY</text>
+<text x="70" y="60" fill="#888" font-size="12">17 clips · order by generation time · cumulative average overlay</text>
+<line x1="70" y1="440.0" x2="1360" y2="440.0" stroke="#1a1a30" stroke-width="1"/>
+<text x="60" y="444.0" fill="#666" font-size="10" text-anchor="end">0</text>
+<line x1="70" y1="350.0" x2="1360" y2="350.0" stroke="#1a1a30" stroke-width="1"/>
+<text x="60" y="354.0" fill="#666" font-size="10" text-anchor="end">25</text>
+<line x1="70" y1="260.0" x2="1360" y2="260.0" stroke="#1a1a30" stroke-width="1"/>
+<text x="60" y="264.0" fill="#666" font-size="10" text-anchor="end">50</text>
+<line x1="70" y1="170.0" x2="1360" y2="170.0" stroke="#1a1a30" stroke-width="1"/>
+<text x="60" y="174.0" fill="#666" font-size="10" text-anchor="end">75</text>
+<line x1="70" y1="116.0" x2="1360" y2="116.0" stroke="#1a1a30" stroke-width="1"/>
+<text x="60" y="120.0" fill="#666" font-size="10" text-anchor="end">90</text>
+<line x1="70" y1="80.0" x2="1360" y2="80.0" stroke="#1a1a30" stroke-width="1"/>
+<text x="60" y="84.0" fill="#666" font-size="10" text-anchor="end">100</text>
+<line x1="70" y1="170.0" x2="1360" y2="170.0" stroke="#9cf" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+<text x="1356" y="166.0" fill="#9cf" font-size="10" text-anchor="end">GREAT 75+</text>
+<line x1="70" y1="116.0" x2="1360" y2="116.0" stroke="#ffd166" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+<text x="1356" y="112.0" fill="#ffd166" font-size="10" text-anchor="end">HERO 90+</text>
+<text x="70.0" y="460.0" fill="#666" font-size="10" text-anchor="middle">01:56</text>
+<text x="715.0" y="460.0" fill="#666" font-size="10" text-anchor="middle">08:01</text>
+<text x="1360.0" y="460.0" fill="#666" font-size="10" text-anchor="middle">14:06</text>
+<polyline points="70.0,121.4 151.3,104.8 234.4,103.9 311.1,105.9 391.4,110.4 466.5,113.8 544.1,110.1 623.6,108.8 701.3,112.1 778.9,115.6 857.5,116.0 939.6,122.4 1026.2,119.9 1109.2,118.8 1193.9,119.7 1276.1,120.3 1360.0,118.9" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="5,3" opacity="0.7"/>
+<text x="1368.0" y="122.9" fill="#888" font-size="11">avg 89.2</text>
+<circle cx="70.0" cy="121.4" r="5" fill="#ffaa00" stroke="#fff" stroke-width="1"/>
+<circle cx="151.3" cy="88.3" r="7" fill="#00ff88" stroke="#fff" stroke-width="1"/>
+<circle cx="234.4" cy="102.0" r="7" fill="#9933ff" stroke="#fff" stroke-width="1"/>
+<circle cx="311.1" cy="112.0" r="7" fill="#ff3366" stroke="#fff" stroke-width="1"/>
+<circle cx="391.4" cy="128.2" r="5" fill="#00aaff" stroke="#fff" stroke-width="1"/>
+<circle cx="466.5" cy="130.8" r="5" fill="#ffaa00" stroke="#fff" stroke-width="1"/>
+<circle cx="544.1" cy="88.3" r="7" fill="#00ff88" stroke="#fff" stroke-width="1"/>
+<circle cx="623.6" cy="99.4" r="7" fill="#9933ff" stroke="#fff" stroke-width="1"/>
+<circle cx="701.3" cy="138.3" r="5" fill="#ff3366" stroke="#fff" stroke-width="1"/>
+<circle cx="778.9" cy="147.0" r="5" fill="#00aaff" stroke="#fff" stroke-width="1"/>
+<circle cx="857.5" cy="120.3" r="5" fill="#ffaa00" stroke="#fff" stroke-width="1"/>
+<circle cx="939.6" cy="193.0" r="5" fill="#00ff88" stroke="#fff" stroke-width="1"/>
+<circle cx="1026.2" cy="89.4" r="7" fill="#9933ff" stroke="#fff" stroke-width="1"/>
+<circle cx="1109.2" cy="105.2" r="7" fill="#ff3366" stroke="#fff" stroke-width="1"/>
+<circle cx="1193.9" cy="132.2" r="5" fill="#00aaff" stroke="#fff" stroke-width="1"/>
+<circle cx="1276.1" cy="129.0" r="5" fill="#ffaa00" stroke="#fff" stroke-width="1"/>
+<circle cx="1360.0" cy="95.8" r="7" fill="#00ff88" stroke="#fff" stroke-width="1"/>
+<circle cx="75" cy="476" r="5" fill="#00ff88"/>
+<text x="84" y="480" fill="#ddd" font-size="11">vigolas</text>
+<circle cx="175" cy="476" r="5" fill="#ffaa00"/>
+<text x="184" y="480" fill="#ddd" font-size="11">kompis</text>
+<circle cx="275" cy="476" r="5" fill="#00aaff"/>
+<text x="284" y="480" fill="#ddd" font-size="11">smurjan</text>
+<circle cx="375" cy="476" r="5" fill="#9933ff"/>
+<text x="384" y="480" fill="#ddd" font-size="11">trollmage</text>
+<circle cx="475" cy="476" r="5" fill="#ff3366"/>
+<text x="484" y="480" fill="#ddd" font-size="11">rougeina</text>
+<text x="1360" y="480" fill="#ffd166" font-size="11" text-anchor="end">YWAPOS</text>
+</svg>

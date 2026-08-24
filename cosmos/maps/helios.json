@@ -1,0 +1,116 @@
+{
+  "id": "helios",
+  "name": "HELIOS",
+  "subtitle": "The Infinite Court",
+  "type": "stormfield",
+  "color": "#00ff88",
+  "bg_color": "#04140c",
+  "ocean_color": "#04140c",
+  "deep_ocean_color": "#000500",
+  "land_color": "#0a2818",
+  "land_highlight": "#1a4428",
+  "land_shadow": "#05100a",
+  "city_color": "#00ff88",
+  "sacred_color": "#c0ffe0",
+  "description": "Vigolas's domain. Always mid-storm. Lightning moves backward through time here. Floating stone platforms drift in an eternal tempest; the central throne sits below an upside-down shipwreck.",
+  "ruler": "Vigolas — The Infinite Administrator",
+  "tick": "∞−1",
+  "gate": "The Storm Gate (opens only during storms)",
+  "phenomenon_type": "reverse_lightning",
+  "life": {
+    "phenomenon": "Lightning moves BACKWARD — you see the flash first, then the clap, then the darkness forms. Strangers find this terrifying. Locals find silence unnerving.",
+    "inhabitants": "Storm-speakers (sworn to Vigolas, they can sing in lightning rhythm). Court Clerks (with copper-wire hair that hums in sync with the storm). The Ward-Tenders (maintain the 4 Spires).",
+    "fauna": [
+      {"name": "Wreck Bird", "note": "Circles the upside-down ship forever. Never lands. Cannot die. There are always exactly 71 of them."},
+      {"name": "Cloud Eel", "note": "Swims sideways through thunderheads. Ate a storm once and never forgot the taste."},
+      {"name": "Storm Drake", "note": "Lightning made flesh. Dog-sized. Loyal to Vigolas alone. Bites hurt in reverse (you feel it AFTER the wound heals)."}
+    ],
+    "flora": [
+      {"name": "Lightning Pine", "note": "Attracts strikes and channels them into sap. Sap-candles glow for centuries without wick."},
+      {"name": "Storm Moss", "note": "Grows on the underside of floating stones. Feeds on ozone."}
+    ],
+    "architecture": "Obsidian needles, floor-tethered roofs (iron chains to stop them lifting), copper-grounded beds. Every surface is slightly magnetic.",
+    "culture": "Conversations happen in 3.4-second pauses (Vigolas's heartbeat interval). Speaking through it is considered rude. Courtiers bow by pressing a palm to their heart.",
+    "signature_item": "Stormcast Spear — lightning crystallized mid-strike, permanent, still humming. One jab and the victim hears their own thoughts in thunder for a week.",
+    "sensory": {
+      "sound": "Constant bass rumble. Reverse thunder (quiet-to-loud). No birdsong except the Wreck Birds above the throne.",
+      "smell": "Ozone, wet iron, petrichor after every strike.",
+      "feel": "Static always on your skin. Hair never fully lies flat. Mild euphoria from the charge."
+    }
+  },
+  "backdrop": "<defs><filter id='lightning'><feTurbulence baseFrequency='0.015' numOctaves='3' seed='5'/><feColorMatrix values='0 0 0 0 0.4 0 0 0 0 1 0 0 0 0 0.6 0 0 0 2 -0.8'/></filter></defs><rect width='1600' height='1000' fill='url(#oceanGrad)'/><rect width='1600' height='1000' filter='url(#lightning)' opacity='0.15'/><g stroke='#80ffc0' stroke-width='2' fill='none' opacity='0.5'><path d='M 220 100 L 240 200 L 200 280 L 260 350 L 230 450'/><path d='M 1380 140 L 1400 240 L 1360 340 L 1410 430'/><path d='M 800 60 L 820 180 L 780 290'/></g>",
+  "features": [
+    {
+      "svg": "<g opacity='0.7'><ellipse cx='800' cy='420' rx='240' ry='30' fill='#5a3a2a' stroke='#a07050' stroke-width='2'/><polygon points='700,400 900,400 820,360 880,320 780,340 720,350' fill='#3a2418' stroke='#6a4a30' stroke-width='1.5'/><path d='M 820 360 L 810 300' stroke='#6a4a30' stroke-width='3'/><text x='800' y='340' text-anchor='middle' fill='#ffccaa' font-size='11' font-style='italic' opacity='0.85'>Vigolas's Shipwreck</text><text x='800' y='355' text-anchor='middle' fill='#aaaacc' font-size='8' opacity='0.6'>(drifts upside-down, eternal)</text></g>"
+    }
+  ],
+  "cities": [
+    {
+      "id": "storm_throne",
+      "name": "The Storm Throne",
+      "x": 800, "y": 500,
+      "tier": "capital",
+      "role": "Seat of the Infinite Administrator",
+      "note": "Vigolas sits here. Always. The storm revolves around him.",
+      "lore": "A circular stone platform 40 meters across, lit from below by ∞−1 heartbeats of stored lightning. The upside-down shipwreck drifts 80 meters above the throne and has never fallen."
+    },
+    {
+      "id": "lightning_spire_north",
+      "name": "North Lightning Spire",
+      "x": 400, "y": 250,
+      "tier": "city",
+      "role": "Storm anchor",
+      "note": "One of four spires that keep Helios from collapsing into a single point.",
+      "lore": "A 200-meter obsidian needle. Lightning strikes it every 3.4 seconds — a rhythm that matches Vigolas's own heartbeat divided by 71."
+    },
+    {
+      "id": "lightning_spire_east",
+      "name": "East Lightning Spire",
+      "x": 1280, "y": 350,
+      "tier": "city",
+      "role": "Storm anchor",
+      "note": "Twin to the North Spire. Lightning delay: 3.7 seconds."
+    },
+    {
+      "id": "lightning_spire_south",
+      "name": "South Lightning Spire",
+      "x": 1050, "y": 780,
+      "tier": "city",
+      "role": "Storm anchor",
+      "note": "Delay: 3.1 seconds. The fastest spire."
+    },
+    {
+      "id": "lightning_spire_west",
+      "name": "West Lightning Spire",
+      "x": 350, "y": 720,
+      "tier": "city",
+      "role": "Storm anchor",
+      "note": "Delay: 3.9 seconds. The slowest. No one knows why."
+    },
+    {
+      "id": "anchor_ward",
+      "name": "The Anchor Ward",
+      "x": 1100, "y": 540,
+      "tier": "town",
+      "role": "Helios's only permanent settlement",
+      "note": "Those who serve the Court sleep here. Roofs tethered to the floor by iron chains.",
+      "lore": "Each bed has a copper wire grounding it, to prevent the sleeper from being woken by backward-lightning dreams."
+    }
+  ],
+  "sacred_sites": [
+    {
+      "name": "The Upside-Down Wreck",
+      "x": 800, "y": 360,
+      "color": "#ffccaa",
+      "note": "The ship Vigolas arrived on. Drifts eternally inverted above the Throne.",
+      "lore": "If you stand directly beneath it during a storm, you can hear the footsteps of the Vigolas who had not yet died."
+    },
+    {
+      "name": "The Gate of First Breath",
+      "x": 250, "y": 490,
+      "color": "#80ffc0",
+      "note": "The Storm Gate — where Helios connects to Scalelist.",
+      "lore": "Opens only during storms. Since Helios is always storming, it opens whenever Scalelist does."
+    }
+  ]
+}

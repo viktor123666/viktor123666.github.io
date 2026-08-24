@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pricing — ViggeClips</title>
+<meta name="description" content="One credit is one hour of stream. Credits never expire and failed jobs are never charged."/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="stylesheet" href="/cf.css?v=202608232310"/>
+<script defer src="/cf.js?v=202608232310"></script>
+<style>
+.cmp{border:1px solid var(--edge);overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:44rem}
+th,td{padding:.85rem 1.1rem;text-align:left;border-bottom:1px solid var(--edge);font-size:.9rem}
+th{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dim2);background:var(--bg2);font-weight:500}
+td:first-child{color:var(--ink)}
+td:not(:first-child){font-family:var(--mono);color:var(--dim);text-align:center;width:11rem}
+tr:hover td{background:var(--bg2)}
+.yes{color:var(--sig)}.no{color:var(--dim2)}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--edge)}
+.calc>div{padding:1.5rem 1.6rem}
+.calc>div:first-child{border-right:1px solid var(--edge)}
+.calc output{display:block;font-family:var(--mono);font-size:2rem;color:var(--gold2);
+  margin-top:.6rem;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--gold);margin-top:.6rem}
+@media(max-width:680px){.calc{grid-template-columns:1fr}.calc>div:first-child{border-right:0;border-bottom:1px solid var(--edge)}}
+</style>
+<meta property="og:title" content="Pricing — ViggeClips"/>
+<meta property="og:url" content="https://vigge.pro/pricing.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="ViggeClips"/>
+<meta property="og:image" content="https://vigge.pro/og.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://vigge.pro/og.png"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0a0a0b"/>
+</head>
+<body>
+<div class="grid"></div>
+<header class="cf"></header>
+
+<section class="first"><div class="w">
+  <div class="head rv" style="max-width:44ch">
+    <span class="lbl">Pricing</span>
+    <h1>You pay for stream length, not clips</h1>
+    <p class="lede">Billed per minute of source, shown as hours. Charged only when a job
+      succeeds, and the number of shorts never changes the price.
+      <button class="infob" type="button" data-info="billInfo" title="The limits">i</button></p>
+    <div class="infopanel" id="billInfo" hidden style="max-width:52rem">
+      <b>The limits</b>
+      <p>Minimum 10 minutes charged per job, maximum 12 hours of source per job. The engine
+        decides how many shorts a stream yields — you never pay per clip.</p>
+    </div>
+  </div>
+
+  <div class="plans rv">
+    <div class="pl">
+      <div class="nm">Free</div><div class="pr">$0</div>
+      <div class="for">Enough to judge the engine on your own footage — every month.</div>
+      <ul><li>2 hours of stream every month</li><li>3 shorts, watermarked</li>
+        <li>Captions and audio mastering</li><li>Full transcript (SRT + TXT)</li>
+        <li>The whole video subtitled, as a bonus</li><li>Full detector readout</li>
+        <li>720p export</li></ul>
+      <div class="go" id="freeGo"><a class="b2" href="/app.html">Start free — no card</a></div>
+    </div>
+    <div class="pl mid">
+      <div class="nm">Pro</div><div class="pr">$24<s> / month</s></div>
+      <div class="for">Everything the engine can do. One flat price.</div>
+      <ul><li>100 hours of stream every month</li><li>Unlimited shorts per stream</li>
+        <li>No watermark · 1080p export</li><li>Publish straight to YouTube, scheduled or instant</li>
+        <li>Face-tracking 9:16 crop, custom words, title templates</li>
+        <li>Trim any clip, share pages, public portfolio</li>
+        <li>API access · priority queue</li>
+        <li>Top up more hours whenever you need them</li></ul>
+      <div class="go" id="proGo"><a class="b1" href="/app.html">Get started</a></div>
+    </div>
+  </div>
+
+  <p class="lbl rv" style="margin-top:1rem">Prices exclude VAT · billed monthly · cancel any time</p>
+  <p class="hint rv" style="margin-top:.5rem;max-width:52rem">
+    Monthly hours reset each billing month. Extra hours you buy never expire.
+    <button class="infob" type="button" data-info="hoursInfo" title="How hours work">i</button></p>
+  <div class="infopanel rv" id="hoursInfo" hidden style="max-width:52rem">
+    <b>How your hours work</b>
+    <table class="ptbl">
+      <tr><td class="pp">Monthly</td><td>your plan&rsquo;s hours refill on your billing date;
+        whatever is left of them that month is not carried over</td></tr>
+      <tr><td class="pp">Extra hours</td><td>bought once, on top. <b>They never expire</b> —
+        spending always takes the monthly hours first, so what you paid extra for is the
+        last thing to run out</td></tr>
+      <tr><td class="pp">Cancelling</td><td>you keep everything you have already paid for
+        until the end of the period you are in</td></tr>
+    </table>
+  </div>
+</div></section>
+
+<!-- calculator -->
+<section><div class="w">
+  <div class="head rv">
+    <span class="lbl">Estimate</span>
+    <h2>How many credits do you need?</h2>
+    <p>Move the sliders. Billing follows source length only — a stream that yields twelve good
+      moments costs exactly the same as one that yields three.</p>
+  </div>
+  <div class="calc rv">
+    <div>
+      <label class="fl" for="hrs">Hours streamed per week</label>
+      <input type="range" id="hrs" min="1" max="40" value="8"/>
+      <output id="ohrs" class="mono" style="font-size:1rem;color:var(--ink)">8 h / week</output>
+      <label class="fl" for="wks" style="margin-top:1.4rem">Streams clipped per month</label>
+      <input type="range" id="wks" min="1" max="30" value="4"/>
+      <output id="owks" class="mono" style="font-size:1rem;color:var(--ink)">4 streams</output>
+    </div>
+    <div>
+      <span class="lbl">Credits needed monthly</span>
+      <output id="need">32 hours</output>
+      <p style="color:var(--dim);font-size:.88rem;margin:.8rem 0 0" id="rec">
+        Recommended: <b class="gld">Pro</b> — 100 hours included.</p>
+      <p class="hint" id="cost"></p>
+    </div>
+  </div>
+</div></section>
+
+<!-- comparison -->
+<section><div class="w">
+  <div class="head rv"><span class="lbl">Comparison</span><h2>What each tier includes</h2></div>
+  <div class="cmp rv">
+    <table>
+      <thead><tr><th>Capability</th><th>Free</th><th>Pro</th></tr></thead>
+      <tbody>
+        <tr><td>Hours of stream monthly</td><td>2</td><td>100 + top-ups</td></tr>
+        <tr><td>Shorts per stream</td><td>3</td><td>Unlimited</td></tr>
+        <tr><td>Watermark</td><td class="wrn">Yes</td><td class="yes">No</td></tr>
+        <tr><td>Export resolution</td><td>720p</td><td>1080p</td></tr>
+        <tr><td>Captions &amp; karaoke sync</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Audio mastering</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Content safety gate</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Detector readout</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Face-tracking 9:16 crop</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Custom words &amp; title templates</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Trim clips · share pages · portfolio</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Publish to YouTube</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>API access</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>Priority render queue</td><td class="no">—</td><td class="yes">✓</td></tr>
+        <tr><td>Buy extra hours</td><td class="no">—</td><td class="yes">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div></section>
+
+<!-- honesty -->
+<section><div class="w">
+  <div class="head rv"><span class="lbl">Before you pay</span><h2>What every plan gives you</h2></div>
+  <div class="note ok rv">
+    <span class="lbl">Included on every plan</span>
+    <ul>
+      <li>Every moment that clears the bar becomes a clip — captioned, vertical, ready to post.</li>
+      <li>A score on every clip and the full report of what it skipped, so you can trust the cut.</li>
+      <li>Works on anything spoken — gaming, vlogs, podcasts, music. Supported game HUDs are
+        read from the picture too, so silent highlights still get caught.</li>
+      <li>Your source is deleted automatically within 7 days of delivery. We never train on your content.</li>
+    </ul>
+  </div>
+  <div class="note ok rv" style="margin-top:1rem">
+    <span class="lbl">What we will always do</span>
+    <ul>
+      <li>Never charge for a job that failed.</li>
+      <li>Delete your source footage automatically within 7 days of delivery.</li>
+      <li>Never train models on your content.</li>
+      <li>Let you cancel in one click, from the same portal you subscribed in.</li>
+    </ul>
+  </div>
+</div></section>
+
+<section><div class="w w-narrow">
+  <div class="head rv"><span class="lbl">Billing questions</span><h2>Straight answers</h2></div>
+  <div class="rv">
+    <details open><summary>What exactly counts as a credit?</summary>
+      <p class="dp">Minutes of source material, rounded up to the whole minute and billed on
+        completion. A 95-minute stream costs 95 minutes of your allowance. There is a 10-minute
+        minimum per job and a 12-hour maximum. The number of shorts produced is irrelevant to
+        the price — the engine decides how many the stream deserves.</p></details>
+    <details><summary>What if a job fails?</summary>
+      <p class="dp">You are not charged. Credits are deducted when a job finishes
+        successfully, never when it is submitted. If our engine cannot read your file we
+        tell you why and the credit stays in your account.</p></details>
+    <details><summary>Do unused credits roll over?</summary>
+      <p class="dp">Monthly allowances reset each billing period. Credits you buy separately
+        as top-ups never expire.</p></details>
+    <details><summary>Can I cancel whenever?</summary>
+      <p class="dp">Yes, from the billing portal. You keep access until the end of the period
+        you already paid for, and your finished clips stay downloadable for 30 days after
+        that.</p></details>
+    <details><summary>Is VAT included?</summary>
+      <p class="dp">Prices are shown excluding VAT. EU customers are charged the correct rate
+        at checkout, and businesses can enter a VAT number for reverse charge.</p></details>
+  </div>
+</div></section>
+
+<section><div class="w">
+  <div class="head rv" style="max-width:40ch">
+    <span class="lbl">Get started</span>
+    <h2>Judge it on your own footage</h2>
+    <p>The free hours are a full-quality run. Read the detector output and decide.</p>
+  </div>
+  <div class="acts rv"><a class="b1" href="/app.html">Clip a VOD free</a>
+    <a class="b2" href="/engine.html">How the engine works</a></div>
+</div></section>
+
+<footer class="cf"></footer>
+<script>
+// THE BUTTONS KNOW WHO YOU ARE (2026-08-17). Signed out: start free / get started.
+// Signed in on Free: "Create new video" + a real Upgrade button that opens Stripe
+// checkout. Signed in on Pro: "Your plan" + Manage subscription (portal). Before this,
+// every state saw the same "Get started → /app.html" — a Pro customer was told to get
+// started with what they already pay for.
+(async function(){
+  const freeGo=document.getElementById("freeGo"), proGo=document.getElementById("proGo");
+  if(!freeGo||!proGo) return;
+  let me=null, plan="free";
+  try{ const r=await fetch("/api/auth/me",{credentials:"same-origin"}); if(r.ok) me=await r.json(); }catch(e){}
+  if(!me||!me.email) return;                                   // signed out: leave as is
+  try{ const r=await fetch("/api/account/stats",{credentials:"same-origin"}); if(r.ok){ const st=await r.json(); plan=(st&&st.plan)||"free"; } }catch(e){}
+  const esc=(t)=>String(t).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const go=async(btn,path,body)=>{
+    btn.disabled=true; const t=btn.textContent; btn.textContent="Opening…";
+    try{ const r=await fetch(path,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body||{})});
+      const b=await r.json().catch(()=>({}));
+      if(r.ok&&b.url){ location.href=b.url; return; }
+      btn.textContent=(b&&b.error)||"Could not open — try again"; setTimeout(()=>{btn.textContent=t;btn.disabled=false;},2500);
+    }catch(e){ btn.textContent="Network hiccup"; setTimeout(()=>{btn.textContent=t;btn.disabled=false;},2500); }
+  };
+  if(plan==="pro"){
+    freeGo.innerHTML='<a class="b2" href="/app.html">Create new video</a>';
+    proGo.innerHTML='<span class="lbl" style="display:block;margin-bottom:.5rem">YOUR PLAN · '+esc(me.email)+'</span>'
+      +'<button class="b1" type="button" id="prPortal">Manage subscription</button> '
+      +'<button class="b2" type="button" id="prTop10">+10 h · $5</button> '
+      +'<button class="b2" type="button" id="prTop50">+50 h · $20</button>';
+    document.getElementById("prPortal").onclick=(e)=>go(e.currentTarget,"/api/billing/portal");
+    document.getElementById("prTop10").onclick=(e)=>go(e.currentTarget,"/api/billing/topup",{pack:"h10"});
+    document.getElementById("prTop50").onclick=(e)=>go(e.currentTarget,"/api/billing/topup",{pack:"h50"});
+  }else{
+    freeGo.innerHTML='<span class="lbl" style="display:block;margin-bottom:.5rem">YOUR PLAN</span><a class="b2" href="/app.html">Create new video</a> <a class="b2" href="/history.html">Edited videos</a>';
+    proGo.innerHTML='<button class="b1" type="button" id="prUp">Upgrade to Pro — $24 / month</button>'
+      + '<p class="hint" style="margin:.6rem 0 0">Payment is handled by <b>Stripe</b> — '
+      + 'card details go straight to them and never touch our servers. '
+      + 'Cancel any time, from your account.</p>';
+    document.getElementById("prUp").onclick=(e)=>go(e.currentTarget,"/api/billing/checkout",{plan:"pro"});
+  }
+})();
+(function(){
+  const h=document.getElementById("hrs"), w=document.getElementById("wks");
+  const oh=document.getElementById("ohrs"), ow=document.getElementById("owks");
+  const need=document.getElementById("need"), rec=document.getElementById("rec"),
+        cost=document.getElementById("cost");
+  function upd(){
+    const hv=+h.value, wv=+w.value;
+    const monthly=hv*wv;              // hours per stream × streams per month
+    oh.textContent=hv+" h / week";
+    ow.textContent=wv+(wv===1?" stream":" streams");
+    need.textContent=monthly+(monthly===1?" hour":" hours");
+    let tier="Free", price=0;
+    if(monthly>2){tier="Pro";price=24}
+    if(monthly>100){tier="Pro + top-ups";price=24}
+    rec.innerHTML='Recommended: <b class="gld">'+tier+'</b>'+
+      (tier==="Pro"?" — 100 hours included.":
+       tier.startsWith("Pro")?" — 100 hours included, buy the rest as you go.":" — the two free hours cover it.");
+    cost.textContent = price ? "≈ $"+price+" per month, excluding VAT."
+      : "No payment needed at this volume.";
+  }
+  h.oninput=w.oninput=upd; upd();
+})();
+</script>
+</body>
+</html>

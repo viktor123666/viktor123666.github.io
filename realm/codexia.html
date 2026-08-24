@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CODEXIA — The Seven Spires | Scalelist Universe</title>
+<meta name="description" content="CODEXIA: The Seven Spires. A realm on Ferdinand the Cosmic Cork Oak.">
+<meta property="og:title" content="CODEXIA — The Seven Spires">
+<meta property="og:description" content="The Seven Spires. A realm on the cosmic cork oak Ferdinand.">
+<meta property="og:image" content="https://scalelistuniverse.com/cosmos/scenery/codexia.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a84c; --void:#050510; --panel:#0a0a14; --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060; --accent:#9933ff}
+html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.7}
+a{color:inherit;text-decoration:none}
+
+header{padding:18px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
+header nav{display:flex;gap:18px;flex-wrap:wrap}
+header nav a{color:var(--dim);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:'Cinzel',serif}
+header nav a:hover{color:var(--gold)}
+
+.hero{position:relative;height:60vh;min-height:420px;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,transparent 50%,var(--void) 100%),radial-gradient(ellipse at 50% 100%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 70%);pointer-events:none}
+.hero .body{position:relative;z-index:2;padding:50px 32px;max-width:1100px;width:100%;margin:0 auto}
+.hero .eyebrow{font-family:'Cinzel',serif;color:var(--accent);font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(2.4rem,6vw,5rem);color:#fff;letter-spacing:.06em;font-weight:900;line-height:1;text-shadow:0 0 40px color-mix(in srgb,var(--accent) 40%,transparent)}
+.hero h1 em{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:.36em;color:var(--accent);letter-spacing:.04em;margin-top:12px;text-shadow:none;opacity:.95}
+
+.section{max-width:1100px;margin:0 auto;padding:50px 32px;border-top:1px solid var(--border)}
+.section h2{font-family:'Cinzel',serif;color:var(--accent);font-size:.86rem;letter-spacing:.32em;text-transform:uppercase;margin-bottom:24px;font-weight:700}
+.section .blurb{font-size:1.18rem;line-height:1.85;font-style:italic;opacity:.94;max-width:760px}
+
+.grid-2{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
+@media(min-width:780px){.grid-2{grid-template-columns:1fr 1fr}}
+.entry{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 22px;transition:all .25s}
+.entry:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+.entry h3{font-family:'Cinzel',serif;color:#fff;font-size:1.04rem;font-weight:700;letter-spacing:.04em;margin-bottom:6px;line-height:1.2}
+.entry .biome{color:var(--accent);font-style:italic;font-size:.84rem;margin-bottom:10px;letter-spacing:.04em}
+.entry p{font-size:.94rem;line-height:1.65;opacity:.92;margin-bottom:8px}
+.entry p:last-child{margin-bottom:0}
+
+.char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:14px}
+.char-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;transition:all .2s;display:block}
+.char-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.char-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#080812}
+.char-card .char-name{padding:10px 12px 4px;font-family:'Cinzel',serif;color:#fff;font-size:.88rem;font-weight:700;letter-spacing:.04em;line-height:1.2}
+.char-card .char-role{padding:0 12px 12px;color:var(--accent);font-style:italic;font-size:.78rem;line-height:1.3}
+
+.fate{margin-top:28px;background:linear-gradient(135deg,rgba(204,51,51,0.08),var(--panel));border:1px solid rgba(204,51,51,0.4);border-radius:12px;padding:20px 24px}
+.fate-label{font-family:'Cinzel',serif;color:#ff6677;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:8px;font-weight:700}
+.fate p{font-size:1rem;line-height:1.7;font-style:italic;color:var(--text)}
+
+.cta{padding:60px 32px;text-align:center;border-top:1px solid var(--border)}
+.cta a{display:inline-block;margin:6px;padding:12px 28px;background:var(--accent);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;border-radius:8px;text-decoration:none}
+.cta a.outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.cta a:hover{transform:scale(1.04);transition:transform .15s}
+
+footer{padding:30px;text-align:center;color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
+  <nav>
+    <a href="/cosmos">All Realms</a>
+    <a href="/cosmos/atlas">Atlas</a>
+    <a href="/lineage">Lineage</a>
+    <a href="/manga">Manga</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <img src="/cosmos/scenery/codexia.jpg" alt="CODEXIA scenery" onerror="this.style.display='none'">
+  <div class="body">
+    <div class="eyebrow">A realm on Ferdinand</div>
+    <h1>CODEXIA<em>The Seven Spires</em></h1>
+  </div>
+</section>
+
+<section class="section">
+  <h2>The Realm</h2>
+  <p class="blurb">CODEXIA is one of the twelve realms of the Scalelist Universe.</p>
+  <div class="fate"><div class="fate-label">Realm Fate</div><p>{'threat': "A Spire is read forward. If any Codex is read front-to-back (instead of back-to-front), the sin it contains spills into the reader's mind AND the surrounding realm. Trollmage has guarded against this for 800 years.", 'consequence': "Depends which Codex. Forward-reading Pride's Page would turn Codexia into a realm of perfect certainty — no one would doubt anything, which would end philosophy and therefore all casting. The other six pages would end the world at a lesser scale.", 'prophecy_line': 'Read the last word first. Pride ends the page. Pride ends the realm.', 'destroyable_by': "Any reader who cannot resist reading forward. A famous inscription above Spire Seven's gate reads: 'Backwards. Or not at all.'"}</p></div>
+</section>
+
+<section class="section">
+  <h2>Continents · 4 regions</h2>
+  <div class="grid-2"><div class="entry">
+          <h3>The Spire Highlands</h3>
+          <div class="biome">Seven colossal violet stone spires rising from misty moorlands.</div>
+          <p>The seven spires of Codexia — one per Sin Codex. Each spire is a library, a prison, and a patient teacher.</p>
+        </div><div class="entry">
+          <h3>The Backwards Bayou</h3>
+          <div class="biome">Swampland where water flows uphill and trees grow roots skyward.</div>
+          <p>The marshland where magic works backwards. Every incantation cast here must be inverted before speaking. Dangerous for anyone who cannot think in reverse.</p>
+        </div><div class="entry">
+          <h3>The Necromancer Reach</h3>
+          <div class="biome">Cold pine forest, fogged graveyards, black-ice rivers.</div>
+          <p>The eastern continent. Necromancers, stonemasons, and students who find corpses more polite than the living.</p>
+        </div><div class="entry">
+          <h3>The Dancehall Basin</h3>
+          <div class="biome">A basin of warm grasslands below the spires. One dancehall. That's it.</div>
+          <p>The one warm and uncomplicated place in Codexia. Even Trollmage visits when the reading becomes too heavy.</p>
+        </div></div>
+</section>
+
+<section class="section">
+  <h2>Tribes &amp; Peoples · 7 groups</h2>
+  <div class="grid-2"><div class="entry">
+          <h3>The Spire-Readers</h3>
+          <div class="biome">on spire_highlands</div>
+          <p><b>Look:</b> Violet-robed. Hoods always up when reading. Ink-black fingertips. Calm.</p>
+          <p><b>Persona:</b> Patient. Warm once you earn it. Love a riddle. Will correct your grammar — forward or reverse.</p>
+        </div><div class="entry">
+          <h3>The Codex-Acolytes</h3>
+          <div class="biome">on spire_highlands</div>
+          <p><b>Look:</b> Young, pale, tattooed with one sin-glyph per rank (max seven for a full master). Eyes slightly crossed from close reading.</p>
+          <p><b>Persona:</b> Earnest. Overworked. Just out of their twenties and carrying cosmic weight lightly.</p>
+        </div><div class="entry">
+          <h3>The Reverse-Scribes</h3>
+          <div class="biome">on backwards_bayou</div>
+          <p><b>Look:</b> Lean. Ink-fingered. Tunic stained in reverse-drying ink. Writing-pads strapped to forearms.</p>
+          <p><b>Persona:</b> Focused to a fault. Prickly when distracted. Delightful after work hours, when the ink dries.</p>
+        </div><div class="entry">
+          <h3>The Bayou-Conjurers</h3>
+          <div class="biome">on backwards_bayou</div>
+          <p><b>Look:</b> Stocky, sun-browned, wear garlands of cypress-bark. Cheek-tattoos in rune-clusters.</p>
+          <p><b>Persona:</b> Slow-talking. Sharp-eyed. Distrustful of anyone who talks about magic like it's a game.</p>
+        </div><div class="entry">
+          <h3>The Twin-Raisers</h3>
+          <div class="biome">on necromancer_reach</div>
+          <p><b>Look:</b> Always a pair. Matching grey cloaks. One hums constantly; the other does not. The humming twin leads; the silent twin binds.</p>
+          <p><b>Persona:</b> Polite. Orderly. Surprisingly cheerful. They think of the dead as patient neighbors.</p>
+        </div><div class="entry">
+          <h3>The Stone-Readers</h3>
+          <div class="biome">on necromancer_reach</div>
+          <p><b>Look:</b> Calloused hands. Hoods of mossy wool. Carry a chisel at the belt. Knee-padded.</p>
+          <p><b>Persona:</b> Slow. Deliberate. Feel the cold more than most. Nod rather than speak.</p>
+        </div><div class="entry">
+          <h3>The Dancehall-Kin</h3>
+          <div class="biome">on dancehall_basin</div>
+          <p><b>Look:</b> Warm-eyed. Aprons stained with rum and cornmeal. Fingers ring-laden. A single bell woven into each person's hair.</p>
+          <p><b>Persona:</b> Generous. Musical. The heart of Codexia's social life, without trying to be.</p>
+        </div></div>
+</section>
+
+<section class="section">
+  <h2>Named Characters Here · 10 souls</h2>
+  <div class="char-grid"><a class="char-card" href="/cosmos/atlas#realm-codexia">
+          <img src="/characters/trollmage.png" alt="Trollmage" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Trollmage</div>
+          <div class="char-role">Warden of Codexia, Keeper of the Seven Spires</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-codexia">
+          <img src="/characters/npcs/apprentice_nock.png" alt="Apprentice Nock" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Apprentice Nock</div>
+          <div class="char-role">Trollmage's trainee</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-codexia">
+          <img src="/characters/npcs/acolyte_fenn.png" alt="Acolyte Fenn" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Acolyte Fenn</div>
+          <div class="char-role">Three-glyph acolyte assigned to Spire Three</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-codexia">
+          <img src="/characters/npcs/the_voiceless_scribe.png" alt="The Voiceless Scribe" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">The Voiceless Scribe</div>
+          <div class="char-role">Writes Trollmage's decrees in invisible ink</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-codexia">
+          <img src="/characters/npcs/conjurer_tallis.png" alt="Conjurer Tallis" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Conjurer Tallis</div>
+          <div class="char-role">Keeper of the Ink-River</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-codexia">
+          <img src="/characters/npcs/tal_the_hummer.png" alt="Tal" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Tal</div>
+          <div class="char-role">The humming twin</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-codexia">
+          <img src="/characters/npcs/tess_the_binder.png" alt="Tess" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Tess</div>
+          <div class="char-role">The silent twin</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-codexia">
+          <img src="/characters/npcs/stone_reader_ilk.png" alt="Stone-Reader Ilk" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Stone-Reader Ilk</div>
+          <div class="char-role">Eldest Stone-Reader</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-codexia">
+          <img src="/characters/npcs/grandmother_iris.png" alt="Grandmother Iris" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Grandmother Iris</div>
+          <div class="char-role">Runs the only dancehall in Codexia</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-codexia">
+          <img src="/characters/npcs/dancehall_drummer_bo.png" alt="Drummer Bo" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Drummer Bo</div>
+          <div class="char-role">Head drummer</div>
+        </a></div>
+</section>
+
+<section class="cta">
+  <a href="/cosmos">All 12 Realms</a>
+  <a href="/cosmos/atlas" class="outline">Open Atlas</a>
+  <a href="/lineage" class="outline">The Lineage</a>
+</section>
+
+<footer>
+  Scalelist Universe · CODEXIA · <a href="/" style="color:var(--accent)">Home</a>
+</footer>
+
+</body>
+</html>

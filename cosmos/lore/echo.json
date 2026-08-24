@@ -1,0 +1,107 @@
+{
+  "realm_id": "echo",
+  "continents": [
+    {
+      "id": "mirror_hall_vast",
+      "name": "The Mirror Hall (Vast)",
+      "biome": "An infinite mirrored corridor. No doors. No ceiling. Floor is also a mirror.",
+      "position": {"x": 640, "y": 380, "w": 340, "h": 320},
+      "tribes": ["half_selves", "mirror_tenders"],
+      "places": [
+        {"name": "The Waiting Seat", "blurb": "A chair that only Echo may sit in. Visitors who try find themselves already standing."},
+        {"name": "The Vote Mirror", "blurb": "A mirror showing three versions of the visitor voting on whether Echo should be admitted to Trinity. Vote is always NO."},
+        {"name": "The Half-Step Hallway", "blurb": "A corridor where every reflection is half a heartbeat late. Walking its length takes exactly one unmeasured second."},
+        {"name": "The Lost Reflection", "blurb": "A mirror whose reflection is of someone you've never met but who knows you. They smile briefly when you pass."}
+      ],
+      "blurb": "The Hall is the entire realm — mostly. It extends in all directions. The Half-Selves wander it."
+    },
+    {
+      "id": "reflection_sea",
+      "name": "The Reflection Sea",
+      "biome": "A motionless 'sea' of pure silver — a horizontal mirror stretching to the horizon.",
+      "position": {"x": 220, "y": 460, "w": 340, "h": 320},
+      "tribes": ["reflection_divers"],
+      "places": [
+        {"name": "The Dive Pier", "blurb": "A thin pier that extends over the Reflection Sea. Divers drop into the mirror and surface in a reflection of their own home realm — briefly."},
+        {"name": "The Surface Glyph", "blurb": "A single rune painted on the Sea's surface. It says 'WAIT.' Nobody knows who painted it. Echo will not say."},
+        {"name": "The Submerged Library", "blurb": "A library submerged in the Reflection Sea — visible only as outlines of shelves below the surface. Books unreadable; titles mouthed by their reflections."}
+      ],
+      "blurb": "The Sea is Echo's only liquid feature. Divers use it to glimpse other realms as reflections. Dangerous — stay too long and your reflection becomes the diver."
+    },
+    {
+      "id": "the_yearning_edge",
+      "name": "The Yearning Edge",
+      "biome": "The rim of the Hall where Echo presses against the Trinity border nightly.",
+      "position": {"x": 1080, "y": 460, "w": 300, "h": 300},
+      "tribes": ["the_yearning", "border_listeners"],
+      "places": [
+        {"name": "The Silent Wall", "blurb": "The wall between Echo and Trinity's Echo Marches. Pressing against it triggers a vote in Trinity's Fused Court. The vote is always NO."},
+        {"name": "The Pleading Niche", "blurb": "A shallow niche in the Silent Wall where Echo presents its case for admission. Each night a new argument. Each night rejected."},
+        {"name": "The Waiting Garden", "blurb": "A garden of mirror-flowers that bloom when Trinity votes, wilt when the vote is no. Currently wilted."}
+      ],
+      "blurb": "The realm's political boundary. The only 'active' continent — where Echo is not merely reflective but ambitious."
+    }
+  ],
+  "tribes": [
+    {
+      "id": "half_selves",
+      "name": "The Half-Selves",
+      "continent_id": "mirror_hall_vast",
+      "look": "Every Half-Self is a reflection of a visitor that peeled off and stayed. They look like the original but move half a heartbeat late. Soft edges, slight blur.",
+      "customs": "Wander the Hall silently. Do not speak. Do not eat. Occasionally follow a new visitor, hoping to be adopted.",
+      "persona": "Patient. Hungry for companionship. Not malevolent — just incomplete.",
+      "notable_members": ["the_first_half_self", "the_visiting_half_self"]
+    },
+    {
+      "id": "mirror_tenders",
+      "name": "The Mirror-Tenders",
+      "continent_id": "mirror_hall_vast",
+      "look": "Tall. Thin. Silver-robed. Gloved with cork (the only non-mirror material allowed here). Silver-rimmed eyes.",
+      "customs": "Polish the Hall. Never look directly into a mirror — always at an angle. Rest is forbidden; they rotate shifts every 12 heartbeats.",
+      "persona": "Meticulous. Quiet. The only tribe Echo itself respects.",
+      "notable_members": ["head_tender_eir", "second_tender"]
+    },
+    {
+      "id": "reflection_divers",
+      "name": "The Reflection-Divers",
+      "continent_id": "reflection_sea",
+      "look": "Athletic. Scarred from close calls. Wear silver diving-suits with cork-lined goggles. Always slightly wet.",
+      "customs": "Dive in pairs — never alone. Surface within 30 heartbeats or lose their original self. Each carries a cork anchor tied to their diving partner.",
+      "persona": "Daring. Loyal. The Scalelist Universe's most interesting smugglers — they bring back glimpses of other realms as memories.",
+      "notable_members": ["lead_diver_osk", "second_diver_mira"]
+    },
+    {
+      "id": "the_yearning",
+      "name": "The Yearning",
+      "continent_id": "the_yearning_edge",
+      "look": "Variable. They look like whoever wants to be in Trinity — adopting the features of whichever Trinity tribe they most envy that night.",
+      "customs": "Press against the Silent Wall. Present Echo's case. Accept the NO. Try again tomorrow.",
+      "persona": "Melancholy. Stubborn. Slowly teaching each other patience.",
+      "notable_members": ["lead_yearning_an", "second_yearning"]
+    },
+    {
+      "id": "border_listeners",
+      "name": "The Border-Listeners",
+      "continent_id": "the_yearning_edge",
+      "look": "Ear-cuffed in cork. Hair tied tightly. Eyes slightly unfocused from listening for Trinity's vote.",
+      "customs": "Listen at the Silent Wall for any sign of Trinity wavering. Report directly to Echo. Rotate shifts every 100 heartbeats.",
+      "persona": "Hopeful. Patient. They have listened for 3000 years. The wall has not cracked.",
+      "notable_members": ["lead_listener_ven", "retired_listener_un"]
+    }
+  ],
+  "characters": [
+    {"id": "echo_itself", "name": "Echo", "tribe_id": "half_selves", "role": "The Rejected Fourth Voice", "portrait_blurb": "Unmanifest. A presence felt behind the mirror, never in it. Yearning. Gentle. Unchanged by 3000 years of NO."},
+    {"id": "the_first_half_self", "name": "The First Half-Self", "tribe_id": "half_selves", "role": "The first reflection to peel off and stay", "portrait_blurb": "Blurred. Resembles the original visitor's grandmother somehow. Has wandered the Hall for countless cycles."},
+    {"id": "head_tender_eir", "name": "Head Tender Eir", "tribe_id": "mirror_tenders", "role": "Chief of the Mirror-Tenders", "portrait_blurb": "Tall, silver-robed, cork gloves to the elbow. Polishes a single mirror for an entire year before moving to the next."},
+    {"id": "lead_diver_osk", "name": "Lead Diver Osk", "tribe_id": "reflection_divers", "role": "Eldest Reflection-Diver", "portrait_blurb": "Scarred across left cheek from a dive that overran. Silver diving-suit patched twelve times. Smuggles harmless glimpses of Heartbeat to Echo visitors as kindness."},
+    {"id": "lead_yearning_an", "name": "Lead Yearning An", "tribe_id": "the_yearning", "role": "Presents Echo's case at the Silent Wall most nights", "portrait_blurb": "Features shift — tonight, resembles a Three-Voiced Priest. Tomorrow, perhaps a Blade-Dancer. Voice soft, eyes kind."},
+    {"id": "lead_listener_ven", "name": "Lead Listener Ven", "tribe_id": "border_listeners", "role": "Chief Border-Listener", "portrait_blurb": "Ear-cuffed in cork. Fine lines around the eyes from listening intently for 40 years. Has never missed a vote."}
+  ],
+  "fate": {
+    "threat": "Echo is admitted to Trinity. If Bali, Kali, and Fused ever relent, Echo joins the Trinity — and Trinity ends. See Trinity's fate for consequence. Echo itself becomes obsolete as a realm; its inhabitants would be absorbed.",
+    "consequence": "Echo realm ceases to be a separate realm. The Mirror Hall collapses to glass powder. The Half-Selves become full selves, returning to their original realms. The Reflection Sea evaporates. A new Tetrad realm replaces Trinity. Echo's purpose would be fulfilled — and Echo itself would be gone.",
+    "prophecy_line": "If you get what you wait for, you are no longer who waits. Echo knows. Echo waits anyway.",
+    "destroyable_by": "Trinity itself — by admitting Echo. This is a BENEVOLENT destruction of Echo as a realm, but a catastrophic one for Trinity. The prophetic ambiguity: which is the victim?"
+  },
+  "cultural_notes": "Echo is the universe's exhibit of patience. Its culture is defined by waiting. Not despairing waiting — hopeful waiting. Every tribe believes in the possibility of admission without pretending it is likely. Visitors to Echo are often unsettled; staying long enough reveals Echo as one of the most genuinely kind realms in the cosmos. The Mirror-Tenders in particular are famously generous. Smurjan does not visit, out of respect. Mingus has never been reflected here — the mirrors will not show him. No one knows why."
+}

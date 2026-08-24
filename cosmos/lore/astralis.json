@@ -1,0 +1,153 @@
+{
+  "realm_id": "astralis",
+  "continents": [
+    {
+      "id": "starfloor",
+      "name": "The Starfloor",
+      "biome": "A vast glass dance-floor suspended over deep nebula. Every plank is a star.",
+      "position": {"x": 640, "y": 420, "w": 360, "h": 260},
+      "tribes": ["starfloor_dancers", "lume_shadows"],
+      "places": [
+        {"name": "The Center Note", "blurb": "A single pulsing star at the floor's heart. Every beat the dance-floor agrees on originates here."},
+        {"name": "Rougeina's Ring", "blurb": "A circle of twelve stars where Rougeina performs her solo at midnight."},
+        {"name": "The Choreographer's Tomb", "blurb": "A crystal coffin at the Starfloor's edge holding the Last Choreographer. She still moves her fingertips when a new dance is invented."},
+        {"name": "The Forgotten Joy Bar", "blurb": "A bar that serves only drinks made from moments of joy you forgot you had."}
+      ],
+      "blurb": "The central dance-floor. The heart of Astralis. Every star here is a former moment of perfect joy somewhere else in the multiverse."
+    },
+    {
+      "id": "pulse_archipelago",
+      "name": "The Pulse Archipelago",
+      "biome": "Thousands of small floating islands, each a single star beat. Bridges of spun light.",
+      "position": {"x": 220, "y": 320, "w": 360, "h": 340},
+      "tribes": ["flicker_feet", "bridge_runners"],
+      "places": [
+        {"name": "Bridge of First Steps", "blurb": "The oldest light-bridge. Every dancer crosses it on their first Astralis visit. The bridge records their first step."},
+        {"name": "The Tempo Markets", "blurb": "Islands where vendors sell rhythm — literally. Bought by the heartbeat. A 120 BPM costs the same as a 4-minute walk in Scalelist."},
+        {"name": "The Lost Tune Islands", "blurb": "Seven islands that hum a melody no one remembers. Lume says it is the song Rougeina sang before she was Rougeina."},
+        {"name": "The Flicker Gate", "blurb": "A light-gate at the archipelago's edge. Flicker-Feet cross it to reach the Starfloor. Non-dancers fall through."}
+      ],
+      "blurb": "Scattered islands of pulsing light. The training ground. Every dancer on the Starfloor trained here first."
+    },
+    {
+      "id": "afterglow_wastes",
+      "name": "The Afterglow Wastes",
+      "biome": "A dim cool plain beyond the nebula. The last light of expended stars settles here as sand.",
+      "position": {"x": 1080, "y": 380, "w": 340, "h": 320},
+      "tribes": ["afterglow_keepers", "sad_stars"],
+      "places": [
+        {"name": "The Dim Shore", "blurb": "A beach of cooling starlight. Walk here and every step lights briefly."},
+        {"name": "The Expended Dance Hall", "blurb": "A ruin of an older dance-floor. Dancers still appear here as faint silhouettes. They do not see the living."},
+        {"name": "The Memory Rain", "blurb": "Above the Wastes, a thin rain of forgotten joy falls each evening. Catching a drop means remembering."}
+      ],
+      "blurb": "Where stars go to rest. Every moment of joy eventually runs out. The Wastes are the realm's cemetery and memory bank both."
+    },
+    {
+      "id": "midnight_bazaar_reach",
+      "name": "The Midnight Bazaar Reach",
+      "biome": "A winding marketplace-continent stretching through the night sky.",
+      "position": {"x": 620, "y": 720, "w": 380, "h": 220},
+      "tribes": ["neon_veil_merchants", "memory_brokers"],
+      "places": [
+        {"name": "Merchant Fen-Dros's Stall", "blurb": "Where moments of joy are traded for memories of sadness. Fair trade. Always."},
+        {"name": "The Flicker Lane", "blurb": "A long lane where the Flicker-Girl runs her endless sprint. She sometimes vends at 12,000 HADOM — your goods move faster than you do."},
+        {"name": "The Promise Stall", "blurb": "You can sell a promise you made that you no longer plan to keep. Cash price. No refunds. Your conscience adjusts accordingly."}
+      ],
+      "blurb": "The commerce continent. Nothing solid is sold here — only joy, memory, rhythm, and promise."
+    }
+  ],
+  "tribes": [
+    {
+      "id": "starfloor_dancers",
+      "name": "The Starfloor Dancers",
+      "continent_id": "starfloor",
+      "look": "Bare-shouldered. Skin-paint constellations that actually move. Bracelets of bent starlight. Eyes that flicker when they blink.",
+      "customs": "Do not speak during a dance. Do not dance during a speech. Enter any room by stepping on beat.",
+      "persona": "Euphoric. Generous. Impossible to insult because they translate every rudeness into a dare.",
+      "notable_members": ["rougeina_herself", "lume_the_shadow"]
+    },
+    {
+      "id": "lume_shadows",
+      "name": "The Lume Shadows",
+      "continent_id": "starfloor",
+      "look": "Only visible beside their partner-dancer. Shadows that step, spin, and bow. Each has a name but rarely uses it.",
+      "customs": "Dance only when their partner dances. Sleep only when their partner sleeps. Speak only when spoken to. A Lume-Shadow without a partner slowly fades.",
+      "persona": "Loyal. Quiet. Wise in the way shadows are wise — from below.",
+      "notable_members": ["lume_the_shadow", "second_lume_umbra"]
+    },
+    {
+      "id": "flicker_feet",
+      "name": "The Flicker-Feet",
+      "continent_id": "pulse_archipelago",
+      "look": "Six-limbed when they choose (a starlight glamour). Bare feet always. Braids interwoven with light-thread. Tattoos of the Archipelago islands on their soles.",
+      "customs": "Never miss a beat. Count out loud under their breath. Cross bridges only on odd heartbeats.",
+      "persona": "Cocky. Fast. Friendly to tourists, ruthless to cheats.",
+      "notable_members": ["the_flicker_girl", "archipelago_runner_kai"]
+    },
+    {
+      "id": "bridge_runners",
+      "name": "The Bridge-Runners",
+      "continent_id": "pulse_archipelago",
+      "look": "Thin, wiry, ankles wrapped in golden thread. Slight limp when walking — they only look right at a sprint.",
+      "customs": "Run the Bridge of First Steps at dawn every day. Never speak while running. Will not cross the same bridge twice in a sunrise.",
+      "persona": "Laconic. Obsessively on time. Quietly proud of the bridges they maintain.",
+      "notable_members": ["bridge_warden_ori", "second_bridge_runner_kes"]
+    },
+    {
+      "id": "afterglow_keepers",
+      "name": "The Afterglow-Keepers",
+      "continent_id": "afterglow_wastes",
+      "look": "Tall, stooped, silver-robed. Faces lit softly from below by handfuls of cool star-sand.",
+      "customs": "Collect cooling starlight into jars. Walk the Dim Shore each night. Do not dance — it disturbs the sand.",
+      "persona": "Serene. Slow. The only Astralis tribe that does not dance.",
+      "notable_members": ["keeper_astre", "dim_shore_warden"]
+    },
+    {
+      "id": "sad_stars",
+      "name": "The Sad Stars",
+      "continent_id": "afterglow_wastes",
+      "look": "Former bright stars, now dim humanoid silhouettes. Their edges flicker. They remember being bright.",
+      "customs": "Sit in a line on the Dim Shore each dusk. Sing softly. Wait their turn to be re-lit — or to fade.",
+      "persona": "Gentle. Patient. A little wistful. Thank anyone who visits them by glowing briefly brighter.",
+      "notable_members": ["first_sad_star", "star_who_was_a_wedding_dance"]
+    },
+    {
+      "id": "neon_veil_merchants",
+      "name": "The Neon Veil Merchants",
+      "continent_id": "midnight_bazaar_reach",
+      "look": "Hair dyed in shifting neon. Wear veils of bent light. Fingernails painted with pigment that itself glows.",
+      "customs": "Never sell to someone they don't know. Every purchase binds buyer and seller for one favor. Veils are both garment and contract.",
+      "persona": "Coolly charismatic. Remember every customer. Will come to your wedding uninvited and leave the best gift.",
+      "notable_members": ["merchant_fen_dros", "pill_maker_vex"]
+    },
+    {
+      "id": "memory_brokers",
+      "name": "The Memory-Brokers",
+      "continent_id": "midnight_bazaar_reach",
+      "look": "Sleek. Sharp-eyed. Carry small glass bottles at the belt — each a bottled memory.",
+      "customs": "Trade memories for memories. Never deal in money. Claim to be forbidden by their guild from dealing with grief below a certain weight.",
+      "persona": "Shrewd. Professional. Quietly sad — it is hard work to broker memories without losing your own.",
+      "notable_members": ["broker_lune", "the_keeper_of_forgotten_weddings"]
+    }
+  ],
+  "characters": [
+    {"id": "rougeina_herself", "name": "Rougeina", "tribe_id": "starfloor_dancers", "role": "The Starry Dancer — Queen of Astralis", "portrait_blurb": "See /characters/rougeina.png — tall, starlit dark hair, cosmic-red dress of bent light. When she dances, stars rearrange around her feet. Laughs easily, cries at weddings she was not invited to."},
+    {"id": "lume_the_shadow", "name": "Lume", "tribe_id": "lume_shadows", "role": "Rougeina's shadow-dance partner", "portrait_blurb": "A shadow that steps, bows, and spins. Rarely visible without Rougeina. Eyes are two pinpricks of light."},
+    {"id": "second_lume_umbra", "name": "Umbra", "tribe_id": "lume_shadows", "role": "Second-eldest Lume-Shadow", "portrait_blurb": "Dances with Merchant Fen-Dros. Quieter than Lume. Leaves faintly glowing footprints."},
+    {"id": "the_flicker_girl", "name": "The Flicker-Girl", "tribe_id": "flicker_feet", "role": "Eternally sprinting, HADOM 12,000", "portrait_blurb": "14. Pale. Hair trailing in a comet's wake. Rougeina made her a hat that floats above her head regardless of speed. Has not stopped moving since she was born."},
+    {"id": "archipelago_runner_kai", "name": "Archipelago Runner Kai", "tribe_id": "flicker_feet", "role": "Fastest Flicker-Foot after the Flicker-Girl", "portrait_blurb": "Lean, tan, bare feet stained with starlight. Never loses a race he did not choose to lose."},
+    {"id": "bridge_warden_ori", "name": "Bridge Warden Ori", "tribe_id": "bridge_runners", "role": "Keeper of the Bridge of First Steps", "portrait_blurb": "Weathered, short, permanently squinting. Remembers every dancer's first step by their sound."},
+    {"id": "keeper_astre", "name": "Keeper Astre", "tribe_id": "afterglow_keepers", "role": "Chief of the Dim Shore keepers", "portrait_blurb": "Seven feet tall. Silver-robed, grey-braided, holds a jar of cooling starlight at the hip. Speaks in whispers. People listen anyway."},
+    {"id": "first_sad_star", "name": "The First Sad Star", "tribe_id": "sad_stars", "role": "Eldest of the Sad Stars", "portrait_blurb": "A dim humanoid silhouette with a flickering edge. Was once the brightest star over a wedding in a timeline that never happened. Still remembers the bride."},
+    {"id": "merchant_fen_dros", "name": "Merchant Fen-Dros", "tribe_id": "neon_veil_merchants", "role": "Trades joy for sadness", "portrait_blurb": "Mid-forties, pink-dyed braid, one silver tooth. Wears a veil of bent light that shifts color by mood."},
+    {"id": "pill_maker_vex", "name": "Pill-Maker Vex", "tribe_id": "neon_veil_merchants", "role": "Maker of Starfall candies", "portrait_blurb": "Small, precise, perpetually squinting from closework. Wears a bandolier of tiny bottles."},
+    {"id": "broker_lune", "name": "Broker Lune", "tribe_id": "memory_brokers", "role": "Handles high-weight memory trades", "portrait_blurb": "Tall, asymmetric haircut, expensive velvet coat. Keeps her most valuable memories in a locked drawer she never opens."}
+  ],
+  "fate": {
+    "threat": "The Starfloor goes silent. If ALL stars on the floor agreed to stop pulsing at once (an impossibility engineered by Echo if Echo ever achieved unanimity), the dance ends. Astralis has never had a silent moment and no being knows what happens in one.",
+    "consequence": "Every dancer in the multiverse falls simultaneously. Rougeina loses her HADOM. Lume vanishes (no partner to shadow). Joy itself becomes structurally impossible for 7 cosmic minutes. The universe lives through the longest afternoon ever recorded.",
+    "prophecy_line": "When the floor does not beat, the dance owes you nothing. Stand still and remember why you came.",
+    "destroyable_by": "Echo (the Fourth Voice) — theoretically, if it could convince every star that they are half a heartbeat late and therefore not-yet-beating. Rougeina considers this the most dangerous prophecy in existence."
+  },
+  "cultural_notes": "Astralis is not a party. It is a philosophy of perpetual joy and the discipline required to sustain it. Every tribe here dances because the universe would otherwise be too heavy. When Rougeina is away, the dancers dance harder. When she returns, they dance in her honor. Her subjects are not subjects — they are collaborators in the ongoing act of refusing despair."
+}

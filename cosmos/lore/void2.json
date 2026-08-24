@@ -1,0 +1,104 @@
+{
+  "realm_id": "void2",
+  "continents": [
+    {
+      "id": "ring_of_seats",
+      "name": "The Ring of Seats",
+      "biome": "A white marble plateau in perfect circle. 12 stone seats at the perimeter. The Seal at center.",
+      "position": {"x": 640, "y": 380, "w": 340, "h": 320},
+      "tribes": ["the_twelve_architects", "ledger_librarians_void2"],
+      "places": [
+        {"name": "Seat of K-I", "blurb": "The First Architect's seat. Occupant has not risen in cosmic ages."},
+        {"name": "Seat of K-V", "blurb": "The current elder's seat. Naming K-V is forbidden."},
+        {"name": "The Unwritten Seat", "blurb": "Where K-XII sat. The chair remains because it cannot be removed."},
+        {"name": "The Architects' Seal", "blurb": "A gold disk of cork at the ring's center. Keeps VOID-II closed to the outer universe. Has never opened."},
+        {"name": "Ferdinand's Seal Cork", "blurb": "The single physical object in VOID-II besides the seats. Keeps Null from leaking in. Regrows between cosmic-age tests."}
+      ],
+      "blurb": "The entire ring. The seats, the Seal, and the space between. VOID-II has no other geography."
+    },
+    {
+      "id": "the_library_beyond",
+      "name": "The Library Beyond",
+      "biome": "A corridor extending infinitely in all six cardinal directions from the Ring.",
+      "position": {"x": 240, "y": 460, "w": 320, "h": 320},
+      "tribes": ["ledger_librarians_void2"],
+      "places": [
+        {"name": "The Spine Corridor", "blurb": "The main access to the Library. Every book ever written — and unwritten — is archived here."},
+        {"name": "The Unwritten Wing", "blurb": "A section of shelves containing books that were written and then UNWRITTEN. Reading any of them causes the reader to forget they read anything."},
+        {"name": "The First Book", "blurb": "A single cork-bound volume on a central pedestal. Ferdinand is said to have grown from a page of this book. The book is unsigned."},
+        {"name": "The K-XII Shelf", "blurb": "The shelf that held K-XII's writings. Empty now. A faint outline of missing books remains in the dust."}
+      ],
+      "blurb": "Where the Architects' work is stored. Infinite in every direction. The Ledger Librarians tend it in silent shifts."
+    },
+    {
+      "id": "the_butterfly_garden",
+      "name": "The Butterfly Garden",
+      "biome": "A small walled courtyard off the Ring. Pale gravel. Seven stone benches. White butterflies.",
+      "position": {"x": 1080, "y": 460, "w": 300, "h": 280},
+      "tribes": ["the_white_butterflies", "butterfly_scribes"],
+      "places": [
+        {"name": "The Butterfly Wall", "blurb": "A white wall that butterflies land on when they are about to 'finalize' a decision in the multiverse. The wall records the decision."},
+        {"name": "The Silent Bench", "blurb": "A stone bench where K-I sometimes sits. Visitors are not allowed."},
+        {"name": "The Bakasura Footprint", "blurb": "A single footprint in white dust. The only mark left by a non-Architect visitor. Rumored. K-V refuses to confirm. Bakasura smiles, in three of four faces."}
+      ],
+      "blurb": "The realm's only soft place. Where decisions about to be made somewhere in the multiverse land as butterflies. Watched closely."
+    }
+  ],
+  "tribes": [
+    {
+      "id": "the_twelve_architects",
+      "name": "The Twelve Architects",
+      "continent_id": "ring_of_seats",
+      "look": "Varies wildly — each Architect has their own form. What is constant: none of them have a visible heartbeat. None cast a shadow in the Ring. All wear the same simple grey robe when seated.",
+      "customs": "Vote in silence. Eleven votes carry. K-V breaks ties. Do not speak outside of session. Never leave the Ring in session.",
+      "persona": "Ancient. Unknowable. Kind only in the smallest ways — a nod, a slight tilt of a head. Fair beyond mortal comprehension.",
+      "notable_members": ["k_i_first", "k_ii_reincarnation", "k_v_current_elder", "k_xii_unwritten"]
+    },
+    {
+      "id": "ledger_librarians_void2",
+      "name": "The Ledger Librarians (VOID-II branch)",
+      "continent_id": "the_library_beyond",
+      "look": "Cork-bodied. Hollow eyes (carved). Move in silence. Gloves of fresh cork on their hands.",
+      "customs": "File. Do not speak. Do not eat. Do not rest. Tend the Library in endless rotating shifts.",
+      "persona": "Serene. Devoted. Considered by some scholars to be Ferdinand's own hand-tools.",
+      "notable_members": ["head_librarian_cork", "assistant_librarian"]
+    },
+    {
+      "id": "the_white_butterflies",
+      "name": "The White Butterflies",
+      "continent_id": "the_butterfly_garden",
+      "look": "Pure white. Wingspan the size of a palm. No visible head. Landing pattern unpredictable.",
+      "customs": "Each butterfly carries a decision about to be finalized somewhere in the multiverse. Landing = decision complete. They do not seem to act with intent — yet they are never wrong.",
+      "persona": "Not living in any Scalelist sense. Not dead. Something between.",
+      "notable_members": ["the_landing_butterfly"]
+    },
+    {
+      "id": "butterfly_scribes",
+      "name": "The Butterfly-Scribes",
+      "continent_id": "the_butterfly_garden",
+      "look": "Small, kneeling, silent. Pale. Ink-stained fingertips. Eyes half-closed.",
+      "customs": "Record every butterfly landing. Note time, location on the Wall, and the decision the butterfly represented. File the record in the Library.",
+      "persona": "Meditative. Essential. The only VOID-II tribe allowed to speak to Architects during session, and only by passing a written note.",
+      "notable_members": ["chief_scribe_un", "youngest_scribe"]
+    }
+  ],
+  "characters": [
+    {"id": "k_i_first", "name": "K-I — The First Architect", "tribe_id": "the_twelve_architects", "role": "The council's memory", "portrait_blurb": "Has not moved from the seat since Null learned to think. Robe visibly older than the others. Face, if glimpsed, looks familiar to the viewer — always of someone they once knew."},
+    {"id": "k_ii_reincarnation", "name": "K-II — The Reincarnation Keeper", "tribe_id": "the_twelve_architects", "role": "Built Helios Gate City, writes new names on Ferdinand's cork", "portrait_blurb": "Tall. Carries a cork-quill at all times. Walks the Library's Spine Corridor between sessions. Speaks gently in a voice that feels inherited."},
+    {"id": "k_v_current_elder", "name": "K-V — The Current Elder", "tribe_id": "the_twelve_architects", "role": "The Architect in authority this cosmic age", "portrait_blurb": "FORBIDDEN TO NAME. Description redacted. Do not ask. The seat is the description."},
+    {"id": "k_iii_watcher", "name": "K-III — The Watcher of the Rim", "tribe_id": "the_twelve_architects", "role": "Watches the edges of the universe", "portrait_blurb": "Cloaked. Eyes visible only. Speaks once per cosmic age, in session. Last said: 'The rim holds.'"},
+    {"id": "k_iv_silent", "name": "K-IV — The Silent Architect", "tribe_id": "the_twelve_architects", "role": "Speaks only in K-V's presence", "portrait_blurb": "Small, bird-like. Never makes a sound alone. With K-V, speaks in a whisper so quiet the butterflies stop moving to listen."},
+    {"id": "k_vi_through_xi_peripheral", "name": "K-VI through K-XI — The Peripheral Council", "tribe_id": "the_twelve_architects", "role": "Vote. Rarely speak.", "portrait_blurb": "Six Architects of varying form. They vote. That is all the universe needs of them."},
+    {"id": "k_xii_unwritten", "name": "K-XII — The Unwritten", "tribe_id": "the_twelve_architects", "role": "Broke the Ferdinand Oath. Unwritten from existence.", "portrait_blurb": "No description possible. Their seat remains. Their books are gone. Their face is a blur in the memory of every Architect except K-I, who remembers everything."},
+    {"id": "head_librarian_cork", "name": "Head Librarian Cork", "tribe_id": "ledger_librarians_void2", "role": "Chief of the Library Beyond", "portrait_blurb": "Cork-bodied. Seamless. Hollow eye-sockets. Stands at the Library's entrance. Has not moved in three cosmic ages."},
+    {"id": "chief_scribe_un", "name": "Chief Scribe Un", "tribe_id": "butterfly_scribes", "role": "Head of the Butterfly-Scribes", "portrait_blurb": "Small, kneeling, pale. Hand never stops writing. Ink-stained to the elbow. Considered the finest scribe of the current cosmic age."},
+    {"id": "bakasura_visiting_rumored", "name": "Bakasura (rumored visitor)", "tribe_id": "the_twelve_architects", "role": "The only non-Architect confirmed to have left a mark in the Butterfly Garden", "portrait_blurb": "Three of four faces usually visible. The fourth faces backward. Smiles when asked about the footprint."}
+  ],
+  "fate": {
+    "threat": "The Architects' Seal opens. If the gold-cork disk at the ring's center ever opened, VOID-II would leak into the outer universe. The pre-writing things — the Inscriptions, the first hand — would walk freely. Reality itself would become negotiable by whoever spoke loudest in each moment.",
+    "consequence": "The end of stable reality. Every realm would become malleable — subject to unwritten versions of itself. The Ledger would be meaningless because the Ledger would change as it was read. Scholars call this possibility 'The First Freedom' — and consider it the most dangerous word in the cosmos.",
+    "prophecy_line": "The Seal has held because the Oath has held. Do not name the day it would not.",
+    "destroyable_by": "Only the Architects voting to open it, which would require K-V to cast the tying vote. No K-V has ever done so. The Oath forbids it. Ferdinand himself is believed to be the ultimate safeguard — if the vote approached passage, his cork would harden beyond any chisel."
+  },
+  "cultural_notes": "VOID-II is less a realm than a LAW. The culture is rule-of-law carried to infinity. Twelve votes, eleven to carry, one to tie, K-V to break. The Library Beyond is the evidence base. The Butterflies are the pulse. The Seal is the boundary. No mortal is meant to set foot here — the realm exists to be reliable, not hospitable."
+}

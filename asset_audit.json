@@ -1,0 +1,251 @@
+{
+  "generated_at": "2026-04-08 09:30:22",
+  "total_clips": 11,
+  "complete_clips": 11,
+  "incomplete_clips": 0,
+  "missing_counts": {},
+  "clips": [
+    {
+      "char": "kompis",
+      "name": "kompis_W21_000_00_807871.webp",
+      "score": 85,
+      "grade": "GREAT",
+      "assets": {
+        "raw": true,
+        "enhanced": true,
+        "strip": true,
+        "pinterest": true,
+        "twitter": true,
+        "compare": true,
+        "staged_dir": true,
+        "staged_mp4": true,
+        "youtube_json": true,
+        "social_json": true,
+        "pub_raw": true,
+        "pub_enh": true
+      },
+      "missing": [],
+      "complete": true
+    },
+    {
+      "char": "kompis",
+      "name": "kompis_W21_001_00_709785.webp",
+      "score": 85.9,
+      "grade": "GREAT",
+      "assets": {
+        "raw": true,
+        "enhanced": true,
+        "strip": true,
+        "pinterest": true,
+        "twitter": true,
+        "compare": true,
+        "staged_dir": true,
+        "staged_mp4": true,
+        "youtube_json": true,
+        "social_json": true,
+        "pub_raw": true,
+        "pub_enh": true
+      },
+      "missing": [],
+      "complete": true
+    },
+    {
+      "char": "kompis",
+      "name": "kompis_W21_002_00_378996.webp",
+      "score": 88.8,
+      "grade": "GREAT",
+      "assets": {
+        "raw": true,
+        "enhanced": true,
+        "strip": true,
+        "pinterest": true,
+        "twitter": true,
+        "compare": true,
+        "staged_dir": true,
+        "staged_mp4": true,
+        "youtube_json": true,
+        "social_json": true,
+        "pub_raw": true,
+        "pub_enh": true
+      },
+      "missing": [],
+      "complete": true
+    },
+    {
+      "char": "rougeina",
+      "name": "rougeina_W21_000_00_164027.webp",
+      "score": 91.1,
+      "grade": "HERO",
+      "assets": {
+        "raw": true,
+        "enhanced": true,
+        "strip": true,
+        "pinterest": true,
+        "twitter": true,
+        "compare": true,
+        "staged_dir": true,
+        "staged_mp4": true,
+        "youtube_json": true,
+        "social_json": true,
+        "pub_raw": true,
+        "pub_enh": true
+      },
+      "missing": [],
+      "complete": true
+    },
+    {
+      "char": "rougeina",
+      "name": "rougeina_W21_001_00_515889.webp",
+      "score": 83.8,
+      "grade": "GREAT",
+      "assets": {
+        "raw": true,
+        "enhanced": true,
+        "strip": true,
+        "pinterest": true,
+        "twitter": true,
+        "compare": true,
+        "staged_dir": true,
+        "staged_mp4": true,
+        "youtube_json": true,
+        "social_json": true,
+        "pub_raw": true,
+        "pub_enh": true
+      },
+      "missing": [],
+      "complete": true
+    },
+    {
+      "char": "smurjan",
+      "name": "smurjan_W21_000_00_460471.webp",
+      "score": 86.6,
+      "grade": "GREAT",
+      "assets": {
+        "raw": true,
+        "enhanced": true,
+        "strip": true,
+        "pinterest": true,
+        "twitter": true,
+        "compare": true,
+        "staged_dir": true,
+        "staged_mp4": true,
+        "youtube_json": true,
+        "social_json": true,
+        "pub_raw": true,
+        "pub_enh": true
+      },
+      "missing": [],
+      "complete": true
+    },
+    {
+      "char": "smurjan",
+      "name": "smurjan_W21_001_00_962181.webp",
+      "score": 81.4,
+      "grade": "GREAT",
+      "assets": {
+        "raw": true,
+        "enhanced": true,
+        "strip": true,
+        "pinterest": true,
+        "twitter": true,
+        "compare": true,
+        "staged_dir": true,
+        "staged_mp4": true,
+        "youtube_json": true,
+        "social_json": true,
+        "pub_raw": true,
+        "pub_enh": true
+      },
+      "missing": [],
+      "complete": true
+    },
+    {
+      "char": "trollmage",
+      "name": "trollmage_W21_000_00_60731.webp",
+      "score": 93.9,
+      "grade": "HERO",
+      "assets": {
+        "raw": true,
+        "enhanced": true,
+        "strip": true,
+        "pinterest": true,
+        "twitter": true,
+        "compare": true,
+        "staged_dir": true,
+        "staged_mp4": true,
+        "youtube_json": true,
+        "social_json": true,
+        "pub_raw": true,
+        "pub_enh": true
+      },
+      "missing": [],
+      "complete": true
+    },
+    {
+      "char": "trollmage",
+      "name": "trollmage_W21_001_00_611821.webp",
+      "score": 94.6,
+      "grade": "HERO",
+      "assets": {
+        "raw": true,
+        "enhanced": true,
+        "strip": true,
+        "pinterest": true,
+        "twitter": true,
+        "compare": true,
+        "staged_dir": true,
+        "staged_mp4": true,
+        "youtube_json": true,
+        "social_json": true,
+        "pub_raw": true,
+        "pub_enh": true
+      },
+      "missing": [],
+      "complete": true
+    },
+    {
+      "char": "vigolas",
+      "name": "vigolas_W21_000_00_530767.webp",
+      "score": 97.7,
+      "grade": "HERO",
+      "assets": {
+        "raw": true,
+        "enhanced": true,
+        "strip": true,
+        "pinterest": true,
+        "twitter": true,
+        "compare": true,
+        "staged_dir": true,
+        "staged_mp4": true,
+        "youtube_json": true,
+        "social_json": true,
+        "pub_raw": true,
+        "pub_enh": true
+      },
+      "missing": [],
+      "complete": true
+    },
+    {
+      "char": "vigolas",
+      "name": "vigolas_W21_001_00_544365.webp",
+      "score": 97.7,
+      "grade": "HERO",
+      "assets": {
+        "raw": true,
+        "enhanced": true,
+        "strip": true,
+        "pinterest": true,
+        "twitter": true,
+        "compare": true,
+        "staged_dir": true,
+        "staged_mp4": true,
+        "youtube_json": true,
+        "social_json": true,
+        "pub_raw": true,
+        "pub_enh": true
+      },
+      "missing": [],
+      "complete": true
+    }
+  ]
+}

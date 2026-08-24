@@ -1,0 +1,35 @@
+{
+  "id": "s4e02_the_sea_remembers",
+  "number": 2,
+  "title": "The Sea Remembers",
+  "subtitle": "Episode 2 of 12 · Season 4: The Fates Unravel",
+  "realm_id": "helios",
+  "fate_triggered": "A single forward-moving wave on the Reverse Ocean.",
+  "pov_characters": ["quill_captain_branon", "rougeina_herself"],
+  "supporting": ["captain_of_lost_fleet", "vigolas_the_administrator", "lume_the_shadow"],
+  "synopsis": "Quill-Captain Branon is patrolling Ghost Harbor on the morning the Reverse Ocean stops obeying. A single wave — small, polite — moves the wrong direction. Forward. Branon counts six heartbeats before the next wave undoes it. Six is enough. He sends a stormbird to Stormhold. Vigolas, returning from Scalelist, makes a decision he has been avoiding for centuries: he asks Rougeina to come. She arrives within an Astralis flicker — three of her, technically, the Flicker-Girl carrying her bags, Lume crossing the threshold a half-step late. Vigolas explains. Rougeina listens. She walks the harbor. She does NOT dance — to dance on the Reverse Ocean would weaponize her — and she will not yet. Instead, she observes the forward wave when it returns (it returns once, briefly, in her presence), and she names what is causing it. 'Echo is humming,' she says. 'You can hear it underwater.' The forward wave fades. Vigolas asks if he can hire her permanently as a co-administrator. Rougeina, for once, does not laugh. She says: 'No. But I will come if you ask.' Branon closes the harbor for a week.",
+  "key_scenes": [
+    {"location": "Ghost Harbor, Stormcoast, dawn", "action": "Branon counts six forward-moving heartbeats. Sends a stormbird."},
+    {"location": "Stormhold throne", "action": "Vigolas reads the report. Pauses. Writes a personal letter to Rougeina."},
+    {"location": "Astralis Bridge of First Steps", "action": "Rougeina receives the letter. Looks at Lume. Lume nods once."},
+    {"location": "Ghost Harbor, midday", "action": "Rougeina arrives via flicker. The Flicker-Girl carries her bags. Lume crosses the threshold half a heartbeat late."},
+    {"location": "Pier overlooking the Reverse Ocean", "action": "Rougeina watches. The forward wave returns. She names the cause: 'Echo is humming.'"},
+    {"location": "The Listening Beacon at dusk", "action": "Vigolas asks Rougeina to be co-administrator. She says no — but she will come when asked."}
+  ],
+  "cliffhanger": "Branon, walking home that night, hears his own footsteps echo a half-step late behind him. He does not turn around.",
+  "panel_storyboard": [
+    {"panel": 1, "composition": "Ghost Harbor at dawn. Half-fog. Branon at the pier, lightning-scarred, counting on his fingers.", "character": "quill_captain_branon", "camera": "establishing wide", "emotion": "alert"},
+    {"panel": 2, "composition": "Close-up of a single small wave moving FORWARD across the Reverse Ocean. Sun glint on the wrong side.", "character": null, "camera": "macro on water", "emotion": "wrong"},
+    {"panel": 3, "composition": "Branon scribbling a note, sealing it with stormwax, releasing a stormbird.", "character": "quill_captain_branon", "camera": "tight three-quarter", "emotion": "urgency, controlled"},
+    {"panel": 4, "composition": "Vigolas in his Stormhold throne, scroll unfurled. Behind him, lightning frozen mid-strike.", "character": "vigolas_the_administrator", "camera": "throne-level", "emotion": "calculation", "dialogue": "Vigolas (thinking): 'I had hoped never to ask her.'"},
+    {"panel": 5, "composition": "Astralis Bridge of First Steps. Rougeina holding the gold-stormed letter. Lume's shadow at her feet, slightly delayed.", "character": "rougeina_herself", "camera": "sky-flicker dynamic", "emotion": "rare seriousness"},
+    {"panel": 6, "composition": "Rougeina arriving at Ghost Harbor. The Flicker-Girl behind her with bags. Lume catching up half a step late.", "character": "rougeina_herself", "camera": "wide hero shot", "emotion": "professional"},
+    {"panel": 7, "composition": "Pier scene. Rougeina kneeling, hand just above the water. The forward wave passes beneath her hand.", "character": "rougeina_herself", "camera": "low water-level", "emotion": "concentration", "dialogue": "Rougeina: 'Echo is humming. You can hear it underwater.'"},
+    {"panel": 8, "composition": "The Listening Beacon at dusk. Vigolas and Rougeina seated on stone steps. Honest distance between them.", "character": null, "camera": "wide two-shot", "emotion": "candor", "dialogue": "Vigolas: 'Will you co-administer?' Rougeina: 'No. But I will come when asked.'"},
+    {"panel": 9, "composition": "Branon walking a Stormcoast path at night. A single bootprint forming behind him a half-step late.", "character": "quill_captain_branon", "camera": "long lens, profile", "emotion": "controlled fear", "caption": "He did not turn around."}
+  ],
+  "cosmic_price_paid": "Vigolas has acknowledged a peer for the first time. Rougeina has acknowledged she COULD destroy Helios. Both will remember this conversation for centuries.",
+  "callout_for_cosmos_drawer": "In Season 4, the Reverse Ocean produced a single forward-moving wave. Rougeina diagnosed Echo's humming. Helios survived.",
+  "watch_chapter": null,
+  "read_chapter": null
+}

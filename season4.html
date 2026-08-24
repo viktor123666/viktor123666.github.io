@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Seasons — Ten Seasons, One Heartbeat | Scalelist Universe</title>
+<meta name="description" content="The full ten-season arc of the Scalelist Universe — from Origins to the Convergence — with status, key-art and links to the manga. One continuous heartbeat toward the moment the five remember they are one.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
+<style>
+  .se-hero{min-height:min(48vh,400px);}
+  .se-wrap{max-width:1000px;margin:0 auto;padding:0 1.2rem 2rem;}
+  .legend{display:flex;flex-wrap:wrap;gap:.5rem .9rem;justify-content:center;margin:.4rem auto 1.6rem;}
+  .legend span{font-size:.72rem;color:var(--text-dim);display:inline-flex;align-items:center;gap:.4rem;}
+  .legend i{width:9px;height:9px;border-radius:50%;}
+
+  .season{display:grid;grid-template-columns:200px 1fr;gap:1.1rem;align-items:stretch;margin-bottom:1rem;
+    background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--c,var(--gold));border-radius:var(--radius);overflow:hidden;
+    transition:transform .22s,box-shadow .22s,border-color .22s;}
+  .season:hover{transform:translateY(-3px);border-color:var(--c);box-shadow:0 16px 40px -18px #000,0 0 22px -10px var(--c);}
+  .season .pic{position:relative;overflow:hidden;min-height:150px;}
+  .season .pic img{width:100%;height:100%;object-fit:cover;object-position:center 28%;}
+  .season .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,var(--panel));}
+  .season .pic .num{position:absolute;top:.5rem;left:.6rem;font-family:var(--font-display);font-size:1.5rem;color:#fff;
+    text-shadow:0 2px 12px #000;letter-spacing:.05em;}
+  .season .body{padding:1.1rem 1.2rem 1.1rem 0;display:flex;flex-direction:column;justify-content:center;}
+  .season .st{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    padding:.2rem .6rem;border-radius:999px;margin-bottom:.5rem;width:max-content;}
+  .season h3{font-family:var(--font-display);color:#fff;font-size:1.3rem;margin-bottom:.3rem;}
+  .season .log{color:var(--text-dim);font-size:.9rem;line-height:1.55;}
+  .season .go{margin-top:.6rem;font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--c,var(--gold));}
+  .season.sealed{border-style:dashed;}
+  .season.sealed .pic img{filter:grayscale(.5) brightness(.7);}
+  @media(max-width:620px){ .season{grid-template-columns:1fr;} .season .pic{min-height:130px;} .season .pic::after{background:linear-gradient(0deg,var(--panel),transparent 60%);} .season .body{padding:0 1.2rem 1.2rem;} }
+
+  .se-foot{text-align:center;color:var(--text-dim);font-size:.9rem;max-width:60ch;margin:1.6rem auto 0;}
+</style>
+</head>
+<body>
+
+<header class="su-hero se-hero">
+  <div class="su-kicker su-fade">The arc, end to end</div>
+  <h1 class="su-fade-2">Ten Seasons, One Heartbeat</h1>
+  <p class="su-fade-3">The whole Scalelist saga is one rising heartbeat — from five strangers waking in five broken realms, to the moment they remember they were always one soul. Here is every season, where it stands, and where to read it.</p>
+</header>
+
+<main class="se-wrap su-section" style="padding-top:1rem;">
+  <div class="legend">
+    <span><i style="background:#22c55e"></i>Published</span>
+    <span><i style="background:#c9a84c"></i>In production</span>
+    <span><i style="background:#5b8cff"></i>Upcoming</span>
+    <span><i style="background:#ef4444"></i>The finale · sealed</span>
+  </div>
+  <div id="seasons"></div>
+  <p class="se-foot">Follow the same arc on the <a href="/timeline">Timeline</a>, read what's out in the <a href="/manga">Manga</a>, or jump to the climax: <a href="/convergence">the Convergence</a>.</p>
+</main>
+
+<script>
+const A="/art", C="/characters/art";
+const ST={pub:{t:"Published",c:"#22c55e"},prod:{t:"In production",c:"#c9a84c"},soon:{t:"Upcoming",c:"#5b8cff"},seal:{t:"The finale · sealed",c:"#ef4444"}};
+const SEASONS=[
+ {n:1,t:"Origins",accent:"#00ff88",img:`${A}/cosmos/helios.webp`,st:"pub",link:["/manga","Read the manga"],
+  log:"Five souls wake to five broken realms — a storm-king, a dancer, a fisherman, a voidwalker, a rune-reader — none of them yet knowing they are fragments of one."},
+ {n:2,t:"The Sin Codices",accent:"#9933ff",img:`${A}/cosmos/codexia.webp`,st:"pub",link:["/manga","Read the manga"],
+  log:"Trollmage reads the forbidden books backward, and the routing system that holds reality's heartbeats apart cracks for the first time."},
+ {n:3,t:"The Subtick Empire",accent:"#ffaa00",img:`${A}/cosmos/heartbeat.webp`,st:"pub",link:["/season3","Enter the hype page"],
+  log:"Kompis's heartbeat-realm rises — a cabin by a lake becomes a kingdom, and a golden retriever named Mingus is its sovereign heart."},
+ {n:4,t:"The Fates Unravel",accent:"#00aaff",img:`${A}/cosmos/trinity.webp`,st:"prod",link:["/manga","Read the manga"],
+  log:"Echo is sealed. Mingus crosses into the Null — and returns. The five converge at Lumen for the first time, and Ferdinand, the silent world-tree, finally speaks."},
+ {n:5,t:"The Lineage Awakening",accent:"#d4a056",img:`${C}/runa/runa_keyart.webp`,st:"pub",link:["/lineage","Meet the Lineage"],
+  log:"The ten hidden souls of the cipher step into the light — VIKTOR and RÖNNKVIST made flesh, the guardians of Ferdinand's bark named at last."},
+ {n:6,t:"The Star-Dancer's War",accent:"#ff3366",img:`${A}/cosmos/astralis.webp`,st:"soon",
+  log:"Astralis burns. Rougeina's Kill Order comes due — she must answer the destabilization she helped set in motion, and the dance becomes a battlefield."},
+ {n:7,t:"The Stormcoast War",accent:"#00ff88",img:`${C}/vigolas/vigolas_keyart.webp`,st:"soon",
+  log:"Vass kneels. Vigolas's storm turns outward, and Helios learns exactly what its king is willing to spend to win a war that cannot be lost."},
+ {n:8,t:"The Trinity War",accent:"#00aaff",img:`${C}/smurjan/smurjan_keyart.webp`,st:"soon",
+  log:"Three voices, one throat. Smurjan — the bridge between both orders — is tested to the breaking point, and the universe needs him to hold."},
+ {n:9,t:"The Three Signs",accent:"#c9a84c",img:`${A}/hadom/pulse.webp`,st:"soon",link:["/timeline","See the timeline"],
+  log:"The Seventh falls. The Codices wake. The Heartbeat calls. In every realm at once, the prophecy stirs — and the Convergence begins to dawn."},
+ {n:10,t:"The Convergence",accent:"#ef4444",img:`${A}/begin/ferdinand.webp`,st:"seal",link:["/convergence","Read the Convergence"],
+  log:"The Titanomachy. The five remember they are one, turn as a single soul upon the Null, and ascend to five equal thrones — the opening scene of the world to come. Its final words, the HADOM YWAPOS, stay sealed until the whole saga is complete."},
+];
+
+const el=document.getElementById("seasons");
+SEASONS.forEach(s=>{
+  const st=ST[s.st];
+  const card=document.createElement(s.link?"a":"div");
+  card.className="season"+(s.st==="seal"?" sealed":""); card.style.setProperty("--c",s.accent);
+  if(s.link){ card.href=s.link[0]; }
+  card.innerHTML=`
+    <div class="pic"><span class="num">S${s.n}</span><img loading="lazy" src="${s.img}" alt="${s.t}"></div>
+    <div class="body">
+      <span class="st" style="background:color-mix(in srgb,${st.c} 22%,transparent);color:${st.c};border:1px solid ${st.c}">${st.t}</span>
+      <h3>Season ${s.n} — ${s.t}</h3>
+      <div class="log">${s.log}</div>
+      ${s.link?`<span class="go">${s.link[1]} →</span>`:`<span class="go" style="color:var(--muted)">Coming to the canon</span>`}
+    </div>`;
+  el.appendChild(card);
+});
+</script>
+</body>
+</html>

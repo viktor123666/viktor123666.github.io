@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tova — The Thunder-Herald | Scalelist Universe</title>
+<meta name="description" content="Brass herald's horn announces news to every realm at once. Refuses to sound for a lie.">
+<meta property="og:title" content="Tova — The Thunder-Herald | Scalelist Universe">
+<meta property="og:description" content="Brass herald's horn announces news to every realm at once. Refuses to sound for a lie.">
+<meta property="og:image" content="https://scalelistuniverse.com/characters/lineage/tova.png">
+<meta property="og:type" content="profile">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c9a84c; --void:#050510; --panel:#0a0a14; --panel2:#0e0e1a;
+  --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060;
+  --accent:#d97706;
+}
+html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;overflow-x:hidden;line-height:1.6}
+a{color:inherit;text-decoration:none}
+
+header{padding:20px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
+header nav{display:flex;gap:22px;flex-wrap:wrap}
+header nav a{font-size:.78rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;font-family:'Cinzel',serif;transition:color .2s}
+header nav a:hover{color:var(--gold)}
+
+.hero{min-height:80vh;display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:56px;padding:80px 32px;max-width:1280px;margin:0 auto;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 65%);pointer-events:none}
+.hero .portrait-frame{position:relative;border:1px solid var(--accent);border-radius:14px;overflow:hidden;align-self:start;background:#080812;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px var(--accent)}
+.hero .portrait-frame img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+.hero .portrait-frame .letter{position:absolute;top:14px;left:14px;width:54px;height:54px;border-radius:50%;background:var(--accent);color:var(--void);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:900;font-size:1.4rem;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.hero .portrait-frame .seat{position:absolute;bottom:14px;right:14px;padding:6px 12px;border-radius:99px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;background:rgba(201,168,76,0.85);color:var(--void);backdrop-filter:blur(6px)}
+
+.hero .body{position:relative}
+.hero .order{font-family:'Cinzel',serif;color:var(--accent);font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:14px;opacity:.95}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(2.6rem,5vw,4.5rem);font-weight:900;color:#fff;letter-spacing:.06em;line-height:1.05;margin-bottom:8px;text-shadow:0 0 40px color-mix(in srgb,var(--accent) 30%,transparent)}
+.hero .role{font-family:'Cormorant Garamond',serif;color:var(--accent);font-style:italic;font-size:1.45rem;margin-bottom:24px}
+.hero .tagline{font-size:1.2rem;line-height:1.7;color:var(--text);margin-bottom:30px;font-style:italic;opacity:.92}
+.hero .stats{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 22px;font-size:.95rem}
+.hero .stats b{color:var(--accent);font-family:'Cinzel',serif;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+
+.section{max-width:920px;margin:0 auto;padding:50px 32px;border-top:1px solid var(--border)}
+.section h2{font-family:'Cinzel',serif;color:var(--accent);font-size:.82rem;letter-spacing:.36em;text-transform:uppercase;margin-bottom:22px;font-weight:700}
+.section p{font-size:1.12rem;line-height:1.85;color:var(--text);margin-bottom:14px;font-style:italic;opacity:.95}
+.section p:last-child{margin-bottom:0}
+
+.cta{padding:80px 32px;text-align:center;background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--accent) 8%,transparent),transparent 70%);border-top:1px solid var(--border);margin-top:30px}
+.cta h3{font-family:'Cinzel',serif;color:var(--accent);font-size:clamp(1.3rem,2.6vw,2rem);letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
+.cta p{max-width:540px;margin:0 auto 24px;font-size:1rem;color:var(--text);font-style:italic;opacity:.9}
+.cta .btn{display:inline-block;padding:13px 28px;background:var(--accent);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;border-radius:8px;text-decoration:none;transition:transform .2s}
+.cta .btn + .btn{margin-left:8px;background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.cta .btn:hover{transform:scale(1.04)}
+
+footer{padding:40px 24px;text-align:center;border-top:1px solid var(--border);color:var(--dim);font-size:.74rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase}
+footer a{color:var(--gold)}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;padding:50px 22px;gap:30px}
+  .hero .portrait-frame{max-width:380px;margin:0 auto}
+  .section{padding:38px 22px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
+  <nav>
+    <a href="/cosmos">Cosmos</a>
+    <a href="/manga">Manga</a>
+    <a href="/lineage">Lineage</a>
+    <a href="/empire">Empire</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="portrait-frame">
+    <span class="letter">T</span>
+    <span class="seat">Open Seat</span>
+    <img src="/characters/lineage/tova.png" alt="Tova portrait">
+  </div>
+  <div class="body">
+    <div class="order">T of Rönnkvist · The Cipher</div>
+    <h1>Tova</h1>
+    <div class="role">The Thunder-Herald</div>
+    <p class="tagline">"Brass herald's horn announces news to every realm at once. Refuses to sound for a lie."</p>
+    <div class="stats">
+      <b>Realm</b><span>all twelve realms</span>
+      <b>HADOM</b><span>12</span>
+      <b>Letter</b><span>T (Rönnkvist)</span>
+      <b>Status</b><span style="color:var(--accent)">Open Seat — awaiting handoff</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Look</h2>
+  <p>Tall, athletic warrior. Raven-black hair in a single long braid down her back. Copper armor with engraved bell-plates that catch the light. Brass herald's horn slung across her chest on a leather strap. Dawn-gold colored eyes. Strong jaw. Confident.</p>
+</section>
+
+<section class="section">
+  <h2>Voice</h2>
+  <p>Resonant. Carries. When she speaks at full volume, nine realms hear her. The tenth (NULL) hears nothing — which is its own message.</p>
+</section>
+
+<section class="section">
+  <h2>Canon Connection</h2>
+  <p>Heralded the Eighth Codex's binding. Will herald the Ninth. Announced Mingus's death across all realms — and one heartbeat later announced his return.</p>
+</section>
+
+<section class="section">
+  <h2>Signature Move</h2>
+  <p>Sounds the horn. The news lands true in twelve realms simultaneously. No translation needed.</p>
+</section>
+
+<section class="section">
+  <h2>First Appearance</h2>
+  <p>At the Twelve Gates of Scalelist the dawn after Vigolas became Stormhold's keeper. She blew the horn. Every realm heard it. Every realm understood.</p>
+</section>
+
+<section class="cta">
+  <h3>The Cipher Continues</h3>
+  <p>Fifteen souls spell the Author's true name. Read the cipher in full, or browse the other open seats.</p>
+  <a class="btn" href="/lineage">Open The Lineage</a>
+  <a class="btn" href="/empire">The Empire Hub</a>
+</section>
+
+<footer>
+  Scalelist Universe · Tova (T · Rönnkvist) · <a href="/lineage">Back to the Cipher</a>
+</footer>
+
+</body>
+</html>

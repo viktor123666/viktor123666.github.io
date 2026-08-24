@@ -1,0 +1,154 @@
+{
+  "realm_id": "thanatos",
+  "continents": [
+    {
+      "id": "outer_spiral",
+      "name": "The Outer Spiral",
+      "biome": "Curved plains of pale stone, etched with names. Mist. Soft wind.",
+      "position": {"x": 640, "y": 380, "w": 340, "h": 280},
+      "tribes": ["name_carvers", "silent_grievers"],
+      "places": [
+        {"name": "The First Name", "blurb": "A single carved letter. The oldest name in the universe. Nobody remembers who it belonged to — which is the point."},
+        {"name": "The Memorial Walk", "blurb": "A path winding through the Outer Spiral. Every stone names a death the universe has forgotten. Walking it quietly is considered prayer."},
+        {"name": "The Carvers' Workshop", "blurb": "A stone-roofed workshop where Name-Carvers etch new names onto the spiral. They work at night, when Fenna is not watching."},
+        {"name": "The Unremembered Shrine", "blurb": "A shrine for the names Fenna did NOT carve — lost causes, unknown soldiers, nameless infants. Honored by a single candle each."}
+      ],
+      "blurb": "The outermost ring of the spiral graveyard. Where the ancient dead rest. The Name-Carvers work here."
+    },
+    {
+      "id": "middle_ring",
+      "name": "The Middle Ring",
+      "biome": "Cypress and stone. Tall memorial pillars. Silver mist at ankle-height.",
+      "position": {"x": 1020, "y": 380, "w": 340, "h": 320},
+      "tribes": ["bell_ringers", "grief_poets"],
+      "places": [
+        {"name": "The Bell Tower Line", "blurb": "Twelve bell-towers arranged in a semi-circle. Ring sequentially as souls pass."},
+        {"name": "The Poet's Grotto", "blurb": "A hollowed cave where Grief-Poets compose the final verses for souls before their names are carved."},
+        {"name": "The Thirteenth Tower", "blurb": "A smaller tower at the end. Its bell has not rung. When it does, a name is lost forever."},
+        {"name": "The Reading Garden", "blurb": "A garden of stone benches where mourners sit. Fenna sometimes joins them silently."}
+      ],
+      "blurb": "The middle continent. Where names are sung, rung, and written into final form. The realm's working heart."
+    },
+    {
+      "id": "fennas_center",
+      "name": "Fenna's Center",
+      "biome": "A circular sanctum at the spiral's heart. Marble floor. Single pillar. Single desk.",
+      "position": {"x": 240, "y": 400, "w": 280, "h": 300},
+      "tribes": ["ledger_keepers_death", "fenna_herself"],
+      "places": [
+        {"name": "The Central Pillar", "blurb": "A floor-to-ceiling stone pillar carved with every death in the universe, refreshing constantly. Reading it is fatal within seven lines."},
+        {"name": "Fenna's Desk", "blurb": "A dark wooden desk in the center of the sanctum. Fenna stands, never sits. She reads. She releases. She never rests."},
+        {"name": "The Release Door", "blurb": "A small wooden door at the rear. Souls Fenna releases pass through here on their way to Horizon."},
+        {"name": "The Meditation Circle", "blurb": "A circle of stone chairs where visitors may sit and contemplate. Silence required. Fenna sometimes joins for a single heartbeat."}
+      ],
+      "blurb": "The innermost center. Fenna's domain. Where the universe's deaths are read, acknowledged, and passed on."
+    },
+    {
+      "id": "the_name_snow_marshes",
+      "name": "The Name-Snow Marshes",
+      "biome": "Wetland plains where falling snow is actually drifting carved names.",
+      "position": {"x": 640, "y": 720, "w": 360, "h": 240},
+      "tribes": ["snow_gatherers", "thirteenth_bell_watchers"],
+      "places": [
+        {"name": "The Gathering Field", "blurb": "A vast open field where Snow-Gatherers collect drifting names. Each gathered name is archived, read once aloud, and filed."},
+        {"name": "The Thirteenth Bell Tower", "blurb": "The hidden tower whose bell has never rung. Its watchers wait in shifts of seven years."},
+        {"name": "The Forgotten Chapel", "blurb": "A small wooden chapel where names that cannot be archived (unreadable, incomplete, forbidden) are burned respectfully."},
+        {"name": "The Silent Graveyard", "blurb": "A graveyard without any names — deliberately blank headstones for those whose deaths cannot be named."}
+      ],
+      "blurb": "The southern marshes where the realm's name-snow falls thickest. The Snow-Gatherers are the realm's archivists-on-foot."
+    }
+  ],
+  "tribes": [
+    {
+      "id": "name_carvers",
+      "name": "The Name-Carvers",
+      "continent_id": "outer_spiral",
+      "look": "Tall, thin, ink-stained sleeves. Calluses on both hands from chisel work. Wear a small silver letter on a chain — their own name, carved by a predecessor.",
+      "customs": "Carve only at night. Never carve their own family's names (delegated to another carver). Sleep during the day. Pass tools to apprentices only after seven years.",
+      "persona": "Quiet. Precise. Respected. Their work is the realm's memory.",
+      "notable_members": ["master_carver_ost", "apprentice_carver_nel"]
+    },
+    {
+      "id": "silent_grievers",
+      "name": "The Silent-Grievers",
+      "continent_id": "outer_spiral",
+      "look": "Grey or black. Veiled. Walk the Memorial Walk daily. Hands ink-black from rubbing the stone to feel the names.",
+      "customs": "Speak only at sunrise. Walk in single file. Carry a single flower — release it at the Unremembered Shrine.",
+      "persona": "Meditative. Kind to visitors. Every Silent-Griever carries a grief they have chosen to represent the realm.",
+      "notable_members": ["elder_griever_ond", "youngest_griever"]
+    },
+    {
+      "id": "bell_ringers",
+      "name": "The Bell-Ringers",
+      "continent_id": "middle_ring",
+      "look": "Strong-armed, bronze-gloved. Dark uniforms. Hair cropped. One bell-medal per year of service.",
+      "customs": "Pull the bells sequentially across 12 towers. A missed pull means a soul unheard — feared. Work in shifts of twelve.",
+      "persona": "Earnest. Steadfast. Hate laziness. Take drinks after shift and sing old Thanatos hymns.",
+      "notable_members": ["bell_master_oj", "bell_second_kir"]
+    },
+    {
+      "id": "grief_poets",
+      "name": "The Grief-Poets",
+      "continent_id": "middle_ring",
+      "look": "Shawl-wrapped. Quill at the ear. Ink-stained sleeves and cheeks. Soft-eyed.",
+      "customs": "Compose one verse per soul. Read it once aloud in the Poet's Grotto. Never publish — verses are for the soul, not for readers.",
+      "persona": "Gentle. Observant. Write the realm's uncatalogued tenderness.",
+      "notable_members": ["poet_ama", "poet_of_the_third_grotto"]
+    },
+    {
+      "id": "ledger_keepers_death",
+      "name": "The Ledger-Keepers (Death branch)",
+      "continent_id": "fennas_center",
+      "look": "Pale, linen-robed, carry a small book always. Eyes soft but unfocused (from proximity to the Central Pillar).",
+      "customs": "Never speak of the Pillar's contents. Assist Fenna silently. Eat one meal a day.",
+      "persona": "Devoted. Quietly joyful. Grateful to serve a post that the universe depends on.",
+      "notable_members": ["keeper_at_fennas_desk", "second_ledger_keeper"]
+    },
+    {
+      "id": "fenna_herself",
+      "name": "Fenna (Herself)",
+      "continent_id": "fennas_center",
+      "look": "Tall, pale, long black hair braided in a single thick plait. Black robe with silver trim. Hands ink-free — she reads, not writes.",
+      "customs": "Stand at the desk. Read the Pillar. Release souls to Horizon. Does not rest.",
+      "persona": "Kind in a way that is hard to notice. Will greet you in a language you have not yet learned but understand anyway. Has never been surprised.",
+      "notable_members": ["fenna_the_reader"]
+    },
+    {
+      "id": "snow_gatherers",
+      "name": "The Snow-Gatherers",
+      "continent_id": "the_name_snow_marshes",
+      "look": "Insulated hooded cloaks. Snowshoes. Net-gloves for catching drifting names. Pink-cheeked from wind.",
+      "customs": "Gather names in shifts. File gathered names at the Chapel. Ring a small hand-bell when a particularly significant name is caught.",
+      "persona": "Hardy. Cheerful. Tell tall tales around the Chapel fire. Respected by all other Thanatos tribes.",
+      "notable_members": ["gatherer_lom", "lead_gatherer_osk"]
+    },
+    {
+      "id": "thirteenth_bell_watchers",
+      "name": "The Thirteenth-Bell Watchers",
+      "continent_id": "the_name_snow_marshes",
+      "look": "Grey-cloaked, seven-striped sleeves (one stripe per year of service). Silver ear-cuff. Solemn.",
+      "customs": "Watch the Thirteenth Bell in silent shifts of seven years. Do not leave the tower during shift. Do not speak. Eat once a day, carried up by an apprentice.",
+      "persona": "Silent. Grave. Chosen by Fenna herself. It is the hardest post in the realm.",
+      "notable_members": ["current_watcher", "retired_watcher_un"]
+    }
+  ],
+  "characters": [
+    {"id": "fenna_the_reader", "name": "Fenna", "tribe_id": "fenna_herself", "role": "Reader of the Ledger, Gate-Keeper of Thanatos", "portrait_blurb": "Tall, pale, long dark plait. Black robe with silver trim. Has not slept in 400 years. Will greet you in the language you will understand tomorrow."},
+    {"id": "master_carver_ost", "name": "Master Carver Ost", "tribe_id": "name_carvers", "role": "Eldest Name-Carver", "portrait_blurb": "Tall, slender, silver-haired. Chisel calluses on both hands. Works only at night. Carves with her left hand; holds the stone with her right."},
+    {"id": "elder_griever_ond", "name": "Elder Griever Ond", "tribe_id": "silent_grievers", "role": "Eldest of the Silent-Grievers", "portrait_blurb": "Old. Veiled. Walks the Memorial Walk at dawn and dusk. Carries a different flower each day — roses on days of war, daisies on days of peace."},
+    {"id": "bell_master_oj", "name": "Bell-Master Oj", "tribe_id": "bell_ringers", "role": "Chief Bell-Ringer", "portrait_blurb": "Strong-armed. Bronze-gloved. Cropped hair with a silver streak. Has rung bells for 47 years. Has never missed a pull."},
+    {"id": "poet_ama", "name": "Poet Ama", "tribe_id": "grief_poets", "role": "Head Grief-Poet", "portrait_blurb": "Shawl-wrapped, ink-stained cheek, quill at the ear. Composes verses so gentle the Pillar itself is rumored to soften when she reads."},
+    {"id": "keeper_at_fennas_desk", "name": "Keeper at Fenna's Desk", "tribe_id": "ledger_keepers_death", "role": "Fenna's primary assistant", "portrait_blurb": "Pale, linen-robed, always barefoot. Has not lifted their eyes from Fenna's desk in 30 years. Reads every released name aloud, softly, once."},
+    {"id": "gatherer_lom", "name": "Gatherer Lom", "tribe_id": "snow_gatherers", "role": "Senior Snow-Gatherer", "portrait_blurb": "Pink-cheeked, hooded, net-glove in hand. Has gathered 10,000 names personally. Knows the weight of each snowflake-name by touch."},
+    {"id": "current_watcher", "name": "The Current Watcher", "tribe_id": "thirteenth_bell_watchers", "role": "Currently on shift at the Thirteenth Bell Tower", "portrait_blurb": "Grey-cloaked, silent, seven-striped sleeve. Fourth year of shift. Will not speak for three more years."},
+    {"id": "brother_vel", "name": "Brother Vel", "tribe_id": "ledger_keepers_death", "role": "Tends the meditation garden", "portrait_blurb": "Speaks once a week. Prepares carefully what he will say. His words are often the single line someone needed to hear."},
+    {"id": "thirteenth_bell_ringer_rumored", "name": "The Thirteenth Bell Ringer (rumored)", "tribe_id": "thirteenth_bell_watchers", "role": "The one who will ring the Thirteenth Bell when it must be rung", "portrait_blurb": "Identity unknown even to the Watchers. Fenna knows. She has not named them."}
+  ],
+  "fate": {
+    "threat": "The Central Pillar is read aloud to completion. The Pillar updates constantly; reading it aloud in its entirety would END the universe's capacity to produce new deaths — which would END the universe's capacity to produce new LIFE. Reincarnation would halt. Horizon would empty. New souls would never be born.",
+    "consequence": "Static universe. No death, no birth. Ferdinand's roots would stop drawing from Null (nothing new to draw). Cosmic cascade failure within seven cycles.",
+    "prophecy_line": "The Pillar reads itself. You do not.",
+    "destroyable_by": "Any mortal fool enough to read aloud, or a God Slayer-class entity weaponizing Fenna's desk. Fenna has a standing order: if she dies, the Pillar is to be sealed in cork from Ferdinand himself."
+  },
+  "cultural_notes": "Thanatos is NOT a sad realm. It is a WORKING realm — the only realm where the staff all consider their jobs necessary, meaningful, and properly resourced. Death is not tragedy here; it is administration. Fenna runs the operation with the quiet competence of an accountant who has seen every possible expense. The Grief-Poets and Silent-Grievers are the realm's conscience, keeping the operation tender. Mingus visits here once per century; no one ever sees him enter or leave."
+}

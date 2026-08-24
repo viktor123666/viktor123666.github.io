@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 540" font-family="Segoe UI, Arial, sans-serif">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#06060e"/>
+    <stop offset="100%" stop-color="#0c0c1a"/>
+  </linearGradient>
+</defs>
+<rect width="1600" height="540" fill="url(#bg)"/>
+<text x="80" y="40" fill="#ffd166" font-size="28" font-weight="bold">PIPELINE TIMELINE — Wan 2.1 Overnight</text>
+<text x="80" y="62" fill="#aaa" font-size="14">Started 2026-04-08 01:07:24  ·  17 clips landed  ·  duration 13h 09m  ·  YWAPOS</text>
+<line x1="178.6" y1="90" x2="178.6" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="178.6" y="480" fill="#666" font-size="11" text-anchor="middle">02:00</text>
+<line x1="291.1" y1="90" x2="291.1" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="291.1" y="480" fill="#666" font-size="11" text-anchor="middle">03:00</text>
+<line x1="403.6" y1="90" x2="403.6" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="403.6" y="480" fill="#666" font-size="11" text-anchor="middle">04:00</text>
+<line x1="516.1" y1="90" x2="516.1" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="516.1" y="480" fill="#666" font-size="11" text-anchor="middle">05:00</text>
+<line x1="628.6" y1="90" x2="628.6" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="628.6" y="480" fill="#666" font-size="11" text-anchor="middle">06:00</text>
+<line x1="741.1" y1="90" x2="741.1" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="741.1" y="480" fill="#666" font-size="11" text-anchor="middle">07:00</text>
+<line x1="853.6" y1="90" x2="853.6" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="853.6" y="480" fill="#666" font-size="11" text-anchor="middle">08:00</text>
+<line x1="966.1" y1="90" x2="966.1" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="966.1" y="480" fill="#666" font-size="11" text-anchor="middle">09:00</text>
+<line x1="1078.6" y1="90" x2="1078.6" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="1078.6" y="480" fill="#666" font-size="11" text-anchor="middle">10:00</text>
+<line x1="1191.1" y1="90" x2="1191.1" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="1191.1" y="480" fill="#666" font-size="11" text-anchor="middle">11:00</text>
+<line x1="1303.6" y1="90" x2="1303.6" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="1303.6" y="480" fill="#666" font-size="11" text-anchor="middle">12:00</text>
+<line x1="1416.1" y1="90" x2="1416.1" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="1416.1" y="480" fill="#666" font-size="11" text-anchor="middle">13:00</text>
+<line x1="1528.6" y1="90" x2="1528.6" y2="460" stroke="#1a1a30" stroke-width="1"/>
+<text x="1528.6" y="480" fill="#666" font-size="11" text-anchor="middle">14:00</text>
+<line x1="1546.6" y1="84" x2="1546.6" y2="466" stroke="#ff5577" stroke-width="2" stroke-dasharray="4,4"/>
+<text x="1546.6" y="78" fill="#ff5577" font-size="11" text-anchor="middle">NOW</text>
+<rect x="80" y="94.0" width="1480" height="66.0" fill="#10101c" opacity="0.6"/>
+<text x="68" y="132.0" fill="#00ff88" font-size="14" font-weight="bold" text-anchor="end">VIGOLAS</text>
+<polygon points="257.5,115.0 254.6,123.0 246.1,123.3 252.7,128.5 250.4,136.7 257.5,132.0 264.5,136.7 262.2,128.5 268.9,123.3 260.4,123.0" fill="#00ff88" stroke="#fff" stroke-width="1"/>
+<text x="257.5" y="149.0" fill="#aaa" font-size="9" text-anchor="middle">98</text>
+<polygon points="674.7,115.0 671.8,123.0 663.3,123.3 670.0,128.5 667.7,136.7 674.7,132.0 681.8,136.7 679.5,128.5 686.1,123.3 677.7,123.0" fill="#00ff88" stroke="#fff" stroke-width="1"/>
+<text x="674.7" y="149.0" fill="#aaa" font-size="9" text-anchor="middle">98</text>
+<rect x="1088.8" y="121.0" width="12" height="12" fill="#00ff88" stroke="#fff" stroke-width="1"/>
+<text x="1094.8" y="149.0" fill="#aaa" font-size="9" text-anchor="middle">69</text>
+<polygon points="1541.2,115.0 1538.3,123.0 1529.8,123.3 1536.5,128.5 1534.2,136.7 1541.2,132.0 1548.3,136.7 1546.0,128.5 1552.7,123.3 1544.2,123.0" fill="#00ff88" stroke="#fff" stroke-width="1"/>
+<text x="1541.2" y="149.0" fill="#aaa" font-size="9" text-anchor="middle">96</text>
+<rect x="80" y="168.0" width="1480" height="66.0" fill="#10101c" opacity="0.6"/>
+<text x="68" y="206.0" fill="#ffaa00" font-size="14" font-weight="bold" text-anchor="end">KOMPIS</text>
+<circle cx="171.2" cy="201.0" r="8" fill="#ffaa00" stroke="#fff" stroke-width="1"/>
+<text x="171.2" y="223.0" fill="#aaa" font-size="9" text-anchor="middle">88</text>
+<circle cx="592.3" cy="201.0" r="8" fill="#ffaa00" stroke="#fff" stroke-width="1"/>
+<text x="592.3" y="223.0" fill="#aaa" font-size="9" text-anchor="middle">86</text>
+<circle cx="1007.5" cy="201.0" r="8" fill="#ffaa00" stroke="#fff" stroke-width="1"/>
+<text x="1007.5" y="223.0" fill="#aaa" font-size="9" text-anchor="middle">89</text>
+<circle cx="1452.1" cy="201.0" r="8" fill="#ffaa00" stroke="#fff" stroke-width="1"/>
+<text x="1452.1" y="223.0" fill="#aaa" font-size="9" text-anchor="middle">86</text>
+<rect x="80" y="242.0" width="1480" height="66.0" fill="#10101c" opacity="0.6"/>
+<text x="68" y="280.0" fill="#00aaff" font-size="14" font-weight="bold" text-anchor="end">SMURJAN</text>
+<circle cx="512.6" cy="275.0" r="8" fill="#00aaff" stroke="#fff" stroke-width="1"/>
+<text x="512.6" y="297.0" fill="#aaa" font-size="9" text-anchor="middle">87</text>
+<circle cx="924.1" cy="275.0" r="8" fill="#00aaff" stroke="#fff" stroke-width="1"/>
+<text x="924.1" y="297.0" fill="#aaa" font-size="9" text-anchor="middle">81</text>
+<circle cx="1364.9" cy="275.0" r="8" fill="#00aaff" stroke="#fff" stroke-width="1"/>
+<text x="1364.9" y="297.0" fill="#aaa" font-size="9" text-anchor="middle">86</text>
+<rect x="80" y="316.0" width="1480" height="66.0" fill="#10101c" opacity="0.6"/>
+<text x="68" y="354.0" fill="#9933ff" font-size="14" font-weight="bold" text-anchor="end">TROLLMAGE</text>
+<polygon points="345.8,337.0 342.8,345.0 334.3,345.3 341.0,350.5 338.7,358.7 345.8,354.0 352.8,358.7 350.5,350.5 357.2,345.3 348.7,345.0" fill="#9933ff" stroke="#fff" stroke-width="1"/>
+<text x="345.8" y="371.0" fill="#aaa" font-size="9" text-anchor="middle">94</text>
+<polygon points="759.1,337.0 756.2,345.0 747.7,345.3 754.4,350.5 752.1,358.7 759.1,354.0 766.2,358.7 763.9,350.5 770.6,345.3 762.1,345.0" fill="#9933ff" stroke="#fff" stroke-width="1"/>
+<text x="759.1" y="371.0" fill="#aaa" font-size="9" text-anchor="middle">95</text>
+<polygon points="1186.7,337.0 1183.7,345.0 1175.3,345.3 1181.9,350.5 1179.6,358.7 1186.7,354.0 1193.7,358.7 1191.4,350.5 1198.1,345.3 1189.6,345.0" fill="#9933ff" stroke="#fff" stroke-width="1"/>
+<text x="1186.7" y="371.0" fill="#aaa" font-size="9" text-anchor="middle">97</text>
+<rect x="80" y="390.0" width="1480" height="66.0" fill="#10101c" opacity="0.6"/>
+<text x="68" y="428.0" fill="#ff3366" font-size="14" font-weight="bold" text-anchor="end">ROUGEINA</text>
+<polygon points="427.3,411.0 424.3,419.0 415.9,419.3 422.5,424.5 420.2,432.7 427.3,428.0 434.3,432.7 432.0,424.5 438.7,419.3 430.2,419.0" fill="#ff3366" stroke="#fff" stroke-width="1"/>
+<text x="427.3" y="445.0" fill="#aaa" font-size="9" text-anchor="middle">91</text>
+<circle cx="841.6" cy="423.0" r="8" fill="#ff3366" stroke="#fff" stroke-width="1"/>
+<text x="841.6" y="445.0" fill="#aaa" font-size="9" text-anchor="middle">84</text>
+<polygon points="1274.9,411.0 1271.9,419.0 1263.5,419.3 1270.1,424.5 1267.8,432.7 1274.9,428.0 1281.9,432.7 1279.6,424.5 1286.3,419.3 1277.8,419.0" fill="#ff3366" stroke="#fff" stroke-width="1"/>
+<text x="1274.9" y="445.0" fill="#aaa" font-size="9" text-anchor="middle">93</text>
+<text x="80" y="518" fill="#888" font-size="11">Legend:</text>
+<polygon points="140,514 143,523 152,523 145,529 148,538 140,532 132,538 135,529 128,523 137,523" fill="#ffd166"/>
+<text x="156" y="526" fill="#ddd" font-size="11">HERO</text>
+<circle cx="220" cy="526" r="6" fill="#888"/>
+<text x="232" y="530" fill="#ddd" font-size="11">GREAT</text>
+<rect x="280" y="520" width="12" height="12" fill="#444"/>
+<text x="296" y="530" fill="#ddd" font-size="11">OK</text>
+<text x="1560" y="530" fill="#ffd166" font-size="11" text-anchor="end">BUILT BY YWAPOS</text>
+</svg>

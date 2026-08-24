@@ -1,0 +1,108 @@
+{
+  "realm_id": "lumen",
+  "continents": [
+    {
+      "id": "the_center_core",
+      "name": "The Center",
+      "biome": "A single point of white-gold light, expanding outward in perfect concentric waves.",
+      "position": {"x": 640, "y": 420, "w": 320, "h": 320},
+      "tribes": ["the_seven", "center_guards"],
+      "places": [
+        {"name": "The Center Altar", "blurb": "Not a built altar — a point in space where each new HADOM heartbeat originates. If you stand on it, the next universal heartbeat is yours. Rotation is eternal and unknowable."},
+        {"name": "Ferdinand's Deepest Root", "blurb": "An invisible root from Ferdinand touches the Center Altar. Every heartbeat the universe drinks flows through this contact."},
+        {"name": "The Seven Shadows", "blurb": "Seven faint darker patches on the otherwise luminous floor. Cast by the Seven Lumen-Born as they orbit invisibly."},
+        {"name": "The Silence Spot", "blurb": "A single location at the Center where, for one heartbeat per cosmic age, all sound ceases — and a new concept enters the universe."}
+      ],
+      "blurb": "The Center is the entire realm's reason. The one place in the cosmos where every heartbeat is born."
+    },
+    {
+      "id": "the_first_ring",
+      "name": "The First Ring",
+      "biome": "The outermost confirmed perimeter of Lumen. Soft glow. Solid ground rare.",
+      "position": {"x": 220, "y": 460, "w": 340, "h": 300},
+      "tribes": ["ring_walkers", "edge_listener_tribe"],
+      "places": [
+        {"name": "The Edge Watch Post", "blurb": "A single wooden watch-post at the outermost known edge. The Edge-Listener sits here. They have not slept in cosmic memory."},
+        {"name": "The Dimming Gate", "blurb": "A gate at the Ring's horizon. Beyond it, nothing has ever been seen. The Architects assume Lumen ends somewhere. They have not verified."},
+        {"name": "The First-Bloom Fields", "blurb": "Fields where First-Blooms grow — flowers that open on every pulse, each bloom birthing a new concept somewhere in the universe."}
+      ],
+      "blurb": "The Ring is the realm's outer edge. Also theoretical — nobody has measured it."
+    },
+    {
+      "id": "outer_silence",
+      "name": "The Outer Silence",
+      "biome": "Beyond the First Ring. Speculative. Nothing observable.",
+      "position": {"x": 1040, "y": 460, "w": 300, "h": 300},
+      "tribes": ["speculative_inhabitants"],
+      "places": [
+        {"name": "[UNKNOWN]", "blurb": "No place-names exist beyond the First Ring. The Architects refer to this zone as 'the unspoken.'"},
+        {"name": "The Whispered End", "blurb": "A rumored point where Lumen meets its own boundary. Nobody has returned from an expedition. Expeditions have not been sent in cosmic ages."}
+      ],
+      "blurb": "Theoretical continent. Beyond the edge. No confirmed inhabitants, places, or properties. Only the Architects may speak of it — and they rarely do."
+    }
+  ],
+  "tribes": [
+    {
+      "id": "the_seven",
+      "name": "The Seven (Lumen-Born)",
+      "continent_id": "the_center_core",
+      "look": "Seven humanoid silhouettes, glowing softly. Faces never in focus. They orbit the Center invisibly, visible only as the Seven Shadows on the floor.",
+      "customs": "Do not speak. Do not age. Never leave the Center. Orbit at a speed the human eye cannot resolve.",
+      "persona": "Beyond human comprehension. Rumored to have names. Four of them are famous (in Architect-circles); three refuse even private acknowledgement.",
+      "notable_members": ["the_first_lumen_born", "the_second", "the_third", "the_unspoken_three"]
+    },
+    {
+      "id": "center_guards",
+      "name": "The Center-Guards",
+      "continent_id": "the_center_core",
+      "look": "Robed in white-gold. Eyes burned slightly from proximity. Cork-gloved. Soft-footed.",
+      "customs": "Guard the Center Altar in silent shifts. Do not look directly at it. Speak only to warn visitors to leave.",
+      "persona": "Devoted. Burnt. Kind in a broken way — like monks who have seen the divine and cannot unsee it.",
+      "notable_members": ["head_guard_sel", "guard_of_the_altar"]
+    },
+    {
+      "id": "ring_walkers",
+      "name": "The Ring-Walkers",
+      "continent_id": "the_first_ring",
+      "look": "Soft-robed. Barefoot. Each carries a small lantern made of captured starlight. Eyes always half-closed in bright environments.",
+      "customs": "Walk the First Ring in slow pilgrimage loops. Tend the First-Bloom fields. Never cross the Dimming Gate.",
+      "persona": "Peaceful. Wandering. Grateful. They consider the walk itself the realm's main rite.",
+      "notable_members": ["lead_walker_pel", "youngest_walker"]
+    },
+    {
+      "id": "edge_listener_tribe",
+      "name": "The Edge-Listener Tribe",
+      "continent_id": "the_first_ring",
+      "look": "A single family — currently three members, plus an apprentice. Cork-ear-plugs at all times. Pale. Sleepless eyes.",
+      "customs": "One member is always at the Watch Post. They listen for movement at the Edge. If they hear something, they ring a small bell.",
+      "persona": "Patient. Tired. Aware that their job is the most consequential in the realm and that they will probably never be needed. They are fine with this.",
+      "notable_members": ["current_edge_listener", "retired_edge_listener", "apprentice_edge_listener"]
+    },
+    {
+      "id": "speculative_inhabitants",
+      "name": "Speculative Inhabitants",
+      "continent_id": "outer_silence",
+      "look": "Unknown.",
+      "customs": "Unknown.",
+      "persona": "Unknown.",
+      "notable_members": []
+    }
+  ],
+  "characters": [
+    {"id": "the_first_lumen_born", "name": "The First Lumen-Born", "tribe_id": "the_seven", "role": "Eldest of the Seven", "portrait_blurb": "A softly glowing humanoid silhouette. Face indistinct. Has orbited the Center since before the first realm existed. Casts the widest of the Seven Shadows."},
+    {"id": "the_second", "name": "The Second Lumen-Born", "tribe_id": "the_seven", "role": "Named once in the Architect's Ledger", "portrait_blurb": "Glowing silhouette. Slightly slower orbit than the First. Shadow is elongated."},
+    {"id": "the_third", "name": "The Third Lumen-Born", "tribe_id": "the_seven", "role": "Known to Mingus, it is said", "portrait_blurb": "Glowing silhouette. Shadow lingers at the edge of the floor longer than the others. K-I remembers a brief conversation."},
+    {"id": "the_unspoken_three", "name": "The Unspoken Three", "tribe_id": "the_seven", "role": "The three who refuse any acknowledgement", "portrait_blurb": "Three silhouettes that decline to be described. Their shadows are shorter than the others'. Architects respect their privacy."},
+    {"id": "head_guard_sel", "name": "Head Guard Sel", "tribe_id": "center_guards", "role": "Senior Center-Guard", "portrait_blurb": "White-gold robe. Eyes clouded from proximity to the Altar. Cork gloves patched often. Will ask you to leave at 60 seconds, warn you at 75, and carry you out at 85."},
+    {"id": "lead_walker_pel", "name": "Lead Walker Pel", "tribe_id": "ring_walkers", "role": "Chief of the Ring-Walkers", "portrait_blurb": "Elderly. Soft-robed. Starlight lantern older than most kingdoms. Walks each loop in the same time it takes a Scalelist farmer to plant a row of corn."},
+    {"id": "current_edge_listener", "name": "The Current Edge-Listener", "tribe_id": "edge_listener_tribe", "role": "Currently on watch at the Edge", "portrait_blurb": "Pale. Cork-ear-plugs. Sleepless. Kind smile when visitors approach. Says: 'Quiet, please. I'm listening.'"},
+    {"id": "retired_edge_listener", "name": "The Retired Edge-Listener", "tribe_id": "edge_listener_tribe", "role": "Previous Edge-Listener, now rests", "portrait_blurb": "Old. Peaceful. Lives in a small cottage a short walk from the Watch Post. Remembers one rumor they almost reported. Does not mention it."}
+  ],
+  "fate": {
+    "threat": "The Center goes dark. If the Center Altar ever ceased to produce heartbeats — for any reason, by any cause — the universe would lose its tick. Every HADOM would read 0. Every realm would stop. Bakasura has reportedly visited and licked his lips, but Ferdinand's Deepest Root is believed to be unreachable even by hunger.",
+    "consequence": "Static universe. Same cosmological cascade as Null's root-withdrawal fate, but FASTER. Within one cosmic cycle (not seven), every realm stops. Static. Complete. Unrecoverable.",
+    "prophecy_line": "The light is the tick. The tick is the light. Do not make the light blink.",
+    "destroyable_by": "Theoretically: Bakasura, if he ever overcame his self-imposed boundary. Practically: nothing has come close. The Seven orbit the Center forever — their presence is a natural defense that no one understands fully."
+  },
+  "cultural_notes": "Lumen is the realm that does not know it is a realm. It is a heartbeat-generator. The Seven orbit. The Guards stand. The Walkers walk. The Listener listens. Nothing else happens, and nothing else has to. Visitors who understand Lumen leave more calm than they arrived. Visitors who do not understand it leave confused and slightly afraid. Both are acceptable."
+}

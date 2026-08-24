@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which Realm Do You Belong To? | Scalelist Universe</title>
+<meta name="description" content="Eight questions to find which of the nine realms on Ferdinand's branches is truly yours — from the Storm Court of Helios to the warm cabin of Heartbeat. Shareable result.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
+<style>
+  .rq-hero{min-height:auto;padding:3rem 1.2rem 1rem;}
+  .rq-wrap{max-width:620px;margin:0 auto;padding:0 1.2rem 2rem;}
+
+  .prog{height:5px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin:0 0 1.4rem;}
+  .prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold-bright),var(--gold));transition:width .4s;}
+
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.6rem;animation:su-fade-up .4s both;}
+  .card .qn{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+  .card h2{font-size:clamp(1.3rem,3.4vw,1.7rem);color:#fff;margin-bottom:1.2rem;line-height:1.3;}
+  .opt{display:block;width:100%;text-align:left;background:var(--void-2);border:1px solid var(--border);border-radius:12px;
+    color:var(--text);font-family:var(--font-body);font-size:1rem;padding:.85rem 1.1rem;margin-bottom:.6rem;cursor:pointer;transition:all .18s;}
+  .opt:hover{border-color:var(--gold);background:rgba(201,168,76,.08);transform:translateX(4px);color:#fff;}
+
+  .intro,.result{text-align:center;}
+  .intro p{color:var(--text-dim);max-width:50ch;margin:0 auto 1.4rem;}
+
+  /* result */
+  .result .key{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--c);margin-bottom:1.2rem;
+    box-shadow:0 0 40px -12px var(--c);}
+  .result .key img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;}
+  .result .key .cap{position:absolute;inset:auto 0 0 0;padding:1.2rem;text-align:left;
+    background:linear-gradient(0deg,rgba(5,5,9,.92),transparent);}
+  .result .key .yr{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--c);}
+  .result .key h2{font-family:var(--font-display);font-size:clamp(1.8rem,5vw,2.6rem);color:#fff;line-height:1;}
+  .result .key .sub{color:var(--text);font-style:italic;font-size:.95rem;}
+  .result .blurb{color:var(--text);font-size:1.05rem;line-height:1.7;max-width:52ch;margin:0 auto 1rem;}
+  .result .ruler{color:var(--c);font-weight:700;font-size:.85rem;letter-spacing:.04em;margin-bottom:1.2rem;}
+  .result .acts{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;}
+  #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--panel-solid);
+    border:1px solid var(--border-bright);color:var(--gold);padding:.7rem 1.2rem;border-radius:999px;font-size:.85rem;transition:all .3s;z-index:2000;}
+  #toast.show{opacity:1;transform:translateX(-50%);}
+</style>
+</head>
+<body>
+
+<header class="su-hero rq-hero">
+  <div class="su-kicker su-fade">Nine realms on Ferdinand's branches</div>
+  <h1 class="su-fade-2">Which Realm Do You Belong To?</h1>
+</header>
+
+<main class="rq-wrap">
+  <div class="prog" id="prog"><i></i></div>
+  <div id="stage"></div>
+</main>
+
+<div id="toast"></div>
+
+<script>
+const C="/characters/art", A="/art";
+const REALMS={
+ helios:{n:"Helios",sub:"The Storm Court",ruler:"Vigolas, the Infinite Administrator",c:"#00ff88",img:`${A}/cosmos/helios.webp`,
+   blurb:"You are the storm that does not pass. You lead by standing where the lightning is loudest — power, will, and the weight of command. Helios answers to you."},
+ astralis:{n:"Astralis",sub:"The Galaxy Floor",ruler:"Rougeina, the Star-Dancer",c:"#ff3366",img:`${A}/cosmos/astralis.webp`,
+   blurb:"You turn moments into light. Joy is your discipline; you dance where others freeze. Every star here was once a feeling you refused to let die."},
+ codexia:{n:"Codexia",sub:"The Obsidian Spires",ruler:"Trollmage, the Codex-Keeper",c:"#9933ff",img:`${A}/cosmos/codexia.webp`,
+   blurb:"You read what others skim. Patient, mysterious, a keeper of difficult knowledge — the violet runes have been waiting for a mind like yours."},
+ heartbeat:{n:"Heartbeat",sub:"The Lakeside Cabin",ruler:"Kompis & Mingus",c:"#ffaa00",img:`${A}/cosmos/heartbeat.webp`,
+   blurb:"You are the warm hearth at the center of it all — loyalty, peace, and a door that's always unlocked. The dog already likes you."},
+ trinity:{n:"Trinity",sub:"The Triple Void",ruler:"Smurjan, the Bridge",c:"#00aaff",img:`${A}/cosmos/trinity.webp`,
+   blurb:"You are more than one thing at once, and you walk the edges others fear. The bridge between worlds runs straight through you."},
+ thanatos:{n:"Thanatos",sub:"The Spiral Graveyard",ruler:"Ögar, the Far-Eye Watcher",c:"#a78bfa",img:`${C}/ogar/ogar_keyart.webp`,
+   blurb:"You see what others look away from — endings, memory, the truth beneath the surface. You give the lost their last mercy: to be truly seen."},
+ null:{n:"The Null",sub:"The Absence",ruler:"Niva, the Untraversed",c:"#e5e7eb",img:`${C}/niva/niva_keyart.webp`,
+   blurb:"You are at home where there is nothing — and you make solid ground where none exists. You are the first to survive the empty places."},
+ void2:{n:"Void-II",sub:"The Architects' Chamber",ruler:"The Twelve Architects",c:"#cdb878",img:`${C}/vidar/vidar_keyart.webp`,
+   blurb:"You keep the order beneath the world — silent, exact, just. You weigh what others rush past. The count itself answers to you."},
+ scalelist:{n:"Scalelist",sub:"The Prime Material",ruler:"The Twelve Architects (K-V)",c:"#c9a84c",img:`${A}/begin/ferdinand.webp`,
+   blurb:"You are the ground the whole story stands on — community, the ordinary made sacred, a heartbeat that counts itself. You are home."},
+};
+const Q=[
+ {q:"When the noise of the world finally stops, what do you reach for?",a:[
+   ["Somewhere warm, with someone I love","heartbeat"],["A book no one else can read","codexia"],
+   ["The dance floor — life is short","astralis"],["The high balcony where the storm is loudest","helios"],
+   ["The quiet, alone, where nothing can find me","null"]]},
+ {q:"If you had one power, it would be…",a:[
+   ["To command the storm","helios"],["To see every possible ending","thanatos"],
+   ["To turn nothing into something","null"],["To be three minds at once","trinity"],
+   ["To make anyone feel joy again","astralis"]]},
+ {q:"People come to you for…",a:[
+   ["Shelter and a warm meal","heartbeat"],["Hard truths they can't face alone","thanatos"],
+   ["Knowledge buried too deep for them","codexia"],["Order when everything's chaos","void2"],
+   ["A reason to celebrate","astralis"]]},
+ {q:"Your relationship with time is…",a:[
+   ["I move faster than it can","helios"],["I hold still, and it slows for me","null"],
+   ["I read it like a page, forward and back","codexia"],["Every beat matters; I waste none","heartbeat"],
+   ["I keep the ledger of every moment","void2"]]},
+ {q:"When everything falls apart, you…",a:[
+   ["Stand in the center and hold","scalelist"],["Become the storm","helios"],
+   ["Find the joy in the wreckage","astralis"],["Sit with the ones who didn't make it","thanatos"],
+   ["Walk the empty road; you're always the one left","null"]]},
+ {q:"Choose a companion for the road…",a:[
+   ["A loyal dog who never leaves","heartbeat"],["No one — I travel the empty places alone","null"],
+   ["Two others, always; never alone","trinity"],["A book of secrets","codexia"],
+   ["The dead, whispering what they learned","thanatos"]]},
+ {q:"Pick a place to call home…",a:[
+   ["A cabin by a still lake","heartbeat"],["A throne in an endless storm","helios"],
+   ["A stage among the stars","astralis"],["The trunk of the world-tree itself","scalelist"],
+   ["Seven black spires of knowledge","codexia"]]},
+ {q:"What do you want to leave behind?",a:[
+   ["A world that remembers it was loved","heartbeat"],["Order that outlasts me","void2"],
+   ["A light that reminds people of joy","astralis"],["Ground where there was once only void","null"],
+   ["The truth, finally seen","thanatos"]]},
+];
+
+const stage=document.getElementById("stage"), progI=document.querySelector("#prog i");
+let i=0; const score={};
+function start(){ i=0; for(const k in REALMS)score[k]=0; progI.style.width="0%"; showIntro(); }
+function showIntro(){
+  document.getElementById("prog").style.display="none";
+  stage.innerHTML=`<div class="card intro"><div class="qn">8 questions · 1 minute</div>
+    <h2>Find your realm</h2>
+    <p>The cork-oak Ferdinand holds nine realms on his branches. One of them is yours. Answer honestly — there are no wrong doors.</p>
+    <button class="su-btn" id="begin">Begin the quiz</button></div>`;
+  document.getElementById("begin").onclick=()=>{document.getElementById("prog").style.display="";next();};
+}
+function next(){
+  if(i>=Q.length) return result();
+  progI.style.width=(i/Q.length*100)+"%";
+  const item=Q[i];
+  stage.innerHTML=`<div class="card"><div class="qn">Question ${i+1} of ${Q.length}</div><h2>${item.q}</h2>
+    <div id="opts"></div></div>`;
+  const opts=document.getElementById("opts");
+  item.a.forEach(([t,r])=>{ const b=document.createElement("button"); b.className="opt"; b.textContent=t;
+    b.onclick=()=>{ score[r]=(score[r]||0)+1; i++; next(); }; opts.appendChild(b); });
+}
+function winner(){ let best=null,bv=-1; for(const k in REALMS){ if(score[k]>bv){bv=score[k];best=k;} } return best; }
+let resKey=null;
+function result(){
+  progI.style.width="100%";
+  const k=winner(); resKey=k; const r=REALMS[k];
+  stage.innerHTML=`<div class="card result" style="--c:${r.c}">
+    <div class="key"><img src="${r.img}" alt="${r.n}"><div class="cap"><div class="yr">Your realm is</div><h2>${r.n}</h2><div class="sub">${r.sub}</div></div></div>
+    <p class="blurb">${r.blurb}</p>
+    <div class="ruler">Ruled by ${r.ruler}</div>
+    <div class="acts">
+      <button class="su-btn" id="share">↗ Share my realm</button>
+      <a class="su-btn-ghost" href="/cosmos">Explore the Cosmos</a>
+      <a class="su-btn-ghost" href="/cosmos/atlas">See it on the Atlas</a>
+      <button class="su-btn-ghost" id="retake">↺ Retake</button>
+    </div></div>`;
+  document.getElementById("retake").onclick=start;
+  document.getElementById("share").onclick=share;
+}
+function share(){
+  const r=REALMS[resKey];
+  const text=`I belong to ${r.n} — ${r.sub} — in the Scalelist Universe. Which realm are you? scalelistuniverse.com/realm-quiz`;
+  if(navigator.share){ navigator.share({title:"My Scalelist realm: "+r.n,text}).catch(()=>{}); }
+  else { navigator.clipboard.writeText(text).then(()=>toast("Result copied — share it anywhere ✓")).catch(()=>toast("Couldn't copy")); }
+}
+function toast(t){ const el=document.getElementById("toast"); el.textContent=t; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),2200); }
+start();
+</script>
+</body>
+</html>

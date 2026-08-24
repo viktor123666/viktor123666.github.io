@@ -1,0 +1,75 @@
+{
+  "id": "lumen",
+  "name": "LUMEN",
+  "subtitle": "The First Light",
+  "type": "light_realm",
+  "color": "#fff2aa",
+  "bg_color": "#f4e8b0",
+  "ocean_color": "#fff4c8",
+  "deep_ocean_color": "#e8d884",
+  "land_color": "#ffffff",
+  "land_highlight": "#ffffff",
+  "land_shadow": "#e8dca4",
+  "city_color": "#fffaa0",
+  "sacred_color": "#fff0a0",
+  "description": "Where every HADOM tick is born. A single point of white-gold light, expanding outward in perfect concentric waves. The universe's first heartbeat happens HERE, and then happens everywhere else. Look directly at the center for too long and your own heartbeat syncs with Lumen's — at which point you are no longer yours.",
+  "ruler": "No one (the first light cannot be owned)",
+  "tick": "1 = all (the singularity tick from which every other tick is born)",
+  "gate": "The First Dawn (never closes)",
+  "phenomenon_type": "light_expansion",
+  "life": {
+    "phenomenon": "A heartbeat-wave expands outward from the center every second. Stand at the center and you feel every heartbeat in the universe simultaneously. Most visitors leave within 90 seconds. The rest are still here.",
+    "inhabitants": "The Lumen-Born (beings who were originally born HERE and walked out into the multiverse). Seven confirmed. Four are famous. Three refuse to be named.",
+    "fauna": [
+      {"name": "Light-Sprite", "note": "Tiny pinpoints of gold that flicker into existence on each pulse and vanish on the next. Count them if you dare — you will miscount."},
+      {"name": "The Seven", "note": "Seven unnamed beings that orbit the center. They do not speak. They have never left Lumen. They do not age."}
+    ],
+    "flora": [
+      {"name": "First-Bloom", "note": "A flower that opens on every pulse. Each bloom is the birth of a new concept somewhere in the universe. Pick one and something, somewhere, stops existing."}
+    ],
+    "architecture": "None. Lumen is not built. Lumen is the architecture that other realms are built inside of.",
+    "culture": "Reverence. Total, unspoken, instinctive reverence. Visitors do not speak here. It is not a rule — it is simply impossible to speak.",
+    "signature_item": "A grain of Lumen-sand — smaller than a heartbeat, heavier than a mountain. Ferdinand's trunk contains three grains. The Architects split every dispute around them.",
+    "sensory": {
+      "sound": "A held note that is also silence. You cannot describe it after you leave.",
+      "smell": "Nothing. The absence of smell, as a concept, feels important here.",
+      "feel": "Warm on every surface of your body at once. Not hot. Warm."
+    }
+  },
+  "cities": [
+    {
+      "id": "the_center",
+      "name": "The Center",
+      "x": 800, "y": 500,
+      "tier": "capital",
+      "role": "Where the first tick is born",
+      "note": "A single point of light. Everything in Lumen is measured by its distance from this point.",
+      "lore": "Ferdinand's oldest root touches the Center. This is how the tree receives its heartbeats. The root is invisible — only the vibration is felt."
+    },
+    {
+      "id": "the_first_ring",
+      "name": "The First Ring",
+      "x": 500, "y": 500,
+      "tier": "city",
+      "role": "The outermost confirmed perimeter",
+      "note": "Beyond this ring, nothing has ever been seen. The Architects assume Lumen ends somewhere. They have not checked.",
+      "lore": "The First Ring is a concept more than a place. Standing on it, you feel that you are at the edge of something but cannot find the edge."
+    }
+  ],
+  "sacred_sites": [
+    {
+      "name": "The Center Altar",
+      "x": 800, "y": 500,
+      "color": "#fff0a0",
+      "note": "No altar is built — but there is something altar-like at the heart of Lumen.",
+      "lore": "If you stand on the Center Altar, the next heartbeat of the universe is YOURS. One heartbeat. Then it passes to the next person. The rotation has existed forever. Nobody can tell you who is currently on duty."
+    },
+    {
+      "name": "The Seven Shadows",
+      "x": 800, "y": 200,
+      "color": "#fffaa0",
+      "note": "The places where the Seven Lumen-Born cast their shadows.",
+      "lore": "Seven faint darker patches in an otherwise luminous floor. They do not move. The beings that cast them orbit invisibly."
+    }
+  ]
+}

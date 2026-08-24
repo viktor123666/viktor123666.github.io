@@ -1,0 +1,110 @@
+{
+  "id": "astralis",
+  "name": "ASTRALIS",
+  "subtitle": "The Starry Weave",
+  "type": "starfield",
+  "color": "#ff3366",
+  "bg_color": "#0e0420",
+  "ocean_color": "#0e0420",
+  "deep_ocean_color": "#030110",
+  "land_color": "#2a0a30",
+  "land_highlight": "#5a1850",
+  "land_shadow": "#14041a",
+  "city_color": "#ff80a0",
+  "sacred_color": "#ffc0d0",
+  "description": "Rougeina's domain. A dance-floor galaxy. Stars orbit a cosmic stage. Every star is a former moment of perfect joy somewhere else in the multiverse. Rougeina dances between them.",
+  "ruler": "Rougeina — The Starry Dancer",
+  "tick": "10,000 (flicker-time)",
+  "gate": "The Starfall Gate (opens at midnight on dance-floors)",
+  "phenomenon_type": "dancing_particles",
+  "life": {
+    "phenomenon": "Gravity moves with the music beat. At 128 BPM, everything pulses up-down-up-down. Stop the music entirely and everyone floats until the next beat returns.",
+    "inhabitants": "Dance-born (people literally birthed from a moment of joy that crystallized into a star). Rougeina's entourage, known as THE STARRY SIX. A population of roughly 100,000 souls who dance constantly.",
+    "fauna": [
+      {"name": "Light Dove", "note": "Body made of concert lights. They migrate with the beat. A flock at 140 BPM is a warning — big drop incoming."},
+      {"name": "Memory Fish", "note": "Swim through starlight. Taste like your happiest day. Catching one requires you to dance better than you ever have."},
+      {"name": "Starlight Cat", "note": "Attracted to laughter. Purr at 432 Hz. A lap of one calms even Kali. Rougeina has three."}
+    ],
+    "flora": [
+      {"name": "Rhythm Vine", "note": "Grows faster when danced near. A ballroom's worth of dancing can make a vine tree-tall in one night."},
+      {"name": "Glow Moss", "note": "The dance floor IS alive. Stepping in rhythm makes the moss glow brighter underfoot."}
+    ],
+    "architecture": "Platforms suspended by SOLID MUSICAL NOTES. The notes have names (the floating platform above The Stage sits on a B-flat from 1997). Bridges made of tempo.",
+    "culture": "Greet by dancing three steps toward each other. Breaking eye contact while dancing = insult. Leaving a party without dancing once is a violation punishable by a year's banishment.",
+    "signature_item": "Rhythm Shoes — let you dance across gaps in reality. Rougeina hand-delivers pairs to mortals who danced without self-consciousness. No mortal who received a pair has since been unhappy.",
+    "sensory": {
+      "sound": "Everywhere hums at 128 BPM. Whisper too quiet and you can't hear yourself; speak too loud and the music absorbs you.",
+      "smell": "Sweat + sweet wine + ozone + a hint of sea salt.",
+      "feel": "Pulse-perfect heartbeat synced with the realm. You don't get tired."
+    }
+  },
+  "backdrop": "<defs><radialGradient id='astralGlow' cx='50%' cy='50%' r='65%'><stop offset='0%' stop-color='#ff3366' stop-opacity='0.22'/><stop offset='100%' stop-color='#0e0420' stop-opacity='0'/></radialGradient></defs><rect width='1600' height='1000' fill='url(#astralGlow)'/><g opacity='0.75'><circle cx='180' cy='180' r='2' fill='#fff'><animate attributeName='opacity' values='0.4;1;0.4' dur='2.8s' repeatCount='indefinite'/></circle><circle cx='420' cy='260' r='1.5' fill='#ffaacc'><animate attributeName='opacity' values='0.3;1;0.3' dur='3.4s' repeatCount='indefinite'/></circle><circle cx='1380' cy='220' r='2.5' fill='#fff'><animate attributeName='opacity' values='0.5;1;0.5' dur='2.2s' repeatCount='indefinite'/></circle><circle cx='1440' cy='720' r='2' fill='#ffccdd'><animate attributeName='opacity' values='0.4;1;0.4' dur='3s' repeatCount='indefinite'/></circle><circle cx='160' cy='820' r='1.8' fill='#fff'><animate attributeName='opacity' values='0.3;0.9;0.3' dur='2.5s' repeatCount='indefinite'/></circle></g><g stroke='#ff80a0' stroke-width='1' fill='none' opacity='0.25'><path d='M 800 500 Q 600 300 400 380'/><path d='M 800 500 Q 1000 300 1200 360'/><path d='M 800 500 Q 600 700 380 660'/><path d='M 800 500 Q 1000 700 1220 680'/></g>",
+  "features": [
+    {
+      "svg": "<g transform='translate(800 500)'><ellipse cx='0' cy='0' rx='180' ry='55' fill='#40114a' stroke='#ff80a0' stroke-width='2' opacity='0.85'/><ellipse cx='0' cy='0' rx='180' ry='55' fill='none' stroke='#ffc0d0' stroke-width='1' opacity='0.55'><animate attributeName='rx' values='180;190;180' dur='3.2s' repeatCount='indefinite'/></ellipse><text x='0' y='5' text-anchor='middle' fill='#ffc0d0' font-size='16' font-weight='700' letter-spacing='6'>THE STAGE</text></g>"
+    }
+  ],
+  "cities": [
+    {
+      "id": "the_stage",
+      "name": "The Cosmic Stage",
+      "x": 800, "y": 500,
+      "tier": "capital",
+      "role": "Where Rougeina dances",
+      "note": "The center of Astralis. Every other star orbits around her performance.",
+      "lore": "She does not stop. She has never stopped. Entry to the stage requires you to bring a memory of a moment you danced without thinking."
+    },
+    {
+      "id": "platform_joy",
+      "name": "The Platform of First Joy",
+      "x": 440, "y": 280,
+      "tier": "city",
+      "role": "A child's birthday, preserved as a star",
+      "note": "Touch this platform and you remember a joy you have never lived.",
+      "lore": "This star was a moment in another multiverse. A child opened a present they wanted. The joy was so pure it crossed dimensions and became a platform here."
+    },
+    {
+      "id": "platform_wedding",
+      "name": "The Platform of Vows",
+      "x": 1160, "y": 280,
+      "tier": "city",
+      "role": "A wedding dance, preserved",
+      "note": "The music never stops. The dancers are ghosts of their own joy.",
+      "lore": "A bride and groom on their wedding night, dancing to their song. The moment became immortal the instant it happened. They are still there. They are still dancing."
+    },
+    {
+      "id": "platform_reunion",
+      "name": "The Platform of Reunion",
+      "x": 380, "y": 720,
+      "tier": "city",
+      "role": "Two people meeting after years apart",
+      "note": "The hug here lasts forever.",
+      "lore": "The embrace lasts as long as you watch it. Turn away and when you look back, it is still happening. It will always be happening. This is how love outlasts time."
+    },
+    {
+      "id": "platform_victory",
+      "name": "The Platform of the Last Point",
+      "x": 1220, "y": 720,
+      "tier": "city",
+      "role": "A game won in overtime",
+      "note": "The buzzer is still ringing.",
+      "lore": "Nobody knows which game. Nobody knows which team. The victory is the point. Everything else is detail."
+    }
+  ],
+  "sacred_sites": [
+    {
+      "name": "The Starfall Gate",
+      "x": 800, "y": 920,
+      "color": "#ffc0d0",
+      "note": "The gate to Scalelist. Opens at midnight on dance-floors.",
+      "lore": "If you are reading this at midnight, on a dance-floor, and you dance — you may see a flicker of this gate. Do not step through. Rougeina decides when she hosts."
+    },
+    {
+      "name": "The Silence Before the Beat",
+      "x": 800, "y": 120,
+      "color": "#ff80a0",
+      "note": "The only quiet place in Astralis.",
+      "lore": "A single pillar of dark stone. The only place where music does not reach. Rougeina visits here exactly once per cosmic age, to miss the sound."
+    }
+  ]
+}

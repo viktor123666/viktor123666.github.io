@@ -1,0 +1,67 @@
+/*
+ * CHARACTER THEME CSS — Scalelist Universe
+ * Generated: 2026-04-08 03:44:42
+ * 
+ * Import this in any HTML: <link rel='stylesheet' href='/char_theme.css'>
+ * Then reference with CSS vars: var(--vigolas-primary), etc.
+ */
+
+:root {
+  /* vigolas — The Infinite Administrator */
+  --vigolas-primary:   #00ff88;
+  --vigolas-secondary: #004d29;
+  --vigolas-accent:    #66ffa6;
+  --vigolas-dark:      #0a1f14;
+  --vigolas-glow:      0 0 20px rgba(0, 255, 136, 0.5);
+
+  /* kompis — Buddy of Mingus — heartbeats become forever */
+  --kompis-primary:   #ffaa00;
+  --kompis-secondary: #4d3000;
+  --kompis-accent:    #ffcc66;
+  --kompis-dark:      #1f1408;
+  --kompis-glow:      0 0 20px rgba(255, 170, 0, 0.5);
+
+  /* smurjan — Void Cosmic — three voices in one */
+  --smurjan-primary:   #00aaff;
+  --smurjan-secondary: #003366;
+  --smurjan-accent:    #66ccff;
+  --smurjan-dark:      #0a1420;
+  --smurjan-glow:      0 0 20px rgba(0, 170, 255, 0.5);
+
+  /* trollmage — Dark patois — bass as deep as the nether */
+  --trollmage-primary:   #9933ff;
+  --trollmage-secondary: #330066;
+  --trollmage-accent:    #cc99ff;
+  --trollmage-dark:      #140a1f;
+  --trollmage-glow:      0 0 20px rgba(153, 51, 255, 0.5);
+
+  /* rougeina — Cosmic rave — starlight and hardkick */
+  --rougeina-primary:   #ff3366;
+  --rougeina-secondary: #660a1f;
+  --rougeina-accent:    #ff99b3;
+  --rougeina-dark:      #1f080d;
+  --rougeina-glow:      0 0 20px rgba(255, 51, 102, 0.5);
+
+}
+
+/* Utility classes */
+.char-vigolas { color: var(--vigolas-primary); }
+.bg-vigolas   { background: var(--vigolas-dark); }
+.border-vigolas { border-color: var(--vigolas-primary); }
+.glow-vigolas { box-shadow: var(--vigolas-glow); }
+.char-kompis { color: var(--kompis-primary); }
+.bg-kompis   { background: var(--kompis-dark); }
+.border-kompis { border-color: var(--kompis-primary); }
+.glow-kompis { box-shadow: var(--kompis-glow); }
+.char-smurjan { color: var(--smurjan-primary); }
+.bg-smurjan   { background: var(--smurjan-dark); }
+.border-smurjan { border-color: var(--smurjan-primary); }
+.glow-smurjan { box-shadow: var(--smurjan-glow); }
+.char-trollmage { color: var(--trollmage-primary); }
+.bg-trollmage   { background: var(--trollmage-dark); }
+.border-trollmage { border-color: var(--trollmage-primary); }
+.glow-trollmage { box-shadow: var(--trollmage-glow); }
+.char-rougeina { color: var(--rougeina-primary); }
+.bg-rougeina   { background: var(--rougeina-dark); }
+.border-rougeina { border-color: var(--rougeina-primary); }
+.glow-rougeina { box-shadow: var(--rougeina-glow); }

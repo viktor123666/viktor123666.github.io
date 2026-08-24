@@ -1,0 +1,54 @@
+{
+  "generated_at": "2026-04-09 14:07:31",
+  "total_raw": 28,
+  "total_enhanced": 27,
+  "total_staged": 26,
+  "plan_total": 1620,
+  "by_char": {
+    "kompis": {
+      "img_count": 35,
+      "scenes": 12,
+      "total_possible": 420,
+      "raw": 7,
+      "enhanced": 6,
+      "staged": 5,
+      "pct_done": 1.67
+    },
+    "vigolas": {
+      "img_count": 25,
+      "scenes": 12,
+      "total_possible": 300,
+      "raw": 6,
+      "enhanced": 6,
+      "staged": 6,
+      "pct_done": 2.0
+    },
+    "smurjan": {
+      "img_count": 25,
+      "scenes": 12,
+      "total_possible": 300,
+      "raw": 5,
+      "enhanced": 5,
+      "staged": 5,
+      "pct_done": 1.67
+    },
+    "trollmage": {
+      "img_count": 25,
+      "scenes": 12,
+      "total_possible": 300,
+      "raw": 5,
+      "enhanced": 5,
+      "staged": 5,
+      "pct_done": 1.67
+    },
+    "rougeina": {
+      "img_count": 25,
+      "scenes": 12,
+      "total_possible": 300,
+      "raw": 5,
+      "enhanced": 5,
+      "staged": 5,
+      "pct_done": 1.67
+    }
+  }
+}

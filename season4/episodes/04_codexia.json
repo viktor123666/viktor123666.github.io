@@ -1,0 +1,35 @@
+{
+  "id": "s4e04_the_page_turns_forward",
+  "number": 4,
+  "title": "The Page Turns Forward",
+  "subtitle": "Episode 4 of 12 · Season 4: The Fates Unravel",
+  "realm_id": "codexia",
+  "fate_triggered": "Apprentice Nock turns one Codex page forward. Pride leaks for 11 seconds.",
+  "pov_characters": ["apprentice_nock", "trollmage_warden"],
+  "supporting": ["acolyte_fenn", "the_voiceless_scribe", "grandmother_iris"],
+  "synopsis": "It is Apprentice Nock's first solo reading. He has been training nineteen years for this. The Codex is Pride's Page — the most dangerous — and he is supposed to read backward, as he has been taught. He does. He reads backward for forty-seven minutes. On the forty-eighth minute his thumb slips, and one page turns forward. Eleven seconds. PRIDE LEAKS. Nock feels a certainty arrive in him — a certainty that he is the smartest reader Codexia has ever produced. He believes it. He almost stands. He almost speaks. But the Voiceless Scribe — who is in the room as ritual witness — drops a fresh inkpot. The black ink hits Nock's wrist, breaks the certainty, and Nock SCREAMS. The page falls back. Trollmage, three spires away, hears the scream and arrives in seven seconds (a personal Trollmage record). He places his hand on Nock's wrist. He says one word. Nock's right hand falls away. It does not bleed. It is simply GONE — the cost of the forward read, paid by Codexia's grammar. Trollmage carries Nock to Grandmother Iris's dancehall. Iris pours rum. Nock cries. The dancehall plays for him until dawn.",
+  "key_scenes": [
+    {"location": "Spire Seven (Pride's Page) interior, midnight", "action": "Nock reading backward. Forty-seven minutes flawless."},
+    {"location": "The page slip", "action": "Nock's thumb slips. One forward page. Eleven seconds of pride leaking."},
+    {"location": "The intervention", "action": "The Voiceless Scribe drops an inkpot. The black ink breaks Nock's certainty. He screams."},
+    {"location": "Trollmage arriving", "action": "Trollmage runs from three spires away. Seven seconds. A personal record."},
+    {"location": "The cost", "action": "Trollmage says one word. Nock's right hand vanishes. Painlessly."},
+    {"location": "Grandmother Iris's dancehall, dawn", "action": "Iris pours rum. The Drum That Plays Itself plays for Nock until first light."}
+  ],
+  "cliffhanger": "Nock, watching his left hand pour rum for the first time, realizes he can still feel the right hand. It is somewhere. It is reading. He does not know what.",
+  "panel_storyboard": [
+    {"panel": 1, "composition": "Spire Seven interior. Tall obsidian walls. Nock kneeling at the lectern. Pride's Page open. Backward reading runic glyphs visible.", "character": "apprentice_nock", "camera": "wide reverent", "emotion": "concentration"},
+    {"panel": 2, "composition": "Close-up of Nock's thumb slipping. The page beginning to turn forward.", "character": "apprentice_nock", "camera": "extreme macro", "emotion": "horror"},
+    {"panel": 3, "composition": "Nock's expression shifting. Eyes widening with arriving certainty. A faint gold glow rising from the page.", "character": "apprentice_nock", "camera": "tight three-quarter", "emotion": "false confidence", "caption": "Pride leaked. Nock believed."},
+    {"panel": 4, "composition": "The Voiceless Scribe in the corner. Inkpot in hand, deliberate motion to release.", "character": "the_voiceless_scribe", "camera": "wide intervention", "emotion": "calm sacrifice"},
+    {"panel": 5, "composition": "Black ink striking Nock's wrist. Page falling back. Nock screaming.", "character": "apprentice_nock", "camera": "close motion", "emotion": "anguish, return to self"},
+    {"panel": 6, "composition": "Trollmage running between spires, robes billowing, eyes glowing violet.", "character": "trollmage_warden", "camera": "running long lens", "emotion": "determined urgency"},
+    {"panel": 7, "composition": "Trollmage placing his hand on Nock's wrist. Speaking one word. Nock's right hand visibly fading.", "character": "trollmage_warden", "camera": "two-shot intimate", "emotion": "grief, mastery", "dialogue": "Trollmage: '... Forgiven.'"},
+    {"panel": 8, "composition": "Grandmother Iris's dancehall, dawn light. Trollmage carrying Nock. Iris pouring rum. The Drum visible above the bar, pulsing softly.", "character": "grandmother_iris", "camera": "warm wide", "emotion": "loving care"},
+    {"panel": 9, "composition": "Close-up of Nock's left hand pouring rum. His right sleeve hangs empty. His face is calm but his eyes are far away.", "character": "apprentice_nock", "camera": "tight on hand and face", "emotion": "phantom presence", "caption": "He could still feel it. Somewhere it was reading."}
+  ],
+  "cosmic_price_paid": "Apprentice Nock's right hand is gone. It exists in some unread page of Pride. Trollmage tightens the Codex protocols. The Voiceless Scribe is promoted to Senior Witness.",
+  "callout_for_cosmos_drawer": "In Season 4, Apprentice Nock turned one Codex page forward. Pride leaked for eleven seconds. Trollmage arrived in seven. Nock paid with his right hand.",
+  "watch_chapter": null,
+  "read_chapter": null
+}

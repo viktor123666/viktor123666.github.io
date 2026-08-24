@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lineage — The Cipher of Viktor Rönnkvist | Scalelist Universe</title>
+<meta name="description" content="The Author's true name spells the universe. VIKTOR — six souls of the Lineage. RÖNNKVIST — nine Guardians of Ferdinand's bark. Fifteen souls, and the sixteenth who holds the name.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
+<style>
+  .ln-hero{min-height:min(58vh,480px);}
+  .ln-hero h1{letter-spacing:.1em;}
+
+  /* the cipher */
+  .cipher{display:flex;flex-direction:column;gap:1.4rem;align-items:center;margin:0 auto;}
+  .word{text-align:center;}
+  .word .wlab{font-family:var(--font-display);color:var(--text-dim);letter-spacing:.24em;
+    text-transform:uppercase;font-size:.7rem;margin-bottom:.6rem;}
+  .letters{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
+  .lt{position:relative;width:62px;height:78px;border-radius:10px;border:1px solid var(--border);
+    background:var(--panel);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transition:all .2s;padding:0;color:var(--text);}
+  .lt .L{font-family:var(--font-display);font-size:1.9rem;line-height:1;color:#fff;}
+  .lt .nm{font-size:.52rem;letter-spacing:.04em;text-transform:uppercase;color:var(--text-dim);margin-top:.25rem;}
+  .lt:hover,.lt.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 16%,var(--panel));transform:translateY(-3px);}
+  .lt:hover .nm,.lt.on .nm{color:var(--c);}
+  .lt.bridge::after{content:"⟡";position:absolute;top:-9px;right:-7px;font-size:.8rem;color:var(--smurjan);
+    background:var(--void);border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;border:1px solid var(--smurjan);}
+
+  /* reveal panel */
+  .reveal-card{display:grid;grid-template-columns:120px 1fr;gap:1.2rem;align-items:center;max-width:640px;margin:1.8rem auto 0;
+    background:var(--panel);border:1px solid var(--c,var(--border));border-radius:var(--radius);padding:1.2rem;
+    box-shadow:0 0 30px -10px var(--c,transparent);transition:border-color .3s,box-shadow .3s;}
+  .reveal-card img{width:120px;height:150px;object-fit:cover;object-position:center top;border-radius:10px;border:1px solid var(--c,var(--border));}
+  .reveal-card .rl{font-family:var(--font-display);color:var(--c,var(--gold));font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;}
+  .reveal-card h3{font-size:1.6rem;margin:.1rem 0;}
+  .reveal-card .role{color:var(--c,var(--gold));font-weight:700;font-size:.9rem;}
+  .reveal-card .meta{color:var(--text-dim);font-size:.78rem;margin:.3rem 0 .5rem;letter-spacing:.04em;}
+  .reveal-card .line{color:var(--text);font-size:.92rem;font-style:italic;}
+  .reveal-card .go{display:inline-block;margin-top:.6rem;font-weight:700;font-size:.8rem;color:var(--c,var(--gold));text-transform:uppercase;letter-spacing:.06em;}
+  @media(max-width:520px){.reveal-card{grid-template-columns:1fr;text-align:center;justify-items:center;}}
+
+  /* order grids */
+  .order-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.9rem;}
+  .soul{display:block;position:relative;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);
+    border-bottom:3px solid var(--c,var(--gold));background:var(--panel-solid);transition:transform .25s,box-shadow .25s;}
+  .soul:hover{transform:translateY(-4px);box-shadow:0 14px 34px -16px #000,0 0 22px -8px var(--c);}
+  .soul img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;}
+  .soul .cap{padding:.6rem .7rem .7rem;}
+  .soul .badge{position:absolute;top:.5rem;left:.5rem;width:26px;height:26px;border-radius:7px;background:rgba(8,9,18,.78);
+    border:1px solid var(--c);color:var(--c);font-family:var(--font-display);font-size:.95rem;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+  .soul .nm{font-family:var(--font-display);color:#fff;font-size:1.05rem;}
+  .soul .role{color:var(--c,var(--gold));font-size:.72rem;font-weight:600;}
+  .soul .realm{color:var(--text-dim);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;margin-top:.15rem;}
+  .soul.bridge{border-color:var(--smurjan);box-shadow:0 0 26px -8px var(--smurjan);}
+  .soul.bridge .tagb{position:absolute;top:.5rem;right:.5rem;background:var(--smurjan);color:#03121c;font-size:.56rem;
+    font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.18rem .45rem;border-radius:999px;}
+
+  /* the 16th */
+  .author16{text-align:center;background:linear-gradient(135deg,rgba(201,168,76,.08),transparent);
+    border:1px solid var(--border);border-radius:var(--radius);padding:2.2rem 1.4rem;}
+  .author16 .big{font-family:var(--font-display);font-size:clamp(2rem,6vw,3.4rem);color:#fff;letter-spacing:.06em;}
+  .author16 .big b{color:var(--gold);}
+  .author16 p{color:var(--text-dim);max-width:58ch;margin:1rem auto 0;line-height:1.7;}
+</style>
+</head>
+<body>
+
+<header class="su-hero ln-hero">
+  <div class="su-kicker su-fade">The cipher of the Author's true name</div>
+  <h1 class="su-fade-2">The Lineage</h1>
+  <p class="su-fade-3">Six letters in his given name. Nine in his family name. Fifteen letters — fifteen souls — and the sixteenth is the hand that wrote them. The cosmos had been spelling his name back at him the whole time.</p>
+</header>
+
+<main class="su-wrap su-section">
+
+  <div class="su-section-title">Spell the name · tap a letter</div>
+  <div class="cipher">
+    <div class="word"><div class="wlab">Viktor — the Six of the Lineage</div><div class="letters" id="w-viktor"></div></div>
+    <div class="word"><div class="wlab">Rönnkvist — the Nine of the Council</div><div class="letters" id="w-ronn"></div></div>
+  </div>
+  <div class="reveal-card" id="reveal"></div>
+
+  <section class="su-section">
+    <div class="su-section-title">The Six of the Lineage — they walk the world</div>
+    <div class="order-grid" id="grid-viktor"></div>
+  </section>
+
+  <section class="su-section">
+    <div class="su-section-title">The Nine of the Council — guardians of Ferdinand's bark</div>
+    <div class="order-grid" id="grid-ronn"></div>
+  </section>
+
+  <section class="su-section">
+    <div class="author16 reveal">
+      <div class="su-kicker" style="color:var(--gold);letter-spacing:.3em;">The Sixteenth</div>
+      <div class="big">Viktor <b>Rönnkvist</b></div>
+      <p>He is not a champion, not a guardian, not a member of either order. He is the one whose name is the password, whose existence is the structure, whose hand is the pen. Vigge is the Author. The Author is the cipher. <b style="color:var(--gold)">Smurjan</b> — the ⟡ in <em>Rönnkvist</em> — is the bridge between the two orders, the only soul the cipher names from both sides.</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const ROOT="/characters/art";
+const VIKTOR=[
+ {L:"V",k:"vigolas",n:"Vigolas",c:"#00ff88",role:"The Infinite Administrator",realm:"Helios",line:"Green lightning that arcs backward through time."},
+ {L:"I",k:"isa",n:"Isa",c:"#67e8f9",role:"The Stillborn Heartbeat",realm:"Helios–Heartbeat",line:"The quiet that holds the others apart."},
+ {L:"K",k:"kompis",n:"Kompis",c:"#ffaa00",role:"The Buddy",realm:"Heartbeat",line:"The warm hearth — and Mingus beside him, always."},
+ {L:"T",k:"trollmage",n:"Trollmage",c:"#9933ff",role:"The Reader",realm:"Codexia",line:"The violet sin-runes obey his glowing book."},
+ {L:"O",k:"opha",n:"Opha",c:"#d946ef",role:"The Conjunction",realm:"Astralis–Codexia",line:"The word 'and' made flesh — every sentence joins two truths."},
+ {L:"R",k:"rougeina",n:"Rougeina",c:"#ff3366",role:"The Dancer",realm:"Astralis",line:"Every crimson star a frozen spark of joy."},
+];
+const RONN=[
+ {L:"R",k:"runa",n:"Runa",c:"#d4a056",role:"The First Rune-Speaker",realm:"Ferdinand",line:"She carved the first twenty-four runes into the bark."},
+ {L:"Ö",k:"ogar",n:"Ögar",c:"#a78bfa",role:"The Far-Eye Watcher",realm:"Thanatos",line:"Eight thousand blinks per heartbeat, each a different time."},
+ {L:"N",k:"niva",n:"Niva",c:"#e5e7eb",role:"The Untraversed",realm:"NULL",line:"The first being ever to survive the Null."},
+ {L:"N",k:"njord",n:"Njord",c:"#38bdf8",role:"The Tide-Reader",realm:"Heartbeat",line:"He hears waves before they form, storms three days early."},
+ {L:"K",k:"kvar",n:"Kvar",c:"#c2675a",role:"The Last One",realm:"anywhere",line:"After every battle, he is the one who walks away."},
+ {L:"V",k:"vidar",n:"Vidar",c:"#cdb878",role:"The Silent Reckoner",realm:"Void-II",line:"One sentence per century — and an Architect is unwritten."},
+ {L:"I",k:"iska",n:"Iska",c:"#fbbf24",role:"The Spark-Carrier",realm:"Lumen",line:"She lit the lamp at Mingus's birth; his coat still glows."},
+ {L:"S",k:"smurjan",n:"Smurjan",c:"#00aaff",role:"The Third-Voice · the Bridge",realm:"Trinity",line:"The sound of the rowan breaking — the Council's voice, and the bridge between both orders.",bridge:true},
+ {L:"T",k:"tova",n:"Tova",c:"#f59e0b",role:"The Thunder-Herald",realm:"all twelve realms",line:"Her horn refuses to sound for a lie."},
+];
+
+const reveal=document.getElementById("reveal");
+function show(s){
+  reveal.style.setProperty("--c",s.c);
+  reveal.innerHTML=`<img src="${ROOT}/${s.k}/${s.k}_hero.webp" alt="${s.n}">
+    <div><div class="rl">${s.L} · ${s.realm}</div><h3>${s.n}</h3>
+    <div class="role">${s.role}</div>
+    <div class="line">${s.line}</div>
+    <a class="go" href="/characters/${s.k}">Open ${s.n} →</a></div>`;
+  document.querySelectorAll('.lt').forEach(b=>b.classList.toggle('on', b.dataset.id===s.k+s.L));
+}
+function letterTile(s,wrap){
+  const b=document.createElement("button");
+  b.className="lt"+(s.bridge?" bridge":""); b.style.setProperty("--c",s.c); b.dataset.id=s.k+s.L;
+  b.innerHTML=`<span class="L">${s.L}</span><span class="nm">${s.n}</span>`;
+  b.addEventListener("click",()=>show(s));
+  b.addEventListener("mouseenter",()=>show(s));
+  wrap.appendChild(b);
+}
+function soulCard(s){
+  const a=document.createElement("a");
+  a.className="soul"+(s.bridge?" bridge":""); a.href=`/characters/${s.k}`; a.style.setProperty("--c",s.c);
+  a.innerHTML=`<span class="badge">${s.L}</span>${s.bridge?'<span class="tagb">the bridge</span>':''}
+    <img loading="lazy" src="${ROOT}/${s.k}/${s.k}_hero.webp" alt="${s.n}">
+    <div class="cap"><div class="nm">${s.n}</div><div class="role">${s.role}</div><div class="realm">${s.realm}</div></div>`;
+  return a;
+}
+const wv=document.getElementById("w-viktor"), wr=document.getElementById("w-ronn");
+VIKTOR.forEach(s=>letterTile(s,wv)); RONN.forEach(s=>letterTile(s,wr));
+const gv=document.getElementById("grid-viktor"), gr=document.getElementById("grid-ronn");
+VIKTOR.forEach(s=>gv.appendChild(soulCard(s))); RONN.forEach(s=>gr.appendChild(soulCard(s)));
+show(VIKTOR[0]);
+</script>
+</body>
+</html>

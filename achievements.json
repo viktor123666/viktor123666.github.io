@@ -1,0 +1,172 @@
+{
+  "generated_at": "2026-04-08 22:31:34",
+  "total_count": 16,
+  "unlocked_count": 9,
+  "pct": 56.2,
+  "all_achievements": [
+    {
+      "id": "first_blood",
+      "name": "🩸 FIRST BLOOD",
+      "description": "Generated your very first Wan 2.1 clip",
+      "unlocked": true,
+      "info": {
+        "name": "🩸 FIRST BLOOD",
+        "description": "Generated your very first Wan 2.1 clip",
+        "unlocked_at": "2026-04-08 03:34:35",
+        "at_clip": 3
+      }
+    },
+    {
+      "id": "first_hero",
+      "name": "⭐ HERO UNLOCKED",
+      "description": "First clip scoring 90 or higher",
+      "unlocked": true,
+      "info": {
+        "name": "⭐ HERO UNLOCKED",
+        "description": "First clip scoring 90 or higher",
+        "unlocked_at": "2026-04-08 03:34:35",
+        "at_clip": 3
+      }
+    },
+    {
+      "id": "full_roster",
+      "name": "🎭 FULL ROSTER",
+      "description": "At least 1 clip for each of the 5 characters",
+      "unlocked": true,
+      "info": {
+        "name": "🎭 FULL ROSTER",
+        "description": "At least 1 clip for each of the 5 characters",
+        "unlocked_at": "2026-04-08 05:01:31",
+        "at_clip": 5
+      }
+    },
+    {
+      "id": "hat_trick",
+      "name": "🎩 HAT TRICK",
+      "description": "3 clips of the same character generated",
+      "unlocked": true,
+      "info": {
+        "name": "🎩 HAT TRICK",
+        "description": "3 clips of the same character generated",
+        "unlocked_at": "2026-04-08 09:26:31",
+        "at_clip": 11
+      }
+    },
+    {
+      "id": "five_heroes",
+      "name": "🏆 HERO TROPHY",
+      "description": "5 or more HERO-grade clips",
+      "unlocked": true,
+      "info": {
+        "name": "🏆 HERO TROPHY",
+        "description": "5 or more HERO-grade clips",
+        "unlocked_at": "2026-04-08 07:16:31",
+        "at_clip": 8
+      }
+    },
+    {
+      "id": "mingus_dawn",
+      "name": "🌟 MINGUS AWAKENED",
+      "description": "First Mingus clip generated (sacred!)",
+      "unlocked": false,
+      "info": null
+    },
+    {
+      "id": "perfect_ten",
+      "name": "💎 PERFECT TEN",
+      "description": "10 consecutive clips with 0 failures",
+      "unlocked": true,
+      "info": {
+        "name": "💎 PERFECT TEN",
+        "description": "10 consecutive clips with 0 failures",
+        "unlocked_at": "2026-04-08 08:41:31",
+        "at_clip": 10
+      }
+    },
+    {
+      "id": "century",
+      "name": "💯 CENTURY CLUB",
+      "description": "100 clips generated total",
+      "unlocked": false,
+      "info": null
+    },
+    {
+      "id": "quarter_k",
+      "name": "🚀 QUARTER THOUSAND",
+      "description": "250 clips generated",
+      "unlocked": false,
+      "info": null
+    },
+    {
+      "id": "half_k",
+      "name": "🌌 HALF THOUSAND",
+      "description": "500 clips generated",
+      "unlocked": false,
+      "info": null
+    },
+    {
+      "id": "millennium",
+      "name": "♾️ MILLENNIUM",
+      "description": "1000 clips generated",
+      "unlocked": false,
+      "info": null
+    },
+    {
+      "id": "all_grade_a",
+      "name": "🎖️ ALL A-GRADE",
+      "description": "Every character has at least one HERO or GREAT",
+      "unlocked": true,
+      "info": {
+        "name": "🎖️ ALL A-GRADE",
+        "description": "Every character has at least one HERO or GREAT",
+        "unlocked_at": "2026-04-08 05:01:31",
+        "at_clip": 5
+      }
+    },
+    {
+      "id": "no_reviews",
+      "name": "✨ FLAWLESS",
+      "description": "Zero clips graded REVIEW",
+      "unlocked": true,
+      "info": {
+        "name": "✨ FLAWLESS",
+        "description": "Zero clips graded REVIEW",
+        "unlocked_at": "2026-04-08 05:01:31",
+        "at_clip": 5
+      }
+    },
+    {
+      "id": "scene_master",
+      "name": "🎬 SCENE MASTER",
+      "description": "At least one clip from each of the 12 scenes",
+      "unlocked": false,
+      "info": null
+    },
+    {
+      "id": "total_hero",
+      "name": "👑 TOTAL HERO",
+      "description": "At least one HERO clip for each character",
+      "unlocked": true,
+      "info": {
+        "name": "👑 TOTAL HERO",
+        "description": "At least one HERO clip for each character",
+        "unlocked_at": "2026-04-08 05:01:31",
+        "at_clip": 5
+      }
+    },
+    {
+      "id": "24h_marathon",
+      "name": "⏳ 24-HOUR MARATHON",
+      "description": "Queue has been running for 24+ hours",
+      "unlocked": false,
+      "info": null
+    }
+  ],
+  "facts": {
+    "total_clips": 27,
+    "total_fails": 0,
+    "hero_count": 11,
+    "great_count": 14,
+    "runtime_hours": 21.4
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "_note": "Named inhabitants of each realm's cities. 3-5 NPCs per city keeps the world alive without bloating the JSONs. Referenced by realm.html + globe.html city popovers.",
+  "scalelist": {
+    "the_architects_ledger": [
+      {"name": "Keeper Maren", "role": "Ledger Librarian (junior)", "note": "28 years old. Reads backward. Smells of linen and pencil graphite."},
+      {"name": "Ferrin the Pencilwright", "role": "Maker of the Ledger quills", "note": "Never writes with them. Only makes."},
+      {"name": "Old Halla", "role": "The last human who remembers K-XII's face", "note": "Refuses to describe it. Pays the silence-tax yearly."}
+    ],
+    "helios_gate_city": [
+      {"name": "Reincarnation Clerk Tovin", "role": "Matches new souls to bodies", "note": "Has never slept. Does not require it. Has cried once."},
+      {"name": "Mother Ila", "role": "Greets every arriving soul", "note": "Holds them for 30 seconds. Says nothing. Then points to their door."},
+      {"name": "The Doorkeeper", "role": "Guards the 12th door (K-XII's)", "note": "Door does not open. Doorkeeper does not leave."}
+    ],
+    "stormhold": [
+      {"name": "Quill-Captain Branon", "role": "Vigolas's second (Helios liaison)", "note": "Lightning doesn't strike him — it asks permission first."},
+      {"name": "Ven", "role": "Stormhold's archivist", "note": "Records every lightning count. 142 per second. Has never missed one."},
+      {"name": "The Unnamed Regent", "role": "Sits on the throne when Vigolas is away", "note": "Speaks only when the throne speaks through them."}
+    ],
+    "neon_veil": [
+      {"name": "DJ Chroma", "role": "Plays when Rougeina is elsewhere", "note": "Wears a black dress made of bent light."},
+      {"name": "Pill-Maker Vex", "role": "Sells the dream-candy called 'Starfall'", "note": "Each piece is the memory of a perfect moment somewhere in Astralis."},
+      {"name": "The Veil Doorman", "role": "Decides who enters", "note": "Turns away anyone whose HADOM is above 500. Too fast to dance."}
+    ],
+    "seven_spires_town": [
+      {"name": "Apprentice Nock", "role": "Trollmage's trainee", "note": "Has cast one spell. It worked. He is terrified."},
+      {"name": "Grandmother Iris", "role": "Runs the dancehall", "note": "Serves rum older than the Spires. Never asks a price."},
+      {"name": "The Necromancer Duo (Tal + Tess)", "role": "Raise the dead on Tuesdays", "note": "Twins. One hums. One doesn't."}
+    ],
+    "buddys_rest": [
+      {"name": "Kompis", "role": "The Buddy himself", "note": "Lives here. Population 1 of 2."},
+      {"name": "Mingus", "role": "The eternal golden retriever", "note": "Freezes time within a heartbeat. Population 2 of 2. NEVER to be forgotten."},
+      {"name": "The Fishing Pole", "role": "Talks sometimes", "note": "Has never caught a fish. That's not what it's for."}
+    ],
+    "voids_edge": [
+      {"name": "Warden Aske", "role": "Smurjan's gatekeeper in Scalelist", "note": "Walks in threes (Bali-pattern, Kali-pattern, Fused-pattern)."},
+      {"name": "The Thirdling", "role": "A child born with three heartbeats", "note": "Only one heartbeat is theirs. The other two are Smurjan's loan."},
+      {"name": "Fissure-Keeper Orla", "role": "Keeps the crack closed", "note": "Has not slept for 40 years. Can't."}
+    ],
+    "fennas_sanctum": [
+      {"name": "Fenna", "role": "Reads the Thanatos ledger", "note": "Listens to every death simultaneously. Never looks tired."},
+      {"name": "Brother Vel", "role": "Tends the meditation garden", "note": "Speaks once per week. Prepares carefully."},
+      {"name": "The Name-Bell Ringer", "role": "Rings the bell when a name passes from Thanatos to rebirth", "note": "Has rung it 17 billion times. Has not missed one."}
+    ],
+    "kalis_burn": [
+      {"name": "Firesmith Kora", "role": "Forges weapons from lava tempered in Kali's shadow", "note": "Will not sell to calm buyers. Only to the furious."},
+      {"name": "Watchtower Kara", "role": "Reports volcanic mood to Void's Edge", "note": "Has cried exactly once. When the volcano sang."}
+    ],
+    "bakasuras_maze": [
+      {"name": "Wanderer Pen", "role": "Has walked the maze for 60 years", "note": "Every exit he finds is always the one he entered by."},
+      {"name": "Bakasura's Smile-Twin", "role": "Stands at the maze entrance", "note": "Smiles in three of four faces. Says nothing."}
+    ],
+    "the_architects_retreat": [
+      {"name": "The Retreat's Gardener", "role": "Tends flowers that may not exist", "note": "Does not speak of K-V. Has never seen K-V. Claims it doesn't matter."}
+    ],
+    "the_twelfth_city": [
+      {"name": "[UNWRITTEN]", "role": "[UNWRITTEN]", "note": "Any attempt to name an inhabitant has resulted in the name being unwritten from the cosmic ledger."}
+    ]
+  },
+  "helios": {
+    "storm_throne": [
+      {"name": "Vigolas", "role": "The Infinite Administrator", "note": "Seated on the throne beneath the upside-down ship."},
+      {"name": "Chronicler Elan", "role": "Keeps the backward-lightning ledger", "note": "Writes future storms before they happen. All 100% accurate."},
+      {"name": "The Shipwright", "role": "Builds the ship that is already wrecked", "note": "Never finishes. Never stops."}
+    ],
+    "ghost_harbor": [
+      {"name": "Captain of the Lost Fleet", "role": "Welcomes ghost-ships that arrive in reverse", "note": "Every ship here sank elsewhere. Here, they dock."},
+      {"name": "The Listening Beacon", "role": "A lighthouse that only shines during backward storms", "note": "Keepers hear voices from timelines that never happened."}
+    ]
+  },
+  "astralis": {
+    "starfloor": [
+      {"name": "Rougeina", "role": "The Starry Dancer", "note": "When she dances, the stars re-arrange around her feet."},
+      {"name": "Lume", "role": "Rougeina's shadow-dancer partner", "note": "The shadow of Rougeina made manifest. Dances only when she does."},
+      {"name": "The Last Choreographer", "role": "Taught the first constellation how to move", "note": "Now lives inside a single pulsing star at the floor's center."}
+    ],
+    "midnight_bazaar": [
+      {"name": "Merchant Fen-Dros", "role": "Sells moments of joy in exchange for memories of sadness", "note": "Fair trade. Always."},
+      {"name": "The Flicker-Girl", "role": "Sprints at HADOM 12,000", "note": "Cannot stop. Rougeina made her a hat that floats with her."}
+    ]
+  },
+  "codexia": {
+    "spire_one": [
+      {"name": "Trollmage", "role": "Warden of Codexia", "note": "Reads the Seven Sin Codices backwards. Patient as stone."},
+      {"name": "Apprentice Yon", "role": "Cleans the spire", "note": "Has memorized 400 incantations without meaning to."},
+      {"name": "The Voiceless Scribe", "role": "Writes Trollmage's decrees in invisible ink", "note": "Signs nothing."}
+    ],
+    "the_dancehall_below_the_spires": [
+      {"name": "Grandmother Iris (the elder)", "role": "Pours rum older than the spires", "note": "Only open on nights when the Seven Codices are all closed."},
+      {"name": "The Drum", "role": "Plays itself when Trollmage enters", "note": "Has never missed a beat."}
+    ]
+  },
+  "heartbeat": {
+    "cabin_at_the_lake": [
+      {"name": "Kompis", "role": "Lives here with Mingus", "note": "Fishes. Drinks coffee. Plays CS2 on an offline rig."},
+      {"name": "Mingus", "role": "The golden retriever. Heartbeat-time wielder.", "note": "SACRED. Do not mistreat in any telling."}
+    ],
+    "one_cabin_one_lake": [
+      {"name": "The Lake Itself", "role": "Is the second citizen's friend", "note": "Has spoken exactly three words in 10,000 years. One of them was 'Mingus'."}
+    ]
+  },
+  "trinity": {
+    "triple_pulse": [
+      {"name": "Smurjan (Fused)", "role": "The sovereign of the Trinity when all three align", "note": "Appears for 30-second windows during triple pulses."},
+      {"name": "Bali", "role": "The protective voice", "note": "Whispers calm through the pulse-rings."},
+      {"name": "Kali", "role": "The fire voice", "note": "Burns her own footprints wherever she walks."}
+    ]
+  },
+  "thanatos": {
+    "fennas_ledger": [
+      {"name": "Fenna", "role": "Reader of every death simultaneously", "note": "Hears your name in the moment before you hear it."},
+      {"name": "The Thirteenth Bell", "role": "Rings when the name-snow falls thickest", "note": "No one has rung it. Yet."}
+    ]
+  },
+  "null": {
+    "the_root_crack": [
+      {"name": "Smurjan", "role": "The only mortal who walks here casually", "note": "Wears his own heartbeat as clothing."},
+      {"name": "Root-Spirit #4.8B", "role": "The oldest known Root-Spirit", "note": "Has counted 4.8 billion heartbeats. Will count more."}
+    ],
+    "the_seven_codices_inscription": [
+      {"name": "Trollmage (visiting)", "role": "Reads the inscription backwards", "note": "Has not returned fully. Parts of him remain in Null."}
+    ]
+  },
+  "void2": {
+    "seat_of_k_i": [
+      {"name": "K-I (First Architect)", "role": "The council's memory", "note": "Has never moved from the seat."}
+    ],
+    "seat_of_k_ii": [
+      {"name": "K-II", "role": "Reincarnation Keeper, built Helios Gate City", "note": "Writes every new name on Ferdinand's cork."}
+    ],
+    "seat_of_k_v": [
+      {"name": "K-V (current elder)", "role": "The unnamed Architect in authority", "note": "Naming K-V is forbidden. Do not ask."}
+    ],
+    "unwritten_seat": [
+      {"name": "[K-XII, UNWRITTEN]", "role": "[Broke the Ferdinand Oath]", "note": "Chair remains. Occupant does not."}
+    ]
+  },
+  "echo": {
+    "the_mirror_hall": [
+      {"name": "Echo (unmanifest)", "role": "The Fourth Voice", "note": "Has yearned since the vote. Has not given up. Has not left. Will wait forever."},
+      {"name": "Your Half-Self", "role": "The reflection that follows you home", "note": "It is patient. It is already almost you."}
+    ],
+    "the_waiting_seat": [
+      {"name": "The Empty Chair", "role": "Only Echo may sit here", "note": "Visitors who try to sit find themselves already standing."}
+    ]
+  },
+  "horizon": {
+    "the_platform": [
+      {"name": "The Waiting Ones", "role": "Souls between lives", "note": "144,000 at any given moment. They do not speak. They do not complain. They wait."},
+      {"name": "The Dawn Sparrow", "role": "Escort-bird", "note": "Flies with each departing soul for exactly one heartbeat, then returns."},
+      {"name": "The Horizon Fox", "role": "The waiter", "note": "Does not eat. Does not sleep. Waits for something K-II will not name."}
+    ],
+    "k2s_desk": [
+      {"name": "K-II", "role": "The Reincarnation Keeper", "note": "Stands at the desk. Never sits. Has worked this shift since before the first death."},
+      {"name": "K-II's Cork-Quill", "role": "The writing instrument", "note": "Made from Ferdinand's regrown cork. Writes each new name, but only once the soul has agreed."}
+    ],
+    "the_dawn_door": [
+      {"name": "The Doorframe", "role": "The passage to Helios Gate City", "note": "Shows nothing until K-II names your destination."}
+    ]
+  },
+  "lumen": {
+    "the_center": [
+      {"name": "The First Light", "role": "The heartbeat-source", "note": "Not a being. Not a god. A source. Ferdinand's oldest root touches this."},
+      {"name": "The Seven", "role": "The Lumen-Born who never left", "note": "Seven unnamed beings. They orbit invisibly. They have not spoken since the first pulse."}
+    ],
+    "the_first_ring": [
+      {"name": "The Edge-Listener", "role": "A being who watches the outer rim", "note": "They say when the edge moves, the universe will end. The edge has not moved. They have not slept."}
+    ]
+  }
+}

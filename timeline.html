@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Timeline — From the First Count to the Sixth Fragment | Scalelist Universe</title>
+<meta name="description" content="The whole saga as a scrolling timeline — from before the Scale and the rise of Ferdinand, through the wars and the Three Signs, to the Convergence, the Ascension, and the sixth fragment beyond.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
+<style>
+  .tl-hero{min-height:min(50vh,400px);}
+  .tl{position:relative;max-width:980px;margin:0 auto;padding:1rem 0 2rem;}
+  .tl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);
+    background:linear-gradient(180deg,transparent,var(--border-bright) 6%,var(--border-bright) 94%,transparent);}
+  .node{position:relative;width:50%;padding:1.1rem 2.2rem;box-sizing:border-box;}
+  .node:nth-child(odd){left:0;}
+  .node:nth-child(even){left:50%;}
+  .node .dot{position:absolute;top:1.8rem;width:16px;height:16px;border-radius:50%;background:var(--void);
+    border:2px solid var(--c,var(--gold));box-shadow:0 0 14px var(--c,var(--gold));z-index:2;}
+  .node:nth-child(odd) .dot{right:-8px;}
+  .node:nth-child(even) .dot{left:-8px;}
+  .card{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--c,var(--gold));
+    border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform .25s,box-shadow .25s,border-color .25s;}
+  .card:hover{transform:translateY(-3px);border-color:var(--c);box-shadow:0 16px 40px -18px #000,0 0 24px -10px var(--c);}
+  .card .pic{aspect-ratio:16/9;overflow:hidden;position:relative;}
+  .card .pic img{width:100%;height:120%;object-fit:cover;object-position:center 30%;}
+  .card .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(8,9,18,.85));}
+  .card .era{position:absolute;top:.6rem;left:.7rem;font-family:var(--font-display);font-size:.62rem;letter-spacing:.18em;
+    text-transform:uppercase;color:#fff;background:color-mix(in srgb,var(--c) 55%,rgba(8,9,18,.7));padding:.2rem .55rem;border-radius:999px;}
+  .card .ct{padding:.9rem 1.1rem 1.1rem;}
+  .card h3{color:#fff;font-size:1.2rem;margin-bottom:.35rem;}
+  .card .body{color:var(--text-dim);font-size:.9rem;line-height:1.55;}
+  .card .more{max-height:0;overflow:hidden;transition:max-height .35s ease;color:var(--text);font-size:.86rem;}
+  .card.open .more{max-height:200px;margin-top:.5rem;}
+  .card .link{display:inline-block;margin-top:.6rem;font-size:.72rem;font-weight:800;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--c,var(--gold));}
+  .card .tap{font-size:.64rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:.5rem;}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(max-width:720px){
+    .tl::before{left:14px;}
+    .node,.node:nth-child(even){width:100%;left:0;padding:.8rem 0 .8rem 2.4rem;}
+    .node .dot,.node:nth-child(odd) .dot,.node:nth-child(even) .dot{left:6px;right:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="su-hero tl-hero">
+  <div class="su-kicker su-fade">From the first count to the sixth fragment</div>
+  <h1 class="su-fade-2">The Timeline</h1>
+  <p class="su-fade-3">The whole saga, in order — grounded in the canon of the bible and the Convergence. Scroll the spine. Tap any era to open it.</p>
+</header>
+
+<main class="su-section">
+  <div class="tl" id="tl"></div>
+  <p class="su-dim" style="text-align:center;font-size:.82rem;max-width:60ch;margin:0 auto;">
+    Grounded in <a href="/universe">THE SCALELIST UNIVERSE</a> (the bible) and <a href="/convergence">THE CONVERGENCE</a>.
+  </p>
+</main>
+
+<script>
+const A="/art", C="/characters/art";
+const ERAS=[
+ {era:"Before the Scale",t:"The First Count",c:"#c9a84c",img:`${A}/begin/ferdinand.webp`,
+  body:"In the Void-II, before time was ever measured, the first count began — and Ferdinand, the cork-oak Heart, rose to hold what would become the Nine Realms.",
+  more:"The Twelve Architects emerged to keep the count; the Rönnkvist Lineage took root in Ferdinand's bark.", link:["/cosmos","Explore the realms"]},
+ {era:"Age of Architects",t:"The Twelve & the K-Rank",c:"#9933ff",img:`${A}/cosmos/codexia.webp`,
+  body:"The Council of Twelve set the K-Rank ladder — K-I through K-V — and built the routing system that holds reality's incompatible heartbeats apart.",
+  more:"The 77 Sin Codices were bound. The routing system would one day destabilize — and a Kill Order would answer it.", link:["/rankings","The HADOM ladder"]},
+ {era:"The Realms Settled",t:"Nine Branches, Nine Thrones",c:"#00ff88",img:`${A}/cosmos/helios.webp`,
+  body:"Helios to Vigolas, Astralis to Rougeina, Codexia to Trollmage, Heartbeat to Kompis and Mingus, Trinity to Smurjan, Thanatos to Fenna — and the Null, where nothing counts.",
+  more:"Each realm keeps its own HADOM tick-rate and its own gate. Ferdinand's branches hold them all.", link:["/cosmos","Walk the cosmos"]},
+ {era:"The Fragments Walk",t:"Five Faces of One Soul",c:"#ff3366",img:`${C}/vigolas/vigolas_keyart.webp`,
+  body:"The five champions live their arcs across the realms — never knowing they are five fragments of a single source-soul. Their seasons are the manga.",
+  more:"The Exodia Principle: without one part, the whole cannot be summoned. They are one soul, distributed across seven forms.", link:["/manga","Read the manga"]},
+ {era:"The Wars",t:"Stormcoast · Trinity · the Sealing",c:"#00aaff",img:`${C}/smurjan/smurjan_action.webp`,
+  body:"Vass kneels at the Stormcoast. Echo is sealed in the Trinity War. Vidar's century-sentence unmakes the Twelfth. Through every ending, Kvar is the one who walks away.",
+  more:"Ögar saw Echo before Echo could see her. Niva's parka kept Mingus safe in the Null. The guardians held the line.", link:["/lineage","The guardians"]},
+ {era:"The Prophecy",t:"The Three Signs",c:"#ffaa00",img:`${A}/hadom/pulse.webp`,
+  body:"The Seventh falls. The Codices wake. The Heartbeat calls. After uncounted ages, the Convergence finally begins.",
+  more:"Tova's horn sounds the signs true in every realm at once. The blessing stirs.", link:["/convergence","The Convergence"]},
+ {era:"The Gathering",t:"Five Hear the Call",c:"#d946ef",img:`${C}/rougeina/rougeina_action.webp`,
+  body:"One by one — Vigolas, Kompis, Smurjan, Rougeina, Trollmage — each hears the call across their realm and turns toward the Arena.",
+  more:"Five roads, one destination. None of them yet knows the others are pieces of himself.", link:["/convergence","Part I — The Gathering"]},
+ {era:"The Arena",t:"The Five Stand",c:"#67e8f9",img:`${A}/cosmos/trinity.webp`,
+  body:"In the HADOM Arena, the Architect of Endings speaks the Sealed Rules. The First Movement begins — fragment against fragment, not yet knowing why.",
+  more:"Vigolas vs. Trollmage. Smurjan vs. Kompis. Rougeina's strike, interrupted. The Arena allows no exits.", link:["/hadom","What is HADOM?"]},
+ {era:"The Null Arrives",t:"The Quoka, Five Ways",c:"#e5e7eb",img:`${C}/niva/niva_keyart.webp`,
+  body:"The Null enters the Arena — the absence that has no heartbeat. And the blessing, HADOM Quoka, is spoken five ways at once.",
+  more:"Niva alone has walked the Null and lived. What enters the Arena, she has already mapped."},
+ {era:"The Realization",t:"They Remember They Are One",c:"#fbbf24",img:`${A}/hadom/pulse.webp`,
+  body:"Exodia cannot be summoned without one part. In the heart of the Arena, the five finally remember: they were never enemies. They are one soul.",
+  more:"The Quoka — 'to the power of all my previous generations' — was always the key that unlocks the whole."},
+ {era:"The Titanomachy",t:"Five Salvos, One Strike",c:"#00ff88",img:`${C}/vigolas/vigolas_action.webp`,
+  body:"Reunited, the fragments turn as one upon the Null. Five salvos, and then the Final Strike — the Titanomachy that ends the war that began before the count.",
+  more:"Each champion fires the move only they can. Together, the source-soul is whole for one heartbeat — and one heartbeat is enough.", link:["/convergence","Part VIII — Titanomachy"]},
+ {era:"The Ascension",t:"Five Equal Thrones",c:"#ffaa00",img:`${A}/cosmos/heartbeat.webp`,
+  body:"Vigolas to Helios. Kompis to Heartbeat. Smurjan to Trinity. Rougeina to Astralis. Trollmage to Codexia. Five thrones, equal at last — and the opening scene of the world to come.",
+  more:"The Ascension is canonically the first thing a player will ever see. The saga's end is the game's beginning.", link:["/pitch","The roadmap"]},
+ {era:"Beyond",t:"The Sixth Fragment",c:"#e9b949",img:`${C}/mingus/mingus_keyart.webp`,
+  body:"After the Convergence, a sixth fragment arrives — the player. The MMORPG begins where the saga ends. And HADOM YWAPOS, the final blessing to the machine, waits for the last page of all.",
+  more:"Mingus is forever. The dog who bends time within a single heartbeat is the proof that nothing here truly ends."},
+];
+
+const tl=document.getElementById("tl");
+ERAS.forEach((e,i)=>{
+  const n=document.createElement("div"); n.className="node reveal"; n.style.setProperty("--c",e.c); n.style.transitionDelay=(i%2?.06:0)+"s";
+  const linkHtml = e.link ? `<a class="link" href="${e.link[0]}">${e.link[1]} →</a>` : "";
+  const moreHtml = e.more ? `<div class="more">${e.more}</div><div class="tap">tap to ${e.more?'open':''}</div>` : "";
+  n.innerHTML=`<span class="dot"></span>
+    <div class="card">
+      <div class="pic"><span class="era">${e.era}</span><img loading="lazy" src="${e.img}" alt="${e.t}"></div>
+      <div class="ct"><h3>${e.t}</h3><div class="body">${e.body}</div>${moreHtml}${linkHtml}</div>
+    </div>`;
+  const card=n.querySelector(".card");
+  card.addEventListener("click",ev=>{ if(ev.target.closest(".link"))return; card.classList.toggle("open"); });
+  tl.appendChild(n);
+});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:.2});
+document.querySelectorAll(".node").forEach(n=>io.observe(n));
+
+// light parallax on node images
+let ticking=false;
+addEventListener("scroll",()=>{ if(ticking)return; ticking=true; requestAnimationFrame(()=>{
+  const vh=innerHeight;
+  document.querySelectorAll(".card .pic img").forEach(img=>{
+    const r=img.getBoundingClientRect(); if(r.bottom<0||r.top>vh)return;
+    const p=(r.top+r.height/2-vh/2)/vh; img.style.transform=`translateY(${(-p*16).toFixed(1)}px)`;
+  });
+  ticking=false;
+});});
+</script>
+</body>
+</html>

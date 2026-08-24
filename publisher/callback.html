@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Connecting TikTok — SU Publisher</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#14141f;--gold:#c9a84c;--border:#1e1e2e;--text:#e0e0e0;--dim:#8a8a98;--err:#e06060;--ok:#5fbf7a}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond','Segoe UI',system-ui,serif;line-height:1.7;font-size:1.1rem;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:36px 32px;max-width:480px;width:100%;text-align:center}
+h1{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;margin-bottom:6px}
+h1 span{color:var(--gold)}
+.spinner{width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite;margin:22px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+#msg{color:var(--dim);font-style:italic;margin-top:8px;word-break:break-word}
+#msg.ok{color:var(--ok);font-style:normal}
+#msg.err{color:var(--err);font-style:normal}
+.name{font-family:'Cinzel',serif;color:var(--gold);font-size:1.15rem;margin-top:14px;display:none}
+.backlink{display:none;font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;padding:12px 24px;border:1px solid var(--gold);border-radius:99px;color:var(--gold);margin-top:26px}
+.backlink:hover{background:var(--gold);color:#0a0a0f;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>SU <span>Publisher</span></h1>
+  <p style="color:var(--dim)">TikTok authorization</p>
+  <div class="spinner" id="spin"></div>
+  <div id="msg">Exchanging authorization code&hellip;</div>
+  <div class="name" id="who"></div>
+  <a class="backlink" id="back" href="/publisher/">Back to SU Publisher</a>
+</div>
+
+<script>
+(function(){
+"use strict";
+// Keep origin consistent with the registered OAuth redirect URI (www).
+if (location.hostname === 'scalelistuniverse.com') {
+  location.replace('https://www.scalelistuniverse.com' + location.pathname + location.search);
+  return;
+}
+var API = localStorage.getItem('su_pub_api') || 'https://api.scalelistuniverse.com';
+var msg = document.getElementById('msg');
+var spin = document.getElementById('spin');
+var back = document.getElementById('back');
+var who = document.getElementById('who');
+
+function done(kind, text){
+  spin.style.display = 'none';
+  msg.className = kind;
+  msg.textContent = text;
+  back.style.display = 'inline-block';
+}
+
+var params = new URLSearchParams(location.search);
+var code = params.get('code');
+var state = params.get('state');
+var errParam = params.get('error');
+
+if (errParam) {
+  done('err', 'TikTok returned an error: ' + errParam + (params.get('error_description') ? ' — ' + params.get('error_description') : ''));
+} else if (!code || !state) {
+  done('err', 'Missing code/state in the callback URL. Start the connection again from SU Publisher.');
+} else {
+  fetch(API + '/auth/exchange', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({code: code, state: state})
+  }).then(function(r){
+    return r.json().catch(function(){ return {}; }).then(function(j){
+      if (!r.ok) { throw new Error(j.error || j.message || (r.status + ' ' + r.statusText)); }
+      return j;
+    });
+  }).then(function(j){
+    if (!j.open_id) { throw new Error('Exchange succeeded but no open_id was returned.'); }
+    localStorage.setItem('su_pub_open_id', j.open_id);
+    if (j.display_name) { localStorage.setItem('su_pub_display_name', j.display_name); }
+    done('ok', 'TikTok account connected successfully.');
+    if (j.display_name) {
+      who.textContent = j.display_name;
+      who.style.display = 'block';
+    }
+    // Scrub code/state from the address bar.
+    history.replaceState(null, '', location.pathname);
+  }).catch(function(e){
+    done('err', 'Token exchange failed: ' + e.message);
+  });
+}
+})();
+</script>
+</body>
+</html>

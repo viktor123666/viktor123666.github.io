@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>The Cosmos — Ferdinand, the Taurus Tree | Scalelist Universe</title>
+<meta name="description" content="Ferdinand the cosmic cork-oak holds nine realms on his branches. Touch each one — ruler, HADOM tick-rate, and the truth of every world."/>
+<meta property="og:title" content="The Cosmos of Ferdinand — Scalelist Universe"/>
+<meta property="og:image" content="https://scalelistuniverse.com/art/begin/ferdinand.webp"/>
+<link rel="stylesheet" href="/su.css"/>
+<script defer src="/su.js"></script>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
+<style>
+  .cos-hero{position:relative;min-height:96vh;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;padding:5rem 1.2rem 3rem;overflow:hidden;}
+  .cos-hero .art{position:absolute;inset:0;z-index:-1;background:
+    radial-gradient(1100px 700px at 50% 40%, transparent, var(--void) 82%),
+    linear-gradient(180deg, rgba(5,5,9,.4), rgba(5,5,9,.92)),
+    url('/art/begin/ferdinand.webp') center/cover no-repeat;}
+  .cos-hero .kicker{font-family:var(--font-display);color:var(--gold);letter-spacing:.34em;text-transform:uppercase;font-size:.76rem;margin-bottom:1rem;}
+  .cos-hero h1{font-size:clamp(2.4rem,6.5vw,4.6rem);text-shadow:0 4px 40px rgba(0,0,0,.7);}
+  .cos-hero p{max-width:62ch;color:var(--text);font-style:italic;font-size:1.12rem;margin:1.3rem auto 0;text-shadow:0 2px 18px rgba(0,0,0,.85);}
+  .scrolldown{position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);color:var(--gold);font-size:1.4rem;animation:bob 1.8s ease-in-out infinite;opacity:.8;}
+  @keyframes bob{50%{transform:translate(-50%,8px);}}
+
+  .realm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.1rem;}
+  .orb-card{position:relative;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.3rem 1.3rem;
+    background:var(--panel);cursor:pointer;overflow:hidden;transition:transform .28s,border-color .28s,box-shadow .28s;text-align:left;}
+  .orb-card:hover{transform:translateY(-5px);border-color:var(--rc);box-shadow:var(--shadow),0 0 30px -6px var(--rc);}
+  .orb{width:64px;height:64px;border-radius:50%;margin-bottom:1rem;
+    background:radial-gradient(circle at 35% 30%, #fff6, var(--rc) 45%, color-mix(in srgb,var(--rc) 40%, #000) 100%);
+    box-shadow:0 0 26px -2px var(--rc), inset 0 0 18px -4px #000;animation:float 6s ease-in-out infinite;}
+  @keyframes float{50%{transform:translateY(-7px);}}
+  .orb-card .rname{font-family:var(--font-display);color:#fff;letter-spacing:.05em;font-size:1.15rem;}
+  .orb-card .rrole{color:var(--rc);font-size:.78rem;margin-top:.15rem;font-weight:600;}
+  .orb-card .rruler{color:var(--text-dim);font-size:.8rem;margin-top:.55rem;}
+  .orb-card .rhadom{position:absolute;top:1rem;right:1.1rem;font-family:var(--font-display);font-size:.7rem;
+    color:var(--rc);letter-spacing:.04em;opacity:.9;}
+
+  #cos-modal{position:fixed;inset:0;z-index:2000;background:rgba(3,3,7,.86);backdrop-filter:blur(8px);
+    display:none;align-items:center;justify-content:center;padding:1.2rem;}
+  #cos-modal.open{display:flex;animation:su-fade-up .35s both;}
+  .modal-card{position:relative;max-width:720px;width:100%;background:var(--panel-solid);
+    border:1px solid var(--rc,var(--gold));border-radius:var(--radius);overflow:hidden;box-shadow:0 0 60px -10px var(--rc,var(--gold));}
+  .modal-art{height:230px;background-size:cover;background-position:center;position:relative;}
+  .modal-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--panel-solid));}
+  .modal-body{padding:1.4rem 1.6rem 1.8rem;position:relative;margin-top:-60px;}
+  .modal-body .mname{font-family:var(--font-display);font-size:1.8rem;color:#fff;}
+  .modal-body .mrole{color:var(--rc);font-weight:700;letter-spacing:.04em;margin-bottom:1rem;}
+  .modal-stats{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem;}
+  .mstat{border:1px solid var(--border);border-radius:8px;padding:.4rem .7rem;font-size:.76rem;}
+  .mstat b{color:var(--rc);display:block;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;}
+  .modal-body .mnote{color:var(--text);line-height:1.7;}
+  #cos-close{position:absolute;top:.8rem;right:.9rem;z-index:3;background:rgba(0,0,0,.5);border:1px solid var(--border);
+    color:#fff;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1.1rem;}
+</style>
+</head>
+<body>
+
+  <section class="cos-hero">
+    <div class="art"></div>
+    <div class="kicker su-fade">Ferdinand · the Taurus Tree</div>
+    <h1 class="su-fade-2">The Cosmos of Ferdinand</h1>
+    <p class="su-fade-3">A bull-hearted cork-oak, born from the Null, holds nine realms on nine branches. He refuses the fight he could win. He simply holds. Touch a realm and learn its truth.</p>
+    <div class="scrolldown">↓</div>
+  </section>
+
+  <section class="su-section">
+    <div class="su-wrap">
+      <div class="su-section-title">The Nine Realms</div>
+      <div class="realm-grid reveal" id="realmGrid"></div>
+      <p class="su-dim" style="text-align:center;margin-top:1.4rem;font-size:.85rem;">Click any realm to enter its detail.</p>
+    </div>
+  </section>
+
+  <section class="su-section" style="text-align:center;">
+    <div class="su-wrap">
+      <div class="reveal">
+        <h2>You cannot climb Ferdinand.</h2>
+        <p class="su-dim" style="max-width:60ch;margin:1rem auto 0;line-height:1.7;">His branches move in heartbeat-time — faster than any mortal can perceive. Each pulse of the universe runs up his trunk and out along the branches; that pulse powers every HADOM ability, every tick-rate, every Architect's ledger mark. The tree is not <i>like</i> the heart of the universe. The tree <b>is</b> the heart.</p>
+        <div class="su-cta" style="margin-top:1.8rem;justify-content:center;">
+          <a class="su-btn" href="/cosmos/atlas">Read the Atlas</a>
+          <a class="su-btn-ghost" href="/lineage">The Lineage</a>
+          <a class="su-btn-ghost" href="/manga">The Manga</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="cos-modal">
+    <div class="modal-card" id="modalCard">
+      <button id="cos-close" aria-label="close">✕</button>
+      <div class="modal-art" id="modalArt"></div>
+      <div class="modal-body">
+        <div class="mname" id="modalName"></div>
+        <div class="mrole" id="modalRole"></div>
+        <div class="modal-stats" id="modalStats"></div>
+        <div class="mnote" id="modalNote"></div>
+      </div>
+    </div>
+  </div>
+
+  <button id="snd" title="Ambient sound on/off" aria-label="Sound" style="position:fixed;right:14px;bottom:14px;z-index:1100;background:rgba(7,8,16,.8);border:1px solid var(--border-bright);color:var(--gold);border-radius:999px;width:46px;height:46px;cursor:pointer;font-size:1.1rem;backdrop-filter:blur(8px);">♪</button>
+
+  <script>
+  const REALMS = [
+    {k:"scalelist",n:"Scalelist",c:"#c9a84c",role:"The Prime Material",ruler:"The Twelve Architects (K-V council)",hadom:"1",note:"The central material plane — where the characters physically live. Not their domain: their battlefield. All roads, all gates, converge here.",art:null},
+    {k:"helios",n:"Helios",c:"#00ff88",role:"The Storm Court",ruler:"Vigolas — The Infinite Administrator",hadom:"∞−1",note:"Always mid-storm. Lightning moves backward through time. A shipwreck drifts eternally upside-down above the central throne where the Infinite Administrator holds eternal session.",art:"/art/cosmos/helios.webp"},
+    {k:"astralis",n:"Astralis",c:"#ff3366",role:"The Starry Weave",ruler:"Rougeina — The Starry Dancer",hadom:"10,000",note:"A dance-floor galaxy. Every star is a former moment of perfect joy somewhere in the multiverse, and Rougeina dances between them. Enter uninvited and you forget how to dance — forever.",art:"/art/cosmos/astralis.webp"},
+    {k:"codexia",n:"Codexia",c:"#9933ff",role:"The Seven Spires",ruler:"Trollmage — Keeper of the Seven Sin Codices",hadom:"50,000",note:"Seven black-spire towers, one per sin-codex, humming in minor-key harmony. Walk the ring without reading the sin-warnings carved at each base and you bind to one sin permanently.",art:"/art/cosmos/codexia.webp"},
+    {k:"heartbeat",n:"Heartbeat",c:"#ffaa00",role:"The Subtick",ruler:"Kompis & Mingus",hadom:"Kompis 10,000 · Mingus unclassified",note:"A realm where time moves sideways — an eternity here is one heartbeat in Scalelist. A cabin by a lake, a fireplace, Mingus asleep on a rug. It resets to this scene every heartbeat, no matter what war rages outside. Sacred. The dog is forever.",art:"/art/cosmos/heartbeat.webp"},
+    {k:"trinity",n:"Trinity",c:"#00aaff",role:"The Void Three",ruler:"Smurjan — all three voices at once",hadom:"1,000,000",note:"A realm that contains itself three times, overlaid. Enter once: only kind Bali. Twice: only wrathful Kali. Three times in rapid succession: you meet Fused-Smurjan — and you are judged.",art:"/art/cosmos/trinity.webp"},
+    {k:"thanatos",n:"Thanatos",c:"#c0c0c0",role:"The Reclamation",ruler:"Fenna — the Reclaimer (K-IV)",hadom:"3",note:"The death-plane. Every soul that ever died in Scalelist exists here as a whispered name. Fenna walks the silver fields reading names aloud; when she reads yours, you reincarnate. This is how Vigolas first arrived — shipwrecked, dead, named, returned.",art:null},
+    {k:"null",n:"Null",c:"#23232e",role:"The Absence",ruler:"No one — claiming rulership dissolves you",hadom:"0",note:"What existed before the universe, and still exists around it. Pure absence. Ferdinand's roots drink here. The Seven Sin Codices were written on the inside of Null by hands that existed before writing existed. Smurjan walks here casually; anyone else dies in seconds.",art:null},
+    {k:"void2",n:"Void-II",c:"#e6e6f2",role:"The Second Void",ruler:"The Twelve Architects only",hadom:"negative",note:"A deeper void than Null — the void of the void, where the Twelve Architects originated before writing themselves into Ferdinand. They meet here to write new physics. No mortal has entered and returned with memory intact.",art:null}
+  ];
+
+  const grid = document.getElementById("realmGrid");
+  REALMS.forEach(r => {
+    const a = document.createElement("div");
+    a.className = "orb-card"; a.style.setProperty("--rc", r.c);
+    a.innerHTML = `<div class="rhadom">HADOM ${r.hadom}</div><div class="orb"></div>
+      <div class="rname">${r.n}</div><div class="rrole">${r.role}</div>
+      <div class="rruler">${r.ruler}</div>`;
+    a.addEventListener("click", () => openRealm(r));
+    grid.appendChild(a);
+  });
+
+  const modal = document.getElementById("cos-modal"), card = document.getElementById("modalCard");
+  function openRealm(r){
+    card.style.setProperty("--rc", r.c);
+    const art = document.getElementById("modalArt");
+    art.style.background = r.art
+      ? `url('${r.art}') center/cover`
+      : `radial-gradient(circle at 50% 40%, ${r.c}, color-mix(in srgb,${r.c} 25%, #050509) 75%)`;
+    document.getElementById("modalName").textContent = r.n;
+    document.getElementById("modalRole").textContent = r.role;
+    document.getElementById("modalStats").innerHTML =
+      `<div class="mstat"><b>Ruler</b>${r.ruler}</div>` +
+      `<div class="mstat"><b>HADOM tick-rate</b>${r.hadom}</div>` +
+      `<div class="mstat"><b>Signature</b><span style="color:${r.c}">${r.c}</span></div>`;
+    document.getElementById("modalNote").textContent = r.note;
+    modal.classList.add("open");
+  }
+  function closeModal(){ modal.classList.remove("open"); }
+  document.getElementById("cos-close").addEventListener("click", closeModal);
+  modal.addEventListener("click", e => { if(e.target === modal) closeModal(); });
+  addEventListener("keydown", e => { if(e.key === "Escape") closeModal(); });
+
+  (function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});})();
+  (function(){var b=document.getElementById('snd'),ctx,m,on=false;b.addEventListener('click',function(){if(!ctx){ctx=new(window.AudioContext||window.webkitAudioContext)();m=ctx.createGain();m.gain.value=0;m.connect(ctx.destination);var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=520;lp.connect(m);[55,82.4,110,164.8].forEach(function(f,i){var o=ctx.createOscillator();o.type=i%2?'sine':'triangle';o.frequency.value=f;var g=ctx.createGain();g.gain.value=.16;o.connect(g);g.connect(lp);o.start();});var lfo=ctx.createOscillator();lfo.frequency.value=.07;var lg=ctx.createGain();lg.gain.value=180;lfo.connect(lg);lg.connect(lp.frequency);lfo.start();}on=!on;m.gain.cancelScheduledValues(ctx.currentTime);m.gain.linearRampToValueAtTime(on?0.09:0,ctx.currentTime+(on?1.2:0.5));b.textContent=on?'♫':'♪';b.style.color=on?'#e8c86a':'';});})();
+  </script>
+</body>
+</html>

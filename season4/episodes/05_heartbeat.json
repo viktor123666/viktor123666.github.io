@@ -1,0 +1,37 @@
+{
+  "id": "s4e05_the_subtick_slows",
+  "number": 5,
+  "title": "The Subtick Slows",
+  "subtitle": "Episode 5 of 12 · Season 4: The Fates Unravel",
+  "realm_id": "heartbeat",
+  "fate_triggered": "Time forgets to slow around Mingus for one heartbeat. Mingus is fine. Kompis is undone.",
+  "pov_characters": ["kompis_himself", "mingus_himself", "the_lake_voice"],
+  "supporting": ["paw_ghost_at_whisper_clearing", "the_first_pine"],
+  "synopsis": "It is the most ordinary morning. Kompis is on the porch. Mingus is asleep at his feet. The Lake is still. Then — for one heartbeat — Mingus's heartbeat-time fails to slow. The morning skips a single second. Mingus does not notice. He does not even wake. But Kompis does. Kompis FEELS the second pass — feels it because for the first time in 14 years he has been forced to live a moment without the subtick blanket of love that had wrapped every previous moment. Kompis goes white. Kompis stops breathing. The Lake — the Lake itself — speaks. It speaks one of its three remaining words: 'STAY.' Just that. Mingus opens one eye, looks at Kompis, and goes back to sleep — because Mingus is not afraid. Mingus has never been afraid. Kompis takes 30 minutes to recover. The Whisper Clearing's Paw Ghost arrives uninvited and sits on Kompis's left side for the full half-hour. By the time Mingus wakes for his morning drink at the Lake, Kompis is laughing again — but he has been changed. Vigolas, watching all this from a stormbird-relayed report at Stormhold, makes a private vow: he will personally walk to Heartbeat if it ever happens again.",
+  "key_scenes": [
+    {"location": "Cabin Point, Buddy's Rest porch, dawn", "action": "Ordinary morning. Mingus asleep at Kompis's feet."},
+    {"location": "The skipped heartbeat", "action": "For one beat, Mingus's subtick fails. The morning skips a second."},
+    {"location": "Kompis frozen", "action": "Kompis goes white. Stops breathing. Recognizes the absence."},
+    {"location": "The Lake speaks", "action": "The Lake speaks its second-of-three remaining words: 'STAY.'"},
+    {"location": "Mingus opens one eye", "action": "Mingus glances at Kompis. Sees nothing wrong. Goes back to sleep."},
+    {"location": "The Paw Ghost", "action": "The Whisper Clearing Paw Ghost arrives uninvited. Sits on Kompis's left for 30 minutes."},
+    {"location": "Recovery", "action": "Kompis laughs again by the time Mingus wakes. The change is internal."}
+  ],
+  "cliffhanger": "Vigolas, alone in his throne room, writes one line in his private ledger: 'If it happens again, I walk.'",
+  "panel_storyboard": [
+    {"panel": 1, "composition": "Wide establishing of Cabin Point. Pines. The Lake. The Cabin. Smoke from chimney. Kompis on the porch with Mingus asleep at his feet.", "character": "kompis_himself", "camera": "establishing wide", "emotion": "peace"},
+    {"panel": 2, "composition": "Close-up of Mingus's chest, the rise and fall of his breathing. Soft golden light.", "character": "mingus_himself", "camera": "macro chest", "emotion": "rest"},
+    {"panel": 3, "composition": "Single full-page panel: a single black bar across the page representing the skipped heartbeat. No image. Just absence.", "character": null, "camera": "negative space", "emotion": "absence", "caption": "ONE HEARTBEAT, MISSING."},
+    {"panel": 4, "composition": "Kompis's face going white. Eyes wide. Hands frozen. Mug of coffee paused mid-air.", "character": "kompis_himself", "camera": "tight face", "emotion": "primal fear"},
+    {"panel": 5, "composition": "The Lake's surface rippling for the first time without Mingus drinking. A single visible word forming in the ripples: 'STAY.'", "character": "the_lake_voice", "camera": "overhead lake", "emotion": "ancient command", "dialogue": "The Lake: 'STAY.'"},
+    {"panel": 6, "composition": "Mingus opening one eye. Tilt of the head. Gaze meeting Kompis's. Reassuring.", "character": "mingus_himself", "camera": "macro eye", "emotion": "calm love"},
+    {"panel": 7, "composition": "Mingus's eye closing again. Going back to sleep.", "character": "mingus_himself", "camera": "macro", "emotion": "trust"},
+    {"panel": 8, "composition": "Kompis on the porch, faint paw-print outline forming in the moss to his left. Kompis turning toward it slowly.", "character": "kompis_himself", "camera": "porch wide", "emotion": "recognition", "caption": "The Whisper Clearing's Paw Ghost arrived uninvited."},
+    {"panel": 9, "composition": "Wide of porch with Kompis sitting, invisible warm presence on his left, Mingus asleep at his feet, Lake visible in distance, the morning light slowly returning.", "character": null, "camera": "wide warm", "emotion": "shared protection"},
+    {"panel": 10, "composition": "Cut to Vigolas at his Stormhold throne, alone, writing in his private ledger by candlelight.", "character": "vigolas_the_administrator", "camera": "tight on hand and ledger", "emotion": "private vow", "dialogue": "Vigolas (writing): 'If it happens again, I walk.'"}
+  ],
+  "cosmic_price_paid": "The Lake has spoken its second word. One word remaining. Kompis carries a new fear quietly. Mingus is unchanged.",
+  "callout_for_cosmos_drawer": "In Season 4, Mingus's subtick failed for one heartbeat. Mingus did not notice. The Lake spoke 'STAY.' Kompis recovered in thirty minutes. He has not been the same since.",
+  "watch_chapter": null,
+  "read_chapter": null
+}

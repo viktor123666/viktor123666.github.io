@@ -1,0 +1,88 @@
+User-agent: *
+Allow: /
+Disallow: /su-vault-9x7k
+Disallow: /su-vault-9x7k/
+Disallow: /su-admin
+Disallow: /su-admin/
+Disallow: /ywapos_morning_index.html
+Disallow: /morning_dashboard.html
+Disallow: /empire_status.html
+Disallow: /live_pipeline.html
+Disallow: /wake_up.html
+Disallow: /whats_next.html
+Disallow: /clips_overnight.html
+Disallow: /clip_reviewer.html
+Disallow: /clip_player.html
+Disallow: /clip_overview.html
+Disallow: /best_of.html
+Disallow: /pipeline_timeline.html
+Disallow: /score_history.html
+Disallow: /lifetime_stats.html
+Disallow: /milestones_progress.html
+Disallow: /lore_glossary.html
+Disallow: /lore_cards.html
+Disallow: /lore_quotes.html
+Disallow: /achievements.html
+Disallow: /tool_catalog.html
+Disallow: /coverage_heatmap.html
+Disallow: /compare_gallery.html
+Disallow: /twitter_cards.html
+Disallow: /pinterest_gallery.html
+Disallow: /upcoming_clips.html
+Disallow: /progress_chart.html
+Disallow: /morning_card_latest.png
+Disallow: /mingus_tribute.png
+Disallow: /storyboard_latest.png
+Disallow: /lore_quotes.html
+Disallow: /uploads.html
+Disallow: /content.html
+Disallow: /index_old.html
+
+# Block aggressive scrapers from heavy crawling (rate-limit, not block — they
+# can read the public site but slowly).
+User-agent: AhrefsBot
+Crawl-delay: 30
+
+User-agent: SemrushBot
+Crawl-delay: 30
+
+User-agent: MJ12bot
+Crawl-delay: 30
+
+User-agent: DotBot
+Crawl-delay: 30
+
+# LLM crawlers: allow public lore (it's meant to spread) but block private vault + admin.
+User-agent: GPTBot
+Allow: /
+Disallow: /su-vault-9x7k/
+Disallow: /su-admin/
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /su-vault-9x7k/
+Disallow: /su-admin/
+Disallow: /api/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /su-vault-9x7k/
+Disallow: /su-admin/
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /su-vault-9x7k/
+Disallow: /su-admin/
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /su-vault-9x7k/
+Disallow: /su-admin/
+
+Sitemap: https://www.scalelistuniverse.com/sitemap.xml
+
+# Scalelist Universe — public hub only; internal tooling lives in /su-vault-9x7k/
+# YWAPOS

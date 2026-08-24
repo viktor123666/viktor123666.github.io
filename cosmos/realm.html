@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Realm Map — Scalelist Cosmos</title>
+<meta name="description" content="Detailed parchment map of a Scalelist Universe realm, drawn in elven cartographer style.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --accent:#c9a84c;
+    --panel:#0a0a14;
+    --panel-border:rgba(201,168,76,0.3);
+    --text:#d4c9a8;
+    --dim:#7a7060;
+  }
+  html,body{height:100%;overflow:hidden;background:#1a130a;color:var(--text);font-family:'Cormorant Garamond','Georgia',serif;user-select:none;-webkit-user-select:none;}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:30;padding:14px 24px;display:flex;align-items:center;gap:20px;background:linear-gradient(to bottom, rgba(5,5,8,0.85), rgba(5,5,8,0));}
+  header .back{color:var(--dim);font-size:0.82rem;letter-spacing:0.14em;text-decoration:none;text-transform:uppercase;font-family:'Cinzel',serif;transition:color 0.2s;}
+  header .back:hover{color:var(--accent);}
+  header h1{font-size:1.2rem;color:var(--accent);letter-spacing:0.14em;font-weight:700;text-transform:uppercase;font-family:'Cinzel',serif;margin-left:auto;text-shadow:0 0 14px currentColor;}
+  header h1 .sub{color:var(--dim);font-size:0.7rem;letter-spacing:0.28em;font-weight:400;margin-left:10px;font-family:'Cinzel',serif;}
+
+  #stage{position:fixed;inset:0;z-index:5;overflow:hidden;cursor:grab;background:#1a130a;}
+  #stage.grabbing{cursor:grabbing;}
+  #stage svg{width:100%;height:100%;}
+
+  .ctrl-cluster{position:fixed;bottom:20px;right:24px;z-index:19;display:flex;flex-direction:column;gap:6px;}
+  .ctrl-cluster button{background:rgba(10,10,20,0.85);backdrop-filter:blur(14px);border:1px solid var(--panel-border);color:var(--accent);width:42px;height:42px;border-radius:10px;font-size:1.2rem;font-family:'Cinzel',serif;cursor:pointer;transition:all 0.2s;}
+  .ctrl-cluster button:hover{background:rgba(201,168,76,0.2);border-color:var(--accent);}
+  .help-pill{position:fixed;bottom:20px;left:24px;z-index:19;background:rgba(10,10,20,0.85);backdrop-filter:blur(14px);border:1px solid var(--panel-border);border-radius:20px;padding:8px 16px;font-size:0.76rem;color:var(--dim);letter-spacing:0.1em;}
+  .help-pill span{color:var(--accent);margin:0 4px;font-weight:700;}
+
+  .view-toggle{position:fixed;top:62px;left:50%;transform:translateX(-50%);z-index:19;background:rgba(10,10,20,0.85);backdrop-filter:blur(14px);border:1px solid var(--panel-border);border-radius:24px;padding:3px;display:flex;gap:2px;}
+  .view-toggle a{color:var(--dim);font-size:0.74rem;letter-spacing:0.18em;text-decoration:none;text-transform:uppercase;font-family:'Cinzel',serif;padding:8px 18px;border-radius:20px;transition:all 0.2s;}
+  .view-toggle a.active{background:var(--accent);color:#1a130a;font-weight:700;box-shadow:0 0 12px rgba(201,168,76,0.5);}
+  .view-toggle a:hover:not(.active){color:var(--accent);}
+  @media(max-width:800px){ .view-toggle{top:58px;} }
+
+  .info-panel{position:fixed;top:62px;left:24px;z-index:19;background:rgba(10,10,20,0.88);backdrop-filter:blur(14px);border:1px solid var(--panel-border);border-radius:10px;padding:16px 18px;max-width:290px;font-size:0.84rem;font-family:'Cormorant Garamond',serif;}
+  .info-panel h2{font-size:1rem;color:var(--accent);letter-spacing:0.14em;margin-bottom:4px;font-family:'Cinzel',serif;text-transform:uppercase;}
+  .info-panel .rs{font-size:0.72rem;color:var(--dim);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:12px;font-family:'Cinzel',serif;}
+  .info-panel p{font-size:0.88rem;line-height:1.55;color:var(--text);font-style:italic;}
+  .info-panel .stats{margin-top:12px;padding-top:12px;border-top:1px solid var(--panel-border);font-size:0.78rem;color:var(--dim);display:grid;grid-template-columns:auto 1fr;gap:4px 10px;}
+  .info-panel .stats b{color:var(--accent);font-weight:600;font-style:normal;}
+
+  #drawer{position:fixed;top:0;right:0;width:420px;max-width:92vw;height:100vh;background:rgba(10,10,20,0.95);backdrop-filter:blur(16px);border-left:1px solid var(--panel-border);z-index:50;transform:translateX(100%);transition:transform 0.4s cubic-bezier(.25,.8,.25,1);overflow-y:auto;}
+  #drawer.open{transform:translateX(0);}
+  #drawer-header{padding:24px 28px 16px;border-bottom:1px solid var(--panel-border);}
+  #drawer-header .close{float:right;cursor:pointer;color:var(--dim);font-size:1.4rem;line-height:1;}
+  #drawer-header .close:hover{color:var(--accent);}
+  #drawer-header .sub{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.22em;color:var(--dim);margin-bottom:6px;font-family:'Cinzel',serif;}
+  #drawer-header h2{font-size:1.65rem;color:var(--accent);letter-spacing:0.08em;text-shadow:0 0 12px currentColor;font-family:'Cinzel',serif;text-transform:uppercase;}
+  #drawer-body{padding:22px 28px;}
+  #drawer-body p{font-size:0.95rem;line-height:1.65;color:var(--text);margin-bottom:12px;font-family:'Cormorant Garamond',serif;}
+  #drawer-body .note{font-size:0.92rem;line-height:1.65;color:#e8dfc2;border-left:2px solid var(--accent);padding-left:14px;font-style:italic;}
+
+  @media(max-width:800px){
+    .info-panel{top:110px;left:12px;max-width:calc(100vw - 24px);}
+    #drawer{width:92vw !important;}
+  }
+
+  .splash{position:fixed;inset:0;z-index:200;background:#1a130a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity 0.6s ease;}
+  .splash.hidden{opacity:0;pointer-events:none;}
+  .splash h1{font-size:2rem;letter-spacing:0.35em;color:var(--accent);font-weight:700;font-family:'Cinzel',serif;}
+  .splash .sub{font-size:0.8rem;letter-spacing:0.35em;color:var(--dim);text-transform:uppercase;font-family:'Cinzel',serif;}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/cosmos" class="back">← COSMOS</a>
+  <h1 id="realm-name">Loading…<span class="sub" id="realm-sub"></span></h1>
+</header>
+
+<div class="view-toggle">
+  <a href="#" class="active">🗺 2D MAP</a>
+  <a href="#" id="to-globe">🌐 3D GLOBE</a>
+</div>
+
+<div id="stage"><svg id="mapsvg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid meet"></svg></div>
+
+<div class="info-panel" id="info-panel" style="display:none;">
+  <h2 id="ip-name">Realm</h2>
+  <div class="rs" id="ip-sub"></div>
+  <p id="ip-desc"></p>
+  <div class="stats">
+    <b>Ruler:</b><span id="ip-ruler">—</span>
+    <b>Tick-rate:</b><span id="ip-tick">—</span>
+    <b>Gate:</b><span id="ip-gate">—</span>
+  </div>
+</div>
+
+<div class="ctrl-cluster">
+  <button id="zin">+</button>
+  <button id="zout">−</button>
+  <button id="zreset" style="font-size:0.9rem;">⌂</button>
+</div>
+
+<div class="help-pill"><span>DRAG</span> pan · <span>SCROLL</span> zoom · <span>CLICK</span> city · <span>ESC</span> back</div>
+
+<div id="drawer">
+  <div id="drawer-header">
+    <span class="close" id="drawer-close">✕</span>
+    <div class="sub" id="d-sub">Location</div>
+    <h2 id="d-name">—</h2>
+  </div>
+  <div id="drawer-body"></div>
+</div>
+
+<div class="splash" id="splash">
+  <h1 id="splash-title">REALM</h1>
+  <div class="sub" id="splash-sub">CHARTING</div>
+</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const REALM_ID = params.get('id') || 'scalelist';
+const MAP_URL = `/cosmos/maps/${REALM_ID}.json`;
+document.getElementById('to-globe').href = `/cosmos/globe.html?id=${REALM_ID}`;
+
+const svg = document.getElementById('mapsvg');
+const stage = document.getElementById('stage');
+let MAP = null;
+let VIEW = { tx: 0, ty: 0, scale: 1 };
+
+// Default parchment palettes per realm type — "elven" cartographer tones
+const PARCHMENT_DEFAULTS = {
+  scalelist: { paper: '#ede0c1', ink: '#3a2814', accent_ink: '#8b4513', wash: '#d4b88a' },
+  helios:    { paper: '#cfdacf', ink: '#0e1810', accent_ink: '#2d5030', wash: '#aabbaa' },
+  astralis:  { paper: '#dccadc', ink: '#200a28', accent_ink: '#7a3a7a', wash: '#bba6bb' },
+  codexia:   { paper: '#d6c5d6', ink: '#240a28', accent_ink: '#6a2a6a', wash: '#b5a3b5' },
+  heartbeat: { paper: '#efe2c4', ink: '#4a2a14', accent_ink: '#8a5a28', wash: '#d8c196' },
+  trinity:   { paper: '#cdd3dc', ink: '#161628', accent_ink: '#3a4a6a', wash: '#abb1bb' },
+  thanatos:  { paper: '#c8c8d0', ink: '#2a2a30', accent_ink: '#5a5a6a', wash: '#a8a8b4' },
+  null:      { paper: '#12121a', ink: '#c9a84c', accent_ink: '#8a7030', wash: '#1e1e28' },
+  void2:     { paper: '#f4f4f6', ink: '#2a2a30', accent_ink: '#9a2a2a', wash: '#e0e0e8' },
+  echo:      { paper: '#d8cfee', ink: '#2a1d48', accent_ink: '#6a4ea0', wash: '#bfb3db' },
+  horizon:   { paper: '#f0dfba', ink: '#5a3a18', accent_ink: '#b07830', wash: '#d8c090' },
+  lumen:     { paper: '#fff5cf', ink: '#7a5a10', accent_ink: '#c9a84c', wash: '#f4e8a8' },
+};
+
+let LORE = null;
+Promise.all([
+  fetch(MAP_URL).then(r => { if(!r.ok) throw new Error('not found'); return r.json(); }),
+  fetch(`/cosmos/lore/${REALM_ID}.json`).then(r => r.ok ? r.json() : null).catch(() => null),
+]).then(([data, lore]) => {
+  MAP = data;
+  LORE = lore;
+  applyTheme(data);
+  renderMap(data);
+  renderInfoPanel(data);
+  setTimeout(() => document.getElementById('splash').classList.add('hidden'), 400);
+  setTimeout(() => document.getElementById('splash').remove(), 1200);
+}).catch(e => {
+  console.error(e);
+  document.getElementById('splash').innerHTML = `
+    <h1 style="color:#ff6b6b;">${REALM_ID.toUpperCase()}</h1>
+    <div class="sub">Not yet charted</div>
+    <p style="margin-top:18px;color:#7a7060;max-width:420px;text-align:center;line-height:1.55;font-size:0.88rem;font-family:'Cormorant Garamond',serif;font-style:italic;">
+      <a href="/cosmos" style="color:#c9a84c;">← Return to the Cosmos</a>
+    </p>`;
+});
+
+function applyTheme(data){
+  const r = document.documentElement;
+  r.style.setProperty('--accent', data.color || '#c9a84c');
+  document.getElementById('realm-name').innerHTML = `${data.name}<span class="sub">${data.subtitle||''}</span>`;
+  document.title = `${data.name} — Scalelist Cosmos`;
+  document.getElementById('splash-title').textContent = data.name;
+  document.getElementById('splash-sub').textContent = data.subtitle || '';
+  const parchment = PARCHMENT_DEFAULTS[data.id] || PARCHMENT_DEFAULTS.scalelist;
+  document.body.style.background = parchment.paper;
+  stage.style.background = parchment.paper;
+}
+
+function renderInfoPanel(d){
+  document.getElementById('info-panel').style.display = 'block';
+  document.getElementById('ip-name').textContent = d.name;
+  document.getElementById('ip-sub').textContent = d.subtitle || '';
+  document.getElementById('ip-desc').textContent = d.description || '';
+  document.getElementById('ip-ruler').textContent = d.ruler || '—';
+  document.getElementById('ip-tick').textContent = d.tick || '—';
+  document.getElementById('ip-gate').textContent = d.gate || '—';
+  if(d.life){
+    const existing = document.getElementById('ip-life-btn');
+    if(existing) existing.remove();
+    const btn = document.createElement('button');
+    btn.id = 'ip-life-btn';
+    btn.textContent = `📖 Life in ${d.name} →`;
+    btn.style.cssText = `margin-top:14px;width:100%;padding:10px 14px;background:linear-gradient(135deg, ${d.color}33, ${d.color}11);border:1px solid ${d.color};border-radius:8px;color:${d.color};font-size:0.8rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;font-family:'Cinzel',serif;`;
+    btn.onmouseover = () => { btn.style.background = `${d.color}44`; btn.style.boxShadow = `0 0 12px ${d.color}66`; };
+    btn.onmouseout = () => { btn.style.background = `linear-gradient(135deg, ${d.color}33, ${d.color}11)`; btn.style.boxShadow = 'none'; };
+    btn.onclick = () => openLifeDrawer(d);
+    document.getElementById('info-panel').appendChild(btn);
+  }
+  // Characters-of-this-realm strip (portraits)
+  if(LORE && LORE.characters && LORE.characters.length){
+    const existing = document.getElementById('ip-chars-btn');
+    if(existing) existing.remove();
+    const charsBtn = document.createElement('a');
+    charsBtn.id = 'ip-chars-btn';
+    charsBtn.href = `/cosmos/character-chat.html?realm=${d.id}`;
+    charsBtn.innerHTML = `💬 Chat with ${LORE.characters.length} characters →`;
+    charsBtn.style.cssText = `display:block;margin-top:10px;width:100%;padding:10px 14px;background:linear-gradient(135deg, ${d.color}22, ${d.color}08);border:1px solid ${d.color}88;border-radius:8px;color:${d.color};font-size:0.78rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;text-align:center;font-family:'Cinzel',serif;transition:all 0.2s;`;
+    charsBtn.onmouseover = () => { charsBtn.style.background = `${d.color}33`; };
+    charsBtn.onmouseout = () => { charsBtn.style.background = `linear-gradient(135deg, ${d.color}22, ${d.color}08)`; };
+    document.getElementById('info-panel').appendChild(charsBtn);
+  }
+}
+
+function ns(tag){ return document.createElementNS('http://www.w3.org/2000/svg', tag); }
+
+function renderMap(d){
+  svg.innerHTML = '';
+  const pal = PARCHMENT_DEFAULTS[d.id] || PARCHMENT_DEFAULTS.scalelist;
+  const INK = pal.ink, ACC = pal.accent_ink, PAPER = pal.paper, WASH = pal.wash;
+
+  /* ========= DEFS: patterns, filters, paper texture ========= */
+  const defs = ns('defs');
+  defs.innerHTML = `
+    <filter id="paperTex" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="${hash(d.id)}"/>
+      <feColorMatrix values="0 0 0 0 0.5  0 0 0 0 0.4  0 0 0 0 0.25  0 0 0 0.35 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="paperGrain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="${hash(d.id+'2')}"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.12 0"/>
+    </filter>
+    <filter id="inkBleed" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="0.4"/>
+    </filter>
+    <pattern id="landHatch" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="${ACC}" stroke-width="0.3" opacity="0.35"/>
+    </pattern>
+    <pattern id="seaHatch" x="0" y="0" width="50" height="10" patternUnits="userSpaceOnUse">
+      <path d="M 0 5 Q 12.5 1 25 5 T 50 5" stroke="${INK}" stroke-opacity="0.25" fill="none" stroke-width="0.5"/>
+    </pattern>
+    <pattern id="seaHatch2" x="0" y="5" width="70" height="14" patternUnits="userSpaceOnUse">
+      <path d="M 0 7 Q 17 2 35 7 T 70 7" stroke="${INK}" stroke-opacity="0.15" fill="none" stroke-width="0.4"/>
+    </pattern>
+    <radialGradient id="paperGlow" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="${PAPER}" stop-opacity="1"/>
+      <stop offset="80%" stop-color="${WASH}" stop-opacity="1"/>
+      <stop offset="100%" stop-color="${WASH}" stop-opacity="1"/>
+    </radialGradient>
+  `;
+  svg.appendChild(defs);
+
+  const g = ns('g');
+  g.setAttribute('id', 'viewport');
+  svg.appendChild(g);
+
+  /* ========= 1. PARCHMENT BASE + TEXTURE OVERLAY ========= */
+  const paper = ns('rect');
+  paper.setAttribute('width', '1600');
+  paper.setAttribute('height', '1000');
+  paper.setAttribute('fill', 'url(#paperGlow)');
+  g.appendChild(paper);
+
+  // Paper grain noise overlay
+  const grain = ns('rect');
+  grain.setAttribute('width', '1600');
+  grain.setAttribute('height', '1000');
+  grain.setAttribute('fill', INK);
+  grain.setAttribute('filter', 'url(#paperGrain)');
+  grain.setAttribute('opacity', '0.6');
+  g.appendChild(grain);
+
+  /* ========= 2. SEA HATCHING (on the "ocean" parts) ========= */
+  if(d.type === 'continent' || !d.type || d.type === 'pastoral' || d.type === 'mist'){
+    const sea = ns('rect');
+    sea.setAttribute('width', '1600');
+    sea.setAttribute('height', '1000');
+    sea.setAttribute('fill', 'url(#seaHatch)');
+    g.appendChild(sea);
+    const sea2 = ns('rect');
+    sea2.setAttribute('width', '1600');
+    sea2.setAttribute('height', '1000');
+    sea2.setAttribute('fill', 'url(#seaHatch2)');
+    g.appendChild(sea2);
+  }
+
+  /* ========= 3. LAND MASS (outline + hatch fill) ========= */
+  if(d.land_polygon){
+    // Outer drop-shadow-ish outline (darker slightly offset)
+    const landBg = ns('path');
+    landBg.setAttribute('d', d.land_polygon);
+    landBg.setAttribute('fill', WASH);
+    landBg.setAttribute('stroke', 'none');
+    landBg.setAttribute('transform', 'translate(3,4)');
+    landBg.setAttribute('opacity', '0.5');
+    g.appendChild(landBg);
+
+    // Main land: hatch-pattern fill + ink outline
+    const land = ns('path');
+    land.setAttribute('d', d.land_polygon);
+    land.setAttribute('fill', 'url(#landHatch)');
+    land.setAttribute('stroke', INK);
+    land.setAttribute('stroke-width', '1.8');
+    land.setAttribute('filter', 'url(#inkBleed)');
+    g.appendChild(land);
+
+    // Inner coastline (second thinner line for hand-drawn feel)
+    const inner = ns('path');
+    inner.setAttribute('d', d.land_polygon);
+    inner.setAttribute('fill', 'none');
+    inner.setAttribute('stroke', INK);
+    inner.setAttribute('stroke-width', '0.6');
+    inner.setAttribute('stroke-dasharray', '2 4');
+    inner.setAttribute('opacity', '0.45');
+    inner.setAttribute('transform', 'translate(0.8,0.8)');
+    g.appendChild(inner);
+  }
+
+  /* ========= 4. RIVERS (flowing double-line) ========= */
+  for(const r of (d.rivers || [])){
+    const bank = ns('path');
+    bank.setAttribute('d', r.path);
+    bank.setAttribute('fill', 'none');
+    bank.setAttribute('stroke', WASH);
+    bank.setAttribute('stroke-width', '4');
+    bank.setAttribute('stroke-linecap', 'round');
+    bank.setAttribute('opacity', '0.7');
+    g.appendChild(bank);
+
+    const river = ns('path');
+    river.setAttribute('d', r.path);
+    river.setAttribute('fill', 'none');
+    river.setAttribute('stroke', INK);
+    river.setAttribute('stroke-width', '1');
+    river.setAttribute('stroke-linecap', 'round');
+    river.setAttribute('opacity', '0.6');
+    river.setAttribute('filter', 'url(#inkBleed)');
+    g.appendChild(river);
+
+    if(r.name){
+      const midIdx = Math.floor((r.path.match(/[MLQT]/g)||[]).length / 2);
+      // Find a point along the path to label at. We'll just label at first M coord
+      const match = r.path.match(/M\s*([\d.-]+)\s+([\d.-]+)/);
+      if(match){
+        const lbl = ns('text');
+        lbl.setAttribute('x', parseFloat(match[1]) + 10);
+        lbl.setAttribute('y', parseFloat(match[2]) - 10);
+        lbl.setAttribute('font-family', 'Cormorant Garamond, serif');
+        lbl.setAttribute('font-style', 'italic');
+        lbl.setAttribute('font-size', '12');
+        lbl.setAttribute('fill', INK);
+        lbl.setAttribute('opacity', '0.7');
+        lbl.setAttribute('letter-spacing', '1');
+        lbl.textContent = r.name;
+        g.appendChild(lbl);
+      }
+    }
+  }
+
+  /* ========= 5. ROADS (thin serpentine dotted) ========= */
+  for(const road of (d.roads || [])){
+    const p = ns('path');
+    p.setAttribute('d', road.path);
+    p.setAttribute('fill', 'none');
+    p.setAttribute('stroke', ACC);
+    p.setAttribute('stroke-width', '1');
+    p.setAttribute('stroke-dasharray', '2 5');
+    p.setAttribute('opacity', '0.55');
+    g.appendChild(p);
+  }
+
+  /* ========= 6. FORESTS — tight clusters of detailed tree silhouettes ========= */
+  for(const f of (d.forests || [])){
+    const fg = ns('g');
+    const [cx, cy] = f.center;
+    const rseed = hash(f.name + d.id);
+    const rand = mulberry32(rseed);
+    const count = Math.max(14, Math.min(42, Math.round(f.radius * 0.5)));
+    // Collect positions first so we can sort for parallax feel (back trees smaller)
+    const trees = [];
+    for(let i = 0; i < count; i++){
+      const angle = rand() * Math.PI * 2;
+      const r = Math.sqrt(rand()) * f.radius * 0.95;
+      trees.push({
+        x: cx + Math.cos(angle) * r,
+        y: cy + Math.sin(angle) * r * 0.6,  // slight top-down squish for perspective
+        size: 9 + rand() * 5,
+        kind: rand() < 0.6 ? 'evergreen' : 'deciduous',
+      });
+    }
+    trees.sort((a, b) => a.y - b.y); // back-to-front
+    for(const t of trees){
+      fg.appendChild(detailedTree(t.x, t.y, t.size, t.kind, INK, ACC));
+    }
+    g.appendChild(fg);
+
+    if(f.name){
+      const lbl = ns('text');
+      lbl.setAttribute('x', cx);
+      lbl.setAttribute('y', cy - f.radius - 12);
+      lbl.setAttribute('text-anchor', 'middle');
+      lbl.setAttribute('font-family', 'Cinzel, serif');
+      lbl.setAttribute('font-style', 'italic');
+      lbl.setAttribute('font-size', '13');
+      lbl.setAttribute('fill', INK);
+      lbl.setAttribute('opacity', '0.75');
+      lbl.setAttribute('letter-spacing', '4');
+      lbl.setAttribute('font-weight', '600');
+      lbl.textContent = f.name.toUpperCase();
+      g.appendChild(lbl);
+    }
+  }
+
+  /* ========= 7. MOUNTAIN RANGES — cluster of jagged triangles with shading strokes ========= */
+  for(const m of (d.mountain_ranges || [])){
+    for(const [mx, my] of m.points){
+      g.appendChild(cartographerMountain(mx, my, m.size || 30, INK, ACC));
+    }
+    if(m.name && m.points.length){
+      const [lx, ly] = m.points[Math.floor(m.points.length / 2)];
+      const lbl = ns('text');
+      lbl.setAttribute('x', lx);
+      lbl.setAttribute('y', ly - 55);
+      lbl.setAttribute('text-anchor', 'middle');
+      lbl.setAttribute('font-family', 'Cinzel, serif');
+      lbl.setAttribute('font-style', 'italic');
+      lbl.setAttribute('font-size', '13');
+      lbl.setAttribute('fill', INK);
+      lbl.setAttribute('opacity', '0.75');
+      lbl.setAttribute('letter-spacing', '4');
+      lbl.setAttribute('font-weight', '600');
+      lbl.textContent = m.name.toUpperCase();
+      g.appendChild(lbl);
+    }
+  }
+
+  /* ========= 8. CUSTOM FEATURES (SVG from JSON, tinted to fit) ========= */
+  if(d.backdrop){
+    const bg = ns('g');
+    bg.setAttribute('opacity', '0.8');
+    bg.innerHTML = d.backdrop;
+    g.appendChild(bg);
+  }
+  if(d.features){
+    for(const feat of d.features){
+      const fg = ns('g');
+      fg.setAttribute('opacity', '0.9');
+      fg.innerHTML = feat.svg;
+      g.appendChild(fg);
+    }
+  }
+
+  /* ========= 8.5 CONTINENTS (continent overlay — tinted rects + italic label) ========= */
+  if(LORE && LORE.continents){
+    for(const cont of LORE.continents){
+      const p = cont.position || {x: 400, y: 400, w: 400, h: 300};
+      // Tinted hull
+      const hull = ns('rect');
+      hull.setAttribute('x', p.x);
+      hull.setAttribute('y', p.y);
+      hull.setAttribute('width', p.w);
+      hull.setAttribute('height', p.h);
+      hull.setAttribute('rx', 24);
+      hull.setAttribute('ry', 24);
+      hull.setAttribute('fill', d.color || '#c9a84c');
+      hull.setAttribute('opacity', '0.06');
+      hull.setAttribute('stroke', d.color || '#c9a84c');
+      hull.setAttribute('stroke-opacity', '0.35');
+      hull.setAttribute('stroke-width', '1.5');
+      hull.setAttribute('stroke-dasharray', '6 5');
+      g.appendChild(hull);
+      // Italic Cinzel-style label centered on continent
+      const label = ns('text');
+      label.setAttribute('x', p.x + p.w/2);
+      label.setAttribute('y', p.y + 30);
+      label.setAttribute('text-anchor', 'middle');
+      label.setAttribute('font-family', 'Cinzel, "Cormorant Garamond", serif');
+      label.setAttribute('font-style', 'italic');
+      label.setAttribute('font-size', '22');
+      label.setAttribute('fill', ACC);
+      label.setAttribute('letter-spacing', '3');
+      label.setAttribute('opacity', '0.75');
+      label.style.cursor = 'pointer';
+      label.textContent = cont.name;
+      label.addEventListener('click', () => openContinent(cont));
+      g.appendChild(label);
+    }
+  }
+
+  /* ========= 9. CITIES (ornate markers + serif italic labels) ========= */
+  for(const c of (d.cities || [])){
+    const marker = cityMarker(c, INK, ACC);
+    marker.addEventListener('click', ev => { ev.stopPropagation(); openCity(c); });
+    g.appendChild(marker);
+  }
+
+  /* ========= 10. SACRED SITES (star markers, labels italic gold) ========= */
+  for(const s of (d.sacred_sites || [])){
+    const marker = sacredMarker(s, INK, ACC, d.color || '#c9a84c');
+    marker.addEventListener('click', ev => { ev.stopPropagation(); openSacred(s); });
+    g.appendChild(marker);
+  }
+
+  /* ========= 11. COMPASS ROSE (top-right) ========= */
+  g.appendChild(compassRose(1430, 170, INK, ACC));
+
+  /* ========= 12. MAP TITLE CARTOUCHE (top-left) ========= */
+  g.appendChild(titleCartouche(110, 100, d.name, d.subtitle || '', INK, ACC, PAPER));
+
+  /* ========= 13. BORDER FRAME with corner ornaments ========= */
+  g.appendChild(borderFrame(INK, ACC));
+
+  applyViewport();
+}
+
+/* =======================================================
+   CARTOGRAPHER-STYLE RENDER HELPERS
+   ======================================================= */
+
+function detailedTree(x, y, size, kind, ink, accent){
+  const g = ns('g');
+  g.setAttribute('transform', `translate(${x} ${y})`);
+  if(kind === 'evergreen'){
+    // Pine-style triangular canopy with trunk
+    const tree = ns('path');
+    const h = size * 1.4, w = size * 0.7;
+    tree.setAttribute('d', `
+      M 0 ${h * 0.5}
+      L ${-w * 0.5} ${h * 0.18}
+      L ${-w * 0.35} ${h * 0.18}
+      L ${-w * 0.55} ${-h * 0.1}
+      L ${-w * 0.4} ${-h * 0.1}
+      L ${-w * 0.5} ${-h * 0.36}
+      L ${-w * 0.35} ${-h * 0.36}
+      L ${-w * 0.45} ${-h * 0.6}
+      L 0 ${-h}
+      L ${w * 0.45} ${-h * 0.6}
+      L ${w * 0.35} ${-h * 0.36}
+      L ${w * 0.5} ${-h * 0.36}
+      L ${w * 0.4} ${-h * 0.1}
+      L ${w * 0.55} ${-h * 0.1}
+      L ${w * 0.35} ${h * 0.18}
+      L ${w * 0.5} ${h * 0.18}
+      Z
+    `);
+    tree.setAttribute('fill', accent);
+    tree.setAttribute('stroke', ink);
+    tree.setAttribute('stroke-width', '0.7');
+    tree.setAttribute('opacity', '0.85');
+    g.appendChild(tree);
+    // Small trunk
+    const trunk = ns('rect');
+    trunk.setAttribute('x', -1);
+    trunk.setAttribute('y', size * 0.3);
+    trunk.setAttribute('width', 2);
+    trunk.setAttribute('height', size * 0.25);
+    trunk.setAttribute('fill', ink);
+    g.appendChild(trunk);
+  } else {
+    // Round canopy (deciduous)
+    const canopy = ns('circle');
+    canopy.setAttribute('cx', 0);
+    canopy.setAttribute('cy', -size * 0.55);
+    canopy.setAttribute('r', size * 0.58);
+    canopy.setAttribute('fill', accent);
+    canopy.setAttribute('stroke', ink);
+    canopy.setAttribute('stroke-width', '0.7');
+    canopy.setAttribute('opacity', '0.82');
+    g.appendChild(canopy);
+    // Shading strokes on canopy
+    for(let i = 0; i < 4; i++){
+      const line = ns('line');
+      const angle = (i - 1.5) * 0.3;
+      line.setAttribute('x1', Math.cos(angle) * size * 0.3);
+      line.setAttribute('y1', -size * 0.55 + Math.sin(angle) * size * 0.3);
+      line.setAttribute('x2', Math.cos(angle) * size * 0.5);
+      line.setAttribute('y2', -size * 0.55 + Math.sin(angle) * size * 0.5);
+      line.setAttribute('stroke', ink);
+      line.setAttribute('stroke-width', '0.4');
+      line.setAttribute('opacity', '0.5');
+      g.appendChild(line);
+    }
+    // Trunk
+    const trunk = ns('rect');
+    trunk.setAttribute('x', -1.5);
+    trunk.setAttribute('y', -size * 0.1);
+    trunk.setAttribute('width', 3);
+    trunk.setAttribute('height', size * 0.3);
+    trunk.setAttribute('fill', ink);
+    g.appendChild(trunk);
+  }
+  return g;
+}
+
+function cartographerMountain(x, y, size, ink, accent){
+  const g = ns('g');
+  g.setAttribute('transform', `translate(${x} ${y})`);
+  // Main triangle
+  const peak = ns('path');
+  peak.setAttribute('d', `M ${-size} ${size * 0.35} L ${-size * 0.3} ${-size * 0.5} L 0 ${-size * 0.95} L ${size * 0.3} ${-size * 0.5} L ${size} ${size * 0.35} Z`);
+  peak.setAttribute('fill', accent);
+  peak.setAttribute('stroke', ink);
+  peak.setAttribute('stroke-width', '1.1');
+  peak.setAttribute('opacity', '0.9');
+  peak.setAttribute('stroke-linejoin', 'round');
+  g.appendChild(peak);
+  // Shading lines (hatched slope)
+  for(let i = 0; i < 6; i++){
+    const line = ns('line');
+    const px = -size * 0.7 + i * size * 0.25;
+    line.setAttribute('x1', px);
+    line.setAttribute('y1', size * 0.2 - Math.abs(px) * 0.4);
+    line.setAttribute('x2', px + size * 0.08);
+    line.setAttribute('y2', size * 0.32);
+    line.setAttribute('stroke', ink);
+    line.setAttribute('stroke-width', '0.5');
+    line.setAttribute('opacity', '0.7');
+    g.appendChild(line);
+  }
+  // Secondary peak to the side (makes it look like a range)
+  const peakB = ns('path');
+  peakB.setAttribute('d', `M ${size * 0.4} ${size * 0.35} L ${size * 0.7} ${-size * 0.1} L ${size * 0.9} ${size * 0.1} L ${size * 1.15} ${size * 0.35} Z`);
+  peakB.setAttribute('fill', accent);
+  peakB.setAttribute('stroke', ink);
+  peakB.setAttribute('stroke-width', '0.9');
+  peakB.setAttribute('opacity', '0.8');
+  peakB.setAttribute('stroke-linejoin', 'round');
+  g.appendChild(peakB);
+  return g;
+}
+
+function cityMarker(c, ink, accent){
+  const g = ns('g');
+  g.setAttribute('transform', `translate(${c.x} ${c.y})`);
+  g.setAttribute('style', 'cursor:pointer;');
+  const tier = c.tier || 'city';
+
+  if(tier === 'capital'){
+    // Capital: ornate star-in-circle with crown on top
+    const outerR = 11;
+    const outer = ns('circle');
+    outer.setAttribute('r', outerR);
+    outer.setAttribute('fill', accent);
+    outer.setAttribute('stroke', ink);
+    outer.setAttribute('stroke-width', '1.5');
+    g.appendChild(outer);
+    const inner = ns('circle');
+    inner.setAttribute('r', outerR * 0.55);
+    inner.setAttribute('fill', ink);
+    g.appendChild(inner);
+    const star = ns('path');
+    star.setAttribute('d', 'M 0 -5 L 1.5 -1.5 L 5 -1 L 2.3 1.5 L 3.2 5 L 0 3 L -3.2 5 L -2.3 1.5 L -5 -1 L -1.5 -1.5 Z');
+    star.setAttribute('fill', '#f5ebc8');
+    g.appendChild(star);
+  } else if(tier === 'town'){
+    // Town: small filled circle
+    const c1 = ns('circle');
+    c1.setAttribute('r', 5);
+    c1.setAttribute('fill', ink);
+    c1.setAttribute('stroke', accent);
+    c1.setAttribute('stroke-width', '1.5');
+    g.appendChild(c1);
+  } else {
+    // City: circle with cross/plus mark
+    const c1 = ns('circle');
+    c1.setAttribute('r', 7.5);
+    c1.setAttribute('fill', accent);
+    c1.setAttribute('stroke', ink);
+    c1.setAttribute('stroke-width', '1.3');
+    g.appendChild(c1);
+    const ci = ns('circle');
+    ci.setAttribute('r', 2);
+    ci.setAttribute('fill', ink);
+    g.appendChild(ci);
+  }
+
+  // Label (italic serif)
+  const label = ns('text');
+  const fontSize = tier === 'capital' ? 15 : (tier === 'town' ? 11 : 13);
+  label.setAttribute('x', 0);
+  label.setAttribute('y', (tier === 'capital' ? 30 : 22));
+  label.setAttribute('text-anchor', 'middle');
+  label.setAttribute('font-family', 'Cinzel, serif');
+  label.setAttribute('font-size', fontSize);
+  label.setAttribute('font-weight', tier === 'capital' ? '700' : '600');
+  label.setAttribute('fill', ink);
+  label.setAttribute('letter-spacing', '1.2');
+  label.textContent = c.name;
+  // Label text shadow via duplicate stroke
+  const labelBg = label.cloneNode(true);
+  labelBg.setAttribute('stroke', '#fff8e0');
+  labelBg.setAttribute('stroke-width', '3');
+  labelBg.setAttribute('opacity', '0.8');
+  labelBg.setAttribute('fill', 'transparent');
+  g.appendChild(labelBg);
+  g.appendChild(label);
+  return g;
+}
+
+function sacredMarker(s, ink, accent, realmColor){
+  const g = ns('g');
+  g.setAttribute('transform', `translate(${s.x} ${s.y})`);
+  g.setAttribute('style', 'cursor:pointer;');
+  // 8-pointed star
+  const star = ns('path');
+  star.setAttribute('d', 'M 0 -11 L 2 -3 L 9 -6 L 3.5 0 L 9 6 L 2 3 L 0 11 L -2 3 L -9 6 L -3.5 0 L -9 -6 L -2 -3 Z');
+  star.setAttribute('fill', realmColor);
+  star.setAttribute('stroke', ink);
+  star.setAttribute('stroke-width', '1');
+  g.appendChild(star);
+  const center = ns('circle');
+  center.setAttribute('r', 2);
+  center.setAttribute('fill', ink);
+  g.appendChild(center);
+
+  const label = ns('text');
+  label.setAttribute('x', 0);
+  label.setAttribute('y', 25);
+  label.setAttribute('text-anchor', 'middle');
+  label.setAttribute('font-family', 'Cormorant Garamond, serif');
+  label.setAttribute('font-size', '11');
+  label.setAttribute('font-style', 'italic');
+  label.setAttribute('fill', ink);
+  label.setAttribute('letter-spacing', '1');
+  label.textContent = s.name;
+  const labelBg = label.cloneNode(true);
+  labelBg.setAttribute('stroke', '#fff8e0');
+  labelBg.setAttribute('stroke-width', '3');
+  labelBg.setAttribute('opacity', '0.75');
+  labelBg.setAttribute('fill', 'transparent');
+  g.appendChild(labelBg);
+  g.appendChild(label);
+  return g;
+}
+
+function compassRose(cx, cy, ink, accent){
+  const g = ns('g');
+  g.setAttribute('transform', `translate(${cx} ${cy})`);
+  // Outer circle
+  const outer = ns('circle');
+  outer.setAttribute('r', 55);
+  outer.setAttribute('fill', 'none');
+  outer.setAttribute('stroke', ink);
+  outer.setAttribute('stroke-width', '1.2');
+  outer.setAttribute('opacity', '0.5');
+  g.appendChild(outer);
+  // Inner circle
+  const inner = ns('circle');
+  inner.setAttribute('r', 40);
+  inner.setAttribute('fill', 'none');
+  inner.setAttribute('stroke', ink);
+  inner.setAttribute('stroke-width', '0.5');
+  inner.setAttribute('stroke-dasharray', '2 3');
+  inner.setAttribute('opacity', '0.45');
+  g.appendChild(inner);
+  // 4 cardinal points (diamond)
+  const card = ns('path');
+  card.setAttribute('d', 'M 0 -52 L 8 -8 L 52 0 L 8 8 L 0 52 L -8 8 L -52 0 L -8 -8 Z');
+  card.setAttribute('fill', accent);
+  card.setAttribute('stroke', ink);
+  card.setAttribute('stroke-width', '1');
+  card.setAttribute('opacity', '0.85');
+  g.appendChild(card);
+  // Inner diamond
+  const inn = ns('path');
+  inn.setAttribute('d', 'M 0 -22 L 5 -5 L 22 0 L 5 5 L 0 22 L -5 5 L -22 0 L -5 -5 Z');
+  inn.setAttribute('fill', ink);
+  inn.setAttribute('opacity', '0.75');
+  g.appendChild(inn);
+  // N label
+  const n = ns('text');
+  n.setAttribute('x', 0);
+  n.setAttribute('y', -42);
+  n.setAttribute('text-anchor', 'middle');
+  n.setAttribute('font-family', 'Cinzel, serif');
+  n.setAttribute('font-size', '11');
+  n.setAttribute('font-weight', '700');
+  n.setAttribute('fill', ink);
+  n.setAttribute('letter-spacing', '1.5');
+  n.textContent = 'N';
+  g.appendChild(n);
+  return g;
+}
+
+function titleCartouche(cx, cy, name, subtitle, ink, accent, paper){
+  const g = ns('g');
+  g.setAttribute('transform', `translate(${cx} ${cy})`);
+  const w = Math.max(200, name.length * 18 + 40), h = 60;
+  // Outer scroll shape
+  const outer = ns('rect');
+  outer.setAttribute('x', -w / 2);
+  outer.setAttribute('y', -h / 2);
+  outer.setAttribute('width', w);
+  outer.setAttribute('height', h);
+  outer.setAttribute('fill', paper);
+  outer.setAttribute('stroke', ink);
+  outer.setAttribute('stroke-width', '1.2');
+  outer.setAttribute('rx', '6');
+  outer.setAttribute('opacity', '0.9');
+  g.appendChild(outer);
+  // Inner frame
+  const inner = ns('rect');
+  inner.setAttribute('x', -w / 2 + 5);
+  inner.setAttribute('y', -h / 2 + 5);
+  inner.setAttribute('width', w - 10);
+  inner.setAttribute('height', h - 10);
+  inner.setAttribute('fill', 'none');
+  inner.setAttribute('stroke', accent);
+  inner.setAttribute('stroke-width', '0.6');
+  inner.setAttribute('rx', '3');
+  inner.setAttribute('opacity', '0.6');
+  g.appendChild(inner);
+  // Name
+  const nm = ns('text');
+  nm.setAttribute('x', 0);
+  nm.setAttribute('y', -4);
+  nm.setAttribute('text-anchor', 'middle');
+  nm.setAttribute('font-family', 'Cinzel, serif');
+  nm.setAttribute('font-size', '20');
+  nm.setAttribute('font-weight', '700');
+  nm.setAttribute('fill', ink);
+  nm.setAttribute('letter-spacing', '4');
+  nm.textContent = name.toUpperCase();
+  g.appendChild(nm);
+  // Subtitle
+  if(subtitle){
+    const sb = ns('text');
+    sb.setAttribute('x', 0);
+    sb.setAttribute('y', 14);
+    sb.setAttribute('text-anchor', 'middle');
+    sb.setAttribute('font-family', 'Cormorant Garamond, serif');
+    sb.setAttribute('font-size', '11');
+    sb.setAttribute('font-style', 'italic');
+    sb.setAttribute('fill', ink);
+    sb.setAttribute('opacity', '0.8');
+    sb.setAttribute('letter-spacing', '2');
+    sb.textContent = subtitle;
+    g.appendChild(sb);
+  }
+  return g;
+}
+
+function borderFrame(ink, accent){
+  const g = ns('g');
+  g.setAttribute('opacity', '0.75');
+  // Outer rectangle
+  const outer = ns('rect');
+  outer.setAttribute('x', 16);
+  outer.setAttribute('y', 16);
+  outer.setAttribute('width', 1568);
+  outer.setAttribute('height', 968);
+  outer.setAttribute('fill', 'none');
+  outer.setAttribute('stroke', ink);
+  outer.setAttribute('stroke-width', '2.2');
+  g.appendChild(outer);
+  // Inner rectangle (double line feel)
+  const inner = ns('rect');
+  inner.setAttribute('x', 28);
+  inner.setAttribute('y', 28);
+  inner.setAttribute('width', 1544);
+  inner.setAttribute('height', 944);
+  inner.setAttribute('fill', 'none');
+  inner.setAttribute('stroke', ink);
+  inner.setAttribute('stroke-width', '0.6');
+  g.appendChild(inner);
+  // 4 corner ornaments (fleur-de-lis-like)
+  for(const [cx, cy, rot] of [[22, 22, 0], [1578, 22, 90], [22, 978, 270], [1578, 978, 180]]){
+    const orn = ns('path');
+    orn.setAttribute('transform', `translate(${cx} ${cy}) rotate(${rot})`);
+    orn.setAttribute('d', 'M 0 0 L 25 0 M 0 0 L 0 25 M 0 0 L 10 10 L 18 6 M 0 0 L 10 10 L 6 18');
+    orn.setAttribute('fill', 'none');
+    orn.setAttribute('stroke', accent);
+    orn.setAttribute('stroke-width', '1.4');
+    orn.setAttribute('stroke-linecap', 'round');
+    g.appendChild(orn);
+  }
+  return g;
+}
+
+function hash(s){ let h = 0; for(let i = 0; i < s.length; i++) h = ((h << 5) - h) + s.charCodeAt(i) | 0; return h; }
+function mulberry32(a){ return function(){ let t = a += 0x6D2B79F5; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+/* =======================================================
+   DRAWER (location details + life drawer)
+   ======================================================= */
+const drawer = document.getElementById('drawer');
+const dName = document.getElementById('d-name');
+const dSub = document.getElementById('d-sub');
+const dBody = document.getElementById('drawer-body');
+
+function openCity(c){
+  dName.textContent = c.name;
+  dSub.textContent = c.tier === 'capital' ? 'Capital City' : (c.tier === 'town' ? 'Town' : 'City');
+  dBody.innerHTML = '';
+  if(c.role){ const p = document.createElement('p'); p.style.textTransform = 'uppercase'; p.style.fontSize = '0.72rem'; p.style.letterSpacing = '0.2em'; p.style.color = 'var(--accent)'; p.style.fontFamily = '"Cinzel",serif'; p.textContent = c.role; dBody.appendChild(p); }
+  if(c.note){ const n = document.createElement('div'); n.className = 'note'; n.textContent = c.note; dBody.appendChild(n); }
+  if(c.lore){ const p = document.createElement('p'); p.textContent = c.lore; dBody.appendChild(p); }
+  drawer.classList.add('open');
+}
+function openSacred(s){
+  dName.textContent = s.name;
+  dSub.textContent = 'Sacred Site';
+  dBody.innerHTML = '';
+  if(s.note){ const n = document.createElement('div'); n.className = 'note'; n.textContent = s.note; dBody.appendChild(n); }
+  if(s.lore){ const p = document.createElement('p'); p.textContent = s.lore; dBody.appendChild(p); }
+  drawer.classList.add('open');
+}
+function openContinent(cont){
+  dName.textContent = cont.name;
+  dSub.textContent = 'Continent';
+  dBody.innerHTML = '';
+  if(cont.biome){ const p = document.createElement('p'); p.style.cssText = 'text-transform:uppercase;font-size:0.72rem;letter-spacing:0.2em;color:var(--accent);font-family:"Cinzel",serif;'; p.textContent = cont.biome; dBody.appendChild(p); }
+  if(cont.blurb){ const n = document.createElement('div'); n.className = 'note'; n.textContent = cont.blurb; dBody.appendChild(n); }
+  if(cont.places && cont.places.length){
+    const h = document.createElement('h3');
+    h.textContent = 'Notable Places';
+    h.style.cssText = 'font-size:0.76rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--accent);margin:18px 0 8px;border-bottom:1px solid rgba(201,168,76,0.15);padding-bottom:5px;font-family:"Cinzel",serif;';
+    dBody.appendChild(h);
+    for(const place of cont.places){
+      const div = document.createElement('div');
+      div.style.cssText = 'margin:8px 0;padding:8px 10px;background:rgba(139,94,60,0.08);border-left:2px solid var(--accent);border-radius:4px;';
+      div.innerHTML = `<b style="color:var(--ink);">${place.name}</b><div style="font-size:0.82rem;color:var(--ink-soft);margin-top:3px;line-height:1.5;">${place.blurb||''}</div>`;
+      dBody.appendChild(div);
+    }
+  }
+  // Linked tribes on this continent (if LORE has them)
+  if(LORE && LORE.tribes){
+    const tribes = LORE.tribes.filter(t => t.continent_id === cont.id);
+    if(tribes.length){
+      const h = document.createElement('h3');
+      h.textContent = 'Tribes of this Continent';
+      h.style.cssText = 'font-size:0.76rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--accent);margin:18px 0 8px;border-bottom:1px solid rgba(201,168,76,0.15);padding-bottom:5px;font-family:"Cinzel",serif;';
+      dBody.appendChild(h);
+      for(const t of tribes){
+        const div = document.createElement('div');
+        div.style.cssText = 'margin:8px 0;padding:8px 10px;background:rgba(139,94,60,0.08);border-left:2px solid var(--accent);border-radius:4px;';
+        div.innerHTML = `<b style="color:var(--ink);">${t.name}</b><div style="font-size:0.78rem;color:var(--ink-soft);margin-top:4px;line-height:1.5;"><i>${t.look||''}</i></div>`;
+        dBody.appendChild(div);
+      }
+    }
+  }
+  drawer.classList.add('open');
+}
+function openLifeDrawer(d){
+  const life = d.life;
+  if(!life) return;
+  dName.textContent = `Life in ${d.name}`;
+  dSub.textContent = d.subtitle || '';
+  dBody.innerHTML = '';
+  const section = (title, body) => {
+    const h = document.createElement('h3');
+    h.textContent = title;
+    h.style.cssText = `font-size:0.76rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--accent);margin:18px 0 8px;border-bottom:1px solid rgba(201,168,76,0.15);padding-bottom:5px;font-family:'Cinzel',serif;`;
+    dBody.appendChild(h);
+    if(typeof body === 'string'){ const p = document.createElement('p'); p.textContent = body; dBody.appendChild(p); }
+    else dBody.appendChild(body);
+  };
+  if(life.phenomenon){ const n = document.createElement('div'); n.className = 'note'; n.style.fontStyle = 'italic'; n.textContent = life.phenomenon; dBody.appendChild(n); }
+  if(life.inhabitants) section('Inhabitants', life.inhabitants);
+  if(life.fauna?.length){ const list = document.createElement('div'); for(const f of life.fauna){ const el = document.createElement('div'); el.style.cssText = 'padding:10px 0;border-bottom:1px solid rgba(201,168,76,0.08);'; el.innerHTML = `<div style="font-weight:700;color:#fff;font-size:0.95rem;font-family:Cinzel,serif;">${f.name}</div><div style="font-size:0.88rem;color:var(--text);margin-top:4px;line-height:1.55;font-style:italic;">${f.note}</div>`; list.appendChild(el); } section('Fauna', list); }
+  if(life.flora?.length){ const list = document.createElement('div'); for(const f of life.flora){ const el = document.createElement('div'); el.style.cssText = 'padding:10px 0;border-bottom:1px solid rgba(201,168,76,0.08);'; el.innerHTML = `<div style="font-weight:700;color:#fff;font-size:0.95rem;font-family:Cinzel,serif;">${f.name}</div><div style="font-size:0.88rem;color:var(--text);margin-top:4px;line-height:1.55;font-style:italic;">${f.note}</div>`; list.appendChild(el); } section('Flora', list); }
+  if(life.architecture) section('Architecture', life.architecture);
+  if(life.culture) section('Culture', life.culture);
+  if(life.signature_item) section('Signature Item', life.signature_item);
+  if(life.sensory){ const list = document.createElement('div'); for(const [k, v] of Object.entries(life.sensory)){ const el = document.createElement('div'); el.style.padding = '8px 0'; el.innerHTML = `<div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--dim);margin-bottom:3px;font-family:'Cinzel',serif;">${k}</div><div style="font-size:0.9rem;line-height:1.55;color:var(--text);font-style:italic;">${v}</div>`; list.appendChild(el); } section('Sensory', list); }
+  drawer.classList.add('open');
+}
+
+document.getElementById('drawer-close').addEventListener('click', () => drawer.classList.remove('open'));
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){
+    if(drawer.classList.contains('open')) drawer.classList.remove('open');
+    else location.href = '/cosmos';
+  }
+});
+
+/* ============ PAN / ZOOM ============ */
+function applyViewport(){
+  const g = document.getElementById('viewport');
+  if(g) g.setAttribute('transform', `translate(${VIEW.tx} ${VIEW.ty}) scale(${VIEW.scale})`);
+}
+let isDown = false, lastX, lastY;
+stage.addEventListener('mousedown', e => { isDown = true; lastX = e.clientX; lastY = e.clientY; stage.classList.add('grabbing'); });
+document.addEventListener('mousemove', e => {
+  if(!isDown) return;
+  const dx = e.clientX - lastX, dy = e.clientY - lastY;
+  lastX = e.clientX; lastY = e.clientY;
+  const rect = svg.getBoundingClientRect();
+  VIEW.tx += (dx / rect.width) * 1600 / VIEW.scale;
+  VIEW.ty += (dy / rect.height) * 1000 / VIEW.scale;
+  applyViewport();
+});
+document.addEventListener('mouseup', () => { isDown = false; stage.classList.remove('grabbing'); });
+stage.addEventListener('wheel', e => {
+  e.preventDefault();
+  const f = e.deltaY > 0 ? 0.88 : 1.13;
+  VIEW.scale = Math.max(0.4, Math.min(4, VIEW.scale * f));
+  applyViewport();
+}, { passive: false });
+let touchDist = 0;
+stage.addEventListener('touchstart', e => {
+  if(e.touches.length === 1){ isDown = true; lastX = e.touches[0].clientX; lastY = e.touches[0].clientY; }
+  else if(e.touches.length === 2) touchDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+}, { passive: true });
+stage.addEventListener('touchmove', e => {
+  if(e.touches.length === 1 && isDown){
+    const dx = e.touches[0].clientX - lastX, dy = e.touches[0].clientY - lastY;
+    lastX = e.touches[0].clientX; lastY = e.touches[0].clientY;
+    const rect = svg.getBoundingClientRect();
+    VIEW.tx += (dx / rect.width) * 1600 / VIEW.scale;
+    VIEW.ty += (dy / rect.height) * 1000 / VIEW.scale;
+    applyViewport();
+  } else if(e.touches.length === 2){
+    const newDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    if(touchDist){ VIEW.scale = Math.max(0.4, Math.min(4, VIEW.scale * (newDist / touchDist))); applyViewport(); }
+    touchDist = newDist;
+  }
+}, { passive: true });
+stage.addEventListener('touchend', () => { isDown = false; touchDist = 0; });
+
+document.getElementById('zin').addEventListener('click', () => { VIEW.scale = Math.min(4, VIEW.scale * 1.2); applyViewport(); });
+document.getElementById('zout').addEventListener('click', () => { VIEW.scale = Math.max(0.4, VIEW.scale * 0.83); applyViewport(); });
+document.getElementById('zreset').addEventListener('click', () => { VIEW = { tx: 0, ty: 0, scale: 1 }; applyViewport(); });
+addEventListener('resize', () => applyViewport());
+</script>
+</body>
+</html>

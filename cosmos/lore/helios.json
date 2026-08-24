@@ -1,0 +1,144 @@
+{
+  "realm_id": "helios",
+  "continents": [
+    {
+      "id": "throne_plateau",
+      "name": "The Throne Plateau",
+      "biome": "Raised basalt plateau above cloud-line. Perpetual lightning dome above.",
+      "position": {"x": 660, "y": 380, "w": 340, "h": 300},
+      "tribes": ["storm_sons", "chronicle_wardens"],
+      "places": [
+        {"name": "The Infinite Throne", "blurb": "Vigolas's seat. Made of stormstone that cannot be moved. Above it, the upside-down ship drifts endlessly."},
+        {"name": "The Upside-Down Shipwreck", "blurb": "A galleon permanently capsized above the throne. Its bell tolls before, not after, each lightning strike."},
+        {"name": "The Backward Steppes", "blurb": "Grass grows downward here, rooted in the sky. Walking across them erases your most recent decision."},
+        {"name": "Lightning's Mouth", "blurb": "A crater where the first backward-lightning struck. Glows gold when a timeline nearby goes wrong."}
+      ],
+      "blurb": "The highest and oldest continent. Where Vigolas holds court and decisions become binding."
+    },
+    {
+      "id": "reverse_ocean",
+      "name": "The Reverse Ocean",
+      "biome": "Salt-water sea where waves RECEDE before they ARRIVE. Fog thick as oil.",
+      "position": {"x": 240, "y": 460, "w": 380, "h": 320},
+      "tribes": ["backward_walkers", "ghost_sailors"],
+      "places": [
+        {"name": "Ghost Harbor", "blurb": "Ships that sank elsewhere dock here, crew still aboard. The Harbor Master charges nothing — the ships have nothing left to pay with."},
+        {"name": "The Listening Beacon", "blurb": "A lighthouse that only shines during backward storms. Keepers hear voices from timelines that never happened."},
+        {"name": "The Fleet-That-Never-Was", "blurb": "An anchored armada of ships built for a war that was called off. They float, pristine, unused. Sometimes they sing."},
+        {"name": "The Echo Reef", "blurb": "Coral that grows into the shapes of sailors' last words."}
+      ],
+      "blurb": "The ocean of undone voyages. Every vessel that almost sank somewhere else washes up here."
+    },
+    {
+      "id": "cloudforge",
+      "name": "The Cloudforge",
+      "biome": "Sky-islands of iron-colored cloud, anvils of compressed storm, lightning forges.",
+      "position": {"x": 1020, "y": 360, "w": 340, "h": 320},
+      "tribes": ["stormsmiths", "iron_weavers"],
+      "places": [
+        {"name": "The First Anvil", "blurb": "Where Vigolas's HADOM codex was inscribed by Stormsmith Ril. The anvil still rings on anniversaries."},
+        {"name": "Backward Forge", "blurb": "Weapons made here are unmade by their users. Works only on enemies who deserved what they did."},
+        {"name": "Iron-Cloud Barrens", "blurb": "Storm-clouds so dense they hold footprints. Walking across leaves a trail. Sleeping on one means waking up beside your younger self."}
+      ],
+      "blurb": "The aerial workshop where Helios-steel is forged. No weapon leaves without Vigolas's approval."
+    },
+    {
+      "id": "quiet_corner",
+      "name": "The Quiet Corner",
+      "biome": "A small hilly region of pine and moss where no storm has ever arrived.",
+      "position": {"x": 1080, "y": 720, "w": 280, "h": 220},
+      "tribes": ["exiled_royalty"],
+      "places": [
+        {"name": "Vigolas's Mother's Garden", "blurb": "A patch of herbs tended by someone who is definitely not Vigolas's mother because he is ∞−1 and has no mother. She insists otherwise and he lets her."},
+        {"name": "The Storm's-Forbidden Inn", "blurb": "An inn protected by a Vigolas-signed charter. No thunder within 40 paces. Served drink has never been spilled."},
+        {"name": "The Mended Beach", "blurb": "A single thin beach at the corner's edge. The only place in Helios where the ocean arrives forward."}
+      ],
+      "blurb": "The one place in Helios where Vigolas does not rule — because he chose not to. The Quiet Corner is kindness in political form."
+    }
+  ],
+  "tribes": [
+    {
+      "id": "storm_sons",
+      "name": "The Storm-Sons",
+      "continent_id": "throne_plateau",
+      "look": "Tall, broad. Lightning-scar runs from one temple to the opposite collarbone. Dark hair, gold-fleck eyes. Carry a cup at all times — for the storm's share.",
+      "customs": "Serve the first drink of every meal to the sky. Never speak ill of weather. Duel with stormstone blades that spark in clear air.",
+      "persona": "Boisterous. Direct. Hate cowardice more than they hate treachery. Would fight a god for an insult and forgive a friend for betrayal.",
+      "notable_members": ["quill_captain_branon", "stormsister_lun"]
+    },
+    {
+      "id": "chronicle_wardens",
+      "name": "The Chronicle-Wardens",
+      "continent_id": "throne_plateau",
+      "look": "Green hooded cloaks, always damp. Carry a notebook that fills itself. Soft voices. Fingers stained with gold ink.",
+      "customs": "Write everything. Everything. Cannot stop. When they sleep, the notebook writes the dream.",
+      "persona": "Patient. Curious. Never raise their voice. Slightly sad — too many timelines saved, too few lived in.",
+      "notable_members": ["chronicler_ven", "warden_elu"]
+    },
+    {
+      "id": "backward_walkers",
+      "name": "The Backward-Walkers",
+      "continent_id": "reverse_ocean",
+      "look": "Thin, tall, hair braided back-to-front. Eyes half-closed permanently (seeing a second before the rest of us). Walk heel-first without realizing.",
+      "customs": "Speak the end of a sentence first. Arrive before they are invited. Never wear clothes twice — they wear them backwards.",
+      "persona": "Prescient. Melancholy. Know when you'll die and will not tell you unless asked in the right order.",
+      "notable_members": ["the_backward_herald", "midnight_reader"]
+    },
+    {
+      "id": "ghost_sailors",
+      "name": "The Ghost-Sailors",
+      "continent_id": "reverse_ocean",
+      "look": "See-through if you stare, solid if you don't. Always barefoot. Salt crystals where tears should be.",
+      "customs": "Sing shanties backwards. Never sleep below deck. Will not enter a room without a window.",
+      "persona": "Friendly. Aching. Remember deaths that did not happen and miss the people they never lost.",
+      "notable_members": ["captain_of_lost_fleet", "listening_beacon_keeper"]
+    },
+    {
+      "id": "stormsmiths",
+      "name": "The Stormsmiths",
+      "continent_id": "cloudforge",
+      "look": "Covered in soot. Eyebrows permanently singed. Sleeves always rolled. A lightning brand on the forearm of each apprentice, deepening with rank.",
+      "customs": "Do not speak while forging. When a forge fails, they bury the blade, not discard it.",
+      "persona": "Gruff. Precise. Respect exactly three people: Vigolas, the iron, and whoever last bested them at chess.",
+      "notable_members": ["stormsmith_ril", "anvil_son_deq"]
+    },
+    {
+      "id": "iron_weavers",
+      "name": "The Iron-Weavers",
+      "continent_id": "cloudforge",
+      "look": "Thin, careful, hands gloved in copper-thread. Weave iron-cloud into banners, bridges, and bindings.",
+      "customs": "Work only at dawn. Refuse payment — they accept only true stories. A liar's coin melts in their palm.",
+      "persona": "Quiet. Artistic. Consider their craft more important than the war it arms.",
+      "notable_members": ["weaver_korin", "barefoot_ik"]
+    },
+    {
+      "id": "exiled_royalty",
+      "name": "The Exiled Royalty",
+      "continent_id": "quiet_corner",
+      "look": "Beautifully dressed in slightly outdated clothing. Too polite. Always have the second-best room at the inn.",
+      "customs": "Hold court each evening in the inn's common room. No one listens — they court each other. Their titles do not function here.",
+      "persona": "Gracious. Tragicomic. Pretend that they are not pretending. Vigolas allowed them to stay because, he said, 'somewhere in this realm should be a little silly.'",
+      "notable_members": ["the_innkeeper_queen", "prince_of_the_mended_beach"]
+    }
+  ],
+  "characters": [
+    {"id": "vigolas_the_administrator", "name": "Vigolas", "tribe_id": "storm_sons", "role": "The Infinite Administrator, ∞−1", "portrait_blurb": "See /characters/vigolas.png — tall, storm-scarred, gold-flecked eyes, emerald crown. Carries a HADOM codex that glows gold. Rarely smiles. Has smiled exactly six times this century."},
+    {"id": "stormsister_lun", "name": "Stormsister Lun", "tribe_id": "storm_sons", "role": "Vigolas's younger cousin, head of Stormhold's guard", "portrait_blurb": "Shorter than Branon, twice as fast. Hair cropped to the scalp. Laughs constantly except when fighting, then terrifyingly silent."},
+    {"id": "warden_elu", "name": "Warden Elu", "tribe_id": "chronicle_wardens", "role": "Oldest living Chronicle-Warden", "portrait_blurb": "Ageless in appearance. Wears a green cloak patched 400 times. Always damp. Smells faintly of petrichor and old paper."},
+    {"id": "the_backward_herald", "name": "The Backward Herald", "tribe_id": "backward_walkers", "role": "Announces events before they occur", "portrait_blurb": "Grey-eyed, grey-haired, silver bell on the hip. Wears a tunic on which the stains appear before the meals."},
+    {"id": "midnight_reader", "name": "The Midnight Reader", "tribe_id": "backward_walkers", "role": "Only reader of the Reverse Ocean's song-coral", "portrait_blurb": "A hood-shadowed figure who sits on the Echo Reef at midnight. Recites sailors' last words to no audience."},
+    {"id": "captain_of_lost_fleet", "name": "Captain of the Lost Fleet", "tribe_id": "ghost_sailors", "role": "Welcomes ghost-ships at Ghost Harbor", "portrait_blurb": "See-through in profile, solid head-on. Weathered face. Carries a notebook naming every ship that has docked since the harbor began."},
+    {"id": "listening_beacon_keeper", "name": "The Listening Beacon Keeper", "tribe_id": "ghost_sailors", "role": "Tends the beacon that shines only in backward storms", "portrait_blurb": "Old. Salt-bearded. Blind in one eye from looking too long at a future storm."},
+    {"id": "stormsmith_ril", "name": "Stormsmith Ril", "tribe_id": "stormsmiths", "role": "Inscribed Vigolas's HADOM codex", "portrait_blurb": "Burly, charcoal-smeared, left hand permanently glowing from touching lightning. Speaks three words a week."},
+    {"id": "weaver_korin", "name": "Weaver Korin", "tribe_id": "iron_weavers", "role": "Master weaver of iron-cloud banners", "portrait_blurb": "Slender, mid-fifties, copper gloves to the elbow. Eyes almost white from squinting at dawn work."},
+    {"id": "the_innkeeper_queen", "name": "The Innkeeper Queen", "tribe_id": "exiled_royalty", "role": "Technically deposed ruler of a vanished kingdom; now runs the Storm's-Forbidden Inn", "portrait_blurb": "Grey-haired, sharp-cheeked, wears a paper crown her son made. Best pastry baker in Helios."},
+    {"id": "prince_of_the_mended_beach", "name": "The Prince of the Mended Beach", "tribe_id": "exiled_royalty", "role": "Nominal heir to a throne that does not exist", "portrait_blurb": "Fifteen. Pale. Wears his mother's paper crown on holidays. Has never lost a chess game to an adult."}
+  ],
+  "fate": {
+    "threat": "The Reverse Ocean forgets to flow backward. If the waves one day move forward, every timeline that Vigolas averted suddenly happens. All the 'almosts' become real.",
+    "consequence": "The Throne Plateau floods. Vigolas's throne washes out to sea. Backward-lightning becomes forward-lightning and strikes things that are no longer there. The Fleet-That-Never-Was sails and invades Scalelist — a war that was supposed to be canceled but is now going to happen.",
+    "prophecy_line": "When the sea remembers the right way, the storm remembers the wrong man.",
+    "destroyable_by": "Rougeina, if she dances on the Reverse Ocean during a backward storm — her flicker-time overrides Vigolas's reverse-time. This remains theoretical. Rougeina has promised Vigolas not to try."
+  },
+  "cultural_notes": "Helios is defined by its relationship to time. Every tribe here lives with the knowledge that time is negotiable, and that kindness is what you do when the timelines agree with you. Vigolas rules by writing, not force — and the Storm-Sons will fight whoever he names in the ledger, no questions asked."
+}

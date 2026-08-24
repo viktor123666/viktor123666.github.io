@@ -1,0 +1,190 @@
+{
+  "realm_id": "scalelist",
+  "continents": [
+    {
+      "id": "ledger_heartland",
+      "name": "The Ledger Heartland",
+      "biome": "Temperate plains, amber fields, slate-roofed cities",
+      "position": {"x": 620, "y": 420, "w": 380, "h": 240},
+      "tribes": ["ledgerkeepers", "architects_kin"],
+      "places": [
+        {"name": "Ferdinand's Trunk-Shadow", "blurb": "A patch of eternal noon beneath the cosmic tree's projected image. Never rains."},
+        {"name": "Twelve-Cities Road", "blurb": "Cobbled road linking all 12 cities. Takes exactly 12 days on foot. The 12th day always ends on a Tuesday."},
+        {"name": "The Scribe's Vineyard", "blurb": "Grapes grow into the shape of tiny quills. The wine is called Ink-Red and stains fingers for three days."},
+        {"name": "Old Halla's Well", "blurb": "Only the last person to remember K-XII's face may drink from it. Currently sealed."}
+      ],
+      "blurb": "The central steppe where The Architects' Ledger sits. Agriculture, scribes, and the quiet bureaucracy that keeps the universe running."
+    },
+    {
+      "id": "stormcoast",
+      "name": "The Stormcoast",
+      "biome": "Rocky cliffs, perpetual lightning-fog, pine forests",
+      "position": {"x": 1120, "y": 340, "w": 320, "h": 340},
+      "tribes": ["storm_marked", "mastless_captains"],
+      "places": [
+        {"name": "Stormhold Tower", "blurb": "Vigolas's citadel. Lightning strikes its peak 142 times per second."},
+        {"name": "The Ship That Was", "blurb": "A wooden ship half-embedded in a cliffside. No one remembers when it ran aground. It corrects passing ships' bearings by some invisible mechanism."},
+        {"name": "Thunder Archive", "blurb": "Every lightning strike on Stormcoast is catalogued here by Chronicler Ven. The oldest entry predates writing."},
+        {"name": "The Backward Beach", "blurb": "Waves here recede before they arrive. Beachcombers find things before they're lost."}
+      ],
+      "blurb": "Vigolas's ancestral homeland. A rugged eastern coast where the Helios Storm Gate thins and lightning leaks through."
+    },
+    {
+      "id": "lake_country",
+      "name": "The Lake Country",
+      "biome": "Forested lowlands, mirror lakes, cabin-dotted valleys",
+      "position": {"x": 560, "y": 720, "w": 340, "h": 240},
+      "tribes": ["lake_folk", "mingus_witnesses"],
+      "places": [
+        {"name": "Buddy's Rest", "blurb": "One cabin. One lake. Population 2 — Kompis and Mingus. SACRED ground."},
+        {"name": "The Lemon Grove", "blurb": "Kompis's picnic spot. The only place in the universe where Mingus once laid down, and the universe cracked slightly from the peace."},
+        {"name": "Mirror-Lake Twelve", "blurb": "A lake that reflects not your face but the face you will have in twelve years. The Lake Folk refuse to look."},
+        {"name": "The Quiet Dock", "blurb": "A wooden pier where the Lake Itself has, on record, spoken three words in 10,000 years. One of them was 'Mingus'."}
+      ],
+      "blurb": "The peaceful south. Fishermen, retired soldiers, and anyone who needs somewhere that refuses to be interesting."
+    },
+    {
+      "id": "dancing_desert",
+      "name": "The Dancing Desert",
+      "biome": "Red sand, bone-carved canyons, star-glass mesas",
+      "position": {"x": 280, "y": 420, "w": 300, "h": 260},
+      "tribes": ["flicker_nomads", "neon_veil_weavers"],
+      "places": [
+        {"name": "Neon Veil City", "blurb": "Rougeina's rave-city. A sky of direct-view stars from Astralis. Never closes."},
+        {"name": "The Star-Glass Mesas", "blurb": "Flat-topped mountains where sand fuses into star-glass under cosmic pressure. Walking shoeless cuts your feet into a poem."},
+        {"name": "The Bone Canyons", "blurb": "Canyon walls ring like bells when struck. Flicker-Nomads sing into them to make their ancestors dance."},
+        {"name": "The Veiled Well", "blurb": "A desert well where a thin fabric of starlight can be drawn up by bucket. Worth a life in Neon Veil."}
+      ],
+      "blurb": "The west. Home of dancers, nomads, and those who traded their gravity for a better view of the stars."
+    },
+    {
+      "id": "voids_edge_peninsula",
+      "name": "The Void's Edge Peninsula",
+      "biome": "Black sand, white fissures, no shadow at noon",
+      "position": {"x": 900, "y": 760, "w": 320, "h": 220},
+      "tribes": ["three_step_walkers", "fissure_wardens"],
+      "places": [
+        {"name": "Void's Edge City", "blurb": "Built on the lip of a Null fissure. Every citizen walks in threes (Bali-pattern, Kali-pattern, Fused-pattern)."},
+        {"name": "The Root Crack", "blurb": "The fissure itself. Entry to Null. Anyone who enters first is lost. Anyone who enters second arrives."},
+        {"name": "Kali's Burn", "blurb": "A volcano that is an extension of Smurjan's fire-voice into the material plane. It erupts once per century, always on the anniversary of Kali's divine fall."},
+        {"name": "The Three-Lane Path", "blurb": "A footpath painted with three parallel lines. Walkers must alternate lanes every third step or lose their shadow."}
+      ],
+      "blurb": "The southeast peninsula. Where Scalelist thins enough for the void to leak through. Citizens live by threes because the ground agrees with them."
+    }
+  ],
+  "tribes": [
+    {
+      "id": "ledgerkeepers",
+      "name": "The Ledgerkeepers",
+      "continent_id": "ledger_heartland",
+      "look": "Cork-pale skin, linen robes with ink-stained cuffs. Eyes always slightly unfocused from reading back-to-front. Left hand always writing even when nothing is held.",
+      "customs": "Speak only after a one-heartbeat pause — the pause is to check the ledger in their mind. Wed by signature, not ceremony. Apprentices swear silence for their first seven years.",
+      "persona": "Patient. Unreadable. Kind in small, documented ways. Will remember your name forever, whether you want it remembered or not.",
+      "notable_members": ["keeper_maren", "ferrin_pencilwright", "old_halla"]
+    },
+    {
+      "id": "architects_kin",
+      "name": "The Architects' Kin",
+      "continent_id": "ledger_heartland",
+      "look": "Tall. Grey-blonde braids. Wear a single gold-thread band around their throat — marker of distant Architect ancestry. One eye often a different color.",
+      "customs": "Never name their children. A name is a cost — the child chooses their own at age twelve. Between birth and naming, they are called 'the walker.'",
+      "persona": "Formal. Reserved. Deeply loyal to the Ledger. Known to stop mid-sentence if they suspect an Architect is listening.",
+      "notable_members": ["the_retreat_gardener", "nameless_walker_of_house_fen"]
+    },
+    {
+      "id": "storm_marked",
+      "name": "The Storm-Marked",
+      "continent_id": "stormcoast",
+      "look": "Lightning-scar birthmarks branching across face, shoulder, or sternum. Coarse dark hair. Thunder-colored eyes (deep grey with a gold fleck).",
+      "customs": "Never sleep during a storm — it is considered cowardice. Buried standing up, weapon drawn. Drink only during lightning.",
+      "persona": "Proud. Loud. Loyal to Vigolas to death and then some. Tell the truth violently.",
+      "notable_members": ["quill_captain_branon", "chronicler_ven", "the_unnamed_regent"]
+    },
+    {
+      "id": "mastless_captains",
+      "name": "The Mastless Captains",
+      "continent_id": "stormcoast",
+      "look": "Old sailors from timelines that never quite happened. Weathered, barefoot, salt in every wrinkle. Each carries a scar that will be earned in a future they now cannot reach.",
+      "customs": "Do not speak of shipwrecks — their own or anyone else's. Drink rum upside-down from shells. Sing only in reverse.",
+      "persona": "Melancholic. Competent. Welcoming to strangers, cagey with family. They have already lost too much in places that never were.",
+      "notable_members": ["captain_of_lost_fleet", "listening_beacon_keeper"]
+    },
+    {
+      "id": "lake_folk",
+      "name": "The Lake Folk",
+      "continent_id": "lake_country",
+      "look": "Small, sun-tanned, barefoot year-round. Dark braids woven with duckweed on holidays. Usually smiling. Always holding something — a fish, a stick, a friend.",
+      "customs": "Do not raise their voice even in danger. Give every visitor exactly one item from their home — a cup, a whittled spoon, a pressed flower. Refuse nothing offered. Never ask where the gift came from.",
+      "persona": "Gentle. Observant. Astonishingly hard to anger and terrible to finally anger. Love their dogs more than their gods.",
+      "notable_members": ["kompis_himself", "old_lake_miri", "the_quiet_dockmaster"]
+    },
+    {
+      "id": "mingus_witnesses",
+      "name": "The Mingus-Witnesses",
+      "continent_id": "lake_country",
+      "look": "Wear a single golden retriever hair somewhere on their person. A ring. A locket. Woven into a hem. They are easy to pick out — they look at dogs the way most people look at sunsets.",
+      "customs": "Kneel briefly when a dog passes, no matter whose. Will not eat until any visiting dog has eaten. Keep one dawn of every year silent in honor.",
+      "persona": "Tender. Unbreakable. Cry at small kindnesses. Would stop a war to let a dog finish eating.",
+      "notable_members": ["first_witness_elan", "keeper_of_mingus_hair"]
+    },
+    {
+      "id": "flicker_nomads",
+      "name": "The Flicker-Nomads",
+      "continent_id": "dancing_desert",
+      "look": "Six-limbed on festival days (extra pair of arms is a starlight glamour). Barefoot. Tattoos of constellations that move across the skin as they dance.",
+      "customs": "Sleep only when the stars are hidden. Never miss a dance. Bury their dead by dancing over the grave until the ground accepts it.",
+      "persona": "Euphoric. Exhausting. Honest. Will laugh in the middle of a knife fight and somehow survive.",
+      "notable_members": ["dj_chroma", "the_flicker_girl", "lume_ambassador"]
+    },
+    {
+      "id": "neon_veil_weavers",
+      "name": "The Neon Veil Weavers",
+      "continent_id": "dancing_desert",
+      "look": "Pale, because they never sleep outside during the day. Hair dyed in shifting neon (pigment harvested from Astralis moths). Fingers always slightly luminous.",
+      "customs": "Never sell a veil to someone they don't know. Their weaves are both fabric and contract — wear one and you are in debt to the maker for one favor.",
+      "persona": "Coolly charismatic. Small-talkers of genius caliber. Intensely professional about their craft.",
+      "notable_members": ["merchant_fen_dros", "pill_maker_vex", "the_veil_doorman"]
+    },
+    {
+      "id": "three_step_walkers",
+      "name": "The Three-Step Walkers",
+      "continent_id": "voids_edge_peninsula",
+      "look": "Three braids in their hair, one dyed black (Bali), one red (Kali), one white (Fused). Walk in a specific gait — left, right, center, repeat.",
+      "customs": "Never take two steps of the same kind in a row. Vote on every decision, even small ones, among three household members — the third vote always goes to the eldest child, whose word is final.",
+      "persona": "Cautious. Philosophical. Easy to share a drink with if you understand the rhythm; terrifying to ambush.",
+      "notable_members": ["warden_aske", "the_thirdling", "fissure_keeper_orla"]
+    },
+    {
+      "id": "fissure_wardens",
+      "name": "The Fissure-Wardens",
+      "continent_id": "voids_edge_peninsula",
+      "look": "Always masked below the eyes. Face-ink in spiral patterns. Carry a bell around the waist that rings if the fissure widens.",
+      "customs": "Do not sleep in the same bed twice. Do not close their eyes near the crack. One-handed (right hand — the other is gloved with lead-silk to stop the crack calling).",
+      "persona": "Stoic. Underrated. They have held the crack closed for 400 years. Exhausted but will not be relieved — the crack only recognizes them.",
+      "notable_members": ["fissure_keeper_orla", "warden_second_watch"]
+    }
+  ],
+  "characters": [
+    {"id": "keeper_maren", "name": "Keeper Maren", "tribe_id": "ledgerkeepers", "role": "Junior ledger librarian", "portrait_blurb": "28, chestnut braid, ink-stained left cuff, permanent half-smile."},
+    {"id": "ferrin_pencilwright", "name": "Ferrin the Pencilwright", "tribe_id": "ledgerkeepers", "role": "Maker of the Ledger quills (never writes)", "portrait_blurb": "Short, bald, extraordinarily steady hands, wears a leather apron with 48 tool-pockets."},
+    {"id": "old_halla", "name": "Old Halla", "tribe_id": "ledgerkeepers", "role": "Last human who remembers K-XII's face", "portrait_blurb": "Ninety-something. White braid down to her waist. Blind in the right eye since the unwriting. Pays the silence-tax yearly and tips the tax-collector."},
+    {"id": "the_retreat_gardener", "name": "The Retreat's Gardener", "tribe_id": "architects_kin", "role": "Tends flowers that may or may not exist", "portrait_blurb": "Stooped, white-braided, always gloved. Talks to the flowers in a language older than writing. They nod."},
+    {"id": "quill_captain_branon", "name": "Quill-Captain Branon", "tribe_id": "storm_marked", "role": "Vigolas's second, Helios liaison", "portrait_blurb": "Tall. Scar from brow to jaw in the shape of a lightning bolt. Left-handed. Drinks only during thunder."},
+    {"id": "chronicler_ven", "name": "Chronicler Ven", "tribe_id": "storm_marked", "role": "Stormhold's archivist", "portrait_blurb": "Younger than she looks. Green cloak, always soaked. Writes in a notebook that fills itself when she sleeps."},
+    {"id": "the_unnamed_regent", "name": "The Unnamed Regent", "tribe_id": "storm_marked", "role": "Sits on Stormhold's throne when Vigolas is away", "portrait_blurb": "No one has seen their face. Armor of Stormhold-steel. Speaks only with the throne's voice."},
+    {"id": "kompis_himself", "name": "Kompis", "tribe_id": "lake_folk", "role": "The Buddy", "portrait_blurb": "Golden-tan. Braided beard. Wears a hoodie older than most dynasties. Fishing pole always within arm's reach."},
+    {"id": "old_lake_miri", "name": "Old Lake Miri", "tribe_id": "lake_folk", "role": "The Lake Folk's eldest", "portrait_blurb": "Hundred-and-four. Brown as oak. Laughs at funerals because she knows something funny."},
+    {"id": "first_witness_elan", "name": "First Witness Elan", "tribe_id": "mingus_witnesses", "role": "Founder of the Witness tradition", "portrait_blurb": "Soft-spoken, fair-haired, wears a ring braided from a single retriever hair. Weeps when she speaks of him."},
+    {"id": "dj_chroma", "name": "DJ Chroma", "tribe_id": "flicker_nomads", "role": "Plays Neon Veil when Rougeina is elsewhere", "portrait_blurb": "Pale (never sleeps outside). Hair in violet-pink gradient. Black dress of bent light. Laughs before she speaks."},
+    {"id": "the_flicker_girl", "name": "The Flicker-Girl", "tribe_id": "flicker_nomads", "role": "HADOM 12,000 sprinter", "portrait_blurb": "Cannot stop moving. Rougeina made her a hat that floats. 14 years old and aging slowly."},
+    {"id": "warden_aske", "name": "Warden Aske", "tribe_id": "three_step_walkers", "role": "Smurjan's gatekeeper at Void's Edge", "portrait_blurb": "Three braids: black, red, white. Walks in the Fused-pattern. Never eats alone."},
+    {"id": "fissure_keeper_orla", "name": "Fissure-Keeper Orla", "tribe_id": "fissure_wardens", "role": "Holds the Root Crack closed", "portrait_blurb": "Masked, spiral-inked cheeks, left hand gloved in lead-silk. Has not slept in 40 years. Smells faintly of cold iron."}
+  ],
+  "fate": {
+    "threat": "The Twelfth City returns. If the unwritten K-XII's renounced city ever reappears on a map, the Ledger's self-consistency collapses — Scalelist's reality would have to be RE-written to include what was already unwritten.",
+    "consequence": "The 12 cities would rearrange overnight, one of them becoming unrecognisable to its own citizens. The Ledger Heartland would go dark for a month. The other 11 cities would age by a century while their citizens sleep.",
+    "prophecy_line": "When the Twelfth returns, the first to notice is the last to remember. Count your cities before you sleep.",
+    "destroyable_by": "K-XII self-reinstating (theoretical), or the Architects voting to rewrite the Unwriting — both catastrophic."
+  },
+  "cultural_notes": "Scalelist is the anchor. Its tribes are older than any of the ruling characters. When Vigolas or Rougeina rise or fall, the people of Scalelist continue to plant, to fish, to write, to mourn. This is the realm that other realms borrow meaning from."
+}

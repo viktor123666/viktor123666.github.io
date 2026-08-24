@@ -1,0 +1,36 @@
+{
+  "id": "s4e08_the_root_stops",
+  "number": 8,
+  "title": "The Root Stops",
+  "subtitle": "Episode 8 of 12 · Season 4: The Fates Unravel",
+  "realm_id": "null",
+  "fate_triggered": "Ferdinand's Oldest Root pauses for three heartbeats.",
+  "pov_characters": ["smurjan_null_walker", "root_spirit_48000000000"],
+  "supporting": ["root_spirit_1", "first_tender", "junior_root_spirit"],
+  "synopsis": "Smurjan walks Null casually as he has for cosmic ages. He is on his weekly visit to Smurjan's Seat — the single rock in upper Null where he sits to think. Three heartbeats into his sit, the Heartbeat Point goes SILENT. Smurjan freezes. He has heard absence many times — Null is absence — but not THIS absence. Ferdinand's Oldest Root has stopped drinking. Smurjan rises. He walks (running in Null is impossible) to the Oldest Root. He arrives in 12 cosmic minutes. Root-Spirit 4.8B is already there. Her tattoo flickers. Root-Spirit One — the eldest, almost wholly bark, attached to the Oldest Root since the First Heartbeat — is, for the first time in cosmic memory, AGITATED. The First Tender stands beside the Root, hollow eye-sockets fixed. None of them speak. They wait. After a third heartbeat of pause, the Root drinks again. The Heartbeat Point resumes. The Root-Spirits exhale. Smurjan crouches. He places his hand on the Root. He says, in his Fused voice — for the first time in canon, alone in Null — 'Brother. I am sorry someone called you.' The Root warms slightly. Smurjan walks back. The Junior Root-Spirit, unassigned, watches him go and decides it is time to be assigned.",
+  "key_scenes": [
+    {"location": "Smurjan's Seat, upper Null", "action": "Smurjan begins his weekly think-sit. The Heartbeat Point goes silent."},
+    {"location": "Walk to the Oldest Root", "action": "12 cosmic minutes. Smurjan in pure Fused form."},
+    {"location": "The Oldest Root, motionless", "action": "Root-Spirit 4.8B arrives. Root-Spirit One is agitated for the first time. The First Tender holds vigil."},
+    {"location": "The third pause heartbeat", "action": "Three heartbeats of stillness. Then the Root drinks again."},
+    {"location": "Smurjan's apology", "action": "Smurjan crouches, hand on the Root. Says: 'Brother. I am sorry someone called you.' The Root warms."},
+    {"location": "The Junior Root-Spirit decision", "action": "The unassigned Junior, watching, decides it is time to bond to a root."}
+  ],
+  "cliffhanger": "Bakasura, in some unseen elsewhere, smiles in his fourth face — the one that always points backward — for the first time in canon. The smile is recorded by the Butterfly Garden Wall.",
+  "panel_storyboard": [
+    {"panel": 1, "composition": "Pure black panel except for a single glowing point — the Heartbeat Point — and Smurjan's seated silhouette at his Seat.", "character": "smurjan_null_walker", "camera": "infinite black", "emotion": "ritual"},
+    {"panel": 2, "composition": "The Heartbeat Point ceasing. Smurjan's silhouette turning. Both eyes visible, gold-flecked.", "character": "smurjan_null_walker", "camera": "tight", "emotion": "alarm without panic"},
+    {"panel": 3, "composition": "Smurjan walking through Null. No ground visible — only a sense of forward. Silver root-shapes faint in the distance.", "character": "smurjan_null_walker", "camera": "long lens", "emotion": "purpose"},
+    {"panel": 4, "composition": "The Oldest Root standing motionless in the void. Root-Spirit 4.8B at its base, bark-skinned, tattoo flickering on her forearm.", "character": "root_spirit_48000000000", "camera": "wide reverent", "emotion": "vigil"},
+    {"panel": 5, "composition": "Root-Spirit One — almost wholly bark — visibly trembling. The First Tender beside, cork-bodied, stoic.", "character": "root_spirit_1", "camera": "tight on bark", "emotion": "first agitation in cosmic memory"},
+    {"panel": 6, "composition": "Three-panel montage of three pause heartbeats. Each heartbeat marked by a single black bar. The Root not drinking.", "character": null, "camera": "negative space sequence", "emotion": "suspense", "caption": "ONE. ... TWO. ... THREE."},
+    {"panel": 7, "composition": "The Root drinking again. Faint silver light returning to the Heartbeat Point. Root-Spirits visibly exhaling — bark cracking softly.", "character": null, "camera": "wide", "emotion": "relief"},
+    {"panel": 8, "composition": "Smurjan crouching. Hand on the Root. Whispering. The Root visibly warming around his hand.", "character": "smurjan_null_walker", "camera": "tight on hand and root", "emotion": "tenderness", "dialogue": "Smurjan (Fused): 'Brother. I am sorry someone called you.'"},
+    {"panel": 9, "composition": "Smurjan walking away. The Junior Root-Spirit, in the background, taking a single step toward an unassigned root.", "character": "junior_root_spirit", "camera": "wide departing", "emotion": "decision"},
+    {"panel": 10, "composition": "Cut to the Butterfly Garden in VOID-II. A single white butterfly landing on the wall. Bakasura's silhouette barely visible in the corner, smiling in the fourth face — the backward-facing one.", "character": null, "camera": "wide cosmic", "emotion": "dread", "caption": "Somewhere, Bakasura was watching."}
+  ],
+  "cosmic_price_paid": "Bakasura has revealed his fourth-face smile. The Butterfly Wall has recorded a decision somewhere in the multiverse. The Junior Root-Spirit is now assigned. Root-Spirit One is reassuring herself — softly — for the first time in cosmic memory.",
+  "callout_for_cosmos_drawer": "In Season 4, Ferdinand's Oldest Root paused for three heartbeats. Smurjan apologized to the Root in Fused voice — alone in Null. Bakasura smiled in his fourth face.",
+  "watch_chapter": null,
+  "read_chapter": null
+}

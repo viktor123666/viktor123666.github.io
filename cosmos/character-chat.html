@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speak with the Souls — Scalelist Universe</title>
+<meta name="description" content="Talk with the sixteen souls of the Scalelist Universe — real, in-character, lore-aware. And take their art with you: every image free to download, forever.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
+<style>
+  .ch-wrap{max-width:980px;margin:0 auto;padding:0 1.2rem;}
+  /* character rail */
+  .rail{display:flex;gap:.6rem;overflow-x:auto;padding:.4rem .2rem 1rem;scrollbar-width:thin;}
+  .pick{flex:none;width:84px;cursor:pointer;text-align:center;opacity:.6;transition:opacity .2s,transform .2s;}
+  .pick:hover{opacity:1;transform:translateY(-2px);}
+  .pick.on{opacity:1;}
+  .pick img{width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:center top;
+    border:2px solid transparent;background:var(--void-2);}
+  .pick.on img{border-color:var(--c);box-shadow:0 0 18px -3px var(--c);}
+  .pick .n{font-family:var(--font-display);font-size:.74rem;margin-top:.35rem;color:var(--text);}
+  .pick.on .n{color:var(--c);}
+
+  /* chat panel */
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+  .panel .top{display:flex;align-items:center;gap:.8rem;padding:.9rem 1.1rem;border-bottom:1px solid var(--border);
+    background:linear-gradient(135deg,color-mix(in srgb,var(--c) 14%,var(--panel)),var(--panel));}
+  .panel .top img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:center top;border:1px solid var(--c);}
+  .panel .top .nm{font-family:var(--font-display);color:#fff;font-size:1.15rem;}
+  .panel .top .vibe{font-size:.72rem;color:var(--c);letter-spacing:.06em;text-transform:uppercase;}
+  .thread{height:min(52vh,460px);overflow-y:auto;padding:1.1rem;display:flex;flex-direction:column;gap:.7rem;}
+  .msg{max-width:78%;padding:.6rem .9rem;border-radius:14px;font-size:.94rem;line-height:1.5;animation:su-fade-up .4s both;}
+  .msg.them{align-self:flex-start;background:color-mix(in srgb,var(--c) 12%,var(--panel-solid));
+    border:1px solid color-mix(in srgb,var(--c) 35%,transparent);border-bottom-left-radius:4px;}
+  .msg.me{align-self:flex-end;background:rgba(201,168,76,.14);border:1px solid var(--border);border-bottom-right-radius:4px;color:#fff;}
+  .msg.sys{align-self:center;background:transparent;border:1px dashed var(--border);color:var(--text-dim);font-size:.82rem;text-align:center;max-width:90%;}
+  .msg.typing{color:var(--c);font-style:italic;}
+  .compose{display:flex;gap:.5rem;padding:.8rem;border-top:1px solid var(--border);}
+  .compose input{flex:1;background:var(--void-2);border:1px solid var(--border);border-radius:999px;
+    padding:.7rem 1.1rem;color:var(--text);font-family:var(--font-body);font-size:.92rem;outline:none;}
+  .compose input:focus{border-color:var(--c);}
+  .compose button{background:linear-gradient(180deg,var(--gold-bright),var(--gold));color:#1a1405;border:none;
+    border-radius:999px;padding:0 1.3rem;font-weight:800;cursor:pointer;letter-spacing:.04em;}
+  .compose button:disabled{opacity:.5;cursor:default;}
+
+  /* free image vault */
+  .vault{margin-top:2.4rem;}
+  .vault-bar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:center;margin:1rem 0 1.4rem;}
+  .vault-bar .su-btn,.vault-bar .su-btn-ghost{cursor:pointer;}
+  .vault-note{text-align:center;color:var(--text-dim);font-size:.84rem;max-width:60ch;margin:0 auto;}
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:.6rem;margin-top:1.2rem;}
+  .vcell{position:relative;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);background:var(--void-2);}
+  .vcell img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;}
+  .vcell a.dl{position:absolute;inset:auto 0 0 0;text-align:center;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+    background:rgba(8,9,18,.82);color:var(--gold);padding:.32rem;opacity:0;transition:opacity .2s;}
+  .vcell:hover a.dl{opacity:1;}
+  .vcell .tag{position:absolute;top:.3rem;left:.3rem;font-size:.6rem;background:rgba(8,9,18,.7);color:#fff;padding:.1rem .4rem;border-radius:5px;}
+  #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;
+    background:var(--panel-solid);border:1px solid var(--border-bright);color:var(--gold);padding:.7rem 1.2rem;
+    border-radius:999px;font-size:.85rem;transition:all .3s;z-index:2000;pointer-events:none;}
+  #toast.show{opacity:1;transform:translateX(-50%);}
+</style>
+</head>
+<body>
+
+<header class="su-hero" style="min-height:auto;padding:3rem 1.2rem 1rem;">
+  <div class="su-kicker su-fade">Real · in-character · lore-aware</div>
+  <h1 class="su-fade-2">Speak with the Souls</h1>
+  <p class="su-fade-3">Sixteen voices of the Scalelist Universe. Pick one and talk — they answer in their own character, from their own corner of the canon. And every image here is yours to keep, free, forever.</p>
+</header>
+
+<main class="ch-wrap su-section" style="padding-top:1rem;">
+  <div class="rail" id="rail"></div>
+
+  <div class="panel" id="panel">
+    <div class="top"><img id="t-img" alt=""><div><div class="nm" id="t-nm"></div><div class="vibe" id="t-vibe"></div></div></div>
+    <div class="thread" id="thread"></div>
+    <div class="compose">
+      <input id="inp" type="text" maxlength="700" placeholder="Say something…" autocomplete="off">
+      <button id="send">Send</button>
+    </div>
+  </div>
+
+  <section class="vault">
+    <div class="su-section-title">The free image vault — they're yours, forever</div>
+    <p class="vault-note">No blocks, no watermark traps, no login. Download a single piece or take the whole set. Once it's on your machine, it's yours — that's the rule here.</p>
+    <div class="vault-bar">
+      <button class="su-btn" id="dlAll">⬇ Download all 48</button>
+      <button class="su-btn-ghost" id="copyAll">⧉ Copy all links</button>
+    </div>
+    <div class="vgrid" id="vgrid"></div>
+  </section>
+</main>
+
+<div id="toast"></div>
+
+<script>
+const ROOT="/characters/art";
+const CHARS=[
+ {k:"vigolas",n:"Vigolas",c:"#00ff88",vibe:"Sámi-jojk hardstyle · storm-calm",greet:"The storm holds its breath. Speak."},
+ {k:"rougeina",n:"Rougeina",c:"#ff3366",vibe:"rave-glam · warm",greet:"Darling — the floor is ours. What's on your heart?"},
+ {k:"kompis",n:"Kompis",c:"#ffaa00",vibe:"gamer-chill · loyal",greet:"Ey! Pull up a chair — Mingus already likes you."},
+ {k:"smurjan",n:"Smurjan",c:"#00aaff",vibe:"triple-voiced · cosmic",greet:"We — I — answer. Ask, and the three will speak as one."},
+ {k:"trollmage",n:"Trollmage",c:"#9933ff",vibe:"dark-trap mystic · riddling",greet:"The book turned its own page when you arrived. Curious. Ask, seeker."},
+ {k:"mingus",n:"Mingus",c:"#e9b949",vibe:"no words — only warmth",greet:"*pads over, tail sweeping slow, and rests his head against you*"},
+ {k:"isa",n:"Isa",c:"#67e8f9",vibe:"hushed · weighed",greet:"…you found the quiet between two heartbeats. Stay a moment."},
+ {k:"opha",n:"Opha",c:"#d946ef",vibe:"joined truths · calm",greet:"You came here, and you already half-know why. Speak the other half."},
+ {k:"runa",n:"Runa",c:"#d4a056",vibe:"rain-on-bark · ancient",greet:"Mind the runes, child. Speak softly, and I will answer softer."},
+ {k:"ogar",n:"Ögar",c:"#a78bfa",vibe:"solemn · seeing",greet:"I have already seen three ways this talk could end. Choose the first word well."},
+ {k:"niva",n:"Niva",c:"#e5e7eb",vibe:"sparse · grounded",greet:"The Null has no heartbeat. Yet here we stand on something. Speak."},
+ {k:"njord",n:"Njord",c:"#38bdf8",vibe:"salt-and-pine · gruff",greet:"Lake's gone still. That means weather — or company. Sit, then."},
+ {k:"kvar",n:"Kvar",c:"#c2675a",vibe:"quiet · tired-kind",greet:"Everyone leaves eventually. I'm the one still here. What do you need?"},
+ {k:"vidar",n:"Vidar",c:"#cdb878",vibe:"speaks once a century",greet:"…(the hood turns toward you. He has not spoken in ninety-one years.)"},
+ {k:"iska",n:"Iska",c:"#fbbf24",vibe:"bright · tender",greet:"Hi! Hold the lamp a sec — careful, it's warm. What made you smile last?"},
+ {k:"tova",n:"Tova",c:"#f59e0b",vibe:"clear · ringing",greet:"The horn stayed silent when you walked in — so you came in truth. Speak it."},
+];
+const SHOTS={kompis:["_hero","_with_mingus","_keyart"]};
+const shotsFor=k=>SHOTS[k]||["_hero","_action","_keyart"];
+
+let cur=CHARS[0], thread=[];
+const rail=document.getElementById("rail"), threadEl=document.getElementById("thread");
+const tImg=document.getElementById("t-img"), tNm=document.getElementById("t-nm"), tVibe=document.getElementById("t-vibe");
+const inp=document.getElementById("inp"), sendBtn=document.getElementById("send"), panel=document.getElementById("panel");
+
+CHARS.forEach(ch=>{
+  const d=document.createElement("div"); d.className="pick"; d.style.setProperty("--c",ch.c); d.dataset.k=ch.k;
+  d.innerHTML=`<img loading="lazy" src="${ROOT}/${ch.k}/${ch.k}_hero.webp" alt="${ch.n}"><div class="n">${ch.n}</div>`;
+  d.addEventListener("click",()=>select(ch));
+  rail.appendChild(d);
+});
+
+function bubble(cls,text){ const m=document.createElement("div"); m.className="msg "+cls; m.textContent=text; threadEl.appendChild(m); threadEl.scrollTop=threadEl.scrollHeight; return m; }
+function select(ch){
+  cur=ch; thread=[];
+  panel.style.setProperty("--c",ch.c);
+  document.querySelectorAll(".pick").forEach(p=>p.classList.toggle("on",p.dataset.k===ch.k));
+  tImg.src=`${ROOT}/${ch.k}/${ch.k}_hero.webp`; tImg.alt=ch.n; tNm.textContent=ch.n; tVibe.textContent=ch.vibe;
+  threadEl.innerHTML=""; bubble("them",ch.greet);
+}
+async function send(){
+  const text=inp.value.trim(); if(!text) return;
+  inp.value=""; bubble("me",text); thread.push({role:"user",content:text});
+  sendBtn.disabled=true;
+  const typing=bubble("them typing",cur.n+" is here…");
+  try{
+    const r=await fetch("/api/character-chat",{method:"POST",headers:{"content-type":"application/json"},
+      body:JSON.stringify({character:cur.k,messages:thread})});
+    const j=await r.json(); typing.remove();
+    if(j.offline){ bubble("sys","⚡ Live chat isn't switched on yet — "+cur.n+"'s greeting above is canon, but the voice is waiting for its key. (The art below is fully live and free right now.)"); }
+    else if(j.reply){ bubble("them",j.reply); thread.push({role:"assistant",content:j.reply}); }
+    else { bubble("sys", j.error||"The voice faltered. Try again."); }
+  }catch(e){ typing.remove(); bubble("sys","The realm connection dropped. Try again in a moment."); }
+  sendBtn.disabled=false; inp.focus();
+}
+sendBtn.addEventListener("click",send);
+inp.addEventListener("keydown",e=>{ if(e.key==="Enter") send(); });
+
+/* ===== free image vault ===== */
+const vgrid=document.getElementById("vgrid"); const allUrls=[];
+CHARS.forEach(ch=>shotsFor(ch.k).forEach(sfx=>{
+  const url=`${ROOT}/${ch.k}/${ch.k}${sfx}.webp`; allUrls.push(url);
+  const c=document.createElement("div"); c.className="vcell";
+  c.innerHTML=`<span class="tag">${ch.n}</span><img loading="lazy" src="${url}" alt="${ch.n}">
+    <a class="dl" href="${url}" download="scalelist_${ch.k}${sfx}.webp">⬇ download</a>`;
+  vgrid.appendChild(c);
+}));
+function toast(t){ const el=document.getElementById("toast"); el.textContent=t; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),2200); }
+document.getElementById("dlAll").addEventListener("click",async()=>{
+  toast("Downloading all 48 — allow multiple files if asked");
+  for(let i=0;i<allUrls.length;i++){ const a=document.createElement("a"); a.href=allUrls[i];
+    a.download="scalelist_"+allUrls[i].split("/").slice(-2).join("_"); document.body.appendChild(a); a.click(); a.remove();
+    await new Promise(r=>setTimeout(r,260)); }
+});
+document.getElementById("copyAll").addEventListener("click",async()=>{
+  const abs=allUrls.map(u=>location.origin+u).join("\n");
+  try{ await navigator.clipboard.writeText(abs); toast("Copied all 48 image links ✓"); }
+  catch{ toast("Couldn't copy — long-press a thumbnail to save instead"); }
+});
+
+select(CHARS[0]);
+</script>
+</body>
+</html>

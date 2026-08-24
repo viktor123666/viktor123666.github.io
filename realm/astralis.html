@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ASTRALIS — The Starry Weave | Scalelist Universe</title>
+<meta name="description" content="ASTRALIS: The Starry Weave. A realm on Ferdinand the Cosmic Cork Oak.">
+<meta property="og:title" content="ASTRALIS — The Starry Weave">
+<meta property="og:description" content="The Starry Weave. A realm on the cosmic cork oak Ferdinand.">
+<meta property="og:image" content="https://scalelistuniverse.com/cosmos/scenery/astralis.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a84c; --void:#050510; --panel:#0a0a14; --border:rgba(201,168,76,0.3); --text:#d4c9a8; --dim:#7a7060; --accent:#ff3366}
+html,body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.7}
+a{color:inherit;text-decoration:none}
+
+header{padding:18px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,5,16,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+header .brand{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.18em;color:var(--gold);font-weight:700;text-transform:uppercase}
+header nav{display:flex;gap:18px;flex-wrap:wrap}
+header nav a{color:var(--dim);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-family:'Cinzel',serif}
+header nav a:hover{color:var(--gold)}
+
+.hero{position:relative;height:60vh;min-height:420px;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,transparent 50%,var(--void) 100%),radial-gradient(ellipse at 50% 100%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 70%);pointer-events:none}
+.hero .body{position:relative;z-index:2;padding:50px 32px;max-width:1100px;width:100%;margin:0 auto}
+.hero .eyebrow{font-family:'Cinzel',serif;color:var(--accent);font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(2.4rem,6vw,5rem);color:#fff;letter-spacing:.06em;font-weight:900;line-height:1;text-shadow:0 0 40px color-mix(in srgb,var(--accent) 40%,transparent)}
+.hero h1 em{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:.36em;color:var(--accent);letter-spacing:.04em;margin-top:12px;text-shadow:none;opacity:.95}
+
+.section{max-width:1100px;margin:0 auto;padding:50px 32px;border-top:1px solid var(--border)}
+.section h2{font-family:'Cinzel',serif;color:var(--accent);font-size:.86rem;letter-spacing:.32em;text-transform:uppercase;margin-bottom:24px;font-weight:700}
+.section .blurb{font-size:1.18rem;line-height:1.85;font-style:italic;opacity:.94;max-width:760px}
+
+.grid-2{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
+@media(min-width:780px){.grid-2{grid-template-columns:1fr 1fr}}
+.entry{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 22px;transition:all .25s}
+.entry:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+.entry h3{font-family:'Cinzel',serif;color:#fff;font-size:1.04rem;font-weight:700;letter-spacing:.04em;margin-bottom:6px;line-height:1.2}
+.entry .biome{color:var(--accent);font-style:italic;font-size:.84rem;margin-bottom:10px;letter-spacing:.04em}
+.entry p{font-size:.94rem;line-height:1.65;opacity:.92;margin-bottom:8px}
+.entry p:last-child{margin-bottom:0}
+
+.char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:14px}
+.char-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;transition:all .2s;display:block}
+.char-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.char-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#080812}
+.char-card .char-name{padding:10px 12px 4px;font-family:'Cinzel',serif;color:#fff;font-size:.88rem;font-weight:700;letter-spacing:.04em;line-height:1.2}
+.char-card .char-role{padding:0 12px 12px;color:var(--accent);font-style:italic;font-size:.78rem;line-height:1.3}
+
+.fate{margin-top:28px;background:linear-gradient(135deg,rgba(204,51,51,0.08),var(--panel));border:1px solid rgba(204,51,51,0.4);border-radius:12px;padding:20px 24px}
+.fate-label{font-family:'Cinzel',serif;color:#ff6677;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:8px;font-weight:700}
+.fate p{font-size:1rem;line-height:1.7;font-style:italic;color:var(--text)}
+
+.cta{padding:60px 32px;text-align:center;border-top:1px solid var(--border)}
+.cta a{display:inline-block;margin:6px;padding:12px 28px;background:var(--accent);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;border-radius:8px;text-decoration:none}
+.cta a.outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.cta a:hover{transform:scale(1.04);transition:transform .15s}
+
+footer{padding:30px;text-align:center;color:var(--dim);font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">SCALELIST · UNIVERSE</a>
+  <nav>
+    <a href="/cosmos">All Realms</a>
+    <a href="/cosmos/atlas">Atlas</a>
+    <a href="/lineage">Lineage</a>
+    <a href="/manga">Manga</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <img src="/cosmos/scenery/astralis.jpg" alt="ASTRALIS scenery" onerror="this.style.display='none'">
+  <div class="body">
+    <div class="eyebrow">A realm on Ferdinand</div>
+    <h1>ASTRALIS<em>The Starry Weave</em></h1>
+  </div>
+</section>
+
+<section class="section">
+  <h2>The Realm</h2>
+  <p class="blurb">ASTRALIS is one of the twelve realms of the Scalelist Universe.</p>
+  <div class="fate"><div class="fate-label">Realm Fate</div><p>{'threat': 'The Starfloor goes silent. If ALL stars on the floor agreed to stop pulsing at once (an impossibility engineered by Echo if Echo ever achieved unanimity), the dance ends. Astralis has never had a silent moment and no being knows what happens in one.', 'consequence': 'Every dancer in the multiverse falls simultaneously. Rougeina loses her HADOM. Lume vanishes (no partner to shadow). Joy itself becomes structurally impossible for 7 cosmic minutes. The universe lives through the longest afternoon ever recorded.', 'prophecy_line': 'When the floor does not beat, the dance owes you nothing. Stand still and remember why you came.', 'destroyable_by': 'Echo (the Fourth Voice) — theoretically, if it could convince every star that they are half a heartbeat late and therefore not-yet-beating. Rougeina considers this the most dangerous prophecy in existence.'}</p></div>
+</section>
+
+<section class="section">
+  <h2>Continents · 4 regions</h2>
+  <div class="grid-2"><div class="entry">
+          <h3>The Starfloor</h3>
+          <div class="biome">A vast glass dance-floor suspended over deep nebula. Every plank is a star.</div>
+          <p>The central dance-floor. The heart of Astralis. Every star here is a former moment of perfect joy somewhere else in the multiverse.</p>
+        </div><div class="entry">
+          <h3>The Pulse Archipelago</h3>
+          <div class="biome">Thousands of small floating islands, each a single star beat. Bridges of spun light.</div>
+          <p>Scattered islands of pulsing light. The training ground. Every dancer on the Starfloor trained here first.</p>
+        </div><div class="entry">
+          <h3>The Afterglow Wastes</h3>
+          <div class="biome">A dim cool plain beyond the nebula. The last light of expended stars settles here as sand.</div>
+          <p>Where stars go to rest. Every moment of joy eventually runs out. The Wastes are the realm's cemetery and memory bank both.</p>
+        </div><div class="entry">
+          <h3>The Midnight Bazaar Reach</h3>
+          <div class="biome">A winding marketplace-continent stretching through the night sky.</div>
+          <p>The commerce continent. Nothing solid is sold here — only joy, memory, rhythm, and promise.</p>
+        </div></div>
+</section>
+
+<section class="section">
+  <h2>Tribes &amp; Peoples · 8 groups</h2>
+  <div class="grid-2"><div class="entry">
+          <h3>The Starfloor Dancers</h3>
+          <div class="biome">on starfloor</div>
+          <p><b>Look:</b> Bare-shouldered. Skin-paint constellations that actually move. Bracelets of bent starlight. Eyes that flicker when they blink.</p>
+          <p><b>Persona:</b> Euphoric. Generous. Impossible to insult because they translate every rudeness into a dare.</p>
+        </div><div class="entry">
+          <h3>The Lume Shadows</h3>
+          <div class="biome">on starfloor</div>
+          <p><b>Look:</b> Only visible beside their partner-dancer. Shadows that step, spin, and bow. Each has a name but rarely uses it.</p>
+          <p><b>Persona:</b> Loyal. Quiet. Wise in the way shadows are wise — from below.</p>
+        </div><div class="entry">
+          <h3>The Flicker-Feet</h3>
+          <div class="biome">on pulse_archipelago</div>
+          <p><b>Look:</b> Six-limbed when they choose (a starlight glamour). Bare feet always. Braids interwoven with light-thread. Tattoos of the Archipelago islands on their soles.</p>
+          <p><b>Persona:</b> Cocky. Fast. Friendly to tourists, ruthless to cheats.</p>
+        </div><div class="entry">
+          <h3>The Bridge-Runners</h3>
+          <div class="biome">on pulse_archipelago</div>
+          <p><b>Look:</b> Thin, wiry, ankles wrapped in golden thread. Slight limp when walking — they only look right at a sprint.</p>
+          <p><b>Persona:</b> Laconic. Obsessively on time. Quietly proud of the bridges they maintain.</p>
+        </div><div class="entry">
+          <h3>The Afterglow-Keepers</h3>
+          <div class="biome">on afterglow_wastes</div>
+          <p><b>Look:</b> Tall, stooped, silver-robed. Faces lit softly from below by handfuls of cool star-sand.</p>
+          <p><b>Persona:</b> Serene. Slow. The only Astralis tribe that does not dance.</p>
+        </div><div class="entry">
+          <h3>The Sad Stars</h3>
+          <div class="biome">on afterglow_wastes</div>
+          <p><b>Look:</b> Former bright stars, now dim humanoid silhouettes. Their edges flicker. They remember being bright.</p>
+          <p><b>Persona:</b> Gentle. Patient. A little wistful. Thank anyone who visits them by glowing briefly brighter.</p>
+        </div><div class="entry">
+          <h3>The Neon Veil Merchants</h3>
+          <div class="biome">on midnight_bazaar_reach</div>
+          <p><b>Look:</b> Hair dyed in shifting neon. Wear veils of bent light. Fingernails painted with pigment that itself glows.</p>
+          <p><b>Persona:</b> Coolly charismatic. Remember every customer. Will come to your wedding uninvited and leave the best gift.</p>
+        </div><div class="entry">
+          <h3>The Memory-Brokers</h3>
+          <div class="biome">on midnight_bazaar_reach</div>
+          <p><b>Look:</b> Sleek. Sharp-eyed. Carry small glass bottles at the belt — each a bottled memory.</p>
+          <p><b>Persona:</b> Shrewd. Professional. Quietly sad — it is hard work to broker memories without losing your own.</p>
+        </div></div>
+</section>
+
+<section class="section">
+  <h2>Named Characters Here · 12 souls</h2>
+  <div class="char-grid"><a class="char-card" href="/cosmos/atlas#realm-astralis">
+          <img src="/characters/rougeina.png" alt="Rougeina" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Rougeina</div>
+          <div class="char-role">The Starry Dancer — Queen of Astralis</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-astralis">
+          <img src="/characters/npcs/lume_the_shadow.png" alt="Lume" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Lume</div>
+          <div class="char-role">Rougeina's shadow-dance partner</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-astralis">
+          <img src="/characters/npcs/second_lume_umbra.png" alt="Umbra" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Umbra</div>
+          <div class="char-role">Second-eldest Lume-Shadow</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-astralis">
+          <img src="/characters/npcs/the_flicker_girl.png" alt="The Flicker-Girl" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">The Flicker-Girl</div>
+          <div class="char-role">Eternally sprinting, HADOM 12,000</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-astralis">
+          <img src="/characters/npcs/archipelago_runner_kai.png" alt="Archipelago Runner Kai" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Archipelago Runner Kai</div>
+          <div class="char-role">Fastest Flicker-Foot after the Flicker-Girl</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-astralis">
+          <img src="/characters/npcs/bridge_warden_ori.png" alt="Bridge Warden Ori" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Bridge Warden Ori</div>
+          <div class="char-role">Keeper of the Bridge of First Steps</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-astralis">
+          <img src="/characters/npcs/keeper_astre.png" alt="Keeper Astre" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Keeper Astre</div>
+          <div class="char-role">Chief of the Dim Shore keepers</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-astralis">
+          <img src="/characters/npcs/first_sad_star.png" alt="The First Sad Star" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">The First Sad Star</div>
+          <div class="char-role">Eldest of the Sad Stars</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-astralis">
+          <img src="/characters/npcs/merchant_fen_dros.png" alt="Merchant Fen-Dros" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Merchant Fen-Dros</div>
+          <div class="char-role">Trades joy for sadness</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-astralis">
+          <img src="/characters/npcs/pill_maker_vex.png" alt="Pill-Maker Vex" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Pill-Maker Vex</div>
+          <div class="char-role">Maker of Starfall candies</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-astralis">
+          <img src="/characters/npcs/broker_lune.png" alt="Broker Lune" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Broker Lune</div>
+          <div class="char-role">Handles high-weight memory trades</div>
+        </a><a class="char-card" href="/cosmos/atlas#realm-astralis">
+          <img src="/characters/lineage/opha.png" alt="Opha" loading="lazy" onerror="this.style.opacity='0.2'">
+          <div class="char-name">Opha</div>
+          <div class="char-role">The Conjunction</div>
+        </a></div>
+</section>
+
+<section class="cta">
+  <a href="/cosmos">All 12 Realms</a>
+  <a href="/cosmos/atlas" class="outline">Open Atlas</a>
+  <a href="/lineage" class="outline">The Lineage</a>
+</section>
+
+<footer>
+  Scalelist Universe · ASTRALIS · <a href="/" style="color:var(--accent)">Home</a>
+</footer>
+
+</body>
+</html>

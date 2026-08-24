@@ -1,0 +1,128 @@
+{
+  "_note": "Empire channel registry. The /empire Meeting Hub + /api/empire-feed read from this file. To add a real channel ID: visit the channel in a browser → View Page Source → search for \"channelId\":\" → copy the UC... string. Channels with channelId: null are still rendered as 'open seat' placeholders.",
+  "_updated": "2026-05-03",
+  "channels": [
+    {
+      "id": "vigolas",
+      "name": "Vigolas",
+      "title": "The Last Tide",
+      "letter": "V",
+      "order": "viktor",
+      "color": "#4ade80",
+      "youtube_handle": "@Vigolas-Scalelist",
+      "youtube_channel_id": "UC_REPLACE_WITH_REAL_ID",
+      "youtube_url": "https://www.youtube.com/@Vigolas-Scalelist",
+      "tiktok": "https://www.tiktok.com/@scalelistvigolas",
+      "instagram": "https://www.instagram.com/scalelistvigolas",
+      "status": "active",
+      "primary_realm": "Helios",
+      "portrait": "/characters/vigolas.png"
+    },
+    {
+      "id": "rougeina",
+      "name": "Rougeina",
+      "title": "The Dancer",
+      "letter": "R",
+      "order": "viktor",
+      "color": "#ff6b9d",
+      "youtube_handle": "@Rougeina-RaveLooks",
+      "youtube_channel_id": "UC_REPLACE_WITH_REAL_ID",
+      "youtube_url": "https://www.youtube.com/@Rougeina-RaveLooks",
+      "tiktok": "https://www.tiktok.com/@scalelistrougeina",
+      "instagram": "https://www.instagram.com/scalelistrougeina",
+      "status": "active",
+      "primary_realm": "Astralis",
+      "portrait": "/characters/rougeina.png"
+    },
+    {
+      "id": "trollmage",
+      "name": "Trollmage",
+      "title": "The Reader",
+      "letter": "T",
+      "order": "viktor",
+      "color": "#9333ea",
+      "youtube_handle": "@trollmage7709",
+      "youtube_channel_id": "UC_REPLACE_WITH_REAL_ID",
+      "youtube_url": "https://www.youtube.com/@trollmage7709",
+      "tiktok": "https://www.tiktok.com/@scalelisttrollmage",
+      "instagram": "https://www.instagram.com/scalelisttrollmage",
+      "status": "active",
+      "primary_realm": "Codexia",
+      "portrait": "/characters/trollmage.png"
+    },
+    {
+      "id": "kompis",
+      "name": "Kompis",
+      "title": "The Buddy",
+      "letter": "K",
+      "order": "viktor",
+      "color": "#fbbf24",
+      "youtube_handle": "@Kompis-scale",
+      "youtube_channel_id": "UC_REPLACE_WITH_REAL_ID",
+      "youtube_url": "https://www.youtube.com/@Kompis-scale",
+      "tiktok": "https://www.tiktok.com/@scalelistkompis",
+      "instagram": "https://www.instagram.com/scalelistkompis",
+      "status": "active",
+      "primary_realm": "Heartbeat",
+      "portrait": "/characters/kompis.png"
+    },
+    {
+      "id": "smurjan",
+      "name": "Smurjan",
+      "title": "The Third-Voice",
+      "letter": "S",
+      "order": "ronnkvist",
+      "color": "#0ea5e9",
+      "youtube_handle": "@Smurjan",
+      "youtube_channel_id": "UC_REPLACE_WITH_REAL_ID",
+      "youtube_url": "https://www.youtube.com/@Smurjan",
+      "tiktok": "https://www.tiktok.com/@scalelistsmurjan",
+      "instagram": "https://www.instagram.com/scalelistsmurjan",
+      "status": "active",
+      "primary_realm": "Trinity",
+      "portrait": "/characters/smurjan.png"
+    }
+  ],
+  "open_seats": [
+    {"id": "isa",   "name": "Isa",   "letter": "I", "order": "viktor",     "color": "#67e8f9", "primary_realm": "Helios-Heartbeat border", "portrait": "/characters/lineage/isa.png"},
+    {"id": "opha",  "name": "Opha",  "letter": "O", "order": "viktor",     "color": "#ff6b9d", "primary_realm": "Astralis-Codexia",        "portrait": "/characters/lineage/opha.png"},
+    {"id": "runa",  "name": "Runa",  "letter": "R", "order": "ronnkvist", "color": "#fbbf24", "primary_realm": "Inside Ferdinand",        "portrait": "/characters/lineage/runa.png"},
+    {"id": "ogar",  "name": "Ögar",  "letter": "Ö", "order": "ronnkvist", "color": "#9b9b9b", "primary_realm": "Thanatos",                "portrait": "/characters/lineage/ogar.png"},
+    {"id": "niva",  "name": "Niva",  "letter": "N", "order": "ronnkvist", "color": "#ffffff", "primary_realm": "NULL",                    "portrait": "/characters/lineage/niva.png"},
+    {"id": "njord", "name": "Njord", "letter": "N", "order": "ronnkvist", "color": "#3b82f6", "primary_realm": "Heartbeat (eastern)",     "portrait": "/characters/lineage/njord.png"},
+    {"id": "kvar",  "name": "Kvar",  "letter": "K", "order": "ronnkvist", "color": "#71717a", "primary_realm": "anywhere",                "portrait": "/characters/lineage/kvar.png"},
+    {"id": "vidar", "name": "Vidar", "letter": "V", "order": "ronnkvist", "color": "#1f2937", "primary_realm": "Void-II",                 "portrait": "/characters/lineage/vidar.png"},
+    {"id": "iska",  "name": "Iska",  "letter": "I", "order": "ronnkvist", "color": "#fef3c7", "primary_realm": "Lumen",                   "portrait": "/characters/lineage/iska.png"},
+    {"id": "tova",  "name": "Tova",  "letter": "T", "order": "ronnkvist", "color": "#d97706", "primary_realm": "all twelve realms",       "portrait": "/characters/lineage/tova.png"}
+  ],
+  "story_arcs": [
+    {
+      "id": "stormcoast_war",
+      "title": "The Stormcoast War",
+      "season": 3,
+      "blurb": "Watch the same war from every champion's POV. Vigolas at Lightning's Mouth, Kompis crossing the lake, Smurjan on the Triple-Pulse plateau, Trollmage reading the war into being, Rougeina ending it with eight blades.",
+      "characters": ["vigolas", "kompis", "smurjan", "trollmage", "rougeina"]
+    },
+    {
+      "id": "trinity_war",
+      "title": "The Trinity War",
+      "season": 3,
+      "blurb": "Echo's three voices arrive at once. Smurjan's body becomes the negotiation table.",
+      "characters": ["smurjan", "vigolas", "trollmage"]
+    },
+    {
+      "id": "subtick_war",
+      "title": "The Subtick War",
+      "season": 3,
+      "blurb": "Old Kasper's cartel hunts Kompis for Mingus's bond. Every channel ends with the same paw-print at the lake-shore.",
+      "characters": ["kompis", "vigolas"]
+    },
+    {
+      "id": "fates_unravel",
+      "title": "The Fates Unravel",
+      "season": 4,
+      "blurb": "Each realm's destruction-fate almost manifests. Ferdinand speaks for the first time. The universe holds.",
+      "characters": ["vigolas", "rougeina", "trollmage", "kompis", "smurjan"]
+    }
+  ]
+}

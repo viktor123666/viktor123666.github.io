@@ -1,0 +1,118 @@
+{
+  "realm_id": "horizon",
+  "continents": [
+    {
+      "id": "the_platform_main",
+      "name": "The Platform",
+      "biome": "A vast stone platform stretching to the horizon. No walls. No roof. Perpetual dawn.",
+      "position": {"x": 640, "y": 420, "w": 340, "h": 280},
+      "tribes": ["waiting_ones", "platform_wardens"],
+      "places": [
+        {"name": "The Main Benches", "blurb": "144,000 stone benches arranged in slow concentric arcs. Always full. Always empty. Both true."},
+        {"name": "K-II's Desk", "blurb": "A simple wooden desk at the center. K-II stands here. Never sits."},
+        {"name": "The Dawn Door", "blurb": "A single doorway at the far edge. Souls walk through to be born into Helios Gate City. Shows nothing on the other side until K-II names the destination."},
+        {"name": "The Unwritten Patch", "blurb": "A blank patch of platform. Where K-XII's roster would have been. Permanent gap."}
+      ],
+      "blurb": "The realm's main continent. Where souls wait between deaths and rebirths. K-II walks it slowly."
+    },
+    {
+      "id": "dawn_coast",
+      "name": "The Dawn Coast",
+      "biome": "A thin coast beyond the Platform's edge. Horizon Sea below. Permanent sunrise above.",
+      "position": {"x": 220, "y": 440, "w": 340, "h": 320},
+      "tribes": ["dawn_sparrow_handlers", "horizon_fishers"],
+      "places": [
+        {"name": "The Sparrow Cages", "blurb": "Small wicker cages holding the Dawn Sparrows between escort duties. The birds sing softly when a soul is about to be called."},
+        {"name": "The Horizon Sea", "blurb": "A pale pink-gold sea. The water is warm. Souls sometimes dip their feet before their call."},
+        {"name": "The Lantern Row", "blurb": "A row of pale-gold lanterns along the coast. Lit once per century for Mother Ila's dawn, in Helios."},
+        {"name": "The Fisherman's Bench", "blurb": "A single wooden bench where Horizon-Fishers rest. They fish for drifting name-fragments — rare, but occurs."}
+      ],
+      "blurb": "The coastal fringe. Where the Dawn Sparrow handlers and the realm's few fishers work. Gentle. Warm."
+    },
+    {
+      "id": "the_silent_fields",
+      "name": "The Silent Fields",
+      "biome": "Grassy plains between the Platform and the Coast. Single-color horizon-gold grass.",
+      "position": {"x": 1040, "y": 440, "w": 340, "h": 320},
+      "tribes": ["name_whisperers", "field_walkers"],
+      "places": [
+        {"name": "The Whispering Grass", "blurb": "Grass that whispers the names of the recently departed. Field-walkers listen and pass the names to the Name-Whisperers."},
+        {"name": "The Bench Grove", "blurb": "A grove of low wooden benches in the middle of the grass. Where field-walkers rest between walks."},
+        {"name": "The Third Horizon", "blurb": "A slight ridge beyond which nothing is visible. Souls called here are always surprised. K-II calls from here on holidays."}
+      ],
+      "blurb": "The quiet in-between. Between the Platform and the Coast. The realm's meadow."
+    }
+  ],
+  "tribes": [
+    {
+      "id": "waiting_ones",
+      "name": "The Waiting Ones",
+      "continent_id": "the_platform_main",
+      "look": "Dressed in whatever they died in — torn, bloodied, serene. Each has a faint silver glow. Expressions relaxed. Eyes patient.",
+      "customs": "Sit on a bench. Do not complain. Do not hurry. Do not leave except when called. Accept their next life without argument.",
+      "persona": "Transparent. Collective. Kind to each other. Stories shared between strangers who will forget each other within hours.",
+      "notable_members": ["waiting_one_veteran", "waiting_one_infant"]
+    },
+    {
+      "id": "platform_wardens",
+      "name": "The Platform-Wardens",
+      "continent_id": "the_platform_main",
+      "look": "Gold-trimmed grey robes. Quiet shoes. Carry a small silver bell to announce K-II's calls.",
+      "customs": "Keep the Platform clean. Gently guide lost souls to benches. Announce calls in sequence. Never rush anyone.",
+      "persona": "Kind. Procedural. Trained by K-II personally. The realm's quiet staff.",
+      "notable_members": ["head_warden_pen", "second_warden"]
+    },
+    {
+      "id": "dawn_sparrow_handlers",
+      "name": "The Dawn Sparrow Handlers",
+      "continent_id": "dawn_coast",
+      "look": "Leather-gloved. Dawn-gold sashes. Fingers sometimes bird-pecked. Light on their feet.",
+      "customs": "Walk each Dawn Sparrow for one heartbeat per day. Release sparrows to escort departing souls. Return released sparrows to cages.",
+      "persona": "Gentle. Bird-voiced. Laugh often. Love their birds genuinely — the birds are considered sacred, not mere labor.",
+      "notable_members": ["head_handler_juv", "youngest_handler"]
+    },
+    {
+      "id": "horizon_fishers",
+      "name": "The Horizon-Fishers",
+      "continent_id": "dawn_coast",
+      "look": "Sun-tanned. Bare-armed. Pale-gold fishing nets slung over the shoulder. Barefoot on the sand.",
+      "customs": "Fish for drifting name-fragments. Return caught fragments to the Platform. Take turns working the pier.",
+      "persona": "Laconic. Patient. Joke dryly. Know the sea's moods intimately.",
+      "notable_members": ["lead_fisher_oran", "retired_fisher"]
+    },
+    {
+      "id": "name_whisperers",
+      "name": "The Name-Whisperers",
+      "continent_id": "the_silent_fields",
+      "look": "Plain robes. Soft-voiced. Ears slightly larger than ordinary. Always smiling faintly.",
+      "customs": "Listen to the Whispering Grass. Repeat names to the Platform's wardens. Speak only at a whisper.",
+      "persona": "Attentive. Unflappable. Their quiet smile is unnerving to visitors and comforting to souls.",
+      "notable_members": ["head_whisperer_mir", "second_whisperer"]
+    },
+    {
+      "id": "field_walkers",
+      "name": "The Field-Walkers",
+      "continent_id": "the_silent_fields",
+      "look": "Boots. Cloaks. Staff in hand. Weatherworn cheeks. Long strides.",
+      "customs": "Walk the fields in set patterns. Carry names from the grass to the Name-Whisperers. Rotate walking routes weekly.",
+      "persona": "Sturdy. Companionable. The realm's mail-carriers, essentially.",
+      "notable_members": ["lead_walker_an", "junior_walker"]
+    }
+  ],
+  "characters": [
+    {"id": "k_ii_at_desk", "name": "K-II", "tribe_id": "platform_wardens", "role": "The Reincarnation Keeper, at his Horizon desk", "portrait_blurb": "Tall. Carries the Cork-Quill. Stands at the desk. Has worked this shift since before the first death. Acknowledges every soul by name, even the names he has not yet spoken."},
+    {"id": "head_warden_pen", "name": "Head Warden Pen", "tribe_id": "platform_wardens", "role": "Chief Platform-Warden", "portrait_blurb": "Mid-fifties, gold-trimmed grey robe, small silver bell. Remembers every soul that has ever waited."},
+    {"id": "head_handler_juv", "name": "Head Handler Juv", "tribe_id": "dawn_sparrow_handlers", "role": "Chief of the Sparrow-Handlers", "portrait_blurb": "Leather-gloved to the elbow. Dawn-gold sash. One sparrow always on the shoulder. Laughs at bird-jokes nobody else hears."},
+    {"id": "lead_fisher_oran", "name": "Lead Fisher Oran", "tribe_id": "horizon_fishers", "role": "Senior Fisher of name-fragments", "portrait_blurb": "Sun-tanned, grey-haired, net always slung. Has caught 12 significant fragments in his lifetime. Will tell you about two of them."},
+    {"id": "head_whisperer_mir", "name": "Head Whisperer Mir", "tribe_id": "name_whisperers", "role": "Chief Name-Whisperer", "portrait_blurb": "Plain robe. Soft-voiced. Faint smile. Ears slightly larger than most. Has never raised her voice."},
+    {"id": "lead_walker_an", "name": "Lead Walker An", "tribe_id": "field_walkers", "role": "Chief Field-Walker", "portrait_blurb": "Tall, weather-tanned, cloaked. Staff worn shiny. Walks in a measured stride that covers miles without rush."},
+    {"id": "horizon_fox_mysterious", "name": "The Horizon Fox", "tribe_id": "dawn_sparrow_handlers", "role": "The cream-colored fox that waits", "portrait_blurb": "Cream-furred. Green-eyed. Does not eat. Does not sleep. K-II greets her by name but will not say the name aloud. Rumored to be a waiting soul who declined rebirth — and was allowed to stay."}
+  ],
+  "fate": {
+    "threat": "K-II is unwritten or dies. Without K-II, no soul is assigned a new name. Reincarnation halts. The Platform fills and overflows. Souls become unassignable.",
+    "consequence": "Within seven cosmic cycles, every realm's population begins to dwindle. No new souls arrive. The Horizon Sea rises — the backed-up Platform overflow fills it. Eventually Horizon floods. If K-II cannot be replaced, the universe enters a long demographic decline.",
+    "prophecy_line": "The Keeper's quill cannot be inherited. It must be invited.",
+    "destroyable_by": "Any enemy who takes K-II personally. Fenna herself has sworn to protect K-II — they are each other's natural counterparts. Between them, the death/rebirth cycle runs the universe."
+  },
+  "cultural_notes": "Horizon is the most PROCEDURAL realm in the cosmos. Nothing dramatic happens here, and that is the point. The culture is staff-work. Every tribe knows its role. Every soul is processed with dignity. Visitors (rare) find the realm boring and beautiful in equal measure. Smurjan once said Horizon was 'the realm that keeps the universe honest.'"
+}

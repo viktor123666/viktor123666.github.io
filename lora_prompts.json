@@ -1,0 +1,85 @@
+{
+  "generated_at": "2026-04-08 09:45:32",
+  "characters": {
+    "vigolas": {
+      "trigger": "vigolas_char",
+      "negative": "blurry, low quality, distorted face, extra limbs, bad anatomy, watermark, text",
+      "examples": [
+        "vigolas_char standing on the edge of a cosmic cliff, hero pose, glowing green aura, cinematic lighting, anime style",
+        "vigolas_char meditating in space, eyes closed, infinite stars behind, peaceful expression, soft glow",
+        "vigolas_char drawing his katana, dramatic side profile, wind blowing his hair, dark fantasy anime",
+        "vigolas_char laughing with eyes closed, warm smile, golden hour sunlight, casual outfit, slice of life",
+        "vigolas_char in administrator robes, glowing tablet in hand, futuristic command center, blue UI overlays",
+        "vigolas_char fighting stance with twin katanas, cinematic close-up, particles of green energy, dynamic angle",
+        "vigolas_char looking at a sunset with hands in pockets, peaceful contemplation, watercolor anime aesthetic",
+        "vigolas_char with arms raised summoning power, lightning around him, epic anime moment",
+        "vigolas_char jumping between rooftops at night, neon city below, dynamic motion blur",
+        "vigolas_char reading an ancient book in candlelight, scholarly mood, dark library, mysterious shadows"
+      ]
+    },
+    "kompis": {
+      "trigger": "kompis_char",
+      "negative": "blurry, low quality, distorted face, extra limbs, bad anatomy, watermark",
+      "examples": [
+        "kompis_char petting a golden retriever named Mingus, tender smile, golden hour, emotional warmth",
+        "kompis_char gaming intensely with a headset, RGB keyboard, focused expression, esports vibe",
+        "kompis_char laughing while running with his dog Mingus, sunny park, joyful, slice of life anime",
+        "kompis_char giving a thumbs up to camera, casual hoodie, gamer room background",
+        "kompis_char hugging Mingus the golden retriever, happy tears, sunset background, emotional reunion",
+        "kompis_char in a victory pose after winning a game, fist pump, RGB lighting, esports stage",
+        "kompis_char and Mingus walking through autumn leaves, warm colors, peaceful afternoon",
+        "kompis_char smiling at his phone, casual modern outfit, soft afternoon light, slice of life",
+        "kompis_char in a battle royale outfit, tactical gear, intense expression, video game aesthetic",
+        "kompis_char throwing a tennis ball for Mingus, action shot, joyful expression, summer day"
+      ]
+    },
+    "smurjan": {
+      "trigger": "smurjan_char",
+      "negative": "blurry, low quality, distorted face, extra limbs, bad anatomy, watermark",
+      "examples": [
+        "smurjan_char floating in deep space, cosmic aura, three faint silhouettes around him (Bali, Kali, Fused), ethereal",
+        "smurjan_char casting a void spell, hands extended, blue cosmic energy, mysterious robes",
+        "smurjan_char standing on a galaxy, looking up at the stars, contemplative pose, vast scale",
+        "smurjan_char in MOBA fighting stance, dual cosmic weapons, blue aura, dynamic anime action",
+        "smurjan_char meditating cross-legged, eyes glowing blue, void mist swirling around him, calm intensity",
+        "smurjan_char close-up portrait, three-tone glowing eyes, mysterious half-smile, dramatic blue lighting",
+        "smurjan_char summoning a black hole between his hands, focused face, dramatic anime moment",
+        "smurjan_char silhouetted against a binary sun, cape blowing in solar wind, epic wide shot",
+        "smurjan_char in casual modern clothes but with subtle blue glow under his skin, slice of life with hint of magic",
+        "smurjan_char fused form revealing all three personalities at once, prismatic effect, anime climax shot"
+      ]
+    },
+    "trollmage": {
+      "trigger": "trollmage_char",
+      "negative": "blurry, low quality, distorted face, extra limbs, bad anatomy, watermark",
+      "examples": [
+        "trollmage_char in dark robes, dropping a magical bass line, purple energy waves, dancehall meets anime",
+        "trollmage_char playing Hearthstone with glowing cards, focused expression, mage tower background",
+        "trollmage_char sitting on a Nether throne, casual cool pose, purple flames, dark fantasy",
+        "trollmage_char laughing with fangs visible, mischievous grin, jamaican-inspired patterned outfit, anime style",
+        "trollmage_char casting a dark spell over a turntable, music as magic, neon purple lighting",
+        "trollmage_char in WoW raid gear, intense expression, cinematic mage moment, dramatic sky",
+        "trollmage_char relaxing with headphones on, eyes closed, feeling the bass, casual pose",
+        "trollmage_char surrounded by floating ancestor spirits, glowing green and purple, ceremonial pose",
+        "trollmage_char in a club setting, glowing dance floor, magic circle around him, music + magic fusion",
+        "trollmage_char close-up smirk, golden chain with HADOM symbol, dark patois aesthetic"
+      ]
+    },
+    "rougeina": {
+      "trigger": "rougeina_char",
+      "negative": "blurry, low quality, distorted face, extra limbs, bad anatomy, watermark",
+      "examples": [
+        "rougeina_char dancing in a cosmic rave, starlight strobes, pink hair flying, joyful expression",
+        "rougeina_char in WoW solo gear, fighting stance, magical pink aura, anime mage warrior",
+        "rougeina_char playing a One Piece TCG card with confidence, neon arcade background, focused smile",
+        "rougeina_char crying single tear of starlight, beautiful melancholic close-up, soft pink lighting",
+        "rougeina_char with arms raised in a euphoric rave moment, lasers around her, cosmic energy",
+        "rougeina_char in a starry meadow, peaceful smile, flowers in her hair, slice of life",
+        "rougeina_char DJing with cosmic decks, magenta glow, particles flying, anime concert scene",
+        "rougeina_char in a casual streetwear outfit, neon city night background, aesthetic anime girl",
+        "rougeina_char hugging her knees, sitting under stars, contemplative emotional moment",
+        "rougeina_char mid-jump in a dance move, motion blur, rave outfit, ecstatic expression"
+      ]
+    }
+  }
+}

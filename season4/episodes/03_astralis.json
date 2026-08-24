@@ -1,0 +1,35 @@
+{
+  "id": "s4e03_the_floor_forgets",
+  "number": 3,
+  "title": "The Floor Forgets",
+  "subtitle": "Episode 3 of 12 · Season 4: The Fates Unravel",
+  "realm_id": "astralis",
+  "fate_triggered": "A single Starfloor star permanently dims (the first such loss in 7000 years).",
+  "pov_characters": ["rougeina_herself", "lume_the_shadow"],
+  "supporting": ["the_flicker_girl", "first_sad_star", "merchant_fen_dros"],
+  "synopsis": "Rougeina returns from Helios with a new awareness — that her domain is not invulnerable, that even Astralis has a count. The Starfloor has 4 trillion 800 billion stars (the same count as Root-Spirit Elder 4.8B's heartbeat tally — not a coincidence, the Architects say). Tonight, one of them stops pulsing. A small star at the edge of Rougeina's Ring, the one that had been the laugh of a small girl at her father's wedding in a timeline where the wedding actually happened. The star fades. Lume FEELS it before Rougeina does — a half-heartbeat earlier, of course — and stops dancing for the first time in canon history. The Starfloor briefly skips a beat. Three thousand dancers stumble. Rougeina's instinct is to dance HARDER, to compensate, to fill the gap with her own joy. She begins. Lume catches her arm. 'Don't,' Lume says. 'You'll burn.' Rougeina has never been told 'don't' by Lume in 8000 years. She stops. Together they walk to the dim star. They sit beside it. They do not dance. They simply mourn for forty heartbeats. The star does NOT relight. But the Starfloor's other stars synchronize their pulses to honor it. The First Sad Star arrives from the Afterglow Wastes — the FIRST cross-continent visit in canon — and joins the vigil. Astralis survives.",
+  "key_scenes": [
+    {"location": "Rougeina's Ring on the Starfloor, midnight", "action": "Lume stops dancing. The Starfloor skips a beat. Three thousand dancers stumble."},
+    {"location": "The dim star at the Ring's edge", "action": "Rougeina kneels. The star is cold. It will not relight."},
+    {"location": "Rougeina's solo dance attempt", "action": "Rougeina begins to dance to fill the gap. Lume catches her arm. 'Don't.'"},
+    {"location": "Vigil at the dim star", "action": "Rougeina, Lume, the Flicker-Girl, Merchant Fen-Dros all sit. They mourn for forty heartbeats."},
+    {"location": "Arrival of the First Sad Star", "action": "From the Afterglow Wastes — the first cross-continent visit. Joins the vigil."},
+    {"location": "The Starfloor synchronizing its pulses", "action": "Every other star synchronizes one beat in honor."}
+  ],
+  "cliffhanger": "Lume, returning to her shadow-form at dawn, asks Rougeina a question she has never asked: 'Could YOU have caused this?' Rougeina does not answer.",
+  "panel_storyboard": [
+    {"panel": 1, "composition": "Wide shot of the Starfloor at midnight. Thousands of dancers moving as one. Rougeina at the center.", "character": "rougeina_herself", "camera": "high overhead", "emotion": "joy"},
+    {"panel": 2, "composition": "Close-up of the edge-star fading. A single dancing figure paused beside it (a wedding memory).", "character": null, "camera": "macro", "emotion": "loss"},
+    {"panel": 3, "composition": "Lume stops mid-step. Her shadow-form goes still. Three thousand dancers stumble in synchronization.", "character": "lume_the_shadow", "camera": "wide ensemble", "emotion": "shock"},
+    {"panel": 4, "composition": "Rougeina kneeling beside the dim star, hand hovering above its glass. Cold visible as faint frost.", "character": "rougeina_herself", "camera": "tight low-angle", "emotion": "reverence"},
+    {"panel": 5, "composition": "Rougeina starts to rise, beginning to dance. Lume's shadow-arm extends and grips Rougeina's wrist.", "character": null, "camera": "two-shot", "emotion": "intervention", "dialogue": "Lume: 'Don't. You'll burn.'"},
+    {"panel": 6, "composition": "Vigil scene. Rougeina, Lume, Flicker-Girl, Fen-Dros seated in a small circle around the dim star. The Flicker-Girl is, for the first time, motionless.", "character": null, "camera": "high overhead vigil", "emotion": "shared mourning"},
+    {"panel": 7, "composition": "First Sad Star arriving. A dim humanoid silhouette walking across the Starfloor toward the vigil.", "character": "first_sad_star", "camera": "long lens hero shot", "emotion": "kinship"},
+    {"panel": 8, "composition": "Wide overhead shot of the Starfloor synchronizing one collective pulse. All four trillion eight hundred billion stars pulsing once together.", "character": null, "camera": "cosmic wide", "emotion": "honor", "caption": "Every star synchronized one beat. For the one that could not."},
+    {"panel": 9, "composition": "Dawn. Rougeina seated at the edge of Rougeina's Ring. Lume folding back into shadow-form behind her.", "character": "lume_the_shadow", "camera": "tight profile", "emotion": "private fear", "dialogue": "Lume: 'Could YOU have caused this?'"}
+  ],
+  "cosmic_price_paid": "Astralis now has 4 trillion 7 billion 999 million 999 thousand 999 stars. The First Sad Star will visit the Starfloor every century from now on.",
+  "callout_for_cosmos_drawer": "In Season 4, a single Starfloor star permanently dimmed. Rougeina mourned. Lume asked the question Rougeina cannot yet answer.",
+  "watch_chapter": null,
+  "read_chapter": null
+}

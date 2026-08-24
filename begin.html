@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Begin — Scalelist Universe</title>
+<meta name="description" content="The gate into the Scalelist Universe. One name, five faces, nine realms, one tree. Enter."/>
+<meta property="og:title" content="Begin — Scalelist Universe"/>
+<meta property="og:description" content="Yet we are part of something. Step through the gate."/>
+<meta property="og:image" content="https://scalelistuniverse.com/art/begin/ferdinand.webp"/>
+<link rel="stylesheet" href="/su.css"/>
+<script defer src="/su.js"></script>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
+<style>
+  /* page-specific only — everything else inherits su.css tokens */
+  .begin-hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;padding:5rem 1.2rem 4rem;overflow:hidden;}
+  .begin-hero .art{position:absolute;inset:0;z-index:-1;background:
+    radial-gradient(1200px 700px at 50% 35%, transparent, var(--void) 80%),
+    linear-gradient(180deg, rgba(5,5,9,.45), rgba(5,5,9,.9)),
+    url('/art/begin/ferdinand.webp') center/cover no-repeat,
+    radial-gradient(900px 600px at 50% 30%, rgba(0,170,255,.12), transparent 60%);}
+  .begin-hero .kicker{font-family:var(--font-display);color:var(--gold);letter-spacing:.34em;
+    text-transform:uppercase;font-size:.78rem;margin-bottom:1.1rem;}
+  .begin-hero h1{font-size:clamp(2.6rem,7vw,5rem);text-shadow:0 4px 40px rgba(0,0,0,.7);}
+  .begin-hero .lede{max-width:60ch;color:var(--text);font-size:1.15rem;font-style:italic;margin:1.4rem auto 0;
+    text-shadow:0 2px 20px rgba(0,0,0,.8);}
+  .begin-hero .su-cta{margin-top:2.2rem;}
+  .scrolldown{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);color:var(--gold);
+    font-size:1.4rem;animation:bob 1.8s ease-in-out infinite;opacity:.8;}
+  @keyframes bob{50%{transform:translate(-50%,8px);}}
+
+  /* sound toggle */
+  #snd{position:fixed;right:14px;bottom:14px;z-index:1100;background:rgba(7,8,16,.8);
+    border:1px solid var(--border-bright);color:var(--gold);border-radius:999px;width:46px;height:46px;
+    cursor:pointer;font-size:1.1rem;backdrop-filter:blur(8px);transition:transform .2s;}
+  #snd:hover{transform:scale(1.08);}
+
+  /* journey chapters */
+  .chapter{min-height:78vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:4rem 1.2rem;border-top:1px solid rgba(201,168,76,.08);}
+  .chapter .truth{font-family:var(--font-display);font-size:clamp(1.8rem,4.6vw,3rem);color:#fff;max-width:18ch;line-height:1.25;}
+  .chapter .say{max-width:58ch;color:var(--text-dim);font-size:1.08rem;margin-top:1.2rem;line-height:1.7;}
+  .chapter .say b{color:var(--text);}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* realms grid */
+  .realms{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;max-width:880px;margin:2rem auto 0;}
+  .realm{border:1px solid var(--border);border-left:3px solid var(--rc,var(--gold));border-radius:10px;
+    padding:.8rem .9rem;text-align:left;background:var(--panel);transition:transform .2s,border-color .2s;}
+  .realm:hover{transform:translateY(-3px);border-color:var(--rc,var(--gold));}
+  .realm b{color:var(--rc,var(--gold));font-family:var(--font-display);letter-spacing:.06em;font-size:.92rem;}
+  .realm span{display:block;color:var(--text-dim);font-size:.74rem;margin-top:.2rem;}
+
+  /* doors */
+  .doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;max-width:980px;margin:1.6rem auto 0;}
+  .door{position:relative;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+    min-height:160px;display:flex;flex-direction:column;justify-content:flex-end;padding:1.3rem;
+    background:var(--panel);transition:transform .28s,border-color .28s,box-shadow .28s;}
+  .door:hover{transform:translateY(-5px);border-color:var(--accent,var(--gold));box-shadow:var(--shadow),var(--glow-gold);}
+  .door h3{color:#fff;} .door p{color:var(--text-dim);font-size:.85rem;margin-top:.2rem;}
+  .door .go{color:var(--accent,var(--gold));font-weight:800;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;margin-top:.7rem;}
+</style>
+</head>
+<body>
+
+  <!-- HERO ============================================================= -->
+  <section class="begin-hero">
+    <div class="art"></div>
+    <div class="kicker su-fade">Yet we are part of something</div>
+    <h1 class="su-fade-2">Enter the Scalelist Universe</h1>
+    <p class="lede su-fade-3">One name became a cipher. The cipher became five faces, nine realms, and one tree that holds them all. This is the gate. Step through.</p>
+    <div class="su-cta su-fade-3">
+      <a class="su-btn" href="/cosmos">Enter the Cosmos</a>
+      <a class="su-btn-ghost" href="/manga">Read the Manga</a>
+      <a class="su-btn-ghost" href="/lineage">The Lineage</a>
+    </div>
+    <div class="scrolldown">↓</div>
+  </section>
+
+  <!-- THE JOURNEY ====================================================== -->
+  <section class="chapter">
+    <div class="reveal">
+      <div class="truth">It begins with a name.</div>
+      <p class="say">The Author's true name — <b>Viktor Rönnkvist</b> — is the cosmic cipher. Fifteen letters, fifteen souls, and the Author himself as the sixteenth. Nothing else in fiction is built this way: the world IS the man, spelled out.</p>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="reveal">
+      <div class="truth">Five faces. One soul.</div>
+      <p class="say">Vigolas, Kompis, Smurjan, Rougeina, Trollmage — they look like five champions. They are <b>five fragments of one source-soul</b>, wearing different faces. The Exodia Principle: without one part, the whole cannot be summoned. They are Vigge, distributed.</p>
+      <div class="su-fade" style="margin-top:1.4rem;display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;">
+        <a class="su-chip c-vigolas" href="/wiki">Vigolas</a>
+        <a class="su-chip c-rougeina" href="/wiki">Rougeina</a>
+        <a class="su-chip c-kompis" href="/wiki">Kompis</a>
+        <a class="su-chip c-smurjan" href="/wiki">Smurjan</a>
+        <a class="su-chip c-trollmage" href="/wiki">Trollmage</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="reveal">
+      <div class="truth">Nine realms, on one tree.</div>
+      <p class="say"><b>Ferdinand</b> — the cosmic cork-oak, patient and bull-hearted — holds all nine realms on his branches. His bark regrows in a single heartbeat; the Architects use that cork to seal the deepest void.</p>
+      <div class="realms">
+        <div class="realm" style="--rc:var(--gold)"><b>Scalelist</b><span>The Prime — all roads converge</span></div>
+        <div class="realm" style="--rc:var(--vigolas)"><b>Helios</b><span>Vigolas · the sovereign sun</span></div>
+        <div class="realm" style="--rc:var(--rougeina)"><b>Astralis</b><span>Rougeina · the starlit court</span></div>
+        <div class="realm" style="--rc:var(--trollmage)"><b>Codexia</b><span>Trollmage · the sin-library</span></div>
+        <div class="realm" style="--rc:var(--kompis)"><b>Heartbeat</b><span>Kompis &amp; Mingus · time is love</span></div>
+        <div class="realm" style="--rc:var(--smurjan)"><b>Trinity</b><span>Smurjan · three-in-one</span></div>
+        <div class="realm" style="--rc:#cfd6e6"><b>Thanatos</b><span>Fenna · the scorer's shore</span></div>
+        <div class="realm" style="--rc:#6b6f7d"><b>Null</b><span>the recycling void</span></div>
+        <div class="realm" style="--rc:#3a3550"><b>Void-II</b><span>Architects only · sealed</span></div>
+      </div>
+      <div class="su-cta" style="margin-top:1.6rem;"><a class="su-btn-ghost" href="/cosmos">Walk the realms →</a></div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="reveal">
+      <div class="truth">Time is measured in heartbeats.</div>
+      <p class="say"><b>HADOM</b> — Swedish <i>hjärtslag</i> — is how many actions you resolve in a single heartbeat. A normal human: one. The champions: thousands. Vigolas: ∞−1. It is the tick-rate of reality itself.</p>
+      <div class="su-cta" style="margin-top:1.4rem;"><a class="su-btn-ghost" href="/hadom">Understand HADOM →</a></div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="reveal">
+      <div class="truth">And one soul is forever.</div>
+      <p class="say"><b>Mingus</b> — the golden retriever whose love makes time irrelevant. Kompis's eternal companion. When he is near, one blink can hold a thousand days. The dog is forever.</p>
+      <div class="su-cta" style="margin-top:1.4rem;"><a class="su-btn-ghost" href="/mingus">For Mingus →</a></div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="reveal">
+      <div class="truth">It all converges.</div>
+      <p class="say">The moment the five remember they are one — the <b>Convergence</b> — is the Titanomachy, the five equal thrones, and the opening scene of the world to come. You arrive after it. You are the sixth fragment.</p>
+    </div>
+  </section>
+
+  <!-- CHOOSE YOUR DOOR ================================================= -->
+  <section class="su-section">
+    <div class="su-wrap">
+      <div class="su-section-title">Choose your door</div>
+      <div class="doors">
+        <a class="door" href="/cosmos" style="--accent:var(--smurjan)"><h3>The Cosmos</h3><p>Walk the nine realms on Ferdinand's branches.</p><span class="go">Enter →</span></a>
+        <a class="door" href="/manga" style="--accent:var(--trollmage)"><h3>The Manga</h3><p>The saga, drawn — from Origins to the Convergence.</p><span class="go">Read →</span></a>
+        <a class="door" href="/lineage" style="--accent:var(--rougeina)"><h3>The Lineage</h3><p>The cipher of Viktor Rönnkvist — all sixteen souls.</p><span class="go">Decode →</span></a>
+        <a class="door" href="/wiki" style="--accent:var(--gold)"><h3>The Wiki</h3><p>Every character, realm, and law of the universe.</p><span class="go">Explore →</span></a>
+      </div>
+    </div>
+  </section>
+
+  <button id="snd" title="Ambient sound on/off" aria-label="Sound">♪</button>
+
+  <script>
+  // scroll-reveal
+  (function(){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.2});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  })();
+  // ambient cosmic drone via Web Audio (no asset; toggles on user gesture)
+  (function(){
+    var btn=document.getElementById('snd'),ctx,master,on=false,nodes=[];
+    btn.addEventListener('click',function(){
+      if(!ctx){
+        ctx=new (window.AudioContext||window.webkitAudioContext)();
+        master=ctx.createGain();master.gain.value=0;master.connect(ctx.destination);
+        var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=520;lp.connect(master);
+        [55,82.4,110,164.8].forEach(function(f,i){
+          var o=ctx.createOscillator();o.type=i%2?'sine':'triangle';o.frequency.value=f;
+          var g=ctx.createGain();g.gain.value=.16;o.connect(g);g.connect(lp);o.start();nodes.push(o);
+        });
+        var lfo=ctx.createOscillator();lfo.frequency.value=.07;var lg=ctx.createGain();lg.gain.value=180;
+        lfo.connect(lg);lg.connect(lp.frequency);lfo.start();
+      }
+      on=!on;
+      master.gain.cancelScheduledValues(ctx.currentTime);
+      master.gain.linearRampToValueAtTime(on?0.09:0, ctx.currentTime+ (on?1.2:0.5));
+      btn.textContent=on?'♫':'♪';btn.style.color=on?'#e8c86a':'';
+    });
+  })();
+  </script>
+</body>
+</html>

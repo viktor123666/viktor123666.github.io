@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Relationship Graph — Scalelist Universe</title>
+<meta name="description" content="Every soul, realm and thread of the Scalelist Universe as a living force-directed graph. The five fragments orbit the source-soul; the nine guardians hold Ferdinand. Drag, zoom, click through to the wiki.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  .gr-head{text-align:center;padding:2.4rem 1.2rem 1rem;}
+  .gr-head h1{font-family:var(--font-display);font-size:clamp(1.8rem,4.5vw,2.8rem);color:#fff;letter-spacing:.06em;}
+  .gr-head .su-kicker{margin-bottom:.6rem;}
+  .gr-head p{color:var(--text-dim);max-width:60ch;margin:.6rem auto 0;font-size:.92rem;}
+  .legend{display:flex;flex-wrap:wrap;gap:.5rem .9rem;justify-content:center;margin:1rem auto 0;max-width:760px;}
+  .legend span{display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--text-dim);letter-spacing:.04em;}
+  .legend i{width:11px;height:11px;border-radius:50%;display:inline-block;}
+  #wrap{position:relative;width:100%;height:74vh;min-height:520px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    background:radial-gradient(900px 500px at 50% 40%,rgba(0,170,255,.05),transparent 70%);overflow:hidden;}
+  #wrap svg{width:100%;height:100%;cursor:grab;}
+  #wrap svg:active{cursor:grabbing;}
+  .link{stroke-opacity:.35;}
+  .node circle,.node rect{cursor:pointer;transition:stroke-width .15s;}
+  .node text{font-family:var(--font-display);fill:#e7dfc6;font-size:9px;pointer-events:none;text-anchor:middle;
+    paint-order:stroke;stroke:rgba(5,5,9,.85);stroke-width:2.4px;}
+  .node.big text{font-size:11px;fill:#fff;}
+  .tip{position:absolute;pointer-events:none;z-index:10;background:var(--panel-solid);border:1px solid var(--c,var(--border-bright));
+    border-radius:10px;padding:.5rem .7rem;display:none;max-width:220px;box-shadow:0 12px 30px -12px #000;}
+  .tip.show{display:block;}
+  .tip img{width:100%;height:84px;object-fit:cover;object-position:center top;border-radius:6px;margin-bottom:.4rem;}
+  .tip .nm{font-family:var(--font-display);color:#fff;font-size:.95rem;}
+  .tip .ro{color:var(--c,var(--gold));font-size:.72rem;font-weight:700;}
+  .tip .go{color:var(--text-dim);font-size:.66rem;margin-top:.25rem;letter-spacing:.06em;text-transform:uppercase;}
+  .ctrl{position:absolute;top:.7rem;right:.7rem;display:flex;gap:.4rem;}
+  .ctrl button{background:rgba(8,9,18,.8);border:1px solid var(--border);color:var(--gold);border-radius:8px;
+    width:34px;height:34px;cursor:pointer;font-size:1rem;backdrop-filter:blur(4px);}
+  .ctrl button:hover{border-color:var(--border-bright);}
+</style>
+</head>
+<body>
+
+<div class="gr-head">
+  <div class="su-kicker">How it all connects</div>
+  <h1>The Relationship Graph</h1>
+  <p>The five fragments orbit the source-soul. The nine guardians hold Ferdinand. The threads between are canon. Drag a node, scroll to zoom, click any soul to open its wiki entry.</p>
+  <div class="legend">
+    <span><i style="background:#c9a84c"></i>Source / Tree</span>
+    <span><i style="background:#00ff88"></i>Fragment (champion)</span>
+    <span><i style="background:#67e8f9"></i>Lineage soul</span>
+    <span><i style="background:#38bdf8"></i>Guardian</span>
+    <span><i style="background:#888;border-radius:2px"></i>Realm</span>
+  </div>
+</div>
+
+<div id="wrap">
+  <div class="ctrl"><button id="zin">+</button><button id="zout">−</button><button id="zfit" title="reset">⟲</button></div>
+  <div class="tip" id="tip"></div>
+</div>
+
+<script>
+const ROOT="/characters/art";
+const N=[
+ {id:"source",label:"The Author",grp:"source",c:"#c9a84c",r:26,role:"The source-soul · the cipher",wiki:"lineage"},
+ {id:"ferdinand",label:"Ferdinand",grp:"tree",c:"#d4a056",r:21,role:"The cork-oak world-tree",wiki:"ferdinand"},
+ // fragments
+ {id:"vigolas",label:"Vigolas",grp:"frag",c:"#00ff88",r:17,role:"The Infinite Administrator",img:1},
+ {id:"kompis",label:"Kompis",grp:"frag",c:"#ffaa00",r:17,role:"The Buddy",img:1},
+ {id:"smurjan",label:"Smurjan",grp:"frag",c:"#00aaff",r:17,role:"The Void Three · the bridge",img:1},
+ {id:"rougeina",label:"Rougeina",grp:"frag",c:"#ff3366",r:17,role:"The Star-Dancer",img:1},
+ {id:"trollmage",label:"Trollmage",grp:"frag",c:"#9933ff",r:17,role:"The Codex-Keeper",img:1},
+ {id:"mingus",label:"Mingus",grp:"comp",c:"#e9b949",r:14,role:"The Eternal Companion",img:1},
+ // viktor lineage (non-champion letters)
+ {id:"isa",label:"Isa",grp:"line",c:"#67e8f9",r:12,role:"The Stillborn Heartbeat",img:1},
+ {id:"opha",label:"Opha",grp:"line",c:"#d946ef",r:12,role:"The Conjunction",img:1},
+ // ronnkvist council
+ {id:"runa",label:"Runa",grp:"guard",c:"#d4a056",r:12,role:"The First Rune-Speaker",img:1},
+ {id:"ogar",label:"Ögar",grp:"guard",c:"#a78bfa",r:12,role:"The Far-Eye Watcher",img:1},
+ {id:"niva",label:"Niva",grp:"guard",c:"#e5e7eb",r:12,role:"The Untraversed",img:1},
+ {id:"njord",label:"Njord",grp:"guard",c:"#38bdf8",r:12,role:"The Tide-Reader",img:1},
+ {id:"kvar",label:"Kvar",grp:"guard",c:"#c2675a",r:12,role:"The Last One",img:1},
+ {id:"vidar",label:"Vidar",grp:"guard",c:"#cdb878",r:12,role:"The Silent Reckoner",img:1},
+ {id:"iska",label:"Iska",grp:"guard",c:"#fbbf24",r:12,role:"The Spark-Carrier",img:1},
+ {id:"tova",label:"Tova",grp:"guard",c:"#f59e0b",r:12,role:"The Thunder-Herald",img:1},
+ // realms (rect)
+ {id:"helios",label:"Helios",grp:"realm",c:"#00ff88",r:12,role:"Vigolas's Storm Court"},
+ {id:"astralis",label:"Astralis",grp:"realm",c:"#ff3366",r:12,role:"Rougeina's galaxy floor"},
+ {id:"codexia",label:"Codexia",grp:"realm",c:"#9933ff",r:12,role:"Trollmage's obsidian ring"},
+ {id:"heartbeat",label:"Heartbeat",grp:"realm",c:"#ffaa00",r:12,role:"Kompis & Mingus's realm"},
+ {id:"trinity",label:"Trinity",grp:"realm",c:"#00aaff",r:12,role:"Smurjan's triple void"},
+ {id:"thanatos",label:"Thanatos",grp:"realm",c:"#a78bfa",r:11,role:"The spiral graveyard"},
+ {id:"null",label:"The Null",grp:"realm",c:"#e5e7eb",r:11,role:"The realm of absence"},
+ {id:"void2",label:"Void-II",grp:"realm",c:"#cdb878",r:11,role:"The Architects' chamber"},
+];
+const L=[
+ // exodia: source -> fragments
+ ...["vigolas","kompis","smurjan","rougeina","trollmage"].map(target=>({source:"source",target,k:"exodia"})),
+ // the name also holds isa + opha (VIKTOR letters)
+ {source:"source",target:"isa",k:"name"},{source:"source",target:"opha",k:"name"},
+ // rules: champion -> realm
+ {source:"vigolas",target:"helios",k:"rule"},{source:"rougeina",target:"astralis",k:"rule"},{source:"trollmage",target:"codexia",k:"rule"},
+ {source:"kompis",target:"heartbeat",k:"rule"},{source:"smurjan",target:"trinity",k:"rule"},
+ // companion
+ {source:"kompis",target:"mingus",k:"bond"},{source:"mingus",target:"heartbeat",k:"thread"},
+ // ferdinand holds the realms
+ ...["helios","astralis","codexia","heartbeat","trinity","thanatos","null","void2"].map(target=>({source:"ferdinand",target,k:"holds"})),
+ // the nine guardians hold ferdinand
+ ...["runa","ogar","niva","njord","kvar","vidar","iska","smurjan","tova"].map(source=>({source,target:"ferdinand",k:"guard"})),
+ // canon threads
+ {source:"isa",target:"vigolas",k:"thread"},{source:"isa",target:"kompis",k:"thread"},
+ {source:"opha",target:"trollmage",k:"thread"},{source:"opha",target:"rougeina",k:"thread"},
+ {source:"runa",target:"trollmage",k:"thread"},{source:"ogar",target:"thanatos",k:"thread"},{source:"ogar",target:"niva",k:"thread"},
+ {source:"niva",target:"null",k:"thread"},{source:"niva",target:"mingus",k:"thread"},
+ {source:"njord",target:"kompis",k:"thread"},{source:"iska",target:"mingus",k:"thread"},
+ {source:"vidar",target:"void2",k:"thread"},{source:"kvar",target:"void2",k:"thread"},
+];
+const EK={exodia:{c:"#c9a84c",w:2.6},name:{c:"#c9a84c",w:1.2},rule:{c:"#8a8",w:1.4},holds:{c:"#d4a056",w:1},
+  guard:{c:"#cdb878",w:1},bond:{c:"#e9b949",w:2},thread:{c:"#5b8cff",w:1}};
+
+const wrap=document.getElementById("wrap"); let W=wrap.clientWidth,H=wrap.clientHeight;
+const svg=d3.select("#wrap").append("svg").attr("viewBox",[0,0,W,H]);
+const g=svg.append("g");
+const zoom=d3.zoom().scaleExtent([.35,3]).on("zoom",e=>g.attr("transform",e.transform));
+svg.call(zoom);
+
+const link=g.append("g").selectAll("line").data(L).join("line")
+  .attr("class","link").attr("stroke",d=>EK[d.k].c).attr("stroke-width",d=>EK[d.k].w);
+
+const node=g.append("g").selectAll("g").data(N).join("g")
+  .attr("class",d=>"node"+(d.grp==="source"||d.grp==="tree"?" big":""))
+  .call(d3.drag().on("start",ds).on("drag",dd).on("end",de))
+  .on("click",(e,d)=>{ location.href="/wiki#"+(d.wiki||d.id); })
+  .on("mousemove",(e,d)=>showTip(e,d)).on("mouseleave",hideTip);
+
+node.each(function(d){
+  const el=d3.select(this);
+  if(d.grp==="realm"){
+    el.append("rect").attr("x",-d.r).attr("y",-d.r).attr("width",d.r*2).attr("height",d.r*2)
+      .attr("rx",3).attr("transform","rotate(45)").attr("fill","rgba(10,11,22,.9)").attr("stroke",d.c).attr("stroke-width",1.6);
+  } else {
+    el.append("circle").attr("r",d.r).attr("fill",d.grp==="source"?"radial-gradient":"rgba(10,11,22,.92)")
+      .attr("fill",`color-mix(in srgb,${d.c} 22%,#0a0b16)`).attr("stroke",d.c)
+      .attr("stroke-width",d.grp==="source"?3:2);
+    if(d.grp==="source") el.select("circle").style("filter","drop-shadow(0 0 14px "+d.c+")")
+      .append("animate").attr("attributeName","r").attr("values",d.r+";"+(d.r+3)+";"+d.r).attr("dur","2.6s").attr("repeatCount","indefinite");
+  }
+  el.append("text").attr("dy",d.r+11).text(d.label);
+});
+
+const sim=d3.forceSimulation(N)
+  .force("link",d3.forceLink(L).id(d=>d.id).distance(d=>d.k==="exodia"?70:d.k==="holds"?60:d.k==="guard"?80:75).strength(d=>d.k==="exodia"?.5:.18))
+  .force("charge",d3.forceManyBody().strength(-260))
+  .force("center",d3.forceCenter(W/2,H/2))
+  .force("collide",d3.forceCollide().radius(d=>d.r+16))
+  .on("tick",()=>{
+    link.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+    node.attr("transform",d=>`translate(${d.x},${d.y})`);
+  });
+
+function ds(e,d){if(!e.active)sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y;}
+function dd(e,d){d.fx=e.x;d.fy=e.y;}
+function de(e,d){if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}
+
+const tip=document.getElementById("tip");
+function showTip(e,d){
+  tip.style.setProperty("--c",d.c);
+  const img=d.img?`<img src="${ROOT}/${d.id}/${d.id}_hero.webp" alt="${d.label}">`:"";
+  tip.innerHTML=`${img}<div class="nm">${d.label}</div><div class="ro">${d.role}</div><div class="go">click → wiki</div>`;
+  tip.classList.add("show");
+  const x=Math.min(e.offsetX+16,wrap.clientWidth-230), y=Math.min(e.offsetY+16,wrap.clientHeight-150);
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+}
+function hideTip(){tip.classList.remove("show");}
+
+document.getElementById("zin").onclick=()=>svg.transition().call(zoom.scaleBy,1.4);
+document.getElementById("zout").onclick=()=>svg.transition().call(zoom.scaleBy,.7);
+document.getElementById("zfit").onclick=()=>svg.transition().call(zoom.transform,d3.zoomIdentity);
+addEventListener("resize",()=>{W=wrap.clientWidth;H=wrap.clientHeight;svg.attr("viewBox",[0,0,W,H]);sim.force("center",d3.forceCenter(W/2,H/2)).alpha(.3).restart();});
+</script>
+</body>
+</html>

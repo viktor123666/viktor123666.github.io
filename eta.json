@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-04-08 14:09:47",
+  "done": 17,
+  "avg_pace_sec": 2741.2103234678507,
+  "median_pace_sec": 2780.101886510849,
+  "last_clip_at": "2026-04-08 14:05:58",
+  "predictions": [
+    {
+      "clip_number": 18,
+      "eta_clock": "14:51",
+      "eta_ts": 1775652699.2645388,
+      "mins_from_now": 41.86082541545232
+    },
+    {
+      "clip_number": 19,
+      "eta_clock": "15:37",
+      "eta_ts": 1775655440.474862,
+      "mins_from_now": 87.54766413768132
+    },
+    {
+      "clip_number": 20,
+      "eta_clock": "16:23",
+      "eta_ts": 1775658181.6851857,
+      "mins_from_now": 133.23450286388396
+    },
+    {
+      "clip_number": 21,
+      "eta_clock": "17:08",
+      "eta_ts": 1775660922.895509,
+      "mins_from_now": 178.921341586113
+    },
+    {
+      "clip_number": 22,
+      "eta_clock": "17:54",
+      "eta_ts": 1775663664.1058326,
+      "mins_from_now": 224.60818031231562
+    },
+    {
+      "clip_number": 23,
+      "eta_clock": "18:40",
+      "eta_ts": 1775666405.316156,
+      "mins_from_now": 270.2950190345446
+    },
+    {
+      "clip_number": 24,
+      "eta_clock": "19:25",
+      "eta_ts": 1775669146.5264795,
+      "mins_from_now": 315.9818577607473
+    },
+    {
+      "clip_number": 25,
+      "eta_clock": "20:11",
+      "eta_ts": 1775671887.736803,
+      "mins_from_now": 361.6686964869499
+    },
+    {
+      "clip_number": 26,
+      "eta_clock": "20:57",
+      "eta_ts": 1775674628.9471264,
+      "mins_from_now": 407.3555352091789
+    },
+    {
+      "clip_number": 27,
+      "eta_clock": "21:42",
+      "eta_ts": 1775677370.15745,
+      "mins_from_now": 453.0423739353816
+    }
+  ]
+}

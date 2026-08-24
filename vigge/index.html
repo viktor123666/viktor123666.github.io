@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ViggeClips — every short worth posting, found automatically</title>
+<meta name="description" content="Upload one stream and get back every short worth posting — captioned, vertical, ready for TikTok, Reels and Shorts. Any recording, any language. Two free hours every month."/>
+<meta property="og:title" content="ViggeClips — turn one stream into every short worth posting"/>
+<meta property="og:description" content="Upload once. The engine finds every clip-worthy moment and hands back finished vertical shorts — captioned and ready to post."/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" href="/emblem.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="stylesheet" href="/cf.css?v=202608232310"/>
+<script defer src="/cf.js?v=202608232310"></script>
+<style>/* Sidspecifik CSS — delade regler bor i cf.css */
+/* see it happen — the walkthrough */
+.demo{margin-top:1.8rem;display:grid;grid-template-columns:1fr auto;gap:1.4rem;align-items:start}
+@media(max-width:820px){.demo{grid-template-columns:1fr}.dnav{display:none}}
+.dwin{border:1px solid var(--edge2);border-radius:.7rem;background:linear-gradient(180deg,#0f1316,#0a0c0e);
+  box-shadow:0 2rem 4rem rgba(0,0,0,.55),0 0 0 1px rgba(217,165,49,.06);overflow:hidden;min-height:22rem}
+.dbar{display:flex;align-items:center;gap:.4rem;padding:.6rem .8rem;border-bottom:1px solid var(--edge);background:var(--bg2)}
+.dbar i{width:.6rem;height:.6rem;border-radius:50%;background:var(--edge2)}
+.dbar .durl{margin-left:.6rem;font-family:var(--mono);font-size:.68rem;color:var(--dim2);letter-spacing:.08em}
+.dbody{position:relative;padding:1.4rem 1.4rem 1.6rem;min-height:27rem}
+.dstep{position:absolute;inset:1.4rem 1.4rem 1.6rem;opacity:0;transform:translateY(10px);pointer-events:none;
+  transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1)}
+.dstep.on{opacity:1;transform:none;pointer-events:auto}
+.dlbl{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.9rem}
+.dlbl b{color:var(--ink);font-weight:500;text-transform:none;letter-spacing:0}
+.dsm{color:var(--dim2)}
+.dlink{display:flex;gap:.6rem;align-items:stretch}
+.dinput{flex:1;min-height:2.6rem;border:1px solid var(--edge2);background:#0b0e11;border-radius:.3rem;padding:.6rem .8rem;
+  font-family:var(--mono);font-size:.82rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dinput .caret{display:inline-block;width:1px;height:1em;background:var(--gold2);vertical-align:-.15em;margin-left:1px;animation:dblink 1s steps(1) infinite}
+@keyframes dblink{50%{opacity:0}}
+.dbtn{display:inline-flex;align-items:center;padding:.6rem 1rem;background:var(--gold);color:#0a0805;font-family:var(--mono);
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-radius:.3rem;transition:transform .2s,box-shadow .2s}
+.dbtn.pulse{transform:scale(.97);box-shadow:0 0 0 .5rem rgba(217,165,49,.18)}
+.dbtn2{display:inline-flex;align-items:center;padding:.6rem 1rem;border:1px solid var(--edge2);color:var(--ink);font-family:var(--mono);
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-radius:.3rem}
+.dfine{margin-top:.9rem;font-family:var(--mono);font-size:.66rem;color:var(--dim2)}
+.dprog{height:.4rem;background:var(--edge);border-radius:.2rem;overflow:hidden;margin:.2rem 0 1rem}
+.dprog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));box-shadow:0 0 12px rgba(217,165,49,.5)}
+.dstages{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.35rem .8rem}
+.dstages li{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--dim2);display:flex;justify-content:space-between;gap:.5rem;
+  padding:.28rem 0;border-bottom:1px solid var(--edge);transition:color .3s}
+.dstages li.run{color:var(--gold2)}.dstages li.done{color:var(--dim)}
+.dstages li.done::after{content:"✓";color:var(--sig)}
+.dstages li.run::after{content:"…";color:var(--gold2)}
+.dstages li b{font-weight:500;color:inherit}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(8.4rem,1fr));gap:.7rem;margin-bottom:1rem}
+.dcard{border:1px solid var(--edge2);border-radius:.4rem;overflow:hidden;background:#0b0e11;opacity:0;transform:translateY(12px) scale(.98);
+  transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1)}
+.dcard.on{opacity:1;transform:none}
+.dcard .th{aspect-ratio:9/16;max-height:9.2rem;position:relative;
+  background:radial-gradient(60% 40% at 50% 38%,rgba(217,165,49,.22),transparent 70%),linear-gradient(170deg,#141a1f,#0b0e11)}
+.dcard .th::after{content:attr(data-kind);position:absolute;left:.4rem;top:.4rem;font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;
+  color:var(--gold2);border:1px solid rgba(217,165,49,.5);padding:.1rem .35rem;border-radius:.2rem;background:rgba(0,0,0,.55)}
+.dcard .tt{padding:.5rem .6rem;font-size:.74rem;line-height:1.3}
+.dcard .tt span{display:block;font-family:var(--mono);font-size:.6rem;color:var(--dim2);margin-top:.25rem;letter-spacing:.08em}
+.dacts{display:flex;gap:.6rem;flex-wrap:wrap}
+.dnav{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.9rem;font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim2)}
+.dnav li{position:relative;padding-left:1.4rem;transition:color .3s}
+.dnav li::before{content:"";position:absolute;left:0;top:.2rem;width:.55rem;height:.55rem;border-radius:50%;border:1px solid var(--edge2);transition:background .3s,border-color .3s}
+.dnav li.on{color:var(--ink)}.dnav li.on::before{background:var(--gold);border-color:var(--gold);box-shadow:0 0 10px rgba(217,165,49,.6)}
+
+/* ── HERO ───────────────────────────────────────────────────────────────── */
+.hero{padding:6.6rem 0 3.5rem}
+/* The showcase is the argument — it must PEEK above the fold, not hide under it.
+   Measured: at 1280x900 the phone started 664 px down and only its top third showed. */
+@media(min-width:901px){.hero .claim{margin-bottom:.9rem}
+  .hero .lede{margin-bottom:1.4rem}
+  .stage{margin-top:2.4rem}}
+.hero .rule{display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
+.hero .rule i{flex:1;height:1px;background:var(--edge2)}
+h1{font-size:clamp(2.2rem,5.4vw,4rem);line-height:1.04;letter-spacing:-.035em;
+  font-weight:700;margin:0 0 1.4rem;max-width:34ch}
+h1 em{font-style:normal;color:var(--gold2)}
+.lede{max-width:46ch;color:var(--dim);font-size:1.06rem;line-height:1.62;margin:0 0 2.2rem}
+.acts{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.acts .fine{font-family:var(--mono);font-size:.7rem;color:var(--dim2);margin-left:.4rem}
+
+
+.linkbox{display:flex;gap:.6rem;max-width:34rem;margin:0 0 .2rem;flex-wrap:wrap}
+.linkbox input{flex:1;min-width:15rem;padding:.85rem 1rem;background:rgba(0,0,0,.4);
+  border:1px solid var(--edge2);color:var(--ink);font:inherit;font-size:.95rem;transition:border-color .2s}
+.linkbox input:focus{outline:none;border-color:var(--gold)}
+.linkbox input::placeholder{color:var(--dim2)}
+.linkbox.bad input{border-color:var(--warn)}
+
+/* ── THE INSTRUMENT ─────────────────────────────────────────────────────── */
+.inst{margin-top:4rem;border:1px solid var(--edge);background:var(--panel)}
+.inst .top{display:flex;align-items:center;gap:1rem;padding:.7rem 1rem;
+  border-bottom:1px solid var(--edge);background:var(--bg2);flex-wrap:wrap}
+.inst .top .f{font-family:var(--mono);font-size:.72rem;color:var(--dim)}
+.inst .top .f b{color:var(--ink);font-weight:500}
+.inst .top .live{margin-left:auto;display:flex;align-items:center;gap:.45rem;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;color:var(--sig)}
+.inst .top .live i{width:.4rem;height:.4rem;border-radius:99px;background:var(--sig);
+  animation:bl 1.8s ease-in-out infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.25}}
+
+.scope{position:relative;height:13rem;cursor:crosshair;overflow:hidden}
+.scope svg{display:block;width:100%;height:100%}
+.ticks{display:flex;border-top:1px solid var(--edge);background:var(--bg2)}
+.ticks div{flex:1;padding:.32rem .5rem;font-family:var(--mono);font-size:.62rem;
+  color:var(--dim2);border-right:1px solid var(--edge)}
+.ticks div:last-child{border-right:0}
+
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));
+  border-top:1px solid var(--edge)}
+.rd{padding:.85rem 1rem;border-right:1px solid var(--edge)}
+.rd:last-child{border-right:0}
+.rd .k{font-family:var(--mono);font-size:.63rem;letter-spacing:.14em;color:var(--dim2);
+  text-transform:uppercase;margin-bottom:.3rem}
+.rd .v{font-family:var(--mono);font-size:1.02rem;font-variant-numeric:tabular-nums;
+  transition:color .2s}
+.rd.hi .v{color:var(--gold2)}
+.verdict{padding:.8rem 1rem;border-top:1px solid var(--edge);background:var(--bg2);
+  font-family:var(--mono);font-size:.76rem;color:var(--dim);min-height:2.6rem;
+  display:flex;align-items:center;gap:.6rem}
+.verdict b{color:var(--sig);font-weight:500}
+.verdict.no b{color:var(--warn)}
+
+
+/* spec table */
+.spec{border:1px solid var(--edge);border-bottom:0}
+.sr{display:grid;grid-template-columns:2.4rem 1fr 8rem 6rem;gap:1rem;align-items:center;
+  padding:.95rem 1.1rem;border-bottom:1px solid var(--edge);transition:background .2s}
+.sr:hover{background:var(--bg2)}
+.sr .n{font-family:var(--mono);font-size:.7rem;color:var(--dim2)}
+.sr .t{font-size:.95rem}
+.sr .t s{display:block;text-decoration:none;color:var(--dim2);font-size:.82rem;margin-top:.12rem}
+.sr .m{font-family:var(--mono);font-size:.78rem;color:var(--gold2);text-align:right}
+.sr .p{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--dim2);
+  text-align:right;text-transform:uppercase}
+@media(max-width:720px){.sr{grid-template-columns:2rem 1fr;}.sr .m,.sr .p{display:none}}
+
+/* capability list */
+.caps{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:0;
+  border:1px solid var(--edge)}
+.cap{padding:1.6rem 1.5rem;border-right:1px solid var(--edge);border-bottom:1px solid var(--edge);
+  transition:background .2s}
+.cap:hover{background:var(--bg2)}
+.cap .h{display:flex;align-items:baseline;gap:.7rem;margin-bottom:.6rem}
+.cap .h b{font-size:1rem;font-weight:600}
+.cap .h s{font-family:var(--mono);font-size:.64rem;color:var(--gold);text-decoration:none;
+  letter-spacing:.1em}
+.cap p{margin:0;color:var(--dim);font-size:.9rem;line-height:1.62}
+.cap .fig{margin-top:.9rem;font-family:var(--mono);font-size:.74rem;color:var(--ink);
+  padding-top:.7rem;border-top:1px dashed var(--edge2)}
+.cap .fig s{text-decoration:none;color:var(--dim2)}
+
+/* honest box */
+.honest{border:1px solid var(--edge2);background:var(--bg2);padding:1.6rem 1.7rem;margin-top:2rem}
+.honest .lbl{color:var(--warn);margin-bottom:.7rem;display:block}
+.honest ul{margin:0;padding-left:1.1rem;color:var(--dim);font-size:.92rem;line-height:1.75}
+
+</style>
+<meta property="og:title" content="ViggeClips — every short worth posting, found automatically"/>
+<meta property="og:url" content="https://vigge.pro/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="ViggeClips"/>
+<meta property="og:image" content="https://vigge.pro/og.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://vigge.pro/og.png"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0a0a0b"/>
+</head>
+<body>
+<div class="grid"></div>
+
+<header class="cf"></header>
+
+<!-- HERO ------------------------------------------------------------------ -->
+<div class="hero"><div class="w">
+  <h1 class="claim rv">Upload once.<em>Get every short worth posting.</em></h1>
+  <p class="lede rv" style="max-width:44ch">
+    The engine watches your whole stream — the laughs, the reactions, the moment the room
+    turns — and hands back finished vertical shorts, captioned and ready for TikTok, Reels
+    and Shorts. One ten-hour stream gave 25 of them — in 91 minutes.
+  </p>
+  <form class="linkbox rv" id="lb" novalidate>
+    <input type="text" id="lbu" aria-label="Paste a video link"
+           placeholder="Paste a YouTube, Twitch or Kick link…"/>
+    <button class="b1" type="submit">Get my shorts</button>
+  </form>
+  <div class="acts rv" style="margin-top:1rem">
+    <span class="fine">Two free hours every month · no card · your link is not stored until you sign in</span>
+  </div>
+  <!-- #2 Prova utan konto: förhandsvisning INNAN registrering. Kostar bara metadata. -->
+  <div id="lbPreview" class="lbprev rv" hidden></div>
+  <div class="acts rv" style="margin-top:1.4rem">
+    <a class="b2" href="/app.html">Upload a file instead</a>
+    <a class="b2" href="#work">See how it decides</a>
+  </div>
+
+  <!-- SHOWCASE: what comes out, moving ------------------------------------- -->
+  <div class="stage rv">
+    <div>
+      <div class="collapse">
+        <span class="lbl">The whole recording, scored end to end</span>
+        <div class="bar" id="cbar" style="margin-top:.9rem">
+          <span class="scan"></span>
+        </div>
+        <div class="lg"><span>00:00</span><span>SCORING EVERY SECOND</span><span>09:54:00</span></div>
+        <div class="reel" id="creel"></div>
+        <p class="fine" style="margin:.9rem 0 0">Gold marks every moment that cleared the bar — and they all become clips. You also
+          get the score for the ones that didn’t.</p>
+      </div>
+    </div>
+
+    <div class="phone" aria-hidden="true">
+      <span class="notch"></span>
+      <!-- Abstract footage until an approved sample clip is supplied (2026-08-17). -->
+      <span class="film"></span>
+      <span class="badge">9:16 · CAPTIONED</span>
+      <div class="cap" id="pcap"></div>
+      <div class="wavestrip" id="pwave"></div>
+    </div>
+  </div>
+
+  <div class="figs rv">
+    <div class="fg"><b data-count="25" data-suffix="">0</b><span>posts from one sitting — five weeks of daily content</span></div>
+    <div class="fg"><b data-count="6.5" data-suffix="×">0×</b><span>faster than realtime</span></div>
+    <div class="fg"><b data-count="1080" data-suffix=" × 1920">0</b><span>every clip delivered vertical, whatever the source</span></div>
+    <div class="fg"><b data-count="0" data-suffix="">0</b><span>plugins or timelines to touch</span></div>
+  </div>
+
+  <!-- THE INSTRUMENT -->
+  <div class="inst rv" id="work">
+    <div class="top">
+      <span class="f">SOURCE <b>stream_10h.mp4</b></span>
+      <span class="f">1280×720 · 30 fps · 44.1 kHz</span>
+      <span class="f out">→ DELIVERED 1080×1920</span>
+      <span class="live"><i></i>DETECTOR ACTIVE</span>
+    </div>
+    <p class="srcnote">A deliberately unflattering source — a 720p 30 fps recording,
+      the kind most people actually have. Every clip still leaves at 1080 × 1920 with the
+      captions checked pixel by pixel against the screen.</p>
+    <div class="scope" id="scope">
+      <svg id="svg" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-label="Audio waveform with detected highlights"></svg>
+    </div>
+    <div class="ticks" id="ticks"></div>
+    <div class="readout">
+      <div class="rd" id="r1"><div class="k">Position</div><div class="v">—</div></div>
+      <div class="rd" id="r2"><div class="k">Laughter (4–8 Hz)</div><div class="v">—</div></div>
+      <div class="rd" id="r3"><div class="k">Hype density</div><div class="v">—</div></div>
+      <div class="rd" id="r4"><div class="k">Event terms /20 s</div><div class="v">—</div></div>
+      <div class="rd" id="r5"><div class="k">Speaker</div><div class="v">—</div></div>
+    </div>
+    <div class="verdict" id="vd">Move across the waveform — the detector reports what it measured at that point.</div>
+  </div>
+</div></div>
+
+<!-- WHAT YOU GET ---------------------------------------------------------- -->
+<!-- SEE IT HAPPEN: the whole customer journey, animated from real timings ------- -->
+<section id="see"><div class="w">
+  <div class="head rv">
+    <span class="lbl">See it happen</span>
+    <h2>Paste a link. Come back to clips.</h2>
+    <p>This is the workspace doing a real job, replayed in forty seconds: the stages are the engine’s
+       own, in the proportions they took on the ten-hour stream; the clips at the end are the ones it delivered.</p>
+  </div>
+  <div class="demo rv" id="demo" aria-label="Animated walkthrough of a job">
+    <div class="dwin">
+      <div class="dbar"><i></i><i></i><i></i><span class="durl">vigge.pro/app</span></div>
+      <div class="dbody">
+        <!-- 1 · paste -->
+        <div class="dstep on" data-step="1">
+          <div class="dlbl">Paste a Twitch, YouTube or Kick link — or drop a file</div>
+          <div class="dlink"><span class="dinput" id="dinput"><i class="caret"></i></span><span class="dbtn" id="dbtn">Get my shorts</span></div>
+          <div class="dfine">Two free hours every month · no card</div>
+        </div>
+        <!-- 2 · run -->
+        <div class="dstep" data-step="2">
+          <div class="dlbl">Processing <b id="dname">stream_10h.mp4</b> <span class="dsm" id="deta">· ~91 min</span></div>
+          <div class="dprog"><i id="dfill"></i></div>
+          <ol class="dstages" id="dstages"></ol>
+          <div class="dfine">Nothing runs on your machine — close the tab, we email you when it lands.</div>
+        </div>
+        <!-- 3 · deliver -->
+        <div class="dstep" data-step="3">
+          <div class="dlbl">Delivered · <b id="dcount">25 shorts</b> <span class="dsm">· 91 minutes · nothing charged until now</span></div>
+          <div class="dgrid" id="dgrid"></div>
+          <div class="dacts"><span class="dbtn">Download all</span><span class="dbtn2">Schedule to YouTube</span><span class="dbtn2">Share</span></div>
+        </div>
+      </div>
+    </div>
+    <ol class="dnav" id="dnav"><li class="on">Paste</li><li>Engine</li><li>Delivery</li></ol>
+  </div>
+</div></section>
+
+<section id="pipeline"><div class="w">
+  <div class="head rv">
+    <span class="lbl">What arrives</span>
+    <h2>You send one file. You get a delivery.</h2>
+    <p>Everything heavy runs on our servers. Close the tab if you like — the work carries
+       on without you, and nothing touches your machine.</p>
+  </div>
+  <div class="spec rv">
+    <div class="sr"><span class="n">01</span><span class="t">Vertical shorts, captioned
+      <span class="why">Ready for TikTok, Reels and Shorts. Karaoke captions, a hook title,
+      a progress bar. Every moment that clears the bar becomes a clip — no quota to fill.</span></span>
+      <span class="v">9:16</span><span class="m">MP4</span></div>
+    <div class="sr"><span class="n">02</span><span class="t">The full transcript
+      <span class="why">The whole recording as text, timed and speaker-labelled. Yours to
+      re-use for descriptions, chapters, subtitles or search.</span></span>
+      <span class="v">SRT + TXT</span><span class="m">FULL</span></div>
+    <div class="sr"><span class="n">03</span><span class="t">Your original video, subtitled
+      <span class="why">Full length, original quality, captions burned in. A by-product of
+      the analysis — we hand it over rather than throw it away.</span></span>
+      <span class="v">BONUS</span><span class="m">MP4</span></div>
+    <div class="sr"><span class="n">04</span><span class="t">The report on what we skipped
+      <span class="why">Every moment we scored and did not keep, with its timestamp and what
+      was said. You can check our judgement instead of trusting it.</span></span>
+      <span class="v">PER JOB</span><span class="m">LOG</span></div>
+  </div>
+  <p class="fine rv" style="margin-top:1.6rem;text-align:center">
+    MEASURED END TO END ON A 10-HOUR STREAM: 91 MINUTES, DOOR TO DOOR · NOTHING RUNS ON YOUR MACHINE
+  </p>
+</div></section>
+
+<!-- CAPABILITIES ---------------------------------------------------------- -->
+<section id="caps"><div class="w">
+  <div class="head rv">
+    <span class="lbl">What it handles</span>
+    <h2>Measured on real recordings</h2>
+    <p>Every number below we measured on real footage and can prove. The methods behind
+       them are ours.</p>
+  </div>
+  <div class="caps rv">
+
+    <div class="cap"><div class="h"><b>Finds the reactions</b><s>DETECTION</s></div>
+      <p>Laughter, sudden energy, the moment several people talk at once — the engine
+         hears the room turn and does not need the transcript to spell it out. Flat
+         routine chatter is checked on every job and must score zero.</p>
+      <div class="fig">Flat routine chatter scores <s>&rarr;</s> 0.00</div></div>
+
+    <div class="cap"><div class="h"><b>Knows who is speaking</b><s>VOICES</s></div>
+      <p>Separates speakers and gives each their own caption colour. When two voices
+         overlap and it cannot be certain, it leaves the line uncoloured rather than
+         colour it wrongly. Voice profiles are set up for you.</p>
+      <div class="fig">Recall on a named voice <s>&rarr;</s> 100 %</div></div>
+
+    <div class="cap"><div class="h"><b>Swedish and English together</b><s>LANGUAGE</s></div>
+      <p>Switching language mid-sentence is expected, not an error case. The engine adapts
+         to what is actually being talked about before it writes a word down.</p>
+      <div class="fig">High-confidence lines <s>&rarr;</s> 95 %</div></div>
+
+    <div class="cap"><div class="h"><b>Protects your channel</b><s>GATE</s></div>
+      <p>Slurs are masked in text and bleeped in audio. Beyond that, moments that read as
+         racist are never cut into a clip at all — because a bleep does not save a clip
+         that is about the joke.</p>
+      <div class="fig">Runs before selection, on every job</div></div>
+
+    <div class="cap"><div class="h"><b>Captions that are really there</b><s>VERIFIED</s></div>
+      <p>Word-by-word karaoke, several speakers in separate screen zones. We then sample
+         the finished file and check the pixels — a caption that failed to render is
+         caught before you ever see it.</p>
+      <div class="fig">Burned-in text present <s>&rarr;</s> 24/24 frames</div></div>
+
+    <div class="cap"><div class="h"><b>Length follows content</b><s>ADAPTIVE</s></div>
+      <p>Not a template. A quick beat stays short; a twelve-turn exchange gets room.
+         Sentences always finish.</p>
+      <div class="fig">Spread <s>&rarr;</s> 18–55 s across one batch</div></div>
+
+  </div>
+</div></section>
+
+<!-- PRICING --------------------------------------------------------------- -->
+<section id="price"><div class="w">
+  <div class="head rv">
+    <span class="lbl">Pricing</span>
+    <h2>One credit is one hour of stream</h2>
+    <p>Credits never expire. A failed job is never charged.</p>
+  </div>
+  <div class="plans rv">
+    <div class="pl">
+      <div class="nm">Free</div><div class="pr">$0</div>
+      <div class="for">Enough to judge the engine on your own footage — every month.</div>
+      <ul><li>2 hours of stream every month</li><li>3 shorts, watermarked</li><li>Captions and audio mastering</li>
+          <li>Full transcript (SRT + TXT)</li><li>The whole video subtitled, as a bonus</li>
+          <li>Full detector readout</li></ul>
+      <div class="go"><a class="b2" href="/app.html">Create new video</a> <a class="b2" href="/history.html">Edited videos</a></div>
+    </div>
+    <div class="pl mid">
+      <div class="nm">Pro</div><div class="pr">$24<s> / month</s></div>
+      <div class="for">Everything the engine can do. One flat price.</div>
+      <ul><li>100 hours of stream every month</li><li>Unlimited shorts · no watermark · 1080p</li>
+          <li>Publish straight to YouTube, scheduled or instant</li>
+          <li>Face-tracking crop, custom words, trim, API</li>
+          <li>Top up more hours whenever you need</li></ul>
+      <div class="go"><a class="b1" href="/app.html">Get started</a></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ ------------------------------------------------------------------- -->
+<section><div class="w" style="max-width:52rem">
+  <div class="head rv"><span class="lbl">Questions</span><h2>Straight answers</h2></div>
+  <div class="rv">
+    <details open><summary>How do you decide what is a highlight?</summary>
+      <p>Several independent signals from the audio and the picture, weighted and scored
+        across the whole recording. We publish the result rather than the recipe: every
+        job comes with the score each moment got and the reason the ones we skipped lost.
+        You can check the judgement on your own footage — that is the point of the free
+        hour.</p></details>
+    <details><summary>Why does the language matter so much?</summary>
+      <p>Because a transcriber that guesses the wrong context does not degrade gracefully —
+        it produces confident nonsense. The engine works out what is actually being talked
+        about before it commits, which is why Swedish streams that slide into English come
+        out readable instead of mangled.</p></details>
+    <details><summary>What happens to my footage?</summary>
+      <p>The upload is stored for processing and deleted automatically within 7 days of delivery.
+        We do not train models on your content. Voice profiles exist only if you create them
+        and can be deleted at any time.</p></details>
+    <details><summary>Can I steer the output?</summary>
+      <p>Yes. Pick who should be in focus, set preferred length, and extend the list of words
+        that disqualify a moment entirely. Every choice the engine made is visible to you
+        afterwards.</p></details>
+    <details><summary>How long does a stream take?</summary>
+      <p>About forty minutes for a two-hour VOD. All of it runs on our servers — start the
+        job and close the tab.</p></details>
+  </div>
+</div></section>
+
+<!-- CLOSE ----------------------------------------------------------------- -->
+<section><div class="w">
+  <div class="head rv" style="max-width:40ch">
+    <span class="lbl">Get started</span>
+    <h2>Your next short is already in your last stream</h2>
+    <p>Upload an hour and read the detector output yourself. That is the whole pitch.</p>
+  </div>
+  <div class="acts rv"><a class="b1" href="/app.html">Clip a VOD free</a></div>
+  <!-- Kickern satt först på sidan och konkurrerade med rubriken. Den är ett påstående
+       om hur vi arbetar — den hör hemma EFTER beviset, som en signatur. -->
+  <p class="kicker rv sig"><i></i>Clip engine v5 · measured, not guessed</p>
+</div></section>
+
+<footer class="cf"></footer>
+
+<script>
+/* ── waveform + detector ─────────────────────────────────────────────────
+   REAL DATA (2026-08-17): /demo/detector.json is exported from an actual job —
+   a ten-hour stream, measured end to end. The bars are its audio envelope, the
+   coloured bands are the shorts that were delivered (by type), the dim ticks are
+   near-misses, and every readout is the number the engine measured at that point.
+   Nothing here is invented; if the file cannot load, the panel says so instead of
+   drawing something pretty.                                                       */
+const N = 1000, W = 1000, H = 220, MID = H / 2;
+const CS = getComputedStyle(document.documentElement);
+const tok = n => CS.getPropertyValue(n).trim();
+const KCOL = { LAUGH: tok("--sig"), KILL: tok("--gold"), HYPE: tok("--info"), TEACH: "#c9a0ff",
+               STORY: "#ffb070", SCENERY: "#7fd7d0" };
+const KTXT = { LAUGH: "Laugh", KILL: "Kill", HYPE: "Hype", TEACH: "Teach", STORY: "Story", SCENERY: "Scenery" };
+const C_LINE = tok("--edge2"), C_BAR = tok("--wave"), C_HEAD = tok("--gold2");
+const svg = document.getElementById("svg"), tk = document.getElementById("ticks");
+const rd = { 1:document.getElementById("r1"), 2:document.getElementById("r2"),
+             3:document.getElementById("r3"), 4:document.getElementById("r4"),
+             5:document.getElementById("r5") };
+const vd = document.getElementById("vd");
+const scope = document.getElementById("scope");
+let D = null, ph = null;
+const fmt = (sec) => { sec = Math.max(0, Math.round(sec)); const h = Math.floor(sec/3600), m = Math.floor(sec%3600/60), s = sec%60;
+  return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`; };
+const esc = t => String(t).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+function draw() {
+  const env = D.env, dur = D.dur;
+  let s = "";
+  // delivered shorts: a band per clip, coloured by type
+  for (const c of D.clips) {
+    if (!c.src) continue;
+    const a = c.src[0] / dur * W, b = Math.max(c.src[1] / dur * W, a + 3);
+    const col = KCOL[c.kind] || KCOL.HYPE;
+    s += `<rect x="${a.toFixed(1)}" y="0" width="${(b-a).toFixed(1)}" height="${H}" fill="${col}" opacity=".16"/>`;
+    s += `<rect x="${a.toFixed(1)}" y="0" width="${(b-a).toFixed(1)}" height="2" fill="${col}" opacity=".9"/>`;
+  }
+  // near-misses: dim ticks at the top
+  for (const n of D.near) {
+    const x = n.t / dur * W;
+    s += `<rect x="${x.toFixed(1)}" y="0" width="1.4" height="7" fill="${C_HEAD}" opacity=".35"/>`;
+  }
+  s += `<line x1="0" y1="${MID}" x2="${W}" y2="${MID}" stroke="${C_LINE}" stroke-width="1"/>`;
+  const bw = W / N;
+  for (let i = 0; i < N; i++) {
+    const a = 0.06 + env[i] * 0.9, h = a * (H - 26), y = MID - h / 2;
+    const t = (i + 0.5) / N * dur;
+    const c = clipAt(t);
+    s += `<rect x="${(i*bw + bw*.15).toFixed(2)}" y="${y.toFixed(1)}" width="${(bw*.7).toFixed(2)}" height="${h.toFixed(1)}" fill="${c ? (KCOL[c.kind]||KCOL.HYPE) : C_BAR}" opacity="${c ? .95 : .6}"/>`;
+  }
+  s += `<line id="ph" x1="0" y1="0" x2="0" y2="${H}" stroke="${C_HEAD}" stroke-width="1.5" opacity="0"/>`;
+  svg.innerHTML = s;
+  ph = document.getElementById("ph");
+  tk.innerHTML = Array.from({length: 6}, (_, i) => `<div>${fmt(dur * i / 6)}</div>`).join("");
+  const top = document.querySelector(".inst .top");
+  if (top) top.querySelectorAll(".f")[1].textContent = `${D.w}×${D.h} · ${D.fps} fps · ${(D.sr/1000).toFixed(1)} kHz · ${fmt(dur).slice(0,5).replace(":", " h ")} min · ${D.job_minutes} min door to door`;
+}
+function clipAt(t) { return D.clips.find(c => c.src && t >= c.src[0] - 2 && t <= c.src[1] + 2) || null; }
+function nearAt(t) { let best = null; for (const n of D.near) { const d = Math.abs(n.t - t); if (d < 45 && (!best || d < best.d)) best = { ...n, d }; } return best; }
+
+function probe(f) {
+  if (!D) return;
+  const t = f * D.dur, i = Math.min(N - 1, Math.floor(f * N));
+  const lg = D.laugh[i] || 0, hy = D.hype[i] || 0, tm = (D.terms[i] || 0) + (D.kill[i] || 0);
+  const c = clipAt(t), nr = c ? null : nearAt(t);
+  rd[1].querySelector(".v").textContent = fmt(t);
+  rd[2].querySelector(".v").textContent = lg.toFixed(2) + "×";
+  rd[3].querySelector(".v").textContent = hy + " / 20 s";
+  rd[4].querySelector(".v").textContent = String(tm);
+  rd[5].querySelector(".v").textContent = c ? `${KTXT[c.kind] || c.kind} · ${c.score.toFixed(1)}` : (nr ? `near · ${nr.score.toFixed(1)}` : "—");
+  rd[2].classList.toggle("hi", lg >= 1);
+  rd[3].classList.toggle("hi", hy >= 3);
+  rd[4].classList.toggle("hi", tm >= 2);
+  rd[5].classList.toggle("hi", !!c);
+  if (c) {
+    vd.className = "verdict";
+    vd.innerHTML = `<b>CUT HERE</b> ${KTXT[c.kind] || c.kind} moment, score ${c.score.toFixed(1)} — “${esc(c.title)}” became a ${Math.round(c.seconds)} s short.`;
+  } else if (nr) {
+    vd.className = "verdict no";
+    vd.innerHTML = `<b>NEAR MISS</b> scored ${nr.score.toFixed(1)} but no clean start and end could be built around it — listed for you, not clipped.`;
+  } else {
+    vd.className = "verdict no";
+    vd.innerHTML = `<b>SKIP</b> routine play — no reaction density here, not clipped.`;
+  }
+  if (ph) { ph.setAttribute("x1", f*W); ph.setAttribute("x2", f*W); ph.setAttribute("opacity", ".9"); }
+}
+
+scope.addEventListener("pointermove", e => {
+  const r = scope.getBoundingClientRect();
+  probe(Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)));
+});
+scope.addEventListener("pointerleave", () => {
+  if (ph) ph.setAttribute("opacity", "0");
+  vd.className = "verdict";
+  vd.textContent = "Move across the waveform — the detector reports what it measured at that point.";
+  Object.values(rd).forEach(d => { d.querySelector(".v").textContent = "—"; d.classList.remove("hi"); });
+});
+// idle sweep so the panel is alive before anyone touches it
+let sweep = 0, idle = true;
+scope.addEventListener("pointerenter", () => idle = false);
+setInterval(() => { if (idle && D) { sweep = (sweep + .0025) % 1; probe(sweep); } }, 55);
+
+fetch("/demo/detector.json").then(r => r.ok ? r.json() : null).then(d => {
+  if (!d || !d.env) throw new Error("no data");
+  D = d; draw();
+}).catch(() => {
+  svg.innerHTML = `<text x="500" y="${MID}" fill="${C_LINE}" font-size="14" text-anchor="middle" font-family="monospace">detector data unavailable right now</text>`;
+});
+
+
+/* ── SHOWCASE MOTION ───────────────────────────────────────────────────────
+   Three small machines, each demonstrating one claim:
+     · the phone types the captions the way the renderer lands them (word by word)
+     · the bar collapses two hours into the moments that cleared the bar
+     · the figures count up only once, when they are actually on screen
+   All of it pauses under prefers-reduced-motion — the page still SAYS everything.
+   ─────────────────────────────────────────────────────────────────────────── */
+(function showcase() {
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // 1. karaoke captions
+  const cap = document.getElementById("pcap");
+  if (cap && !cap.hidden) {
+    // Real opening lines from delivered shorts — never invented.
+    const LINES = [
+      "OH WAIT, ARE YOU ON ONE OF THE ROOFS?",
+      "THERE'S SO MANY THAT SPAWN THOUGH",
+      "HOW FAST CAN YOU SPIN THOUGH?",
+      "I'VE BEEN IN THE AIR TOO LONG",
+      "HOW MANY GYMS HAVE YOU DEFEATED?",
+      "I SHOULD POST MY SHINY TIER LIST",
+    ];
+    let li = 0;
+    const play = () => {
+      const words = LINES[li % LINES.length].split(" ");
+      cap.innerHTML = words.map((w) => `<span>${w}</span>`).join(" ");
+      const spans = cap.querySelectorAll("span");
+      if (still) { spans.forEach((s) => s.classList.add("on")); return; }
+      spans.forEach((s, k) => setTimeout(() => s.classList.add("on"), 170 * k));
+      setTimeout(() => { li++; play(); }, 170 * words.length + 1500);
+    };
+    play();
+  }
+
+  // 2. the waveform strip
+  const wv = document.getElementById("pwave");
+  if (wv && !wv.hidden) {
+    for (let i = 0; i < 34; i++) {
+      const b = document.createElement("i");
+      b.style.animationDelay = (i * 0.055).toFixed(2) + "s";
+      b.style.animationDuration = (0.8 + (i % 5) * 0.14).toFixed(2) + "s";
+      wv.appendChild(b);
+    }
+  }
+
+  // 3. the collapse — the same six zones the detector panel uses, so the two
+  //    halves of the page tell one story rather than two.
+  const bar = document.getElementById("cbar"), reel = document.getElementById("creel");
+  // The collapse is drawn from the SAME real data as the detector below (25 shorts of a
+  // ten-hour stream, at their real positions). Until the JSON lands, the twelve highest
+  // scores stand in at even spacing so the page never shows an empty bar.
+  const FALLBACK = [14.1, 13.1, 11.8, 11.6, 11.2, 10.4, 10.4, 10.2, 10.0, 9.9, 9.3, 8.9];
+  window.buildCollapse = function (items) {
+    if (!bar || !reel) return;
+    bar.querySelectorAll("i").forEach((e) => e.remove()); reel.innerHTML = "";
+    items.forEach((it, k) => {
+      const hit = document.createElement("i");
+      hit.style.left = (it.at * 100).toFixed(2) + "%";
+      hit.style.width = Math.max(0.55, it.w * 100).toFixed(2) + "%";
+      hit.style.animationDelay = still ? "0s" : (0.2 + k * 0.05).toFixed(2) + "s";
+      if (it.title) hit.title = it.title;
+      bar.appendChild(hit);
+      const card = document.createElement("div");
+      card.className = "r";
+      card.setAttribute("data-s", it.score.toFixed(1));
+      card.style.animationDelay = still ? "0s" : (0.4 + k * 0.05).toFixed(2) + "s";
+      reel.appendChild(card);
+    });
+  };
+  window.buildCollapse(FALLBACK.map((sc, k) => ({ at: 0.04 + (k / FALLBACK.length) * 0.92, w: 0.021, score: sc })));
+  fetch("/demo/detector.json").then(r => r.ok ? r.json() : null).then(d => {
+    if (!d || !d.clips) return;
+    const items = d.clips.filter(c => c.src).sort((a, b) => a.src[0] - b.src[0])
+      .map(c => ({ at: c.src[0] / d.dur, w: c.seconds / d.dur, score: c.score, title: c.title }));
+    window.buildCollapse(items);
+    const lg = document.querySelector(".collapse .lg span:last-child");
+    if (lg) lg.textContent = fmt(d.dur);
+  }).catch(() => {});
+
+  // 4. figures count up on first sight
+  const figs = document.querySelectorAll(".figs b[data-count]");
+  const run = (el) => {
+    const target = parseFloat(el.dataset.count), suffix = el.dataset.suffix || "";
+    const dec = (el.dataset.count.split(".")[1] || "").length;
+    if (still || target === 0) { el.textContent = target.toFixed(dec) + suffix; return; }
+    const t0 = performance.now(), dur = 900;
+    const tick = (t) => {
+      const p = Math.min(1, (t - t0) / dur);
+      el.textContent = (target * (1 - Math.pow(1 - p, 3))).toFixed(dec) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  // A figure that never animates reads "0", which looks broken. So: animate on first
+  // sight, but ALSO guarantee the real number lands even if the observer never fires
+  // (already in view on a tall screen, a browser that throttles it, etc.).
+  const done = new WeakSet();
+  const fire = (el) => { if (!done.has(el)) { done.add(el); run(el); } };
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) { fire(e.target); io.unobserve(e.target); }
+    }), { threshold: .35 });
+    figs.forEach((f) => {
+      // Already in the viewport at load? Animate it now — the observer may never say so.
+      const r = f.getBoundingClientRect();
+      if (r.top < innerHeight && r.bottom > 0) fire(f); else io.observe(f);
+    });
+  } else {
+    figs.forEach(fire);
+  }
+  // Last-resort safety net. requestAnimationFrame is throttled when the tab is not
+  // focused, so the animated path can leave a figure reading "0". This sets the true
+  // value DIRECTLY — no rAF — guaranteeing the real number is on screen by 2.5s no
+  // matter what the observer or the animation did.
+  setTimeout(() => figs.forEach((el) => {
+    done.add(el);
+    const dec = (el.dataset.count.split(".")[1] || "").length;
+    el.textContent = parseFloat(el.dataset.count).toFixed(dec) + (el.dataset.suffix || "");
+  }), 2500);
+})();
+
+
+// hero link box -> workspace
+(function(){
+  const f=document.getElementById("lb"), i=document.getElementById("lbu");
+  if(!f) return;
+  const OK=/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|twitch\.tv|kick\.com)\//i;
+  const prev=document.getElementById("lbPreview");
+  const btn=f.querySelector("button");
+  const esc=t=>String(t).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  f.addEventListener("submit",async e=>{
+    e.preventDefault();
+    const v=i.value.trim();
+    if(!v || !OK.test(v)){ f.classList.add("bad"); i.focus(); return; }
+    f.classList.remove("bad");
+    btn.disabled=true; const t0=btn.textContent; btn.textContent="Looking…";
+    prev.hidden=false; prev.innerHTML='<span class="spin"></span> Reading the video…';
+    try{
+      const r=await fetch("/api/preview",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({url:v})});
+      const b=await r.json().catch(()=>({}));
+      if(!r.ok){ prev.innerHTML='<span style="color:var(--warn)">'+esc(b.error||"Could not read that link.")+'</span>'; return; }
+      const mm=Math.floor((b.durationS||0)/60);
+      prev.innerHTML='<b>'+esc(b.title||"That video")+'</b>'
+        +'<span class="mono">'+mm+' MIN · WE’LL FIND UP TO '+b.estimatedClips+' CLIPS WORTH POSTING</span>'
+        +'<a class="b1 sm" href="/app.html?src='+encodeURIComponent(v)+'">Make these shorts — free account</a>';
+    }catch(err){ prev.innerHTML='<span style="color:var(--warn)">Network hiccup — try again.</span>'; }
+    finally{ btn.disabled=false; btn.textContent=t0; }
+  });
+  i.addEventListener("input",()=>f.classList.remove("bad"));
+})();
+
+// #4 Levande räknare: riktiga DB-siffror, men bara NÄR de är värda att visa —
+// annars står den ärliga mätta bragden kvar ("28 från en 82-min-stream").
+(async function(){
+  try{
+    const r=await fetch("/api/stats/public"); if(!r.ok) return;
+    const s=await r.json();
+    if((s.clipsDelivered||0)>=50){
+      const set=(sel,val,suf)=>{const el=document.querySelector(sel);
+        if(el){el.setAttribute("data-count",val);el.setAttribute("data-suffix",suf||"");el.textContent="0"+(suf||"");}};
+      const figs=document.querySelectorAll(".figs .fg b");
+      if(figs[0]) set(".figs .fg:nth-child(1) b", s.clipsDelivered, "");
+      const lbl0=document.querySelector(".figs .fg:nth-child(1) span");
+      if(lbl0) lbl0.textContent="shorts delivered to creators";
+    }
+  }catch(e){}
+})();
+
+/* ── SEE IT HAPPEN ────────────────────────────────────────────────────────
+   Replays a real job in ~40 s. Stage names are the engine's own; their widths are
+   the seconds each took on the ten-hour stream (2026-08-17), scaled. The clips are
+   four of the twenty-five it delivered. Under prefers-reduced-motion it shows the
+   delivery straight away.                                                       */
+(function () {
+  const root = document.getElementById("demo");
+  if (!root) return;
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const steps = [...root.querySelectorAll(".dstep")], nav = [...root.querySelectorAll("#dnav li")];
+  const dinput = document.getElementById("dinput"), dbtn = document.getElementById("dbtn");
+  const fill = document.getElementById("dfill"), stagesEl = document.getElementById("dstages"), eta = document.getElementById("deta");
+  const grid = document.getElementById("dgrid");
+  const URL = "https://www.twitch.tv/videos/2314987110";
+  // real per-stage seconds from the ten-hour job
+  const STAGES = [["scanning",1],["audio",927],["transcribing",503],["speakers",7],["watching",1988],["planning",38],
+                  ["filling gaps",125],["scoreboard",196],["selecting",35],["subtitling",1],["cutting",1408],["uploading",40]];
+  const TOTAL = STAGES.reduce((a, s) => a + s[1], 0);
+  const CLIPS = [
+    { t: "How fast can you spin though?", k: "HYPE", s: 11.6, l: "20 s" },
+    { t: "Oh wait, are you on one of the roofs?", k: "LAUGH", s: 14.1, l: "42 s" },
+    { t: "I’ve been in the air too long", k: "HYPE", s: 10.4, l: "33 s" },
+    { t: "How many gyms have you defeated?", k: "HYPE", s: 7.9, l: "35 s" },
+  ];
+  stagesEl.innerHTML = STAGES.map(([n, s]) => `<li data-n="${n}"><span>${n}</span><b>${s >= 60 ? Math.round(s / 60) + " min" : s + " s"}</b></li>`).join("");
+  grid.innerHTML = CLIPS.map((c) => `<div class="dcard"><div class="th" data-kind="${c.k}"></div><div class="tt">“${c.t}”<span>${c.k} · ${c.l} · SCORE ${c.s.toFixed(1)}</span></div></div>`).join("");
+  const cards = [...grid.querySelectorAll(".dcard")], lis = [...stagesEl.querySelectorAll("li")];
+
+  const show = (n) => { steps.forEach((s) => s.classList.toggle("on", +s.dataset.step === n)); nav.forEach((l, i) => l.classList.toggle("on", i === n - 1)); };
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  let running = false, gen = 0;
+
+  async function play() {
+    if (running) return; running = true; const my = ++gen;
+    const alive = () => my === gen;
+    // 1 · paste
+    show(1); dinput.innerHTML = '<i class="caret"></i>'; dbtn.classList.remove("pulse");
+    fill.style.transition = "none"; fill.style.width = "0"; lis.forEach((l) => l.className = ""); cards.forEach((c) => c.classList.remove("on"));
+    await sleep(700); if (!alive()) return;
+    for (let i = 1; i <= URL.length; i++) { dinput.innerHTML = URL.slice(0, i) + '<i class="caret"></i>'; await sleep(28); if (!alive()) return; }
+    await sleep(500); dbtn.classList.add("pulse"); await sleep(600); if (!alive()) return;
+    // 2 · engine
+    show(2); await sleep(600); if (!alive()) return;
+    const SCALE = 16000 / TOTAL;                       // whole job ≈ 16 s on screen
+    let acc = 0;
+    fill.style.transition = "width .3s linear";
+    for (let i = 0; i < STAGES.length; i++) {
+      const [n, sec] = STAGES[i];
+      lis[i].className = "run";
+      const dur = Math.max(260, sec * SCALE), t0 = performance.now();
+      while (performance.now() - t0 < dur) {
+        const p = (acc + sec * Math.min(1, (performance.now() - t0) / dur)) / TOTAL;
+        fill.style.width = (p * 100).toFixed(2) + "%";
+        eta.textContent = "· ~" + Math.max(1, Math.round(91 * (1 - p))) + " min left";
+        await sleep(90); if (!alive()) return;
+      }
+      acc += sec; lis[i].className = "done";
+    }
+    fill.style.width = "100%"; eta.textContent = "· done";
+    await sleep(700); if (!alive()) return;
+    // 3 · delivery
+    show(3);
+    for (let i = 0; i < cards.length; i++) { await sleep(220); if (!alive()) return; cards[i].classList.add("on"); }
+    await sleep(6500); if (!alive()) return;
+    running = false;
+    play();
+  }
+  if (still) {
+    show(3); cards.forEach((c) => c.classList.add("on")); lis.forEach((l) => l.className = "done"); fill.style.width = "100%";
+    return;
+  }
+  // start when it scrolls into view; pause when the tab hides
+  const start = () => { if (!running) play(); };
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { start(); io.disconnect(); } }), { threshold: 0.25 });
+    io.observe(root);
+  } else start();
+  document.addEventListener("visibilitychange", () => { if (document.hidden) { gen++; running = false; } else start(); });
+})();
+
+// nav + reveals hanteras av cf.js
+</script>
+</body>
+</html>

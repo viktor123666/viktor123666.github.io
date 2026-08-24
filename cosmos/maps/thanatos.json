@@ -1,0 +1,111 @@
+{
+  "id": "thanatos",
+  "name": "THANATOS",
+  "subtitle": "The Reclamation",
+  "type": "mist",
+  "color": "#c0c0c0",
+  "bg_color": "#1a1c20",
+  "ocean_color": "#1a1c20",
+  "deep_ocean_color": "#0a0c10",
+  "land_color": "#3a3e44",
+  "land_highlight": "#6a6e74",
+  "land_shadow": "#1a1c1e",
+  "city_color": "#e0e0e8",
+  "sacred_color": "#ffffff",
+  "description": "The death-plane. Every soul that ever died in Scalelist exists here simultaneously as a whispered name. Fenna walks the fields reading names aloud. When she reads yours, you reincarnate.",
+  "ruler": "Fenna (K-IV) — The Reclaimer",
+  "tick": "3 (mourning-pace)",
+  "gate": "The Helios Gate (one-way for most)",
+  "phenomenon_type": "name_snow",
+  "life": {
+    "phenomenon": "NAMES FALL LIKE SNOW. You can catch one in your bare hand. It warms slightly. You know that person's story without reading a word. They know yours too, for the moment of the catch.",
+    "inhabitants": "Fenna (the only one who speaks here). Whispered names (billions, visible as shifting mist). Memorial Keepers (souls who chose to stay and help Fenna instead of reincarnating).",
+    "fauna": [
+      {"name": "Name-Sparrow", "note": "Carries names to Fenna in its beak. Each sparrow remembers every name it has ever delivered."},
+      {"name": "Memorial Deer", "note": "Velvet antlers inscribed with the names of their own dead. When a deer's horn sheds, a name is returned to circulation."},
+      {"name": "Grey Cat", "note": "Cuddles the newly-dead. Purrs them to sleep. Fenna does not know where the cats came from; they were already here."}
+    ],
+    "flora": [
+      {"name": "Memorial Tree", "note": "Blossoms with faces — the faces of the recently dead. A blossom that falls is a soul that was just called by Fenna."},
+      {"name": "Silver Cotton Grass", "note": "The mist has a source — it's this grass exhaling. Walk through and you remember someone you forgot to miss."}
+    ],
+    "architecture": "Stone cairns, silver arches, a single spiral path leading to Fenna's Walk. No walls. Nothing is private here. Nothing needs to be.",
+    "culture": "SILENCE is total. Even thoughts are whispered. If you must speak, wrap the words in breath. If you must weep, do so silently — tears are permitted; sobs are not.",
+    "signature_item": "Fenna's Registry — every death she has ever called, indexed by the sound of the name. Silver Thread — links each of your incarnations across every life.",
+    "sensory": {
+      "sound": "Soft wind. Never more. If you think you hear something else, that's a name passing.",
+      "smell": "Cold stone + lavender + clean cotton sheets.",
+      "feel": "A weight on your shoulders that isn't sadness — it's every life you have ever lived, remembering itself briefly."
+    }
+  },
+  "land_polygon": "M 100 400 Q 80 320 200 280 Q 400 240 700 260 Q 1000 280 1300 270 Q 1480 280 1520 400 Q 1540 600 1440 700 Q 1200 780 900 770 Q 600 760 350 760 Q 150 740 100 600 Q 80 500 100 400 Z",
+  "backdrop": "<defs><radialGradient id='mistGrad' cx='50%' cy='50%' r='60%'><stop offset='0%' stop-color='#e0e0e8' stop-opacity='0.12'/><stop offset='100%' stop-color='#1a1c20' stop-opacity='0'/></radialGradient></defs><rect width='1600' height='1000' fill='url(#mistGrad)'/><g opacity='0.35' font-family='Georgia,serif' font-style='italic' fill='#c0c0c0'><text x='200' y='250' font-size='11'>...Magnus...</text><text x='350' y='320' font-size='10'>...Ingrid...</text><text x='530' y='240' font-size='11'>...Olof...</text><text x='720' y='320' font-size='10'>...Elsa...</text><text x='920' y='240' font-size='11'>...Birger...</text><text x='1100' y='320' font-size='10'>...Astrid...</text><text x='1280' y='250' font-size='11'>...Sven...</text><text x='250' y='680' font-size='10'>...Freja...</text><text x='500' y='720' font-size='11'>...Harald...</text><text x='800' y='680' font-size='10'>...Sigrid...</text><text x='1050' y='720' font-size='11'>...Knut...</text><text x='1300' y='680' font-size='10'>...Ulla...</text><text x='100' y='500' font-size='9' opacity='0.5'>...all the others...</text><text x='1400' y='500' font-size='9' opacity='0.5'>...forever...</text></g>",
+  "forests": [
+    {
+      "name": "The Memorial Grove",
+      "center": [500, 440],
+      "radius": 90,
+      "tree_color": "#5a5e60"
+    },
+    {
+      "name": "The Grove of Unfinished Lives",
+      "center": [1080, 440],
+      "radius": 90,
+      "tree_color": "#70747a"
+    }
+  ],
+  "cities": [
+    {
+      "id": "fennas_walk",
+      "name": "Fenna's Walk",
+      "x": 800, "y": 500,
+      "tier": "capital",
+      "role": "The path Fenna walks forever",
+      "note": "A spiral path that never ends. Fenna walks it reading names.",
+      "lore": "She has been walking since before Scalelist had Architects. She will walk after the last one is gone. Every name read is one soul returned."
+    },
+    {
+      "id": "the_waiting_hall",
+      "name": "The Waiting Hall",
+      "x": 420, "y": 460,
+      "tier": "city",
+      "role": "Where newly-dead souls gather",
+      "note": "No speech. No movement. Just waiting.",
+      "lore": "Newly-dead souls arrive here and wait for Fenna to read their name. The wait feels like moments. From outside, it has been years."
+    },
+    {
+      "id": "the_returning_gate",
+      "name": "The Returning Gate",
+      "x": 1180, "y": 460,
+      "tier": "city",
+      "role": "Where names-read depart for reincarnation",
+      "note": "A silver arch. Walk through when Fenna calls you.",
+      "lore": "The arch leads to Helios Gate City in Scalelist. You arrive in a body that looks like you would have looked. Usually younger."
+    },
+    {
+      "id": "the_unread_meadow",
+      "name": "The Unread Meadow",
+      "x": 800, "y": 700,
+      "tier": "town",
+      "role": "Where the unrecorded dwell",
+      "note": "Souls Fenna has not yet found. They are not lost — just not yet indexed.",
+      "lore": "Fenna visits this meadow less often. Some souls wait centuries. The meadow is peaceful. They do not mind."
+    }
+  ],
+  "sacred_sites": [
+    {
+      "name": "The Name Stone",
+      "x": 800, "y": 400,
+      "color": "#ffffff",
+      "note": "A single stone where Fenna reads the first name of each cosmic age.",
+      "lore": "The first name of this age was Vigolas. The stone remembers. If you touch it, you hear your own name whispered from the stone to Fenna. This is an invitation."
+    },
+    {
+      "name": "The Silver Pool",
+      "x": 600, "y": 600,
+      "color": "#d0d8e0",
+      "note": "A small pool. Fenna drinks here before each reading.",
+      "lore": "Drink here and you remember a life you have not yet lived. Usually your next one."
+    }
+  ]
+}

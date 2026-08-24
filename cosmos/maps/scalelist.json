@@ -1,0 +1,291 @@
+{
+  "id": "scalelist",
+  "name": "SCALELIST",
+  "subtitle": "The Prime Material",
+  "type": "continent",
+  "color": "#c9a84c",
+  "bg_color": "#0a1a2a",
+  "ocean_color": "#0a1a2a",
+  "deep_ocean_color": "#020818",
+  "land_color": "#3a4a28",
+  "land_highlight": "#5a6a38",
+  "land_shadow": "#1a2210",
+  "city_color": "#c9a84c",
+  "sacred_color": "#ffeab0",
+  "description": "The central material plane. A vast continent where the twelve cities of the Architects circle Ferdinand's trunk. Mountains in the east, the Anchor Sea to the south, the Null Fissure in the northwest, and the Lemon Grove sitting peacefully in the warm lowlands.",
+  "ruler": "The Twelve Architects (K-V)",
+  "tick": "1 (human baseline)",
+  "gate": "All 8 other realms connect through Scalelist",
+  "phenomenon_type": "ledger_lines",
+  "life": {
+    "phenomenon": "Every heartbeat of Ferdinand leaves a golden Ledger Line briefly visible across the sky. Citizens read the sky to know the hour.",
+    "inhabitants": "Humans, reincarnated souls, Architect scribes, cork-harvesters, and tea-makers. Population ~40 million spread across the 12 cities.",
+    "fauna": [
+      {"name": "Scalelist Stag", "note": "Antlers grow 1mm per heartbeat. Sheds once per cosmic age. A single dropped antler feeds a village for a year."},
+      {"name": "Cork Beetle", "note": "Sacred. You do not kill them. You bow. They live only on Ferdinand's shed bark."},
+      {"name": "Scalelist Retriever", "note": "Descendants of a single puppy Mingus approved with a single tail-wag in 1987. Every retriever on the continent is distant kin to that pup."}
+    ],
+    "flora": [
+      {"name": "Lemon Grove Tree", "note": "Fruit never out of season. The grove is one of six sacred sites. Eat one and you cannot feel sadness for an hour."},
+      {"name": "Ledger Fern", "note": "Grows only on pages left outdoors for seven days. Reading the fern's leaf is reading a forgotten paragraph of the universe."}
+    ],
+    "architecture": "Wood-and-cork houses with gold-ink signage. Every door has a HADOM-number above it indicating how many heartbeats since the house was built. Oldest house on record: 2.4 billion heartbeats (K-III's era).",
+    "culture": "Greet strangers with 'HADOM Quoka'. Pay small debts in Cork Coins (Ferdinand's shed bark = legal tender). Celebrate Reincarnation Day (anniversary of your current soul's arrival) with family, tea, and a lemon.",
+    "signature_item": "Cork Coin — a coin-sized disc of cork from Ferdinand's bark. Universal currency across Scalelist. Cannot be counterfeited (cork remembers).",
+    "sensory": {
+      "sound": "Murmuring crowds, distant church-bell rings, the occasional Ferdinand heartbeat thumping under your feet.",
+      "smell": "Warm bread, lemon rind, old paper, cork dust.",
+      "feel": "Ground-warm even in winter. Ferdinand's roots heat the continent from below."
+    }
+  },
+  "land_polygon": "M 120 330 Q 80 280 140 230 Q 220 180 320 190 Q 420 200 480 170 Q 560 140 660 160 Q 760 180 830 210 Q 940 240 1080 230 Q 1220 220 1320 270 Q 1420 320 1480 410 Q 1500 500 1480 590 Q 1460 680 1400 720 Q 1320 760 1200 760 Q 1060 760 950 750 Q 800 740 680 770 Q 560 800 450 790 Q 320 780 230 720 Q 140 650 120 550 Q 100 450 120 330 Z",
+  "mountain_ranges": [
+    {
+      "name": "Codex Mountains",
+      "color": "#6a6a78",
+      "snow_color": "#e8e8f0",
+      "size": 36,
+      "points": [
+        [1180, 330], [1230, 300], [1280, 330], [1320, 290], [1360, 330],
+        [1210, 360], [1260, 390], [1310, 360], [1350, 400], [1280, 440]
+      ]
+    },
+    {
+      "name": "The Northern Peaks",
+      "color": "#7a7a88",
+      "snow_color": "#fafaff",
+      "size": 30,
+      "points": [
+        [390, 260], [430, 240], [470, 265], [510, 245], [550, 270]
+      ]
+    },
+    {
+      "name": "Bakasura Range",
+      "color": "#4a3a4a",
+      "snow_color": "#8a7a8a",
+      "size": 26,
+      "points": [
+        [800, 680], [840, 660], [880, 685], [920, 665]
+      ]
+    }
+  ],
+  "forests": [
+    {
+      "name": "The Lemon Grove",
+      "center": [540, 580],
+      "radius": 75,
+      "tree_color": "#c9d84a"
+    },
+    {
+      "name": "Rougeina's Starwood",
+      "center": [230, 440],
+      "radius": 90,
+      "tree_color": "#ff6688"
+    },
+    {
+      "name": "The Trollmage Thicket",
+      "center": [1080, 520],
+      "radius": 100,
+      "tree_color": "#6b3a8a"
+    },
+    {
+      "name": "The Silent Glade",
+      "center": [380, 650],
+      "radius": 70,
+      "tree_color": "#5a5a5a"
+    }
+  ],
+  "rivers": [
+    {
+      "name": "The Anchor River",
+      "path": "M 1300 330 Q 1100 380 900 420 Q 700 460 500 520 Q 350 580 250 680 Q 200 740 180 780",
+      "color": "#4a9ad0",
+      "width": 3.5
+    },
+    {
+      "name": "The Seven Falls River",
+      "path": "M 1240 400 Q 1180 480 1050 550 Q 920 620 800 680",
+      "color": "#4a9ad0",
+      "width": 2.5
+    },
+    {
+      "name": "The Fenna Stream",
+      "path": "M 420 280 Q 380 360 340 440 Q 300 520 280 620",
+      "color": "#a0c8d8",
+      "width": 2
+    }
+  ],
+  "roads": [
+    {
+      "path": "M 700 490 L 530 460 L 350 480 L 260 540",
+      "color": "#b89b60"
+    },
+    {
+      "path": "M 700 490 L 880 470 L 1080 480 L 1280 440",
+      "color": "#b89b60"
+    },
+    {
+      "path": "M 700 490 L 680 600 L 600 680 L 460 720",
+      "color": "#b89b60"
+    },
+    {
+      "path": "M 700 490 L 720 360 L 700 250",
+      "color": "#b89b60"
+    }
+  ],
+  "backdrop": "<circle cx='300' cy='170' r='25' fill='#0f0820' opacity='0.85'/><text x='300' y='178' text-anchor='middle' fill='#b07ae0' font-size='18' font-style='italic'>⚠</text><text x='300' y='210' text-anchor='middle' fill='#b07ae0' font-size='10' font-style='italic' opacity='0.75' letter-spacing='2'>THE ROOT CRACK</text>",
+  "cities": [
+    {
+      "id": "architects_ledger",
+      "name": "The Architects' Ledger",
+      "x": 700, "y": 490,
+      "tier": "capital",
+      "role": "Central capital",
+      "note": "Where the twelve book-holders record every HADOM event. A library the size of a small country.",
+      "lore": "Built of black stone and gold ink. K-I's city. Every pulse of Ferdinand's heartbeat is inscribed here by hand within the same heartbeat. Tourists may visit the outer halls; the Inner Ledger is sealed."
+    },
+    {
+      "id": "helios_gate_city",
+      "name": "Helios Gate City",
+      "x": 700, "y": 250,
+      "tier": "capital",
+      "role": "Reincarnation hub",
+      "note": "K-II's city. Where every reincarnated soul is born into Scalelist.",
+      "lore": "Vigolas was shipwrecked here. Every city gate faces a massive stone arch; when Fenna's Thanatos gate opens, a newborn soul walks through in the body they died in, newly cleaned. The city's entire economy is welcoming the confused."
+    },
+    {
+      "id": "stormhold",
+      "name": "Stormhold",
+      "x": 410, "y": 200,
+      "tier": "city",
+      "role": "Vigolas's citadel",
+      "note": "Lightning hits the tower 142 times per second.",
+      "lore": "A tower on cliffs above the Anchor Sea. Vigolas stands on the balcony whenever storms roll in (always). The tower has been there since before the first Architect. Nobody built it — it was found."
+    },
+    {
+      "id": "neon_veil",
+      "name": "Neon Veil",
+      "x": 250, "y": 450,
+      "tier": "city",
+      "role": "Rougeina's rave-city",
+      "note": "Starlight instead of sunlight — a direct view into Astralis overhead.",
+      "lore": "Never sleeps. The sky here is a one-way mirror into Rougeina's realm. Every dance-floor doubles as a gate if you dance correctly."
+    },
+    {
+      "id": "seven_spires_town",
+      "name": "Seven Spires Town",
+      "x": 1260, "y": 400,
+      "tier": "city",
+      "role": "Trollmage's town",
+      "note": "Wizards + necromancers + one dancehall.",
+      "lore": "At the foot of the Codex Mountains. The dancehall is called 'Dark Patois' — it operates outside the Sin Codices by treaty. Everyone else pays sin-tax at the door."
+    },
+    {
+      "id": "buddys_rest",
+      "name": "Buddy's Rest",
+      "x": 540, "y": 620,
+      "tier": "town",
+      "role": "Kompis's home village",
+      "note": "One cabin by one lake. Population: Kompis + Mingus.",
+      "lore": "You can walk here. The door is unlocked. Mingus will wag his tail. Kompis will offer you tea. The Lemon Grove is 20 minutes south. Sometimes pilgrims come; they always leave calmer."
+    },
+    {
+      "id": "voids_edge",
+      "name": "Void's Edge",
+      "x": 260, "y": 330,
+      "tier": "city",
+      "role": "Smurjan's city",
+      "note": "Built on the edge of the Null Fissure. Citizens walk in threes.",
+      "lore": "Everyone in Void's Edge walks with two companions. Alone = Kali's attention. Paired = Bali's boredom. Three = safe. Even breakfast is eaten in groups of three."
+    },
+    {
+      "id": "fennas_sanctum",
+      "name": "Fenna's Sanctum",
+      "x": 370, "y": 660,
+      "tier": "town",
+      "role": "Thanatos gate-point",
+      "note": "Meditation garden. Silent. Do not speak.",
+      "lore": "Fenna receives newly dead souls here. If you are alive and visit, you cannot speak for 24 hours after leaving. The silence is not a rule; it is a consequence."
+    },
+    {
+      "id": "kalis_burn",
+      "name": "Kali's Burn",
+      "x": 850, "y": 680,
+      "tier": "city",
+      "role": "Volcano-city",
+      "note": "Kali's extension of Smurjan's wrath into Scalelist.",
+      "lore": "Built inside an active volcano. Citizens are fire-resistant by blood. Visitors receive a blessing-cloak at the gate, reusable. The city exports obsidian and warnings."
+    },
+    {
+      "id": "bakasura_maze",
+      "name": "Bakasura's Maze",
+      "x": 920, "y": 630,
+      "tier": "city",
+      "role": "Shifting labyrinth",
+      "note": "Geography changes daily. Yesterday's inn might be tomorrow's cliff.",
+      "lore": "No one has mapped the Maze. Locals carry a piece of chalk and a piece of cheese: the chalk marks where they've been (which the Maze ignores), the cheese marks where they're going (which the Maze respects, as tribute to Bakasura)."
+    },
+    {
+      "id": "architects_retreat",
+      "name": "The Architect's Retreat",
+      "x": 1140, "y": 310,
+      "tier": "city",
+      "role": "K-V's estate (rumored)",
+      "note": "No one has found it. It's here on the map only by implication.",
+      "lore": "K-V is rumored to own an estate in the foothills of the Codex Mountains. The estate exists. It cannot be visited. If you try, you arrive at Seven Spires Town and wonder why you came."
+    },
+    {
+      "id": "twelfth_city",
+      "name": "The Twelfth City",
+      "x": 1380, "y": 580,
+      "tier": "town",
+      "role": "Lost",
+      "note": "K-XII's renounced city. May not exist anymore.",
+      "lore": "Marked on old maps. No current road reaches it. No traveler has returned with a photograph. Some Architects claim it was unwritten when K-XII broke the Ferdinand Oath."
+    }
+  ],
+  "sacred_sites": [
+    {
+      "name": "The Seven Falls",
+      "x": 1200, "y": 480,
+      "color": "#a0e0ff",
+      "note": "Seven waterfalls in the Codex Mountains, one per sin.",
+      "lore": "Trollmage's trial circuit. Pilgrims walk the seven falls in order; each fall washes away one sin. The seventh fall doesn't wash — it remembers."
+    },
+    {
+      "name": "HADOM's Heart",
+      "x": 700, "y": 490,
+      "color": "#ffdd80",
+      "note": "Where Ferdinand's trunk touches ground. Pilgrimage site.",
+      "lore": "The exact center of Scalelist. A small chapel of cork wood marks the spot. Inside, you can place your ear against the trunk and hear the heartbeat of the universe. Average visit: 4 minutes before tears."
+    },
+    {
+      "name": "The First Gate",
+      "x": 720, "y": 230,
+      "color": "#e8e8ff",
+      "note": "Where the first soul ever reincarnated. Monument.",
+      "lore": "An archway of fused stone. The stone fused when the first name was read from Thanatos. Legend says the first soul was Architect I, returning to found the Ledger."
+    },
+    {
+      "name": "The Anchor Sea",
+      "x": 700, "y": 820,
+      "color": "#60a0d0",
+      "note": "Where Vigolas's shipwreck still drifts eternally.",
+      "lore": "The sea does not have waves. It has memories. Vigolas's shipwreck — the exact ship he arrived on — drifts forever in the center, visible to fishermen on clear nights. You cannot reach it; the sea shifts as you approach."
+    },
+    {
+      "name": "The Lemon Grove",
+      "x": 540, "y": 580,
+      "color": "#ffe890",
+      "note": "Kompis's picnic spot. Mingus laid down here once and the universe cracked slightly from the peace.",
+      "lore": "A grove of lemon trees that bear fruit year-round. You cannot feel sad here. If you try, you find yourself laughing instead. Mingus sleeps under the largest tree on Sundays. Do not disturb."
+    },
+    {
+      "name": "The Architect's Ledger Library",
+      "x": 735, "y": 490,
+      "color": "#ffcc50",
+      "note": "Inside the capital. Records every HADOM pulse.",
+      "lore": "Unreadable to anyone but the twelve. A non-Architect who opens a book sees only their own memories scrolling. The library has no limit; books are born inside it as they are written."
+    }
+  ]
+}
