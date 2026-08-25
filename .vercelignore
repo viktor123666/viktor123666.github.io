@@ -47,3 +47,8 @@ tools/youtube_creds/
 # ClipForge — local mode only. app/admin/review are NOT for the public
 # site until the attacker review (K5) has run. Brochure launch = own decision.
 clipforge/
+
+# vigge.pro-frontenden hör hemma PÅ vigge.pro (VPS) — aldrig duplicerad hit.
+# Isolering: en kompromiss av konst-sajten ska inte nå ClipForge. Redirect i
+# vercel.json skickar /vigge/* till den riktiga sajten.
+vigge/

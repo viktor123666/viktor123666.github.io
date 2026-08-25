@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /account.html
-Disallow: /api/
-Sitemap: https://vigge.pro/sitemap.xml
