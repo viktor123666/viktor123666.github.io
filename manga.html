@@ -81,6 +81,17 @@ footer{text-align:center;padding:3rem 2rem;color:var(--dim);font-family:'Space M
   .chapter-card{padding:.9rem 1rem}
   nav .brand{font-size:.9rem}
 }
+/* newsletter — owned audience (Listmonk @ news.scalelistuniverse.com) */
+.nl{max-width:540px;margin:0 auto 1.6rem;text-align:center}
+.nl-label{display:block;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.08em;color:#b8b8c4;margin-bottom:.7rem;line-height:1.55;text-transform:none}
+.nl-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.nl-row input{flex:1 1 220px;min-width:0;padding:.65rem .9rem;background:#14141f;border:1px solid rgba(201,168,76,.35);border-radius:8px;color:#fff;font-size:.9rem;outline:none}
+.nl-row input:focus{border-color:#c9a84c}
+.nl-row button{padding:.65rem 1.2rem;background:#c9a84c;color:#0a0a0f;border:0;border-radius:8px;font-weight:700;letter-spacing:.06em;cursor:pointer;font-size:.85rem}
+.nl-row button:disabled{opacity:.6;cursor:wait}
+.nl-note{font-family:'Space Mono',monospace;font-size:.62rem;color:#8a8a98;margin-top:.6rem;letter-spacing:.05em}
+.nl-note a{color:#c9a84c}
+.nl-msg{font-size:.8rem;color:#c9a84c;margin-top:.5rem;min-height:1em;letter-spacing:0}
 </style>
 <meta content="Read Scalelist Universe manga online free — 219 chapters of dark fantasy action across Seasons 1-4. Follow Vigolas, Rougeina, Trollmage, Kompis and Smurjan." name="description"/><meta content="scalelist universe manga, read manga online free, dark fantasy manga chapters, vigolas manga, rougeina manga, trollmage manga" name="keywords"/><link href="https://scalelist-universe.vercel.app/manga.html" rel="canonical"/><meta content="index, follow" name="robots"/><meta content="website" property="og:type"/><meta content="Scalelist Universe" property="og:site_name"/><meta content="https://scalelist-universe.vercel.app/manga.html" property="og:url"/><meta content="Read Manga — Scalelist Universe" property="og:title"/><meta content="Read Scalelist Universe manga online free — 219 chapters of dark fantasy action across Seasons 1-4. Follow Vigolas, Rougeina, Trollmage, Kompis and Smurjan." property="og:description"/><meta content="https://scalelistuniverse.com/og.png" property="og:image"/><meta content="en_US" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/><meta content="Read Manga — Scalelist Universe" name="twitter:title"/><meta content="Read Scalelist Universe manga online free — 219 chapters of dark fantasy action across Seasons 1-4. Follow Vigolas, Rougeina, Trollmage, Kompis and Smurjan." name="twitter:description"/><meta content="https://scalelistuniverse.com/og.png" name="twitter:image"/><meta content="@susmurjan" name="twitter:site"/><script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -151,7 +162,16 @@ ct.style.opacity=Math.max(0,1-y/(vh*0.55));ct.style.transform='translateY('+(y*0
 <audio controls="" id="readerAudio"></audio>
 </div>
 </div>
-<footer>© 2026 Scalelist Universe. All rights reserved.</footer>
+<footer>
+<form class="nl" action="https://news.scalelistuniverse.com/subscription/form" method="post" data-nl>
+<input type="hidden" name="l" value="c8da10b8-b170-44dd-8473-5c8a2059b77f">
+<label class="nl-label" for="nl-email">Newsletter — manga drops, music releases, new videos. Straight from us, no algorithm in between.</label>
+<div class="nl-row"><input id="nl-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email" maxlength="254"><button type="submit">Subscribe</button></div>
+<p class="nl-note">Double opt-in · unsubscribe any time · <a href="/legal/privacy.html#newsletter">privacy</a></p>
+<p class="nl-msg" aria-live="polite"></p>
+</form>
+<p>© 2026 Scalelist Universe. All rights reserved.</p>
+</footer>
 <script>
 const CHAPTERS = [
   {num:"KW01",title:"The Hollow Hunt",file:"chapter_KW01_kompis_the_hollow_hunt",meta:"Kompis & Mingus · The Wilds · Part 1 · the hunt begins",char:"kompis",season:"wilds",badge:"THE WILDS",color:"#D97706"},
@@ -656,5 +676,15 @@ drawAurora();
 render();
 </script>
 <script src="/js/analytics.js"></script>
+<script>
+/* newsletter form: progressive enhancement — JSON to Listmonk's public API; falls back to the plain form POST */
+(function(){var f=document.querySelector('form[data-nl]');if(!f||!window.fetch)return;
+f.addEventListener('submit',function(e){e.preventDefault();var b=f.querySelector('button'),m=f.querySelector('.nl-msg'),em=f.email.value.trim();b.disabled=true;m.textContent='Sending…';
+fetch('https://news.scalelistuniverse.com/api/public/subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,name:em.split('@')[0],list_uuids:[f.l.value]})})
+.then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
+.then(function(x){if(x.ok&&x.j&&x.j.data){m.textContent='Check your inbox and click the confirmation link — that finishes it.';f.reset();}else{m.textContent=(x.j&&x.j.message)||'Something went wrong — try again.';}})
+.catch(function(){m.textContent='';f.submit();})
+.then(function(){b.disabled=false;});});})();
+</script>
 </body>
 </html>

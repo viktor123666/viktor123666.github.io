@@ -85,6 +85,19 @@ body.saver-mode .meta .title{font-size:12px;-webkit-line-clamp:1;min-height:auto
   .tab .cnt{display:none}
   .search{width:100%}
 }
+/* newsletter — owned audience (Listmonk @ news.scalelistuniverse.com) */
+.nl{max-width:540px;margin:0 auto 1.6rem;text-align:center}
+.nl-label{display:block;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.08em;color:#b8b8c4;margin-bottom:.7rem;line-height:1.55;text-transform:none}
+.nl-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.nl-row input{flex:1 1 220px;min-width:0;padding:.65rem .9rem;background:#14141f;border:1px solid rgba(201,168,76,.35);border-radius:8px;color:#fff;font-size:.9rem;outline:none}
+.nl-row input:focus{border-color:#c9a84c}
+.nl-row button{padding:.65rem 1.2rem;background:#c9a84c;color:#0a0a0f;border:0;border-radius:8px;font-weight:700;letter-spacing:.06em;cursor:pointer;font-size:.85rem}
+.nl-row button:disabled{opacity:.6;cursor:wait}
+.nl-note{font-family:'Space Mono',monospace;font-size:.62rem;color:#8a8a98;margin-top:.6rem;letter-spacing:.05em}
+.nl-note a{color:#c9a84c}
+.nl-msg{font-size:.8rem;color:#c9a84c;margin-top:.5rem;min-height:1em;letter-spacing:0}
+.site-footer{max-width:1500px;margin:0 auto;padding:2rem 24px 3rem;border-top:1px solid var(--border);text-align:center;color:#777;font-size:12px}
+.site-footer .foot a{color:#aaa}
 </style>
 </head>
 <body>
@@ -272,6 +285,26 @@ ov.addEventListener('click',e=>{if(e.target===ov)closePlayer();});
 
 reset();
 })();
+</script>
+<footer class="site-footer">
+<form class="nl" action="https://news.scalelistuniverse.com/subscription/form" method="post" data-nl>
+<input type="hidden" name="l" value="c8da10b8-b170-44dd-8473-5c8a2059b77f">
+<label class="nl-label" for="nl-email">Newsletter — manga drops, music releases, new videos. Straight from us, no algorithm in between.</label>
+<div class="nl-row"><input id="nl-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email" maxlength="254"><button type="submit">Subscribe</button></div>
+<p class="nl-note">Double opt-in · unsubscribe any time · <a href="/legal/privacy.html#newsletter">privacy</a></p>
+<p class="nl-msg" aria-live="polite"></p>
+</form>
+<p class="foot">© 2026 Scalelist Universe · <a href="/legal/privacy.html">Privacy</a> · <a href="/legal/terms.html">Terms</a></p>
+</footer>
+<script>
+/* newsletter form: progressive enhancement — JSON to Listmonk's public API; falls back to the plain form POST */
+(function(){var f=document.querySelector('form[data-nl]');if(!f||!window.fetch)return;
+f.addEventListener('submit',function(e){e.preventDefault();var b=f.querySelector('button'),m=f.querySelector('.nl-msg'),em=f.email.value.trim();b.disabled=true;m.textContent='Sending…';
+fetch('https://news.scalelistuniverse.com/api/public/subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,name:em.split('@')[0],list_uuids:[f.l.value]})})
+.then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
+.then(function(x){if(x.ok&&x.j&&x.j.data){m.textContent='Check your inbox and click the confirmation link — that finishes it.';f.reset();}else{m.textContent=(x.j&&x.j.message)||'Something went wrong — try again.';}})
+.catch(function(){m.textContent='';f.submit();})
+.then(function(){b.disabled=false;});});})();
 </script>
 </body>
 </html>

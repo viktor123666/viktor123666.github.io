@@ -109,6 +109,17 @@ footer p{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--textDim)
   .char-grid{grid-template-columns:1fr 1fr;gap:.8rem}
   .char-card{padding:1.2rem 1rem}
 }
+/* newsletter — owned audience (Listmonk @ news.scalelistuniverse.com) */
+.nl{max-width:540px;margin:0 auto 1.6rem;text-align:center}
+.nl-label{display:block;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.08em;color:#b8b8c4;margin-bottom:.7rem;line-height:1.55;text-transform:none}
+.nl-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.nl-row input{flex:1 1 220px;min-width:0;padding:.65rem .9rem;background:#14141f;border:1px solid rgba(201,168,76,.35);border-radius:8px;color:#fff;font-size:.9rem;outline:none}
+.nl-row input:focus{border-color:#c9a84c}
+.nl-row button{padding:.65rem 1.2rem;background:#c9a84c;color:#0a0a0f;border:0;border-radius:8px;font-weight:700;letter-spacing:.06em;cursor:pointer;font-size:.85rem}
+.nl-row button:disabled{opacity:.6;cursor:wait}
+.nl-note{font-family:'Space Mono',monospace;font-size:.62rem;color:#8a8a98;margin-top:.6rem;letter-spacing:.05em}
+.nl-note a{color:#c9a84c}
+.nl-msg{font-size:.8rem;color:#c9a84c;margin-top:.5rem;min-height:1em;letter-spacing:0}
 </style>
 <meta content="Scalelist Universe — A dark fantasy manga series following five souls with infinite power. Read 119+ chapters free." name="description"/><meta content="scalelist universe, dark fantasy manga, five souls, vigolas, rougeina, trollmage, kompis, smurjan, free manga online, HADOM" name="keywords"/><link href="https://scalelist-universe.vercel.app/" rel="canonical"/><meta content="index, follow" name="robots"/><meta content="website" property="og:type"/><meta content="Scalelist Universe" property="og:site_name"/><meta content="https://scalelist-universe.vercel.app/" property="og:url"/><meta content="Scalelist Universe — Dark Fantasy Manga" property="og:title"/><meta content="Scalelist Universe — A dark fantasy manga series following five souls with infinite power. Read 119+ chapters free." property="og:description"/><meta content="https://scalelistuniverse.com/og.png" property="og:image"/><meta content="en_US" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/><meta content="Scalelist Universe — Dark Fantasy Manga" name="twitter:title"/><meta content="Scalelist Universe — A dark fantasy manga series following five souls with infinite power. Read 119+ chapters free." name="twitter:description"/><meta content="https://scalelistuniverse.com/og.png" name="twitter:image"/><meta content="@susmurjan" name="twitter:site"/><script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -227,6 +238,13 @@ footer p{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--textDim)
 </div>
 </section>
 <footer>
+<form class="nl" action="https://news.scalelistuniverse.com/subscription/form" method="post" data-nl>
+<input type="hidden" name="l" value="c8da10b8-b170-44dd-8473-5c8a2059b77f">
+<label class="nl-label" for="nl-email">Newsletter — manga drops, music releases, new videos. Straight from us, no algorithm in between.</label>
+<div class="nl-row"><input id="nl-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email" maxlength="254"><button type="submit">Subscribe</button></div>
+<p class="nl-note">Double opt-in · unsubscribe any time · <a href="/legal/privacy.html#newsletter">privacy</a></p>
+<p class="nl-msg" aria-live="polite"></p>
+</form>
 <p>© 2026 Scalelist Universe</p>
 <p class="legal-links"><a href="/legal/privacy.html">Privacy Policy</a> · <a href="/legal/terms.html">Terms of Service</a> · <a href="mailto:vigge.holmstrom@gmail.com">Contact</a></p>
 </footer>
@@ -409,5 +427,15 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()
 })();
 </script>
 <script src="/js/analytics.js"></script>
+<script>
+/* newsletter form: progressive enhancement — JSON to Listmonk's public API; falls back to the plain form POST */
+(function(){var f=document.querySelector('form[data-nl]');if(!f||!window.fetch)return;
+f.addEventListener('submit',function(e){e.preventDefault();var b=f.querySelector('button'),m=f.querySelector('.nl-msg'),em=f.email.value.trim();b.disabled=true;m.textContent='Sending…';
+fetch('https://news.scalelistuniverse.com/api/public/subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,name:em.split('@')[0],list_uuids:[f.l.value]})})
+.then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
+.then(function(x){if(x.ok&&x.j&&x.j.data){m.textContent='Check your inbox and click the confirmation link — that finishes it.';f.reset();}else{m.textContent=(x.j&&x.j.message)||'Something went wrong — try again.';}})
+.catch(function(){m.textContent='';f.submit();})
+.then(function(){b.disabled=false;});});})();
+</script>
 </body>
 </html>
