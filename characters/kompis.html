@@ -4,11 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Kompis — The Buddy · Subtick Billionaire | Scalelist Universe</title>
-<meta name="description" content="Mingus's eternal companion. The cosmic force of Lust — the bond that binds beings.">
-<meta property="og:title" content="Kompis — The Buddy · Subtick Billionaire | Scalelist Universe">
-<meta property="og:description" content="Mingus's eternal companion. The cosmic force of Lust — the bond that binds beings.">
-<meta property="og:image" content="https://scalelistuniverse.com/characters/kompis.png">
+<meta name="description" content="Mingus&#x27;s eternal companion. The cosmic force of Lust — the bond that binds beings.">
+<link rel="canonical" href="https://scalelistuniverse.com/characters/kompis">
 <meta property="og:type" content="profile">
+<meta property="og:site_name" content="Scalelist Universe">
+<meta property="og:url" content="https://scalelistuniverse.com/characters/kompis">
+<meta property="og:title" content="Kompis — The Buddy · Subtick Billionaire | Scalelist Universe">
+<meta property="og:description" content="Mingus&#x27;s eternal companion. The cosmic force of Lust — the bond that binds beings.">
+<meta property="og:image" content="https://scalelistuniverse.com/characters/art/kompis/kompis_keyart.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kompis — The Buddy · Subtick Billionaire | Scalelist Universe">
+<meta name="twitter:description" content="Mingus&#x27;s eternal companion. The cosmic force of Lust — the bond that binds beings.">
+<meta name="twitter:image" content="https://scalelistuniverse.com/characters/art/kompis/kompis_keyart.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -26,12 +34,14 @@ header nav{display:flex;gap:22px;flex-wrap:wrap}
 header nav a{font-size:.78rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;font-family:'Cinzel',serif;transition:color .2s}
 header nav a:hover{color:var(--gold)}
 
-.hero{min-height:80vh;display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:56px;padding:80px 32px;max-width:1280px;margin:0 auto;position:relative}
+.hero{min-height:70vh;display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:56px;padding:80px 32px;max-width:1280px;margin:0 auto;position:relative}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 65%);pointer-events:none}
 .hero .portrait-frame{position:relative;border:1px solid var(--accent);border-radius:14px;overflow:hidden;align-self:start;background:#080812;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px var(--accent)}
 .hero .portrait-frame img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+.hero .portrait-frame.no-art{aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 30%,color-mix(in srgb,var(--accent) 22%,transparent),var(--panel) 75%)}
+.hero .portrait-frame.no-art .big-letter{font-family:'Cinzel',serif;font-weight:900;font-size:7rem;color:var(--accent);opacity:.85;text-shadow:0 0 60px color-mix(in srgb,var(--accent) 60%,transparent)}
 .hero .portrait-frame .letter{position:absolute;top:14px;left:14px;width:54px;height:54px;border-radius:50%;background:var(--accent);color:var(--void);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:900;font-size:1.4rem;box-shadow:0 4px 12px rgba(0,0,0,.4)}
-.hero .portrait-frame .seat{position:absolute;bottom:14px;right:14px;padding:6px 12px;border-radius:99px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;background:rgba(74,222,128,0.85);color:var(--void);backdrop-filter:blur(6px)}
+.hero .portrait-frame .seat{position:absolute;bottom:14px;right:14px;padding:6px 12px;border-radius:99px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;background:rgba(201,168,76,0.85);color:var(--void);backdrop-filter:blur(6px)}
 
 .hero .body{position:relative}
 .hero .order{font-family:'Cinzel',serif;color:var(--accent);font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:14px;opacity:.95}
@@ -46,15 +56,47 @@ header nav a:hover{color:var(--gold)}
 .section p{font-size:1.12rem;line-height:1.85;color:var(--text);margin-bottom:14px;font-style:italic;opacity:.95}
 .section p:last-child{margin-bottom:0}
 
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.vcard{display:block;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--panel);transition:transform .2s,border-color .2s}
+.vcard:hover{transform:translateY(-3px);border-color:var(--accent)}
+.vcard .thumb{position:relative;aspect-ratio:16/9;background:#000}
+.vcard .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.vcard .thumb .dur{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.8);color:#fff;font-family:'Cinzel',serif;font-size:.65rem;padding:2px 6px;border-radius:4px}
+.vcard .vt{padding:10px 14px;font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--text);font-style:normal;line-height:1.4}
+.vcard .vm{padding:0 14px 12px;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+
+.mchips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.mchip{border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.04em;color:var(--text);background:var(--panel)}
+.mchip b{color:var(--accent);margin-right:6px}
+.mmore{font-size:.85rem;color:var(--dim);font-style:italic}
+
+.chanrow{display:flex;flex-wrap:wrap;gap:12px}
+.chan-live{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--accent);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.75rem;border-radius:8px}
+.chan-planned{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px dashed var(--border);color:var(--dim);font-family:'Cinzel',serif;letter-spacing:.1em;text-transform:uppercase;font-size:.68rem;border-radius:8px;font-style:italic}
+
 .cta{padding:80px 32px;text-align:center;background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--accent) 8%,transparent),transparent 70%);border-top:1px solid var(--border);margin-top:30px}
 .cta h3{font-family:'Cinzel',serif;color:var(--accent);font-size:clamp(1.3rem,2.6vw,2rem);letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
 .cta p{max-width:540px;margin:0 auto 24px;font-size:1rem;color:var(--text);font-style:italic;opacity:.9}
 .cta .btn{display:inline-block;padding:13px 28px;background:var(--accent);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;border-radius:8px;text-decoration:none;transition:transform .2s}
-.cta .btn + .btn{margin-left:8px;background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.cta .btn+.btn{margin-left:8px;background:transparent;border:1px solid var(--accent);color:var(--accent)}
 .cta .btn:hover{transform:scale(1.04)}
 
 footer{padding:40px 24px;text-align:center;border-top:1px solid var(--border);color:var(--dim);font-size:.74rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase}
 footer a{color:var(--gold)}
+
+/* newsletter — owned audience (Listmonk @ news.scalelistuniverse.com) — copied
+   verbatim from public/index.html so one deploy carries both. */
+.nl{max-width:540px;margin:0 auto 1.6rem;text-align:center}
+.nl-label{display:block;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.08em;color:#b8b8c4;margin-bottom:.7rem;line-height:1.55;text-transform:none}
+.nl-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.nl-row input{flex:1 1 220px;min-width:0;padding:.65rem .9rem;background:#14141f;border:1px solid rgba(201,168,76,.35);border-radius:8px;color:#fff;font-size:.9rem;outline:none}
+.nl-row input:focus{border-color:#c9a84c}
+.nl-row button{padding:.65rem 1.2rem;background:#c9a84c;color:#0a0a0f;border:0;border-radius:8px;font-weight:700;letter-spacing:.06em;cursor:pointer;font-size:.85rem}
+.nl-row button:disabled{opacity:.6;cursor:wait}
+.nl-note{font-family:'Space Mono',monospace;font-size:.62rem;color:#8a8a98;margin-top:.6rem;letter-spacing:.05em}
+.nl-note a{color:#c9a84c}
+.nl-msg{font-size:.8rem;color:#c9a84c;margin-top:.5rem;min-height:1em;letter-spacing:0}
+.nl-wrap{padding:50px 32px 10px;border-top:1px solid var(--border)}
 
 @media(max-width:768px){
   .hero{grid-template-columns:1fr;padding:50px 22px;gap:30px}
@@ -64,79 +106,55 @@ footer a{color:var(--gold)}
 </style>
 </head>
 <body>
-
 <header>
   <a class="brand" href="/">SCALELIST · UNIVERSE</a>
   <nav>
+    <a href="/characters">All Souls</a>
     <a href="/cosmos">Cosmos</a>
     <a href="/manga">Manga</a>
     <a href="/lineage">Lineage</a>
     <a href="/empire">Empire</a>
   </nav>
 </header>
-
 <section class="hero">
-  <div class="portrait-frame">
-    <span class="letter">K</span>
-    <span class="seat">Live · in canon</span>
-    <img src="/characters/kompis.png" alt="Kompis portrait">
-  </div>
+  <div class="portrait-frame"><span class="letter">K</span><span class="seat">Live · in canon</span><img src="/characters/art/kompis/kompis_keyart.webp" alt="Kompis key art" loading="eager"></div>
   <div class="body">
-    <div class="order">K of Viktor · The Cipher</div>
+    <div class="order">K of Viktor</div>
     <h1>Kompis</h1>
     <div class="role">The Buddy · Subtick Billionaire</div>
-    <p class="tagline">"Mingus's eternal companion. The cosmic force of Lust — the bond that binds beings."</p>
-    <div class="stats">
-      <b>Realm</b><span>Heartbeat — Buddy's Rest</span>
-      <b>HADOM</b><span>10⁹ (1 billion subtick)</span>
-      <b>Letter</b><span>K (Viktor)</span>
-      <b>Status</b><span style="color:var(--accent)">Active Champion · Live across multiple platforms</span>
-    </div>
+    <p class="tagline">“Mingus&#x27;s eternal companion. The cosmic force of Lust — the bond that binds beings.”</p>
+    <div class="stats"><b>Realm</b><span>Heartbeat — Buddy&#x27;s Rest</span><b>HADOM</b><span>1,000,000,000 / tick (Subtick Billionaire)</span><b>K-Rank</b><span>K-II — rising toward K-III</span><b>Fragment</b><span>Lust</span><b>Lineage</b><span>VIKTOR-3</span><b>Status</b><span>Live · in canon</span></div>
   </div>
 </section>
-
-<section class="section">
-  <h2>Look</h2>
-  <p>Golden-tan skin. Braided beard with a single duckweed strand from holiday weeks. Hoodie older than most dynasties. Fishing pole within arm's reach at all times. Mingus — the sacred golden retriever — beside him in every panel. KOMPIS name patch on the drop-leg of his armor when he fights.</p>
-</section>
-
-<section class="section">
-  <h2>Voice</h2>
-  <p>Gentle, warm, slow. The voice of someone who has decided not to raise it even in danger. Laughs easily. Cries easily. When the laugh and the cry happen at once, that's how you know the moment is true.</p>
-</section>
-
-<section class="section">
-  <h2>Canon Connection</h2>
-  <p>Subtick Billionaire — a billion actions per cosmic heartbeat. Mingus is his eternal companion; their bond is a HADOM-class miracle the Architects do not interfere with. In S3 he fought off Old Kasper's cartel. In S4 he survived Bakasura at the Lake — Niva's parka-piece on Mingus's collar held. The CT/T duality (canon-locked 2026-04-19) reveals that Mingus's human-form manifestation in CS2 reality is the CT-side of every match — same KOMPIS name patch on both drop-legs. **In peace-time reality Mingus remains the sacred golden retriever. Always. The dog is forever.**</p>
-</section>
-
-<section class="section">
-  <h2>Signature Move</h2>
-  <p>Subtick Strike — performs a billion actions in one heartbeat. The opponent doesn't lose so much as the opponent finds themselves on the floor without remembering arriving. Mingus is the steady metronome that keeps Kompis from spending all billion at once.</p>
-</section>
-
-<section class="section">
-  <h2>First Appearance</h2>
-  <p>Origins OVA, Episode 1. Major arcs in Season 1 (*kompis_s1e* chapters), Season 3's *Subtick War*, Season 4's *Bakasura at the Lake*.</p>
-</section>
-
-<section class="section">
-  <h2>Videoshower — Every Kompis Video</h2>
-  <iframe class="vshower" src="/videoshower_embed.html?char=kompis&n=12" loading="lazy" title="Kompis Videoshower" style="width:100%;height:250px;border:0;border-radius:12px" scrolling="no"></iframe>
-  <p style="margin-top:10px;font-style:normal"><a href="/videos.html?char=kompis" style="color:var(--accent)">Open the full gallery →</a></p>
-</section>
-<script>addEventListener('message',function(e){if(e.data&&e.data.vsHeight){var f=document.querySelector('.vshower');if(f)f.style.height=Math.min(e.data.vsHeight+8,720)+'px';}});</script>
-
+<section class="section"><h2>Look</h2><p>Golden-tan skin. Braided beard with a single duckweed strand from holiday weeks. Hoodie older than most dynasties. Fishing pole within arm&#x27;s reach at all times. Mingus — the sacred golden retriever — beside him in every panel. KOMPIS name patch on the drop-leg of his armor when he fights.</p></section><section class="section"><h2>Voice</h2><p>Gentle, warm, slow. The voice of someone who has decided not to raise it even in danger. Laughs easily. Cries easily. When the laugh and the cry happen at once, that&#x27;s how you know the moment is true.</p></section><section class="section"><h2>Canon Connection</h2><p>Subtick Billionaire — a billion actions per cosmic heartbeat. Mingus is his eternal companion; their bond is a HADOM-class miracle the Architects do not interfere with. In S3 he fought off Old Kasper&#x27;s cartel. In S4 he survived Bakasura at the Lake — Niva&#x27;s parka-piece on Mingus&#x27;s collar held. The CT/T duality (canon-locked 2026-04-19) reveals that Mingus&#x27;s human-form manifestation in CS2 reality is the CT-side of every match — same KOMPIS name patch on both drop-legs. **In peace-time reality Mingus remains the sacred golden retriever. Always. The dog is forever.**</p></section><section class="section"><h2>Signature Move</h2><p>Subtick Strike — performs a billion actions in one heartbeat. The opponent doesn&#x27;t lose so much as the opponent finds themselves on the floor without remembering arriving. Mingus is the steady metronome that keeps Kompis from spending all billion at once.</p></section><section class="section"><h2>First Appearance</h2><p>Origins OVA, Episode 1. Major arcs in Season 1 (*kompis_s1e* chapters), Season 3&#x27;s *Subtick War*, Season 4&#x27;s *Bakasura at the Lake*.</p></section>
+<section class="section"><h2>Latest Videos</h2><div class="vgrid"><a class="vcard" href="https://www.youtube-nocookie.com/embed/KOo03u47tWY" target="_blank" rel="noopener"><div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/KOo03u47tWY/hqdefault.jpg" alt="Takanashi Kiara: LEAKED The Clip They Don&#x27;t Want You To See #shorts"><span class="dur">0:46</span></div><div class="vt">Takanashi Kiara: LEAKED The Clip They Don&#x27;t Want You To See #shorts</div><div class="vm">1,800 views</div></a><a class="vcard" href="https://www.youtube-nocookie.com/embed/ToRKPGJYvh8" target="_blank" rel="noopener"><div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/ToRKPGJYvh8/hqdefault.jpg" alt="Takanashi Kiara: This Changed EVERYTHING #shorts"><span class="dur">0:31</span></div><div class="vt">Takanashi Kiara: This Changed EVERYTHING #shorts</div><div class="vm">1,600 views</div></a><a class="vcard" href="https://www.youtube-nocookie.com/embed/6YzclVwQNhk" target="_blank" rel="noopener"><div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/6YzclVwQNhk/hqdefault.jpg" alt="Takanashi Kiara: Bro Unlocked A NEW LEVEL #shorts"><span class="dur">0:31</span></div><div class="vt">Takanashi Kiara: Bro Unlocked A NEW LEVEL #shorts</div><div class="vm">1,500 views</div></a><a class="vcard" href="https://www.youtube-nocookie.com/embed/Yip6r1O8xQg" target="_blank" rel="noopener"><div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/Yip6r1O8xQg/hqdefault.jpg" alt="Takanashi Kiara: Takanashi Kiara 2nd Album 「Vogelfrei」 ALBUM TEASER #shorts"><span class="dur">0:37</span></div><div class="vt">Takanashi Kiara: Takanashi Kiara 2nd Album 「Vogelfrei」 ALBUM TEASER #shorts</div><div class="vm">1,400 views</div></a><a class="vcard" href="https://www.youtube-nocookie.com/embed/q3YyEBLnc-0" target="_blank" rel="noopener"><div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/q3YyEBLnc-0/hqdefault.jpg" alt="Doug DeMuro: drop this car, whoa, have you seen this?"><span class="dur">0:53</span></div><div class="vt">Doug DeMuro: drop this car, whoa, have you seen this?</div><div class="vm">1,300 views</div></a><a class="vcard" href="https://www.youtube-nocookie.com/embed/iTgZSvxiJu4" target="_blank" rel="noopener"><div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/iTgZSvxiJu4/hqdefault.jpg" alt="Takanashi Kiara: Bro Unlocked A NEW LEVEL #shorts"><span class="dur">0:31</span></div><div class="vt">Takanashi Kiara: Bro Unlocked A NEW LEVEL #shorts</div><div class="vm">1,200 views</div></a></div></section>
+<section class="section"><h2>Manga Appearances</h2><div class="mchips"><div class="mchip"><b>Ch.KW01b</b>The Hollow Hunt</div><div class="mchip"><b>Ch.KW01</b>The Hollow Hunt</div><div class="mchip"><b>S4 · Ch.10</b>Home</div><div class="mchip"><b>S4 · Ch.09</b>Minguss True Form</div><div class="mchip"><b>S4 · Ch.08</b>Mingus Crosses Realms</div><div class="mchip"><b>S4 · Ch.07</b>The Dock Stand</div><div class="mchip"><b>S4 · Ch.06</b>The Cabin Falls</div><div class="mchip"><b>S4 · Ch.05</b>Vigolas Arrives</div><div class="mchip"><b>S4 · Ch.04</b>The Lemon Grove Stand</div><div class="mchip"><b>S4 · Ch.03</b>First Contact</div><div class="mchip"><b>S4 · Ch.02</b>The Approach</div><div class="mchip"><b>S4 · Ch.01</b>The Subtick Slows</div></div><p class="mmore">+30 more — <a href="/manga">read them all on the Manga page →</a></p></section>
+<section class="section"><h2>Channels</h2><div class="chanrow"><a class="chan-live" href="https://www.youtube.com/@Kompis-scale" target="_blank" rel="noopener">YouTube — @Kompis-scale</a></div></section>
 <section class="cta">
   <h3>The Cipher Continues</h3>
-  <p>Fifteen souls spell the Author's true name. Read the cipher in full, or browse the other ten open seats waiting for blood.</p>
+  <p>Fifteen souls spell the Author's true name. Read the cipher in full, or browse the other souls waiting for their next chapter.</p>
   <a class="btn" href="/lineage">Open The Lineage</a>
-  <a class="btn" href="/empire">The Empire Hub</a>
+  <a class="btn" href="/characters">All Souls</a>
 </section>
-
+<div class="nl-wrap"><form class="nl" action="https://news.scalelistuniverse.com/subscription/form" method="post" data-nl>
+<input type="hidden" name="l" value="c8da10b8-b170-44dd-8473-5c8a2059b77f">
+<label class="nl-label" for="nl-email">Newsletter — manga drops, music releases, new videos. Straight from us, no algorithm in between.</label>
+<div class="nl-row"><input id="nl-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email" maxlength="254"><button type="submit">Subscribe</button></div>
+<p class="nl-note">Double opt-in · unsubscribe any time · <a href="/legal/privacy.html#newsletter">privacy</a></p>
+<p class="nl-msg" aria-live="polite"></p>
+</form></div>
 <footer>
-  Scalelist Universe · Kompis (K · Viktor) · <a href="/lineage">Back to the Cipher</a>
+  Scalelist Universe · Kompis (K · Viktor) · <a href="/characters">Back to All Souls</a>
 </footer>
-
+<script>
+/* newsletter form: progressive enhancement — JSON to Listmonk's public API; falls back to the plain form POST */
+(function(){var f=document.querySelector('form[data-nl]');if(!f||!window.fetch)return;
+f.addEventListener('submit',function(e){e.preventDefault();var b=f.querySelector('button'),m=f.querySelector('.nl-msg'),em=f.email.value.trim();b.disabled=true;m.textContent='Sending…';
+fetch('https://news.scalelistuniverse.com/api/public/subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,name:em.split('@')[0],list_uuids:[f.l.value]})})
+.then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
+.then(function(x){if(x.ok&&x.j&&x.j.data){m.textContent='Check your inbox and click the confirmation link — that finishes it.';f.reset();}else{m.textContent=(x.j&&x.j.message)||'Something went wrong — try again.';}})
+.catch(function(){m.textContent='';f.submit();})
+.then(function(){b.disabled=false;});});})();
+</script>
 </body>
 </html>

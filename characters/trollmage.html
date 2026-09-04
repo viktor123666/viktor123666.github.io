@@ -5,10 +5,18 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Trollmage — The Reader · Master of the Eighth Codex | Scalelist Universe</title>
 <meta name="description" content="Reads the Seven Sin Codices backward. Bound the Eighth. The Apprenticeship line is his.">
+<link rel="canonical" href="https://scalelistuniverse.com/characters/trollmage">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Scalelist Universe">
+<meta property="og:url" content="https://scalelistuniverse.com/characters/trollmage">
 <meta property="og:title" content="Trollmage — The Reader · Master of the Eighth Codex | Scalelist Universe">
 <meta property="og:description" content="Reads the Seven Sin Codices backward. Bound the Eighth. The Apprenticeship line is his.">
-<meta property="og:image" content="https://scalelistuniverse.com/characters/trollmage.png">
-<meta property="og:type" content="profile">
+<meta property="og:image" content="https://scalelistuniverse.com/characters/art/trollmage/trollmage_keyart.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trollmage — The Reader · Master of the Eighth Codex | Scalelist Universe">
+<meta name="twitter:description" content="Reads the Seven Sin Codices backward. Bound the Eighth. The Apprenticeship line is his.">
+<meta name="twitter:image" content="https://scalelistuniverse.com/characters/art/trollmage/trollmage_keyart.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -26,12 +34,14 @@ header nav{display:flex;gap:22px;flex-wrap:wrap}
 header nav a{font-size:.78rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;font-family:'Cinzel',serif;transition:color .2s}
 header nav a:hover{color:var(--gold)}
 
-.hero{min-height:80vh;display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:56px;padding:80px 32px;max-width:1280px;margin:0 auto;position:relative}
+.hero{min-height:70vh;display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:56px;padding:80px 32px;max-width:1280px;margin:0 auto;position:relative}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 65%);pointer-events:none}
 .hero .portrait-frame{position:relative;border:1px solid var(--accent);border-radius:14px;overflow:hidden;align-self:start;background:#080812;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px var(--accent)}
 .hero .portrait-frame img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+.hero .portrait-frame.no-art{aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 30%,color-mix(in srgb,var(--accent) 22%,transparent),var(--panel) 75%)}
+.hero .portrait-frame.no-art .big-letter{font-family:'Cinzel',serif;font-weight:900;font-size:7rem;color:var(--accent);opacity:.85;text-shadow:0 0 60px color-mix(in srgb,var(--accent) 60%,transparent)}
 .hero .portrait-frame .letter{position:absolute;top:14px;left:14px;width:54px;height:54px;border-radius:50%;background:var(--accent);color:var(--void);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:900;font-size:1.4rem;box-shadow:0 4px 12px rgba(0,0,0,.4)}
-.hero .portrait-frame .seat{position:absolute;bottom:14px;right:14px;padding:6px 12px;border-radius:99px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;background:rgba(74,222,128,0.85);color:var(--void);backdrop-filter:blur(6px)}
+.hero .portrait-frame .seat{position:absolute;bottom:14px;right:14px;padding:6px 12px;border-radius:99px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;background:rgba(201,168,76,0.85);color:var(--void);backdrop-filter:blur(6px)}
 
 .hero .body{position:relative}
 .hero .order{font-family:'Cinzel',serif;color:var(--accent);font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:14px;opacity:.95}
@@ -46,15 +56,47 @@ header nav a:hover{color:var(--gold)}
 .section p{font-size:1.12rem;line-height:1.85;color:var(--text);margin-bottom:14px;font-style:italic;opacity:.95}
 .section p:last-child{margin-bottom:0}
 
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.vcard{display:block;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--panel);transition:transform .2s,border-color .2s}
+.vcard:hover{transform:translateY(-3px);border-color:var(--accent)}
+.vcard .thumb{position:relative;aspect-ratio:16/9;background:#000}
+.vcard .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.vcard .thumb .dur{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.8);color:#fff;font-family:'Cinzel',serif;font-size:.65rem;padding:2px 6px;border-radius:4px}
+.vcard .vt{padding:10px 14px;font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--text);font-style:normal;line-height:1.4}
+.vcard .vm{padding:0 14px 12px;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+
+.mchips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.mchip{border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.04em;color:var(--text);background:var(--panel)}
+.mchip b{color:var(--accent);margin-right:6px}
+.mmore{font-size:.85rem;color:var(--dim);font-style:italic}
+
+.chanrow{display:flex;flex-wrap:wrap;gap:12px}
+.chan-live{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--accent);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.75rem;border-radius:8px}
+.chan-planned{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px dashed var(--border);color:var(--dim);font-family:'Cinzel',serif;letter-spacing:.1em;text-transform:uppercase;font-size:.68rem;border-radius:8px;font-style:italic}
+
 .cta{padding:80px 32px;text-align:center;background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--accent) 8%,transparent),transparent 70%);border-top:1px solid var(--border);margin-top:30px}
 .cta h3{font-family:'Cinzel',serif;color:var(--accent);font-size:clamp(1.3rem,2.6vw,2rem);letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
 .cta p{max-width:540px;margin:0 auto 24px;font-size:1rem;color:var(--text);font-style:italic;opacity:.9}
 .cta .btn{display:inline-block;padding:13px 28px;background:var(--accent);color:var(--void);font-family:'Cinzel',serif;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;border-radius:8px;text-decoration:none;transition:transform .2s}
-.cta .btn + .btn{margin-left:8px;background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.cta .btn+.btn{margin-left:8px;background:transparent;border:1px solid var(--accent);color:var(--accent)}
 .cta .btn:hover{transform:scale(1.04)}
 
 footer{padding:40px 24px;text-align:center;border-top:1px solid var(--border);color:var(--dim);font-size:.74rem;font-family:'Cinzel',serif;letter-spacing:.18em;text-transform:uppercase}
 footer a{color:var(--gold)}
+
+/* newsletter — owned audience (Listmonk @ news.scalelistuniverse.com) — copied
+   verbatim from public/index.html so one deploy carries both. */
+.nl{max-width:540px;margin:0 auto 1.6rem;text-align:center}
+.nl-label{display:block;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.08em;color:#b8b8c4;margin-bottom:.7rem;line-height:1.55;text-transform:none}
+.nl-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.nl-row input{flex:1 1 220px;min-width:0;padding:.65rem .9rem;background:#14141f;border:1px solid rgba(201,168,76,.35);border-radius:8px;color:#fff;font-size:.9rem;outline:none}
+.nl-row input:focus{border-color:#c9a84c}
+.nl-row button{padding:.65rem 1.2rem;background:#c9a84c;color:#0a0a0f;border:0;border-radius:8px;font-weight:700;letter-spacing:.06em;cursor:pointer;font-size:.85rem}
+.nl-row button:disabled{opacity:.6;cursor:wait}
+.nl-note{font-family:'Space Mono',monospace;font-size:.62rem;color:#8a8a98;margin-top:.6rem;letter-spacing:.05em}
+.nl-note a{color:#c9a84c}
+.nl-msg{font-size:.8rem;color:#c9a84c;margin-top:.5rem;min-height:1em;letter-spacing:0}
+.nl-wrap{padding:50px 32px 10px;border-top:1px solid var(--border)}
 
 @media(max-width:768px){
   .hero{grid-template-columns:1fr;padding:50px 22px;gap:30px}
@@ -64,79 +106,55 @@ footer a{color:var(--gold)}
 </style>
 </head>
 <body>
-
 <header>
   <a class="brand" href="/">SCALELIST · UNIVERSE</a>
   <nav>
+    <a href="/characters">All Souls</a>
     <a href="/cosmos">Cosmos</a>
     <a href="/manga">Manga</a>
     <a href="/lineage">Lineage</a>
     <a href="/empire">Empire</a>
   </nav>
 </header>
-
 <section class="hero">
-  <div class="portrait-frame">
-    <span class="letter">T</span>
-    <span class="seat">Live · in canon</span>
-    <img src="/characters/trollmage.png" alt="Trollmage portrait">
-  </div>
+  <div class="portrait-frame"><span class="letter">T</span><span class="seat">Live · in canon</span><img src="/characters/art/trollmage/trollmage_keyart.webp" alt="Trollmage key art" loading="eager"></div>
   <div class="body">
-    <div class="order">T of Viktor · The Cipher</div>
+    <div class="order">T of Viktor</div>
     <h1>Trollmage</h1>
     <div class="role">The Reader · Master of the Eighth Codex</div>
-    <p class="tagline">"Reads the Seven Sin Codices backward. Bound the Eighth. The Apprenticeship line is his."</p>
-    <div class="stats">
-      <b>Realm</b><span>Codexia — The Seven Spires</span>
-      <b>HADOM</b><span>10⁵ (100,000)</span>
-      <b>Letter</b><span>T (Viktor)</span>
-      <b>Status</b><span style="color:var(--accent)">Active Champion · Live across multiple platforms</span>
-    </div>
+    <p class="tagline">“Reads the Seven Sin Codices backward. Bound the Eighth. The Apprenticeship line is his.”</p>
+    <div class="stats"><b>Realm</b><span>Codexia — The Seven Spires</span><b>HADOM</b><span>Macrofiable — variable by command, no fixed tick</span><b>K-Rank</b><span>K-V</span><b>Fragment</b><span>Sloth (absorbed) + Gluttony (incomplete)</span><b>Lineage</b><span>VIKTOR-4</span><b>Status</b><span>Live · in canon</span></div>
   </div>
 </section>
-
-<section class="section">
-  <h2>Look</h2>
-  <p>Violet-runed face from his backward-reading discipline. Deep purple eyes that have seen too many pages. Scholarly robes with rune embroidery at the hem. Holds a glowing codex page in the air with one hand more often than not. The other hand always still — too much movement breaks a backward-read.</p>
-</section>
-
-<section class="section">
-  <h2>Voice</h2>
-  <p>Measured. Quiet. The cadence of someone who has learned to think in reverse without telling you. When he does speak, the sentence finishes its meaning before the words finish arriving.</p>
-</section>
-
-<section class="section">
-  <h2>Canon Connection</h2>
-  <p>Master of the Seven Sin Codices, all read backward and bound. Bound the Eighth Codex (the Apprenticeship binding) at the climax of S3 — sealed Vex (the Forward Reader) and Pride (the possessed hand) inside. Runa is his great-(many)-grandmother and the original carver of the runes he reads. Apprentice Nock is his current disciple; the Eighth Codex's Apprenticeship binding ties them together.</p>
-</section>
-
-<section class="section">
-  <h2>Signature Move</h2>
-  <p>Backward Read — speaks the last word of a Codex page first, then the second-to-last, then the third-to-last, until the page is complete. The page's *meaning* assembles itself in reality as he reads. Most listeners go briefly mad. He has not.</p>
-</section>
-
-<section class="section">
-  <h2>First Appearance</h2>
-  <p>Origins OVA. Major arc in Season 2 (*Macro Wars*). Definitive arc in Season 3's *Forward Reader* and Season 4's *Nock's Right Hand*.</p>
-</section>
-
-<section class="section">
-  <h2>Videoshower — Every Trollmage Video</h2>
-  <iframe class="vshower" src="/videoshower_embed.html?char=trollmage&n=12" loading="lazy" title="Trollmage Videoshower" style="width:100%;height:250px;border:0;border-radius:12px" scrolling="no"></iframe>
-  <p style="margin-top:10px;font-style:normal"><a href="/videos.html?char=trollmage" style="color:var(--accent)">Open the full gallery →</a></p>
-</section>
-<script>addEventListener('message',function(e){if(e.data&&e.data.vsHeight){var f=document.querySelector('.vshower');if(f)f.style.height=Math.min(e.data.vsHeight+8,720)+'px';}});</script>
-
+<section class="section"><h2>Look</h2><p>Violet-runed face from his backward-reading discipline. Deep purple eyes that have seen too many pages. Scholarly robes with rune embroidery at the hem. Holds a glowing codex page in the air with one hand more often than not. The other hand always still — too much movement breaks a backward-read.</p></section><section class="section"><h2>Voice</h2><p>Measured. Quiet. The cadence of someone who has learned to think in reverse without telling you. When he does speak, the sentence finishes its meaning before the words finish arriving.</p></section><section class="section"><h2>Canon Connection</h2><p>Master of the Seven Sin Codices, all read backward and bound. Bound the Eighth Codex (the Apprenticeship binding) at the climax of S3 — sealed Vex (the Forward Reader) and Pride (the possessed hand) inside. Runa is his great-(many)-grandmother and the original carver of the runes he reads. Apprentice Nock is his current disciple; the Eighth Codex&#x27;s Apprenticeship binding ties them together.</p></section><section class="section"><h2>Signature Move</h2><p>Backward Read — speaks the last word of a Codex page first, then the second-to-last, then the third-to-last, until the page is complete. The page&#x27;s *meaning* assembles itself in reality as he reads. Most listeners go briefly mad. He has not.</p></section><section class="section"><h2>First Appearance</h2><p>Origins OVA. Major arc in Season 2 (*Macro Wars*). Definitive arc in Season 3&#x27;s *Forward Reader* and Season 4&#x27;s *Nock&#x27;s Right Hand*.</p></section>
+<section class="section"><h2>Latest Videos</h2><div class="vgrid"><a class="vcard" href="https://www.youtube-nocookie.com/embed/xSLLLc4vFYU" target="_blank" rel="noopener"><div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/xSLLLc4vFYU/hqdefault.jpg" alt="Pedro Song BOOSTED CHAOS EXTREME VERSION Remix"><span class="dur">3:09</span></div><div class="vt">Pedro Song BOOSTED CHAOS EXTREME VERSION Remix</div><div class="vm">2,183 views</div></a><a class="vcard" href="https://www.youtube-nocookie.com/embed/9yr0_TT0iqA" target="_blank" rel="noopener"><div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/9yr0_TT0iqA/hqdefault.jpg" alt="Hakos Baelz: 【3D Performance Video】 SNAKE EYES || HAKOS BAELZ #shorts"><span class="dur">0:59</span></div><div class="vt">Hakos Baelz: 【3D Performance Video】 SNAKE EYES || HAKOS BAELZ #shorts</div><div class="vm">1,500 views</div></a><a class="vcard" href="https://www.youtube-nocookie.com/embed/ABspfl1CFKI" target="_blank" rel="noopener"><div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/ABspfl1CFKI/hqdefault.jpg" alt="Hakos Baelz: 【3D Performance Video】 SNAKE EYES || HAKOS BAELZ #shorts"><span class="dur">0:59</span></div><div class="vt">Hakos Baelz: 【3D Performance Video】 SNAKE EYES || HAKOS BAELZ #shorts</div><div class="vm">1,300 views</div></a><a class="vcard" href="https://www.youtube-nocookie.com/embed/YAUVZ6aoEis" target="_blank" rel="noopener"><div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/YAUVZ6aoEis/hqdefault.jpg" alt="Hakos Baelz: 【ORIGINAL 3D MV】 SNAKE EYES || HAKOS BAELZ #shorts"><span class="dur">0:59</span></div><div class="vt">Hakos Baelz: 【ORIGINAL 3D MV】 SNAKE EYES || HAKOS BAELZ #shorts</div><div class="vm">1,200 views</div></a><a class="vcard" href="https://www.youtube-nocookie.com/embed/-bFtnIebKW8" target="_blank" rel="noopener"><div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/-bFtnIebKW8/hqdefault.jpg" alt="Kairyu Crocodile: Drawing my friends from memory #shorts"><span class="dur">0:36</span></div><div class="vt">Kairyu Crocodile: Drawing my friends from memory #shorts</div><div class="vm">1,200 views</div></a><a class="vcard" href="https://www.youtube-nocookie.com/embed/_m9293dFQlE" target="_blank" rel="noopener"><div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/_m9293dFQlE/hqdefault.jpg" alt="Hakos Baelz: 【ORIGINAL 3D MV】 SNAKE EYES || HAKOS BAELZ #shorts"><span class="dur">0:59</span></div><div class="vt">Hakos Baelz: 【ORIGINAL 3D MV】 SNAKE EYES || HAKOS BAELZ #shorts</div><div class="vm">1,100 views</div></a></div></section>
+<section class="section"><h2>Manga Appearances</h2><div class="mchips"><div class="mchip"><b>S4 · Ch.10</b>The Dancehall Drinks</div><div class="mchip"><b>S4 · Ch.09</b>The New Council</div><div class="mchip"><b>S4 · Ch.08</b>Hunting The Last Rogue</div><div class="mchip"><b>S4 · Ch.07</b>The Binding At Prides Page</div><div class="mchip"><b>S4 · Ch.06</b>Nock And The Hand Together</div><div class="mchip"><b>S4 · Ch.05</b>The Other Three Council Members</div><div class="mchip"><b>S4 · Ch.04</b>The Hand Talks</div><div class="mchip"><b>S4 · Ch.03</b>Nock Locked Up</div><div class="mchip"><b>S4 · Ch.02</b>The Crime Scene</div><div class="mchip"><b>S4 · Ch.01</b>Acolyte Fenns Last Reading</div><div class="mchip"><b>S3 · Ch.10</b>The Eighth Codex</div><div class="mchip"><b>S3 · Ch.09</b>Trollmage Vs Pride</div></div><p class="mmore">+28 more — <a href="/manga">read them all on the Manga page →</a></p></section>
+<section class="section"><h2>Channels</h2><div class="chanrow"><a class="chan-live" href="https://www.youtube.com/@trollmage7709" target="_blank" rel="noopener">YouTube — @trollmage7709</a></div></section>
 <section class="cta">
   <h3>The Cipher Continues</h3>
-  <p>Fifteen souls spell the Author's true name. Read the cipher in full, or browse the other ten open seats waiting for blood.</p>
+  <p>Fifteen souls spell the Author's true name. Read the cipher in full, or browse the other souls waiting for their next chapter.</p>
   <a class="btn" href="/lineage">Open The Lineage</a>
-  <a class="btn" href="/empire">The Empire Hub</a>
+  <a class="btn" href="/characters">All Souls</a>
 </section>
-
+<div class="nl-wrap"><form class="nl" action="https://news.scalelistuniverse.com/subscription/form" method="post" data-nl>
+<input type="hidden" name="l" value="c8da10b8-b170-44dd-8473-5c8a2059b77f">
+<label class="nl-label" for="nl-email">Newsletter — manga drops, music releases, new videos. Straight from us, no algorithm in between.</label>
+<div class="nl-row"><input id="nl-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email" maxlength="254"><button type="submit">Subscribe</button></div>
+<p class="nl-note">Double opt-in · unsubscribe any time · <a href="/legal/privacy.html#newsletter">privacy</a></p>
+<p class="nl-msg" aria-live="polite"></p>
+</form></div>
 <footer>
-  Scalelist Universe · Trollmage (T · Viktor) · <a href="/lineage">Back to the Cipher</a>
+  Scalelist Universe · Trollmage (T · Viktor) · <a href="/characters">Back to All Souls</a>
 </footer>
-
+<script>
+/* newsletter form: progressive enhancement — JSON to Listmonk's public API; falls back to the plain form POST */
+(function(){var f=document.querySelector('form[data-nl]');if(!f||!window.fetch)return;
+f.addEventListener('submit',function(e){e.preventDefault();var b=f.querySelector('button'),m=f.querySelector('.nl-msg'),em=f.email.value.trim();b.disabled=true;m.textContent='Sending…';
+fetch('https://news.scalelistuniverse.com/api/public/subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,name:em.split('@')[0],list_uuids:[f.l.value]})})
+.then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
+.then(function(x){if(x.ok&&x.j&&x.j.data){m.textContent='Check your inbox and click the confirmation link — that finishes it.';f.reset();}else{m.textContent=(x.j&&x.j.message)||'Something went wrong — try again.';}})
+.catch(function(){m.textContent='';f.submit();})
+.then(function(){b.disabled=false;});});})();
+</script>
 </body>
 </html>
