@@ -221,7 +221,7 @@ f.addEventListener('submit',function(e){e.preventDefault();var b=f.querySelector
 fetch('https://news.scalelistuniverse.com/api/public/subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,name:em.split('@')[0],list_uuids:[f.l.value]})})
 .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
 .then(function(x){if(x.ok&&x.j&&x.j.data){m.textContent='Check your inbox and click the confirmation link — that finishes it.';f.reset();}else{m.textContent=(x.j&&x.j.message)||'Something went wrong — try again.';}})
-.catch(function(){m.textContent='';f.submit();})
+.catch(function(){b.disabled=false;m.textContent='Could not reach the newsletter server right now - please try again later.';})
 .then(function(){b.disabled=false;});});})();
 </script>
 </body>
