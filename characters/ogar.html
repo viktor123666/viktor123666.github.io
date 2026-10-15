@@ -113,7 +113,7 @@ footer a{color:var(--gold)}
     <a href="/cosmos">Cosmos</a>
     <a href="/manga">Manga</a>
     <a href="/lineage">Lineage</a>
-    <a href="/empire">Empire</a>
+    <a href="/lore">The Saga</a>
   </nav>
 </header>
 <section class="hero">
@@ -129,32 +129,17 @@ footer a{color:var(--gold)}
 <section class="section"><h2>Look</h2><p>Tall, gaunt. Blindfold woven from cypress thread and golden retriever fur. Beneath the blindfold her eyes are silver coins. Removes blindfold only on the new moon, only for the dying.</p></section><section class="section"><h2>Voice</h2><p>Soft, certain. Speaks of futures as though they already happened — because to her they already have.</p></section><section class="section"><h2>Canon Connection</h2><p>The only being Echo could not infiltrate. She wept silver coins at Mingus&#x27;s burial-that-never-happened. The coins are still in the Spiral.</p></section><section class="section"><h2>Signature Move</h2><p>Names the moment a person will die. The naming is a kindness, not a curse — they get to make it count.</p></section><section class="section"><h2>First Appearance</h2><p>At the rim of the Spiral Graveyard the night Mingus first didn&#x27;t die. She arrived to mourn and stayed to celebrate.</p></section>
 
 <section class="section"><h2>Manga Appearances</h2><div class="mchips"><div class="mchip"><b>Ch.L04</b>The Far Eye Watcher</div></div><p class="mmore"><a href="/manga">Read on the Manga page →</a></p></section>
-<section class="section"><h2>Channels</h2><div class="chanrow"><span class="chan-planned">YouTube planned — @scalelistogar</span><span class="chan-planned">TikTok planned — @scalelistogar</span><span class="chan-planned">Instagram planned — @scalelistogar</span><span class="chan-planned">X planned — @SLOgar</span></div></section>
+
 <section class="cta">
   <h3>The Cipher Continues</h3>
   <p>Fifteen souls spell the Author's true name. Read the cipher in full, or browse the other souls waiting for their next chapter.</p>
   <a class="btn" href="/lineage">Open The Lineage</a>
   <a class="btn" href="/characters">All Souls</a>
 </section>
-<div class="nl-wrap"><form class="nl" action="https://news.scalelistuniverse.com/subscription/form" method="post" data-nl>
-<input type="hidden" name="l" value="c8da10b8-b170-44dd-8473-5c8a2059b77f">
-<label class="nl-label" for="nl-email">Newsletter — manga drops, music releases, new videos. Straight from us, no algorithm in between.</label>
-<div class="nl-row"><input id="nl-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email" maxlength="254"><button type="submit">Subscribe</button></div>
-<p class="nl-note">Double opt-in · unsubscribe any time · <a href="/legal/privacy.html#newsletter">privacy</a></p>
-<p class="nl-msg" aria-live="polite"></p>
-</form></div>
+
 <footer>
   Scalelist Universe · Ögar (Ö · Rönnkvist) · <a href="/characters">Back to All Souls</a>
 </footer>
-<script>
-/* newsletter form: progressive enhancement — JSON to Listmonk's public API; falls back to the plain form POST */
-(function(){var f=document.querySelector('form[data-nl]');if(!f||!window.fetch)return;
-f.addEventListener('submit',function(e){e.preventDefault();var b=f.querySelector('button'),m=f.querySelector('.nl-msg'),em=f.email.value.trim();b.disabled=true;m.textContent='Sending…';
-fetch('https://news.scalelistuniverse.com/api/public/subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,name:em.split('@')[0],list_uuids:[f.l.value]})})
-.then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
-.then(function(x){if(x.ok&&x.j&&x.j.data){m.textContent='Check your inbox and click the confirmation link — that finishes it.';f.reset();}else{m.textContent=(x.j&&x.j.message)||'Something went wrong — try again.';}})
-.catch(function(){b.disabled=false;m.textContent='Could not reach the newsletter server right now - please try again later.';})
-.then(function(){b.disabled=false;});});})();
-</script>
+
 </body>
 </html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Viktor Lineage — the Six Chosen | Scalelist Universe</title>
+<meta name="description" content="V-I-K-T-O-R: six champions whose letters spell the Author&#x27;s given name. They walk the world, they appear in the manga, and when the cosmos needs an action, one of the Six performs it.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
+<style>
+  :root{--ord:#00ff88}
+
+  .ord-hero{min-height:min(64vh,540px);position:relative;overflow:hidden}
+  .ord-hero::before{content:"";position:absolute;inset:-20%;z-index:-1;
+    background:radial-gradient(640px 400px at 50% 72%,color-mix(in srgb,var(--ord) 16%,transparent),transparent 62%)}
+  .ord-lines{font-family:var(--font-display);letter-spacing:.06em;color:var(--text-dim);line-height:1.9;margin-top:1.2rem}
+  .ord-lines b{color:#fff}
+  .cipher{display:flex;justify-content:center;flex-wrap:wrap;gap:.4rem;margin:2.2rem auto 0;max-width:960px}
+  .cipher a{display:flex;flex-direction:column;align-items:center;min-width:64px;padding:.6rem .5rem;border:1px solid var(--border);
+    border-radius:var(--radius-sm);background:var(--panel);transition:transform .25s,border-color .25s,box-shadow .25s}
+  .cipher a b{font-family:var(--font-display);font-size:2rem;color:var(--c);text-shadow:0 0 18px color-mix(in srgb,var(--c) 55%,transparent)}
+  .cipher a small{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)}
+  .cipher a:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 0 26px -8px var(--c)}
+  .ord-intro{max-width:760px;margin:0 auto;color:var(--text);font-size:1.02rem}
+  .ord-intro p+p{margin-top:1rem}
+  .ord-intro .seal{font-family:var(--font-display);color:var(--gold-bright);text-align:center;font-size:1.15rem;margin-top:1.6rem}
+  .souls{display:grid;gap:2.2rem;max-width:1080px;margin:3.4rem auto 0}
+  .soul{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);background:var(--panel);
+    border:1px solid var(--border);border-left:3px solid var(--c);border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow);position:relative}
+  .soul:nth-child(even){grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+  .soul:nth-child(even) .soul-art{order:2}
+  .soul::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--c) 14%,transparent),transparent 60%)}
+  .soul:hover::after{opacity:1}
+  .soul-art{position:relative;aspect-ratio:3/4;background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--c) 22%,#0a0b16),#050509 70%)}
+  .soul-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;z-index:1;transition:transform 1.2s ease}
+  .soul:hover .soul-art img{transform:scale(1.04)}
+  .soul-letter{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);
+    font-size:9rem;color:color-mix(in srgb,var(--c) 70%,#fff);opacity:.35}
+  .soul-cipher{position:absolute;left:.8rem;bottom:.8rem;z-index:2;font-size:.66rem;letter-spacing:.2em;color:#fff;
+    background:color-mix(in srgb,var(--c) 45%,rgba(5,5,9,.75));padding:.25rem .6rem;border-radius:999px}
+  .soul-status{position:absolute;right:.8rem;top:.8rem;z-index:2;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+    color:#fff;background:rgba(5,5,9,.72);border:1px solid color-mix(in srgb,var(--c) 55%,transparent);padding:.22rem .6rem;border-radius:999px}
+  .soul-body{padding:1.6rem 1.7rem 1.5rem;display:flex;flex-direction:column;gap:.75rem}
+  .soul-root{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--c)}
+  .soul h3{font-size:1.7rem}
+  .soul h3 span{display:block;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-top:.3rem}
+  .soul-look{color:var(--text-dim);font-size:.92rem}
+  .soul-voice{font-size:.86rem;font-style:italic;color:var(--text)}
+  .soul-voice b{font-style:normal;color:var(--c);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;margin-right:.4rem}
+  .soul-power{border:1px solid color-mix(in srgb,var(--c) 40%,transparent);background:color-mix(in srgb,var(--c) 7%,transparent);
+    border-radius:var(--radius-sm);padding:.8rem .95rem;font-size:.93rem}
+  .soul-power b{display:block;font-family:var(--font-display);color:var(--c);letter-spacing:.08em;margin-bottom:.2rem}
+  .soul-canon{font-size:.9rem}
+  .soul-first{font-size:.8rem;color:var(--text-dim);border-left:2px solid var(--c);padding-left:.9rem}
+  .soul-link{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:auto}
+  .ord-law{max-width:900px;margin:0 auto;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .ord-law div{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.2rem;font-size:.9rem}
+  .ord-law b{display:block;font-family:var(--font-display);color:var(--gold-bright);margin-bottom:.3rem}
+  .ord-nav{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:2.4rem}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(max-width:760px){
+    .soul,.soul:nth-child(even){grid-template-columns:1fr}
+    .soul:nth-child(even) .soul-art{order:0}
+    .soul-art{aspect-ratio:4/5}
+    .cipher a{min-width:52px} .cipher a b{font-size:1.6rem}
+  }
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.soul-art img{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="su-hero ord-hero">
+  <div class="su-kicker su-fade">The given name · the Six Chosen</div>
+  <h1 class="su-fade-2">The Viktor Lineage</h1>
+  <p class="ord-lines su-fade-3">Six souls. Six letters. One name.<br><b>When the cosmos needs an action, one of the Six performs it.</b></p>
+  <nav class="cipher su-fade-3" aria-label="The cipher"><a href="#vigolas" style="--c:#00ff88" title="Vigolas"><b>V</b><small>Vigolas</small></a><a href="#isa" style="--c:#67e8f9" title="Isa"><b>I</b><small>Isa</small></a><a href="#kompis" style="--c:#ffaa00" title="Kompis"><b>K</b><small>Kompis</small></a><a href="#trollmage" style="--c:#9933ff" title="Trollmage"><b>T</b><small>Trollmage</small></a><a href="#opha" style="--c:#d946ef" title="Opha"><b>O</b><small>Opha</small></a><a href="#rougeina" style="--c:#ff3366" title="Rougeina"><b>R</b><small>Rougeina</small></a></nav>
+</header>
+
+<main class="su-section">
+  <section class="ord-intro reveal"><p>Six souls whose roles in the universe match the six letters of the given name. They are champions, fighters, agents of change. They walk in the world. They appear in the manga.</p><p>The Lineage is not a council. They do not meet. Some of them have never spoken to each other. They are linked only by being letters in the same word, a word that happens to be the Author's name. In the deep grammar of the universe that makes them <strong>instruments of his story</strong>.</p>
+    <p class="seal">Without one part, Exodia cannot be summoned.</p>
+  </section>
+
+  <section class="souls">
+<article class="soul reveal" id="vigolas" style="--c:#00ff88">
+  <div class="soul-art"><img src="/characters/art/vigolas/vigolas_keyart.webp" alt="Vigolas, The Infinite Administrator" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">V</span>
+    <span class="soul-cipher">VIKTOR-1</span>
+    <span class="soul-status">Live · in canon</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">Helios</p>
+    <h3>Vigolas <span>The Infinite Administrator</span></h3>
+    <p class="soul-look">Lightning-marked face. Emerald-storm eyes that hold weather. Dark hair with permanent slight wind-disturbance, even indoors. Midnight-green Stormhold cloak. Lightning crackles softly around his fingertips when he is calm; loud when he is not.</p>
+    <p class="soul-voice"><b>Voice</b>Low, weathered. Like a storm that has decided not to break yet. Says less than he could; means more than he says. Never raises his voice to summon lightning — the lightning hears him at any volume.</p>
+    <div class="soul-power"><b>Reverse Lightning</b> When Vigolas is angry enough, lightning rises <em>from</em> the ground <em>to</em> the sky. Few have lived long enough to remember seeing it.</div>
+    <p class="soul-canon">The Infinite Administrator. Vigolas operates at HADOM ∞−1 — one tick below the uncountable. He summons lightning with intent alone. He defeated Captain Vass at Lightning&#x27;s Mouth in S3, killed his own Backward-Self at the Crack in the Seal in S4, and bound K-XII&#x27;s soul-thread inside the Eighth Codex. He carries Stormhold&#x27;s keep. He drinks during thunder.</p>
+    <p class="soul-first">Origins OVA Episode 1. Before that — implicit since the founding of Stormhold. The throne was empty until he sat in it; the sea-coast was unnamed until his lightning marked it.</p>
+    <a class="soul-link" href="/characters/vigolas">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="isa" style="--c:#67e8f9">
+  <div class="soul-art"><img src="/characters/art/isa/isa_keyart.webp" alt="Isa, The Stillborn Heartbeat" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">I</span>
+    <span class="soul-cipher">VIKTOR-2</span>
+    <span class="soul-status">Live · in canon</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">Helios-Heartbeat border</p>
+    <h3>Isa <span>The Stillborn Heartbeat</span></h3>
+    <p class="soul-look">Silver-white hair to the small of her back. Frost-blue eyes that glow softly. Pale, flawless skin. Barefoot — never melts the ice she stands on.</p>
+    <p class="soul-voice"><b>Voice</b>Sounds like she&#x27;s recovering from a long held breath. Always one beat slower than the room.</p>
+    <div class="soul-power"><b>Signature</b> If she enters a fight, the fight goes from a heartbeat to an hour. Combatants don&#x27;t realize they&#x27;ve been slowed; they simply realize, mid-strike, that they&#x27;ve changed their mind.</div>
+    <p class="soul-canon">The unspoken reason Vigolas and Kompis never collide. She is the hold between ∞−1 and the billion-subtick. She has met neither — and the universe is grateful.</p>
+    <p class="soul-first">Standing barefoot on the frozen edge of Lake Mingus, dawn after the Stormcoast War&#x27;s last skirmish. She doesn&#x27;t say anything. The lake doesn&#x27;t either. Both of them are listening.</p>
+    <a class="soul-link" href="/characters/isa">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="kompis" style="--c:#ffaa00">
+  <div class="soul-art"><img src="/characters/art/kompis/kompis_keyart.webp" alt="Kompis, The Buddy" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">K</span>
+    <span class="soul-cipher">VIKTOR-3</span>
+    <span class="soul-status">Live · in canon</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">Heartbeat</p>
+    <h3>Kompis <span>The Buddy</span></h3>
+    <p class="soul-look">Golden-tan skin. Braided beard with a single duckweed strand from holiday weeks. Hoodie older than most dynasties. Fishing pole within arm&#x27;s reach at all times. Mingus — the sacred golden retriever — beside him in every panel. KOMPIS name patch on the drop-leg of his armor when he fights.</p>
+    <p class="soul-voice"><b>Voice</b>Gentle, warm, slow. The voice of someone who has decided not to raise it even in danger. Laughs easily. Cries easily. When the laugh and the cry happen at once, that&#x27;s how you know the moment is true.</p>
+    <div class="soul-power"><b>Subtick Strike</b> Performs a billion actions in one heartbeat. The opponent doesn&#x27;t lose so much as the opponent finds themselves on the floor without remembering arriving. Mingus is the steady metronome that keeps Kompis from spending all billion at once.</div>
+    <p class="soul-canon">Subtick Billionaire — a billion actions per cosmic heartbeat. Mingus is his eternal companion; their bond is a HADOM-class miracle the Architects do not interfere with. In S3 he fought off Old Kasper&#x27;s cartel. In S4 he survived Bakasura at the Lake — Niva&#x27;s parka-piece on Mingus&#x27;s collar held. The CT/T duality (canon-locked 2026-04-19) reveals that Mingus&#x27;s human-form manifestation in CS2 reality is the CT-side of every match — same KOMPIS name patch on both drop-legs. <strong>In peace-time reality Mingus remains the sacred golden retriever. Always. The dog is forever.</strong></p>
+    <p class="soul-first">Origins OVA, Episode 1. Major arcs in Season 1 (<em>kompis_s1e</em> chapters), Season 3&#x27;s <em>Subtick War</em>, Season 4&#x27;s <em>Bakasura at the Lake</em>.</p>
+    <a class="soul-link" href="/characters/kompis">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="trollmage" style="--c:#9933ff">
+  <div class="soul-art"><img src="/characters/art/trollmage/trollmage_keyart.webp" alt="Trollmage, The Reader" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">T</span>
+    <span class="soul-cipher">VIKTOR-4</span>
+    <span class="soul-status">Live · in canon</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">Codexia</p>
+    <h3>Trollmage <span>The Reader</span></h3>
+    <p class="soul-look">Violet-runed face from his backward-reading discipline. Deep purple eyes that have seen too many pages. Scholarly robes with rune embroidery at the hem. Holds a glowing codex page in the air with one hand more often than not. The other hand always still — too much movement breaks a backward-read.</p>
+    <p class="soul-voice"><b>Voice</b>Measured. Quiet. The cadence of someone who has learned to think in reverse without telling you. When he does speak, the sentence finishes its meaning before the words finish arriving.</p>
+    <div class="soul-power"><b>Backward Read</b> Speaks the last word of a Codex page first, then the second-to-last, then the third-to-last, until the page is complete. The page&#x27;s <em>meaning</em> assembles itself in reality as he reads. Most listeners go briefly mad. He has not.</div>
+    <p class="soul-canon">Master of the Seven Sin Codices, all read backward and bound. Bound the Eighth Codex (the Apprenticeship binding) at the climax of S3 — sealed Vex (the Forward Reader) and Pride (the possessed hand) inside. Runa is his great-(many)-grandmother and the original carver of the runes he reads. Apprentice Nock is his current disciple; the Eighth Codex&#x27;s Apprenticeship binding ties them together.</p>
+    <p class="soul-first">Origins OVA. Major arc in Season 2 (<em>Macro Wars</em>). Definitive arc in Season 3&#x27;s <em>Forward Reader</em> and Season 4&#x27;s <em>Nock&#x27;s Right Hand</em>.</p>
+    <a class="soul-link" href="/characters/trollmage">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="opha" style="--c:#d946ef">
+  <div class="soul-art"><img src="/characters/art/opha/opha_keyart.webp" alt="Opha, The Conjunction" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">O</span>
+    <span class="soul-cipher">VIKTOR-5</span>
+    <span class="soul-status">Open seat · awaiting blood</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">Astralis-Codexia border</p>
+    <h3>Opha <span>The Conjunction</span></h3>
+    <p class="soul-look">Heterochromia — left eye violet, right eye rose-pink. Dark hair shaved at the temples and braided down her back. Half-cloak: ink-black on the left side (Codexia weave), rose-pink with sewn star-fragments on the right (Astralis weave). Cold hands. No jewelry.</p>
+    <p class="soul-voice"><b>Voice</b>Speaks in sentences that have a comma where you don&#x27;t expect it — like every clause arrived twice and chose the shorter version.</p>
+    <div class="soul-power"><b>Signature</b> She names the thing two realms forgot they shared. The naming makes it true.</div>
+    <p class="soul-canon">The reason Trollmage and Rougeina ever met. She read a Codex page and a star simultaneously and the joined sentence walked them into each other.</p>
+    <p class="soul-first">Crossing the Dawnstar Bridge between Astralis and Codexia at the moment the violet sky and the pink starfield touch. Eight Architects watched and did not move.</p>
+    <a class="soul-link" href="/characters/opha">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="rougeina" style="--c:#ff3366">
+  <div class="soul-art"><img src="/characters/art/rougeina/rougeina_keyart.webp" alt="Rougeina, The Dancer" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">R</span>
+    <span class="soul-cipher">VIKTOR-6</span>
+    <span class="soul-status">Live · in canon</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">Astralis</p>
+    <h3>Rougeina <span>The Dancer</span></h3>
+    <p class="soul-look">Long flowing rose-pink hair that carries faint starlight. Violet eyes. The eight-bladed glaive across her back is a living glamour — extra arms appear during festival dance. Tattoos of constellations move across her skin in time with her heartbeat. Always barefoot.</p>
+    <p class="soul-voice"><b>Voice</b>Bright, percussive, rhythmic. Each sentence has a beat. She laughs in the middle of knife fights and somehow survives. Speaks Codexia&#x27;s tongue with a star-accent.</p>
+    <div class="soul-power"><b>The 12,001 HADOM Dance</b> Her forbidden eight-blade choreography that performs 12,001 strikes inside one heartbeat. Used once, in S4, against Echo&#x27;s left hand. Cannot be performed twice; the body forgets the next steps after the dance ends.</div>
+    <p class="soul-canon">Killed Architect Veyra at the end of S1. Sealed the Dark Dancer in the Choreographer&#x27;s Tomb at the end of S3. Hunts rogue Architects for sport. Co-founder of the Eight-Blade tradition. Trollmage&#x27;s anchor across the Dawnstar Bridge; Opha is the soul who introduced them. She has danced eight thousand stars off the Star-Floor and only lost three of them.</p>
+    <p class="soul-first">Season 1, Chapter 1 — <em>The Awakening</em>. The first soul of the modern manga. She has been the empire&#x27;s icon since.</p>
+    <a class="soul-link" href="/characters/rougeina">Full soul page &rarr;</a>
+  </div>
+</article>
+  </section>
+
+  <section style="margin-top:3.6rem">
+    <h2 class="su-section-title" style="text-align:center;margin-bottom:1.4rem">The Law of the Order</h2>
+    <div class="ord-law"><div class="reveal"><b>Letters, not a council.</b>The Six never vote and never gather. Each answers the moment the story needs its letter: V for the override, K for the bond, R for the dance that topples Architects.</div><div class="reveal"><b>Four in print, two revealed.</b>Vigolas, Kompis, Trollmage and Rougeina walk the manga. Isa and Opha were revealed with the Lineage itself, the stillborn heartbeat and the conjunction between two weaves.</div><div class="reveal"><b>The Author is the cipher.</b>The Six spell his given name; the Nine spell the family. He is the sixteenth soul, not a champion and not a guardian: the hand that holds the pen.</div></div>
+    
+  <nav class="ord-nav reveal" aria-label="The three orders">
+    <a class="su-btn su-btn-ghost" href="/viktor">VIKTOR · the Six Chosen</a>
+    <a class="su-btn su-btn-ghost" href="/ronnkvist">RÖNNKVIST · the Nine Guardians</a>
+    <a class="su-btn su-btn-ghost" href="/scarwood">FERDINAND · the Scarwood</a>
+    <a class="su-btn" href="/lore">The whole saga &rarr;</a>
+  </nav>
+    <p class="su-dim" style="text-align:center;font-size:.82rem;margin-top:2rem">
+      Canon: <a href="/universe">THE SCALELIST UNIVERSE</a> · <a href="/lineage">The Lineage cipher</a> · <a href="/characters/">Every soul</a>. HADOM Quoka ツ
+    </p>
+  </section>
+</main>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.soul,.big').forEach(function(card){
+    card.addEventListener('mousemove',function(ev){var r=card.getBoundingClientRect();
+      card.style.setProperty('--mx',(ev.clientX-r.left)+'px');card.style.setProperty('--my',(ev.clientY-r.top)+'px');},{passive:true});
+  });
+})();
+</script>
+</body>
+</html>

@@ -236,9 +236,6 @@ a:hover{text-decoration:underline;}
 <section class="share-section">
   <div style="color:var(--dim);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;">Spread the Word</div>
   <div class="share-btns">
-    <div class="share-btn" onclick="shareTo('twitter')">Twitter / X</div>
-    <div class="share-btn" onclick="shareTo('facebook')">Facebook</div>
-    <div class="share-btn" onclick="shareTo('reddit')">Reddit</div>
     <div class="share-btn" onclick="shareTo('copy')">Copy Link</div>
   </div>
 </section>
@@ -324,9 +321,6 @@ function shareTo(platform){
   const url=encodeURIComponent(window.location.href);
   const text=encodeURIComponent('Season 3 of Scalelist Universe is coming. SUBTICK EMPIRE. The richest gunman alive.');
   const map={
-    twitter:`https://twitter.com/intent/tweet?text=${text}&url=${url}`,
-    facebook:`https://www.facebook.com/sharer/sharer.php?u=${url}`,
-    reddit:`https://reddit.com/submit?url=${url}&title=${text}`,
     copy:null
   };
   if(platform==='copy'){navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'));return;}

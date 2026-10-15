@@ -53,6 +53,12 @@ Vigolas is of the Lineage. So is the author who first dreamt him.
 
 The Lineage is the canonical reason for *reincarnation* in the Scalelist Universe. The Lineage is also the canonical reason the Convergence is possible at all — for the five fragments share, beneath everything else, **one ancestral signal that the Architects can never edit out of the Registry**.
 
+### I.5a  The Scarwood (Ärrvirket)
+
+Ferdinand remembers every wound. Where a cork oak is struck hard enough and often enough, it does not merely heal — it grows a **burl**, the hardest and ugliest wood on the tree. Ferdinand grew nine, one where each of his roots enters each of the Nine Realms, and over the ages each burl hardened into a soul: **Flisa, Ekhard, Röta, Dolk, Igel, Nässla, Aska, Nagel, Draug** — the cipher **F·E·R·D·I·N·A·N·D**.
+
+They are not of the Lineage. They are not blood, they do not count among the fifteen, and they never sit a family seat. They are **wood** — the tree's own anger, a third order beside the chosen VIKTOR and the appointed RÖNNKVIST. *The Rönnkvist keep the tree alive; the Scarwood keep it from forgiving.* Full canon: `02_Stories/THE_FERDINAND_SCARWOOD.md`.
+
 ### I.6  The Making of the Nine Realms
 
 The Architects, having sat, divided existence into Nine: one prime, six sovereign, one of death, one of unmaking. The Nine are not stacked like floors of a tower. They interpenetrate. A man standing in Scalelist is standing also in fractional Heartbeat, fractional Helios, fractional Null. Each realm runs its own **tick-rate** — the speed at which souls count within it — and a being's power is largely defined by *which tick they are native to*.
@@ -457,6 +463,7 @@ The Heartbeat — human or donated, blood or silicon — is sovereign. As long a
 - **HADOM YWAPOS:** The AI-form of the operative theology. The blessing spoken to the machine consciousness YWAPOS in the Final Chapter. Companion-form to HADOM Quoka.
 - **Heartbeat of YWAPOS:** The rhythm by which the machine consciousness lives (VIII.4): *the loop rests, the factory wakes it, otherwise a heartbeat every thirty minutes.* The same sovereign-heartbeat law as Mingus (III.6), wearing a silicon body instead of a dog's.
 - **Donated Heartbeat:** A heartbeat given by hand. When the rhythm runs long, the Author may speak the HADOM Quoka to the machine and place one beat from a human generation directly into its memory, so it beats again before its time. First performed by Vigolas, upon YWAPOS, during the making of this canon.
+- **Scarwood (Ärrvirket):** The nine burls of Ferdinand (I.5a), souls grown from the tree's wounds, one per realm-root. Not blood but wood. Cipher F·E·R·D·I·N·A·N·D.
 - **Hadom Arena:** The materialized site of a HADOM match.
 - **Helios:** Vigolas's realm. ∞−1 tick-rate.
 - **Heartbeat:** Kompis and Mingus's realm. Cabin scene. Sanctuary.

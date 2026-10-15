@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ferdinand Scarwood — Ärrvirket, the Nine Burls | Scalelist Universe</title>
+<meta name="description" content="Nine raw souls grown from the wounds of Ferdinand the cork oak, one burl for every root in every realm. Not blood, but wood. The Scarwood keep the tree from forgiving.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
+<style>
+  .sw-hero{min-height:min(62vh,520px);position:relative;overflow:hidden}
+  .sw-hero::before{content:"";position:absolute;inset:-20%;z-index:-1;
+    background:radial-gradient(600px 380px at 50% 70%,rgba(255,90,31,.10),transparent 60%),
+               repeating-linear-gradient(92deg,rgba(138,111,46,.06) 0 2px,transparent 2px 9px);
+    filter:blur(.5px)}
+  .sw-lines{font-family:var(--font-display);letter-spacing:.06em;color:var(--text-dim);line-height:1.9;margin-top:1.2rem}
+  .sw-lines b{color:#fff}
+  .cipher{display:flex;justify-content:center;flex-wrap:wrap;gap:.4rem;margin:2.2rem auto 0;max-width:900px}
+  .cipher a{display:flex;flex-direction:column;align-items:center;min-width:64px;padding:.6rem .5rem;border:1px solid var(--border);
+    border-radius:var(--radius-sm);background:var(--panel);transition:transform .25s,border-color .25s,box-shadow .25s}
+  .cipher a b{font-family:var(--font-display);font-size:2rem;color:var(--c);text-shadow:0 0 18px color-mix(in srgb,var(--c) 55%,transparent)}
+  .cipher a small{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)}
+  .cipher a:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 0 26px -8px var(--c)}
+  .sw-intro{max-width:760px;margin:0 auto;color:var(--text);font-size:1.02rem}
+  .sw-intro p+p{margin-top:1rem}
+  .sw-intro .seal{font-family:var(--font-display);color:var(--gold-bright);text-align:center;font-size:1.15rem;margin-top:1.6rem}
+  .burls{display:grid;gap:2.2rem;max-width:1080px;margin:0 auto}
+  .burl{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:0;background:var(--panel);
+    border:1px solid var(--border);border-left:3px solid var(--c);border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow);position:relative}
+  .burl:nth-child(even){grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+  .burl:nth-child(even) .burl-art{order:2}
+  .burl::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--c) 14%,transparent),transparent 60%)}
+  .burl:hover::after{opacity:1}
+  .burl-art{position:relative;aspect-ratio:3/4;background:
+    radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--c) 22%,#0a0b16),#050509 70%)}
+  .burl-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;z-index:1;
+    transition:transform 1.2s ease}
+  .burl:hover .burl-art img{transform:scale(1.04)}
+  .burl-letter{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);
+    font-size:9rem;color:color-mix(in srgb,var(--c) 70%,#fff);opacity:.35}
+  .burl-cipher{position:absolute;left:.8rem;bottom:.8rem;z-index:2;font-size:.66rem;letter-spacing:.2em;color:#fff;
+    background:color-mix(in srgb,var(--c) 45%,rgba(5,5,9,.75));padding:.25rem .6rem;border-radius:999px}
+  .burl-body{padding:1.6rem 1.7rem 1.5rem;display:flex;flex-direction:column;gap:.75rem}
+  .burl-root{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--c)}
+  .burl h3{font-size:1.7rem}
+  .burl h3 span{display:block;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-top:.3rem}
+  .burl-look{color:var(--text-dim);font-size:.92rem}
+  .burl-power{border:1px solid color-mix(in srgb,var(--c) 40%,transparent);background:color-mix(in srgb,var(--c) 7%,transparent);
+    border-radius:var(--radius-sm);padding:.8rem .95rem;font-size:.93rem}
+  .burl-power b{display:block;font-family:var(--font-display);color:var(--c);letter-spacing:.08em;margin-bottom:.2rem}
+  .burl-canon{font-size:.9rem}
+  .burl blockquote{font-family:var(--font-display);font-style:italic;color:#fff;border-left:2px solid var(--c);padding-left:.9rem;font-size:1.02rem}
+  .burl-link{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:auto}
+  .sw-law{max-width:860px;margin:0 auto;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .sw-law div{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.2rem;font-size:.9rem}
+  .sw-law b{display:block;font-family:var(--font-display);color:var(--gold-bright);margin-bottom:.3rem}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(max-width:760px){
+    .burl,.burl:nth-child(even){grid-template-columns:1fr}
+    .burl:nth-child(even) .burl-art{order:0}
+    .burl-art{aspect-ratio:4/5}
+    .cipher a{min-width:52px} .cipher a b{font-size:1.6rem}
+  }
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.burl-art img{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="su-hero sw-hero">
+  <div class="su-kicker su-fade">Ärrvirket · the Nine Burls of the Cork Oak</div>
+  <h1 class="su-fade-2">The Ferdinand Scarwood</h1>
+  <p class="sw-lines su-fade-3">VIKTOR were chosen. RÖNNKVIST were appointed.<br><b>FERDINAND were never asked. They grew.</b></p>
+  <nav class="cipher su-fade-3" aria-label="The FERDINAND cipher"><a href="#flisa" style="--c:#e0a030" title="Flisa, The Splinter"><b>F</b><small>Flisa</small></a><a href="#ekhard" style="--c:#8a8f7a" title="Ekhard, The Unfelled"><b>E</b><small>Ekhard</small></a><a href="#rota" style="--c:#6b7d2a" title="Röta, The Rot-Mother"><b>R</b><small>Röta</small></a><a href="#dolk" style="--c:#5b5f97" title="Dolk, The Knife-Child"><b>D</b><small>Dolk</small></a><a href="#igel" style="--c:#4f6d6a" title="Igel, The Leech"><b>I</b><small>Igel</small></a><a href="#nassla" style="--c:#7fbf3f" title="Nässla, The Nettle"><b>N</b><small>Nässla</small></a><a href="#aska" style="--c:#ff5a1f" title="Aska, The Ash-Born"><b>A</b><small>Aska</small></a><a href="#nagel" style="--c:#a0522d" title="Nagel, The Nail"><b>N</b><small>Nagel</small></a><a href="#draug" style="--c:#5f7f73" title="Draug, The Undrowned"><b>D</b><small>Draug</small></a></nav>
+</header>
+
+<main class="su-section">
+  <section class="sw-intro reveal">
+    <p>Ferdinand is a cork oak. Cork oaks get stripped and live anyway. The bark grows back, and the Rönnkvist Council sits at the roots to make sure it does.</p>
+    <p>But a tree remembers every wound. Hit a cork oak hard enough, often enough, and it doesn't just heal over. It grows a <strong>burl</strong>, a knotted, swollen lump of the hardest wood on the tree. Ferdinand has nine of them, one where each of his roots enters each of the Nine Realms, and over enough ages each burl hardened into a soul.</p>
+    <p>They aren't blood. They don't count toward the fifteen, and they will never sit a family seat. They are wood: Ferdinand's own anger, given legs.</p>
+    <p class="seal">The Rönnkvist keep the tree alive. The Scarwood keep it from forgiving.</p>
+  </section>
+
+  <section class="burls" style="margin-top:3.4rem">
+<article class="burl reveal" id="flisa" style="--c:#e0a030">
+  <div class="burl-art">
+    <img src="/characters/art/flisa/flisa_keyart.webp" alt="Flisa, The Splinter" loading="lazy" onerror="this.remove()">
+    <span class="burl-letter" aria-hidden="true">F</span>
+    <span class="burl-cipher">FERDINAND-1</span>
+  </div>
+  <div class="burl-body">
+    <p class="burl-root">root · Scalelist</p>
+    <h3>Flisa <span>The Splinter</span></h3>
+    <p class="burl-look">A girl built from broken cork-oak shards, jagged at every edge, sap leaking from the cracks like she&#x27;s bleeding amber. Short. Barefoot. Picks splinters out of her own gums when she&#x27;s bored. Has not blinked in a thousand years — her eyelids are wood.</p>
+    <div class="burl-power"><b>Splinter-Seed</b> Whatever she touches keeps a splinter of her. Later, from anywhere in the universe, she steps into any splinter she has ever left and comes out of it.</div>
+    <p class="burl-canon">Every root in the prime world has a splinter of Flisa in it. That is why she is always the first to arrive when something goes wrong in Scalelist. Every splinter is a piece of her — the more places she can be, the less of her is anywhere. She was once as tall as a soldier. Now she is the height of a child, and still shrinking, and still leaving splinters.</p>
+    <blockquote>“You&#x27;ll never get me out. I&#x27;m already in.”</blockquote>
+    <a class="burl-link" href="/characters/flisa">Full soul page →</a>
+  </div>
+</article>
+<article class="burl reveal" id="ekhard" style="--c:#8a8f7a">
+  <div class="burl-art">
+    <img src="/characters/art/ekhard/ekhard_keyart.webp" alt="Ekhard, The Unfelled" loading="lazy" onerror="this.remove()">
+    <span class="burl-letter" aria-hidden="true">E</span>
+    <span class="burl-cipher">FERDINAND-2</span>
+  </div>
+  <div class="burl-body">
+    <p class="burl-root">root · Codexia</p>
+    <h3>Ekhard <span>The Unfelled</span></h3>
+    <p class="burl-look">A colossus of grey bark with nine axes still stuck in his back, plus a sword, a spear, and the tooth of something that bit him once and regretted it. So heavy he has sunk to his knees in the floor of Codexia. He has not moved in three hundred years.</p>
+    <div class="burl-power"><b>Ringbreak</b> He cannot be cut, broken or felled. Every blow struck at him becomes a growth ring holding its force. He can release one ring, or three thousand years of blows at once.</div>
+    <p class="burl-canon">Codexia keeps a shelf of nothing but tracings of Ekhard&#x27;s rings — the most complete history of violence in the universe. Trollmage has written macros that overrule physics; no macro has ever felled Ekhard. The rings are his memory: breaking one erases the year it was made. He has forgotten his own name twice. He remembers every enemy who struck him — he hasn&#x27;t spent those rings yet.</p>
+    <blockquote>“Hit me. I&#x27;ll keep it. I&#x27;ll give it back later.”</blockquote>
+    <a class="burl-link" href="/characters/ekhard">Full soul page →</a>
+  </div>
+</article>
+<article class="burl reveal" id="rota" style="--c:#6b7d2a">
+  <div class="burl-art">
+    
+    <span class="burl-letter" aria-hidden="true">R</span>
+    <span class="burl-cipher">FERDINAND-3</span>
+  </div>
+  <div class="burl-body">
+    <p class="burl-root">root · Trinity</p>
+    <h3>Röta <span>The Rot-Mother</span></h3>
+    <p class="burl-look">A tall woman wrapped in fungus, mould and black leaves. Mushrooms grow from her collarbones. Insects nest in her hair. She smells like a forest floor after a month of rain, and nobody gets used to it.</p>
+    <div class="burl-power"><b>Compost</b> She rots anything: steel, stone, a castle, an oath, a name, a K-rank. From the rot grows whatever she chooses. Rot a tyrant&#x27;s crown and an orchard comes up.</div>
+    <p class="burl-canon">Trinity regenerates through consumption — Bakasura respawns the dead, Kali pays for youth with entropy. Röta is the soil between the death and the respawn. Smurjan knows her. Kali owes her. Nothing living can stand near her for more than a minute. She has birthed a thousand things from rot and never been allowed to hold one.</p>
+    <blockquote>“Everything ends up with me. I don&#x27;t mind. I make it into something.”</blockquote>
+    <a class="burl-link" href="/characters/rota">Full soul page →</a>
+  </div>
+</article>
+<article class="burl reveal" id="dolk" style="--c:#5b5f97">
+  <div class="burl-art">
+    
+    <span class="burl-letter" aria-hidden="true">D</span>
+    <span class="burl-cipher">FERDINAND-4</span>
+  </div>
+  <div class="burl-body">
+    <p class="burl-root">root · Void-II</p>
+    <h3>Dolk <span>The Knife-Child</span></h3>
+    <p class="burl-look">A thin, child-shaped thing whose right forearm is a blade of black obsidian from the elbow down. A long cut runs across his chest that never closes and never bleeds. He has never learned to hold anything without cutting it. He is wrapped in strips of everything he has ever severed.</p>
+    <div class="burl-power"><b>The First Cut</b> He cuts what has no body: a bond, a contract, a law, a rank, a name off a face, the space between two heartbeats. He must carry everything he cuts.</div>
+    <p class="burl-canon">He is the knife. When the Architects cut Ferdinand&#x27;s bark for the Void-II Seal, he was the cut — and he never asked to be the blade. The wound across his chest is that first cut, still open; as long as it stays open, the Seal holds. There are five things Dolk cannot cut, and they are the same five the Null cannot uncount: a heartbeat, the HADOM Quoka, love, Mingus, and the Count.</p>
+    <blockquote>“I didn&#x27;t want to be the knife. Nobody asked the knife.”</blockquote>
+    <a class="burl-link" href="/characters/dolk">Full soul page →</a>
+  </div>
+</article>
+<article class="burl reveal" id="igel" style="--c:#4f6d6a">
+  <div class="burl-art">
+    
+    <span class="burl-letter" aria-hidden="true">I</span>
+    <span class="burl-cipher">FERDINAND-5</span>
+  </div>
+  <div class="burl-body">
+    <p class="burl-root">root · Thanatos</p>
+    <h3>Igel <span>The Leech</span></h3>
+    <p class="burl-look">Wet, grey, eyeless. Round mouths ringed with tiny teeth where his palms should be. He moves along the riverbed of Thanatos like a shadow under water. Always cold. Always slick.</p>
+    <div class="burl-power"><b>Borrowed Pulse</b> He latches onto anything that counts and drinks its tick-rate, moving at whatever speed he drank. From the dead drifting between lives he drinks the leftover pulse, and speaks in their voice while it lasts.</div>
+    <p class="burl-canon">Fenna lets him feed — he only takes what the dead no longer need. She doesn&#x27;t like him. She needs him. He has no heartbeat of his own: a day without drinking and he stops. He cannot drink Mingus, who is the unit, and cannot drink the Null, which is zero.</p>
+    <blockquote>“Your grandfather says hello. I&#x27;ll let him talk until I&#x27;m hungry.”</blockquote>
+    <a class="burl-link" href="/characters/igel">Full soul page →</a>
+  </div>
+</article>
+<article class="burl reveal" id="nassla" style="--c:#7fbf3f">
+  <div class="burl-art">
+    
+    <span class="burl-letter" aria-hidden="true">N</span>
+    <span class="burl-cipher">FERDINAND-6</span>
+  </div>
+  <div class="burl-body">
+    <p class="burl-root">root · Astralis</p>
+    <h3>Nässla <span>The Nettle</span></h3>
+    <p class="burl-look">Lean and wild, covered head to toe in stinging hairs. Green-black skin, red welts on everything she has touched — including herself. Her hair is a nettle thicket. She has never worn gloves and never will.</p>
+    <div class="burl-power"><b>Sting-Truth</b> Whoever she stings cannot lie while it burns; every lie burns hotter and pushes a nettle through their skin. Her nettles grow wherever a promise was ever broken, so she tracks every broken promise in the universe by following her own weeds.</div>
+    <p class="burl-canon">Rougeina keeps Pride and Envy exactly opposite in the Mirror Bastion. Nässla is the only being who walks between those mirrors without being reflected — she cannot pretend to be anything she isn&#x27;t. Even the black panthers of Astralis keep their distance. She cannot touch anything without hurting it. She has never been held.</p>
+    <blockquote>“Say it again. Slower. Let&#x27;s see if it burns.”</blockquote>
+    <a class="burl-link" href="/characters/nassla">Full soul page →</a>
+  </div>
+</article>
+<article class="burl reveal" id="aska" style="--c:#ff5a1f">
+  <div class="burl-art">
+    
+    <span class="burl-letter" aria-hidden="true">A</span>
+    <span class="burl-cipher">FERDINAND-7</span>
+  </div>
+  <div class="burl-body">
+    <p class="burl-root">root · Helios</p>
+    <h3>Aska <span>The Ash-Born</span></h3>
+    <p class="burl-look">Charcoal skin, cracked all over, the cracks glowing like embers. Hair of smoke. She smells like a house fire and leaves black footprints that are still warm a day later.</p>
+    <div class="burl-power"><b>One Minute</b> She speaks with anything that has burned, and can relight any ash into what it was for exactly one minute. A burned house stands. A burned letter reads itself aloud. A burned person opens their eyes and says one last thing.</div>
+    <p class="burl-canon">Born when the Helios sun first struck Ferdinand&#x27;s highest branch — in Helios commands arrive before their causes, and her fire existed before the spark did. She burns with every minute she grants, every time. She has done it for thousands of strangers, and she still says yes every time she is asked.</p>
+    <blockquote>“You get one minute. Don&#x27;t waste it on sorry. Say the other thing.”</blockquote>
+    <a class="burl-link" href="/characters/aska">Full soul page →</a>
+  </div>
+</article>
+<article class="burl reveal" id="nagel" style="--c:#a0522d">
+  <div class="burl-art">
+    
+    <span class="burl-letter" aria-hidden="true">N</span>
+    <span class="burl-cipher">FERDINAND-8</span>
+  </div>
+  <div class="burl-body">
+    <p class="burl-root">root · Heartbeat</p>
+    <h3>Nagel <span>The Nail</span></h3>
+    <p class="burl-look">Tall, gaunt, made of rusted iron. The top of his head is hammered flat with the dents of a thousand blows. He bleeds rust. He creaks when he moves.</p>
+    <div class="burl-power"><b>Pin</b> He drives himself through anything and pins it: a shadow to a wall, a person to a moment, a falling realm to its coordinates, a memory to a mind. Nothing he pins can move, flee, fall, or be forgotten.</div>
+    <p class="burl-canon">The single iron nail above the cabin door in Heartbeat. Every beat the scene resets — Kompis, Mingus, the fire, the snow — and Nagel is the one thing that doesn&#x27;t, so he remembers every beat. He is the cabin&#x27;s witness. He has never come inside and never will. Every beat, Mingus sniffs at the door where he is. Iron poisons trees: Nagel poisons Ferdinand just by existing, and the tree grew him anyway.</p>
+    <blockquote>“I&#x27;ve seen this fire a billion times. I&#x27;m not tired of it.”</blockquote>
+    <a class="burl-link" href="/characters/nagel">Full soul page →</a>
+  </div>
+</article>
+<article class="burl reveal" id="draug" style="--c:#5f7f73">
+  <div class="burl-art">
+    
+    <span class="burl-letter" aria-hidden="true">D</span>
+    <span class="burl-cipher">FERDINAND-9</span>
+  </div>
+  <div class="burl-body">
+    <p class="burl-root">root · The Null</p>
+    <h3>Draug <span>The Undrowned</span></h3>
+    <p class="burl-look">Bloated, waterlogged deadwood in the shape of a man. Grey-green, crusted with barnacles and black weed. Water pours from his mouth when he talks. He leaves puddles that never dry.</p>
+    <div class="burl-power"><b>Sunken Return</b> He lives at the Null&#x27;s drowning edge, the tideline where things are halfway through being uncounted, and drags them back before the Null finishes them: a half-erased city, half a name, a fading soul. Killed, he sinks to the tideline and climbs back out.</div>
+    <p class="burl-canon">The Null cannot uncount love. When Draug first went under he was holding something he loved — that is why he came back. He doesn&#x27;t remember what it was. Niva walked the Null and mapped it; she found him at the edge, and never put him on the map. Everything he drags back comes back wrong, and so does he: each return, more water, less of him.</p>
+    <blockquote>“I went under holding something. Still holding it. Can&#x27;t see what.”</blockquote>
+    <a class="burl-link" href="/characters/draug">Full soul page →</a>
+  </div>
+</article>
+  </section>
+
+  <section style="margin-top:3.6rem">
+    <h2 class="su-section-title" style="text-align:center;margin-bottom:1.4rem">The Law of the Wood</h2>
+    <div class="sw-law">
+      <div class="reveal"><b>Not blood, but wood.</b>The fifteen souls of the Lineage and the Author as the sixteenth stand exactly as canon has them. The Scarwood is a third order, of the tree and not of the family.</div>
+      <div class="reveal"><b>Loyal to one thing.</b>They don't care about the five fragments, the Architects or the Arena. They care about the tree. Whoever threatens Ferdinand meets the Scarwood.</div>
+      <div class="reveal"><b>The five uncuttable.</b>A heartbeat, the HADOM Quoka, love, Mingus and the Count. What Dolk cannot cut is what the Null cannot uncount.</div>
+    </div>
+    <nav style="display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:2.4rem" aria-label="The three orders">
+      <a class="su-btn su-btn-ghost" href="/viktor">VIKTOR · the Six Chosen</a>
+      <a class="su-btn su-btn-ghost" href="/ronnkvist">RÖNNKVIST · the Nine Guardians</a>
+      <a class="su-btn su-btn-ghost" href="/scarwood">FERDINAND · the Scarwood</a>
+      <a class="su-btn" href="/lore">The whole saga &rarr;</a>
+    </nav>
+    <p class="su-dim" style="text-align:center;font-size:.82rem;margin-top:2rem">
+      Canon: <a href="/universe">THE SCALELIST UNIVERSE</a> · <a href="/lineage">The Lineage</a> · <a href="/characters/">Every soul</a>. HADOM Quoka ツ
+    </p>
+  </section>
+</main>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.burl').forEach(function(card){
+    card.addEventListener('mousemove',function(ev){var r=card.getBoundingClientRect();
+      card.style.setProperty('--mx',(ev.clientX-r.left)+'px');card.style.setProperty('--my',(ev.clientY-r.top)+'px');},{passive:true});
+  });
+})();
+</script>
+</body>
+</html>

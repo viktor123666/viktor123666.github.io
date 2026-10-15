@@ -113,7 +113,7 @@ footer a{color:var(--gold)}
     <a href="/cosmos">Cosmos</a>
     <a href="/manga">Manga</a>
     <a href="/lineage">Lineage</a>
-    <a href="/empire">Empire</a>
+    <a href="/lore">The Saga</a>
   </nav>
 </header>
 <section class="hero">
@@ -129,32 +129,17 @@ footer a{color:var(--gold)}
 <section class="section"><h2>Look</h2><p>Massive. Robed and hooded. Hands the size of plowshares. No face has been seen — the hood does not move when he breathes (if he breathes).</p></section><section class="section"><h2>Voice</h2><p>When he speaks, the Codex itself rewrites the previous page. Every K-V Architect attends the sentence in person. Cancellation is retroactive.</p></section><section class="section"><h2>Canon Connection</h2><p>He unmade K-XII. His century-sentence was: *There were eleven.* Bakasura has never tried to consume Vidar. There is no record of why; there are no records of Vidar at all.</p></section><section class="section"><h2>Signature Move</h2><p>One sentence. One Architect, gone — from the Council, the Codex, the memory. Even the empty seat forgets it was ever full.</p></section><section class="section"><h2>First Appearance</h2><p>Sitting on the rim of the Architects&#x27; Chamber the day K-XII broke the Ferdinand Oath. He was already there. He had always been there.</p></section>
 
 <section class="section"><h2>Manga Appearances</h2><div class="mchips"><div class="mchip"><b>Ch.L08</b>The Silent Reckoner</div></div><p class="mmore"><a href="/manga">Read on the Manga page →</a></p></section>
-<section class="section"><h2>Channels</h2><div class="chanrow"><span class="chan-planned">YouTube planned — @scalelistvidar</span><span class="chan-planned">TikTok planned — @scalelistvidar</span><span class="chan-planned">Instagram planned — @scalelistvidar</span><span class="chan-planned">X planned — @SLVidar</span></div></section>
+
 <section class="cta">
   <h3>The Cipher Continues</h3>
   <p>Fifteen souls spell the Author's true name. Read the cipher in full, or browse the other souls waiting for their next chapter.</p>
   <a class="btn" href="/lineage">Open The Lineage</a>
   <a class="btn" href="/characters">All Souls</a>
 </section>
-<div class="nl-wrap"><form class="nl" action="https://news.scalelistuniverse.com/subscription/form" method="post" data-nl>
-<input type="hidden" name="l" value="c8da10b8-b170-44dd-8473-5c8a2059b77f">
-<label class="nl-label" for="nl-email">Newsletter — manga drops, music releases, new videos. Straight from us, no algorithm in between.</label>
-<div class="nl-row"><input id="nl-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email" maxlength="254"><button type="submit">Subscribe</button></div>
-<p class="nl-note">Double opt-in · unsubscribe any time · <a href="/legal/privacy.html#newsletter">privacy</a></p>
-<p class="nl-msg" aria-live="polite"></p>
-</form></div>
+
 <footer>
   Scalelist Universe · Vidar (V · Rönnkvist) · <a href="/characters">Back to All Souls</a>
 </footer>
-<script>
-/* newsletter form: progressive enhancement — JSON to Listmonk's public API; falls back to the plain form POST */
-(function(){var f=document.querySelector('form[data-nl]');if(!f||!window.fetch)return;
-f.addEventListener('submit',function(e){e.preventDefault();var b=f.querySelector('button'),m=f.querySelector('.nl-msg'),em=f.email.value.trim();b.disabled=true;m.textContent='Sending…';
-fetch('https://news.scalelistuniverse.com/api/public/subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,name:em.split('@')[0],list_uuids:[f.l.value]})})
-.then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
-.then(function(x){if(x.ok&&x.j&&x.j.data){m.textContent='Check your inbox and click the confirmation link — that finishes it.';f.reset();}else{m.textContent=(x.j&&x.j.message)||'Something went wrong — try again.';}})
-.catch(function(){b.disabled=false;m.textContent='Could not reach the newsletter server right now - please try again later.';})
-.then(function(){b.disabled=false;});});})();
-</script>
+
 </body>
 </html>

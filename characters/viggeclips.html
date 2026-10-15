@@ -113,7 +113,7 @@ footer a{color:var(--gold)}
     <a href="/cosmos">Cosmos</a>
     <a href="/manga">Manga</a>
     <a href="/lineage">Lineage</a>
-    <a href="/empire">Empire</a>
+    <a href="/lore">The Saga</a>
   </nav>
 </header>
 <section class="hero">
@@ -129,32 +129,17 @@ footer a{color:var(--gold)}
 <section class="section"><h2>What This Channel Is</h2><p>The real-name channel behind every fragment — Vigge's own uploads, unfiltered, the seed every other soul grew from.</p></section>
 
 
-<section class="section"><h2>Channels</h2><div class="chanrow"><a class="chan-live" href="https://www.youtube.com/@viggeclips" target="_blank" rel="noopener">YouTube — @viggeclips</a></div></section>
+
 <section class="cta">
   <h3>Explore Further</h3>
   <p>Viggeclips sits outside the Exodia cipher — see where the fifteen lineage souls and five champions live instead.</p>
   <a class="btn" href="/characters">All Souls</a>
   <a class="btn" href="/empire">The Empire Hub</a>
 </section>
-<div class="nl-wrap"><form class="nl" action="https://news.scalelistuniverse.com/subscription/form" method="post" data-nl>
-<input type="hidden" name="l" value="c8da10b8-b170-44dd-8473-5c8a2059b77f">
-<label class="nl-label" for="nl-email">Newsletter — manga drops, music releases, new videos. Straight from us, no algorithm in between.</label>
-<div class="nl-row"><input id="nl-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email" maxlength="254"><button type="submit">Subscribe</button></div>
-<p class="nl-note">Double opt-in · unsubscribe any time · <a href="/legal/privacy.html#newsletter">privacy</a></p>
-<p class="nl-msg" aria-live="polite"></p>
-</form></div>
+
 <footer>
   Scalelist Universe · Viggeclips (V · Creator) · <a href="/characters">Back to All Souls</a>
 </footer>
-<script>
-/* newsletter form: progressive enhancement — JSON to Listmonk's public API; falls back to the plain form POST */
-(function(){var f=document.querySelector('form[data-nl]');if(!f||!window.fetch)return;
-f.addEventListener('submit',function(e){e.preventDefault();var b=f.querySelector('button'),m=f.querySelector('.nl-msg'),em=f.email.value.trim();b.disabled=true;m.textContent='Sending…';
-fetch('https://news.scalelistuniverse.com/api/public/subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,name:em.split('@')[0],list_uuids:[f.l.value]})})
-.then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
-.then(function(x){if(x.ok&&x.j&&x.j.data){m.textContent='Check your inbox and click the confirmation link — that finishes it.';f.reset();}else{m.textContent=(x.j&&x.j.message)||'Something went wrong — try again.';}})
-.catch(function(){b.disabled=false;m.textContent='Could not reach the newsletter server right now - please try again later.';})
-.then(function(){b.disabled=false;});});})();
-</script>
+
 </body>
 </html>

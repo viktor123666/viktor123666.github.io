@@ -28,9 +28,9 @@
 
   // ---- universe map (the interconnection) ----
   var LINKS = [
-    ["/begin", "Begin"], ["/cosmos", "Cosmos"], ["/gallery", "Gallery"],
+    ["/begin", "Begin"], ["/lore", "Saga"], ["/cosmos", "Cosmos"], ["/gallery", "Gallery"],
     ["/manga", "Manga"], ["/lineage", "Lineage"], ["/wiki", "Wiki"],
-    ["/timeline", "Timeline"], ["/hadom", "HADOM"], ["/empire", "Empire"],
+    ["/timeline", "Timeline"], ["/hadom", "HADOM"],
     ["/rankings", "Rankings"]
   ];
   var here = (location.pathname.replace(/\/$/, "") || "/").toLowerCase();
@@ -94,7 +94,8 @@
         "<div class=\"su-sig\">Yet we are part of something · HADOM Quoka ツ</div>" +
         "<div class=\"su-links\">" +
           "<a href=\"/begin\">Begin</a><a href=\"/cosmos\">Cosmos</a><a href=\"/manga\">Manga</a>" +
-          "<a href=\"/lineage\">Lineage</a><a href=\"/wiki\">Wiki</a><a href=\"/pitch\">Pitch</a>" +
+          "<a href=\"/lineage\">Lineage</a><a href=\"/wiki\">Wiki</a>" +
+          "<a href=\"/lore\">The Saga</a><a href=\"/viktor\">Viktor</a><a href=\"/ronnkvist\">Rönnkvist</a><a href=\"/scarwood\">Scarwood</a>" +
         "</div>" +
         "<small>Scalelist Universe — a world built with YWAPOS. © Vigolas.</small>";
       document.body.appendChild(foot);

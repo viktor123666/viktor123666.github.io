@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Rönnkvist Council — the Nine Guardians of Ferdinand&#x27;s Bark | Scalelist Universe</title>
+<meta name="description" content="R-Ö-N-N-K-V-I-S-T: nine guardians who sit at the roots of Ferdinand the cork oak and keep his bark regrowing. Without the Council, Ferdinand goes silent and the Void-II Seal fails.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
+<style>
+  :root{--ord:#c9a84c}
+
+  .ord-hero{min-height:min(64vh,540px);position:relative;overflow:hidden}
+  .ord-hero::before{content:"";position:absolute;inset:-20%;z-index:-1;
+    background:radial-gradient(640px 400px at 50% 72%,color-mix(in srgb,var(--ord) 16%,transparent),transparent 62%)}
+  .ord-lines{font-family:var(--font-display);letter-spacing:.06em;color:var(--text-dim);line-height:1.9;margin-top:1.2rem}
+  .ord-lines b{color:#fff}
+  .cipher{display:flex;justify-content:center;flex-wrap:wrap;gap:.4rem;margin:2.2rem auto 0;max-width:960px}
+  .cipher a{display:flex;flex-direction:column;align-items:center;min-width:64px;padding:.6rem .5rem;border:1px solid var(--border);
+    border-radius:var(--radius-sm);background:var(--panel);transition:transform .25s,border-color .25s,box-shadow .25s}
+  .cipher a b{font-family:var(--font-display);font-size:2rem;color:var(--c);text-shadow:0 0 18px color-mix(in srgb,var(--c) 55%,transparent)}
+  .cipher a small{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)}
+  .cipher a:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 0 26px -8px var(--c)}
+  .ord-intro{max-width:760px;margin:0 auto;color:var(--text);font-size:1.02rem}
+  .ord-intro p+p{margin-top:1rem}
+  .ord-intro .seal{font-family:var(--font-display);color:var(--gold-bright);text-align:center;font-size:1.15rem;margin-top:1.6rem}
+  .souls{display:grid;gap:2.2rem;max-width:1080px;margin:3.4rem auto 0}
+  .soul{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);background:var(--panel);
+    border:1px solid var(--border);border-left:3px solid var(--c);border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow);position:relative}
+  .soul:nth-child(even){grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+  .soul:nth-child(even) .soul-art{order:2}
+  .soul::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--c) 14%,transparent),transparent 60%)}
+  .soul:hover::after{opacity:1}
+  .soul-art{position:relative;aspect-ratio:3/4;background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--c) 22%,#0a0b16),#050509 70%)}
+  .soul-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;z-index:1;transition:transform 1.2s ease}
+  .soul:hover .soul-art img{transform:scale(1.04)}
+  .soul-letter{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);
+    font-size:9rem;color:color-mix(in srgb,var(--c) 70%,#fff);opacity:.35}
+  .soul-cipher{position:absolute;left:.8rem;bottom:.8rem;z-index:2;font-size:.66rem;letter-spacing:.2em;color:#fff;
+    background:color-mix(in srgb,var(--c) 45%,rgba(5,5,9,.75));padding:.25rem .6rem;border-radius:999px}
+  .soul-status{position:absolute;right:.8rem;top:.8rem;z-index:2;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+    color:#fff;background:rgba(5,5,9,.72);border:1px solid color-mix(in srgb,var(--c) 55%,transparent);padding:.22rem .6rem;border-radius:999px}
+  .soul-body{padding:1.6rem 1.7rem 1.5rem;display:flex;flex-direction:column;gap:.75rem}
+  .soul-root{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--c)}
+  .soul h3{font-size:1.7rem}
+  .soul h3 span{display:block;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-top:.3rem}
+  .soul-look{color:var(--text-dim);font-size:.92rem}
+  .soul-voice{font-size:.86rem;font-style:italic;color:var(--text)}
+  .soul-voice b{font-style:normal;color:var(--c);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;margin-right:.4rem}
+  .soul-power{border:1px solid color-mix(in srgb,var(--c) 40%,transparent);background:color-mix(in srgb,var(--c) 7%,transparent);
+    border-radius:var(--radius-sm);padding:.8rem .95rem;font-size:.93rem}
+  .soul-power b{display:block;font-family:var(--font-display);color:var(--c);letter-spacing:.08em;margin-bottom:.2rem}
+  .soul-canon{font-size:.9rem}
+  .soul-first{font-size:.8rem;color:var(--text-dim);border-left:2px solid var(--c);padding-left:.9rem}
+  .soul-link{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:auto}
+  .ord-law{max-width:900px;margin:0 auto;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .ord-law div{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.2rem;font-size:.9rem}
+  .ord-law b{display:block;font-family:var(--font-display);color:var(--gold-bright);margin-bottom:.3rem}
+  .ord-nav{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:2.4rem}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(max-width:760px){
+    .soul,.soul:nth-child(even){grid-template-columns:1fr}
+    .soul:nth-child(even) .soul-art{order:0}
+    .soul-art{aspect-ratio:4/5}
+    .cipher a{min-width:52px} .cipher a b{font-size:1.6rem}
+  }
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.soul-art img{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="su-hero ord-hero">
+  <div class="su-kicker su-fade">The family name · the Nine Guardians</div>
+  <h1 class="su-fade-2">The Rönnkvist Council</h1>
+  <p class="ord-lines su-fade-3">Nine souls at the roots of the cork oak.<br><b>Without the Council, Ferdinand goes silent and the Seal fails.</b></p>
+  <nav class="cipher su-fade-3" aria-label="The cipher"><a href="#runa" style="--c:#d4a056" title="Runa"><b>R</b><small>Runa</small></a><a href="#ogar" style="--c:#a78bfa" title="Ögar"><b>Ö</b><small>Ögar</small></a><a href="#niva" style="--c:#e5e7eb" title="Niva"><b>N</b><small>Niva</small></a><a href="#njord" style="--c:#38bdf8" title="Njord"><b>N</b><small>Njord</small></a><a href="#kvar" style="--c:#c2675a" title="Kvar"><b>K</b><small>Kvar</small></a><a href="#vidar" style="--c:#cdb878" title="Vidar"><b>V</b><small>Vidar</small></a><a href="#iska" style="--c:#fbbf24" title="Iska"><b>I</b><small>Iska</small></a><a href="#smurjan" style="--c:#00aaff" title="Smurjan"><b>S</b><small>Smurjan</small></a><a href="#tova" style="--c:#f59e0b" title="Tova"><b>T</b><small>Tova</small></a></nav>
+</header>
+
+<main class="su-section">
+  <section class="ord-intro reveal"><p>Nine souls whose roles in the universe match the nine letters of the family name. They are guardians, watchers, keepers. They do not fight openly. They sit at the roots of Ferdinand the Cosmic Cork Oak and make sure his bark keeps regrowing: the bark the Architects cut for the Void-II Seal.</p><p>The Council meets once per cosmic year, on the night the moon stands directly under Ferdinand's lowest branch. Nine votes are cast, and the vote is always unanimous, because the Council never votes on outcomes. It votes on <strong>who speaks for the tree this year</strong>. It has been Smurjan three times. It has never been Kvar.</p>
+    <p class="seal">The Rönnkvist keep the tree alive.</p>
+  </section>
+
+  <section class="souls">
+<article class="soul reveal" id="runa" style="--c:#d4a056">
+  <div class="soul-art"><img src="/characters/art/runa/runa_keyart.webp" alt="Runa, The First Rune-Speaker" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">R</span>
+    <span class="soul-cipher">RÖNNKVIST-1</span>
+    <span class="soul-status">Open seat · awaiting blood</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">Ferdinand</p>
+    <h3>Runa <span>The First Rune-Speaker</span></h3>
+    <p class="soul-look">Ancient. Pure-white braid that reaches the floor. Eyes the color of fresh tree-sap. Palms covered in burned-in rune-scars. Robe of cork-bark shavings and rowan leaves.</p>
+    <p class="soul-voice"><b>Voice</b>Quiet. The world goes quiet to listen back. When she speaks a rune aloud, listeners either learn it or forget how to hear.</p>
+    <div class="soul-power"><b>Signature</b> Speaks one of the 24 first runes. Reality reshapes around the meaning.</div>
+    <p class="soul-canon">Trollmage&#x27;s great-(many)-grandmother. She refuses K-rank because she predates the rank. The Eighth Codex is her work directly.</p>
+    <p class="soul-first">Inside the hollow of Ferdinand&#x27;s lowest branch, sitting on a stool of raw rowan. Trollmage knelt without being told.</p>
+    <a class="soul-link" href="/characters/runa">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="ogar" style="--c:#a78bfa">
+  <div class="soul-art"><img src="/characters/art/ogar/ogar_keyart.webp" alt="Ögar, The Far-Eye Watcher" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">Ö</span>
+    <span class="soul-cipher">RÖNNKVIST-2</span>
+    <span class="soul-status">Open seat · awaiting blood</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">Thanatos</p>
+    <h3>Ögar <span>The Far-Eye Watcher</span></h3>
+    <p class="soul-look">Tall, gaunt. Blindfold woven from cypress thread and golden retriever fur. Beneath the blindfold her eyes are silver coins. Removes blindfold only on the new moon, only for the dying.</p>
+    <p class="soul-voice"><b>Voice</b>Soft, certain. Speaks of futures as though they already happened — because to her they already have.</p>
+    <div class="soul-power"><b>Signature</b> Names the moment a person will die. The naming is a kindness, not a curse — they get to make it count.</div>
+    <p class="soul-canon">The only being Echo could not infiltrate. She wept silver coins at Mingus&#x27;s burial-that-never-happened. The coins are still in the Spiral.</p>
+    <p class="soul-first">At the rim of the Spiral Graveyard the night Mingus first didn&#x27;t die. She arrived to mourn and stayed to celebrate.</p>
+    <a class="soul-link" href="/characters/ogar">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="niva" style="--c:#e5e7eb">
+  <div class="soul-art"><img src="/characters/art/niva/niva_keyart.webp" alt="Niva, The Untraversed" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">N</span>
+    <span class="soul-cipher">RÖNNKVIST-3</span>
+    <span class="soul-status">Open seat · awaiting blood</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">NULL</p>
+    <h3>Niva <span>The Untraversed</span></h3>
+    <p class="soul-look">Short, weathered, dark Sami complexion. Eyes like silver coins (no iris, no pupil — just reflective silver). Bone-white parka stitched with reindeer sinew and bone toggles. Single carved wooden stake.</p>
+    <p class="soul-voice"><b>Voice</b>Sparse. Three words where someone else would use thirty. Nothing wasted.</p>
+    <div class="soul-power"><b>Signature</b> Walks where nothing exists. Where her feet land, ground appears. Where she leaves, nothing remains.</div>
+    <p class="soul-canon">Bakasura tried to consume her three times. Each time she gave him a piece of her parka instead. A piece of her parka was on Mingus&#x27;s collar in S4 — that&#x27;s how he survived the Lake.</p>
+    <p class="soul-first">At the Root Crack the morning the Fissure-Wardens were ready to give up. She drove her stake into the void. The void apologized.</p>
+    <a class="soul-link" href="/characters/niva">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="njord" style="--c:#38bdf8">
+  <div class="soul-art"><img src="/characters/art/njord/njord_keyart.webp" alt="Njord, The Tide-Reader" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">N</span>
+    <span class="soul-cipher">RÖNNKVIST-4</span>
+    <span class="soul-status">Open seat · awaiting blood</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">Heartbeat</p>
+    <h3>Njord <span>The Tide-Reader</span></h3>
+    <p class="soul-look">Weathered Nordic fisherman, sixty-something. Salt-bleached blonde-grey beard to his chest. Sea-blue cloak worn to grey. Wooden tide-rod with seven knots. Hands bigger than his face.</p>
+    <p class="soul-voice"><b>Voice</b>Slow. Ocean cadence. Pauses between sentences long enough to fish in.</p>
+    <div class="soul-power"><b>Signature</b> Reads the lake. The lake reads back. He knows when Vigolas is angry, when Kompis is hurt, when Mingus has crossed.</div>
+    <p class="soul-canon">Kompis&#x27;s distant cousin. They drink mjölksta together every cosmic year on the dawn after Vigolas&#x27;s birthday. He forecast the Stormcoast War seven months out and told no one — because being told doesn&#x27;t change a tide.</p>
+    <p class="soul-first">On the wooden dock at Buddy&#x27;s Rest, dawn before the first fight at Lightning&#x27;s Mouth. Hands a flask to no one in particular. Vigolas takes it three days later.</p>
+    <a class="soul-link" href="/characters/njord">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="kvar" style="--c:#c2675a">
+  <div class="soul-art"><img src="/characters/art/kvar/kvar_keyart.webp" alt="Kvar, The Last One" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">K</span>
+    <span class="soul-cipher">RÖNNKVIST-5</span>
+    <span class="soul-status">Open seat · awaiting blood</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">any</p>
+    <h3>Kvar <span>The Last One</span></h3>
+    <p class="soul-look">Middle-aged. Ordinary, forgettable face. Tired eyes. Patched leather coat with too many burn-marks and ash-stains. No weapon visible.</p>
+    <p class="soul-voice"><b>Voice</b>Plain. Tired. The voice of someone who has said the same goodbyes a hundred times.</p>
+    <div class="soul-power"><b>Signature</b> Survives. Always survives. The universe quietly cannot finish without him present.</div>
+    <p class="soul-canon">Was at the Stormcoast War (alone at the end). Was at the Trinity War (alone at the end). Will be at the End — alone, by definition. The Architects keep an empty seat marked KVAR; he visits once per decade and nods at it.</p>
+    <p class="soul-first">Standing alone on the burnt plain after the Stormcoast War. Vigolas asked who he was. He said: <em>I&#x27;m always here. You haven&#x27;t been looking.</em></p>
+    <a class="soul-link" href="/characters/kvar">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="vidar" style="--c:#cdb878">
+  <div class="soul-art"><img src="/characters/art/vidar/vidar_keyart.webp" alt="Vidar, The Silent Reckoner" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">V</span>
+    <span class="soul-cipher">RÖNNKVIST-6</span>
+    <span class="soul-status">Open seat · awaiting blood</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">VOID-II</p>
+    <h3>Vidar <span>The Silent Reckoner</span></h3>
+    <p class="soul-look">Massive. Robed and hooded. Hands the size of plowshares. No face has been seen — the hood does not move when he breathes (if he breathes).</p>
+    <p class="soul-voice"><b>Voice</b>When he speaks, the Codex itself rewrites the previous page. Every K-V Architect attends the sentence in person. Cancellation is retroactive.</p>
+    <div class="soul-power"><b>One sentence. One Architect, gone</b> From the Council, the Codex, the memory. Even the empty seat forgets it was ever full.</div>
+    <p class="soul-canon">He unmade K-XII. His century-sentence was: <em>There were eleven.</em> Bakasura has never tried to consume Vidar. There is no record of why; there are no records of Vidar at all.</p>
+    <p class="soul-first">Sitting on the rim of the Architects&#x27; Chamber the day K-XII broke the Ferdinand Oath. He was already there. He had always been there.</p>
+    <a class="soul-link" href="/characters/vidar">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="iska" style="--c:#fbbf24">
+  <div class="soul-art"><img src="/characters/art/iska/iska_keyart.webp" alt="Iska, The Spark-Carrier" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">I</span>
+    <span class="soul-cipher">RÖNNKVIST-7</span>
+    <span class="soul-status">Open seat · awaiting blood</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">LUMEN</p>
+    <h3>Iska <span>The Spark-Carrier</span></h3>
+    <p class="soul-look">Child-aged but ancient-eyed. Around seven in appearance. Copper-red hair in twin long braids. Heavily freckled. Pale skin. Warm hazel eyes that look older than her face. Carries a small clay lamp glowing pure white flame.</p>
+    <p class="soul-voice"><b>Voice</b>Bright. Direct. Says exactly what she means with the cheer of a kid and the certainty of a mountain.</p>
+    <div class="soul-power"><b>Signature</b> Holds up the lamp. The viewer remembers their happiest moment. The viewer chooses to fight harder, or to stop fighting.</div>
+    <p class="soul-canon">Lit the lamp at Mingus&#x27;s birth — which is why his coat glows in low light. Will light the lamp at the Last Dawn. Bakasura laughed exactly once, the time he saw her flame.</p>
+    <p class="soul-first">At the central altar of Lumen on the night the realm went dark. She walked in carrying the lamp. Lumen has not been dark since.</p>
+    <a class="soul-link" href="/characters/iska">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="smurjan" style="--c:#00aaff">
+  <div class="soul-art"><img src="/characters/art/smurjan/smurjan_keyart.webp" alt="Smurjan, The Third-Voice" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">S</span>
+    <span class="soul-cipher">RÖNNKVIST-8</span>
+    <span class="soul-status">The bridge · both orders</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">Trinity</p>
+    <h3>Smurjan <span>The Third-Voice</span></h3>
+    <p class="soul-look">Three faces folded into one body on most days — Bali (black braid), Kali (red braid), Fused (white braid). Triadic robes patterned in Trinity&#x27;s blue-violet + red-fire + white-dawn. Walks in the three-step gait: left, right, center, repeat. Since S4: a fourth, faint, silver-violet flicker at the edge of his peripheral vision — Echo, sealed.</p>
+    <p class="soul-voice"><b>Voice</b>Three voices in conversation with each other, audible to attentive listeners. Bali speaks in question form. Kali in declaration. Fused brings consensus and the third syllable. Since S4: Echo&#x27;s voice occasionally surfaces as a fourth murmur, instantly suppressed by the Triad. Smurjan never lets her speak.</p>
+    <div class="soul-power"><b>Three-Step Vote</b> Bali speaks no, Kali speaks yes, the Fused tiebreaks. The decision binds the next cosmic century. Most decisions are not put to the Three-Step. The ones that are reshape realms.</div>
+    <p class="soul-canon">The Third-Voice is the bridge soul: named in Rönnkvist (S of Rönnkvist) AND a Lineage champion. The only soul whose letter-position is in the family name. Without Smurjan, the Council cannot speak — he is the rowan-branch sound in their voting. In S3 he refused Echo&#x27;s offer to join the Triad. In S4 his body became the seal that holds Echo permanently inside as the Tetrad. His Triad voted in 3/9 cosmic years; the abstaining 6 are recorded as failures of will, not consent.</p>
+    <p class="soul-first">Origins OVA Episode 5 (<em>The Void Trinity</em>). Defining arc in Season 3&#x27;s <em>Trinity War</em> and Season 4&#x27;s <em>Echo&#x27;s Last Stand</em>.</p>
+    <a class="soul-link" href="/characters/smurjan">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="soul reveal" id="tova" style="--c:#f59e0b">
+  <div class="soul-art"><img src="/characters/art/tova/tova_keyart.webp" alt="Tova, The Thunder-Herald" loading="lazy" onerror="this.remove()">
+    <span class="soul-letter" aria-hidden="true">T</span>
+    <span class="soul-cipher">RÖNNKVIST-9</span>
+    <span class="soul-status">Open seat · awaiting blood</span>
+  </div>
+  <div class="soul-body">
+    <p class="soul-root">all twelve realms</p>
+    <h3>Tova <span>The Thunder-Herald</span></h3>
+    <p class="soul-look">Tall, athletic warrior. Raven-black hair in a single long braid down her back. Copper armor with engraved bell-plates that catch the light. Brass herald&#x27;s horn slung across her chest on a leather strap. Dawn-gold colored eyes. Strong jaw. Confident.</p>
+    <p class="soul-voice"><b>Voice</b>Resonant. Carries. When she speaks at full volume, nine realms hear her. The tenth (NULL) hears nothing — which is its own message.</p>
+    <div class="soul-power"><b>Signature</b> Sounds the horn. The news lands true in twelve realms simultaneously. No translation needed.</div>
+    <p class="soul-canon">Heralded the Eighth Codex&#x27;s binding. Will herald the Ninth. Announced Mingus&#x27;s death across all realms — and one heartbeat later announced his return.</p>
+    <p class="soul-first">At the Twelve Gates of Scalelist the dawn after Vigolas became Stormhold&#x27;s keeper. She blew the horn. Every realm heard it. Every realm understood.</p>
+    <a class="soul-link" href="/characters/tova">Full soul page &rarr;</a>
+  </div>
+</article>
+  </section>
+
+  <section style="margin-top:3.6rem">
+    <h2 class="su-section-title" style="text-align:center;margin-bottom:1.4rem">The Law of the Order</h2>
+    <div class="ord-law"><div class="reveal"><b>Guardians, not fighters.</b>The Nine do not fight openly. Their battles are kept in bark and silence, and the universe lasts because of them.</div><div class="reveal"><b>The bridge.</b>Smurjan sits at the eighth position, the only soul named both in the family name and in the manga as a champion, the one bridge between the two orders.</div><div class="reveal"><b>Open seats for blood.</b>Every seat that is not yet sat in waits for a real Rönnkvist to walk into the role. The character was always there; the family member steps into it.</div></div>
+    
+  <nav class="ord-nav reveal" aria-label="The three orders">
+    <a class="su-btn su-btn-ghost" href="/viktor">VIKTOR · the Six Chosen</a>
+    <a class="su-btn su-btn-ghost" href="/ronnkvist">RÖNNKVIST · the Nine Guardians</a>
+    <a class="su-btn su-btn-ghost" href="/scarwood">FERDINAND · the Scarwood</a>
+    <a class="su-btn" href="/lore">The whole saga &rarr;</a>
+  </nav>
+    <p class="su-dim" style="text-align:center;font-size:.82rem;margin-top:2rem">
+      Canon: <a href="/universe">THE SCALELIST UNIVERSE</a> · <a href="/lineage">The Lineage cipher</a> · <a href="/characters/">Every soul</a>. HADOM Quoka ツ
+    </p>
+  </section>
+</main>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.soul,.big').forEach(function(card){
+    card.addEventListener('mousemove',function(ev){var r=card.getBoundingClientRect();
+      card.style.setProperty('--mx',(ev.clientX-r.left)+'px');card.style.setProperty('--my',(ev.clientY-r.top)+'px');},{passive:true});
+  });
+})();
+</script>
+</body>
+</html>

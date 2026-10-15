@@ -81,7 +81,7 @@ footer{text-align:center;padding:3rem 2rem;color:var(--dim);font-family:'Space M
   .chapter-card{padding:.9rem 1rem}
   nav .brand{font-size:.9rem}
 }
-/* newsletter — owned audience (Listmonk @ news.scalelistuniverse.com) */
+
 .nl{max-width:540px;margin:0 auto 1.6rem;text-align:center}
 .nl-label{display:block;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.08em;color:#b8b8c4;margin-bottom:.7rem;line-height:1.55;text-transform:none}
 .nl-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
@@ -93,11 +93,11 @@ footer{text-align:center;padding:3rem 2rem;color:var(--dim);font-family:'Space M
 .nl-note a{color:#c9a84c}
 .nl-msg{font-size:.8rem;color:#c9a84c;margin-top:.5rem;min-height:1em;letter-spacing:0}
 </style>
-<meta content="Read Scalelist Universe manga online free — 219 chapters of dark fantasy action across Seasons 1-4. Follow Vigolas, Rougeina, Trollmage, Kompis and Smurjan." name="description"/><meta content="scalelist universe manga, read manga online free, dark fantasy manga chapters, vigolas manga, rougeina manga, trollmage manga" name="keywords"/><link href="https://scalelist-universe.vercel.app/manga.html" rel="canonical"/><meta content="index, follow" name="robots"/><meta content="website" property="og:type"/><meta content="Scalelist Universe" property="og:site_name"/><meta content="https://scalelist-universe.vercel.app/manga.html" property="og:url"/><meta content="Read Manga — Scalelist Universe" property="og:title"/><meta content="Read Scalelist Universe manga online free — 219 chapters of dark fantasy action across Seasons 1-4. Follow Vigolas, Rougeina, Trollmage, Kompis and Smurjan." property="og:description"/><meta content="https://scalelistuniverse.com/og.png" property="og:image"/><meta content="en_US" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/><meta content="Read Manga — Scalelist Universe" name="twitter:title"/><meta content="Read Scalelist Universe manga online free — 219 chapters of dark fantasy action across Seasons 1-4. Follow Vigolas, Rougeina, Trollmage, Kompis and Smurjan." name="twitter:description"/><meta content="https://scalelistuniverse.com/og.png" name="twitter:image"/><meta content="@susmurjan" name="twitter:site"/><script type="application/ld+json">{
+<meta content="Read Scalelist Universe manga online free — 219 chapters of dark fantasy action across Seasons 1-4. Follow Vigolas, Rougeina, Trollmage, Kompis and Smurjan." name="description"/><meta content="scalelist universe manga, read manga online free, dark fantasy manga chapters, vigolas manga, rougeina manga, trollmage manga" name="keywords"/><link href="https://www.scalelistuniverse.com/manga.html" rel="canonical"/><meta content="index, follow" name="robots"/><meta content="website" property="og:type"/><meta content="Scalelist Universe" property="og:site_name"/><meta content="https://www.scalelistuniverse.com/manga.html" property="og:url"/><meta content="Read Manga — Scalelist Universe" property="og:title"/><meta content="Read Scalelist Universe manga online free — 219 chapters of dark fantasy action across Seasons 1-4. Follow Vigolas, Rougeina, Trollmage, Kompis and Smurjan." property="og:description"/><meta content="https://scalelistuniverse.com/og.png" property="og:image"/><meta content="en_US" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/><meta content="Read Manga — Scalelist Universe" name="twitter:title"/><meta content="Read Scalelist Universe manga online free — 219 chapters of dark fantasy action across Seasons 1-4. Follow Vigolas, Rougeina, Trollmage, Kompis and Smurjan." name="twitter:description"/><meta content="https://scalelistuniverse.com/og.png" name="twitter:image"/><meta content="@susmurjan" name="twitter:site"/><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "ComicSeries",
   "name": "Scalelist Universe",
-  "url": "https://scalelist-universe.vercel.app/manga.html",
+  "url": "https://www.scalelistuniverse.com/manga.html",
   "description": "A dark fantasy manga series following five souls — Vigolas, Rougeina, Trollmage, Kompis, and Smurjan — each wielding infinite power.",
   "genre": [
     "Dark Fantasy",
@@ -109,7 +109,7 @@ footer{text-align:center;padding:3rem 2rem;color:var(--dim);font-family:'Space M
   "publisher": {
     "@type": "Organization",
     "name": "Scalelist Universe",
-    "url": "https://scalelist-universe.vercel.app"
+    "url": "https://www.scalelistuniverse.com"
   },
   "image": "https://scalelistuniverse.com/og.png"
 }</script></head>
@@ -163,13 +163,6 @@ ct.style.opacity=Math.max(0,1-y/(vh*0.55));ct.style.transform='translateY('+(y*0
 </div>
 </div>
 <footer>
-<form class="nl" action="https://news.scalelistuniverse.com/subscription/form" method="post" data-nl>
-<input type="hidden" name="l" value="c8da10b8-b170-44dd-8473-5c8a2059b77f">
-<label class="nl-label" for="nl-email">Newsletter — manga drops, music releases, new videos. Straight from us, no algorithm in between.</label>
-<div class="nl-row"><input id="nl-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email" maxlength="254"><button type="submit">Subscribe</button></div>
-<p class="nl-note">Double opt-in · unsubscribe any time · <a href="/legal/privacy.html#newsletter">privacy</a></p>
-<p class="nl-msg" aria-live="polite"></p>
-</form>
 <p>© 2026 Scalelist Universe. All rights reserved.</p>
 </footer>
 <script>
@@ -674,17 +667,6 @@ function drawAurora() {
 drawAurora();
 
 render();
-</script>
-<script src="/js/analytics.js"></script>
-<script>
-/* newsletter form: progressive enhancement — JSON to Listmonk's public API; falls back to the plain form POST */
-(function(){var f=document.querySelector('form[data-nl]');if(!f||!window.fetch)return;
-f.addEventListener('submit',function(e){e.preventDefault();var b=f.querySelector('button'),m=f.querySelector('.nl-msg'),em=f.email.value.trim();b.disabled=true;m.textContent='Sending…';
-fetch('https://news.scalelistuniverse.com/api/public/subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,name:em.split('@')[0],list_uuids:[f.l.value]})})
-.then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
-.then(function(x){if(x.ok&&x.j&&x.j.data){m.textContent='Check your inbox and click the confirmation link — that finishes it.';f.reset();}else{m.textContent=(x.j&&x.j.message)||'Something went wrong — try again.';}})
-.catch(function(){b.disabled=false;m.textContent='Could not reach the newsletter server right now - please try again later.';})
-.then(function(){b.disabled=false;});});})();
 </script>
 </body>
 </html>

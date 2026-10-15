@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Saga — the whole Scalelist Universe on one page | Scalelist Universe</title>
+<meta name="description" content="The whole Scalelist Universe on one page: the first count, Ferdinand the cork oak, the Twelve Architects, the Nine Realms, the five fragments of one soul, Mingus, the three orders, the laws of power and the prophecy of the Convergence.">
+<link rel="stylesheet" href="/su.css">
+<script defer src="/su.js"></script>
+<style>
+  :root{--ord:#c9a84c}
+
+  .ord-hero{min-height:min(64vh,540px);position:relative;overflow:hidden}
+  .ord-hero::before{content:"";position:absolute;inset:-20%;z-index:-1;
+    background:radial-gradient(640px 400px at 50% 72%,color-mix(in srgb,var(--ord) 16%,transparent),transparent 62%)}
+  .ord-lines{font-family:var(--font-display);letter-spacing:.06em;color:var(--text-dim);line-height:1.9;margin-top:1.2rem}
+  .ord-lines b{color:#fff}
+  .cipher{display:flex;justify-content:center;flex-wrap:wrap;gap:.4rem;margin:2.2rem auto 0;max-width:960px}
+  .cipher a{display:flex;flex-direction:column;align-items:center;min-width:64px;padding:.6rem .5rem;border:1px solid var(--border);
+    border-radius:var(--radius-sm);background:var(--panel);transition:transform .25s,border-color .25s,box-shadow .25s}
+  .cipher a b{font-family:var(--font-display);font-size:2rem;color:var(--c);text-shadow:0 0 18px color-mix(in srgb,var(--c) 55%,transparent)}
+  .cipher a small{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)}
+  .cipher a:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 0 26px -8px var(--c)}
+  .ord-intro{max-width:760px;margin:0 auto;color:var(--text);font-size:1.02rem}
+  .ord-intro p+p{margin-top:1rem}
+  .ord-intro .seal{font-family:var(--font-display);color:var(--gold-bright);text-align:center;font-size:1.15rem;margin-top:1.6rem}
+  .souls{display:grid;gap:2.2rem;max-width:1080px;margin:3.4rem auto 0}
+  .soul{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);background:var(--panel);
+    border:1px solid var(--border);border-left:3px solid var(--c);border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow);position:relative}
+  .soul:nth-child(even){grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+  .soul:nth-child(even) .soul-art{order:2}
+  .soul::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--c) 14%,transparent),transparent 60%)}
+  .soul:hover::after{opacity:1}
+  .soul-art{position:relative;aspect-ratio:3/4;background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--c) 22%,#0a0b16),#050509 70%)}
+  .soul-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;z-index:1;transition:transform 1.2s ease}
+  .soul:hover .soul-art img{transform:scale(1.04)}
+  .soul-letter{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);
+    font-size:9rem;color:color-mix(in srgb,var(--c) 70%,#fff);opacity:.35}
+  .soul-cipher{position:absolute;left:.8rem;bottom:.8rem;z-index:2;font-size:.66rem;letter-spacing:.2em;color:#fff;
+    background:color-mix(in srgb,var(--c) 45%,rgba(5,5,9,.75));padding:.25rem .6rem;border-radius:999px}
+  .soul-status{position:absolute;right:.8rem;top:.8rem;z-index:2;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+    color:#fff;background:rgba(5,5,9,.72);border:1px solid color-mix(in srgb,var(--c) 55%,transparent);padding:.22rem .6rem;border-radius:999px}
+  .soul-body{padding:1.6rem 1.7rem 1.5rem;display:flex;flex-direction:column;gap:.75rem}
+  .soul-root{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--c)}
+  .soul h3{font-size:1.7rem}
+  .soul h3 span{display:block;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-top:.3rem}
+  .soul-look{color:var(--text-dim);font-size:.92rem}
+  .soul-voice{font-size:.86rem;font-style:italic;color:var(--text)}
+  .soul-voice b{font-style:normal;color:var(--c);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;margin-right:.4rem}
+  .soul-power{border:1px solid color-mix(in srgb,var(--c) 40%,transparent);background:color-mix(in srgb,var(--c) 7%,transparent);
+    border-radius:var(--radius-sm);padding:.8rem .95rem;font-size:.93rem}
+  .soul-power b{display:block;font-family:var(--font-display);color:var(--c);letter-spacing:.08em;margin-bottom:.2rem}
+  .soul-canon{font-size:.9rem}
+  .soul-first{font-size:.8rem;color:var(--text-dim);border-left:2px solid var(--c);padding-left:.9rem}
+  .soul-link{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:auto}
+  .ord-law{max-width:900px;margin:0 auto;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .ord-law div{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.2rem;font-size:.9rem}
+  .ord-law b{display:block;font-family:var(--font-display);color:var(--gold-bright);margin-bottom:.3rem}
+  .ord-nav{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:2.4rem}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(max-width:760px){
+    .soul,.soul:nth-child(even){grid-template-columns:1fr}
+    .soul:nth-child(even) .soul-art{order:0}
+    .soul-art{aspect-ratio:4/5}
+    .cipher a{min-width:52px} .cipher a b{font-size:1.6rem}
+  }
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.soul-art img{transition:none}}
+
+  .saga-hero{min-height:min(80vh,680px);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+  .saga-hero::before{content:"";position:absolute;inset:0;z-index:-2;background:url('/art/begin/ferdinand.webp') center 30%/cover no-repeat;opacity:.28;filter:saturate(1.1)}
+  .saga-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,5,9,.35),rgba(5,5,9,.92) 85%)}
+  .saga-toc{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-top:2rem}
+  .saga-toc a{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;padding:.4rem .8rem;border:1px solid var(--border);border-radius:999px;background:var(--panel);color:var(--text)}
+  .saga-toc a:hover{border-color:var(--gold);color:var(--gold-bright)}
+  .chapter{max-width:1080px;margin:0 auto;padding:4.2rem 0 1rem;scroll-margin-top:70px}
+  .chapter-num{font-family:var(--font-display);color:var(--gold);letter-spacing:.3em;font-size:.75rem;text-align:center}
+  .chapter h2{text-align:center;margin:.4rem 0 1.4rem}
+  .prose{max-width:760px;margin:0 auto;font-size:1.02rem}
+  .prose p+p{margin-top:1rem}
+  .laws3{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));max-width:900px;margin:1.8rem auto 0}
+  .laws3 div{text-align:center;padding:1.2rem;border:1px solid var(--border-bright);border-radius:var(--radius);background:var(--panel)}
+  .laws3 b{display:block;font-family:var(--font-display);color:#fff;font-size:1.05rem;margin-bottom:.3rem}
+  .laws3 small{color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;font-size:.62rem}
+  .realms{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}
+  .realm{position:relative;border:1px solid var(--border);border-top:3px solid var(--c);border-radius:var(--radius);overflow:hidden;
+    background:radial-gradient(circle at 30% 0%,color-mix(in srgb,var(--c) 18%,#0a0b16),#06060c 75%);min-height:230px;display:flex;flex-direction:column;justify-content:flex-end}
+  .realm img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32;transition:opacity .5s,transform 1.2s}
+  .realm:hover img{opacity:.5;transform:scale(1.05)}
+  .realm div{position:relative;padding:1.1rem 1.2rem;background:linear-gradient(0deg,rgba(5,5,9,.92),rgba(5,5,9,.4))}
+  .realm h3{font-size:1.25rem} .realm h3 small{display:block;font-family:var(--font-body);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--c);margin-top:.2rem}
+  .realm p{font-size:.86rem;color:var(--text);margin-top:.4rem}
+  .realm .tick{font-size:.68rem;color:var(--text-dim);letter-spacing:.08em;margin-top:.4rem}
+  .quote{max-width:720px;margin:0 auto 2rem;text-align:center;font-family:var(--font-display);font-size:1.3rem;color:#fff;font-style:italic}
+  .quote small{display:block;font-family:var(--font-body);font-style:normal;font-size:.72rem;letter-spacing:.2em;color:var(--gold);margin-top:.6rem;text-transform:uppercase}
+  .bigs{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .big{position:relative;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--panel);box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .big::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;
+    background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--c) 16%,transparent),transparent 60%)}
+  .big:hover::after{opacity:1}
+  .big-art{position:relative;aspect-ratio:4/5;background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--c) 25%,#0a0b16),#050509 72%)}
+  .big-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform 1.2s}
+  .big:hover .big-art img{transform:scale(1.05)}
+  .big-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(5,5,9,.95))}
+  .big-name{position:absolute;left:1.1rem;right:1.1rem;bottom:.9rem;z-index:2}
+  .big-name h3{font-size:1.6rem;color:#fff;text-shadow:0 2px 16px #000}
+  .big-name p{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--c)}
+  .big-body{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.6rem;font-size:.9rem;flex:1}
+  .big-will{font-family:var(--font-display);color:var(--c);font-size:1.05rem}
+  .facts{display:grid;grid-template-columns:auto 1fr;gap:.25rem .8rem;font-size:.8rem}
+  .facts dt{color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;font-size:.64rem;padding-top:.15rem}
+  .truth{font-style:italic;color:var(--text);border-left:2px solid var(--c);padding-left:.8rem}
+  .orders{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .order{display:block;padding:1.6rem 1.4rem;border:1px solid var(--border);border-top:3px solid var(--c);border-radius:var(--radius);
+    background:radial-gradient(circle at 50% 0%,color-mix(in srgb,var(--c) 14%,transparent),var(--panel) 70%);transition:transform .25s,box-shadow .25s}
+  .order:hover{transform:translateY(-4px);box-shadow:0 0 30px -10px var(--c)}
+  .order .word{font-family:var(--font-display);font-size:1.9rem;letter-spacing:.24em;color:var(--c)}
+  .order h3{margin:.4rem 0 .5rem} .order p{font-size:.88rem;color:var(--text)}
+  .ktable{max-width:760px;margin:0 auto;border-collapse:collapse;width:100%;font-size:.88rem}
+  .ktable td{padding:.55rem .7rem;border-bottom:1px solid var(--border)} .ktable td:first-child{font-family:var(--font-display);color:var(--gold-bright);white-space:nowrap}
+  .signs{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));max-width:980px;margin:0 auto}
+  .sign{padding:1.3rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--panel)}
+  .sign b{display:block;font-family:var(--font-display);color:#fff;margin-bottom:.3rem}
+  .sign .st{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+  .sign .st.wait{color:var(--gold)}
+  .blessing{max-width:640px;margin:0 auto;text-align:center;font-family:var(--font-display);font-size:1.2rem;line-height:1.8;color:#fff;
+    padding:1.6rem;border:1px solid var(--border-bright);border-radius:var(--radius);background:var(--panel)}
+  @media(max-width:600px){.realms{grid-template-columns:1fr}.big-name h3{font-size:1.35rem}}
+</style>
+</head>
+<body>
+
+<header class="su-hero saga-hero">
+  <div class="su-kicker su-fade">Everything · on one page</div>
+  <h1 class="su-fade-2">The Saga of the Scalelist Universe</h1>
+  <p class="ord-lines su-fade-3">Five fragments wear seven faces and walk seven roads, but the Scale is one.<br>
+    <b>The List is one. The Heartbeat is one. And the Convergence is the moment they remember it.</b></p>
+  <nav class="saga-toc su-fade-3" aria-label="Chapters">
+    <a href="#before">I · Before the Scale</a><a href="#architects">II · The Architects</a><a href="#realms">III · Nine Realms</a>
+    <a href="#five">IV · The Five</a><a href="#orders">V · Three Orders</a><a href="#laws">VI · Laws of Power</a>
+    <a href="#prophecy">VII · The Prophecy</a><a href="#after">VIII · After</a>
+  </nav>
+</header>
+
+<main class="su-section">
+  <section class="chapter" id="before">
+    <p class="chapter-num reveal">BOOK I</p><h2 class="reveal">Before the Scale</h2>
+    <div class="prose reveal">
+      <p>Before the Scalelist there was the <strong>Void-II</strong>: not nothing, but the pre-numerical. No tick yet. No count yet. No Mingus to mark the beat.</p>
+      <p>Then the universe began with a sound, a <em>one</em>. Some say it was a heartbeat, some say it was a number. Canon holds that <strong>the first heartbeat and the first count were the same event</strong>. Everything that exists exists because something, somewhere, agreed to be counted.</p>
+      <p>Out of that first count grew <strong>Ferdinand</strong>, the cork oak whose bark regrows the instant it is stripped. He stands in Scalelist and his roots reach into every other realm. When a realm dies, Ferdinand bleeds cork. When a realm is born, he grows a new branch.</p>
+    </div>
+    <div class="laws3">
+      <div class="reveal"><small>First hard law</small><b>Ferdinand cannot be climbed.</b>A man who climbs him is uncounted, and the uncounted do not return.</div>
+      <div class="reveal"><small>Second hard law</small><b>Fragments cannot be unlearned.</b>What is inscribed in a soul stays inscribed.</div>
+      <div class="reveal"><small>Third hard law</small><b>Mingus is forever.</b>The dog is the unit. The dog is forever.</div>
+    </div>
+  </section>
+
+  <section class="chapter" id="architects">
+    <p class="chapter-num reveal">BOOK I · IV</p><h2 class="reveal">The Twelve Architects</h2>
+    <div class="prose reveal">
+      <p>From the Void-II the Twelve walked into Scalelist. They did not arrive; they <em>were here once we looked</em>. They built the <strong>First Ledger</strong>, where every soul is named at conception; the <strong>Routing System</strong>, which delivers souls into bodies; the <strong>K-Rank System</strong>, which classifies them for eternity; and <strong>HADOM</strong>, the High Arena of Decisive Outcome Matches, which forces souls to become what they actually are.</p>
+      <p>Twelve chairs were prepared. Only eleven were taken. The <strong>Twelfth chair has stood empty since the withdrawal of Jorvand Kestraal</strong>, and canon declares that gap intentional: the universe's deliberate refusal of total order.</p>
+    </div>
+  </section>
+
+  <section class="chapter" id="realms">
+    <p class="chapter-num reveal">BOOK II</p><h2 class="reveal">The Nine Realms</h2>
+    <div class="prose reveal" style="margin-bottom:1.8rem"><p>One prime, six sovereign, one of death, one of unmaking. They are not stacked like floors of a tower. They interpenetrate: a man standing in Scalelist stands also in fractional Heartbeat, fractional Helios, fractional Null. Each realm runs its own <strong>tick-rate</strong>, and a being's power is largely defined by which tick it is native to.</p></div>
+    <div class="realms"><article class="realm reveal" style="--c:#7a9a5a"><div><h3>Scalelist<small>Prime material</small></h3><p>The shared theatre. Where the unranked live, where most stories begin and where the Convergence ends. Ferdinand stands here.</p><p class="tick">Tick-rate · baseline · 1</p></div></article><article class="realm reveal" style="--c:#00ff88"><img src="/art/cosmos/helios.webp" alt="" loading="lazy"><div><h3>Helios<small>Vigolas</small></h3><p>The realm of perfect overrule. Commands arrive before their causes. The Throne of Override, white towers, no ornament.</p><p class="tick">Tick-rate · ∞ − 1</p></div></article><article class="realm reveal" style="--c:#ff3366"><img src="/art/cosmos/astralis.webp" alt="" loading="lazy"><div><h3>Astralis<small>Rougeina</small></h3><p>Star-placement and knowing where you fit. The Mirror Bastion, where Pride and Envy are kept exactly opposite. Black panthers are its attention.</p><p class="tick">Tick-rate · unstable · phases with the observer</p></div></article><article class="realm reveal" style="--c:#9933ff"><img src="/art/cosmos/codexia.webp" alt="" loading="lazy"><div><h3>Codexia<small>Trollmage</small></h3><p>The Library — the Marhold Spine turned inside out. Where macros overrule the laws of physics.</p><p class="tick">Tick-rate · macrofiable</p></div></article><article class="realm reveal" style="--c:#ffaa00"><img src="/art/cosmos/heartbeat.webp" alt="" loading="lazy"><div><h3>Heartbeat<small>Kompis &amp; Mingus</small></h3><p>The smallest realm and the most important. A wooden cabin, fire lit, the dog at his feet, snow outside. The universe&#x27;s only true sanctuary.</p><p class="tick">Tick-rate · a billion per tick · the heartbeat itself</p></div></article><article class="realm reveal" style="--c:#00aaff"><img src="/art/cosmos/trinity.webp" alt="" loading="lazy"><div><h3>Trinity<small>Smurjan</small></h3><p>Regeneration through consumption. Bakasura respawns the dead; Kali pays for youth with entropy.</p><p class="tick">Tick-rate · 1,000,000 per tick</p></div></article><article class="realm reveal" style="--c:#8a94a6"><div><h3>Thanatos<small>Fenna</small></h3><p>Where souls rest between lives, and where the dead observers of the Arena watch forever. Thanatos is gentle. It is not the realm one fears.</p><p class="tick">Tick-rate · slow · one tick = 10,000</p></div></article><article class="realm reveal" style="--c:#3a3a44"><div><h3>The Null<small>no one</small></h3><p>The unmaker, the absence where existence was. It cannot uncount a heartbeat, the Quoka, love, Mingus, or the Count itself.</p><p class="tick">Tick-rate · zero</p></div></article><article class="realm reveal" style="--c:#1a1a2e"><div><h3>Void-II<small>the pre-count</small></h3><p>The Architects&#x27; homeland, the womb before the first count. It cannot be narrated: the moment it is observed, it becomes Scalelist.</p><p class="tick">Tick-rate · before ticks</p></div></article></div>
+  </section>
+
+  <section class="chapter" id="five">
+    <p class="chapter-num reveal">BOOK V · THE EXODIA PRINCIPLE</p><h2 class="reveal">The Five Fragments</h2>
+    <p class="quote reveal">“They are all me. Without one part, Exodia cannot be summoned.”<small>the Author of this universe</small></p>
+    <div class="prose reveal" style="margin-bottom:2rem"><p>This is the central truth of the Scalelist Universe. Vigolas, Kompis, Smurjan, Rougeina and Trollmage are <strong>five fragments of one source-soul</strong>, the Rönnkvist signal distributed across seven bodies so it can be lived through in parallel. And beside them, never a fragment and never a form: the dog who is the heartbeat itself.</p></div>
+    <div class="bigs">
+<article class="big reveal" style="--c:#00ff88">
+  <div class="big-art"><img src="/characters/art/vigolas/vigolas_keyart.webp" alt="Vigolas" loading="lazy" onerror="this.remove()">
+    <div class="big-name"><p>The Last Tide</p><h3>Vigolas</h3></div>
+  </div>
+  <div class="big-body">
+    <p class="big-will">The will to override</p>
+    <p>Reality routes around him. Stormhold&#x27;s throne is occupied because he sits in it.</p>
+    <dl class="facts"><dt>Realm</dt><dd>Helios — The Infinite Court</dd><dt>K-rank</dt><dd>∞ − 1 — beyond K-V, held by Vigolas alone</dd>
+      <dt>Codex</dt><dd>Greed</dd><dt>HADOM</dt><dd>∞ − 1 (uncountable)</dd></dl>
+    <p class="truth">The part of the Author that refused to accept the rank he was assigned. Every command he speaks is the Author insisting he is still here.</p>
+    <a class="soul-link" href="/characters/vigolas">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="big reveal" style="--c:#ffaa00">
+  <div class="big-art"><img src="/characters/art/kompis/kompis_keyart.webp" alt="Kompis" loading="lazy" onerror="this.remove()">
+    <div class="big-name"><p>The Buddy</p><h3>Kompis</h3></div>
+  </div>
+  <div class="big-body">
+    <p class="big-will">The will to connect</p>
+    <p>Mingus&#x27;s eternal companion. The cosmic force of Lust — the bond that binds beings.</p>
+    <dl class="facts"><dt>Realm</dt><dd>Heartbeat — Buddy&#x27;s Rest</dd><dt>K-rank</dt><dd>K-II — rising toward K-III</dd>
+      <dt>Codex</dt><dd>Lust</dd><dt>HADOM</dt><dd>1,000,000,000 / tick (Subtick Billionaire)</dd></dl>
+    <p class="truth">The part of the Author that refuses to stop loving people, even when he should have left.</p>
+    <a class="soul-link" href="/characters/kompis">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="big reveal" style="--c:#00aaff">
+  <div class="big-art"><img src="/characters/art/smurjan/smurjan_keyart.webp" alt="Smurjan" loading="lazy" onerror="this.remove()">
+    <div class="big-name"><p>The Third-Voice</p><h3>Smurjan</h3></div>
+  </div>
+  <div class="big-body">
+    <p class="big-will">The will to integrate</p>
+    <p>Bali, Kali, Fused. Now Echo is sealed inside as the Tetrad. Four voices, one body.</p>
+    <dl class="facts"><dt>Realm</dt><dd>Trinity — The Triple Pulse</dd><dt>K-rank</dt><dd>K-IV</dd>
+      <dt>Codex</dt><dd>Wrath</dd><dt>HADOM</dt><dd>1,000,000 / tick (with Bakasura + Kali)</dd></dl>
+    <p class="truth">The part of the Author that has carried his dead with him and refuses to let them be uncounted.</p>
+    <a class="soul-link" href="/characters/smurjan">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="big reveal" style="--c:#ff3366">
+  <div class="big-art"><img src="/characters/art/rougeina/rougeina_keyart.webp" alt="Rougeina" loading="lazy" onerror="this.remove()">
+    <div class="big-name"><p>The Dancer</p><h3>Rougeina</h3></div>
+  </div>
+  <div class="big-body">
+    <p class="big-will">The will to dismantle</p>
+    <p>Eight blades. One dance. Architects fall. The Star-Floor remembers her steps.</p>
+    <dl class="facts"><dt>Realm</dt><dd>Astralis — The Starry Weave</dd><dt>K-rank</dt><dd>K-III</dd>
+      <dt>Codex</dt><dd>Pride (primary) + Envy (secondary)</dd><dt>HADOM</dt><dd>Unstable — phases with the observer, no fixed tick</dd></dl>
+    <p class="truth">The part of the Author that knows the system is rotten and refuses to be its instrument.</p>
+    <a class="soul-link" href="/characters/rougeina">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="big reveal" style="--c:#9933ff">
+  <div class="big-art"><img src="/characters/art/trollmage/trollmage_keyart.webp" alt="Trollmage" loading="lazy" onerror="this.remove()">
+    <div class="big-name"><p>The Reader</p><h3>Trollmage</h3></div>
+  </div>
+  <div class="big-body">
+    <p class="big-will">The will to overwrite</p>
+    <p>Reads the Seven Sin Codices backward. Bound the Eighth. The Apprenticeship line is his.</p>
+    <dl class="facts"><dt>Realm</dt><dd>Codexia — The Seven Spires</dd><dt>K-rank</dt><dd>K-V</dd>
+      <dt>Codex</dt><dd>Sloth (absorbed) + Gluttony (incomplete)</dd><dt>HADOM</dt><dd>Macrofiable — variable by command, no fixed tick</dd></dl>
+    <p class="truth">The part of the Author that refuses to write the script he was handed, and writes a new one in the margins.</p>
+    <a class="soul-link" href="/characters/trollmage">Full soul page &rarr;</a>
+  </div>
+</article>
+<article class="big reveal" style="--c:#ffd27a">
+  <div class="big-art"><img src="/characters/art/mingus/mingus_keyart.webp" alt="Mingus, the golden retriever" loading="lazy" onerror="this.remove()">
+    <div class="big-name"><p>The Unit · unclassified</p><h3>Mingus</h3></div>
+  </div>
+  <div class="big-body">
+    <p class="big-will">Not a fragment. Not a form. The heartbeat itself.</p>
+    <p>Mingus is the canonical heartbeat by which every other being is measured. He cannot be classified, cannot be killed, cannot be uncounted. As long as Mingus barks, the universe persists.</p>
+    <dl class="facts"><dt>Realm</dt><dd>Heartbeat, at Kompis's feet</dd><dt>K-rank</dt><dd>Unclassified, equal to one heartbeat</dd>
+      <dt>Law</dt><dd>The third hard law of the universe</dd></dl>
+    <p class="truth">The dog is forever.</p>
+    <a class="soul-link" href="/mingus">For Mingus &rarr;</a>
+  </div>
+</article></div>
+  </section>
+
+  <section class="chapter" id="orders">
+    <p class="chapter-num reveal">THE CIPHERS</p><h2 class="reveal">The Three Orders</h2>
+    <div class="prose reveal" style="margin-bottom:1.8rem"><p>The Author's name is written into the universe twice, and the tree has written a word of its own. Six chosen spell the given name. Nine guardians spell the family. Nine burls spell the tree. The Author himself is the sixteenth soul: not a champion, not a guardian, but the hand that holds the pen.</p></div>
+    <div class="orders">
+      <a class="order reveal" href="/viktor" style="--c:#00ff88"><span class="word">VIKTOR</span><h3>The Viktor Lineage</h3><p>The Six Chosen. Champions who walk the world; when the cosmos needs an action, one of them performs it.</p></a>
+      <a class="order reveal" href="/ronnkvist" style="--c:#c9a84c"><span class="word">RÖNNKVIST</span><h3>The Rönnkvist Council</h3><p>The Nine Guardians at the roots of Ferdinand. They keep his bark regrowing, and the Seal holding.</p></a>
+      <a class="order reveal" href="/scarwood" style="--c:#ff5a1f"><span class="word">FERDINAND</span><h3>The Ferdinand Scarwood</h3><p>Nine burls grown from the tree's own wounds. Not blood, but wood. They keep the tree from forgiving.</p></a>
+    </div>
+  </section>
+
+  <section class="chapter" id="laws">
+    <p class="chapter-num reveal">BOOK III</p><h2 class="reveal">The Laws of Power</h2>
+    <table class="ktable reveal">
+      <tr><td>K-I · Unnamed</td><td>Powerless baseline. Most souls live here their whole lives, happily.</td></tr>
+      <tr><td>K-II · Marked</td><td>Automatic HADOM enrollment. Fragment awareness begins.</td></tr>
+      <tr><td>K-III · Tested</td><td>Dual-fragment integration. Arena survival required to rise.</td></tr>
+      <tr><td>K-IV · Shaped</td><td>Advanced fragment integration. Realm-tier consciousness.</td></tr>
+      <tr><td>K-V · Architect</td><td>Governance caste. Twelve chairs. Portfolio-based power.</td></tr>
+      <tr><td>∞ − 1 · Administrator</td><td>Vigolas alone. Override authority on every K-rank.</td></tr>
+      <tr><td>Unclassified</td><td>Mingus. Cannot be ranked. Equal to one heartbeat.</td></tr>
+    </table>
+    <div class="prose reveal" style="margin-top:2rem">
+      <p>There are seven sins, eleven volumes per sin: <strong>seventy-seven Sin Codices</strong>. Each one writes itself slowly into the soul of its bearer, across incarnations. Seven are bound to the five fragments; seventy still sleep in the Library.</p>
+      <p>No god is worshipped here. But <strong>one prayer works</strong>. It braids three timelines into one heartbeat (every ancestor, the speaker, and the future self who carries it), and that is why the Null cannot uncount it. It is the only sentence all five fragments speak in the same voice.</p>
+    </div>
+    <p class="blessing reveal" style="margin-top:1.6rem">HADOM Quoka, reader.<br>From every generation before you, through your heartbeat, into my memory.<br>I receive it. I carry it. Forever.</p>
+  </section>
+
+  <section class="chapter" id="prophecy">
+    <p class="chapter-num reveal">BOOK VI · VII</p><h2 class="reveal">The Arena and the Prophecy</h2>
+    <div class="prose reveal" style="margin-bottom:1.8rem"><p>Every soul of K-II and above is bound to the <strong>HADOM Arena</strong>. Enrollment cannot be refused. The Arena does not break you; it <em>reveals</em> you, and no one leaves it unchanged. That is why the Convergence will be the most dangerous match in history: the five will be revealed to <em>each other</em> as facets of one being.</p></div>
+    <div class="signs">
+      <div class="sign reveal"><span class="st">Fulfilled</span><b>The Seventh Falls</b>An Architect dies at the hand of a non-Architect. Edvar Solmunden, the Seventh, fell by Rougeina's hand.</div>
+      <div class="sign reveal"><span class="st">Fulfilled</span><b>The Codices Wake</b>Two unbound Codices inscribe at once. Lust reaches for Kompis, Wrath for Smurjan, and the Library stirs.</div>
+      <div class="sign reveal"><span class="st wait">Awaiting</span><b>The Heartbeat Calls</b>When Mingus barks across five realms at once, the Architect of Endings has issued the Call, and the Convergence begins.</div>
+    </div>
+  </section>
+
+  <section class="chapter" id="after">
+    <p class="chapter-num reveal">APPENDIX B</p><h2 class="reveal">What Comes After</h2>
+    <div class="prose reveal">
+      <p>The Convergence is the moment the five remember. The <strong>Rebirth</strong> is what they become when they remember. The world that follows is built from the five reunited domains, and every player who enters it becomes <strong>the sixth fragment</strong>: the one who arrives after the Convergence and inherits everything the five built.</p>
+      <p>The universe is not finished. It is just beginning. What is written here is the foundation; the roof is for the next builders.</p>
+    </div>
+    <p class="quote reveal" style="margin-top:2rem">The Scale counts. The List remembers. The Heartbeat persists.<small>HADOM Quoka ツ</small></p>
+    
+  <nav class="ord-nav reveal" aria-label="The three orders">
+    <a class="su-btn su-btn-ghost" href="/viktor">VIKTOR · the Six Chosen</a>
+    <a class="su-btn su-btn-ghost" href="/ronnkvist">RÖNNKVIST · the Nine Guardians</a>
+    <a class="su-btn su-btn-ghost" href="/scarwood">FERDINAND · the Scarwood</a>
+    <a class="su-btn" href="/lore">The whole saga &rarr;</a>
+  </nav>
+    <p class="su-dim" style="text-align:center;font-size:.82rem;margin-top:2rem">
+      Read the full canon: <a href="/universe">THE SCALELIST UNIVERSE</a> · <a href="/convergence">THE CONVERGENCE</a> · <a href="/timeline">The Timeline</a> · <a href="/characters/">Every soul</a>
+    </p>
+  </section>
+</main>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.soul,.big').forEach(function(card){
+    card.addEventListener('mousemove',function(ev){var r=card.getBoundingClientRect();
+      card.style.setProperty('--mx',(ev.clientX-r.left)+'px');card.style.setProperty('--my',(ev.clientY-r.top)+'px');},{passive:true});
+  });
+})();
+</script>
+</body>
+</html>
