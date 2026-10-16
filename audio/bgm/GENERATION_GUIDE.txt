@@ -57,7 +57,7 @@ Prompt: Aggressive trap battle music with Asian combat elements. Taiko drums thu
 Character: Smurjan
 Type: Character Theme (Full 2min)
 Style of Music: heavy bass, void energy, cosmic destruction, three-voice fusion
-Prompt: Cosmic void bass music with three-layered vocal textures. Deep sub-bass pulses from the edge of existence. Three distinct synth voices harmonize in alien intervals — Bali's aggression, Kali's wisdom, fused Smurjan's cosmic power. Void energy crackles through distorted space. Dark fantasy cosmic entity soundtrack.
+Prompt: Cosmic void bass music with three-layered vocal textures. Deep sub-bass pulses from the edge of existence. Three distinct synth voices harmonize in alien intervals — Bakasura's aggression, Kali's wisdom, fused Smurjan's cosmic power. Void energy crackles through distorted space. Dark fantasy cosmic entity soundtrack.
 
 --- Track 10: smurjan_battle_full.mp3 ---
 Character: Smurjan

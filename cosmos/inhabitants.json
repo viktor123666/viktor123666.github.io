@@ -32,7 +32,7 @@
       {"name": "The Fishing Pole", "role": "Talks sometimes", "note": "Has never caught a fish. That's not what it's for."}
     ],
     "voids_edge": [
-      {"name": "Warden Aske", "role": "Smurjan's gatekeeper in Scalelist", "note": "Walks in threes (Bali-pattern, Kali-pattern, Fused-pattern)."},
+      {"name": "Warden Aske", "role": "Smurjan's gatekeeper in Scalelist", "note": "Walks in threes (Bakasura-pattern, Kali-pattern, Smurjan-pattern)."},
       {"name": "The Thirdling", "role": "A child born with three heartbeats", "note": "Only one heartbeat is theirs. The other two are Smurjan's loan."},
       {"name": "Fissure-Keeper Orla", "role": "Keeps the crack closed", "note": "Has not slept for 40 years. Can't."}
     ],
@@ -100,8 +100,8 @@
   },
   "trinity": {
     "triple_pulse": [
-      {"name": "Smurjan (Fused)", "role": "The sovereign of the Trinity when all three align", "note": "Appears for 30-second windows during triple pulses."},
-      {"name": "Bali", "role": "The protective voice", "note": "Whispers calm through the pulse-rings."},
+      {"name": "Smurjan", "role": "The sovereign of the Trinity when all three align", "note": "Appears for 30-second windows during triple pulses."},
+      {"name": "Bakasura", "role": "The protective voice", "note": "Whispers calm through the pulse-rings."},
       {"name": "Kali", "role": "The fire voice", "note": "Burns her own footprints wherever she walks."}
     ]
   },

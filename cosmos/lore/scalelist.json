@@ -64,7 +64,7 @@
       "position": {"x": 900, "y": 760, "w": 320, "h": 220},
       "tribes": ["three_step_walkers", "fissure_wardens"],
       "places": [
-        {"name": "Void's Edge City", "blurb": "Built on the lip of a Null fissure. Every citizen walks in threes (Bali-pattern, Kali-pattern, Fused-pattern)."},
+        {"name": "Void's Edge City", "blurb": "Built on the lip of a Null fissure. Every citizen walks in threes (Bakasura-pattern, Kali-pattern, Smurjan-pattern)."},
         {"name": "The Root Crack", "blurb": "The fissure itself. Entry to Null. Anyone who enters first is lost. Anyone who enters second arrives."},
         {"name": "Kali's Burn", "blurb": "A volcano that is an extension of Smurjan's fire-voice into the material plane. It erupts once per century, always on the anniversary of Kali's divine fall."},
         {"name": "The Three-Lane Path", "blurb": "A footpath painted with three parallel lines. Walkers must alternate lanes every third step or lose their shadow."}
@@ -149,7 +149,7 @@
       "id": "three_step_walkers",
       "name": "The Three-Step Walkers",
       "continent_id": "voids_edge_peninsula",
-      "look": "Three braids in their hair, one dyed black (Bali), one red (Kali), one white (Fused). Walk in a specific gait — left, right, center, repeat.",
+      "look": "Three braids in their hair, one dyed black (Bakasura), one red (Kali), one white (Smurjan). Walk in a specific gait — left, right, center, repeat.",
       "customs": "Never take two steps of the same kind in a row. Vote on every decision, even small ones, among three household members — the third vote always goes to the eldest child, whose word is final.",
       "persona": "Cautious. Philosophical. Easy to share a drink with if you understand the rhythm; terrifying to ambush.",
       "notable_members": ["warden_aske", "the_thirdling", "fissure_keeper_orla"]

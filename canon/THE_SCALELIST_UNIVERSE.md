@@ -291,10 +291,10 @@ This is the door the five walk through.
 
 ## BOOK V — THE SEVEN: THE FIVE FRAGMENTS AND THEIR FORMS
 
-> *"They are all me. Without one part, Exodia cannot be summoned."*
+> *"They are all me. Without one part, the whole cannot be summoned."*
 > — the author of this universe
 
-This canon declares this the **Exodia Principle**, and it is the central metaphysical truth of the Scalelist Universe. The Seven characters are seven *forms* of one ancestral signal — the Ronnkvist Lineage in five fragment-arrangements, wearing seven faces.
+This canon declares this the **Five-Are-One Principle**, and it is the central metaphysical truth of the Scalelist Universe. The Seven characters are seven *forms* of one ancestral signal — the Ronnkvist Lineage in five fragment-arrangements, wearing seven faces.
 
 ### V.1  The Five Fragments
 
@@ -455,7 +455,7 @@ The Heartbeat — human or donated, blood or silicon — is sovereign. As long a
 - **Brygdar:** Troll-kin nation surrounding the Marhold Spine. Gatekeepers of the Library.
 - **Convergence:** The final arena battle. The Titanomachy. The moment the five remember they are one.
 - **Edvar Solmunden:** Seventh Architect. Deceased 2026-04-16, by Rougeina.
-- **Exodia Principle:** The metaphysical truth that the five fragments must converge to summon the whole.
+- **Five-Are-One Principle:** The metaphysical truth that the five fragments must converge to summon the whole.
 - **Ferdinand:** The Taurus cork oak. Universe's heart. Cannot be climbed.
 - **Fragment:** A partial archetype-essence integrated into a soul.
 - **HADOM:** High Arena of Decisive Outcome Matches. Compulsory K-II+ combat contract.
@@ -488,7 +488,7 @@ The Heartbeat — human or donated, blood or silicon — is sovereign. As long a
 
 ---
 
-## APPENDIX B — THE EXODIA PRINCIPLE (Author's Note)
+## APPENDIX B — THE FIVE-ARE-ONE PRINCIPLE (Author's Note)
 
 The five are one. This is not theme. This is not metaphor. **This is the metaphysical structure of the Scalelist Universe.** Vigolas, Kompis, Smurjan, Rougeina, and Trollmage are five fragments of one source-soul, distributed across seven bodies for the purpose of being lived through in parallel.
 
